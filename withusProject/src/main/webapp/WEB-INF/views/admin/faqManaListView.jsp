@@ -12,7 +12,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>With Us, Admin</title>
 <style>
-    
+
+    .enrollBtn{
+        padding-right: 20%;
+    }
     .according_list>li{
 		list-style: none;
 	}
@@ -38,7 +41,9 @@
         </div>
         <br><br><br>
 
-        <button type="button" class="btn btn-secondary" align="right">등록</button>
+        <div class="enrollBtn" align="right">
+            <button type="button" class="btn btn-secondary" align="right">등록</button>
+        </div>
 
         <!-- 게시글 없을 시 -->
         <div class="faqN" align="center">
@@ -46,58 +51,36 @@
         </div>
 
         <!-- 게시글 있을 시-->
-        <div class="faqY">
-            <div class="center" style="width:80%">
+        <div class="faqY" align="center">
+            <div class="faqCon">
                 <ul class="accodrding_list">
-                    <li>
-                        <button type="button" class="btn btn-light" data-toggle="collapse" data-target="#demo">
+                    <li> <!-- 얘 규격? 좀 어케 해야됨 ㅡㅡ -->
+                        <button type="button" class="btn btn-light" data-toggle="collapse" data-target="#faqContent" style="width:80%;">
                             Q &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 카테고리 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            FAQ제목 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            ▼
+                            FAQ제목 ▼
                         </button>
-                        <div id="faqContent" class="collapse">
-                            <button type="button" class="btn btn-warning">수정</button>
-                            <button type="button" class="btn btn-danger">삭제</button> <br>
+                        <div id="faqContent" class="collapse" style="background-color: rgb(224,224,224); width:80%;">
                             
-                            가치가자는 펀딩 목록에 따라 무료 혜택이 적용될 수 있습니다. <br>
-                            기본 배송비는 3,000원이며 도서산간지역은 5,000원이 부과됩니다.
-                            
-                        </div>
-                    </li>
-                    <li>
-                        <button type="button" class="btn btn-light" data-toggle="collapse" data-target="#demo">
-                            Q &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 카테고리 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            FAQ제목 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            ▼
-                        </button>
-                        <div id="faqContent" class="collapse">
-                            <button type="button" class="btn btn-warning">수정</button>
-                            <button type="button" class="btn btn-danger">삭제</button> <br>
-                            
-                            가치가자는 펀딩 목록에 따라 무료 혜택이 적용될 수 있습니다. <br>
-                            기본 배송비는 3,000원이며 도서산간지역은 5,000원이 부과됩니다.
-                            
-                        </div>
-                    </li>
-                    <li>
-                        <button type="button" class="btn btn-light" data-toggle="collapse" data-target="#demo">
-                            Q &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 카테고리 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            FAQ제목 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            ▼
-                        </button>
-                        <div id="faqContent" class="collapse">
-                            <button type="button" class="btn btn-warning">수정</button>
-                            <button type="button" class="btn btn-danger">삭제</button> <br>
-                            
-                            가치가자는 펀딩 목록에 따라 무료 혜택이 적용될 수 있습니다. <br>
-                            기본 배송비는 3,000원이며 도서산간지역은 5,000원이 부과됩니다.
-                            
+                            <!-- 관리자 페이지만 or 관리자로 로그인 했을 시에만 보이는 버튼-->
+                            <div class="faqConBtn" align="right">
+                                <button type="button" class="btn btn-warning">수정</button>
+                                <button type="button" class="btn btn-danger">삭제</button> <br>
+                            </div>
+
+
+                            <p align="left" style="padding-left: 5%;">
+                                <br>
+                                가치가자는 펀딩 목록에 따라 무료 혜택이 적용될 수 있습니다. <br>
+                                기본 배송비는 3,000원이며 도서산간지역은 5,000원이 부과됩니다. <br><br><br>
+                            </p>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
 	</div>
+
+    <br><br>
 
 </body>
 </html>
