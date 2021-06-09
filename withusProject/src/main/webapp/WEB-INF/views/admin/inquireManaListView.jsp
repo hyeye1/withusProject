@@ -24,8 +24,8 @@
     <div class="container">            
         <table class="table">
           <thead>
-            <tr>
-              <th width="100">글<br>번호</th>
+            <tr align="center">
+              <th width="100">글번호</th>
               <th width="200">펀딩상품정보</th>
               <th width="500">제목</th>
               <th width="100">작성자</th>
@@ -34,7 +34,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr align="center">
               <td>10</td>
               <td><a href="">펀딩상세보기</a></td>
               <td>문의내용 제목입니다.</td>
@@ -42,7 +42,7 @@
               <td>2021-06-09</td>
               <td>N</td>
             </tr>
-            <tr>
+            <tr align="center">
                 <td>10</td>
                 <td><a href="">펀딩상세보기</a></td>
                 <td>문의내용 제목입니다.</td>
@@ -50,7 +50,7 @@
                 <td>2021-06-09</td>
                 <td>N</td>
               </tr>
-              <tr>
+              <tr align="center">
                 <td>10</td>
                 <td><a href="">펀딩상세보기</a></td>
                 <td>문의내용 제목입니다.</td>

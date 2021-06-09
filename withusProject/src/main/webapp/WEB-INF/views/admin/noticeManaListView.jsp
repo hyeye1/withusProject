@@ -5,6 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>Admin With Us</title>
 </head>
 <body>
@@ -17,42 +22,55 @@
     <hr><br>
 
 	<div class="container">
+
+		<div class="topBtn" align="right">
+			<button type="button" class="btn btn-secondary">등록</button>
+		</div>
+		<br>
 	    <!-- 표 N행 6열 -->
-	    <table border="1" id="listView">
-	        <tr style="background-color: rgb(224, 224, 224);">
-	            <th width="50" height="30"><input type="checkbox"></th>
+		<table class="table table-bordered">
+			<thead>
+			  <tr align="center" style="height: 10px; background-color: rgb(224, 224, 224); font-size:smaller ;">
+				<th width="50" height="30"><input type="checkbox"></th>
 	            <th width="60">글번호</th>
 	            <th width="700">공지사항 제목</th>
 	            <th width="100">날짜</th>
 	            <th width="60">글상태<br>(Y/N)</th>
-	        </tr>
-	        <tr>
-	            <td><input type="checkbox"></td>
-	            <td>30</td>
-	            <td>공지사항 제목입니다.</td>
-	            <td>2021-06-09</td>
-	            <td>Y</td>
-	        </tr>
-	        <tr>
-	            <td><input type="checkbox"></td>
-	            <td>29</td>
-	            <td>공지사항 제목입니다.</td>
-	            <td>2021-06-09</td>
-	            <td>Y</td>
-	        </tr>
-	        <tr>
-	            <td><input type="checkbox"></td>
-	            <td>28</td>
-	            <td>공지사항 제목입니다.</td>
-	            <td>2021-06-09</td>
-	            <td>Y</td>
-	        </tr>
-	    </table>
+			  </tr>
+			</thead>
+			<tbody>
+				<tr align="center">
+					<td><input type="checkbox"></td>
+					<td>30</td>
+					<td><a href="">공지사항 제목입니다.</a></td>
+					<td>2021-06-09</td>
+					<td>Y</td>
+				</tr>
+				<tr align="center">
+					<td><input type="checkbox"></td>
+					<td>30</td>
+					<td><a href="">공지사항 제목입니다.</a></td>
+					<td>2021-06-09</td>
+					<td>Y</td>
+				</tr>
+				<tr align="center">
+					<td><input type="checkbox"></td>
+					<td>30</td>
+					<td><a href="">공지사항 제목입니다.</a></td>
+					<td>2021-06-09</td>
+					<td>Y</td>
+				</tr>
+			</tbody>
+		</table>
 	    <br>
-	
-	    <button>수정</button> <button>삭제</button>
-	
+		
+		<div class="Btn" align="right">
+	    	<button type="button" class="btn btn-success">수정</button> &nbsp;
+			<button type="button" class="btn btn-warning">삭제</button>
+		</div>
+
 	    <!-- 페이징 바 추가예정 -->
+		
     </div>
 
 </body>
