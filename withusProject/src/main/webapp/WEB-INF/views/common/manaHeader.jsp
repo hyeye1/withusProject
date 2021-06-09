@@ -119,7 +119,7 @@
 
     <div class="head">
         <div class="head_main">
-            <div class="logo_img"><img src="../../../webapp/resources/images/logo.PNG" alt="로고"></div>
+            <div class="logo_img"><img src="../../../resources/images/logo.png" alt="로고"></div>
             <div class="head_center"></div>
             <div class="login_area">
                 <!-- 로그인전 -->
