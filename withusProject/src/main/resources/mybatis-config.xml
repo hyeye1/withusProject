@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	
+	<!--  
+		* DTD(Document Type Definition 문서타입정의)
+		  XML문서의 구조 및 해당 문서에서 사용할 수 있는 적법한 요소와 속성을 정의 (이 문서가 유효한지 유효성 검사도 됨)
+	-->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	
+	<typeAliases>
+	</typeAliases>
+	
+	<mappers>
+	</mappers>
+	
+</configuration>
