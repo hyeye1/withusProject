@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- jQuery 라이브러리 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- 부트스트랩에서 제공하고 있는 스타일 -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<!-- 부트스트랩에서 제공하고 있는 스크립트 -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+    
+        .mainOuter{
+            width: 1200px; 
+            height: 1000px;
+            margin: auto;  
+            padding: 10px;
+        }
+        .visualSlide{
+            width: 100%;
+            height: 503px;
+            background-color: rgba(224, 224, 224, 0.52);
+        }
+        #slideImg{
+            width: 830px;
+            height: 100%;
+            float: left;
+            margin-right: 20px;
+        }
+        .nextBtn{
+            width: 50px;
+            float: left;
+            margin: 15px;
+        }
+        .mainBody p{
+            display: table-cell;
+        }
+        .mainBody{ width:1200px; height: 200px;background-color: tomato;}
+        
+        #mainTitle{
+            font-size: 27px; 
+            font-weight: 900; 
+            float: left; 
+            margin-top: 70px; 
+            margin-left: 60px;
+        } 
+
+        #mainItems{
+            background-color: thistle;
+            float: left;
+            margin-top: 165px;
+            margin-left: -250px;
+        }  
+
+    </style>
+</head>
+<body>
+    <div class="mainOuter" align="center">
+        
+        <!-- 슬라이드 -->
+        <div class="visualSlide">
+            <img src="../../../resources/images/slide1.JPG" id="slideImg">
+            <div id="slideLetter">
+                <br><br><br><br><br><br><br>
+                <p align="left" style="font-size: 30px; font-weight: 900;">
+                    순천 명인 발효 홍차로 <br>
+                    지구를 지켜요
+                </p>
+                <p align="left" style="font-size: 16px; font-weight: 500;">
+                    환경을 살릴 수 있는 차시간의 전통차 샘플러
+                </p>
+            </div>
+            
+            <br><br><br><br>
+            <div id="slicePaging">
+                <img src="../../../resources/images/slideLeft.PNG" class="nextBtn">
+                <img src="../../../resources/images/slideRight.PNG" class="nextBtn">
+                <img src="../../../resources/images/slideNext_Temp.PNG" style="width: 95px; margin-top: 23px; margin-right: 20px;">
+            </div>
+        </div>
+
+
+        <!-- 이 프로젝트 어때요? -->
+        
+            
+            < style="width: 100%; height: 100%; background-color: black;">
+            </>
+            
+            <div style="width: 100%; height: 100%; background-color: turquoise;">
+                <p id="mainTitle">이 프로젝트 어때요?</p> 
+                
+                <div id="mainItems" align="left">
+                    <img src="../../../resources/images/project1.JPG" style="width: 310px; height: 213px; margin-bottom: 10px;">
+                    <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
+                    <span>
+                        <p>401,240원 펀딩</p>
+                    </span>
+                    <span style="float: right;">
+                        <p style="float: right; margin-right: 10px;">D-4</p>
+                        <p style="float: right; margin-right: 10px;">401%</p> 
+                    </span>
+                </div>
+    
+                <div id="mainItems" align="left" style="float: right; margin-right: 50px;">
+                    <img src="../../../resources/images/project1.JPG" style="width: 310px; height: 213px; margin-bottom: 10px;">
+                    <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
+                    <span>
+                        <p>401,240원 펀딩</p>
+                    </span>
+                    <span style="float: right;">
+                        <p style="float: right; margin-right: 10px;">D-4</p>
+                        <p style="float: right; margin-right: 10px;">401%</p> 
+                    </span>
+                </div>
+    
+                <div id="mainItems" align="left" style="margin:auto; margin-left: 80px; margin-top: 165px;">
+                    <img src="../../../resources/images/project1.JPG" style="width: 310px; height: 213px; margin-bottom: 10px;">
+                    <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
+                    <span>
+                        <p>401,240원 펀딩</p>
+                    </span>
+                    <span style="float: right;">
+                        <p style="float: right; margin-right: 10px;">D-4</p>
+                        <p style="float: right; margin-right: 10px;">401%</p> 
+                    </span>
+                </div>
+            </div>
+
+            <br>
+            
+            <div>
+                <div id="mainItems" align="left">
+                    <img src="../../../resources/images/project1.JPG" style="width: 310px; height: 213px; margin-bottom: 10px;">
+                    <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
+                    <span>
+                        <p>401,240원 펀딩</p>
+                    </span>
+                    <span style="float: right;">
+                        <p style="float: right; margin-right: 10px;">D-4</p>
+                        <p style="float: right; margin-right: 10px;">401%</p> 
+                    </span>
+                </div>
+    
+                <div id="mainItems" align="left" style="float: right; margin-right: 50px;">
+                    <img src="../../../resources/images/project1.JPG" style="width: 310px; height: 213px; margin-bottom: 10px;">
+                    <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
+                    <span>
+                        <p>401,240원 펀딩</p>
+                    </span>
+                    <span style="float: right;">
+                        <p style="float: right; margin-right: 10px;">D-4</p>
+                        <p style="float: right; margin-right: 10px;">401%</p> 
+                    </span>
+                </div>
+    
+                <div id="mainItems" align="left" style="margin:auto; margin-left: 80px; margin-top: 165px;">
+                    <img src="../../../resources/images/project1.JPG" style="width: 310px; height: 213px; margin-bottom: 10px;">
+                    <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
+                    <span>
+                        <p>401,240원 펀딩</p>
+                    </span>
+                    <span style="float: right;">
+                        <p style="float: right; margin-right: 10px;">D-4</p>
+                        <p style="float: right; margin-right: 10px;">401%</p> 
+                    </span>
+                </div>
+            </div>
+
+            
+
+
+            
+       
+            
+        <!-- 실시간 top3 -->
+        <div id="mainTop3" class="mainBody">
+            
+        </div>
+
+        <!-- 오픈 예정 프로젝트 -->
+        <div id="mainComing" class="mainBody">
+
+        </div>
+
+        <!-- 성공 임박 프로젝트 -->
+        <div id="mainSuccess" class="mainBody">
+
+        </div>
+    </div>
+</body>
+</html>
