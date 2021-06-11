@@ -6,12 +6,6 @@
 <head>
 <meta charset="UTF-8">
     <title>Document</title>
-    <!-- jQuery 라이브러리 -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<!-- 부트스트랩에서 제공하고 있는 스타일 -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-	<!-- 부트스트랩에서 제공하고 있는 스크립트 -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
@@ -61,12 +55,12 @@
     </style>
 </head>
 <body>
-    <div class="footerOuter">
+    <div class="footerOuter" align="left">
 
-        <img src="../../../resources/images/footerLogo.PNG" width="100%">
+        <img src="resources/images/footerLogo.PNG" width="100%">
 
         <div class="footerHead">
-            <img src="../../../resources/images/qButton.PNG" width="262px" height="63px">
+            <img src="resources/images/qButton.PNG" width="262px" height="63px">
 
             <span>
                 <p><b style="font-size: 14.4px;">가치가자 고객센터 : 1588-1234</b> <br> 상담가능시간 : 평일 9:00 ~ 18:00</p>
