@@ -1,5 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -65,11 +68,14 @@
     </style>
 </head>
 <body>
+
+	<jsp:include page="common/header.jsp"/>
+	
     <div class="mainOuter" align="center">
         
         <!-- 슬라이드 -->
         <div class="visualSlide">
-            <img src="../../../resources/images/slide1.JPG" id="slideImg">
+            <img src="../../resources/images/slide1.JPG" id="slideImg">
             <div id="slideLetter">
                 <br><br><br><br><br><br><br>
                 <p align="left" style="font-size: 30px; font-weight: 900;">
@@ -83,9 +89,9 @@
             
             <br><br><br><br>
             <div id="slicePaging">
-                <img src="../../../resources/images/slideLeft.PNG" class="nextBtn">
-                <img src="../../../resources/images/slideRight.PNG" class="nextBtn">
-                <img src="../../../resources/images/slideNext_Temp.PNG" style="width: 95px; margin-top: 23px; margin-right: 20px;">
+                <img src="../../resources/images/slideLeft.PNG" class="nextBtn">
+                <img src="../../resources/images/slideRight.PNG" class="nextBtn">
+                <img src="../../resources/images/slideNext_Temp.PNG" style="width: 95px; margin-top: 23px; margin-right: 20px;">
             </div>
         </div>
 
@@ -97,7 +103,7 @@
                 <tr>
                     <th>
                         <div class="mainItems">
-                            <img src="../../../resources/images/project1.JPG">
+                            <img src="../../resources/images/project1.JPG">
                             <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
                             <span>
                                 <p>401,240원 펀딩</p>
@@ -110,7 +116,7 @@
                     </th>
                     <th>
                         <div class="mainItems">
-                            <img src="../../../resources/images/project1.JPG">
+                            <img src="../../resources/images/project1.JPG">
                             <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
                             <span>
                                 <p>401,240원 펀딩</p>
@@ -123,7 +129,7 @@
                     </th>
                     <th>
                         <div class="mainItems">
-                            <img src="../../../resources/images/project1.JPG">
+                            <img src="../../resources/images/project1.JPG">
                             <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
                             <span>
                                 <p>401,240원 펀딩</p>
@@ -138,7 +144,7 @@
                 <tr>
                     <th>
                         <div class="mainItems">
-                            <img src="../../../resources/images/project1.JPG">
+                            <img src="../../resources/images/project1.JPG">
                             <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
                             <span>
                                 <p>401,240원 펀딩</p>
@@ -151,7 +157,7 @@
                     </th>
                     <th>
                         <div class="mainItems">
-                            <img src="../../../resources/images/project1.JPG">
+                            <img src="../../resources/images/project1.JPG">
                             <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
                             <span>
                                 <p>401,240원 펀딩</p>
@@ -164,7 +170,7 @@
                     </th>
                     <th>
                         <div class="mainItems">
-                            <img src="../../../resources/images/project1.JPG">
+                            <img src="../../resources/images/project1.JPG">
                             <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
                             <span>
                                 <p>401,240원 펀딩</p>
@@ -188,7 +194,7 @@
                 <tr>
                     <th>
                         <div class="mainItems">
-                            <img src="../../../resources/images/project1.JPG">
+                            <img src="../../resources/images/project1.JPG">
                             <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
                             <span>
                                 <p>401,240원 펀딩</p>
@@ -201,7 +207,7 @@
                     </th>
                     <th>
                         <div class="mainItems">
-                            <img src="../../../resources/images/project1.JPG">
+                            <img src="../../resources/images/project1.JPG">
                             <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
                             <span>
                                 <p>401,240원 펀딩</p>
@@ -214,7 +220,7 @@
                     </th>
                     <th>
                         <div class="mainItems">
-                            <img src="../../../resources/images/project1.JPG">
+                            <img src="../../resources/images/project1.JPG">
                             <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
                             <span>
                                 <p>401,240원 펀딩</p>
@@ -237,7 +243,7 @@
                 <tr>
                     <th>
                         <div class="mainItems">
-                            <img src="../../../resources/images/project1.JPG">
+                            <img src="../../resources/images/project1.JPG">
                             <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
                             <span>
                                 <p>401,240원 펀딩</p>
@@ -250,7 +256,7 @@
                     </th>
                     <th>
                         <div class="mainItems">
-                            <img src="../../../resources/images/project1.JPG">
+                            <img src="../../resources/images/project1.JPG">
                             <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
                             <span>
                                 <p>401,240원 펀딩</p>
@@ -263,7 +269,7 @@
                     </th>
                     <th>
                         <div class="mainItems">
-                            <img src="../../../resources/images/project1.JPG">
+                            <img src="../../resources/images/project1.JPG">
                             <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
                             <span>
                                 <p>401,240원 펀딩</p>
@@ -286,7 +292,7 @@
                 <tr>
                     <th>
                         <div class="mainItems">
-                            <img src="../../../resources/images/project1.JPG">
+                            <img src="../../resources/images/project1.JPG">
                             <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
                             <span>
                                 <p>401,240원 펀딩</p>
@@ -299,7 +305,7 @@
                     </th>
                     <th>
                         <div class="mainItems">
-                            <img src="../../../resources/images/project1.JPG">
+                            <img src="../../resources/images/project1.JPG">
                             <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
                             <span>
                                 <p>401,240원 펀딩</p>
@@ -312,7 +318,7 @@
                     </th>
                     <th>
                         <div class="mainItems">
-                            <img src="../../../resources/images/project1.JPG">
+                            <img src="../../resources/images/project1.JPG">
                             <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
                             <span>
                                 <p>401,240원 펀딩</p>
@@ -327,5 +333,7 @@
             </table>
         </div>
     </div>
+    
+    <jsp:include page="common/footer.jsp"/>
 </body>
 </html>

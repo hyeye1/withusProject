@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-dfddg
+	<jsp:forward page="WEB-INF/views/main.jsp"/>
 </body>
 </html>
