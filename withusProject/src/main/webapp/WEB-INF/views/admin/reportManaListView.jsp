@@ -20,7 +20,7 @@
 <body>
 
     <!-- 6/9 윤경 생성-->
-    <!-- 6/10 윤경 table 스타일 변경 -->
+    <!-- 6/10 윤경 table 스타일 변경, form-group 수정 -->
 
     <!-- 메뉴바 포함 -->
     <jsp:include page="../common/manaHeader.jsp"/>

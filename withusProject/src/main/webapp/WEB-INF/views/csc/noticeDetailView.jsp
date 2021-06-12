@@ -5,19 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Admin With Us</title>
+<title>With Us</title>
 <style>
 
 </style>
 </head>
 <body>
 
-	
-    <!-- 6/9 윤경 생성-->
-	<!-- 6/12 윤경 수정-->
+	<!-- 6/12 윤경 생성-->
 
-    <!-- 메뉴바 포함 -->
-    <jsp:include page="../common/manaHeader.jsp"/>
+    <!-- 해더바 포함 -->
+    <jsp:include page=""/>
 
     <h2>공지사항 상세보기</h2>
     <hr><br>
@@ -41,18 +39,15 @@
 	        </tr>
 	    </table>
 	    <br>
-
-		<!-- 관리자 로그인시에만 보이는 버튼 -->
-		<div class="edit" align="right" style="padding-right: 200px;">
-			<button>수정</button> <button>삭제</button>
-		</div>
-
 	    <br><br>
 
 		<div class="list" align="center">
 			<button>목록</button>
 		</div>
     </div>
+
+    <!-- 푸터바 포함 -->
+    <jsp:include page=""/>
 	
 
 </body>

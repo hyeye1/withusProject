@@ -14,9 +14,13 @@
 <body>
 
     <!-- 6/9 윤경 생성-->
+    <!-- 6/12 윤경 수정-->
+
     <!-- 메뉴바 포함 -->
     <jsp:include page="../common/manaHeader.jsp"/>
 
+
+    <!-- 관리자만 보여지는 페이지 -->
     <div class="container">
         <div class="content">
             <br><br>
@@ -25,7 +29,7 @@
                 <br>
 
                 <form id="enrollForm" method="post" action="" enctype="multipart/form-data">
-                    <table align="center">
+                    <table align="center" border="1px">
                         <tr>
                             <th><label for="title">제목</label></th>
                             <td><input type="text" id="title" class="form-control" name="" required></td>
@@ -39,10 +43,7 @@
                             <td><input type="file" id="upfile" class="form-control-file border" name=""></td>
                         </tr>
                         <tr>
-                            <th colspan="2"><label for="content">내용</label></th>
-                        </tr>
-                        <tr>
-                            <th colspan="2"><textarea class="form-control" required name="" id="content" rows="10" style="resize:none;"></textarea></th>
+                            <th colspan="2"><textarea class="form-control" style="width: 1000px; height: auto;" required name="" id="content"></textarea></th>
                         </tr>
                     </table>
                     <br>
