@@ -62,7 +62,7 @@
 		</div>
 		
 		<div class="headerCenter" >
-			<img src="resources/images/logo.png" width="165px" id="logoImg">
+			<img src="resources/images/logo.PNG" width="165px" id="logoImg">
 		</div>
         
         <input type="image" src="resources/images/searchIcon.PNG" id="searchIcon">
