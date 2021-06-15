@@ -12,12 +12,12 @@ public class MemberController {
 	@Autowired
 	private MemberService mService;
 	*/
-	/*
+	
 	@RequestMapping("login.me")
-	public String loginMember(HttpSession session) {
-		
+	public String loginForm() {
+		return "member/loginForm";
 	}
-	*/
+	
 	
 	@RequestMapping("logout.me")
 	public String logoutMember(HttpSession session) {
