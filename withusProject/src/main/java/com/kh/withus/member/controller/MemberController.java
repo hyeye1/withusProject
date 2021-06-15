@@ -30,4 +30,10 @@ public class MemberController {
 		return "member/memberEnrollForm";
 	}
 	
+	// 관리자쪽
+	@RequestMapping("memberListView.mana")
+	public String memberList() {
+		return "member/memberManaListView";
+	}
+	
 }

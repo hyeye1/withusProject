@@ -78,7 +78,7 @@
 	    list-style-type: none;
 	    padding: 0;
 	    display: none;
-	    z-index: 1;
+	    z-index: 100;
 	    position:absolute;
 	    width: 240px;
 	}
