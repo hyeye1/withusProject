@@ -13,9 +13,11 @@
 	</settings>
 	
 	<typeAliases>
+		<typeAlias type="com.kh.withus.funding.model.vo.Project" alias="Project" />
 	</typeAliases>
 	
 	<mappers>
+		<mapper resource="/mappers/funding-mapper.xml" />	
 	</mappers>
 	
 </configuration>
