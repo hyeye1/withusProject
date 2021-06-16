@@ -39,28 +39,21 @@
 	.head a{text-decoration: none; color: black;}
 	
 	/* header_web */
-	.head_main>div{float: left; margin-bottom: 20px;}
+	.head_main>div{float: left; margin-bottom: 25px;}
 	
-	.logo_img{width: 30%; position: relative;}
-	.head_center{width: 50%;}
+	.logo_img{position: relative;}
+	.head_center{width: 69%;}
 	.login_area{width: 20%;}
 	
-	.logo_img>img{height:50px; margin: 0 20px;}
-	.login_area{text-align: center; line-height:50px; font-size: 14px; text-indent: 35px;}
+	.logo_img>img{margin: 0 20px;}
+	.login_area{text-align: center; line-height:68px; font-size: 16px;}
 	.login_area>a{margin: 5px;}
 	.login_area>a:hover{cursor: pointer;}
 	
 	/* navigator */
-	.navi{
-	    margin: 0;
-	    padding: 0;
-	    list-style-type: none;
-	}
-	.navi>li{
-	    float: left;
-	    width: 20%;
-	    text-align: center;
-	}
+	.gnb_wrap {width: 100%;float: left;}
+	.navi{ margin: 0; padding: 0; list-style-type: none;}
+	.navi>li{ float: left; width: 20%; text-align: center;}
 	.navi a{
 	    text-decoration: none;
 	    font-size: 18px;
@@ -72,30 +65,20 @@
 	
 	.navi>li>ul a{ font-size: 16px; font-weight: bold;}
 	
-	.navi a:hover{background-color:rgb(52, 152, 219); color:white;}
+	.navi a:hover{background-color:rgb(52, 152, 219); color:white; cursor:pointer;}
 	
 	.navi>li>ul{ 
 	    list-style-type: none;
 	    padding: 0;
 	    display: none;
-	    z-index: 1;
+	    z-index: 100;
 	    position:absolute;
 	    width: 240px;
 	}
-	.navi>li>a:hover+ul{
-	    display: block;
-	}
-	.navi>li>ul:hover{
-	    display: block;
-	}
-	.navi_sub a{
-	    background: lightgray;
-	    color: rgb(19, 19, 19);
-	}  
-	.navi_sub a:hover{
-	    background: rgb(196, 195, 195);
-	    color: rgb(19, 19, 19);
-	}      
+	.navi>li>a:hover+ul{display: block;}
+	.navi>li>ul:hover{display: block;}
+	.navi_sub a{background: #e0e0e0; color: rgb(19, 19, 19);}  
+	.navi_sub a:hover{ background: #d2d2d2; color: rgb(19, 19, 19);}      
 	
 	/* 세부 페이지마다 공통적으로 유지할 style */
 	.content_wrap{
@@ -127,7 +110,7 @@
 
     <div class="head">
         <div class="head_main">
-            <div class="logo_img"><img src="../../../resources/images/logo.png" alt="로고"></div>
+            <div class="logo_img"><a href="${ pageContext.servletContext.contextPath }"><img src="resources/images/logo.PNG" alt="로고" width="125px"></a></div>
             <div class="head_center"></div>
             <div class="login_area">
                 <!-- 로그인전 -->
@@ -143,7 +126,7 @@
 
         <div class="gnb_wrap">
             <ul class="navi">
-                <li><a href="">회원관리</a></li>
+                <li><a href="memberListView.mana">회원관리</a></li>
 
                 <li><a href="">메뉴관리</a></li>
 
@@ -151,12 +134,12 @@
 
                 <li><a>결제관리</a>
                     <ul class="navi_sub">
-                        <li><a href="">주문내역</a></li>
-                        <li><a href="">환불신청 내역</a></li>
+                        <li><a href="orderListView.mana">주문내역</a></li>
+                        <li><a href="refundListView.mana">환불신청 내역</a></li>
                     </ul>
                 </li>
 
-                <li><a href="">고객센터</a>
+                <li><a>고객센터</a>
                     <ul class="navi_sub">
                         <li><a href="">공지사항</a></li>
                         <li><a href="">FAQ</a></li>

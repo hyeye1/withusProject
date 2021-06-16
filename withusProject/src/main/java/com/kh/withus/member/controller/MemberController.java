@@ -32,6 +32,7 @@ public class MemberController {
 		return "member/memberEnrollForm";
 	}
 	
+
 	@RequestMapping("insert.me")
 	public String insertMember(Member m) {
 		System.out.println(m);
@@ -56,4 +57,12 @@ public class MemberController {
 	
 	
 	
+
+	// 관리자쪽
+	@RequestMapping("memberListView.mana")
+	public String selectMemberList() {
+		return "member/manaMemberListView";
+	}
+	
+>>>>>>> ed7609741a6831d2023933ea380196d6461ddbee
 }
