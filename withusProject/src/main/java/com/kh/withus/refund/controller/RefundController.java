@@ -13,14 +13,16 @@ public class RefundController {
 	private RefundService rService;
 
 	@RequestMapping("refundListView.mana")
-	public String refundListMana() {
-		return "refund/refundManaListView";
+	public String selectRefundListMana() {
+		return "refund/manaRefundListView";
 	}
 	
-	
-	
-	
-	
+	/*
+	 * @RequestMapping("refundDetailView.mana") 
+	 * public String selectRefundMana() {
+	 * return "refund/manaRefundDetailView"; }
+	 * 
+	 */	
 	
 	
 }

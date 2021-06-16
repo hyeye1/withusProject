@@ -32,8 +32,8 @@ public class MemberController {
 	
 	// 관리자쪽
 	@RequestMapping("memberListView.mana")
-	public String memberList() {
-		return "member/memberManaListView";
+	public String selectMemberList() {
+		return "member/manaMemberListView";
 	}
 	
 }
