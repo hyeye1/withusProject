@@ -126,7 +126,7 @@
 
         <div class="gnb_wrap">
             <ul class="navi">
-                <li><a href="">회원관리</a></li>
+                <li><a href="memberListView.mana">회원관리</a></li>
 
                 <li><a href="">메뉴관리</a></li>
 
@@ -134,8 +134,8 @@
 
                 <li><a>결제관리</a>
                     <ul class="navi_sub">
-                        <li><a href="">주문내역</a></li>
-                        <li><a href="">환불신청 내역</a></li>
+                        <li><a href="orderListView.mana">주문내역</a></li>
+                        <li><a href="refundListView.mana">환불신청 내역</a></li>
                     </ul>
                 </li>
 

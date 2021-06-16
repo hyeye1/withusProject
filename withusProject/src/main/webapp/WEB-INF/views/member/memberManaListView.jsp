@@ -33,7 +33,7 @@
 	/* table */
 	tbody>tr:hover{cursor: pointer;}
 	table *{text-align: center; font-size: 15px;}
-	.table td, .table th {padding: .35rem;}
+	table.table-bordered td, table.table-bordered th {padding: .35rem;}
 	.tableHead{background-color: #eaeaea;}
 	.btn-sm{ border: none;outline: none;background-color: rgb(44, 62, 80);color: white;}
 	.btn-sm:hover{outline: none; border: none;}
