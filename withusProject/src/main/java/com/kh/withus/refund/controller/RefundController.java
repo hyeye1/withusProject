@@ -14,7 +14,7 @@ public class RefundController {
 
 	@RequestMapping("refundListView.mana")
 	public String refundListMana() {
-		return "refund/refundMenaListView";
+		return "refund/refundManaListView";
 	}
 	
 	
