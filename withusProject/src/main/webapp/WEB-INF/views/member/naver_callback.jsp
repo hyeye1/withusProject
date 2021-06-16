@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -6,16 +9,26 @@
 </head>
 <body>
 <script type="text/javascript">
-  var naver_id_login = new naver_id_login("dLjj3gw6QxxdyRGAZ9q6", "http://127.0.0.1:5500/html/naver_callback.html");
-  // 접근 토큰 값 출력
-  alert(naver_id_login.oauthParams.access_token);
-  // 네이버 사용자 프로필 조회
+  var naver_id_login = new naver_id_login("dLjj3gw6QxxdyRGAZ9q6", "http://localhost:8888/withus/naver_callback.me");
+  // ì ê·¼ í í° ê° ì¶ë ¥
+  //alert(naver_id_login.oauthParams.access_token);
+  // ë¤ì´ë² ì¬ì©ì íë¡í ì¡°í
+  // TODO : 토큰을 못받았을때 처리가 필요하다
   naver_id_login.get_naver_userprofile("naverSignInCallback()");
-  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+
+  // ë¤ì´ë² ì¬ì©ì íë¡í ì¡°í ì´í íë¡í ì ë³´ë¥¼ ì²ë¦¬í  callback function
   function naverSignInCallback() {
-    
-    alert(naver_id_login.getProfileData('email'));
-    alert(naver_id_login.getProfileData('name'));
+	  var token = naver_id_login.oauthParams.access_token;
+	  var email = naver_id_login.getProfileData('email');
+	  var name = naver_id_login.getProfileData('name');
+	  
+	  console.log(email);
+	  console.log(name);
+	  
+    //alert(naver_id_login.getProfileData('email'));
+    //alert(naver_id_login.getProfileData('name'));
+    window.opener.naverLoginResult(email, name, token);
+    window.close();
   }
 </script>
 </body>

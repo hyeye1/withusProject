@@ -158,7 +158,7 @@
                 console.log(authObj);
                 window.Kakao.API.request({
                     url: '/v2/user/me',
-                    success: res => {
+                    success: function(res){
                         const kakao_account = res.kakao_account;
                         console.log(kakao_account);
                     }
@@ -169,13 +169,29 @@
 </script>
 
 <script type="text/javascript">
-    var naver_id_login = new naver_id_login("dLjj3gw6QxxdyRGAZ9q6", "http://localhost:8888/member/naver_callback.jsp");
+    var naver_id_login = new naver_id_login("dLjj3gw6QxxdyRGAZ9q6", "http://localhost:8888/withus/naver_callback.me");
     var state = naver_id_login.getUniqState();
     naver_id_login.setButton("green", 3, 50);
-    naver_id_login.setDomain("http://localhost:8888/");
+    naver_id_login.setDomain("http://localhost:8888/withus/");
     naver_id_login.setState(state);
     naver_id_login.setPopup();
     naver_id_login.init_naver_id_login();
+    
+    function naverLoginResult(email, name, token){
+    	if(!token){
+    		console.log("로그인 실패하셨습니다.");
+    		return;
+    	}else{
+    		console.log(email);
+    		console.log(name);
+    		alert(token);
+    		// 로그인 성공시 서버인증을 통해 토큰발급
+        	// 토큰발급까지 성공했으면 메인페이지로
+        	window.location.replace("http://localhost:8888/withus/");
+    	}
+    	
+    	
+    }
 </script>
     
 </body>

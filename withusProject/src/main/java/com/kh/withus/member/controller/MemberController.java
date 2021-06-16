@@ -32,6 +32,10 @@ public class MemberController {
 		return "member/memberEnrollForm";
 	}
 	
+	@RequestMapping("naver_callback.me")
+	public String naver_callback() {
+		return "member/naver_callback";
+	}
 
 	@RequestMapping("insert.me")
 	public String insertMember(Member m) {
@@ -64,5 +68,5 @@ public class MemberController {
 		return "member/manaMemberListView";
 	}
 	
->>>>>>> ed7609741a6831d2023933ea380196d6461ddbee
+
 }
