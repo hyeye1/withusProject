@@ -169,10 +169,10 @@
 </script>
 
 <script type="text/javascript">
-    var naver_id_login = new naver_id_login("dLjj3gw6QxxdyRGAZ9q6", "http://127.0.0.1:5500/html/naver_callback.html");
+    var naver_id_login = new naver_id_login("dLjj3gw6QxxdyRGAZ9q6", "http://localhost:8888/member/naver_callback.jsp");
     var state = naver_id_login.getUniqState();
     naver_id_login.setButton("green", 3, 50);
-    naver_id_login.setDomain("http://127.0.0.1:5500");
+    naver_id_login.setDomain("http://localhost:8888/");
     naver_id_login.setState(state);
     naver_id_login.setPopup();
     naver_id_login.init_naver_id_login();

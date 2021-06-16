@@ -5,6 +5,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kh.withus.member.model.vo.Member;
+
 @Controller
 public class MemberController {
 
@@ -29,5 +31,29 @@ public class MemberController {
 	public String enrollForm() {
 		return "member/memberEnrollForm";
 	}
+	
+	@RequestMapping("insert.me")
+	public String insertMember(Member m) {
+		System.out.println(m);
+		
+		return "member/memberEnrollForm";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
