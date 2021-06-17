@@ -39,4 +39,10 @@ public class RefundController {
 	public String selectOrderNDilvery() {
 		return "refund/partOrderNDeliveryList";
 	}
+	
+	// 파트너 등록
+	@RequestMapping("partnerEnrollForm.me") 
+	public String selectPartnerEnroll() {
+		return "refund/partnerEnrollForm"; 
+	}
 }
