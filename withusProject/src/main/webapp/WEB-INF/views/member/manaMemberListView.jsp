@@ -13,9 +13,8 @@
 	*{box-sizing: border-box;} 
 	
 	/* 여기서만 css */
-	/* 내페이지 */
 	.btn.btn-withus{background-color: #3498db; color: white;}
-	.btn.btn-withus:hover{cursor: pointer; background-color: #2c83be;}
+	.btn.btn-withus:hover{cursor: pointer; background-color: #2c83be; color: white;}
 	
 	/* search */
 	.search_area {height: 60px;} 
@@ -39,11 +38,11 @@
 	.btn-sm:hover{outline: none; border: none;}
 	
 	/* delModal */
-	.modal-header, .modal-footer{border: none;}
+	.modal-header.none, .modal-footer.none{border: none;}
 	.input-group.mb-s {width: 100%; padding: 0 50px;}
 	button.btn.btn-secondary{ width: 47%; float: left;}
 	button.btn.btn-withus{ width: 47%;}
-	.modal-footer{height: 80%;}
+	.modal-footer.none{height: 80%;}
 	
 	/* pagination */
 	.paging_wrap{width:fit-content;margin:auto; margin-top: 100px;}
@@ -229,7 +228,7 @@
 	        <div class="modal-content">
 	        
 	            <!-- Modal Header -->
-	            <div class="modal-header">
+	            <div class="modal-header none">
 	            <h5 class="modal-title">김지원 회원을 탈퇴시키겠습니까?</h5>
 	            <button type="button" class="close" data-dismiss="modal">&times;</button>
 	            </div>
@@ -250,7 +249,7 @@
 	            </div>
 	            
 	            <!-- Modal footer -->
-	            <div class="modal-footer">
+	            <div class="modal-footer none">
 	            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 	            <button type="button" class="btn btn-withus" data-dismiss="modal">수정</button>
 	            </div>
