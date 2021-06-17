@@ -66,28 +66,43 @@
 		</div>
         
         <input type="image" src="resources/images/searchIcon.PNG" id="searchIcon">
+        
+        
+		<c:if test="${ !empty alertMsg }">
+			<script>
+				alert("${alertMsg}");
+			</script>
+			<c:remove var="alertMsg" scope="session"/>
+		</c:if>
+		<c:choose>
+            <c:when test="${ empty loginUser }">
+            
+				<!-- 로그인전 -->
+				<div class="headerRight">
+					<a href="login.me">로그인</a>
+					<a href="enrollForm.me"> 회원가입</a>
+					<img src="resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
+				</div>
+				</c:when>
+	    	    <c:otherwise>
+				
+					<!-- 로그인후 -->
+					<div class="headerRight" style="display:none">
+						<a href="logout.me">로그아웃</a>
+						<a href=""> 마이페이지</a>
+						<img src="resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
+					</div>
+					
+				</c:otherwise>
+         </c:choose>
 		
-		<!-- 로그인전 -->
-		<div class="headerRight">
-			<a href="login.me">로그인</a>
-			<a href="enrollForm.me"> 회원가입</a>
-			<img src="resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
-		</div>
-		
-		<!-- 로그인후 -->
-		<div class="headerRight" style="display:none">
-			<a href="logout.me">로그아웃</a>
-			<a href=""> 마이페이지</a>
-			<img src="resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
-		</div>
-
-		<!-- 관리자 -->
-		<div class="headerRight" style="display:none">
-			<a href="logout.me">로그아웃</a>
-			<a href=""> 관리자</a>
-			<img src="resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
-		</div>
-	</div>
+				<!-- 관리자 -->
+				<div class="headerRight" style="display:none">
+					<a href="logout.me">로그아웃</a>
+					<a href=""> 관리자</a>
+					<img src="resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
+				</div>
+			</div>
 
 </body>
 </html>
