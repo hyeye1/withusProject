@@ -61,6 +61,7 @@ public class MemberController {
 	
 	
 	
+	
 
 	// 관리자쪽
 	@RequestMapping("memberListView.mana")
