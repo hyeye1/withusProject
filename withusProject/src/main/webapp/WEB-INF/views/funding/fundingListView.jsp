@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
 	div{box-sizing: border-box;}
 	.innerOuter{
      	display:"flex";
@@ -14,7 +15,6 @@
 	    width:1200px;
 	    margin:auto;
 	}
-
 	.category{
 		border: 3px solid red;
 		margin: auto;
