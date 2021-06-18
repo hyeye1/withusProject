@@ -7,13 +7,37 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+	div{box-sizing: border-box;}
 	.innerOuter{
-	        border:1px solid lightgray;
-	        width:80%;
-	        margin:auto;
-	        padding:5% 10%;
-	        background:white;
-	    }
+     	display:"flex";
+	    border:3px solid blue;
+	    width:1200px;
+	    margin:auto;
+	}
+
+	.category{
+		border: 3px solid red;
+		margin: auto;
+		width: 80%;
+		height: 100px;
+	}
+	.fundingList{
+		border: 3px solid red;
+		margin: auto;
+		width: 80%;
+	}
+	.thumbnail{
+        display: inline-block;
+		border: 3px solid pink;
+		width: 30%;
+        margin:14px;
+        margin-top:px;
+	}
+	.thumbnail:hover{
+        cursor:pointer;
+        opacity:0.5;
+    }
+	
 </style>
 </head>
 <body>
@@ -21,32 +45,135 @@
 	<jsp:include page="../common/header.jsp"/>
 	<hr>
 
-	<div class="innerOuter" style="padding:5% 10%;">
+	<div class="innerOuter">
 
 		<div class="category">
-		
+			
 		</div>
-
-		<br><br>
 
 		<div class="fundingList">
 			<h3>전체보기</h3>
 			<hr>
-			<div class="listArea" align="center">
-	            <div class="thumbnail" align="center">
-	            	<input type="hidden" value="">
-					<input type="hidden" value="">
-					<input type="hidden" value="">
+	        <div class="thumbnail" align="center">
+	            <input type="hidden" value="">
+				<input type="hidden" value="">
+				<input type="hidden" value="">
 	            	
-	                <img src="" width="300" height="300">
-	                <p align="left">
-	                    [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
-	                    뷰티 | 팀스모어<br>
-						7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
-	                </p>
-	            </div>
-		</div>
-
+	            <img src="" width="270" height="230">
+	            <p align="left">
+	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
+	                뷰티 | 팀스모어<br>
+					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
+	            </p>
+	        </div>
+			<div class="thumbnail" align="center">
+	            <input type="hidden" value="">
+				<input type="hidden" value="">
+				<input type="hidden" value="">
+	            	
+	            <img src="" width="270" height="230">
+	            <p align="left">
+	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
+	                뷰티 | 팀스모어<br>
+					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
+	            </p>
+	        </div>
+			<div class="thumbnail" align="center">
+	            <input type="hidden" value="">
+				<input type="hidden" value="">
+				<input type="hidden" value="">
+	            	
+	            <img src="" width="270" height="230">
+	            <p align="left">
+	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
+	                뷰티 | 팀스모어<br>
+					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
+	            </p>
+	        </div>
+			<div class="thumbnail" align="center">
+	            <input type="hidden" value="">
+				<input type="hidden" value="">
+				<input type="hidden" value="">
+	            	
+	            <img src="" width="270" height="230">
+	            <p align="left">
+	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
+	                뷰티 | 팀스모어<br>
+					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
+	            </p>
+	        </div>
+			<div class="thumbnail" align="center">
+	            <input type="hidden" value="">
+				<input type="hidden" value="">
+				<input type="hidden" value="">
+	            	
+	            <img src="" width="270" height="230">
+	            <p align="left">
+	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
+	                뷰티 | 팀스모어<br>
+					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
+	            </p>
+	        </div>
+			<div class="thumbnail" align="center">
+	            <input type="hidden" value="">
+				<input type="hidden" value="">
+				<input type="hidden" value="">
+	            	
+	            <img src="" width="270" height="230">
+	            <p align="left">
+	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
+	                뷰티 | 팀스모어<br>
+					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
+	            </p>
+	        </div>
+			<div class="thumbnail" align="center">
+	            <input type="hidden" value="">
+				<input type="hidden" value="">
+				<input type="hidden" value="">
+	            	
+	            <img src="" width="270" height="230">
+	            <p align="left">
+	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
+	                뷰티 | 팀스모어<br>
+					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
+	            </p>
+	        </div>
+			<div class="thumbnail" align="center">
+	            <input type="hidden" value="">
+				<input type="hidden" value="">
+				<input type="hidden" value="">
+	            	
+	            <img src="" width="270" height="230">
+	            <p align="left">
+	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
+	                뷰티 | 팀스모어<br>
+					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
+	            </p>
+	        </div>
+			<div class="thumbnail" align="center">
+	            <input type="hidden" value="">
+				<input type="hidden" value="">
+				<input type="hidden" value="">
+	            	
+	            <img src="" width="270" height="230">
+	            <p align="left">
+	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
+	                뷰티 | 팀스모어<br>
+					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
+	            </p>
+	        </div><div class="thumbnail" align="center">
+	            <input type="hidden" value="">
+				<input type="hidden" value="">
+				<input type="hidden" value="">
+	            	
+	            <img src="" width="270" height="230">
+	            <p align="left">
+	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
+	                뷰티 | 팀스모어<br>
+					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
+	            </p>
+	        </div>
+		</div>	
 	</div>
 
 	<br><br>
