@@ -31,6 +31,7 @@
         float:left;
         background-color: rgb(240, 244, 245);
         width:160px;
+        margin-left: 100px;
     }
     #menubar li:hover{background-color: rgb(71, 189, 250);}
     #menubar a{display: block;}
