@@ -86,12 +86,13 @@
             <div id="content2">
                 <!-- 파트너 프로필 -->
                 <div id="content_1_1">
-                    <img src="city1.PNG" width="100" height="100" class="rounded-circle" >
+                    <img src="/withus/resources/images/memberIcon.PNG" width="100" height="100" class="rounded-circle" >
                    <br> <a href="">편집</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="">취소</a>
                     
                 </div>
                 <p>파트너 프로필사진을 등록해주세요</p>
-                <input type="text" placeholder="파트너 소개 등록(0/50)" class="partnerUp" maxlength="50">
+                <!-- <input type="text" placeholder="파트너 소개 등록(0/50)" class="partnerUp" maxlength="50"> -->
+                <textarea name="" class="partnerUp" cols="30" rows="10" maxlength="50" placeholder="파트너 소개 등록(0/50)"></textarea>
                 <p>펀딩 프로젝트에 등록될 소개글을 입력해주세요!</p>
                 <hr class="line">
             </div>
