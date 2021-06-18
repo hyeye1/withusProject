@@ -102,7 +102,7 @@
         margin-left: 90px;
         font-size: 13px;
         }
-        .kakao {
+        /* .kakao {
         display: table;
         margin-left: auto;
         margin-right: auto;
@@ -112,8 +112,24 @@
         display: table;
         margin-left: auto;
         margin-right: auto;
+        } */
+        #naver_id_login img{
+            border-radius: 50%;
         }
-
+        ul{
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        li{
+            margin: 0px;
+            margin-right: 15px;
+            padding: 0px;
+            float: left;
+        }
     </style>
 </head>
 <body>
@@ -136,12 +152,16 @@
             </div>
             <p class="join">가치가자에 처음오셨나요? <a href="">회원가입</a></p>
 
-            <div class="kakao">
-                <a href="javascript:kakaoLogin();"><img src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_narrow.png" style="height: 50px;width: auto;"></a>
-            </div>
-            <div class="naver">
-                <div id="naver_id_login"></div>
-            </div>
+            <ul>
+                <li><div class="kakao">
+                    <a href="javascript:kakaoLogin();"><img src="https://blog.kakaocdn.net/dn/QnHVz/btqBPXNbjox/T3N8cTlreOvRDECKyrHbx1/img.png" style="height: 50px;width: auto;"></a>
+                </div></li>
+                <li> <div class="naver">
+                    <div id="naver_id_login"></div>
+                </div></li>
+            </ul>
+            
+           
          </div>
    </div>
 
@@ -171,7 +191,7 @@
 <script type="text/javascript">
     var naver_id_login = new naver_id_login("dLjj3gw6QxxdyRGAZ9q6", "http://localhost:8888/withus/naver_callback.me");
     var state = naver_id_login.getUniqState();
-    naver_id_login.setButton("green", 3, 50);
+    naver_id_login.setButton("green", 1, 50);
     naver_id_login.setDomain("http://localhost:8888/withus/");
     naver_id_login.setState(state);
     naver_id_login.setPopup();
