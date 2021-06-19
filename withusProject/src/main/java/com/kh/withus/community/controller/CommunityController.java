@@ -16,4 +16,14 @@ public class CommunityController {
 	public String community() {
 		return "community/communityMain";
 	}
+	
+	@RequestMapping("commu.detail")
+	public String commuDetail() {
+		return "community/commuDetail";
+	}
+	
+	@RequestMapping("commu.enroll")
+	public String commuEnroll() {
+		return "community/commuEnrollForm";
+	}
 }
