@@ -13,6 +13,7 @@
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
         .back {
         border: 1px solid #7f7fd5;
         width: 100vw;

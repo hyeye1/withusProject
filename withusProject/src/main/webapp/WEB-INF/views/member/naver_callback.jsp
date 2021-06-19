@@ -10,13 +10,11 @@
 <body>
 <script type="text/javascript">
   var naver_id_login = new naver_id_login("dLjj3gw6QxxdyRGAZ9q6", "http://localhost:8888/withus/naver_callback.me");
-  // ì ê·¼ í í° ê° ì¶ë ¥
-  //alert(naver_id_login.oauthParams.access_token);
-  // ë¤ì´ë² ì¬ì©ì íë¡í ì¡°í
+
   // TODO : 토큰을 못받았을때 처리가 필요하다
   naver_id_login.get_naver_userprofile("naverSignInCallback()");
 
-  // ë¤ì´ë² ì¬ì©ì íë¡í ì¡°í ì´í íë¡í ì ë³´ë¥¼ ì²ë¦¬í  callback function
+  
   function naverSignInCallback() {
 	  var token = naver_id_login.oauthParams.access_token;
 	  var email = naver_id_login.getProfileData('email');
