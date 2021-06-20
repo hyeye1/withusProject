@@ -67,7 +67,8 @@
                 <li><a href="">질문</a></li>
                 <li><a href="">공구모집</a></li>
             </ul>
-        </div>    
+        </div>
+          
 
 </body>
 </html>
