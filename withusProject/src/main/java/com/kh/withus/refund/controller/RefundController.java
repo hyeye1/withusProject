@@ -12,17 +12,37 @@ public class RefundController {
 	@Autowired
 	private RefundService rService;
 
+	// 관리자
 	@RequestMapping("refundListView.mana")
-	public String selectRefundListMana() {
+	public String selectManaRefundList() {
 		return "refund/manaRefundListView";
 	}
 	
-	/*
-	 * @RequestMapping("refundDetailView.mana") 
-	 * public String selectRefundMana() {
-	 * return "refund/manaRefundDetailView"; }
-	 * 
-	 */	
+	// 주문내역(임시)
+	@RequestMapping("orderListView.mana")
+	public String selectManaOrderList() {
+		return "refund/manaOrderListView";
+	}
+	@RequestMapping("orderDetailView.mana")
+	public String selectManaOrder() {
+		return "refund/manaOrderDetailView";
+	}
 	
+
+	@RequestMapping("refundDetailView.mana") 
+	public String selectManaRefund() {
+		return "refund/manaRefundDetailView"; 
+	}
+  
+	// 사용자
+	@RequestMapping("orderNDeliveryList.part")
+	public String selectOrderNDilvery() {
+		return "refund/partOrderNDeliveryList";
+	}
 	
+	// 파트너 등록
+	@RequestMapping("partnerEnrollForm.me") 
+	public String selectPartnerEnroll() {
+		return "refund/partnerEnrollForm"; 
+	}
 }

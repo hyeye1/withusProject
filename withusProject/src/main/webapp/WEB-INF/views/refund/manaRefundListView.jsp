@@ -8,16 +8,6 @@
 <title>Admin With Us</title>
 
 <style>
-	/* pagination */
-	.paging_wrap{width:fit-content;margin:auto; margin-top: 100px;}
-
-	.pagination a {
-     color: black;
-     float: left;
-     padding: 8px 16px;
-     text-decoration: none;
-     transition: background-color .3s;
-	}
 
 	/* searchBox */
 	.search_box{
@@ -38,12 +28,23 @@
 	.searchBtns{width: 20%; float: right;}
 	.searchBtns button{margin: 0 7px;} 
 	.btn.btn-withus{background-color: #3498db; color: white;}
-	.btn.btn-withus:hover{cursor: pointer; background-color: #2c83be;}
+	.btn.btn-withus:hover{cursor: pointer; background-color: #2c83be;color: white;}
 	
 	table *{text-align: center; font-size: 15px;}
 	tbody>tr:hover{cursor: pointer;}
 	table.table-bordered td, table.table-bordered th {padding: .35rem; vertical-align: inherit;}
 	.tableHead{background-color: #eaeaea;}
+	
+	
+	/* pagination */
+	.paging_wrap{width:fit-content;margin:auto; margin-top: 100px;}
+	.pagination a {
+     color: black;
+     float: left;
+     padding: 8px 16px;
+     text-decoration: none;
+     transition: background-color .3s;
+	}
 
 </style>
 

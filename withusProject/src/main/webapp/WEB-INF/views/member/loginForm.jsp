@@ -13,6 +13,7 @@
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
         .back {
         border: 1px solid #7f7fd5;
         width: 100vw;
@@ -102,7 +103,7 @@
         margin-left: 90px;
         font-size: 13px;
         }
-        .kakao {
+        /* .kakao {
         display: table;
         margin-left: auto;
         margin-right: auto;
@@ -112,8 +113,24 @@
         display: table;
         margin-left: auto;
         margin-right: auto;
+        } */
+        #naver_id_login img{
+            border-radius: 50%;
         }
-
+        ul{
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        li{
+            margin: 0px;
+            margin-right: 15px;
+            padding: 0px;
+            float: left;
+        }
     </style>
 </head>
 <body>
@@ -136,12 +153,16 @@
             </div>
             <p class="join">가치가자에 처음오셨나요? <a href="">회원가입</a></p>
 
-            <div class="kakao">
-                <a href="javascript:kakaoLogin();"><img src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_narrow.png" style="height: 50px;width: auto;"></a>
-            </div>
-            <div class="naver">
-                <div id="naver_id_login"></div>
-            </div>
+            <ul>
+                <li><div class="kakao">
+                    <a href="javascript:kakaoLogin();"><img src="https://blog.kakaocdn.net/dn/QnHVz/btqBPXNbjox/T3N8cTlreOvRDECKyrHbx1/img.png" style="height: 50px;width: auto;"></a>
+                </div></li>
+                <li> <div class="naver">
+                    <div id="naver_id_login"></div>
+                </div></li>
+            </ul>
+            
+           
          </div>
    </div>
 
@@ -158,7 +179,7 @@
                 console.log(authObj);
                 window.Kakao.API.request({
                     url: '/v2/user/me',
-                    success: res => {
+                    success: function(res){
                         const kakao_account = res.kakao_account;
                         console.log(kakao_account);
                     }
@@ -169,13 +190,29 @@
 </script>
 
 <script type="text/javascript">
-    var naver_id_login = new naver_id_login("dLjj3gw6QxxdyRGAZ9q6", "http://127.0.0.1:5500/html/naver_callback.html");
+    var naver_id_login = new naver_id_login("dLjj3gw6QxxdyRGAZ9q6", "http://localhost:8888/withus/naver_callback.me");
     var state = naver_id_login.getUniqState();
-    naver_id_login.setButton("green", 3, 50);
-    naver_id_login.setDomain("http://127.0.0.1:5500");
+    naver_id_login.setButton("green", 1, 50);
+    naver_id_login.setDomain("http://localhost:8888/withus/");
     naver_id_login.setState(state);
     naver_id_login.setPopup();
     naver_id_login.init_naver_id_login();
+    
+    function naverLoginResult(email, name, token){
+    	if(!token){
+    		console.log("로그인 실패하셨습니다.");
+    		return;
+    	}else{
+    		console.log(email);
+    		console.log(name);
+    		alert(token);
+    		// 로그인 성공시 서버인증을 통해 토큰발급
+        	// 토큰발급까지 성공했으면 메인페이지로
+        	window.location.replace("http://localhost:8888/withus/");
+    	}
+    	
+    	
+    }
 </script>
     
 </body>
