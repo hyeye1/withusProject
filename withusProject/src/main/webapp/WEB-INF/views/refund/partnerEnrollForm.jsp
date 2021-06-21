@@ -86,7 +86,7 @@
             <div id="content2">
                 <!-- 파트너 프로필 -->
                 <div id="content_1_1">
-                    <img src="/withus/resources/images/memberIcon.PNG" width="100" height="100" class="rounded-circle" >
+                    <img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="100" height="100" class="rounded-circle" >
                    <br> <a href="">편집</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="">취소</a>
                     
                 </div>
