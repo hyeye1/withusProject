@@ -57,10 +57,10 @@
 <body>
     <div class="footerOuter" align="left">
 
-        <img src="resources/images/footerLogo.PNG" width="100%">
+        <img src="${ pageContext.request.contextPath }/resources/images/footerLogo.PNG" width="100%">
 
         <div class="footerHead">
-            <img src="resources/images/qButton.PNG" width="262px" height="63px">
+            <img src="${ pageContext.request.contextPath }/resources/images/qButton.PNG" width="262px" height="63px">
 
             <span>
                 <p><b style="font-size: 14.4px;">가치가자 고객센터 : 1588-1234</b> <br> 상담가능시간 : 평일 9:00 ~ 18:00</p>

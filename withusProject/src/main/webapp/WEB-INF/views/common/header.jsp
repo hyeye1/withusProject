@@ -56,16 +56,16 @@
 	<div class="headerOuter" align="center" >
 	
 		<div class="headerLeft">
-			<img src="resources/images/catIcon.PNG" width="25px" style="margin-top: -6px;">
+			<img src="${ pageContext.request.contextPath }/resources/images/catIcon.PNG" width="25px" style="margin-top: -6px;">
 			<a href="" style="color: rgb(52, 152, 219);"> 프로젝트 둘러보기 </a>
 			<a href=""> 프로젝트 올리기</a>
 		</div>
 		
-		<div class="headerCenter" >
-			<img src="resources/images/logo.PNG" width="165px" id="logoImg">
+		<div class="headerCenter">
+			<img src="${ pageContext.request.contextPath }/resources/images/logo.PNG" width="165px" id="logoImg">
 		</div>
         
-        <input type="image" src="resources/images/searchIcon.PNG" id="searchIcon">
+        <input type="image" src="${ pageContext.request.contextPath }/resources/images/searchIcon.PNG" id="searchIcon">
         
         
 		<c:if test="${ !empty alertMsg }">
@@ -81,7 +81,7 @@
 				<div class="headerRight">
 					<a href="login.me">로그인</a>
 					<a href="enrollForm.me"> 회원가입</a>
-					<img src="resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
+					<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
 				</div>
 				</c:when>
 	    	    <c:otherwise>
@@ -90,7 +90,7 @@
 					<div class="headerRight" style="display:none">
 						<a href="logout.me">로그아웃</a>
 						<a href=""> 마이페이지</a>
-						<img src="resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
+						<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
 					</div>
 					
 				</c:otherwise>
