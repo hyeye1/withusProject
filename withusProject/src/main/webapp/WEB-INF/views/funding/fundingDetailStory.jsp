@@ -322,11 +322,47 @@
                     width: 63%;
                     margin-right: 0px;
                     line-height: 2.5;
+                    /* 스토리 아닐 때 */
+                    display: none;
+                }
+
+                .detailStory h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6,
+                strong {
+                    line-height: 2;
                 }
 
                 .detailStory img {
                     width: 90%;
                 }
+
+                .detailCommunity {
+                    /*detailStory랑 같음 좀있다합치기*/
+                    background-color: white;
+                    float: left;
+                    margin: 35px;
+                    padding: 50px;
+                    width: 63%;
+                    margin-right: 0px;
+                    line-height: 2.5;
+                }
+
+                #plzLogin {
+                    width: 100%;
+                    height: 150px;
+                    border: 1px solid rgb(127, 127, 127);
+                    border-radius: 5px;
+                    padding: 20px;
+                    line-height: 1.6;
+                    font-size: 13px;
+                    color: rgb(94, 94, 94);
+                }
+
+                .detailGuide {}
             </style>
         </head>
 
@@ -434,8 +470,8 @@
                     <span id="detailNotice"><a href="">펀딩 안내</a></span>
                 </div>
                 <!-- 메뉴바 스토리선택됨 표시바 -->
-                <div class="menuSelected" style="margin-left: 112px;">&nbsp;</div>
-                <div class="menuSelected" style="margin-left: 218px; display: none;">&nbsp;</div>
+                <div class="menuSelected" style="margin-left: 112px; display: none;">&nbsp;</div>
+                <div class="menuSelected" style="margin-left: 218px; ">&nbsp;</div>
                 <div class="menuSelected" style="margin-left: 337px; display: none;">&nbsp;</div>
 
 
@@ -730,6 +766,20 @@
                         </div>
                     </div>
 
+                    <!-- 커뮤니티 -->
+                    <div class="detailCommunity">
+                        <p id="plzLogin">
+                            로그인 후 글 작성이 가능합니다. <br>
+                            펀딩과 관련 없는 내용, 광고, 욕설, 비방, 도배 글은 관리자 검토 후 삭제됩니다.
+                        </p><br>
+                        <h3><b> 응원 · 의견 · 리뷰 </b></h3>
+                        <hr>
+                    </div>
+
+                    <!-- 상품 안내 -->
+                    <div class="detailGuide">
+
+                    </div>
                 </div>
             </div>
 
