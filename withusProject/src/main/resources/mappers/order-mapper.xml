@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="orderMapper">
+	<resultMap type="Order" id="orderRset">
+		<result column="order_no" property="orderNo"/>
+		<result column="project_no" property="projectNo"/>
+		<result column="member_no" property="memberNo"/>
+		<result column="pur_email" property="purEmail"/>
+		<result column="order_plus" property="orderPlus"/>
+		<result column="order_status" property="orderStatus"/>
+		<result column="receiver_name" property="receiverName"/>
+		<result column="receiver_phone" property="receiverPhone"/>
+		<result column="address_no" property="addressNo"/>
+		<result column="address_detail" property="addressDetail"/>
+		<result column="address" property="address"/>
+		<result column="shipping_status" property="shippingStatus"/>
+		<result column="shipping_req" property="shippingReq"/>
+		<result column="shipping_com" property="shippingCom"/>
+		<result column="shipping_no" property="shippingNo"/>
+		<result column="order_date" property="orderDate"/>
+	</resultMap>
+	
+	<!-- 페이징 처리 -->
+	<select id="oSelectListCount" resultType="_int">
+		select
+			   count(*)
+		from tb_order
+	</select>
+	
+	<!-- 회원조회용 (수정필요) -->
+	<select id="oSelectList" resultMap="orderRset">
+		select
+			   order_no
+		     , pur_email
+		     , to_char(order_date,'YYYY-MM-DD HH24:MI:SS') order_date
+			 , order_status
+		  from tb_order  
+		 order
+		    by order_no desc   
+	</select>
+</mapper>
+			 <!--        
+			 , case order_status 
+                   when 1 then '결제완료'
+                   when 2 then '취소신청'
+                   else '취소완료'
+               end as 결제상태 
+               -->    
