@@ -5,9 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>Admin With Us</title>
 <style>
-
+	.noticeDetail>tr>th{
+		align-content: center;
+	}
 </style>
 </head>
 <body>
@@ -15,6 +22,7 @@
 	
     <!-- 6/9 윤경 생성-->
 	<!-- 6/12 윤경 수정-->
+	<!-- 6/17 윤경 수정 -->
 
     <!-- 메뉴바 포함 -->
     <jsp:include page="../common/manaHeader.jsp"/>
@@ -23,23 +31,29 @@
     <hr><br>
 
 	<div class="container">
-	    <table class="noticeDetail" border="1px"> <!-- 솔리드 왜 안되죠,, -->
-	        <tr>
-	            <th width="200" height="35">제목</th>
-	            <td width="800" style="padding-left: 10px;">공지사항입니다.</td>
-	        </tr>
-	        <tr>
-	            <th height="35">작성자</th>
-	            <td style="padding-left: 10px;"">관리자1</td>
-	        </tr>
-	        <tr>
-	            <th height="35">작성일</th>
-	            <td style="padding-left: 10px;"">2021-06-09</td>
-	        </tr>
-	        <tr>
-	            <td colspan="2"><textarea required style="width: 1000px; height:auto;"></textarea></td>
-	        </tr>
-	    </table>
+
+		<table class="table table-bordered noticeDetail">
+			<thead>
+			  <tr>
+				<th style="width: 300px;">제목</th>
+	            <td>공지사항 입니다.</td>
+			  </tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>작성자</th>
+					<td>관리자1</td>
+				</tr>
+				<tr>
+					<th>작성일</th>
+					<td>2021-06-09</td>
+				</tr>
+				<tr>
+					<td colspan="2"><textarea required style="width:1000px; height: auto;">ddd</textarea></td>
+				</tr>
+			</tbody>
+		</table>
+
 	    <br>
 
 		<!-- 관리자 로그인시에만 보이는 버튼 -->
