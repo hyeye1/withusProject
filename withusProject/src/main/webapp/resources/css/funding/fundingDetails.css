@@ -312,8 +312,8 @@
 	    width: 63%;
 	    margin-right: 0px;
 	    line-height: 2.5;
-	    /* 스토리 아닐 때 */
-	    display: none;
+	    /* 스토리 아닐 때
+	    display: none; */
 	}
 	
 	.detailStory h1,
@@ -339,8 +339,8 @@
 	    width: 63%;
 	    margin-right: 0px;
 	    line-height: 2.5;
-	    /* 커뮤니티 아닐 때
-	    display: none; */
+	    /* 커뮤니티 아닐 때*/
+	    display: none; 
 	}
 	
 	.detailCommunity p {
