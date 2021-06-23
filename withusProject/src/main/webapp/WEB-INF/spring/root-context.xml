@@ -10,7 +10,7 @@
 		=> 서버 구동시 바로 셋팅해야되는(빈으로 등록할) 내용들을 작성하는 설정 파일
 		   (보통 DB연결 설정, 트랜잭션 처리, AOP 관련, 내 외부 모듈 연동 등등)
 	-->
-	
+	<!-- 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
@@ -26,11 +26,13 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
-	
+	 -->
+	 
 	<!-- 파일업로드 관련 빈 등록 -->
+	<!-- 
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="100000000"></property>
 		<property name="maxInMemorySize" value="100000000"></property>
 	</bean>
-	
+	  -->
 </beans>
