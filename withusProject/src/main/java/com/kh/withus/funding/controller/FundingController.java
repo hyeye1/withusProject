@@ -40,8 +40,8 @@ public class FundingController {
 		
 	}
 
-	@RequestMapping("detail.st")
-	public String FundingDetailStory() {
+	@RequestMapping("detail.fd")
+	public String FundingDetails() {
 		
 		/*
 		int listCount = bService.selectListCount();
@@ -53,7 +53,7 @@ public class FundingController {
 		model.addAttribute("list", list);
 		*/
 		
-		return "funding/fundingDetailStory";
+		return "funding/fundingDetails";
 		
 	}
 }

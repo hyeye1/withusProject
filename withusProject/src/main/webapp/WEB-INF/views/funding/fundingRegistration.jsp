@@ -20,6 +20,61 @@
                     cursor: default;
                     position: relative;
                 }
+
+                .regiHeader {
+                    height: 200px;
+                    padding: 75px;
+                    background-color: rgba(224, 224, 224, 0.45);
+                }
+
+                .regiHeader b {
+                    float: left;
+                    font-size: 34px;
+                    margin-top: ;
+                }
+
+                .regiHeader button {
+                    float: right;
+                    margin-left: 30px;
+                    width: 100px;
+                    height: 40px;
+                    background-color: rgb(224, 224, 224);
+                    color: rgb(94, 94, 94);
+                    border: none;
+                    border-radius: 5px;
+                    font-weight: 500;
+                }
+
+                .registerBtn {
+                    width: 170px !important;
+                    background-color: rgb(52, 152, 219) !important;
+                    color: white !important;
+                }
+
+                .regiMenubar {
+                    width: 260px;
+                    height: 100%;
+                    background-color: wheat;
+                    padding: 30px;
+                }
+
+                .regiMenubar b {
+                    font-size: 22px;
+                }
+
+                .regiMenubar li {
+                    margin-left: -20px;
+                    line-height: 2.4;
+                    font-size: 17px;
+                }
+
+                .regiBody {
+                    float: right;
+                    width: 940px;
+                    height: 100%;
+                    background-color: lightgoldenrodyellow;
+                    border-left: 2px solid rgba(224, 224, 224, 0.45);
+                }
             </style>
         </head>
 
@@ -28,10 +83,33 @@
 
                 <!-- 타이틀과 미리보기/임시저장/승인요청하기 -->
                 <div class="regiHeader">
-                    <p>기본정보</p>
-                    <button>미리보기</button>
+                    <p><b>기본정보</b></p>
+                    <button class="registerBtn">승인요청하기</button>
                     <button>임시저장</button>
-                    <button>승인요청하기</button>
+                    <button>미리보기</button>
+                </div>
+
+                <!-- 바디 -->
+                <div class="regiBody">
+                    <!-- 1. 기본정보 -->
+                    <div class="regiOne">
+                        <div>
+                            df
+                        </div>
+
+                    </div>
+
+                    <!-- 2. 스토리 -->
+                    <div class="regiTwo" style="display: none;"></div>
+
+                    <!-- 3. 리워드 -->
+                    <div class="regiThree" style="display: none;"></div>
+
+                    <!-- 4. 안내사항 -->
+                    <div class="regiFour" style="display: none;"></div>
+
+                    <!-- 5. 제작자/부가정보 -->
+                    <div class="regiFive" style="display: none;"></div>
                 </div>
 
                 <!-- 왼쪽 메뉴바 -->
@@ -47,17 +125,14 @@
                     </ol>
                 </div>
                 <!-- 메뉴바 스토리선택됨 표시바 -->
-                <div class="regiMenuSelected" style="margin-left: 112px; display: none;">&nbsp;</div>
-                <div class="regiMenuSelected" style="margin-left: 218px; display: none;">&nbsp;</div>
-                <div class="regiMenuSelected" style="margin-left: 339px; display: none;">&nbsp;</div>
+                <div class="regiMenuSelected" style="margin-top: 112px; display: none;">&nbsp;</div>
+                <div class="regiMenuSelected" style="margin-top: 218px; display: none;">&nbsp;</div>
+                <div class="regiMenuSelected" style="margin-top: 339px; display: none;">&nbsp;</div>
+                <div class="regiMenuSelected" style="margin-top: 339px; display: none;">&nbsp;</div>
+                <div class="regiMenuSelected" style="margin-top: 339px; display: none;">&nbsp;</div>
 
+            </div> <!-- outer div -->
 
-                <!-- 바디 -->
-                <div class="regiBody">
-
-                </div>
-
-            </div>
         </body>
 
         </html>
