@@ -35,20 +35,19 @@
        
         /* mypage안의 세부영역 */
         #mypage>div{height: 100%;}
-        #content{width: 100%;}
+        #content{width: 100%; margin-left: 150px;}
 
         /*------공통---------*/
 
         
         /* main content */
-        #main_1{height: 30%; margin-top: 50px;}
+        #main_1{height: 45%; margin-top: 50px;}
         #main_2{height: 40%;}
-        #main_3{height: 30%;}
         
 
-        #main_3>div{float: left;}
-        #main_3_1{width: 45%;}
-        #main_3_2{width: 45%;}
+        #main_2>div{float: left;}
+        #main_2_1{width: 45%;}
+        #main_2_2{width: 45%;}
         
         
 
@@ -63,33 +62,21 @@
           text-align: center;
         }
 
-        /* 좋아요 */
-        #main_2>.like{float: left; padding: 10px;}
+        /* 프로젝트 */
+        #main_1>.like{float: left; padding: 10px;}
         .like>table{width: 90%;}
 
+        /* 버튼 */
+        #openBtn{margin-left: 250px; margin-bottom: 50px;}
+        button{width: 300px}
 
-        /* 문의내역 */
-        #main_3_1>table{width: 90%;}
-        #qTitle{width: 70%; height: 60px;}
-        #qDate{width: 30%;}
-        
-        
-        /* 팔로잉 테이블 */
-        #main_3_2>table{width: 100%;}
-        #profile{width: 10%; height: 60px;}
-        #user{width: 60%}
-        #status{width: 20%}
-
-        #id{font-size: 12px; font-weight: bold;}
-        #idDetail{font-size: 10px;}
-
+        /* 메뉴들 */
+        #main_2>table{width: 90%;}
+        #mmenu{width: 70%; height: 60px;}
        
         a{text-decoration: none; color: black;}
 
     </style>
-
-
-
 </head>
 <body>
     <div class="wrap">
@@ -98,98 +85,88 @@
         <div id="mypage">
             <div id="content">
                 
-                <!-- 나의 펀딩 목록-->
+               <!--좋아요-->
                 <div id="main_1">
-                  <p><a href="">나의 펀딩 내역</a></p>
+                  <p><a href="">오픈프로젝트</a></p>
                   <div id="underLine"></div>
 
-                  <div id="count">펀딩 참여<br> 2회</div>
-
-
-                </div>
-                
-                
-                <!--좋아요-->
-                <div id="main_2">
-                  <p><a href="">좋아요</a></p>
-                  <div id="underLine"></div>
-
-                  <div class="like">
-                    <table>
-                        <tr>
-                            <td colspan="2">
-                                <img src="city1.PNG" class="img-thumbnail" width="250" height="300">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">프로젝트 제목</td>
-                        </tr>
-                        <tr>
-                            <td>가격</td>
-                            <td>날짜</td>
-                        </tr>
-                    </table>
-                  </div>
-
-                  <div class="like">
-                    <table>
-                        <tr>
-                            <td colspan="2">
-                                <img src="city1.PNG" class="img-thumbnail" width="250" height="300">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">프로젝트 제목</td>
-                        </tr>
-                        <tr>
-                            <td>가격</td>
-                            <td>날짜</td>
-                        </tr>
-                    </table>
-                  </div>
-
-                  <div class="like">
-                    <table>
-                        <tr>
-                            <td colspan="2">
-                                <img src="city1.PNG" class="img-thumbnail" width="250" height="300">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">프로젝트 제목</td>
-                        </tr>
-                        <tr>
-                            <td>가격</td>
-                            <td>날짜</td>
-                        </tr>
-                    </table>
-                  </div>
-
-                
-                </div>
-
-                
-                <!--나의문의 & 팔로잉-->
-                <div id="main_3">
+                  <div style="margin-top: 10px; font-size: 20px;">나의펀딩 6</div>
                   
-                  <div id="main_3_1">
-                    <p><a href="">나의 문의 내역</a></p>
+
+
+                  <div class="like">
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <img src="city1.PNG" class="img-thumbnail" width="250" height="300">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">프로젝트 제목</td>
+                        </tr>
+                        <tr>
+                            <td>가격</td>
+                            <td>날짜</td>
+                        </tr>
+                    </table>
+                  </div>
+
+                  <div class="like">
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <img src="city1.PNG" class="img-thumbnail" width="250" height="300">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">프로젝트 제목</td>
+                        </tr>
+                        <tr>
+                            <td>가격</td>
+                            <td>날짜</td>
+                        </tr>
+                    </table>
+                  </div>
+
+                  <div class="like">
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <img src="city1.PNG" class="img-thumbnail" width="250" height="300">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">프로젝트 제목</td>
+                        </tr>
+                        <tr>
+                            <td>가격</td>
+                            <td>날짜</td>
+                        </tr>
+                    </table>
+                  </div>
+                 <br><br>
+                  
+                </div>
+                
+                <div id="openBtn"><button>펀딩오픈하기</button></div>
+                
+
+                
+                <!--펀딩관리  프로젝트안내-->
+                <div id="main_2">
+                  
+                  <div id="main_2_1">
+                    <p><a href="">펀딩관리</a></p>
                     <div id="underLine"></div>
 
-                    <!--3개-->
                     <table>
                       <tr>
-                        <td id="qTitle">문의합니다 </td>
-                        <td id="qDate">2021-06-21</td>
+                        <td id="mmenu">펀딩발송관리 </td>
                       </tr>
                       <tr>
-                        <td id="qTitle">문의합니다 </td>
-                        <td id="qDate">2021-06-21</td>
+                        <td id="mmenu">파트너 정보관리 </td>
                       </tr>
-                      <tr>
-                        <td id="qTitle">문의합니다 </td>
-                        <td id="qDate">2021-06-21</td>
-                      </tr>
+                      
                     </table>  
 
 
@@ -197,47 +174,19 @@
                   </div>    
                   
                   
-                  <div id="main_3_2">
-                    <p><a href="">팔로잉</a></p>
+                  <div id="main_2_2">
+                    <p><a href="">프로젝트안내</a></p>
                     <div id="underLine"></div>
 
                     <!--3개-->
                     <table>
                       <tr>
-                        <td id="profile">
-                          <img src="city1.PNG" width="40" height="40" class="rounded-circle" >
-                        </td>
-                        <td id="user">
-                          <div id="id">유저아이디</div>
-                          <div id="idDetail">오픈펀딩 20</div>
-                        </td>
-                        
+                        <td id="mmenu">펀딩프로젝트 헬프센터</td>
                       </tr>
-
                       <tr>
-                        <td id="profile">
-                          <img src="city1.PNG" width="40" height="40" class="rounded-circle" >
-                        </td>
-                        <td id="user">
-                          <div id="id">유저아이디</div>
-                          <div id="idDetail">오픈펀딩 20</div>
-                        </td>
-                        
+                        <td id="mmenu">펀딩 수수료안내</td>
                       </tr>
 
-                     <tr>
-                        <td id="profile">
-                          <img src="city1.PNG" width="40" height="40" class="rounded-circle" >
-                        </td>
-                        <td id="user">
-                          <div id="id">유저아이디</div>
-                          <div id="idDetail">오픈펀딩 20</div>
-                        </td>
-                        
-                      </tr>
-
-                      
-                      
                     </table>
 
 
