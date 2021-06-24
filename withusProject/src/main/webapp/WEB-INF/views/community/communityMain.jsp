@@ -72,73 +72,63 @@
           font-weight: 500;
         }
 
+
         /* 테이블  */
-        .filter-btn-list{
-          list-style: none;
-          width: 100%;
+        #page_main {
           display: flex;
-          justify-content: space-between;
         }
-        .filter-btn-list li{
+
+        .content {
+          width: 100%;
+          margin: auto;
+        }
+
+        .innerOuter {
+          border: 1px solid lightgray;
+          width: 80%;
+          margin: auto;
+          padding: 5% 15%;
+          background: white;
+        }
+
+        #boardList {
+          text-align: center;
+        }
+
+        #boardList>tbody>tr:hover {
+          cursor: pointer;
+        }
+
+        #pagingArea {
+          width: fit-content;
+          margin: auto;
+        }
+
+        #searchForm {
+          width: 80%;
+          margin: auto;
+        }
+
+        #searchForm>* {
           float: left;
-        }
-        .page-wraper {
-          display: flex;
+          margin: 5px;
         }
 
-        .page-wraper__side {
-          flex: 1.5;
+        .select {
+          width: 20%;
         }
 
-        .page-wraper__table {
-          flex: 8.5;
-          padding: 1rem;
-          position: relative;
+        .text {
+          width: 53%;
         }
 
-
-        .table__title p {
-          font-size: 23px;
-          font-weight: bolder;
+        .searchBtn {
+          Width: 20%;
+          background-color: rgb(60, 145, 224);
+          border: none;
         }
 
-        #replyTitle {
-          width: 60%;
-        }
-
-        #replyDate {
-          width: 20%
-        }
-
-        #replyStatus {
-          width: 20%
-        }
-
-        .table-content {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          padding-left: 50px;
-          padding-right: 50px;
-        }
-
-        .table-content__title{
-          width: 100%;
-          max-width: 800px;
-        }
-
-        .table-content__body {
-          display: flex;
-          justify-content: center;
-          width: 100%;
-          max-width: 800px;
-        }
-
-        #query_1 table {
-          max-width: 800px;
-        }
-
-        #query_1 table .badge-primary {
+        .badge-primary {
           display: inline-block;
           padding: 0.25rem;
           border-radius: 5px;
@@ -146,42 +136,34 @@
           text-align: center;
         }
 
-        #query_1 table tr td:first-child {
-          display: flex;
-          justify-content: center;
-        }
-
-        #query_2 {
+        .filter-btn-list {
+          list-style: none;
           width: 100%;
-          position: absolute;
-          bottom: 0;
-          margin-bottom: 3rem;
           display: flex;
-          justify-content: center;
+          justify-content: space-between;
         }
+        #page_main .page-wraper__side {
+                    flex: 2;
+                }
 
-        main {
-          margin: auto;
-          width: 1200px;
-        }
-        .filter-btn-list__btn button{
-          background-color: rgb(60, 145, 224);
-          border-radius: 5px;
-          border: none;
-          color: white;
-        }
+                #page_main .page-wraper__table {
+                    flex: 8;
+                    /* padding: 1rem; */
+                    position: relative;
+
+                }
       </style>
     </head>
 
     <body>
-      <main>
-        <section>
-          <!-- header -->
-          <jsp:include page="../common/header.jsp" />
-        </section>
-        <section class="page-wraper">
-          <!-- side -->
-          <article class="page-wraper__side">
+
+      <!-- 헤더 -->
+      <jsp:include page="../common/header.jsp" />
+
+      <!-- 사이드메뉴바 -->
+      <div id="page_main">
+        <section class="page-wraper__side">
+          <article>
             <div id="menubar">
               <ul id="menubar_member" class="menubar_admin">
                 <p>커뮤니티</p>
@@ -191,115 +173,136 @@
               </ul>
             </div>
           </article>
+        </section>
 
-          <!-- table  -->
-          <article id="query_1" class="page-wraper__table">
+        <section class="page-wraper__table">
+          <div class="content">
+            <br><br>
+            <div class="innerOuter" style="padding:5% 10%;">
 
-            <div class="table-content">
-              <div class="table-content__title">
+              <br>
+              <form id="searchForm" action="" method="Get" align="center">
+                <div class="select">
+                  <select class="custom-select" name="condition">
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
+                  </select>
+                </div>
+                <div class="text">
+                  <input type="text" class="form-control" name="keyword">
+                </div>
+                <button type="submit" class="searchBtn btn btn-secondary">검색</button>
+              </form>
+              <br><br><br><br><br>
+              <!-- 로그인후 상태일 경우만 보여지는 글쓰기 버튼-->
+              <div>
                 <ul class="filter-btn-list">
-                  <li class="filter-btn-list__filter">
-                    <button>조회순</button> 
+                  <li>
+                    <button>조회순</button>
                     <button>최신순</button>
                   </li>
-                  <li class="filter-btn-list__btn">
-                    <button>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                      </svg> 새글쓰기
-                    </button>
+                  <li>
+                    <a class="btn btn-secondary" style="float:right; background-color: rgb(60, 145, 224); border: none;"
+                      href="">새글쓰기</a>
                   </li>
                 </ul>
-               
               </div>
-              <div class="table-content__body">
-                <table class="table table-hover">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div class="badge-primary">공구모집</div>
-                      </td>
-                      <td>서울 강남 사시는분~!</td>
-                      <td>
-                        <div>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-chat" viewBox="0 0 16 16">
-                            <path
-                              d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
-                          </svg> 21
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-eye-fill" viewBox="0 0 16 16">
-                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                            <path
-                              d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                          </svg> 65
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="badge-primary">자유</div>
-                      </td>
-                      <td>이거 완전 별로</td>
-                      <td>
-                        <div>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-chat" viewBox="0 0 16 16">
-                            <path
-                              d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
-                          </svg> 13
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-eye-fill" viewBox="0 0 16 16">
-                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                            <path
-                              d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                          </svg> 45
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="badge-primary">질문</div>
-                      </td>
-                      <td>유기농 이거 뭘까요?</td>
-                      <td>
-                        <div>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-chat" viewBox="0 0 16 16">
-                            <path
-                              d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
-                          </svg> 1
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-eye-fill" viewBox="0 0 16 16">
-                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                            <path
-                              d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                          </svg> 4
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div id="query_2">
-                  <div id="pagingArea">
-                    <ul class="pagination">
-                      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div> 
+              <table id="boardList" class="table table-hover" align="center">
+                <thead>
+                  <tr>
+                    <th>글번호</th>
+                    <th>카테고리</th>
+                    <th>제목</th>
+                    <th>댓글수</th>
+                    <th>조회수</th>
+                    <th>작성일</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>5</td>
+                    <td>
+                      <div class="badge-primary">공구모집</div>
+                    </td>
+                    <td>마지막 공지사항제목</td>
+                    <td>3</td>
+                    <td>10</td>
+                    <td>2020-02-10</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>
+                      <div class="badge-primary">자유</div>
+                    </td>
+                    <td>마지막 공지사항제목</td>
+                    <td>6</td>
+                    <td>10</td>
+                    <td>2020-02-07</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>
+                      <div class="badge-primary">질문</div>
+                    </td>
+                    <td>마지막 공지사항제목</td>
+                    <td>8</td>
+                    <td>10</td>
+                    <td>2020-02-03</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>
+                      <div class="badge-primary">자유</div>
+                    </td>
+                    <td>마지막 공지사항제목</td>
+                    <td>2</td>
+                    <td>100</td>
+                    <td>2020-02-01</td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>
+                      <div class="badge-primary">질문</div>
+                    </td>
+                    <td>마지막 공지사항제목</td>
+                    <td>10</td>
+                    <td>45</td>
+                    <td>2019-12-25</td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+
+              <div id="pagingArea">
+
+                <ul class="pagination">
+
+                  <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">5</a></li>
+                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                  
+                </ul>
+
+              </div>
+
+              <br clear="both"><br>
+              <br><br>
             </div>
-          </article>
+            <br><br>
+          </div>
         </section>
-        <section>
-          <!-- footer -->
-          <jsp:include page="../common/footer.jsp" />
-        </section>
-      </main>
+      </div>
+      <!-- 이쪽에 푸터바 포함할꺼임 -->
+      <jsp:include page="../common/footer.jsp" />
+
+      <script>
+
+      </script>
 
     </body>
-</html>
+
+    </html>
