@@ -9,8 +9,7 @@
 		root-context.xml 파일은 서버 구동 시 web.xml을 거쳐 바로 로딩(pre-loading) 되는 설정 파일
 		=> 서버 구동시 바로 셋팅해야되는(빈으로 등록할) 내용들을 작성하는 설정 파일
 		   (보통 DB연결 설정, 트랜잭션 처리, AOP 관련, 내 외부 모듈 연동 등등)
-	-->
-	<!-- 
+	--> 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="jdbc:oracle:thin:@52.79.145.230:1521:xe" />
@@ -26,7 +25,6 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
-	 -->
 	 
 	<!-- 파일업로드 관련 빈 등록 -->
 	<!-- 
