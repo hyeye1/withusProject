@@ -208,9 +208,9 @@
         </head>
 
         <body>
-        	
-        	<jsp:include page="../common/header.jsp" />
-        	
+
+            <jsp:include page="../common/header.jsp" />
+
             <div class="regiOuter">
 
                 <!-- 타이틀과 미리보기/임시저장/승인요청하기 -->
@@ -224,7 +224,7 @@
                 <!-- 바디 -->
                 <div class="regiBody">
                     <!-- 1. 기본정보 -->
-                    <div class="regiOne">
+                    <div class="regiOne" style="display: none;">
                         <div class="regiInfo">
                             <b class="regiTitle">프로젝트 성공 조건 & 수수료 안내</b>
                             <p>
@@ -321,19 +321,111 @@
                     <div class="regiTwo" style="display: none;">
 
                         <div>
-                            <b class="regiTitle"></b>
+                            <b class="regiTitle">프로젝트 소개 영상과 이미지를 등록해주세요</b>
+                            <p>
+                                영상과 이미지를 함께 등록할 경우, 영상이 먼저 보여집니다.
+                            </p>
                         </div>
+                        <br>
+
+                        <!-- 동영상 주소 -->
+                        <div>
+                            <b class="regiTitle">동영상 주소를 적어주세요</b><br>
+                            <input type="text" name="regiVideo" id="regiVideo">
+                            <input type="file" name="" id=""><!-- +버튼으로 고치기 -->
+                        </div>
+                        <br>
+
+                        <!-- 이미지 -->
+                        <div>
+                            <b class="regiTitle">이미지를 등록해주세요</b><br>
+                            <button
+                                style="width: 255px; height: 185px; border: 1px solid rgb(127, 127, 127); border-radius: 5px; background-color: white;">
+                                최적 사이즈 740*417 px
+                            </button>
+                            <button
+                                style="width: 255px; height: 185px; border: 1px solid rgb(127, 127, 127); border-radius: 5px; background-color: white;">
+                                +
+                            </button>
+                        </div>
+                        <br>
+
+                        <!-- 에디터 -->
+                        <div>
+                            <b class="regiTitle">프로젝트 스토리를 적어주세요</b>
+                            <p>
+                                프로젝트를 시작하기 위해 필요한 내용이 없다면 승인이 되지 않습니다. <br><br>
+
+                                Enter(↵) : 문단 나눔, Shift + Enter : 줄바꿈입니다! <br>
+                                적절한 문단/줄 바꿈만으로 멋진 프로젝트를 완성 할 수 있습니다! <br>
+                                이미지와 영상은 꼭 버튼을 이용하여 첨부해주세요. <br>
+                            </p>
+                            <button
+                                style="width: 770px; height: 592px; border: 1px solid rgb(127, 127, 127); border-radius: 5px; background-color: white;">
+                                에디터자리
+                            </button>
+
+                        </div>
+
 
                     </div>
 
                     <!-- 3. 리워드 -->
-                    <div class="regiThree" style="display: none;"></div>
+                    <div class="regiThree" style="display: none;">
+                        <div>
+                            <b class="regiTitle">프로젝트 리워드를 구성해주세요</b>
+                            <p>
+                                프로젝트 시작을 위해서는 최소 1개 이상의 리워드가 있어야 합니다. <br>
+
+                                배송이 필요한 리워드는 배송비가 포함된 가격을 적어주세요.
+                            </p>
+                        </div>
+                    </div>
 
                     <!-- 4. 안내사항 -->
                     <div class="regiFour" style="display: none;"></div>
 
                     <!-- 5. 제작자/부가정보 -->
-                    <div class="regiFive" style="display: none;"></div>
+                    <div class="regiFive" style="">
+                        <div>
+                            <b class="regiTitle">계좌 정보를 입력해주세요</b><br>
+                            <p>
+                                프로젝트 종료 후 입금받으실 계좌를 입력해주세요.
+                            </p>
+                        </div>
+
+                        <!-- 은행/계좌번호 -->
+                        <div>
+                            <b class="regiTitle">계좌 번호를 적어주세요</b><br>
+                            <select class="bankOption" name="bankOption">
+                                <option value="selectBank">거래은행</option>
+                                <option value="kb">국민은행</option>
+                                <option value="woori">우리</option>
+                                <option value="hana">하나</option>
+                                <option value="shinhan">신한</option>
+                                <option value="nh">농협</option>
+                                <option value="kakao">카카오뱅크</option>
+                            </select>
+                            <input type="text" id="bankAccount" name="bankAccount" placeholder="계좌번호">
+                        </div>
+
+                        <!-- 예금주명 -->
+                        <div>
+                            <b class="regiTitle">예금주명을 입력해주세요</b><br>
+                            <input type="text" name="accountHolder" id="accountHolder" placeholder="예금주명">
+                        </div>
+
+                        <div>
+                            <div class="">
+                                <b class="regiTitle">홈페이지와 SNS 주소를 적어주세요</b>
+                                <p>현재 운영 중인 곳의 주소를 적어주세요. 진행자 정보에 노출됩니다.</p><br>
+                                <img src="../../../resources/images/webIcon.PNG" style="height: 33px;">
+                                <input type="text" name="partnerWeb" id="partnerWeb"><br>
+                                <img src="../../../resources/images/snsIcon.PNG" style="height: 33px;">
+                                <input type="text" name="partnerSns" id="partnerSns">
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- 등록/초기화 버튼 -->
                     <div class="regiBtn">
@@ -363,7 +455,7 @@
                 <div class="regiMenuSelected" style="margin-top: -86px;  display: none;">&nbsp;</div>
 
             </div> <!-- outer div -->
-            
+
 
         </body>
 
