@@ -45,7 +45,7 @@
 	.modal-footer.none{height: 80%;}
 	
 	/* pagination */
-	.paging_wrap{width:fit-content;margin:auto; margin-top: 100px;}
+	.paging_wrap{width:fit-content;margin:auto; margin-top: 50px;}
 	.pagination a {
 	    color: black;
 	    float: left;
@@ -127,96 +127,29 @@
 	                    <td>Y</td>
 	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
 	                </tr>
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>    
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>             
+	               	<!--  
+	             	<c:forEach var="m" items="${ mList }">
+		                <tr>
+		                    <td>${ m.memberNo }</td>
+		                    <td>${ m.memberId }</td>
+		                    <td>${ m.memberName }</td>
+		                    <td>${ m.memberCreateDate }</td>
+		                    <td>${ m.partnerJoin }</td>
+		                    <td>
+		                    	<c:choose>
+		                    	<c:when test="${!empty m.partnerName }">
+		                    		${ m.partnerName }
+		                    	</c:when>
+		                    	<c:otherwise>
+		                    		-
+		                    	</c:otherwise>
+		                    	</c:choose>
+		                    </td>
+		                    <td>${ m.memberStatus }</td>
+		                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
+		                </tr>
+	                </c:forEach> 
+	               	-->             
 	            </tbody>
 	        </table>
 	    </div>
@@ -272,6 +205,29 @@
 	            <li class="page-item"><a class="page-link" href="#">4</a></li>
 	            <li class="page-item"><a class="page-link" href="#">5</a></li>
 	            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+	        	<!--  
+	        	<c:choose>
+	        		<c:when test="${ pi.currentPage eq 1 }">
+		           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+		            </c:when>
+		            <c:otherwise>
+		            	<li class="page-item disabled"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
+		            </c:otherwise>
+		    	</c:choose>     
+		    	   
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
+				</c:forEach>		            
+		            
+		        <c:choose> 
+		        	<c:when test="${ pi.currentPage eq pi.maxPage }">
+		           	 	<li class="page-item"><a class="page-link" href="#">다음</a></li>
+		           	</c:when>
+		           	<c:otherwise>
+		           		<li class="page-item"><a class="page-link" href="${ pi.currentPage+1 }">다음</a></li>
+		           	</c:otherwise> 	
+	        	</c:choose>
+	        	-->
 	        </ul>
 	    </div>
 	

@@ -1,0 +1,475 @@
+@charset "UTF-8";
+	
+	@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+	
+	.detailOuter {
+	    width: 1200px;
+	    height: 100%;
+	    margin: auto;
+	    cursor: default;
+	    position: relative;
+	}
+	
+	.detailOuter button {
+	    cursor: pointer;
+	}
+	
+	.detailHeader {
+	    height: 800px;
+	    padding: 45px;
+	    padding-left: 55px;
+	}
+	
+	.detailCat button {
+	    font-size: 13px;
+	    width: 86px;
+	    height: 30px;
+	    padding: 0;
+	    border-radius: 3px;
+	    border: 1px solid rgb(94, 94, 94);
+	    margin-bottom: 20px;
+	    background-color: white;
+	    color: rgb(94, 94, 94);
+	}
+	
+	.partner img {
+	    width: 30px;
+	    float: left;
+	    margin-left: 499px;
+	}
+	
+	.partner p {
+	    float: right;
+	    margin-right: 499px;
+	    margin-top: 5px;
+	}
+	
+	.detailTitle {
+	    font-size: 35px;
+	}
+	
+	.detailThumb {
+	    float: left;
+	}
+	
+	.detailAside {
+	    height: 450px;
+	    float: left;
+	    padding-left: 10px;
+	    padding-top: 10px;
+	    font-size: 25px;
+	    line-height: 2;
+	    margin-left: 21px;
+	}
+	
+	.infoTitle {
+	    font-size: 20px;
+	    width: 120px;
+	}
+	
+	.infoSmall {
+	    font-size: 21px;
+	}
+	
+	.infoPs {
+	    font-size: 15px;
+	}
+	
+	.infoPs p {
+	    height: 80px;
+	    width: 410px;
+	    background-color: rgba(107, 148, 175, 0.16);
+	    line-height: 2;
+	    padding-top: 11px;
+	    padding-left: 15px;
+	    border-radius: 10px;
+	}
+	
+	.infoBtn button {
+	    width: 249px;
+	    height: 49px;
+	    font-size: 18px;
+	    vertical-align: 8px;
+	    margin-right: 28px;
+	    background-color: rgb(52, 152, 219);
+	    border: none;
+	    color: white;
+	    border-radius: 10px;
+	}
+	
+	.goalPrice {
+	    font-size: 29px;
+	    line-height: 1.3;
+	}
+	
+	.detailMenubar {
+	    width: 100%;
+	    padding: 23px;
+	    border-top: 1.5px solid rgb(94, 94, 94);
+	    border-bottom: 1.5px solid rgb(94, 94, 94);
+	    padding-left: 100px;
+	}
+	
+	.detailMenubar a {
+	    text-decoration: none;
+	    color: rgb(64, 64, 64);
+	    font-size: 18px;
+	}
+	
+	.detailMenubar span {
+	    margin: 20px;
+	}
+	
+	.menuSelected {
+	    background-color: rgb(52, 152, 219);
+	    width: 70px;
+	    height: 5px;
+	    float: left;
+	    margin-top: -6px;
+	}
+	
+	.detailBody {
+	    width: 100%;
+	    background-color: rgba(224, 224, 224, 0.45);
+	    position: absolute;
+	}
+	
+	.detailRight {
+	    width: 400px;
+	    float: right;
+	    padding: 35px;
+	}
+	
+	.detailPartner {
+	    background-color: white;
+	    padding: 20px;
+	    padding-top: 30px;
+	    padding-bottom: 30px;
+	    font-size: 19px;
+	}
+	
+	.rightPartner {
+	    display: table;
+	    margin-top: 25px;
+	    width: 100%;
+	}
+	
+	.rightPartner img {
+	    width: 40px;
+	    float: left;
+	    margin-left: 10px;
+	    margin-right: -10px;
+	}
+	
+	.rightPartner p {
+	    display: table-cell;
+	    line-height: 2px;
+	    vertical-align: middle;
+	}
+	
+	.rightPartner button {
+	    float: right;
+	    background-color: rgb(94, 94, 94);
+	    border: none;
+	    border-radius: 5px;
+	    color: white;
+	    font-size: 12px;
+	    margin-bottom: 10px;
+	    margin-right: 9px;
+	}
+	
+	#partnerWho {
+	    font-size: 15px;
+	    line-height: 2;
+	    margin-top: 30px;
+	}
+	
+	.partnerBtn button {
+	    width: 100%;
+	    height: 40px;
+	    margin-top: 30px;
+	    border: none;
+	    border-radius: 5px;
+	    background-color: rgb(224, 224, 224);
+	    padding-bottom: 5px;
+	    padding-left: 10px;
+	}
+	
+	.partnerBtn span {
+	    float: right;
+	    margin-top: 6px;
+	    margin-right: 50px;
+	    margin-left: -40px;
+	    font-size: 15px;
+	    color: rgb(94, 94, 94);
+	}
+	
+	.detailReward,
+	.hashtag {
+	    margin-top: 20px;
+	    padding: 20px;
+	    padding-top: 35px;
+	    padding-bottom: 35px;
+	    font-size: 19px;
+	    background-color: white;
+	}
+	
+	.chooseReward {
+	    border: 1px solid rgb(94, 94, 94);
+	    border-radius: 5px;
+	    padding: 20px;
+	}
+	
+	.rePrice {
+	    font-size: 20px;
+	    font-weight: 600;
+	    cursor: pointer;
+	}
+	
+	.reNumber {
+	    border: 1px solid rgb(44, 62, 80);
+	    background-color: rgba(26, 188, 156, 0.2);
+	    border-radius: 5px;
+	    font-size: 12px;
+	    padding: 3px;
+	    float: right;
+	}
+	
+	.reTitle {
+	    font-size: 15px;
+	    margin-top: 20px;
+	    margin-bottom: 0px;
+	}
+	
+	.chooseReward li {
+	    font-size: 14px;
+	    margin-left: -20px;
+	}
+	
+	.supportReward {
+	    font-size: 14px;
+	    margin-top: 25px;
+	    display: none;
+	    /* 클릭시 생성 */
+	}
+	
+	.rewardOption {
+	    width: 243px;
+	    height: 35px;
+	    border-radius: 5px;
+	    cursor: pointer;
+	}
+	
+	.supportPlus {
+	    margin-top: 20px;
+	    color: rgb(127, 127, 127);
+	}
+	
+	.supportPlus input {
+	    width: 243px;
+	    height: 30px;
+	    margin-top: 10px;
+	    border: 1px solid rgb(127, 127, 127);
+	    border-radius: 5px;
+	}
+	
+	.supportPlus p {
+	    font-size: 12.5px;
+	    margin-top: 8px;
+	    margin-bottom: 25px;
+	}
+	
+	.supportReward button {
+	    width: 250px;
+	    height: 35px;
+	    border-radius: 5px;
+	    border: none;
+	    background-color: rgb(52, 152, 219);
+	    color: white;
+	    margin-bottom: 10px;
+	    cursor: pointer;
+	}
+	
+	.hashtag a {
+	    margin: 7px;
+	    width: 80px;
+	    height: 40px;
+	    font-size: 18px;
+	    border-radius: 40px;
+	    line-height: 2.2;
+	    display: block;
+	    text-decoration: none;
+	    color: white;
+	    background-color: rgb(190, 190, 190);
+	    text-align: center;
+	}
+	
+	.detailStory {
+	    background-color: white;
+	    float: left;
+	    margin: 35px;
+	    padding: 50px;
+	    width: 63%;
+	    margin-right: 0px;
+	    line-height: 2.5;
+	    /* 스토리 아닐 때
+	    display: none; */
+	}
+	
+	.detailStory h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	strong {
+	    line-height: 2;
+	}
+	
+	.detailStory img {
+	    width: 90%;
+	}
+	
+	.detailCommunity {
+	    background-color: white;
+	    float: left;
+	    margin: 35px;
+	    padding: 50px;
+	    padding-right: 115px;
+	    width: 63%;
+	    margin-right: 0px;
+	    line-height: 2.5;
+	    /* 커뮤니티 아닐 때*/
+	    display: none; 
+	}
+	
+	.detailCommunity p {
+	    font-size: 17px;
+	}
+	
+	#plzLogin,
+	#yesLogin {
+	    width: 100%;
+	    height: 150px;
+	    border: 1px solid rgb(127, 127, 127);
+	    border-radius: 5px;
+	    padding: 20px;
+	    margin: 35px;
+	    line-height: 1.6;
+	    font-size: 15px;
+	    color: rgb(94, 94, 94);
+	}
+	
+	.loginOn button {
+	    float: right;
+	    width: 100px;
+	    height: 40px;
+	    border: none;
+	    background-color: rgb(52, 152, 219);
+	    color: white;
+	    border-radius: 5px;
+	    margin-top: -25px;
+	    margin-right: -35px;
+	}
+	
+	#comTitle {
+	    margin: 30px;
+	    margin-right: -25px;
+	    margin-top: 70px;
+	    margin-bottom: 60px;
+	}
+	
+	.comReply {
+	    width: 100%;
+	    border: 1px solid rgb(127, 127, 127);
+	    border-radius: 5px;
+	    padding: 25px;
+	    margin: 35px;
+	    margin-right: 135px;
+	    margin-bottom: 50px;
+	    line-height: 1.6;
+	    font-size: 13px;
+	    color: rgb(94, 94, 94);
+	    display: table;
+	}
+	
+	.replyWriter {
+	    box-sizing: border-box;
+	}
+	
+	.replyWriter b {
+	    color: black;
+	    float: left;
+	}
+	
+	.replyWriter img {
+	    float: left;
+	    height: 42px;
+	    margin-top: 5px;
+	    margin-right: 12px;
+	}
+	
+	.partnerMarks {
+	    background-color: rgb(52, 152, 219);
+	    color: white;
+	    font-size: 11px;
+	    width: 48px;
+	    border-radius: 10px;
+	    font-weight: 600;
+	    margin-right: 330px;
+	    margin-top: 6px;
+	    float: right;
+	}
+	
+	.replyContent {
+	    margin-left: 50px;
+	    margin-top: 25px;
+	    margin-bottom: 25px;
+	}
+	
+	.reReply hr {
+	    margin-top: 50px;
+	    margin-bottom: 30px;
+	}
+	
+	.detailGuide {
+	    background-color: white;
+	    float: left;
+	    margin: 35px;
+	    padding: 60px;
+	    width: 63%;
+	    margin-right: 0px;
+	    line-height: 2.5;
+	    /* 안내 아닐 때 */
+	    display: none;
+	}
+	
+	.guideTitle {
+	    margin-top: 20px;
+	    margin-bottom: 60px;
+	}
+	
+	.guideDates {
+	    width: 637px;
+	    height: 250px;
+	    font-size: 18px;
+	    border: 1px solid darkgray;
+	    border-radius: 4px;
+	    padding: 55px;
+	    margin-top: 50px;
+	    margin-bottom: 40px;
+	}
+	
+	.projectReport button {
+	    border: none;
+	    background-color: rgb(224, 224, 224);
+	    color: rgb(64, 64, 64);
+	    font-size: 16px;
+	    width: 100px;
+	    border-radius: 5px;
+	    margin-top: 30px;
+	}
+	
+	.adminShown {
+	    display: none;
+	}

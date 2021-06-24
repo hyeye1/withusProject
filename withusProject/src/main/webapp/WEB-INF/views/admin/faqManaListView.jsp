@@ -16,9 +16,13 @@
     .enrollBtn{
         padding-right: 20%;
     }
-    .according_list>li{
+    .according_list{
 		list-style: none;
 	}
+    .titleBtn span{
+        display:inline-block;
+        box-sizing: border-box;
+    }
 	
 </style>
 </head>
@@ -26,6 +30,7 @@
 	
 	<!-- 6/9 윤경 생성-->
     <!-- 6/12 윤경 수정 -->
+    <!-- 6/14 윤경 수정 : according_list 간격 조정 -->
 
     <!-- 메뉴바 포함 -->
     <jsp:include page="../common/manaHeader.jsp"/>
@@ -55,11 +60,12 @@
         <!-- 게시글 있을 시-->
         <div class="faqY" align="center">
             <div class="faqCon">
-                <ul class="accodrding_list">
+                <ul class="according_list">
                     <li> <!-- 얘 규격? 좀 어케 해야됨 ㅡㅡ -->
-                        <button type="button" class="btn btn-light" data-toggle="collapse" data-target="#faqContent" style="width:80%;">
-                            Q &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 카테고리 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            FAQ제목 ▼
+                        <button type="button" class="btn btn-light titleBtn" data-toggle="collapse" data-target="#faqContent" style="width:80%;">
+                            <span style="width: 25%;">Q &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 카테고리</span> 
+                            <span style="width: 60%;">FAQ 제목 </span>
+                            <span style="width: 15%;">▼</span>
                         </button>
                         <div id="faqContent" class="collapse" style="background-color: rgb(224,224,224); width:80%;">
                             

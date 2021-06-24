@@ -40,8 +40,8 @@ public class FundingController {
 		
 	}
 
-	@RequestMapping("detail.st")
-	public String FundingDetailStory() {
+	@RequestMapping("detail.fd")
+	public String FundingDetails() {
 		
 		/*
 		int listCount = bService.selectListCount();
@@ -53,7 +53,24 @@ public class FundingController {
 		model.addAttribute("list", list);
 		*/
 		
-		return "funding/fundingDetailStory";
+		return "funding/fundingDetails";
+		
+	}
+	
+	@RequestMapping("register.fd")
+	public String FundingRegistration() {
+		
+		/*
+		int listCount = bService.selectListCount();
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<Board> list = bService.selectList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		*/
+		
+		return "funding/fundingRegistration";
 		
 	}
 }

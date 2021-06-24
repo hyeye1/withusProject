@@ -35,7 +35,7 @@
      .tableHead{background-color: #eaeaea;}
         
 	/* pagination */
-	.paging_wrap{width:fit-content;margin:auto; margin-top: 100px;}
+	.paging_wrap{width:fit-content;margin:auto; margin-top: 50px;}
 	.pagination a {
 	    color: black;
 	    float: left;
@@ -97,19 +97,55 @@
                         <th width="250">펀딩 정보</th>
                         <th>수량</th>
                         <th>주문 날짜</th>
+                        <th>결제 상태</th>
                         <th>펀딩 상태</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td rowspan="2">10491</td>
+                        <td>10491</td>
                         <td>김지원</td>
                         <td>프로젝트이름<br>리원드/옵션명111</td>
                         <td>1</td>
                         <td>2021-06-09 15:24:11</td>
-                        <td>결제예약</td>
+                        <td>결제완료</td>
+                        <td>배송준비중</td>
                     </tr>
-                 
+                 	<!--
+                 	 <c:forEach var="o" items="${ oList }">
+	                    <tr>
+	                        <td>${ o.orderNo }</td>
+	                        <td>${ o.purEmail }</td>
+	                        <td>프로젝트이름<br>리원드/옵션명111</td>
+	                        <td>1</td>
+	                        <td>${ o.orderDate }</td>
+                        	<c:choose>
+                        		<c:when test="${ o.orderStatus == 1 }">
+                        			<td>결제완료</td>
+                        		</c:when>
+                        		<c:when test="${ o.orderStatus == 2 }">
+                        			<td>취소요청</td>
+                        		</c:when>
+                        		<c:otherwise>
+                        			<td>취소완료</td>
+                        		</c:otherwise>
+                        	</c:choose>
+                        	<c:choose>
+                        		<c:when test="${ o.shippingStatus == 1 }">
+                        			<td>배송준중</td>
+                        		</c:when>
+                        		<c:when test="${ o.shippingStatus == 2 }">
+                        			<td>배송시작</td>
+                        		</c:when>
+                        		<c:otherwise>
+                        			<td>배송완료</td>
+                        		</c:otherwise>
+                        	</c:choose>
+                       	
+	                       
+	                    	</tr>
+                    	</c:forEach>
+                 	 -->
                 </tbody>
             </table>
         </div>
@@ -126,6 +162,30 @@
                 <li class="page-item"><a class="page-link" href="#">4</a></li>
                 <li class="page-item"><a class="page-link" href="#">5</a></li>
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <!--  
+                <c:choose>
+	        		<c:when test="${ pi.currentPage eq 1 }">
+		           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+		            </c:when>
+		            <c:otherwise>
+		            	<li class="page-item disabled"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
+		            </c:otherwise>
+		    	</c:choose>        
+		            
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
+				</c:forEach>		            
+		            
+		        <c:choose> 
+		        	<c:when test="${ pi.currentPage eq pi.maxPage }">
+		           	 	<li class="page-item"><a class="page-link" href="#">다음</a></li>
+		           	</c:when>
+		           	<c:otherwise>
+		           		<li class="page-item"><a class="page-link" href="${ pi.currentPage+1 }">다음</a></li>
+		           	</c:otherwise> 	
+	        	</c:choose>
+                
+                -->
             </ul>
         </div>
 
