@@ -56,13 +56,13 @@
 	<div class="headerOuter" align="center" >
 	
 		<div class="headerLeft">
-			<img src="${ pageContext.request.contextPath }/resources/images/catIcon.PNG" width="25px" style="margin-top: -6px;">
+			<img src="${ pageContext.request.contextPath }/resources/images/catIcon.PNG" width="25px" style="margin-top: -6px; cursor:pointer;">
 			<a href="" style="color: rgb(52, 152, 219);"> 프로젝트 둘러보기 </a>
-			<a href=""> 프로젝트 올리기</a>
+			<a href="register.fd"> 프로젝트 올리기</a>
 		</div>
 		
 		<div class="headerCenter">
-			<img src="${ pageContext.request.contextPath }/resources/images/logo.PNG" width="165px" id="logoImg">
+			<a href="${ pageContext.request.contextPath }"><img src="${ pageContext.request.contextPath }/resources/images/logo.PNG" width="165px" id="logoImg" ></a>
 		</div>
         
         <input type="image" src="${ pageContext.request.contextPath }/resources/images/searchIcon.PNG" id="searchIcon">
