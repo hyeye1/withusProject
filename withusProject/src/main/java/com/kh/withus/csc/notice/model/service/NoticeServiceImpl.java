@@ -2,53 +2,59 @@ package com.kh.withus.csc.notice.model.service;
 
 import java.util.ArrayList;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.kh.withus.common.model.vo.PageInfo;
+import com.kh.withus.csc.notice.model.dao.NoticeDao;
 import com.kh.withus.csc.notice.model.vo.Notice;
 
+@Service
 public class NoticeServiceImpl implements NoticeService {
 
+	// 6/25  윤경 생성
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	@Autowired
+	private NoticeDao nDao;
+	
 	@Override
 	public int selectListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return nDao.selectListCount(sqlSession);
 	}
 
 	@Override
 	public ArrayList<Notice> selectList(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		return nDao.selectList(sqlSession, pi);
 	}
 
 	@Override
 	public int insertNotice(Notice n) {
-		// TODO Auto-generated method stub
-		return 0;
+		return nDao.insertNotice(sqlSession, n);
 	}
 
 	@Override
 	public int increaseCount(int noticeNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return nDao.increaseCount(sqlSession, noticeNo);
 	}
 
 	@Override
 	public Notice selectNotice(int noticeNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return nDao.selectNotice(sqlSession, noticeNo);
 	}
 
 	@Override
 	public int updateNotice(Notice n) {
-		// TODO Auto-generated method stub
-		return 0;
+		return nDao.updateNotice(sqlSession, n);
 	}
 
 	@Override
 	public int deleteNotice(int noticeNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return nDao.deleteNotice(sqlSession, noticeNo);
 	}
 	
-	// 6/25  윤경 생성
+	
 
 }
