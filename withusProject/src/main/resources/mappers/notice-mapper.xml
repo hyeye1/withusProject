@@ -40,19 +40,45 @@
 		  into notice
 		  (
 		    notice_no
-		  ,
-		  ,
+		  , notice_title
+		  , 작성자
+		  , 첨부파일
 		  )
 		  values
 		  (
 		    seq_nno.nextval
 		  ,
 		  ,
+		  ,
 		  )
-	
 	</insert>
 	
+	<update id="increaseCount" parameterType="_int">
+		update
+		       notice
+		   set count = count + 1
+		 where notice_no = #{noticeNo}
+		   and status = 'Y'
+	</update>
 	
+	<select id="selectNotice" resultMap="notice" parameterType="_int">
+		select
+		       notice_no
+		     , notice_title
+		     , 작성자
+		     , notice_originname
+		     , notice_changename
+		     , to_char(create_date, 'YYYY-MM-DD') create_date
+		  from notice
+		 where notice_no = #{noticeNo}
+	</select>
+	
+	<update id="deleteNotice" parameterType="_int">
+		update
+			   notice
+		   set status = 'N'
+		 where notice_no = #{noticeNo}
+	</update>
 	
 	
 </mapper>
