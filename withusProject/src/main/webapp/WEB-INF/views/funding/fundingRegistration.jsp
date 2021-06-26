@@ -101,12 +101,14 @@
                     border-radius: 5px;
                 }
 
-                #regiSubmitBtn {
+                #regiSubmitBtn,
+                .btn1 {
                     background-color: rgb(52, 152, 219);
                     color: white;
                 }
 
-                #regiResetBtn {
+                #regiResetBtn,
+                .btn2 {
                     background-color: rgb(224, 224, 224);
                 }
 
@@ -203,6 +205,132 @@
 
                 #keywordBox span {
                     margin: 10px;
+                }
+
+                .bankOption {
+                    width: 113px;
+                    height: 40px;
+                }
+
+                #bankAccount {
+                    width: 548px;
+                    height: 40px;
+                }
+
+                #accountHolder {
+                    width: 675px;
+                    height: 40px;
+                }
+
+                .partnerWebSns {
+                    width: 616px;
+                    height: 40px;
+                }
+
+                .regiReward {
+                    background-color: rgba(224, 224, 224, 0.45);
+                    width: 95%;
+                    padding: 40px;
+                    padding-left: 20px !important;
+                }
+
+                .regiReward th {
+                    width: 200px;
+                    height: 80px;
+                }
+
+                .regiReward input,
+                textarea {
+                    width: 467px;
+                }
+
+                .regiReward textarea {
+                    height: 241px;
+                }
+
+                .regiReward button {
+                    width: 130px;
+                    height: 40px;
+                    border: none;
+                    border-radius: 5px;
+                    margin-right: 10px;
+                }
+
+                #addOptionBtn {
+                    width: 471px;
+                    border: 2px solid rgb(41, 128, 185);
+                    color: rgb(41, 128, 185);
+                }
+
+                #limitNum {
+                    width: 178px;
+                }
+
+                .regiRewardContent {
+                    vertical-align: top;
+                }
+
+                .regiRewardContent td {
+                    padding-top: 15px;
+                }
+
+                #regiOption {
+                    font-size: 13px;
+                    margin-bottom: 0px;
+                }
+
+                .registered {
+                    padding: 20px;
+                    border-radius: 5px;
+                    border: rgb(94, 94, 94) 1px solid;
+                }
+
+                .registered span {
+                    border: 2px solid rgba(235, 22, 103, 0.87);
+                    color: rgba(235, 22, 103, 0.87);
+                    padding: 5px;
+                    border-radius: 5px;
+                    font-size: 12px;
+                }
+
+                #registeredSpan1 {
+                    color: white;
+                    background-color: rgba(235, 22, 103, 0.87);
+                }
+
+                #editBtn {
+                    width: 80px;
+                    margin: 5px;
+                }
+
+                #deleteBtn {
+                    width: 71px;
+                    margin: 5px;
+                }
+
+                .registeredTable th {
+                    width: 160px;
+                    vertical-align: top;
+                    padding-top: 13px;
+                }
+
+                #registeredName {
+                    font-size: 20px !important;
+                    color: rgb(64, 64, 64);
+                }
+
+                .registered p {
+                    font-size: 13px;
+                    color: rgb(127, 127, 127);
+                }
+
+                .registered b {
+                    font-size: 16px;
+                    color: rgb(64, 64, 64);
+                }
+
+                .registeredTable td {
+                    padding: 7px;
                 }
             </style>
         </head>
@@ -371,7 +499,7 @@
                     </div>
 
                     <!-- 3. 리워드 -->
-                    <div class="regiThree" style="display: none;">
+                    <div class="regiThree" style="">
                         <div>
                             <b class="regiTitle">프로젝트 리워드를 구성해주세요</b>
                             <p>
@@ -380,13 +508,86 @@
                                 배송이 필요한 리워드는 배송비가 포함된 가격을 적어주세요.
                             </p>
                         </div>
+
+                        <div class="regiReward">
+                            <table>
+                                <tr>
+                                    <th>
+                                        <b class="regiTitle">리워드 금액</b>
+                                    </th>
+                                    <td>
+                                        <input type="text" placeholder="1,000원 이상 입력해 주세요.">
+                                    </td>
+                                    <td>원</td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <b class="regiTitle" style="line-height: 1;">리워드 제공<br>가능 수 </b>
+                                    </th>
+                                    <td class="rewardLimitNum">
+                                        <button class="btn1">무제한</button>
+                                        <button class="btn2">제한</button>
+                                        <input type="number" name="limitNum" id="limitNum">
+                                    </td>
+                                    <td>개</td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <b class="regiTitle">리워드 제목</b>
+                                    </th>
+                                    <td>
+                                        <input type="text" name="" id="">
+                                    </td>
+                                    <td>0/30</td>
+                                </tr>
+                                <tr class="regiRewardContent">
+                                    <th>
+                                        <b class="regiTitle">리워드 내용</b>
+                                    </th>
+                                    <td>
+                                        <textarea name="" id="" placeholder="준비된 리워드와 설명을 적어주세요"
+                                            style="resize: none;"></textarea>
+                                    </td>
+                                    <td>0/70</td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <b class="regiTitle">리워드 옵션</b>
+                                    </th>
+                                    <td>
+                                        <button id="addOptionBtn">리워드 옵션 추가하기</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <b class="regiTitle">리워드 옵션</b>
+                                    </th>
+                                    <td>
+                                        <p id="regiOption">옵션선택</p>
+                                        <input type="text" placeholder="ex) S 사이즈">
+                                    </td>
+                                    <td>
+                                        <p></p>0/20
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <b class="regiTitle">배송지필요여부</b>
+                                    </th>
+                                    <td>
+                                        <button class="btn1">배송지 필요</button>
+                                        <button class="btn2">배송지 필요없음</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
 
                     <!-- 4. 안내사항 -->
                     <div class="regiFour" style="display: none;"></div>
 
                     <!-- 5. 제작자/부가정보 -->
-                    <div class="regiFive" style="">
+                    <div class="regiFive" style="display: none;">
                         <div>
                             <b class="regiTitle">계좌 정보를 입력해주세요</b><br>
                             <p>
@@ -407,22 +608,37 @@
                                 <option value="kakao">카카오뱅크</option>
                             </select>
                             <input type="text" id="bankAccount" name="bankAccount" placeholder="계좌번호">
-                        </div>
+                        </div><br>
 
                         <!-- 예금주명 -->
                         <div>
                             <b class="regiTitle">예금주명을 입력해주세요</b><br>
                             <input type="text" name="accountHolder" id="accountHolder" placeholder="예금주명">
-                        </div>
+                        </div><br>
 
+                        <!-- sns -->
                         <div>
-                            <div class="">
+                            <div>
                                 <b class="regiTitle">홈페이지와 SNS 주소를 적어주세요</b>
-                                <p>현재 운영 중인 곳의 주소를 적어주세요. 진행자 정보에 노출됩니다.</p><br>
-                                <img src="../../../resources/images/webIcon.PNG" style="height: 33px;">
-                                <input type="text" name="partnerWeb" id="partnerWeb"><br>
-                                <img src="../../../resources/images/snsIcon.PNG" style="height: 33px;">
-                                <input type="text" name="partnerSns" id="partnerSns">
+                                <p>현재 운영 중인 곳의 주소를 적어주세요. 진행자 정보에 노출됩니다.</p>
+                                <table>
+                                    <tr>
+                                        <td align="center" width="70px" height="65px">
+                                            <img src="../../../resources/images/webIcon.PNG" style="height: 33px;">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="partnerWeb" id="partnerWeb" class="partnerWebSns">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">
+                                            <img src="../../../resources/images/snsIcon.PNG" style="height: 33px;">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="partnerSns" id="partnerSns" class="partnerWebSns">
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -432,9 +648,147 @@
                         <button type="submit" id="regiSubmitBtn">등록</button>
                         <button type="reset" id="regiResetBtn">초기화</button>
                     </div>
+
+                    <!-- 등록된 리워드  -->
+                    <div class="optionOn" style="display: none;">
+                        <table class="registeredTable">
+                            <hr><br>
+                            <tr>
+                                <th>
+                                    <b class="regiTitle" style="line-height: 1;">등록된 리워드 <br> 미리보기</b>
+                                </th>
+                                <td>
+                                    <div class="registered">
+                                        <div>
+                                            <p><b id="registeredName">999,999,999원 펀딩</b></p>
+                                            <span id="registeredSpan1">9999개 남음</span>
+                                            <span>0개 펀딩</span> <br>
+                                        </div><br>
+                                        <div>
+                                            <p>
+                                                리워드명 <br>
+                                                <b>투명탁상시계</b> <br>
+                                                시계와 캘린더
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p>예상배송일<br><b>2021-06-08</b></p>
+                                        </div>
+                                        <div class="optionOn" style="display: ;">
+                                            <input type="text" placeholder="옵션을 선택하세요" disabled>
+                                        </div><br>
+
+                                        <div>
+                                            <img id="editBtn"
+                                                src="${ pageContext.request.contextPath }/resources/images/editBtn.PNG"
+                                                onclick="">
+                                            <img id="deleteBtn"
+                                                src="${ pageContext.request.contextPath }/resources/images/deleteBtn.PNG"
+                                                onclick="">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="registered">
+                                        <div>
+                                            <p><b id="registeredName">999,999,999원 펀딩</b></p>
+                                            <span id="registeredSpan1">9999개 남음</span>
+                                            <span>0개 펀딩</span> <br>
+                                        </div><br>
+                                        <div>
+                                            <p>
+                                                리워드명 <br>
+                                                <b>투명탁상시계</b> <br>
+                                                시계와 캘린더
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p>예상배송일<br><b>2021-06-08</b></p>
+                                        </div>
+                                        <div class="optionOn" style="display: ;">
+                                            <input type="text" placeholder="옵션을 선택하세요" disabled>
+                                        </div><br>
+
+                                        <div>
+                                            <img id="editBtn"
+                                                src="${ pageContext.request.contextPath }/resources/images/editBtn.PNG"
+                                                onclick="">
+                                            <img id="deleteBtn"
+                                                src="${ pageContext.request.contextPath }/resources/images/deleteBtn.PNG"
+                                                onclick="">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="registered">
+                                        <div>
+                                            <p><b id="registeredName">999,999,999원 펀딩</b></p>
+                                            <span id="registeredSpan1">9999개 남음</span>
+                                            <span>0개 펀딩</span> <br>
+                                        </div><br>
+                                        <div>
+                                            <p>
+                                                리워드명 <br>
+                                                <b>투명탁상시계</b> <br>
+                                                시계와 캘린더
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p>예상배송일<br><b>2021-06-08</b></p>
+                                        </div>
+                                        <div class="optionOn" style="display: ;">
+                                            <input type="text" placeholder="옵션을 선택하세요" disabled>
+                                        </div><br>
+
+                                        <div>
+                                            <img id="editBtn"
+                                                src="${ pageContext.request.contextPath }/resources/images/editBtn.PNG"
+                                                onclick="">
+                                            <img id="deleteBtn"
+                                                src="${ pageContext.request.contextPath }/resources/images/deleteBtn.PNG"
+                                                onclick="">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <div class="registered">
+                                        <div>
+                                            <p><b id="registeredName">999,999,999원 펀딩</b></p>
+                                            <span id="registeredSpan1">9999개 남음</span>
+                                            <span>0개 펀딩</span> <br>
+                                        </div><br>
+                                        <div>
+                                            <p>
+                                                리워드명 <br>
+                                                <b>투명탁상시계</b> <br>
+                                                시계와 캘린더
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p>예상배송일<br><b>2021-06-08</b></p>
+                                        </div>
+                                        <div class="optionOn" style="display: ;">
+                                            <input type="text" placeholder="옵션을 선택하세요" disabled>
+                                        </div><br>
+
+                                        <div>
+                                            <img id="editBtn"
+                                                src="${ pageContext.request.contextPath }/resources/images/editBtn.PNG"
+                                                onclick="">
+                                            <img id="deleteBtn"
+                                                src="${ pageContext.request.contextPath }/resources/images/deleteBtn.PNG"
+                                                onclick="">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
                 </div>
-
-
                 <!-- 왼쪽 메뉴바 -->
                 <div class="regiMenubar">
                     <p><b>프로젝트 만들기</b></p>
