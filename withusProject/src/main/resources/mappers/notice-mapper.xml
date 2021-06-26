@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- 6/25 윤경 생성 -->
+
+<mapper namespace="noticeMapper">
+	<resultMap id="notice" type="Notice">
+		<result column="notice_no" property="noticeNo"/>
+		<result column="notice_title" property="noticeTitle"/>
+		<result column="notice_content" property="noticeContent"/>
+		<result column="notice_originname" property="noticeOriginname"/>
+		<result column="notice_changename" property="noticeChangename"/>
+		<result column="create_date" property="createDate"/>
+		<result column="count" property="count"/>
+		<result column="notice_status" property="noticeStatus"/>
+	</resultMap>
+
+	<select id="selectListCount" resultType="_int">
+		select
+			   count(*)
+		  from notice
+		 where status = 'Y'
+	</select>
+	
+	<!-- 수정예정 -->
+	<select id="selectList" resultMap="notice">
+		select
+		       notice_no
+		     , notice_title
+		     , 작성자
+		     , to_char(create_date, 'YYYY-MM-DD') create_date
+		  from notice
+		 where status = 'Y'
+		 order
+		    by notice_no desc
+	</select>
+	
+	<insert id="insertNotice" parameterType="Notice">
+		insert
+		  into notice
+		  (
+		    notice_no
+		  , notice_title
+		  , 작성자
+		  , 첨부파일
+		  )
+		  values
+		  (
+		    seq_nno.nextval
+		  ,
+		  ,
+		  ,
+		  )
+	</insert>
+	
+	<update id="increaseCount" parameterType="_int">
+		update
+		       notice
+		   set count = count + 1
+		 where notice_no = #{noticeNo}
+		   and status = 'Y'
+	</update>
+	
+	<select id="selectNotice" resultMap="notice" parameterType="_int">
+		select
+		       notice_no
+		     , notice_title
+		     , 작성자
+		     , notice_originname
+		     , notice_changename
+		     , to_char(create_date, 'YYYY-MM-DD') create_date
+		  from notice
+		 where notice_no = #{noticeNo}
+	</select>
+	
+	<update id="deleteNotice" parameterType="_int">
+		update
+			   notice
+		   set status = 'N'
+		 where notice_no = #{noticeNo}
+	</update>
+	
+	
+</mapper>

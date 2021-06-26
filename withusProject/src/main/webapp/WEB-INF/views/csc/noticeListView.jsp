@@ -15,9 +15,10 @@
 <body>
 
 	<!-- 6/12 윤경 생성-->
+	<!-- 6/25 윤경 수정 : 해더,푸터바 포함, js 작성 -->
 
     <!-- 해더바 포함 -->
-    <jsp:include page=""/>
+    <jsp:include page="../common/header.jsp"/>
 
     <h2>공지사항</h2>
     <hr><br>
@@ -37,27 +38,15 @@
 			  </tr>
 			</thead>
 			<tbody>
-				<tr align="center">
-					<td><input type="checkbox"></td>
-					<td>30</td>
-					<td><a href="">공지사항 제목입니다.</a></td>
-					<td>2021-06-09</td>
-					<td>Y</td>
-				</tr>
-				<tr align="center">
-					<td><input type="checkbox"></td>
-					<td>30</td>
-					<td><a href="">공지사항 제목입니다.</a></td>
-					<td>2021-06-09</td>
-					<td>Y</td>
-				</tr>
-				<tr align="center">
-					<td><input type="checkbox"></td>
-					<td>30</td>
-					<td><a href="">공지사항 제목입니다.</a></td>
-					<td>2021-06-09</td>
-					<td>Y</td>
-				</tr>
+				<c:forEach var="n" items="${ list }">
+					<tr align="center">
+						<td><input type="checkbox"></td>
+						<td>${ n.noticeNo }</td>
+						<td><a href="detail.no">${ n.noticeTitle }</a></td>
+						<td>${ n.createDate }</td>
+						<td>${ n.count }</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	    <br>
@@ -69,7 +58,7 @@
     <br><br>
 
     <!-- 푸터바 포함 -->
-    <jsp:include page=""/>
+    <jsp:include page="../common/footer.jsp"/>
 
 </body>
 </html>

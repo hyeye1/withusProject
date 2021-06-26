@@ -15,21 +15,27 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
-        
+        a{text-decoration: none;}
+        a:hover{cusor:pinter; text-decoration: none;}
 		.headerOuter{
             width: 1200px; 
             margin: auto; 
             height: 117px; 
             padding: 10px;
         }
-		.headerOuter div{display: table-cell;}
+		/* .headerOuter div{display: table-cell;}
 		.headerOuter a{
 			text-decoration: none;
             color: rgb(64, 64, 64);
             font-weight: 600;
             font-size: 17px;
             margin-right: 10px;
-		}
+		} */
+		.headerOuter a, .headerOuter button{
+            color: rgb(64, 64, 64);
+            font-weight: 600;
+            font-size: 17px;
+        }
         .headerLeft{
             float: left;
             margin-top: 33px;
@@ -49,16 +55,99 @@
             margin-right: 50px;
             margin-top: 33px;
         }
+        
+        /*  카테고리 */
+		.category{position: relative; float: left;} 
+
+		.cateToggle{border: none; outline: none; background:none;}
+
+		#cateContent{position: absolute; width: 1200px; height: 250px;background-color: white; padding: 30px 20px;}
+		.cateLeft, .cateCenter, .cateRight{float: left; width: 33%;}
+		.sub1, .sub2{float: left; width: 50%;}
+		.cateRight div {float: left;}
+		
+		.tagBox{ margin-bottom: 0.75rem; display: flex;-webkit-box-align: center; align-items: center; margin: 0px 0.4rem 0px 0px;
+		border-radius: 3px; padding: 0.5em 0.7em; color: white;}
+
+
+		.style_1{ margin-bottom: 0.45rem; display: flex; align-items: center; }
 
     </style>
 </head>
 <body>
-	<div class="headerOuter" align="center" >
+	<div class="headerOuter">
 	
 		<div class="headerLeft">
-			<img src="${ pageContext.request.contextPath }/resources/images/catIcon.PNG" width="25px" style="margin-top: -6px; cursor:pointer;">
-			<a href="" style="color: rgb(52, 152, 219);"> 프로젝트 둘러보기 </a>
-			<a href="register.fd"> 프로젝트 올리기</a>
+
+				<button class="cateToggle" type="button" onclick="dropCate();" style="color: rgb(52, 152, 219);">
+					<img src="${ pageContext.request.contextPath }/resources/images/catIcon.PNG" width="25px" style="margin-top: -6px;">
+					프로젝트 둘러보기
+				</button>
+				<a href=""> 프로젝트 올리기</a>
+
+				<div id="cateContent" style="display: none;">
+					<div class="cateLeft">
+						<div class="style_1"><a href="#">모든 프로젝트</a></div>
+						<div class="style_1"><a href="#">인기 추천 프로젝트</a></div>
+						<div class="style_1"><a href="#">성공 임박 프로젝트</a></div>
+						<div class="style_1"><a href="#">신규 추천 프로젝트</a></div>
+						<div class="style_1"><a href="#">공개예정 프로젝트</a></div>
+					</div>
+					
+					<div class="cateCenter">
+					<div clear="both">카테고리</div>
+					<div class="sub1">
+						<div><a href="#">전체보기</a></div>
+						<div><a href="#">테크/가전</a></div>
+						<div><a href="#">패션/잡화</a></div>
+						<div><a href="#">뷰티</a></div>
+						<div><a href="#">푸드</a></div>
+			
+					</div>
+					<div class="sub2">
+						<div><a href="#">홈리핑</a></div>
+						<div><a href="#">디자인 소품</a></div>
+						<div><a href="#">여행/레저</a></div>
+						<div><a href="#">스포츠/모빌리티</a></div>
+						<div><a href="#">반려동물</a></div>
+			
+					</div>
+			
+					</div>
+					<div class="cateRight">
+					<div clear="both">태그</div> <br>	
+					<div class="tagBox"><a href="#">#좋아요 </a></div>
+					<div class="tagBox"><a href="#">#친환경 </a></div>
+					<div class="tagBox"><a href="#">#인형놀이 </a></div>
+					<div class="tagBox"><a href="#">#얼리버드 </a></div>
+					</div>
+			
+					<script>
+					
+								
+					function dropCate(){
+						//alert("작동되니?");
+						var click = document.getElementById("cateContent");  
+						if(click.style.display === "none"){
+							click.style.display = "block";
+						}else{
+						 	click.style.display = "none"
+						}          
+				
+						var result = document.getElementsByClassName("tagBox");
+						var tagColor = ["rgb(190, 190, 190)", "rgba(135, 163, 224, 0.8)" , "rgba(211, 182, 37, 0.65)", "rgba(152, 31, 102, 0.57)"];
+						
+						for(var i=0; i<tagColor.length; i++){
+							var num = Math.floor(Math.random() * tagColor.length);
+				
+							//중복제거 추가
+				
+							result[i].style.backgroundColor = tagColor[num];
+						}
+				
+						}
+					</script>
+			</div>
 		</div>
 		
 		<div class="headerCenter">
