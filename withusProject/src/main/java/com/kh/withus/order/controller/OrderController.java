@@ -54,6 +54,10 @@ public class OrderController {
 	public String selectOrderNDilvery() {
 		return "order/partOrderNDeliveryList";
 	}
+	@RequestMapping("orderNDeliveryList2.part")
+	public String selectOrderNDilvery2() {
+		return "myPage/partner/partOrderNList";
+	}
 	
 
 }

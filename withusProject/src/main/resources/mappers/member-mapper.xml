@@ -1,4 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
+
+	<resultMap id="memberResultSet" type="Member">
+		<id column="member_id" property="memberId"/>
+		<result column="member_pwd" property="memberPwd"/>
+		<result column="member_name" property="memberName"/>
+		<result column="member_create_dt" property="memberCreateDt"/>
+		<result column="status" property="status"/>
+	</resultMap>
+	
+	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
+		
+		select 
+			  member_name
+			, member_id
+			, member_pwd
+			, member_create_dt
+			, status
+		 from member
+  	    where status = 'Y'
+  		  and member_id = #{memberId}
+	</select>
+	
+	<insert id="insertMember" parameterType="Member">
+		insert
+		  into member
+		  (
+		    member_name
+		  ,	member_id
+		  , member_pwd
+		  )
+		  values
+		  (
+		    #{memberName}
+		  , #{memberId}
+		  , #{memberPwd}
+		  )
+	</insert>
+	
+	<update id="updateMember" parameterType="Member">
+		update
+  				member
+  			set member_id = #{memberId}
+   			  , member_name = #{memberName}
+  			  , member_create_dt = sysdate
+  		  where member_id = #{memberId}
+	</update>
+	
+	<update id="deleteMember" parameterType="string">
+		update
+  		       member
+  		   set status = 'N'
+  		     , member_create_dt = sysdate
+  		 where member_id = #{memberId}
+	</update>
+	
+	<select id="idCheck" resultType="_int" parameterType="string">
+  		select
+  		       count(*)
+  		  from member
+  		 where member_id = #{memberId}
+  	</select>
+	
 </mapper>

@@ -138,20 +138,20 @@
         <div class="login">
             <p class="header">login</p>
             <div class="textbtn">
-                <input type="text" placeholder="  아이디"> 
+                <input type="text" name="memberId" placeholder="  아이디" id="userId"> 
             </div>
             <br>
             <div class="textbtn">
-                <input type="text" placeholder="  비밀번호"> 
+                <input type="text" name="memberPwd" placeholder="  비밀번호" id="memberPwd"> 
             </div>
             <br>
             <input type="checkbox" class="check">아이디저장
             <a href="" class="id">아이디/비밀번호 찾기</a>
             <br><br>
             <div class="loginbtn">
-                <button class="test">로그인</button>
+                <button type="submit" class="test">로그인</button>
             </div>
-            <p class="join">가치가자에 처음오셨나요? <a href="">회원가입</a></p>
+            <p class="join">가치가자에 처음오셨나요? <a href="enrollForm.me">회원가입</a></p>
 
             <ul>
                 <li><div class="kakao">
