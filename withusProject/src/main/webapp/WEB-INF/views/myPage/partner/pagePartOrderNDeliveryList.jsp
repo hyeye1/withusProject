@@ -56,7 +56,7 @@
             
             <!-- 파트너 펀딩.발송관리 리스트 -->
             <div id="mypage_content">
-                <jsp:include page="../../order/partOrderNDeliveryList.jsp"/>
+                <jsp:include page="partOrderNDeliveryList.jsp"/>
 			</div>
             
         </div>
