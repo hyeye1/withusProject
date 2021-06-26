@@ -54,125 +54,20 @@
 		<div class="fundingList">
 			<h3>전체보기</h3>
 			<hr>
-	        <div class="thumbnail" align="center">
-	            <input type="hidden" value="">
-				<input type="hidden" value="">
-				<input type="hidden" value="">
-	            	
-	            <img src="" width="270" height="230">
-	            <p align="left">
-	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
-	                뷰티 | 팀스모어<br>
-					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
-	            </p>
-	        </div>
-			<div class="thumbnail" align="center">
-	            <input type="hidden" value="">
-				<input type="hidden" value="">
-				<input type="hidden" value="">
-	            	
-	            <img src="" width="270" height="230">
-	            <p align="left">
-	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
-	                뷰티 | 팀스모어<br>
-					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
-	            </p>
-	        </div>
-			<div class="thumbnail" align="center">
-	            <input type="hidden" value="">
-				<input type="hidden" value="">
-				<input type="hidden" value="">
-	            	
-	            <img src="" width="270" height="230">
-	            <p align="left">
-	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
-	                뷰티 | 팀스모어<br>
-					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
-	            </p>
-	        </div>
-			<div class="thumbnail" align="center">
-	            <input type="hidden" value="">
-				<input type="hidden" value="">
-				<input type="hidden" value="">
-	            	
-	            <img src="" width="270" height="230">
-	            <p align="left">
-	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
-	                뷰티 | 팀스모어<br>
-					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
-	            </p>
-	        </div>
-			<div class="thumbnail" align="center">
-	            <input type="hidden" value="">
-				<input type="hidden" value="">
-				<input type="hidden" value="">
-	            	
-	            <img src="" width="270" height="230">
-	            <p align="left">
-	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
-	                뷰티 | 팀스모어<br>
-					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
-	            </p>
-	        </div>
-			<div class="thumbnail" align="center">
-	            <input type="hidden" value="">
-				<input type="hidden" value="">
-				<input type="hidden" value="">
-	            	
-	            <img src="" width="270" height="230">
-	            <p align="left">
-	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
-	                뷰티 | 팀스모어<br>
-					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
-	            </p>
-	        </div>
-			<div class="thumbnail" align="center">
-	            <input type="hidden" value="">
-				<input type="hidden" value="">
-				<input type="hidden" value="">
-	            	
-	            <img src="" width="270" height="230">
-	            <p align="left">
-	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
-	                뷰티 | 팀스모어<br>
-					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
-	            </p>
-	        </div>
-			<div class="thumbnail" align="center">
-	            <input type="hidden" value="">
-				<input type="hidden" value="">
-				<input type="hidden" value="">
-	            	
-	            <img src="" width="270" height="230">
-	            <p align="left">
-	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
-	                뷰티 | 팀스모어<br>
-					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
-	            </p>
-	        </div>
-			<div class="thumbnail" align="center">
-	            <input type="hidden" value="">
-				<input type="hidden" value="">
-				<input type="hidden" value="">
-	            	
-	            <img src="" width="270" height="230">
-	            <p align="left">
-	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
-	                뷰티 | 팀스모어<br>
-					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
-	            </p>
-	        </div><div class="thumbnail" align="center">
-	            <input type="hidden" value="">
-				<input type="hidden" value="">
-				<input type="hidden" value="">
-	            	
-	            <img src="" width="270" height="230">
-	            <p align="left">
-	                [1억앵콜] 양치 3번으로 치아를 깍지 않고 하얗게 쭉~ 유지하세요! <br>
-	                뷰티 | 팀스모어<br>
-					7193%&nbsp;&nbsp;&nbsp;35,967,600원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
-	            </p>
-	        </div>
+			<c:forEach var="p" items="${ list }">
+		        <div class="thumbnail" align="center">
+		            <input type="hidden" value="${ p.projectNo }">
+					<input type="hidden" value="">
+					<input type="hidden" value="">
+		            	
+		            <img src="${ p.projectThum }" width="270" height="230">
+		            <p align="left">
+		                ${ p.projectTitle } <br>
+		                ${ p.catNo } | ${ p.memberNo }<br>
+						7193%&nbsp;&nbsp;&nbsp;${ p.totalPrice }원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2일 남음
+		            </p>
+		        </div>
+	        </c:forEach>
 		</div>	
 	</div>
 
