@@ -177,6 +177,7 @@
 				
 					<!-- 로그인후 -->
 					<div class="headerRight" style="display:none">
+						<label>${ loginUser.memberName }님 </label>
 						<a href="logout.me">로그아웃</a>
 						<a href=""> 마이페이지</a>
 						<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">

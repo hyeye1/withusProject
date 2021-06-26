@@ -1,13 +1,16 @@
 package com.kh.withus.member.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.withus.member.model.service.MemberService;
+import com.kh.withus.member.model.vo.Member;
 
 @Controller
 public class MemberController {
@@ -19,7 +22,31 @@ public class MemberController {
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	@RequestMapping("login.me")
-	public String loginForm() {
+	public String loginForm(HttpServletRequest request) {
+		
+		/*
+		// 암호화 작업 후 (단지 아이디 대조만)
+				Member loginUser = mService.loginMember(m);
+				// 아이디만을 가지고 조회해옴 (실제db에 저장되어있는 비번 암호문)
+				
+				if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
+					// 로그인 성공
+					session.setAttribute("loginUser", loginUser);
+					mv.setViewName("redirect:/");
+				}else {
+					// 로그인 실패
+					mv.addObject("errorMsg", "로그인실패");
+					mv.setViewName("common/errorPage");
+				}
+				
+				return mv;
+				*/
+		String memberId = request.getParameter("id");
+		String memberPwd = request.getParameter("pwd");
+		
+		System.out.println("ID : " + memberId);
+		System.out.println("PWD : " + memberPwd);
+		
 		return "member/loginForm";
 	}
 	
@@ -30,7 +57,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-//	회원가입페이지
+	//	회원가입페이지
 	@RequestMapping("enrollForm.me")
 	public String enrollForm() {
 		return "member/memberEnrollForm";
@@ -42,17 +69,18 @@ public class MemberController {
 	}
 
 	
-	/*
+	
 	@RequestMapping("insert.me")
 	public String insertMember(Member m, HttpSession session, Model model) {
 		
 		//System.out.println("암호화 전 : " + m.getUserPwd());
 		
 		// 암호화 작업
-		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
+		
+		//String encPwd = bcryptPasswordEncoder.encode(m.getMemberPwd());
 		//System.out.println("암호화 후 : " + encPwd); // 같은 평문을 입력해도 매번 다른 암호문이 나옴
 		
-		//m.setUserPwd(encPwd); // 암호문으로 변경하기
+		//m.setMemberPwd(encPwd); // 암호문으로 변경하기
 		
 		int result = mService.insertMember(m);
 		
@@ -65,7 +93,7 @@ public class MemberController {
 		}
 		
 	}
-	*/
+	
 	
 	
 	
