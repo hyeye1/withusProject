@@ -140,7 +140,7 @@
 					</button>
 					<a href="register.fd"> 프로젝트 올리기</a>
 
-					<div id="cateContent" style="display: none;">
+					<div id="cateContent" style="display: none; z-index: 100;">
 						<div class="cateLeft">
 							<div class="style_1"><a href="#">모든 프로젝트</a></div>
 							<div class="style_1"><a href="#">인기 추천 프로젝트</a></div>

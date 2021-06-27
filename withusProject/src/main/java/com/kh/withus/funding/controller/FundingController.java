@@ -1,40 +1,40 @@
 package com.kh.withus.funding.controller;
 
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.kh.withus.funding.model.service.FundingService;
+import com.kh.withus.funding.model.vo.Project;
 
 @Controller
 public class FundingController {
 	
+	@Autowired
+	private FundingService funService;
+	
 	@RequestMapping("list.fun")
-	public String selectFundingList() {
+	public ModelAndView selectFundingList(ModelAndView mv) {
 		
-		/*
-		int listCount = bService.selectListCount();
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		// 펀딩 상품 조회
+		ArrayList<Project> list = funService.selectList();
 		
-		ArrayList<Board> list = bService.selectList(pi);
+		mv.addObject("list", list)
+		  .setViewName("funding/fundingListView");
 		
-		model.addAttribute("pi", pi);
-		model.addAttribute("list", list);
-		*/
+		System.out.println(list);
 		
-		return "funding/fundingListView";
+		return mv;
 		
 	}
 	
 	@RequestMapping("list.rew")
 	public String selectRewardList() {
 		
-		/*
-		int listCount = bService.selectListCount();
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
-		ArrayList<Board> list = bService.selectList(pi);
-		
-		model.addAttribute("pi", pi);
-		model.addAttribute("list", list);
-		*/
 		
 		return "funding/rewardListView";
 		
@@ -43,15 +43,7 @@ public class FundingController {
 	@RequestMapping("detail.fd")
 	public String FundingDetails() {
 		
-		/*
-		int listCount = bService.selectListCount();
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
-		ArrayList<Board> list = bService.selectList(pi);
-		
-		model.addAttribute("pi", pi);
-		model.addAttribute("list", list);
-		*/
 		
 		return "funding/fundingDetails";
 		
@@ -60,15 +52,7 @@ public class FundingController {
 	@RequestMapping("register.fd")
 	public String FundingRegistration() {
 		
-		/*
-		int listCount = bService.selectListCount();
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
-		ArrayList<Board> list = bService.selectList(pi);
-		
-		model.addAttribute("pi", pi);
-		model.addAttribute("list", list);
-		*/
 		
 		return "funding/fundingRegistration";
 		

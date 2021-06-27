@@ -98,26 +98,16 @@
                         <th>수량</th>
                         <th>주문 날짜</th>
                         <th>결제 상태</th>
-                        <th>펀딩 상태</th>
+                        <th>배송 상태</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>10491</td>
-                        <td>김지원</td>
-                        <td>프로젝트이름<br>리원드/옵션명111</td>
-                        <td>1</td>
-                        <td>2021-06-09 15:24:11</td>
-                        <td>결제완료</td>
-                        <td>배송준비중</td>
-                    </tr>
-                 	<!--
                  	 <c:forEach var="o" items="${ oList }">
 	                    <tr>
-	                        <td>${ o.orderNo }</td>
-	                        <td>${ o.purEmail }</td>
-	                        <td>프로젝트이름<br>리원드/옵션명111</td>
-	                        <td>1</td>
+	                        <td class="ono">${ o.orderNo }</td>
+	                        <td>${ o.memberName }</td>
+	                        <td>${ o.projectTitle }<br>${ o.rewardTitle }/${ o.orderOption }</td>
+	                        <td>${ o.orderCount }</td>
 	                        <td>${ o.orderDate }</td>
                         	<c:choose>
                         		<c:when test="${ o.orderStatus == 1 }">
@@ -126,28 +116,35 @@
                         		<c:when test="${ o.orderStatus == 2 }">
                         			<td>취소요청</td>
                         		</c:when>
-                        		<c:otherwise>
+                        		<c:when test="${ o.orderStatus == 3 }">
                         			<td>취소완료</td>
-                        		</c:otherwise>
+                        		</c:when>
                         	</c:choose>
                         	<c:choose>
                         		<c:when test="${ o.shippingStatus == 1 }">
-                        			<td>배송준중</td>
+                        			<td>배송준비중</td>
                         		</c:when>
                         		<c:when test="${ o.shippingStatus == 2 }">
                         			<td>배송시작</td>
                         		</c:when>
-                        		<c:otherwise>
+                        		<c:when test="${ o.shippingStatus == 3 }">
                         			<td>배송완료</td>
-                        		</c:otherwise>
+                        		</c:when>
                         	</c:choose>
-                       	
-	                       
-	                    	</tr>
-                    	</c:forEach>
-                 	 -->
+                    	</tr>
+                   	</c:forEach>
                 </tbody>
             </table>
+            
+           <!-- 주문상세 정보 -->
+           <script type="text/javascript">
+           $(function(){
+        	   $("#orderTable tbody tr").click(function(){
+        		   location.href="orderDetail.mana?ono="+$(this).children(".ono").text();
+        	   });
+           });
+           </script>  
+                       
         </div>
         
         <br clear="both"><br>

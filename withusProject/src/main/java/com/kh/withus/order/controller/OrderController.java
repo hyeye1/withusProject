@@ -20,11 +20,10 @@ public class OrderController {
 	private OrderService oService;
 
 	// 관리자
-	@RequestMapping("orderListView.mana")
-	public String selectManaOrderList() {
-		return "order/manaOrderListView";
-	}
 	/*
+	 * @RequestMapping("orderListView.mana") public String selectManaOrderList() {
+	 * return "order/manaOrderListView"; }
+	 */
 	@RequestMapping("orderListView.mana")
 	public ModelAndView selectManaOrderList(@RequestParam(value="currentPage", defaultValue="1")
 	                                        int currentPage, ModelAndView mv) {
@@ -40,7 +39,6 @@ public class OrderController {
 		
 		return mv;
 	}
-	 */
 	
 	
 	@RequestMapping("orderDetailView.mana")
@@ -52,12 +50,7 @@ public class OrderController {
 	// 사용자
 	@RequestMapping("orderNDeliveryList.part")
 	public String selectOrderNDilvery() {
-		return "order/partOrderNDeliveryList";
+		return "myPage/partner/pagePartOrderNDeliveryList";
 	}
-	@RequestMapping("orderNDeliveryList2.part")
-	public String selectOrderNDilvery2() {
-		return "myPage/partner/partOrderNList";
-	}
-	
 
 }

@@ -127,7 +127,6 @@
 	                    <td>Y</td>
 	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
 	                </tr>
-	               	<!--  
 	             	<c:forEach var="m" items="${ mList }">
 		                <tr>
 		                    <td>${ m.memberNo }</td>
@@ -149,7 +148,6 @@
 		                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
 		                </tr>
 	                </c:forEach> 
-	               	-->             
 	            </tbody>
 	        </table>
 	    </div>

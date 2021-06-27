@@ -3,5 +3,58 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
  <mapper namespace="fundingMapper">
+ 	
+ 	<resultMap id="fundingListResultSet" type="Project">
+		<id column="project_no" property="projectNo" />
+		<result column="project_thum" property="projectThum" />
+		<result column="project_title" property="projectTitle" />
+		<result column="cat_name" property="catNo" />
+		<result column="partner_name" property="memberNo" />
+		<result column="total_price" property="totalPrice" />
+		<result column="project_gprice" property="projectGprice" />
+		<result column="project_start_dt" property="projectStartDT" />
+		<result column="project_end_dt" property="projectEndDT" />
+	</resultMap>
+	 
+ 	<select id="selectList" resultMap="fundingListResultSet">
+		select
+               p.project_no
+             , p.project_thum
+             , p.project_title
+             , c.cat_name
+             , m.partner_name
+             , sum(o.total_price) total_price
+             , p.project_gprice
+             , p.project_start_dt
+             , p.project_end_dt
+          from 
+          	   tb_order o
+             , project p
+             , category c
+             , member m
+         where p.project_no = o.project_no 
+           and p.cat_no = c.cat_no 
+           and p.member_no = m.member_no 
+         group
+         	by p.project_no
+         	 , p.project_title
+         	 , p.project_thum
+         	 , c.cat_name
+         	 , m.partner_name
+         	 , p.project_gprice
+         	 , p.project_start_dt
+         	 , p.project_end_dt  
+         order 
+            by p.project_no asc
+	</select>
  
+ 	
+ 	<!--
+ 	<select id="selectList" resultType="string">
+		select
+		       project_title
+		  from project
+		 where project_status = 3
+	</select>
+ 	-->
  </mapper>
