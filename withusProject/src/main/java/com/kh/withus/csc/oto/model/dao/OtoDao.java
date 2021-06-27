@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.kh.withus.common.model.vo.PageInfo;
 import com.kh.withus.csc.oto.model.vo.Oto;
 
+@Repository
 public class OtoDao {
 	
 	// 6/27 윤경 생성

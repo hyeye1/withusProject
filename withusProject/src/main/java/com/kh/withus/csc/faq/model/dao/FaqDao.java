@@ -3,9 +3,11 @@ package com.kh.withus.csc.faq.model.dao;
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.kh.withus.csc.faq.model.vo.Faq;
 
+@Repository
 public class FaqDao {
 	
 	// 6/27 윤경 생성

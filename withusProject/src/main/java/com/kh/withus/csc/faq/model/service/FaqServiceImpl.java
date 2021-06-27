@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kh.withus.csc.faq.model.dao.FaqDao;
 import com.kh.withus.csc.faq.model.vo.Faq;
 
+@Service
 public class FaqServiceImpl implements FaqService {
 
 	// 6/27 윤경 생성

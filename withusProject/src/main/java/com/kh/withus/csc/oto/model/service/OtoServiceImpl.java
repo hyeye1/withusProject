@@ -4,15 +4,16 @@ import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kh.withus.common.model.vo.PageInfo;
 import com.kh.withus.csc.oto.model.dao.OtoDao;
 import com.kh.withus.csc.oto.model.vo.Oto;
 
+@Service
 public class OtoServiceImpl implements OtoService {
 
 	// 6/27 윤경 생성
-	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	@Autowired
