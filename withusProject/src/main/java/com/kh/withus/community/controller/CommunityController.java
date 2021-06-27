@@ -28,7 +28,7 @@ public class CommunityController {
 	}
 	*/
 	@RequestMapping("community.main")
-	public ModelAndView selectBoardList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
+	public ModelAndView selectCommunityList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
 		int listCount = cService.selectListCount();
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
