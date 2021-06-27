@@ -93,7 +93,7 @@
                     <tr>
                         <th>신청번호</th>
                         <th>환불 신청인</th>
-                        <th width="330">펀딩 정보</th>
+                        <th width="460">펀딩 정보</th>
                         <th width="180">환불 사유</th>
                         <th>신청 날짜</th>
                         <th>환불 상태</th>

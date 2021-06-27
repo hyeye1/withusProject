@@ -15,7 +15,7 @@ public class OrderDao {
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("orderMapper.selectOrderListCount");
 	}
-	
+		
 	public ArrayList<Order> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
 		
 		int offset =(pi.getCurrentPage()-1)*pi.getBoardLimit();
@@ -23,9 +23,7 @@ public class OrderDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		ArrayList<Order> test = (ArrayList)sqlSession.selectList("orderMapper.selectOrderList", null, rowBounds);
-		System.out.println(test);
-		return test;
+		return (ArrayList)sqlSession.selectList("orderMapper.selectOrderList", null, rowBounds);
 	}
 
 }
