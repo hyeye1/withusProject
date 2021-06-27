@@ -12,7 +12,6 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
     .content{
-        background-color:rgb(247, 245, 245);
         width:80%;
         margin:auto;
     }
@@ -36,17 +35,17 @@
             <h2>회원가입</h2>
             <br>
 
-            <form action="insert.me" method="post">
+            <form action="insert.me" method="post" id="enrollForm">
                 <div class="form-group">
                 
-                	<label for="userName">* 이름 :</label>
-                    <input type="text" class="form-control" id="userName" name="userName" placeholder="Please Enter Name" required><br>
+                	<label for="memberName">* 이름 :</label>
+                    <input type="text" class="form-control" id="memberName" name="memberName" placeholder="Please Enter Name" required><br>
                     
-               	    <label for="email">* 이메일 :</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Please Enter Email"><br>
+               	    <label for="memberId">* 이메일 :</label>
+                    <input type="email" class="form-control" id="memberId" name="memberId" placeholder="Please Enter Email" required><br>
                     
-                    <label for="userPwd">* 비밀번호 :</label>
-                    <input type="password" class="form-control" id="userPwd" name="userPwd" placeholder="비밀번호 입력" required><br>
+                    <label for="memberPwd">* 비밀번호 :</label>
+                    <input type="password" class="form-control" id="memberPwd" name="memberPwd" placeholder="비밀번호 입력" required><br>
                     
                     <input type="password" class="form-control" id="checkPwd" placeholder="비밀번호 확인" required><br>
                     
