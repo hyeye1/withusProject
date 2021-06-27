@@ -139,7 +139,7 @@
                             <!-- <h2>게시글 상세보기</h2> -->
 
                             <!-- 로그인후 상태일 경우만 보여지는 글쓰기 버튼-->
-                            <a class="btn btn-secondary" style="float:right" href="">목록으로</a>
+                            <a class="btn btn-secondary" style="float:right" href="community.me">목록으로</a>
                             <br><br>
                             <table id="contentArea" align="center" class="table">
                                 <tr>
@@ -159,7 +159,7 @@
                                 <br>
                                 <tr>
                                     <th width="100">제목</th>
-                                    <td colspan="3">게시판 제목자리여라 ..</td>
+                                    <td colspan="3">${ b.boardTitle }</td>
                                 </tr>
                                 <tr>
                                     <th>첨부파일</th>
@@ -176,11 +176,11 @@
                                 </tr>
                             </table>
                             <br>
-
+						
                             <div align="center">
                                 <!-- 수정하기, 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨 -->
-                                <a class="btn btn-primary" href="">수정하기</a>
-                                <a class="btn btn-danger" href="">삭제하기</a>
+                                <a class="btn btn-primary" href="postFormSubmit(1);">수정하기</a>
+                                <a class="btn btn-danger" href="postFormSubmit(2);">삭제하기</a>
                             </div><br><br>
 
                             <!-- 댓글 기능은 나중에 ajax 배우고 접목시킬예정! 우선은 화면구현만 해놓음 -->

@@ -107,9 +107,7 @@
             margin: 5px;
         }
 
-        .ray1 {
-            display: flex;
-        }
+        
     </style>
 </head>
 
@@ -139,23 +137,9 @@
                     <h4 style="display: flex; justify-content: center;">새글쓰기</h4>
                     <br>
 
-                    <form id="enrollForm" method="post" action="" enctype="">
+                    <form id="enrollForm" method="post" action="insert.co" enctype="multipart/form-data">
                         <table align="center">
-                            <tr>
-                                <div class="ray1">
-                                    <div id="nav1_1">
-                                        <img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG"
-                                            width="50" height="50" class="rounded-circle">
-                                    </div>
-                                    <div id="nav1_2">
-                                        <b class="name">김미미</b>
-                                        <div class="date">
-                                            2021-04-12 12:25:19
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                            </tr>
+                            
                             <tr>
                                 <div class="select">
                                     <select class="custom-select" name="condition">
@@ -168,22 +152,22 @@
                             </tr>
                             <tr>
                                 <th><label for="title">제목</label></th>
-                                <td><input type="text" id="title" class="form-control" name="" required></td>
+                                <td><input type="text" id="title" class="form-control" name="communityTitle" required></td>
                             </tr>
                             <tr>
                                 <th><label for="writer">작성자</label></th>
-                                <td><input type="text" id="writer" class="form-control" value="user01" name="" readonly>
+                                <td><input type="text" id="writer" class="form-control" value="${ loginMember.memberId }" name="communityWriter" readonly>
                                 </td>
                             </tr>
                             <tr>
                                 <th><label for="upfile">첨부파일</label></th>
-                                <td><input type="file" id="upfile" class="form-control-file border" name=""></td>
+                                <td><input type="file" id="upfile" class="form-control-file border" name="upfile"></td>
                             </tr>
                             <tr>
                                 <th colspan="2"><label for="content">내용</label></th>
                             </tr>
                             <tr>
-                                <th colspan="2"><textarea class="form-control" required name="" id="content" rows="10"
+                                <th colspan="2"><textarea class="form-control" required name="communityContent" id="content" rows="10"
                                         style="resize:none;"></textarea></th>
                             </tr>
                         </table>
