@@ -2,3 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <!-- 6/27 윤경 생성 -->
+
+<mapper namespace="faqMapper">
+	<resultMap id="faq" type="Faq">
+		<result column="faq_no" property="faqNo" />
+		<result column="faq_cat" property="faqCat" />
+		<result column="faq_title" property="faqTitle" />
+		<result column="faq_content" property="faqContent" />
+		<result column="faq_status" property="faqStatus" />
+	</resultMap>
+	
+	<select id="selectList"></select>
+	 
+	<insert id="insertFaq"></insert>
+	
+	<select id="selectFaq"></select>
+	
+	<update id="updateFaq"></update>
+	
+	<update id="deleteFaq"></update>
+</mapper>

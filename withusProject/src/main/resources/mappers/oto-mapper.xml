@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- 6/27 윤경 생성 -->
+
+<mapper namespace="OtoMapper">
+	<resultMap id="oto" type="Oto">
+		<result column="oto_no" property="otoNo" />
+		<result column="member_no" property="memberNo" />
+		<result column="oto_cat" property="otoCat" />
+		<result column="oto_title" property="otoTitle" />
+		<result column="oto_content" property="otoContent" />
+		<result column="oto_orginname" property="otoOrginname" />
+		<result column="oto_changename" property="otoOrginname" />
+		<result column="oto_date" property="otoDate" />
+		<result column="oto_reply" property="otoReply" />
+		<result column="oto_re_date" property="otoReDate" />
+		<result column="oto_re_status" property="otoReStatus" />
+		<result column="oto_status" property="otoStatus" />
+	</resultMap>
+	
+	<select id="selectListCount"></select>
+	
+	<select id="selectList"></select>
+	 
+	<insert id="insertOto"></insert>
+	
+	<insert id="increaseCount"></insert>
+	
+	<select id="selectOto"></select>
+	
+	<update id="updateOto"></update>
+	
+	<delete id="deleteOto"></delete>
+</mapper>

@@ -22,7 +22,7 @@
 		 where status = 'Y'
 	</select>
 	
-	<!-- 수정예정 -->
+	<!-- 수정예정 
 	<select id="selectList" resultMap="notice">
 		select
 		       notice_no
@@ -34,6 +34,7 @@
 		 order
 		    by notice_no desc
 	</select>
+	-->
 	
 	<insert id="insertNotice" parameterType="Notice">
 		insert
