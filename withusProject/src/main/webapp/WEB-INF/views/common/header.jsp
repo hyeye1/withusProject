@@ -259,7 +259,6 @@
 				</c:otherwise>
          </c:choose>
 		
-=======
 					<c:remove var="alertMsg" scope="session" />
 				</c:if>
 				<c:choose>
@@ -286,7 +285,6 @@
 					</c:otherwise>
 				</c:choose>
 
->>>>>>> 7f4938b10cdf5130fbc28a8cfe6abc3910d53b9d
 				<!-- 관리자 -->
 				<div class="headerRight" style="display:none">
 					<a href="logout.me">로그아웃</a>
