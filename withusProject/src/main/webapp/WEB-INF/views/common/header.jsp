@@ -237,7 +237,7 @@
 			<c:remove var="alertMsg" scope="session"/>
 		</c:if>
 		<c:choose>
-            <c:when test="${ empty loginUser }">
+            <c:when test="${ empty loginMember }">
             
 				<!-- 로그인전 -->
 				<div class="headerRight">
@@ -250,7 +250,7 @@
 				
 					<!-- 로그인후 -->
 					<div class="headerRight" style="display:none">
-						<label>${ loginUser.memberName }님 </label>
+						<label>${ loginMember.memberName }님 </label>
 						<a href="logout.me">로그아웃</a>
 						<a href=""> 마이페이지</a>
 						<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">

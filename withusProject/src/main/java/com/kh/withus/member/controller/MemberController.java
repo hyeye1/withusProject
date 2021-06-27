@@ -73,14 +73,17 @@ public class MemberController {
 	@RequestMapping("insert.me")
 	public String insertMember(Member m, HttpSession session, Model model) {
 		
+		//System.out.println(m);
+		//System.out.println(session);
+		//System.out.println(model);
 		//System.out.println("암호화 전 : " + m.getUserPwd());
 		
 		// 암호화 작업
 		
-		//String encPwd = bcryptPasswordEncoder.encode(m.getMemberPwd());
+		String encPwd = bcryptPasswordEncoder.encode(m.getMemberPwd());
 		//System.out.println("암호화 후 : " + encPwd); // 같은 평문을 입력해도 매번 다른 암호문이 나옴
 		
-		//m.setMemberPwd(encPwd); // 암호문으로 변경하기
+		m.setMemberPwd(encPwd); // 암호문으로 변경하기
 		
 		int result = mService.insertMember(m);
 		
