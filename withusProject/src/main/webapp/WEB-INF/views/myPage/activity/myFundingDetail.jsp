@@ -403,15 +403,17 @@
                 
                 <!-- 배송준비중일경우 input, button에 readonly 제거 -->
                 <input type="hidden" value="${orderList.shippingStatus}"  id="shippingStatus">
+                <input type="hidden" value="${orderList.orderStatus}"  id="orderStatus">
                 <script>
                     
                 
 			        $(document).ready(function(){
 			        	var shippingStatus = $("#shippingStatus").val();
+			        	var orderStatus = $("#orderStatus").val();
 			        	
 			        	console.log(shippingStatus);
 			        	
-			            if(shippingStatus =='1'){
+			            if(shippingStatus =='1' && orderStatus=='1'){
 			            	
 			            	$("input").removeAttr("readonly");
 			            	$("button").removeAttr("disabled");
@@ -753,4 +755,4 @@
     
     
 </body>
-</html></html>
+</html>
