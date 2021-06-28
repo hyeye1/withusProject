@@ -38,7 +38,7 @@ public class CommunityDao {
 	}
 	
 	public Community selectCommunity(SqlSessionTemplate sqlSession, int commuNo) {
-		return sqlSession.selectOne("boardMapper.selectBoard", commuNo);
+		return sqlSession.selectOne("communityMapper.selectBoard", commuNo);
 	}
 	
 	public int deleteCommunity(SqlSessionTemplate sqlSession, int commuNo) {
