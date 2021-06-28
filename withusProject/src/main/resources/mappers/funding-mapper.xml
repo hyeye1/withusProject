@@ -45,16 +45,7 @@
          	 , p.project_start_dt
          	 , p.project_end_dt  
          order 
-            by p.project_no asc
+            by p.project_no desc
 	</select>
  
- 	
- 	<!--
- 	<select id="selectList" resultType="string">
-		select
-		       project_title
-		  from project
-		 where project_status = 3
-	</select>
- 	-->
  </mapper>
