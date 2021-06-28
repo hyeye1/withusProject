@@ -15,6 +15,7 @@
 
 			<style>
 				@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
 				a {
 					text-decoration: none;
 				}
@@ -30,14 +31,17 @@
 					height: 117px;
 					padding: 10px;
 				}
+
 				.headerOuter a,
 				.headerOuter button {
 					color: rgb(64, 64, 64);
 				}
-				.projectBtn{
+
+				.projectBtn {
 					font-weight: 600;
 					font-size: 17px;
 				}
+
 				.headerLeft {
 					float: left;
 					margin-top: 33px;
@@ -61,10 +65,11 @@
 					margin-right: 26px;
 					margin-top: 33px;
 				}
-				.headerRight>a{
+
+				.headerRight>a {
 					padding: 0 3px;
-				    font-size: 1.03rem;
-				    font-weight: 900;
+					font-size: 1.03rem;
+					font-weight: 900;
 				}
 
 				/*  카테고리 */
@@ -85,19 +90,28 @@
 					height: 250px;
 					background-color: white;
 					padding: 30px 40px;
+					margin-top: 30px;
+					margin-left: -30px;
 				}
 
-				.cateLeft{float: left; width: 20%; margin-top: 0.4rem;}
+				.cateLeft {
+					float: left;
+					width: 20%;
+					margin-top: 0.4rem;
+				}
+
 				.cateCenter,
 				.cateRight {
 					float: left;
 					width: 40%;
 					position: relative;
 				}
+
 				.cateCenter {
 					padding: 0 75px;
 					border-left: 1px solid lightgray;
 				}
+
 				.cateRight {
 					position: relative;
 					top: 25%;
@@ -122,39 +136,46 @@
 					border-radius: 3px;
 					padding: 0.5em 0.7em;
 				}
-				.tagBox>a{
-					color: white;
-				    font-size: 1.0rem;
-				    font-weight: bolder;
-				}
 
-				.style_1{
-					margin-bottom: 0.35rem;
-					display: flex;
-					align-items: center;
-					font-size: 1.2rem;
+				.tagBox>a {
+					color: white;
+					font-size: 1.0rem;
 					font-weight: bolder;
 				}
-				.style_2{
+
+				.style_1 {
+					margin-bottom: 0.35rem;
+					display: flex;
+					align-items: center;
+					font-size: 1.05rem;
+					font-weight: bolder;
+				}
+
+				.style_2 {
 					margin-bottom: 0.35rem;
 					display: flex;
 					align-items: center;
 				}
-				.style_2a{
+
+				.style_2a {
 					font-size: 1.0rem;
-    				font-weight: 540;
+					font-weight: 540;
 				}
-				.style_3{
+
+				.style_3 {
 					font-size: 14px;
 					color: grey;
 					margin-bottom: 12px;
 				}
 
-				.hash{position: absolute;}
+				.hash {
+					position: absolute;
+				}
+
 				a:hover {
 					color: rgb(117, 117, 117);
-    				cursor: pointer;
-    			}
+					cursor: pointer;
+				}
 			</style>
 		</head>
 
@@ -163,7 +184,8 @@
 
 				<div class="headerLeft">
 
-					<button class="cateToggle projectBtn" type="button" onclick="dropCate();" style="color: rgb(52, 152, 219);">
+					<button class="cateToggle projectBtn" type="button" onclick="dropCate();"
+						style="color: rgb(52, 152, 219);">
 						<img src="${ pageContext.request.contextPath }/resources/images/catIcon.PNG" width="25px"
 							style="margin-top: -6px;">
 						프로젝트 둘러보기
@@ -177,6 +199,7 @@
 							<div class="style_1"><a href="#">성공 임박 프로젝트</a></div>
 							<div class="style_1"><a href="#">신규 추천 프로젝트</a></div>
 							<div class="style_1"><a href="#">공개예정 프로젝트</a></div>
+							<div class="style_1"><a href="#">커뮤니티</a></div>
 						</div>
 
 						<div class="cateCenter">
@@ -191,7 +214,7 @@
 							</div>
 							<div class="sub2">
 								<div class="style_2"><a class="style_2a" href="#">홈리핑</a></div>
-								<div class="style_2"><a class="style_2a"a href="#">디자인 소품</a></div>
+								<div class="style_2"><a class="style_2a" a href="#">디자인 소품</a></div>
 								<div class="style_2"><a class="style_2a" href="#">여행/레저</a></div>
 								<div class="style_2"><a class="style_2a" href="#">스포츠/모빌리티</a></div>
 								<div class="style_2"><a class="style_2a" href="#">반려동물</a></div>
@@ -251,79 +274,82 @@
 					<script>
 						alert("${alertMsg}");
 					</script>
-<<<<<<< HEAD
+					<<<<<<< HEAD </div>
 			</div>
-		</div>
-		
-		<div class="headerCenter">
-			<a href="${ pageContext.request.contextPath }"><img src="${ pageContext.request.contextPath }/resources/images/logo.PNG" width="165px" id="logoImg" ></a>
-		</div>
-        
-        <input type="image" src="${ pageContext.request.contextPath }/resources/images/searchIcon.PNG" id="searchIcon">
-        
-        
-		<c:if test="${ !empty alertMsg }">
-			<script>
-				alert("${alertMsg}");
-			</script>
-			<c:remove var="alertMsg" scope="session"/>
-		</c:if>
-		<c:choose>
-            <c:when test="${ empty loginMember }">
-            
-				<!-- 로그인전 -->
-				<div class="headerRight">
-					<a href="login.me">로그인</a>
-					<a href="enrollForm.me"> 회원가입</a>
-					<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
-				</div>
+
+			<div class="headerCenter">
+				<a href="${ pageContext.request.contextPath }"><img
+						src="${ pageContext.request.contextPath }/resources/images/logo.PNG" width="165px"
+						id="logoImg"></a>
+			</div>
+
+			<input type="image" src="${ pageContext.request.contextPath }/resources/images/searchIcon.PNG"
+				id="searchIcon">
+
+
+			<c:if test="${ !empty alertMsg }">
+				<script>
+					alert("${alertMsg}");
+				</script>
+				<c:remove var="alertMsg" scope="session" />
+			</c:if>
+			<c:choose>
+				<c:when test="${ empty loginMember }">
+
+					<!-- 로그인전 -->
+					<div class="headerRight">
+						<a href="login.me">로그인</a>
+						<a href="enrollForm.me"> 회원가입</a>
+						<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px"
+							style="margin-left: -3px; margin-top: -6px;">
+					</div>
 				</c:when>
-	    	    <c:otherwise>
-				
+				<c:otherwise>
+
 					<!-- 로그인후 -->
 					<div class="headerRight" style="display:none">
 						<label>${ loginMember.memberName }님 </label>
 						<a href="logout.me">로그아웃</a>
 						<a href=""> 마이페이지</a>
-						<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
+						<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px"
+							style="margin-left: -3px; margin-top: -6px;">
 					</div>
-					
+
 				</c:otherwise>
-         </c:choose>
-		
-					<c:remove var="alertMsg" scope="session" />
-				</c:if>
-				<c:choose>
-					<c:when test="${ empty loginUser }">
+			</c:choose>
 
-						<!-- 로그인전 -->
-						<div class="headerRight">
-							<a href="login.me">로그인</a>
-							<a href="enrollForm.me"> 회원가입</a>
-							<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px"
-								style="margin-left: -3px; margin-top: -6px;">
-						</div>
-					</c:when>
-					<c:otherwise>
+			<c:remove var="alertMsg" scope="session" />
+			</c:if>
+			<c:choose>
+				<c:when test="${ empty loginUser }">
 
-						<!-- 로그인후 -->
-						<div class="headerRight" style="display:none">
-							<a href="logout.me">로그아웃</a>
-							<a href=""> 마이페이지</a>
-							<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px"
-								style="margin-left: -3px; margin-top: -6px;">
-						</div>
+					<!-- 로그인전 -->
+					<div class="headerRight">
+						<a href="login.me">로그인</a>
+						<a href="enrollForm.me"> 회원가입</a>
+						<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px"
+							style="margin-left: -3px; margin-top: -6px;">
+					</div>
+				</c:when>
+				<c:otherwise>
 
-					</c:otherwise>
-				</c:choose>
+					<!-- 로그인후 -->
+					<div class="headerRight" style="display:none">
+						<a href="logout.me">로그아웃</a>
+						<a href=""> 마이페이지</a>
+						<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px"
+							style="margin-left: -3px; margin-top: -6px;">
+					</div>
 
-				<!-- 관리자 -->
-				<div class="headerRight" style="display:none">
-					<a href="logout.me">로그아웃</a>
-					<a href=""> 관리자</a>
-					<img src="resources/images/memberIcon.PNG" width="30px"
-						style="margin-left: -3px; margin-top: -6px;">
-				</div>
+				</c:otherwise>
+			</c:choose>
+
+			<!-- 관리자 -->
+			<div class="headerRight" style="display:none">
+				<a href="logout.me">로그아웃</a>
+				<a href=""> 관리자</a>
+				<img src="resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
+			</div>
 			</div>
 
 		</body>

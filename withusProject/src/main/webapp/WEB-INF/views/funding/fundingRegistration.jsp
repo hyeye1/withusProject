@@ -378,10 +378,10 @@
                 <div class="regiHeader">
                     <p>
                         <b class="regi regiOne">기본정보</b>
-                        <b class="regi regiTwo">스토리</b>
-                        <b class="regi regiThree">리워드</b>
-                        <b class="regi regiFour">안내사항</b>
-                        <b class="regi regiFive">제작자/부가 정보</b>
+                        <b class="regi regiTwo" style="display: none;">스토리</b>
+                        <b class="regi regiThree" style="display: none;">리워드</b>
+                        <b class="regi regiFour" style="display: none;">안내사항</b>
+                        <b class="regi regiFive" style="display: none;">제작자/부가 정보</b>
                     </p>
                     <button class="registerBtn">승인요청하기</button>
                     <button>임시저장</button>
