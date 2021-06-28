@@ -35,7 +35,7 @@
             <h2>회원가입</h2>
             <br>
 
-            <form action="insert.me" method="post" id="enrollForm">
+            <form action="insert.me" id="enrollForm">
                 <div class="form-group">
                 
                 	<label for="memberName">* 이름 :</label>

@@ -25,7 +25,7 @@ public class CommunityServiceImpl implements CommunityService{
 	}
 
 	@Override
-	public ArrayList<Community> selectList(PageInfo pi) {
+	public ArrayList<Community> selecList(PageInfo pi) {
 		return cDao.selectList(sqlSession, pi);
 	}
 
@@ -61,9 +61,10 @@ public class CommunityServiceImpl implements CommunityService{
 	}
 
 	@Override
-	public int insertReply(CommuReply cr) {
+	public int insertCommuReply(CommuReply cr) {
 		return cDao.insertCommuReply(sqlSession, cr);
 	}
+
 
 	
 	
