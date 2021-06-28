@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.withus.funding.dto.FundingDetail;
+import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.vo.Project;
 
 @Repository
@@ -19,7 +19,7 @@ public class FundingDao {
 		return sqlSession.update("fundingMapper.increaseCount", projectNo);
 	}
 	
-	public Project selectFunding(SqlSessionTemplate sqlSession, int projectNo) {
+	public FundingDetail selectFunding(SqlSessionTemplate sqlSession, int projectNo) {
 		return sqlSession.selectOne("fundingMapper.selectFunding", projectNo);
 	}
 

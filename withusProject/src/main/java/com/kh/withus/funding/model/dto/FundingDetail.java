@@ -1,4 +1,4 @@
-package com.kh.withus.funding.dto;
+package com.kh.withus.funding.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +16,9 @@ public class FundingDetail {
 	private String catName;
 	private int projectNo;
 	private String projectTitle;
+	private String projectThum;
 	private int totalPrice;
+	private int percentage;
 	private int projectGprice;
 	private String dday;
 	private int supporter;

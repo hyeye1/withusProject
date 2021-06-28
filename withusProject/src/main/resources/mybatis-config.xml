@@ -18,7 +18,7 @@
 		<typeAlias type="com.kh.withus.community.model.vo.CommuReply" alias="CommuReply" />
 		<typeAlias type="com.kh.withus.member.model.vo.Member" alias="Member" />
 		<typeAlias type="com.kh.withus.order.model.vo.Order" alias="Order" />
-		<typeAlias type="com.kh.withus.funding.dto.FundingDetail" alias="FundingDetail" />
+		<typeAlias type="com.kh.withus.funding.model.dto.FundingDetail" alias="FundingDetail" />
 	</typeAliases>
 	
 	<mappers>

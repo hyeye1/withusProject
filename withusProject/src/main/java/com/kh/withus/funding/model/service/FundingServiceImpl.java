@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.withus.funding.dto.FundingDetail;
+import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.dao.FundingDao;
 import com.kh.withus.funding.model.vo.Project;
 
@@ -30,7 +30,7 @@ public class FundingServiceImpl implements FundingService {
 	}
 
 	@Override
-	public Project selectFunding(int projectNo) {
+	public FundingDetail selectFunding(int projectNo) {
 		return funDao.selectFunding(sqlSession, projectNo);
 	}
 

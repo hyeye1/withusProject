@@ -2,7 +2,7 @@ package com.kh.withus.funding.model.service;
 
 import java.util.ArrayList;
 
-import com.kh.withus.funding.dto.FundingDetail;
+import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.vo.Project;
 
 public interface FundingService {
@@ -12,7 +12,7 @@ public interface FundingService {
 	
 	// 상세페이지 조회
 	int increaseCount(int projectNo);
-	Project selectFunding(int projectNo);
+	FundingDetail selectFunding(int projectNo);
 	ArrayList<FundingDetail> selectReward(int projectNo);
 	
 }

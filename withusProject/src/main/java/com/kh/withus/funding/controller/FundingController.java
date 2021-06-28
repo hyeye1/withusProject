@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.service.FundingService;
 import com.kh.withus.funding.model.vo.Project;
 
@@ -46,7 +47,7 @@ public class FundingController {
 		int result= funService.increaseCount(pno);
 		
 		if(result>0) {
-			Project p = funService.selectFunding(pno);
+			FundingDetail p = funService.selectFunding(pno);
 			model.addAttribute("p", p);
 			return "funding/fundingDetails";
 		}else {

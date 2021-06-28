@@ -21,6 +21,7 @@
 		<result column="cat_name" property="catName" />
 		<result column="project_no" property="projectNo" />
 		<result column="project_title" property="projectTitle" />
+		<result column="project_thum" property="projectThum" />
 		<result column="total_price" property="totalPrice" />
 		<result column="project_gprice" property="projectGprice" />
 		<result column="dday" property="dday" />
@@ -87,16 +88,22 @@
 		   and project_status = 3
 	</update>
     
-    <select id="selectFunding" resultMap="fundingDetail" parameterType="_int">
+    <select id="selectFunding" resultMap="fundingDetail" parameterType="FundingDetail">
 	    select
 	       cat_no
 	     , cat_name
 	     , project_no
 	     , project_title
+	     , project_thum
 	     , (select sum(total_price)
 	          from tb_order
 	         where project_no = #{projectNo}) total_price
 	     , project_gprice
+	     , (select (select sum(total_price)
+	          from tb_order
+	         where project_no = #{projectNo}) / project_gprice * 100
+	          from project
+	         where project_no = #{projectNo}) percentage
 	     , ceil(project_end_dt - sysdate) dday
 	     , (select count(*)
 	          from tb_order
@@ -121,7 +128,7 @@
 	   and project_no = #{projectNo}
     </select>
     
-    <select id="selectReward" resultMap="fundingDetail" parameterType="_int" >
+    <select id="selectReward" resultMap="fundingDetail" parameterType="FundingDetail" >
     	select
 	       reward_no
 	     , reward_price
