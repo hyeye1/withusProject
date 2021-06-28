@@ -118,14 +118,16 @@
 
                 <!-- 메뉴바 -->
                 <div class="detailMenubar">
-                    <span id="detailStory"><a href="">스토리</a></span>
-                    <span id="detailCommu"><a href="">커뮤니티</a></span>
-                    <span id="detailNotice"><a href="">펀딩 안내</a></span>
+                    <span class="detailSto" onclick="detailShow('Sto')"><b>스토리</b></span>
+                    <span class="detailCommu" onclick="detailShow('Commu')"><b>커뮤니티</b></span>
+                    <span class="detailNoti" onclick="detailShow('Noti')"><b>펀딩 안내</b></span>
                 </div>
                 <!-- 메뉴바 스토리선택됨 표시바 -->
-                <div class="menuSelected" style="margin-left: 112px; ">&nbsp;</div>
-                <div class="menuSelected" style="margin-left: 218px; display: none;">&nbsp;</div>
-                <div class="menuSelected" style="margin-left: 339px; display: none;">&nbsp;</div>
+                <div class="menuSelected detail detailSto" style="margin-left: 109px; ">&nbsp;</div>
+                <div class="menuSelected detail detailCommu" style="margin-left: 208px; display: none;">&nbsp;
+                </div>
+                <div class="menuSelected detail detailNoti" style="margin-left: 320px; display: none;">&nbsp;
+                </div>
 
 
                 <!-- 바디 -->
@@ -249,7 +251,7 @@
                     </div>
 
                     <!-- 스토리 -->
-                    <div class="detailStory">
+                    <div class="detailStory detail detailSto">
                         <div class="storyContent">
                             <h2>별똥꽃<strong> meteor flower&nbsp;<br></strong><strong><strong>운석을</strong>
                                     <strong>담은</strong> <strong>꽃병과</strong> <strong>모빌</strong></strong></h2>
@@ -420,7 +422,7 @@
                     </div>
 
                     <!-- 커뮤니티 -->
-                    <div class="detailCommunity">
+                    <div class="detailCommunity detail detailCommu">
                         <p id="plzLogin" style="display: none;">
                             로그인 후 글 작성이 가능합니다. <br>
                             펀딩과 관련 없는 내용, 광고, 욕설, 비방, 도배 글은 관리자 검토 후 삭제됩니다.
@@ -488,7 +490,7 @@
                     </div>
 
                     <!-- 상품 안내 -->
-                    <div class="detailGuide">
+                    <div class="detailGuide detail detailNoti">
                         <div class="guideTitle">
                             <h3><b>펀딩 진행 관련 안내 사항입니다.</b></h3>
                         </div>
@@ -562,6 +564,13 @@
                     </div>
                 </div>
             </div>
+
+            <script>
+                function detailShow(className) {
+                    $(".detail").hide();
+                    $(".detail" + className).show();
+                }
+            </script>
 
         </body>
 

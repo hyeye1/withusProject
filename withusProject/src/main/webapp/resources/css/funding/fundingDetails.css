@@ -110,15 +110,13 @@
 	    padding-left: 100px;
 	}
 	
-	.detailMenubar a {
-	    text-decoration: none;
+	.detailMenubar b{
 	    color: rgb(64, 64, 64);
 	    font-size: 18px;
+		margin: 20px;
+		cursor: pointer !important;
 	}
-	
-	.detailMenubar span {
-	    margin: 20px;
-	}
+
 	
 	.menuSelected {
 	    background-color: rgb(52, 152, 219);
@@ -473,3 +471,5 @@
 	.adminShown {
 	    display: none;
 	}
+
+

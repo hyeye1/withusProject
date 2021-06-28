@@ -889,11 +889,11 @@
                     <p><b>프로젝트 만들기</b></p>
                     <ol>
                         <!-- 호버줘서 클릭된건 파랑색보여지게 -->
-                        <li class="regiMenu liOne" onclick="test('One');">기본정보</li>
-                        <li class="regiMenu liTwo" onclick="test('Two');">스토리</li>
-                        <li class="regiMenu liThree" onclick="test('Three');">리워드</li>
-                        <li class="regiMenu liFour" onclick="test('Four');">안내사항</li>
-                        <li class="regiMenu liFive" onclick="test('Five');">제작자/부가 정보</li>
+                        <li class="regiMenu liOne" onclick="regiShow('One');">기본정보</li>
+                        <li class="regiMenu liTwo" onclick="regiShow('Two');">스토리</li>
+                        <li class="regiMenu liThree" onclick="regiShow('Three');">리워드</li>
+                        <li class="regiMenu liFour" onclick="regiShow('Four');">안내사항</li>
+                        <li class="regiMenu liFive" onclick="regiShow('Five');">제작자/부가 정보</li>
                     </ol>
                 </div>
                 <!-- 메뉴바 스토리선택됨 표시바 -->
@@ -906,7 +906,7 @@
             </div> <!-- outer div -->
 
             <script>
-                function test(className) {
+                function regiShow(className) {
                     $(".regi").hide();
                     $(".regi" + className).show();
                     $(".regiMenu").css('color', 'black');
