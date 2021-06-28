@@ -19,8 +19,8 @@ public class CommunityDao {
 	
 	public ArrayList<Community> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
 		
-		int offset = (pi.getCurrentPage() - 1) * pi.getCommunityLimit();
-		int limit = pi.getCommunityLimit();
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		

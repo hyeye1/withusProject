@@ -87,8 +87,11 @@
                 <!-- 파트너 프로필 -->
                 <div id="content_1_1">
                     <img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="100" height="100" class="rounded-circle" >
-                   <br> <a href="">편집</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="">취소</a>
-                    
+                   <!-- <br> <a href="">편집</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="">취소</a> -->
+                   <!-- <th><label for="upfile">첨부파일</label></th> -->
+                   <!-- <td><input type="file" id="upfile" class="form-control-file border" name="upfile"></td> -->
+                   <br>
+                   <button type="file" id="upfile" name="upfile">편집</button>  <button>취소</button>
                 </div>
                 <p>파트너 프로필사진을 등록해주세요</p>
                 <!-- <input type="text" placeholder="파트너 소개 등록(0/50)" class="partnerUp" maxlength="50"> -->
@@ -99,7 +102,7 @@
 
             <!-- 약관동의 -->
             <div id="content3">
-                <input type="checkbox"> 정보수집 동의
+                <input type="checkbox" required> 정보수집 동의
                 <hr class="line">
 
             </div>

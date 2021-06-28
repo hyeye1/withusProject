@@ -137,7 +137,7 @@
                     <h4 style="display: flex; justify-content: center;">새글쓰기</h4>
                     <br>
 
-                    <form id="enrollForm" method="post" action="insert.co" enctype="multipart/form-data">
+                    <form id="enrollForm" method="post" action="insert.c" enctype="multipart/form-data">
                         <table align="center">
                             
                             <tr>
