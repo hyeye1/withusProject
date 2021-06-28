@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="detailTitle">
-                        <p><b>세련되고 시크한 당신을 위한, 투명 시계</b></p>
+                        <p><b>${ p.projectTitle }</b></p>
                     </div>
 
                     <div class="partner">

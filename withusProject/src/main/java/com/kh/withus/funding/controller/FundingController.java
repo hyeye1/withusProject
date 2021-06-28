@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,11 +42,22 @@ public class FundingController {
 	}
 
 	@RequestMapping("detail.fd")
-	public String FundingDetails() {
+	public String selectFunding(int pno, Model model) {
+		int result= funService.increaseCount(pno);
+		
+		if(result>0) {
+			Project p = funService.selectFunding(pno);
+			model.addAttribute("p", p);
+			return "funding/fundingDetails";
+		}else {
+			model.addAttribute("errorMsg", "상세페이지 조회 실패");
+			return "common/errorPage";
+		}
 		
 		
 		
-		return "funding/fundingDetails";
+		
+		
 		
 	}
 	
