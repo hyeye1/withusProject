@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
- 
-    request.setCharacterEncoding("UTF-8");
- 
-%>    
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +14,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     
-	<style>
+<style>
         
         /*div{border: 1px solid red; box-sizing: border-box;}*/
         .wrap{width: 1000px; height: auto; margin: auto;}
@@ -37,7 +33,7 @@
         
        
         /* mypage안의 세부영역 */
-        #content{width: 100%; margin-left: 150px;}
+        #content{width: 100%; margin-left: 130px;}
 
         /*큰제목*/
         p{font-size: 23px; font-weight: bolder;}
@@ -45,12 +41,12 @@
         
         /* fundingDetail content */
         .fundingDetail #content_1{height: 10%; margin-top: 50px;}
-        .fundingDetail #content_2{height: 30%; margin-top: 30px;}
+        .fundingDetail #content_2{height: 30%; margin-top: 50px;}
         .fundingDetail #content_3{height: 30%; margin-top: 30px;}
 
         
         /* 각각 테이블 */
-        .fundingDetail table{margin-left: 20px; width: 80%; border-top:rgb(192, 189, 189) solid 0.2px; }
+        .fundingDetail table{margin-left: 20px; width: 80%; border-top:rgb(192, 189, 189) solid 0.2px;}
         #orderBasic th{width: 150px; height: 40px;}
         #orderBasic td{width: 150px; height: 30px;}
 
@@ -59,13 +55,12 @@
         #orderDetail td{height: 50px; }
         #orderDetail thead{font-weight: 900;}
         
-        
-        #orderName{width: 65%}
-        #oderOption{width: 15%;}
+        #thumb{width: 10%;}
+        #orderName{width: 65%; text-align: center;}
         #rewardPrice{width: 15%; text-align: center;}
         #count{width: 8%; text-align: center;}
 
-        #selectOption{width: 50px; text-align: center;}
+        #selectOption{width: 100px; text-align: center;}
 
 		
 		/* 배송지정보 */
@@ -85,7 +80,7 @@
         a{text-decoration: none; color:white; text-decoration-line: none;}
 
         /* 맨아래 목록 버튼 부분 */
-        .bottm_btnarea{height: 200px; margin-top:10px; text-align: center; }
+        .bottom_btnarea{height: 200px; margin-top:10px; text-align: center; }
         #listBtn{width: 150px; background-color: rgb(52, 152, 219); color: honeydew;}
         #refundBtn{width: 150px; background-color: rgb(52, 152, 219); color: honeydew;}
         
@@ -94,12 +89,12 @@
 		#popup01{ display: none;}
 		
 		#popup01{
-			width: 400px;
-			height: 480px;
+			width: 370px;
+			height: 650px;
 			position: absolute;
 			top: 50%;
 			left: 50%;
-			margin: 80px;
+			margin: -250px 0 0 -250px;
 			background-color: rgb(247, 247, 247);
 			z-index: 2;
 		 }
@@ -121,16 +116,20 @@
 		}
 		
 		
-		#popup_content{margin-top: 20px; margin-left: 30px; margin-right: 20px;}
+		#popup_content{margin-top: 20px; margin-left: 40px; margin-right: 20px;}
 		
 		/* 환불 테이블 */
 		#popup01 table{width: 80%;}
 		#BigTitle{font-size: 15px; font-weight: 700; height: 40px; border-top:rgba(41, 128, 185, 0.16) solid 0.1px;}
 		#rTitle{width: 150px; height: 30px;}
 		#blankBox{height: 20px;}
+
+        #rReason{width: 100%; height: 100px;}
+        .refundInfo{width: 100%;}
+
 		
 		/* 환불 버튼*/
-		#refund_buttonArea{text-align: center; height: 50px; border-top: rgba(41, 128, 185, 0.16) solid 0.1px;}
+		#refund_buttonArea{text-align: center; height: 80px; border-top: rgba(41, 128, 185, 0.16) solid 0.1px;}
 		#popup01 button{background-color: rgba(52, 152, 219, 0.78); width:100px;}
 
     </style>
@@ -143,19 +142,19 @@
         <div id="mypage">
             <div id="content" class="fundingDetail">
               
-              <p>펀딩내역</p>
+              
               <div id="underLine"></div>
                 
               <table id="orderBasic">
                 <tr>
-                  <th>펀딩날짜 : ${orderList[0].orderDate }</th>
-                  <th>주문번호 : ${orderList[0].orderNo } </th>
+                  <th>펀딩날짜 : ${orderList.orderDate }</th>
+                  <th>주문번호 : ${orderList.orderNo } </th>
                   <th> 상태 :
 	                  <c:choose>
-					    <c:when test="${orderList[0].orderStatus eq '1'}">
+					    <c:when test="${orderList.orderStatus eq '1'}">
 					                결제완료
 					    </c:when>
-					    <c:when test="${orderList[0].orderStatus eq '2'}">
+					    <c:when test="${orderList.orderStatus eq '2'}">
 					          취소요청
 					    </c:when>
 					    <c:otherwise>
@@ -164,6 +163,11 @@
 				     </c:choose>              	                
 	              </th>
                 </tr>
+                <c:if test="${ orderList.orderStatus != '1'}">
+                	<tr>
+						<th colspan="3">환불 신청 정보 : ${ orderList.bankName } ${orderList.bankAccount}</th>
+					</tr>
+                </c:if>
               </table>
               
                 
@@ -175,36 +179,55 @@
                   <table id="orderDetail">
                     <thead>
                         <tr>
+                        
                         <td id="orderName">상품명</td>
-                        <td id="orderOption">옵션</td>
+                        <td id="thumb"></td>
                         <td id="rewardPrice">리워드금액</td>
                         <td id="count">수량</td>
                         
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="orderList" items="${ orderList }">
-                            <tr>
-                                <td>
-                                    <div style="margin-top: 20px;">${orderList.projectTitle }</div>
-                                    <div>${orderList.rewardTitle }</div>
-                                    <div>${orderList.rewardContent }</div>
-                                </td>
-                                <td>
-                                <div id="optionPlace" style="margin-top: 20px;"></div>
-                                <button id="selectOption" class="btn btn-outline-dark btn-sm">옵션보기<input type="hidden" value="${orderList.rewardNo }"></button>
-                                
-                                </td>
-                                <td style="text-align: center;">${orderList.rewardPrice }</td>
-                                <td style="text-align: center;">${orderList.count }</td>
-                            </tr>
-                        </c:forEach>
+                    	<tr>
+                    		
+ 							<td>
+                     			<div style="margin-top: 20px;">${orderList.projectTitle }</div>
+                                <div>${orderList.rewardTitle }</div>
+                                <div>${orderList.rewardContent }</div>               
+                            </td>
+                            <td><img src="${ orderList.projectThum }" width="100" height="90"></td>
+                            <td style="text-align: center;">${ orderList.rewardPrice }</td>
+                            <td style="text-align: center;">${ orderList.orderCount }</td>
+                        </tr>
+                        
+                        <!-- 리워드에 옵션기입란 있을경우에만 보이게 -->
+                        <c:if test="${ orderList.optionYn eq 'Y' }">
+	                        <tr>
+	 							<td id="orderOption">
+	                            	<button id="selectOption" class="btn btn-outline-dark btn-sm">옵션보기<input type="hidden" value="${orderList.rewardNo }"></button>
+	                            	<div id="optionPlace" style="margin-top: 20px; display:none;" >${ orderList.orderOption }</div>
+	                            </td>
+	                                                       
+	                        </tr>
+                        </c:if>                                   	
                     </tbody>
 				 </table>
                   
                 </div>
-                <input type="hidden" name="orderNo" value="${ orderList[0].orderNo }">
+                <input type="hidden" name="orderNo" value="${ orderList.orderNo }">
                 
+                <script>
+                	// 옵션값을 보여주고 버튼 사라짐
+                  	$(function() {
+						$('#orderDetail #selectOption').click( function() {
+						   $(this).attr("style", "display:none");
+						   $(this).siblings("#optionPlace").show(); 
+						  
+						   
+						 })
+	                	})
+	            
+	             </script>
                 
                 <!-- 옵션 내역들 가져오기 ajax 
                 <script>
@@ -249,6 +272,7 @@
 	             
 	             -->
 	             
+	             <!-- 
 	             <script>
                   	$(function() {
 						$('#orderDetail #selectOption').click( function() {
@@ -294,31 +318,31 @@
 	                	})
 	            
 	             </script>
-
+				 -->
                 
                 <!-- 배송지 정보 / 배송지가 필요한 리워드인경우에만 보여짐????? 없으면 걍 빈칸으로 둘까 생각즁-->
                 <form action="updateOrder.me" method="post">
 	                <c:choose>
-	                	<c:when test="${orderList[0].rewardShip eq 'Y' }">
+	                	<c:when test="${orderList.rewardShip eq 'Y' }">
 	                		<div id="content_2">
 			                  <p>배송지 정보</p>
 			                  <table id="delivery">
 			                    <tr>
 			                      <th>받는사람</th>
-			                      <td style="width: 600px;"><input type="text" placeholder="이름" value="${orderList[0].receiverName }" name="receiverName" readonly required></td>
+			                      <td style="width: 600px;"><input type="text" placeholder="이름" value="${ orderList.receiverName }" name="receiverName" readonly required></td>
 			                    </tr>
 			                    <tr>
 			                      <th>휴대폰번호</th>
-			                      <td><input type="text" placeholder="휴대폰번호" value="${orderList[0].receiverPhone }" name="receiverPhone" id="receiverPhone" readonly required></td>
+			                      <td><input type="text" placeholder="휴대폰번호" value="${ orderList.receiverPhone }" name="receiverPhone" id="receiverPhone" readonly required></td>
 			                    </tr>
 			                    <tr>
 			                      <th>주소</th>
 			                      <td>
-			                        <input type="text" id="sample6_postcode" placeholder="우편번호" style="width: 100px;" value="${orderList[0].addressNo}" name="addressNo" readonly required>
+			                        <input type="text" id="sample6_postcode" placeholder="우편번호" style="width: 100px;" value="${orderList.addressNo}" name="addressNo" readonly required>
 			                        <button type="button" id="post_btn" onclick="sample6_execDaumPostcode()"disabled class="btn btn-sm">우편번호</button>
 			                        <br>
-			                        <input type="text" id="sample6_address" placeholder="주소" value="${orderList[0].address }" name="address" style="width: 300px;" readonly required>
-			                        <input type="text" id="sample6_detailAddress" placeholder="상세주소" value="${orderList[0].addressDetail }" name="addressDetail" style="width: 300px;" readonly required>
+			                        <input type="text" id="sample6_address" placeholder="주소" value="${orderList.address }" name="address" style="width: 300px;" readonly required>
+			                        <input type="text" id="sample6_detailAddress" placeholder="상세주소" value="${orderList.addressDetail }" name="addressDetail" style="width: 300px;" readonly required>
 			                        <input type="text" id="sample6_extraAddress" placeholder="참고항목" style="display:none;">
 			                      </td>
 			                    </tr>
@@ -327,10 +351,10 @@
 			                      <td>
 			                          <div style="margin-top: 10px;">
 				                          <c:choose>
-							            	<c:when test="${orderList[0].shippingStatus eq '1'}">
-							                        배송준비중
+							            	<c:when test="${orderList.shippingStatus eq '1'}">
+							                                        배송준비중
 							                </c:when>
-							                <c:when test="${orderList[0].shippingStatus eq '2'}">
+							                <c:when test="${orderList.shippingStatus eq '2'}">
 							                     	배송중
 							                </c:when>
 							                <c:otherwise>
@@ -338,13 +362,13 @@
 							                </c:otherwise>
 							              </c:choose>      
 			                          </div>
-			                          <div>${orderList[0].shippingCom }  ${orderList[0].shippingNo }</div>
+			                          <div>${orderList.shippingCom }  ${orderList.shippingNo }</div>
 			                          <!--시간되면 택배조회 api-->
 			                      </td>
 			                    </tr>
 			                    <tr>
 			                      <td colspan="2" class="modifyArea">
-			                      	<input type="hidden" value="${orderList[0].orderNo }" name="orderNo">
+			                      	<input type="hidden" value="${orderList.orderNo }" name="orderNo">
 			                        <button type="submit" id="modify" class="btn btn-sm" disabled onclick="return delieveryM();">배송지수정</button>
 			                      </td>
 			                    </tr>
@@ -378,7 +402,7 @@
                 
                 
                 <!-- 배송준비중일경우 input, button에 readonly 제거 -->
-                <input type="hidden" value="${orderList[0].shippingStatus}"  id="shippingStatus">
+                <input type="hidden" value="${orderList.shippingStatus}"  id="shippingStatus">
                 <script>
                     
                 
@@ -522,8 +546,8 @@
 	                      <td>${ rewardTotal } 원</td>
 	                      <td>
 		                      <c:choose>
-					          	<c:when test="${!empty orderList[0].orderPlus }">
-					                	${ orderList[0].orderPlus} 원
+					          	<c:when test="${!empty orderList.orderPlus }">
+					                	${ orderList.orderPlus} 원
 					            </c:when>
 					            <c:otherwise>
 					                     	0 원  
@@ -539,10 +563,10 @@
                       <th style="text-align: right;" id="finalPrice">${ totalPrice } 원</th>
                     </tr>
                     <tr>
-                        <td colspan="3" class="bottm_btnarea">
+                        <td colspan="3" class="bottom_btnarea">
                             <!-- 주문상태가 결제완료상태일때만 반환신청 버튼 보이게 -->
                             <button class="btn btn-sm" style="color:white;" id="listBtn"><a href="myFunding.me">목록</a></button>
-                            <c:if test="${orderList[0].orderStatus eq '1'}">
+                            <c:if test="${orderList.orderStatus eq '1'}">
                                 <button class="openPopup btn btn-sm" id="refundBtn">펀딩 반환 신청</button>
                             </c:if>
                         </td>
@@ -568,7 +592,7 @@
 				            </tr>
 				            <tr>
 				              <td colspan="2">
-				                    <textarea cols="40" rows="4" style="resize: none;" id="rReason" name="rReason"></textarea>
+				                    <textarea style="resize: none;" id="rReason" name="rReason" required></textarea>
 				              </td>
 				            </tr>
 				            <tr>
@@ -588,7 +612,7 @@
 				            </tr>
 				            <tr>
 				              <td id="rTitle">추가후원금</td>
-				              <td>${ orderList[0].orderPlus} 원</td>
+				              <td>${ orderList.orderPlus} 원</td>
 				            </tr>
 				            <tr>
 				              <td id="rTitle">배송비</td>
@@ -597,10 +621,24 @@
 				            <tr>
 				              <td id="rTitle">반환 신청금액</td>
 				              <td>${ totalPrice } 원</td>
+                              <td style="height: 50px;"></td>
 				            </tr>
+                            <tr>
+                                <td colspan="2" id="BigTitle">환불정보</td>
+                              </tr>
+                              <tr>
+                                <td id="rTitle">은행명</td>
+                                <td><input type="text" name="bankName" class="refundInfo" id="bankName" value="${ orderList.bankName }" required></td>
+                              </tr>
+                              <tr>
+                                <td id="rTitle">계좌번호</td>
+                                <td><input type="text" name="bankAccount" class="refundInfo" id="bankAccount" value="${ orderList.bankAccount}" required></td>
+                                <td style="height: 50px;"></td>
+                              </tr>
+
 				            <tr>
 				                <td colspan="2" id="refund_buttonArea">
-				                    <input type="hidden" name="orderNo" value="${ orderList[0].orderNo }">
+				                    <input type="hidden" name="orderNo" value="${ orderList.orderNo }">
 				                    <button type="submit" class="btn btn-sm" onclick="return validate();">신청</button>
 				                    <button type="button" class="cancel btn btn-sm" >취소</button>
 				                </td>
@@ -643,13 +681,18 @@
 				
 				</script>
 				
-				<!-- 환불신청긍록 유효성검사 -->
+				<!-- 환불신청등록 유효성검사 -->
 				<script>
 				
 				function validate(){
                 	
                 	var rReason = document.getElementById("rReason");
-                	var regExp = /[\S+$]/; // 공백을 제외한 모든 문자로 1글자이상 등록
+                	var bankName = document.getElementById("bankName");
+                	var bankAccount = document.getElementById("bankAccount");
+                	
+                	var regExp = /[\S+$]/; 			// 공백을 제외한 모든 문자로 1글자이상 등록
+                	var regKor = /^[가-힣]{2,}$/;    // 한글결합으로두글자이상
+                	var regNum = /^[0-9]{5,}$/; 	//숫자로만 다섯글자이상
                 	
                 	
                 	if(!regExp.test(rReason.value)){ 
@@ -660,6 +703,27 @@
                 		
                 		return false;
                 	}
+                	
+                	if(!regKor.test(bankName.value)){ 
+                		alert("정확한 은행명을 입력해주세요");
+                	
+                		bankName.value="";
+                		bankName.focus();
+                		
+                		return false;
+                	}
+                	
+                	if(!regNum.test(bankAccount.value)){ 
+                		alert("유효한 계좌번호를 입력해주세요");
+                	
+                		bankAccount.value="";
+                		bankAccount.focus();
+                		
+                		return false;
+                	}
+                	
+                	
+                	
                 	
                 	
                 	var result = confirm("환불신청을 하시겠습니까?");
@@ -689,4 +753,4 @@
     
     
 </body>
-</html>
+</html></html>

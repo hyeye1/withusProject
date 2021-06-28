@@ -55,7 +55,7 @@
             
             
             <!-- 문의내역 상세-->
-            <div id="mypage_content">
+            <div id="mypage_content" class="ff">
                 <jsp:include page="myQueryDetail.jsp"/>
 			</div>
             

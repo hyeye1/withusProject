@@ -14,6 +14,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
     <style>
+    
+	    @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&display=swap');
+	  	.ff{font-family: 'Nanum Gothic Coding', monospace;}
         
         /*div{border: 1px solid red; box-sizing: border-box;}*/
         .wrap{width: 1000px; height: 800px; margin: auto;}
@@ -59,7 +62,7 @@
     <div class="wrap">
         
         <!-- 유저 -->
-        <div id="mypage">
+        <div id="mypage" class="ff">
             <div id="content" class="userDetail">
                 
                 <!-- 유저 프로필 -->
@@ -106,7 +109,7 @@
 					
 						<!-- 팔로워수 -->
                         <div style="margin-left: 25px;">
-                            <li style="color: rgb(52, 152, 219);">${ followerCount }</li>
+                            <li style="color: rgb(52, 152, 219);" id="followerCount"></li>
                             <li>팔로워</li>
                         </div>
                         
@@ -134,13 +137,56 @@
                 <!-- 해당 파트너의 회원번호 -->
                 <input type="hidden" value="${ m.memberNo }" name="followMemberNo" id="followMemberNo">
                 
+                <script>
+                $(function(){
+                	followerCount();
+            		
+            		setInterval(followerCount, 1000); // 1초 간격 실시간으로 갱신
+            		
+                })
+                
+                	// 파트너의 팔로워수를 실시간으로 갱신
+                	function followerCount(){
+                	var $followMemberNo = $("input[name=followMemberNo]").val();	// 해당 파트너의 회원번호
+                	
+                		$.ajax({
+	      					url:"followerCount.me",
+	      					data:{followMemberNo : $followMemberNo},
+	      					success:function(count){
+	      						
+	      						if(count !== null){ // 팔로워수
+	      							
+	      							$("#followerCount").text(count);
+	      							
+	      						
+	      						} else { // 오류
+	      							
+	      							alert("오류가 발생했습니다");
+	      						}
+	      						
+	      					}, error:function(){
+	      						console.log("followerCount ajax통신 실패")
+	      					}
+	      					
+	      				})
+                	
+                	
+                	}
+                
+                </script>
+                
+                
+                
                 <!-- 언팔/팔로 버튼 -->
                 <script>
 					$(function() {
+						
+						
 						$('#followBtn').click( function() {
 						  
 						  var $memberNo = $("input[name=memberNo]").val();
 						  var $followMemberNo = $("input[name=followMemberNo]").val();
+						  
 						  
 						  
 					    if( $(this).html() == '팔로잉' ) {
@@ -155,8 +201,9 @@
 		      						if(result == "Y"){ // 언팔하기
 		      							
 		      							$("#clicked").html('팔로우').removeAttr("class").attr("class", "btn btn-outline-dark btn-sm");
-		      							alert("팔로우를 해제하였습니다");	
-		      						
+		      							alert("팔로우를 해제하였습니다");
+		      							
+		      							
 		      						} else { // 오류
 		      							
 		      							alert("오류가 발생했습니다");
@@ -200,10 +247,6 @@
 				</script>
                 
                 
-                
-                
-                
-                
                 <!-- 진행중인 펀딩 -->
                 <div id="content_2">
                     <p style="font-size: 20px; font-weight: 1000;">
@@ -233,7 +276,7 @@
 			                                </td>
 			                            </tr>
 			                            <tr>
-			                                <td colspan="2">${ list.projectTitle }</td>
+			                                <td colspan="2" style="width:10px;">${ list.projectTitle }</td>
 			                            </tr>
 			                            <tr>
 			                                <td>${ list.projectGPrice }</td>

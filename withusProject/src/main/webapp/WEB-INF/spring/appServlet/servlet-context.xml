@@ -24,5 +24,57 @@
 	<context:component-scan base-package="com.kh.withus" />
 	
 	
+	<interceptors>
+		<interceptor>
+			<mapping path="/myPage.me"/>
+			<mapping path="/myInfo.me"/>
+			<mapping path="/pwdConfirm.me"/>
+			<mapping path="/update.me"/>
+			<mapping path="/deleteForm.me"/>
+			<mapping path="/delete.me"/>
+			
+			<mapping path="/followlist.me"/>
+			<mapping path="/unfollow.me"/>
+			<mapping path="/follow.me"/>
+			
+			<mapping path="/querylist.me"/>
+			<mapping path="/myQuery.me"/>
+			<mapping path="/myQueryDetail"/>
+			<mapping path="/deleteQuery.me"/>
+			
+			<mapping path="/like.me"/>
+			
+			<mapping path="/myFunding.me"/>
+			<mapping path="/myFundingDetail.me"/>
+			<mapping path="/optionList.me"/>
+			<mapping path="/updateOrder.me"/>
+			<mapping path="/refundRequest.me"/>
+			
+			<mapping path="/fundingMain.me"/>
+			<mapping path="/partnerFunding.me"/>
+			<mapping path="/partnerInfo.me"/>
+			<mapping path="/partnerUpdate.me"/>
+			<mapping path="/partnerFunding.me"/>
+			<mapping path="/partnerInfo.me"/>
+			
+			
+			<beans:bean id="" class="com.kh.withus.common.interceptor.LoginInterceptor"/>
+		</interceptor>
+		
+		
+		<!-- 파트너 조인 확인하는 인터셉터 -->
+		<interceptor>
+			<mapping path="/partnerFunding.me"/>
+			<mapping path="/partnerInfo.me"/>
+			<mapping path="/partnerUpdate.me"/>
+			<mapping path="/partnerFunding.me"/>
+			<mapping path="/partnerInfo.me"/>
+			
+			<beans:bean id="" class="com.kh.withus.common.interceptor.PartnerInterceptor"/>
+		</interceptor>
+		
+		
+	</interceptors>
+	
 	
 </beans:beans>

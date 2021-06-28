@@ -143,7 +143,7 @@
         </head>
 
         <body>
-            <form action="insert.login" method="post">
+            <form action="login.me" method="post">
                 <div class="back">
                     <div class="login">
                         <p class="header">login</p>
@@ -152,7 +152,7 @@
                         </div>
                         <br>
                         <div class="textbtn">
-                            <input type="text" name="memberPwd" placeholder="  비밀번호" id="memberPwd">
+                            <input type="password" name="memberPwd" placeholder="  비밀번호" id="memberPwd">
                         </div>
                         <br>
                         <input type="checkbox" class="check">아이디저장

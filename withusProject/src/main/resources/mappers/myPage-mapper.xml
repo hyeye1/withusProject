@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="myPageMapper">
+
+	<resultMap id="memberResultSet" type="MyPage">
+		<id column="member_no" property="memberNo"/>
+		<result column="member_id" property="memberId"/>
+		<result column="member_pwd" property="memberPwd"/>
+		<result column="member_name" property="memberName"/>
+		<result column="member_phone" property="memberPhone"/>
+		<result column="member_createdt" property="memberCreateDt"/>
+		<result column="member_link" property="memberLink"/>
+		<result column="report_count" property="reportCount"/>
+		<result column="member_status" property="memberStatus"/>
+		<result column="member_profile" property="memberProfile"/>
+		<result column="partner_join" property="partnerJoin"/>
+		<result column="partner_name" property="partnerName"/>
+		<result column="partner_intro" property="partnerIntro"/>
+		<result column="follow_member_no" property="followMemberNo"/>
+		
+		<!-- 프로젝트 -->
+		<result column="project_no" property="projectNo"/>
+		<result column="project_title" property="projectTitle"/>
+		<result column="project_start_dt" property="projectStartDt"/>
+		<result column="project_end_dt" property="projectEndDt"/>
+		<result column="project_thum" property="projectThum"/>
+		<result column="project_status" property="projectStatus"/>
+		<result column="project_gprice" property="projectGPrice"/>
+		
+		<!-- 1:1문의 -->
+		<result column="oto_no" property="otoNo"/>
+		<result column="oto_cat" property="otoCat"/>
+		<result column="oto_title" property="otoTitle"/>
+		<result column="oto_content" property="otoContent"/>
+		<result column="oto_date" property="otoDate"/>
+		<result column="oto_reply" property="otoReply"/>
+		<result column="oto_re_status" property="otoReStatus"/>
+		<result column="oto_status" property="otoStatus"/>
+		<result column="oto_orginname" property="otoOriginName"/>
+		<result column="oto_changename" property="otoChangeName"/>
+		
+		<!-- 주문서 -->
+		<result column="ORDER_NO" property="orderNo"/>
+		<result column="ORDER_PLUS" property="orderPlus"/>
+		<result column="ORDER_STATUS" property="orderStatus"/>
+		<result column="BANK_NAME" property="bankName"/>
+		<result column="BANK_ACCOUNT" property="bankAccount"/>
+		<result column="RECEIVER_NAME" property="receiverName"/>
+		<result column="RECEIVER_PHONE" property="receiverPhone"/>
+		<result column="ADDRESS_NO" property="addressNo"/>
+		<result column="ADDRESS_DETAIL" property="addressDetail"/>
+		<result column="ADDRESS" property="address"/>
+		<result column="SHIPPING_STATUS" property="shippingStatus"/>
+		<result column="SHIPPING_REQ" property="shippingReq"/>
+		<result column="SHIPPING_COM" property="shippingCom"/>
+		<result column="SHIPPING_NO" property="shippingNo"/>
+		<result column="ORDER_DATE" property="orderDate"/>
+		<result column="order_count" property="orderCount"/>
+		<result column="order_option" property="orderOption"/>
+		
+		<!-- 리워드 -->
+		<result column="reward_no" property="rewardNo"/>
+		<result column="reward_price" property="rewardPrice"/>
+		<result column="reward_ship" property="rewardShip"/>
+		<result column="reward_title" property="rewardTitle"/>
+		<result column="reward_content" property="rewardContent"/>
+		<result column="option_yn" property="optionYn"/>
+		
+		
+		<!-- 환불 -->
+		<result column="refund_no" property="refundNo"/>
+		<result column="r_changename" property="rChangeName"/>
+		<result column="r_reason" property="rReason"/>
+		<result column="refund_stastaus" property="refundStatus"/>
+	
+	</resultMap>
+	
+  	
+  	<!-- 회원정보수정 -->
+  	<update id="updateMember" parameterType="MyPage">
+  		update
+  		        member
+  		   set  member_phone = #{memberPhone}
+  		      , member_profile = #{memberProfile}
+  		      , partner_name = #{partnerName}
+  		      , partner_intro =#{partnerIntro}
+  		 where member_id = #{memberId}
+  	</update>
+  	
+  	<!-- 회원 비밀번호수정 -->
+  	<update id="updatePwd" parameterType="MyPage">
+  		update
+  		        member
+  		   set  member_pwd = #{memberPwd}
+  		  where member_no = #{memberNo}
+  	</update>
+	
+  	
+  	<!-- 회원탈퇴 -->
+  	<update id="deleteMember" parameterType="string">
+  		update
+  		       member
+  		   set member_status = 'N'
+  		     
+  		 where member_id = #{memberId}
+  	</update>
+  	
+  	
+  	
+  	<!-- 팔로잉 목록카운트 -->
+  	<select id="selectFollowListCount" resultType="_int">
+		select 
+		       count(*)
+		  from member
+		 where member_no in ( select 
+		 							 follow_member_no
+		                        from follow
+		                       where member_no = #{ memberNo })
+		    and member_status='Y'
+		    and partner_join='Y'
+	</select>
+	
+	<!-- 팔로우리스트 -->
+	<select id="selectFollowList" resultMap="memberResultSet">
+		select 
+		        member_no
+		      , member_id
+		      , member_name
+		      , member_profile
+		      , partner_name
+		      , partner_intro
+		  from member
+		 where member_no in ( select 
+		   							 follow_member_no
+		                        from follow
+		                       where member_no = #{ memberNo })
+		    and member_status='Y'
+		    and partner_join='Y'
+	</select>
+	
+	
+	
+	<!-- 언팔로우 -->
+	<delete id="unfollowMember" parameterType="MyPage" >
+		delete 
+		 	from follow
+		   where member_no = #{memberNo}
+		     and follow_member_no = #{followMemberNo}
+		
+	
+	</delete>
+	
+	<!-- 팔로우 -->
+	<insert id="followMember" parameterType="MyPage">
+  		insert
+  		  into follow
+  		  (
+  		    member_no
+  		  , follow_member_no
+  		  )
+  		  values
+  		  (
+  		    #{memberNo}
+  		  , #{followMemberNo}
+  		  
+  		  )
+  	</insert>
+	
+	
+	<!-- 팔로우멤버 (파트너)디테일정보 -->
+  	<select id="partnerDetail" resultMap="memberResultSet" parameterType="MyPage">
+		select 
+		        member_no
+		      , member_id
+		      , member_name
+		      , member_profile
+		      , partner_name
+		      , partner_intro
+		      , partner_join
+		  from member
+		 where member_no = #{memberNo}
+		   and member_status='Y'
+		   and partner_join='Y'
+	
+	</select>
+	
+	<!-- 로그인한 유저의 멤버넘버로 해당 파트너 팔로우 유무체크 -->
+	<!-- 값 거꾸로 넣었음 -->
+	<select id="followCheck" resultType="_int">
+		select 
+		       count(*)
+		  from follow
+		 where member_no = #{followMemberNo}
+		   and follow_member_no = #{memberNo}
+	</select>
+	
+	<!-- 팔로워 수 -->
+	<select id="followerCount" resultType="_int">
+		select 
+		       count(*)
+		  from follow
+		 where follow_member_no = #{followMemberNo}
+	</select>
+	
+	<!-- 파트너 오픈펀딩 수 (게시중인)-->
+	<select id="fundingCount" resultType="_int">
+		select 
+		       count(*)
+		  from project
+		 where member_no = #{memberNo}
+		   and project_status='3' 
+	</select>
+	
+	<!-- 파트너 펀딩 리스트 -->
+	<select id="fundingList" resultMap="memberResultSet">
+		select 
+		        project_no
+		      , project_title
+		      , project_start_dt
+		      , project_end_dt
+		      , project_thum
+		      , project_status
+		      , project_gprice
+		  from project
+		 where member_no=#{memberNo}
+		    and project_status='3'
+		  order by project_end_dt asc
+	</select>
+	
+	
+	
+	
+	
+	
+	<!-- 좋아요 목록카운트 -->
+  	<select id="likeListCount" resultType="_int">
+		select 
+		       count(*)
+		  from likey l
+		  join project using(project_no)
+         where l.member_no = #{memberNo}
+		   and project_status='3'
+	</select>
+	
+	
+	<!-- 좋아요 리스트 -->
+	<select id="likeList" resultMap="memberResultSet">
+		select 
+		        project_no
+		      , project_title
+		      , project_start_dt
+		      , project_end_dt
+		      , project_thum
+		      , project_status
+		      , project_gprice
+		  from project
+		  join likey using(project_no)
+		 where project_no in ( select 
+		   							 project_no
+		                        from likey
+		                       where member_no = #{memberNo})
+		    and project_status='3'
+		  order by project_end_dt asc
+	</select>
+  	
+  	
+  	<!-- 나의문의 목록카운트 -->
+  	<select id="myQueryListCount" resultType="_int">
+		select 
+		       count(*)
+		  from oto
+		 where member_no = #{memberNo}
+		   and oto_status ='Y'
+	</select>
+	
+	
+	<!-- 나의문의 리스트 -->
+	<select id="myQueryList" resultMap="memberResultSet">
+		select 
+		        oto_no
+		      , oto_cat
+		      , oto_title
+		      , TO_CHAR(oto_date, 'YY/MM/DD') oto_date
+		      , oto_re_status
+		  from oto
+		 where member_no = #{memberNo}
+		   and oto_status ='Y'
+		 order by oto_no desc
+	</select>
+  	
+  	
+  	<!-- 나의문의 상세 -->
+	<select id="myQueryDetail" resultMap="memberResultSet">
+		select 
+		        oto_no
+		      , oto_cat
+		      , oto_title
+		      , oto_content
+		      , TO_CHAR(oto_date, 'YYYY-MM-DD') oto_date
+		      , oto_reply
+		      , oto_re_status
+		      , oto_orginname
+		      , oto_changename
+		  from oto
+		 where oto_no = #{otoNo}
+		 
+	</select>
+	
+	<!-- 나의문의삭제 -->
+	<update id="deleteQuery" parameterType="_int">
+  		update
+  		        oto
+  		   set  oto_status = 'N'
+  		 where oto_no = #{otoNo}
+  	</update>
+	
+	
+	
+	
+	<!-- 나의 펀딩 카운트 -->
+  	<select id="myFundingListCount" resultType="_int">
+		select 
+		       count(*)
+		  from tb_order o
+		 where o.member_no = #{memberNo}
+	</select>
+	
+	
+	<!-- 나의 펀딩 리스트 -->
+	<select id="myFundingList" resultMap="memberResultSet">
+		select 
+			   order_no
+			 , project_no
+			 , order_status
+			 , order_date
+			 , project_title
+			 , project_thum
+		  from tb_order o
+		  join project using(project_no)
+		 where o.member_no = #{memberNo}
+	</select>
+  
+  
+  	<!-- 펀딩 내역 디테일 -->
+	<!-- 
+	<select id="myFundingDetail" resultMap="memberResultSet">
+		select
+			  a.order_no
+			, a.reward_no
+			, option_no
+			, count
+			, option_content
+			, reward_title
+			, reward_content
+			, reward_price
+			, reward_ship
+			, order_plus
+			, receiver_name
+			, receiver_phone
+			, address_no
+			, address_detail
+			, address
+			, shipping_status
+			, shipping_req
+			, shipping_com
+			, shipping_no
+			, order_date
+			, project_title
+			, order_status
+	   from or_reward a
+	   join tb_option using (option_no)
+	   join reward b on (a.reward_no = b.reward_no)
+	   join tb_order c on(a.order_no = c.order_no)
+	   join project d on(c.project_no = d.project_no)
+	  where a.order_no = #{orderNo}
+	    and c.member_no = #{memberNo}
+	</select>
+	-->
+	
+	<!--  
+	<select id="myFundingDetail" resultMap="memberResultSet">
+		select distinct
+			  a.order_no
+			, a.reward_no
+			, count
+			, reward_title
+			, reward_content
+			, reward_price
+			, reward_ship
+			, order_plus
+			, receiver_name
+			, receiver_phone
+			, address_no
+			, address_detail
+			, address
+			, shipping_status
+			, shipping_req
+			, shipping_com
+			, shipping_no
+			, order_date
+			, project_title
+			, order_status
+	   from or_reward a
+	   join tb_option using (option_no)
+	   join reward b on (a.reward_no = b.reward_no)
+	   join tb_order c on(a.order_no = c.order_no)
+	   join project d on(c.project_no = d.project_no)
+	  where a.order_no = #{orderNo}
+	    and c.member_no = #{memberNo}
+	</select>
+	-->
+	
+	<!-- 펀딩 내역 디테일 -->
+	<select id="myFundingDetail" resultMap="memberResultSet">
+		select 
+			  a.order_no
+			, a.reward_no
+			, order_plus
+            , order_status
+            , bank_name
+            , bank_account
+            , receiver_name
+			, receiver_phone
+			, address_no
+			, address_detail
+			, address
+			, shipping_status
+			, shipping_req
+			, shipping_com
+			, shipping_no
+			, order_date
+			, order_count
+            , order_option
+            , b.reward_content
+			, b.reward_price
+			, b.reward_ship
+            , b.reward_title
+            , b.reward_content
+            , b.option_yn
+            , c.project_title
+			, c.project_thum
+	   from tb_order a
+       join reward b on (a.reward_no = b.reward_no)
+	   join project c on(a.project_no = c.project_no)
+	  where a.order_no = #{ orderNo }
+	    and a.member_no = #{ memberNo }
+	</select>
+	
+	<!--  불필요
+	<select id="selectOptionList" resultMap="OptionList">
+		select 
+		        order_no
+		      , a.reward_no  
+		      , option_content
+		      , option_no
+		from or_reward a
+		join tb_option using(option_no)
+		where a.reward_no = #{rewardNo}
+	</select>
+	-->
+	
+	<!-- 주문정보 수정 -->
+	<update id="updateOrder" parameterType="MyPage">
+  		update
+  		        tb_order
+  		   set  receiver_name = #{receiverName}
+  		      , receiver_phone = #{receiverPhone}
+  		      , address_no = #{addressNo}
+  		      , address = #{address}
+  		      , address_detail = #{addressDetail}
+  		 where order_no = #{orderNo}
+  	</update>
+  	
+  	<!-- 환불신청 -->
+  	<insert id="refundRequest" parameterType="MyPage">
+		insert 
+		  into refund
+		  (
+		    refund_no
+		  , order_no
+		  , r_changename
+		  , r_reason
+		  , refund_status
+		  )
+		  values
+		  (
+		    seq_rfno.nextval
+		  , #{orderNo}
+		  , #{rChangeName}
+		  , #{rReason}
+		  , default
+		  )
+	</insert>
+	
+	<!-- 환불신청으로 주문상태 업데이트 -->
+	<update id="orderStatusUpdate" parameterType="MyPage">
+  		  update
+  		          tb_order
+  		    set   order_status = '2'
+  		        , bank_name = #{bankName}
+  		        , bank_account = #{bankAccount}
+  		 where order_no = #{orderNo}
+  	
+  	</update>
+  	
+  	
+  	<!-- 메인좋아요 리스트 -->
+	<select id="mainLikeList" resultMap="memberResultSet">
+		select 
+		        project_no
+		      , project_title
+		      , project_start_dt
+		      , project_end_dt
+		      , project_thum
+		      , project_status
+		      , project_gprice
+		  from project
+		  join likey using(project_no)
+		 where project_no in ( select 
+		   							 project_no
+		                        from likey
+		                       where member_no = #{memberNo})
+		    and project_status='3'
+		  
+	</select>
+	
+  	<!-- 메인문의 리스트 -->
+	<select id="mainQueryList" resultMap="memberResultSet">
+		select 
+		        oto_no
+		      , oto_cat
+		      , oto_title
+		      , TO_CHAR(oto_date, 'YY/MM/DD') oto_date
+		      , oto_re_status
+		  from oto
+		 where member_no = #{memberNo}
+		 order by oto_no desc
+	</select>
+
+
+	
+
+	<!-- 메인팔로우리스트 -->
+	<select id="mainFollowList" resultMap="memberResultSet">
+		select 
+		        member_no
+		      , member_id
+		      , member_name
+		      , member_profile
+		      , partner_name
+		      , partner_intro
+		  from member
+		 where member_no in ( select 
+		   							 follow_member_no
+		                        from follow
+		                       where member_no = #{ memberNo })
+		    and member_status='Y'
+		    and partner_join='Y'
+	</select>
+  	
+  	
+  	<!-- 파트너 -->
+  	
+  	<!-- 파트너정보 -->
+  	
+  	<select id="partnerInfo" resultType="_int">
+		select 
+		       count(*)
+		  from tb_order o
+		 where o.member_no = #{memberNo}
+	</select>
+	
+	
+	<!-- 파트너가 만든 펀딩 수 (상태 전부)-->
+	<select id="partnerfundingCount" resultType="_int">
+		select 
+		       count(*)
+		  from project
+		 where member_no = #{memberNo}
+		   
+	</select>
+	
+	<!-- 파트너 펀딩 리스트 -->
+	<select id="partnerfundingList" resultMap="memberResultSet">
+		select 
+		        project_no
+		      , project_title
+		      , project_start_dt
+		      , project_end_dt
+		      , project_thum
+		      , project_status
+		      , project_gprice
+		  from project
+		 where member_no=#{memberNo}
+		  order by project_end_dt asc
+	</select>
+	
+	
+	
+	
+  	
+  	
+  	
+  	
+  
+</mapper>

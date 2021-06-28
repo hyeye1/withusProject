@@ -32,7 +32,7 @@
        
         /* mypage안의 세부영역 */
         #mypage>div{height: 100%;}
-        #content{width: 100%; margin-left:150px;}
+        #content{width: 100%; margin-left:110px;}
 
         /*큰제목*/
         #mainTitle{font-size: 23px; font-weight: bolder;}
@@ -91,7 +91,8 @@
 			                                </td>
 			                            </tr>
 			                            <tr>
-			                                <td colspan="2">${ list.projectTitle }</td>
+			                                <td colspan="2" style="width:30px">${ list.projectTitle }</td>
+			                                
 			                            </tr>
 			                            <tr>
 			                                <td>${ list.projectGPrice }</td>

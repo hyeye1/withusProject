@@ -33,7 +33,7 @@
        
         /* mypage안의 세부영역 */
         #mypage>div{height: 100%;}
-        #content{width: 100%; margin-left:150px;}
+        #content{width: 100%; margin-left:110px;}
 
         
         /* query content */
@@ -82,7 +82,7 @@
                 			<table class="table table-hover">
 		                        <thead class="thead-light">
 		                          <tr>
-                                    <th id="replyCat">분류</th>
+                                    <th id="replyCat">문의유형</th>
 		                            <th id="replyTitle">문의 제목</th>
 		                            <th id="replyDate">문의일</th>
 		                            <th id="replyStatus">상태</th>
@@ -97,7 +97,7 @@
 		                            <td>${ list.otoDate }</td>
 		                            <td>
 		                            	<c:choose>
-		                            		<c:when test="${list.otoReReply eq 'N'}">
+		                            		<c:when test="${list.otoReStatus eq 'N'}">
 		                            			처리중
 		                            		</c:when>
 		                            		<c:otherwise>
