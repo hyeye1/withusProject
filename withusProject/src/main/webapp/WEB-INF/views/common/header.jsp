@@ -260,6 +260,7 @@
 					</div>
 				</div>
 
+				
 				<div class="headerCenter">
 					<a href="${ pageContext.request.contextPath }"><img
 							src="${ pageContext.request.contextPath }/resources/images/logo.PNG" width="165px"
@@ -274,54 +275,11 @@
 					<script>
 						alert("${alertMsg}");
 					</script>
-					<<<<<<< HEAD </div>
-			</div>
-
-			<div class="headerCenter">
-				<a href="${ pageContext.request.contextPath }"><img
-						src="${ pageContext.request.contextPath }/resources/images/logo.PNG" width="165px"
-						id="logoImg"></a>
-			</div>
-
-			<input type="image" src="${ pageContext.request.contextPath }/resources/images/searchIcon.PNG"
-				id="searchIcon">
-
-
-			<c:if test="${ !empty alertMsg }">
-				<script>
-					alert("${alertMsg}");
-				</script>
-				<c:remove var="alertMsg" scope="session" />
-			</c:if>
-			<c:choose>
-				<c:when test="${ empty loginMember }">
-
-					<!-- 로그인전 -->
-					<div class="headerRight">
-						<a href="login.me">로그인</a>
-						<a href="enrollForm.me"> 회원가입</a>
-						<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px"
-							style="margin-left: -3px; margin-top: -6px;">
-					</div>
-				</c:when>
-				<c:otherwise>
-
-					<!-- 로그인후 -->
-					<div class="headerRight" style="display:none">
-						<label>${ loginMember.memberName }님 </label>
-						<a href="logout.me">로그아웃</a>
-						<a href=""> 마이페이지</a>
-						<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px"
-							style="margin-left: -3px; margin-top: -6px;">
-					</div>
-
-				</c:otherwise>
-			</c:choose>
-
+					
 			<c:remove var="alertMsg" scope="session" />
 			</c:if>
 			<c:choose>
-				<c:when test="${ empty loginUser }">
+				<c:when test="${ empty login }">
 
 					<!-- 로그인전 -->
 					<div class="headerRight">

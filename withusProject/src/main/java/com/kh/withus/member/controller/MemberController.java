@@ -57,6 +57,14 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	/*
+	@RequestMapping("insert.login")
+	public String insertMember(Member m) {
+		
+	}
+	*/
+	
+	
 	//	회원가입페이지
 	@RequestMapping("enrollForm.me")
 	public String enrollForm() {
