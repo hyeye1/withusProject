@@ -97,6 +97,10 @@
                     border-radius: 5px;
                 }
 
+                .liOne {
+                    color: rgb(41, 128, 185);
+                }
+
                 #regiSubmitBtn,
                 .btn1 {
                     background-color: rgb(52, 152, 219);
@@ -372,7 +376,13 @@
 
                 <!-- 타이틀과 미리보기/임시저장/승인요청하기 -->
                 <div class="regiHeader">
-                    <p><b>기본정보</b></p>
+                    <p>
+                        <b class="regi regiOne">기본정보</b>
+                        <b class="regi regiTwo">스토리</b>
+                        <b class="regi regiThree">리워드</b>
+                        <b class="regi regiFour">안내사항</b>
+                        <b class="regi regiFive">제작자/부가 정보</b>
+                    </p>
                     <button class="registerBtn">승인요청하기</button>
                     <button>임시저장</button>
                     <button>미리보기</button>
@@ -381,7 +391,7 @@
                 <!-- 바디 -->
                 <div class="regiBody">
                     <!-- 1. 기본정보 -->
-                    <div class="regiOne">
+                    <div class="regiOne regi">
                         <div class="regiInfo">
                             <b class="regiTitle">프로젝트 성공 조건 & 수수료 안내</b>
                             <p>
@@ -475,7 +485,7 @@
                     </div>
 
                     <!-- 2. 스토리 -->
-                    <div class="regiTwo" style="display: none;">
+                    <div class="regiTwo regi" style="display: none;">
 
                         <div>
                             <b class="regiTitle">프로젝트 소개 영상과 이미지를 등록해주세요</b>
@@ -528,7 +538,7 @@
                     </div>
 
                     <!-- 3. 리워드 -->
-                    <div class="regiThree" style="display: none;">
+                    <div class="regiThree regi" style="display: none;">
                         <div>
                             <b class="regiTitle">프로젝트 리워드를 구성해주세요</b>
                             <p>
@@ -584,7 +594,7 @@
                                         <b class="regiTitle">리워드 옵션</b>
                                     </th>
                                     <td>
-                                        <button id="addOptionBtn">리워드 옵션 추가하기</button>
+                                        <button id="addOptionBtn" onclick="addOption();">리워드 옵션 추가하기</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -613,7 +623,7 @@
                     </div>
 
                     <!-- 4. 안내사항 -->
-                    <div class="regiFour" style="display: none;">
+                    <div class="regiFour regi" style="display: none;">
                         <div>
                             <b class="regiTitle">환불 및 교환 정책을 적어주세요</b>
                             <p>
@@ -670,7 +680,7 @@
                     </div>
 
                     <!-- 5. 제작자/부가정보 -->
-                    <div class="regiFive" style="display: none;">
+                    <div class="regiFive regi" style="display: none;">
                         <div>
                             <b class="regiTitle">계좌 정보를 입력해주세요</b><br>
                             <p>
@@ -879,59 +889,33 @@
                     <p><b>프로젝트 만들기</b></p>
                     <ol>
                         <!-- 호버줘서 클릭된건 파랑색보여지게 -->
-                        <li id="liOne" onclick="showRegiOne();">기본정보</li>
-                        <li id="liTwo" onclick="showRegiTwo();">스토리</li>
-                        <li id="liThree" onclick="showRegiThree();">리워드</li>
-                        <li id="liFour" onclick="showRegiFour();">안내사항</li>
-                        <li id="liFive" onclick="showRegiFive();">제작자/부가 정보</li>
+                        <li class="regiMenu liOne" onclick="test('One');">기본정보</li>
+                        <li class="regiMenu liTwo" onclick="test('Two');">스토리</li>
+                        <li class="regiMenu liThree" onclick="test('Three');">리워드</li>
+                        <li class="regiMenu liFour" onclick="test('Four');">안내사항</li>
+                        <li class="regiMenu liFive" onclick="test('Five');">제작자/부가 정보</li>
                     </ol>
                 </div>
                 <!-- 메뉴바 스토리선택됨 표시바 -->
-                <div class="regiMenuSelected" style="margin-top: -247px; ">&nbsp;</div>
-                <div class="regiMenuSelected" style="margin-top: -206px; display: none;">&nbsp;</div>
-                <div class="regiMenuSelected" style="margin-top: -166px; display: none;">&nbsp;</div>
-                <div class="regiMenuSelected" style="margin-top: -125px; display: none;">&nbsp;</div>
-                <div class="regiMenuSelected" style="margin-top: -86px;  display: none;">&nbsp;</div>
+                <div class="regiMenuSelected regi regiOne" style="margin-top: -247px; ">&nbsp;</div>
+                <div class="regiMenuSelected regi regiTwo" style="margin-top: -206px; display: none;">&nbsp;</div>
+                <div class="regiMenuSelected regi regiThree" style="margin-top: -166px; display: none;">&nbsp;</div>
+                <div class="regiMenuSelected regi regiFour" style="margin-top: -125px; display: none;">&nbsp;</div>
+                <div class="regiMenuSelected regi regiFive" style="margin-top: -86px;  display: none;">&nbsp;</div>
 
             </div> <!-- outer div -->
 
             <script>
-                function showRegiOne() {
-                    $('.regiOne').css('display', 'block');
-                    $('.regiTwo').css('display', 'none');
-                    $('.regiThree').css('display', 'none');
-                    $('.regiFour').css('display', 'none');
-                    $('.regiFive').css('display', 'none');
-                }
-                function showRegiTwo() {
-                    $('.regiOne').css('display', 'none');
-                    $('.regiTwo').css('display', 'block');
-                    $('.regiThree').css('display', 'none');
-                    $('.regiFour').css('display', 'none');
-                    $('.regiFive').css('display', 'none');
-                }
-                function showRegiThree() {
-                    $('.regiOne').css('display', 'none');
-                    $('.regiTwo').css('display', 'none');
-                    $('.regiThree').css('display', 'block');
-                    $('.regiFour').css('display', 'none');
-                    $('.regiFive').css('display', 'none');
-                }
-                function showRegiFour() {
-                    $('.regiOne').css('display', 'none');
-                    $('.regiTwo').css('display', 'none');
-                    $('.regiThree').css('display', 'none');
-                    $('.regiFour').css('display', 'block');
-                    $('.regiFive').css('display', 'none');
-                }
-                function showRegiFive() {
-                    $('.regiOne').css('display', 'none');
-                    $('.regiTwo').css('display', 'none');
-                    $('.regiThree').css('display', 'none');
-                    $('.regiFour').css('display', 'none');
-                    $('.regiFive').css('display', 'block');
+                function test(className) {
+                    $(".regi").hide();
+                    $(".regi" + className).show();
+                    $(".regiMenu").css('color', 'black');
+                    $(".li" + className).css('color', 'rgb(41, 128, 185)');
                 }
 
+                function addOption() {
+                    $('.optionOn').css()
+                }
             </script>
 
         </body>
