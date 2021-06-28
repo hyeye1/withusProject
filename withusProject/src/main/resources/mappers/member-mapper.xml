@@ -12,7 +12,7 @@
 	
 	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
 		
-		select 
+		select 	
 			  member_name
 			, member_id
 			, member_pwd
@@ -27,13 +27,15 @@
 		insert
 		  into member
 		  (
-		    member_name
+		  	member_no
+		  , member_name
 		  ,	member_id
 		  , member_pwd
 		  )
 		  values
 		  (
-		    #{memberName}
+		  	#{memberNo}
+		  , #{memberName}
 		  , #{memberId}
 		  , #{memberPwd}
 		  )

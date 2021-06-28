@@ -2,54 +2,69 @@ package com.kh.withus.community.model.service;
 
 import java.util.ArrayList;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.withus.common.model.vo.PageInfo;
+import com.kh.withus.community.model.dao.CommunityDao;
+import com.kh.withus.community.model.vo.CommuReply;
 import com.kh.withus.community.model.vo.Community;
 
 @Service
 public class CommunityServiceImpl implements CommunityService{
 
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	@Autowired
+	private CommunityDao cDao;
+	
 	@Override
 	public int selectListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return cDao.selectListCount(sqlSession);
 	}
 
 	@Override
 	public ArrayList<Community> selectList(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		return cDao.selectList(sqlSession, pi);
 	}
 
 	@Override
-	public int insertBoard(Community b) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertCommunity(Community c) {
+		System.out.println("서비스 실행");
+		return cDao.insertCommunity(sqlSession, c);
 	}
 
 	@Override
-	public int increaseCount(int communityNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int increaseCount(int commuNo) {
+		return cDao.increaseCount(sqlSession, commuNo);
 	}
 
 	@Override
-	public Community selectBoard(int communityNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public Community selectCommunity(int commuNo) {
+		return cDao.selectCommunity(sqlSession, commuNo);
 	}
 
 	@Override
-	public int updateCommunity(Community b) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateCommunity(Community c) {
+		return cDao.updateCommunity(sqlSession, c);
 	}
 
 	@Override
-	public int deleteCommunity(int communityNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteCommunity(int commuNo) {
+		return cDao.deleteCommunity(sqlSession, commuNo);
 	}
 
+	@Override
+	public ArrayList<CommuReply> selectCommuReplyList(int commuNo) {
+		return cDao.selectCommuReplyList(sqlSession, commuNo);
+	}
+
+	@Override
+	public int insertReply(CommuReply cr) {
+		return cDao.insertCommuReply(sqlSession, cr);
+	}
+
+	
+	
 }

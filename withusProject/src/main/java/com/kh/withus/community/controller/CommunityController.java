@@ -28,7 +28,7 @@ public class CommunityController {
 	}
 	*/
 	@RequestMapping("community.main")
-	public ModelAndView selectBoardList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
+	public ModelAndView selectCommunityList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
 		int listCount = cService.selectListCount();
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
@@ -54,7 +54,7 @@ public class CommunityController {
 		return "community/commuEnrollForm";
 	}
 	
-	
+	/*
 	@RequestMapping("insert.co")
 	public void insertCommunity(Community c, MultipartFile upfile) {
 		// 전달된 파일이 있을 경우 => 파일명 수정 작업 후 서버에 업로드 => 파일원본명,실제서버에업로드된경로를 c 추가로 담기
@@ -81,7 +81,7 @@ public class CommunityController {
 			return "common/errorPage";
 		}
 	}
-	
+	*/
 	
 	// 전달받은 첨부파일 수정명 작업해서 서버에 업로드 시키는 메소드
 	public void saveFile() {

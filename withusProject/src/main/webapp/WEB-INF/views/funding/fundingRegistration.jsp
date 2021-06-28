@@ -66,11 +66,7 @@
                     margin-left: -20px;
                     line-height: 2.4;
                     font-size: 17px;
-                }
-
-                .regiMenubar a {
-                    text-decoration: none;
-                    color: black;
+                    cursor: pointer;
                 }
 
                 .regiMenuSelected {
@@ -232,6 +228,7 @@
                     width: 95%;
                     padding: 40px;
                     padding-left: 20px !important;
+                    color: rgb(51, 51, 51);
                 }
 
                 .regiReward th {
@@ -332,6 +329,38 @@
                 .registeredTable td {
                     padding: 7px;
                 }
+
+                #partnersPolicy {
+                    height: 150px !important;
+                    resize: none;
+                }
+
+                .defaultInfo,
+                #partnersPolicy {
+                    width: 776px;
+                    height: 274px;
+                    background-color: rgb(255, 255, 255);
+                    color: rgb(94, 94, 94);
+                    border: rgb(204, 204, 204) 1px solid;
+                    padding: 20px;
+                }
+
+                #showPhone {
+                    width: 20px;
+                    margin-left: 30px;
+                }
+
+                .regiReward label {
+                    color: rgb(41, 128, 185);
+                }
+
+                .blue {
+                    color: rgb(34, 12, 224);
+                }
+
+                .pink {
+                    color: rgb(245, 40, 153);
+                }
             </style>
         </head>
 
@@ -352,7 +381,7 @@
                 <!-- 바디 -->
                 <div class="regiBody">
                     <!-- 1. 기본정보 -->
-                    <div class="regiOne" style="display: none;">
+                    <div class="regiOne">
                         <div class="regiInfo">
                             <b class="regiTitle">프로젝트 성공 조건 & 수수료 안내</b>
                             <p>
@@ -499,7 +528,7 @@
                     </div>
 
                     <!-- 3. 리워드 -->
-                    <div class="regiThree" style="">
+                    <div class="regiThree" style="display: none;">
                         <div>
                             <b class="regiTitle">프로젝트 리워드를 구성해주세요</b>
                             <p>
@@ -584,7 +613,61 @@
                     </div>
 
                     <!-- 4. 안내사항 -->
-                    <div class="regiFour" style="display: none;"></div>
+                    <div class="regiFour" style="display: none;">
+                        <div>
+                            <b class="regiTitle">환불 및 교환 정책을 적어주세요</b>
+                            <p>
+                                리워드 안내에 노출됩니다.
+                            </p>
+                        </div><br>
+
+                        <div class="regiReward">
+                            <div>
+                                <b class="regiTitle">진행자의 환불 및 교환 정책</b>
+                                <span class="pink">(필수사항)</span>
+                                <textarea name="partnersPolicy" id="partnersPolicy"
+                                    placeholder="가치가자 환불 및 교환 정책외에 추가사항이 있으시면 적어주세요."></textarea>
+                            </div><br>
+                            <div>
+                                <b class="regiTitle">문의 가능한 번호</b>
+                                <p>
+                                    번호 공개 여부를 선택해주세요.
+                                </p>
+                                <div>
+                                    <input type="text" placeholder="번호를 적어주세요 (예. 010-1234-5678)">
+                                    <label><input type="radio" name="showPhone" id="showPhone" value="showPhone">
+                                        번호공개</label>
+                                </div>
+                            </div><br>
+                            <div>
+                                <b class="regiTitle">문의 이메일</b>
+                                <p>
+                                    반드시 적어주세요.
+                                </p>
+                                <input type="text" placeholder="abcd1234@withus.com">
+                            </div><br>
+
+                            <div class="defaultInfo">
+                                <p>
+                                <p class="blue">가치가자의 환불 및 교환정책 기본사항</p>
+
+                                1. 프로젝트 기간 중에는 자유롭게 마이 페이지에서 펀딩 취소가 가능합니다. <br>
+                                2. 펀딩을 받아야만 생산을 시작할 수 있는 크라우드 펀딩 특성상, 프로젝트 종료 이후에는 단순 변심으로 인한 교환이나 환불이 불가하니 이점 양해
+                                부탁드립니다. <br>
+                                3. 리워드 배송일이 예상보다 지연되는 경우, 새소식과 후원자 분들의 이메일을 통해 안내해드리겠습니다. <br>
+                                이에 관한 문의는 이메일 "<span class="pink">abcd1234@gogo.com
+                                    <!--파트너 이메일-->
+                                </span>" , 연락처 "<span class="pink">010-1234-5678
+                                    <!--파트너 연락처-->
+                                </span>" 로 연락바랍니다.
+                                </p>
+                            </div><br>
+
+                            <b>* 프로젝트 종료일 이후에 리워드와 관련된 환불 및 교환은 프로젝트 제작자가 약속하는 것에 따르며 가치가자는
+                                이에 책임지지 않습니다.</b>
+                        </div>
+
+                    </div>
 
                     <!-- 5. 제작자/부가정보 -->
                     <div class="regiFive" style="display: none;">
@@ -624,7 +707,8 @@
                                 <table>
                                     <tr>
                                         <td align="center" width="70px" height="65px">
-                                            <img src="../../../resources/images/webIcon.PNG" style="height: 33px;">
+                                            <img src="${ pageContext.request.contextPath }/resources/images/webIcon.PNG"
+                                                style="height: 33px;">
                                         </td>
                                         <td>
                                             <input type="text" name="partnerWeb" id="partnerWeb" class="partnerWebSns">
@@ -632,7 +716,8 @@
                                     </tr>
                                     <tr>
                                         <td align="center">
-                                            <img src="../../../resources/images/snsIcon.PNG" style="height: 33px;">
+                                            <img src="${ pageContext.request.contextPath }/resources/images/snsIcon.PNG"
+                                                style="height: 33px;">
                                         </td>
                                         <td>
                                             <input type="text" name="partnerSns" id="partnerSns" class="partnerWebSns">
@@ -794,11 +879,11 @@
                     <p><b>프로젝트 만들기</b></p>
                     <ol>
                         <!-- 호버줘서 클릭된건 파랑색보여지게 -->
-                        <li><a href="">기본정보</a></li>
-                        <li><a href="">스토리</a></li>
-                        <li><a href="">리워드</a></li>
-                        <li><a href="">안내사항</a></li>
-                        <li><a href="">제작자/부가 정보</a></li>
+                        <li id="liOne" onclick="showRegiOne();">기본정보</li>
+                        <li id="liTwo" onclick="showRegiTwo();">스토리</li>
+                        <li id="liThree" onclick="showRegiThree();">리워드</li>
+                        <li id="liFour" onclick="showRegiFour();">안내사항</li>
+                        <li id="liFive" onclick="showRegiFive();">제작자/부가 정보</li>
                     </ol>
                 </div>
                 <!-- 메뉴바 스토리선택됨 표시바 -->
@@ -810,6 +895,44 @@
 
             </div> <!-- outer div -->
 
+            <script>
+                function showRegiOne() {
+                    $('.regiOne').css('display', 'block');
+                    $('.regiTwo').css('display', 'none');
+                    $('.regiThree').css('display', 'none');
+                    $('.regiFour').css('display', 'none');
+                    $('.regiFive').css('display', 'none');
+                }
+                function showRegiTwo() {
+                    $('.regiOne').css('display', 'none');
+                    $('.regiTwo').css('display', 'block');
+                    $('.regiThree').css('display', 'none');
+                    $('.regiFour').css('display', 'none');
+                    $('.regiFive').css('display', 'none');
+                }
+                function showRegiThree() {
+                    $('.regiOne').css('display', 'none');
+                    $('.regiTwo').css('display', 'none');
+                    $('.regiThree').css('display', 'block');
+                    $('.regiFour').css('display', 'none');
+                    $('.regiFive').css('display', 'none');
+                }
+                function showRegiFour() {
+                    $('.regiOne').css('display', 'none');
+                    $('.regiTwo').css('display', 'none');
+                    $('.regiThree').css('display', 'none');
+                    $('.regiFour').css('display', 'block');
+                    $('.regiFive').css('display', 'none');
+                }
+                function showRegiFive() {
+                    $('.regiOne').css('display', 'none');
+                    $('.regiTwo').css('display', 'none');
+                    $('.regiThree').css('display', 'none');
+                    $('.regiFour').css('display', 'none');
+                    $('.regiFive').css('display', 'block');
+                }
+
+            </script>
 
         </body>
 

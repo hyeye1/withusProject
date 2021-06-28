@@ -5,7 +5,7 @@ public class PageInfo {
 	private int listCount;
 	private int currentPage;
 	private int pageLimit;
-	private int boardLimit;
+	private int communityLimit;
 	
 	private int startPage;
 	private int endPage;
@@ -13,13 +13,13 @@ public class PageInfo {
 	
 	public PageInfo() {}
 
-	public PageInfo(int listCount, int currentPage, int pageLimit, int boardLimit, int startPage, int endPage,
+	public PageInfo(int listCount, int currentPage, int pageLimit, int communityLimit, int startPage, int endPage,
 			int maxPage) {
 		super();
 		this.listCount = listCount;
 		this.currentPage = currentPage;
 		this.pageLimit = pageLimit;
-		this.boardLimit = boardLimit;
+		this.communityLimit = communityLimit;
 		this.startPage = startPage;
 		this.endPage = endPage;
 		this.maxPage = maxPage;
@@ -49,12 +49,12 @@ public class PageInfo {
 		this.pageLimit = pageLimit;
 	}
 
-	public int getBoardLimit() {
-		return boardLimit;
+	public int getCommunityLimit() {
+		return communityLimit;
 	}
 
-	public void setBoardLimit(int boardLimit) {
-		this.boardLimit = boardLimit;
+	public void setCommunityLimit(int communityLimit) {
+		this.communityLimit = communityLimit;
 	}
 
 	public int getStartPage() {
@@ -84,7 +84,7 @@ public class PageInfo {
 	@Override
 	public String toString() {
 		return "PageInfo [listCount=" + listCount + ", currentPage=" + currentPage + ", pageLimit=" + pageLimit
-				+ ", boardLimit=" + boardLimit + ", startPage=" + startPage + ", endPage=" + endPage + ", maxPage="
+				+ ", communityLimit=" + communityLimit + ", startPage=" + startPage + ", endPage=" + endPage + ", maxPage="
 				+ maxPage + "]";
 	}
 	

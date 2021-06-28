@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="communityMapper">
- 
+ 	
+ 	<resultMap id="community" type="Community">
+ 		<id column="commu_no" property="commuNo"/>
+ 		<result column="commu_cate" property="commuCate"/>
+ 		<result column="commu_title" property="commuTitle"/>
+ 		<result column="count" property="count"/>
+ 		<result column="commu_create" property="commuCreate"/>
+ 	</resultMap>
+ 	
+ 	<resultMap id="commuReply" type="CommuReply">
+		<id column="com_re_no" property="comReNo"/>
+		<result column="com_re_content" property="comReContent"/>
+		<result column="com_re_create" property="comReCreate"/>
+		<result column="com_re_status" property="comReStatus"/>
+	</resultMap>
+	
+	<select id="selectListCount" resultType="_int">
+		select
+		       count(*)
+		  from community
+		 where status = 'Y'
+	</select>
 </mapper>

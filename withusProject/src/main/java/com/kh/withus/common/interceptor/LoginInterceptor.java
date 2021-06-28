@@ -15,7 +15,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	
 		
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginUser") == null) { // 로그인 전 (비회원)
+		if(session.getAttribute("loginMember") == null) { // 로그인 전 (비회원)
 			
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스입니다.");
 			response.sendRedirect(request.getContextPath());

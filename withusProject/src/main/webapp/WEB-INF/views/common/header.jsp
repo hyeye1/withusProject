@@ -15,13 +15,12 @@
 
 			<style>
 				@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
-
 				a {
 					text-decoration: none;
 				}
 
 				a:hover {
-					cusor: pinter;
+					cursor: pointer;
 					text-decoration: none;
 				}
 
@@ -31,22 +30,14 @@
 					height: 117px;
 					padding: 10px;
 				}
-
-				/* .headerOuter div{display: table-cell;}
-		.headerOuter a{
-			text-decoration: none;
-            color: rgb(64, 64, 64);
-            font-weight: 600;
-            font-size: 17px;
-            margin-right: 10px;
-		} */
 				.headerOuter a,
 				.headerOuter button {
 					color: rgb(64, 64, 64);
+				}
+				.projectBtn{
 					font-weight: 600;
 					font-size: 17px;
 				}
-
 				.headerLeft {
 					float: left;
 					margin-top: 33px;
@@ -67,8 +58,13 @@
 
 				.headerRight {
 					float: right;
-					margin-right: 50px;
+					margin-right: 26px;
 					margin-top: 33px;
+				}
+				.headerRight>a{
+					padding: 0 3px;
+				    font-size: 1.03rem;
+				    font-weight: 900;
 				}
 
 				/*  카테고리 */
@@ -88,14 +84,23 @@
 					width: 1200px;
 					height: 250px;
 					background-color: white;
-					padding: 30px 20px;
+					padding: 30px 40px;
 				}
 
-				.cateLeft,
+				.cateLeft{float: left; width: 20%; margin-top: 0.4rem;}
 				.cateCenter,
 				.cateRight {
 					float: left;
-					width: 33%;
+					width: 40%;
+					position: relative;
+				}
+				.cateCenter {
+					padding: 0 75px;
+					border-left: 1px solid lightgray;
+				}
+				.cateRight {
+					position: relative;
+					top: 25%;
 				}
 
 				.sub1,
@@ -116,15 +121,40 @@
 					margin: 0px 0.4rem 0px 0px;
 					border-radius: 3px;
 					padding: 0.5em 0.7em;
+				}
+				.tagBox>a{
 					color: white;
+				    font-size: 1.0rem;
+				    font-weight: bolder;
 				}
 
-
-				.style_1 {
-					margin-bottom: 0.45rem;
+				.style_1{
+					margin-bottom: 0.35rem;
+					display: flex;
+					align-items: center;
+					font-size: 1.2rem;
+					font-weight: bolder;
+				}
+				.style_2{
+					margin-bottom: 0.35rem;
 					display: flex;
 					align-items: center;
 				}
+				.style_2a{
+					font-size: 1.0rem;
+    				font-weight: 540;
+				}
+				.style_3{
+					font-size: 14px;
+					color: grey;
+					margin-bottom: 12px;
+				}
+
+				.hash{position: absolute;}
+				a:hover {
+					color: rgb(117, 117, 117);
+    				cursor: pointer;
+    			}
 			</style>
 		</head>
 
@@ -133,12 +163,12 @@
 
 				<div class="headerLeft">
 
-					<button class="cateToggle" type="button" onclick="dropCate();" style="color: rgb(52, 152, 219);">
+					<button class="cateToggle projectBtn" type="button" onclick="dropCate();" style="color: rgb(52, 152, 219);">
 						<img src="${ pageContext.request.contextPath }/resources/images/catIcon.PNG" width="25px"
 							style="margin-top: -6px;">
 						프로젝트 둘러보기
 					</button>
-					<a href="register.fd"> 프로젝트 올리기</a>
+					<a href="register.fd" class="projectBtn"> 프로젝트 올리기</a>
 
 					<div id="cateContent" style="display: none; z-index: 100;">
 						<div class="cateLeft">
@@ -150,31 +180,33 @@
 						</div>
 
 						<div class="cateCenter">
-							<div clear="both">카테고리</div>
+							<div clear="both" class="style_3">카테고리</div>
 							<div class="sub1">
-								<div><a href="#">전체보기</a></div>
-								<div><a href="#">테크/가전</a></div>
-								<div><a href="#">패션/잡화</a></div>
-								<div><a href="#">뷰티</a></div>
-								<div><a href="#">푸드</a></div>
+								<div class="style_2"><a class="style_2a" href="#">전체보기</a></div>
+								<div class="style_2"><a class="style_2a" href="#">테크/가전</a></div>
+								<div class="style_2"><a class="style_2a" href="#">패션/잡화</a></div>
+								<div class="style_2"><a class="style_2a" href="#">뷰티</a></div>
+								<div class="style_2"><a class="style_2a" href="#">푸드</a></div>
 
 							</div>
 							<div class="sub2">
-								<div><a href="#">홈리핑</a></div>
-								<div><a href="#">디자인 소품</a></div>
-								<div><a href="#">여행/레저</a></div>
-								<div><a href="#">스포츠/모빌리티</a></div>
-								<div><a href="#">반려동물</a></div>
+								<div class="style_2"><a class="style_2a" href="#">홈리핑</a></div>
+								<div class="style_2"><a class="style_2a"a href="#">디자인 소품</a></div>
+								<div class="style_2"><a class="style_2a" href="#">여행/레저</a></div>
+								<div class="style_2"><a class="style_2a" href="#">스포츠/모빌리티</a></div>
+								<div class="style_2"><a class="style_2a" href="#">반려동물</a></div>
 
 							</div>
 
 						</div>
 						<div class="cateRight">
-							<div clear="both">태그</div> <br>
-							<div class="tagBox"><a href="#">#좋아요 </a></div>
-							<div class="tagBox"><a href="#">#친환경 </a></div>
-							<div class="tagBox"><a href="#">#인형놀이 </a></div>
-							<div class="tagBox"><a href="#">#얼리버드 </a></div>
+							<div clear="both" class="style_3">태그</div> <br>
+							<div class="hash">
+								<div class="tagBox"><a href="#">#좋아요 </a></div>
+								<div class="tagBox"><a href="#">#친환경 </a></div>
+								<div class="tagBox"><a href="#">#인형놀이 </a></div>
+								<div class="tagBox"><a href="#">#얼리버드 </a></div>
+							</div>
 						</div>
 
 						<script>
@@ -237,7 +269,7 @@
 			<c:remove var="alertMsg" scope="session"/>
 		</c:if>
 		<c:choose>
-            <c:when test="${ empty loginUser }">
+            <c:when test="${ empty loginMember }">
             
 				<!-- 로그인전 -->
 				<div class="headerRight">
@@ -250,7 +282,7 @@
 				
 					<!-- 로그인후 -->
 					<div class="headerRight" style="display:none">
-						<label>${ loginUser.memberName }님 </label>
+						<label>${ loginMember.memberName }님 </label>
 						<a href="logout.me">로그아웃</a>
 						<a href=""> 마이페이지</a>
 						<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
