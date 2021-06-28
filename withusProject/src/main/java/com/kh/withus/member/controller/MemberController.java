@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.withus.member.model.service.MemberService;
 import com.kh.withus.member.model.vo.Member;
@@ -22,33 +23,33 @@ public class MemberController {
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	@RequestMapping("login.me")
-	public String loginForm(HttpServletRequest request) {
+	public String loginMember(Member m, HttpSession session, ModelAndView mv) {
 		
-		/*
+		
+		
 		// 암호화 작업 후 (단지 아이디 대조만)
-				Member loginUser = mService.loginMember(m);
-				// 아이디만을 가지고 조회해옴 (실제db에 저장되어있는 비번 암호문)
-				
-				if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
-					// 로그인 성공
-					session.setAttribute("loginUser", loginUser);
-					mv.setViewName("redirect:/");
-				}else {
-					// 로그인 실패
-					mv.addObject("errorMsg", "로그인실패");
-					mv.setViewName("common/errorPage");
-				}
-				
-				return mv;
-				*/
-		String memberId = request.getParameter("id");
-		String memberPwd = request.getParameter("pwd");
+		Member loginMember = mService.loginMember(m);
+		// 아이디만을 가지고 조회해옴 (실제db에 저장되어있는 비번 암호문)
 		
-		System.out.println("ID : " + memberId);
-		System.out.println("PWD : " + memberPwd);
+		if(loginMember != null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginMember.getMemberPwd())) {
+			// 로그인 성공
+			session.setAttribute("loginMember", loginMember);
+			mv.setViewName("redirect:/");
+		}else {
+			// 로그인 실패
+			mv.addObject("errorMsg", "로그인실패");
+			mv.setViewName("common/errorPage");
+		}
 		
 		return "member/loginForm";
+		
+		
 	}
+	
+//	@RequestMapping("insert.login")
+//	public String insertMemberLogin(Member m, HttpSession session) {
+//		return
+//	}
 	
 	
 	@RequestMapping("logout.me")
