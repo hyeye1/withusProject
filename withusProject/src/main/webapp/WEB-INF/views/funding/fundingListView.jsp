@@ -11,27 +11,23 @@
 	div{box-sizing: border-box;}
 	.innerOuter{
      	display:"flex";
-	    border:3px solid blue;
 	    width:1200px;
 	    margin:auto;
 	}
 	.category{
-		border: 3px solid red;
 		margin: auto;
 		width: 80%;
 		height: 100px;
 	}
 	.fundingList{
-		border: 3px solid red;
 		margin: auto;
 		width: 80%;
 	}
 	.thumbnail{
         display: inline-block;
-		border: 3px solid pink;
 		width: 30%;
         margin:14px;
-        margin-top:px;
+        margin-top:10px;
 	}
 	.thumbnail:hover{
         cursor:pointer;
@@ -48,6 +44,8 @@
 	<div class="innerOuter">
 
 		<div class="category">
+			
+
 			
 		</div>
 
@@ -69,7 +67,7 @@
 		        </div>
 	        </c:forEach>
 		</div>	
-	</div>
+	</didiv>
 
 	<br><br>
 	
