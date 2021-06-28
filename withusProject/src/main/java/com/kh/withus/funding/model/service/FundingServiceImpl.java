@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.withus.funding.dto.FundingDetail;
 import com.kh.withus.funding.model.dao.FundingDao;
 import com.kh.withus.funding.model.vo.Project;
 
@@ -22,5 +23,22 @@ public class FundingServiceImpl implements FundingService {
 	public ArrayList<Project> selectList() {
 		return funDao.selectList(sqlSession);
 	}
+	
+	@Override
+	public int increaseCount(int projectNo) {
+		return funDao.increaseCount(sqlSession, projectNo);
+	}
+
+	@Override
+	public Project selectFunding(int projectNo) {
+		return funDao.selectFunding(sqlSession, projectNo);
+	}
+
+	@Override
+	public ArrayList<FundingDetail> selectReward(int projectNo) {
+		return funDao.selectReward(sqlSession, projectNo);
+	}
+	
+	
 
 }
