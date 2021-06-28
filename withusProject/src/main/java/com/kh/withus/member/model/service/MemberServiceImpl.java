@@ -18,9 +18,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public Member loginMember(Member m) {
-		
 		return mDao.loginMember(sqlSession, m);
-		
 	}
 
 	@Override
@@ -34,15 +32,19 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int deleteMember(String m) {
-		return mDao.deleteMember(sqlSession, m);
-	}
-
-	@Override
-	public int idCheck(String memberId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteMember(String memberId) {
+		return mDao.deleteMember(sqlSession, memberId);
 	}
 
 	
+	@Override
+	public int idCheck(String memberId) {
+		return mDao.idCheck(sqlSession, memberId);
+	}
+
+	@Override
+	public int insertMemberLogin(Member m) {
+		return mDao.insertMemberLogin(sqlSession, m);
+	}
+
 }

@@ -34,7 +34,7 @@
 		  )
 		  values
 		  (
-		  	#{memberNo}
+		  	seq_mno.nextval
 		  , #{memberName}
 		  , #{memberId}
 		  , #{memberPwd}
@@ -64,5 +64,19 @@
   		  from member
   		 where member_id = #{memberId}
   	</select>
+  	
+  	<insert id="insertMemberLogin" parameterType="Member">
+		insert
+		  into member
+		  (
+		  	member_id
+		  , member_pwd
+		  )
+		  values
+		  (
+		    #{memberId}
+		  , #{memberPwd}
+		  )
+	</insert>
 	
 </mapper>

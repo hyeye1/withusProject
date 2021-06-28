@@ -7,6 +7,8 @@ public interface MemberService {
 		// 1. 회원 로그인용 서비스
 		Member loginMember(Member m);
 		
+		
+		
 		// 2. 회원 가입용 서비스
 		int insertMember(Member m);
 		
@@ -18,5 +20,8 @@ public interface MemberService {
 		
 		// 5. 아이디 중복체크용 서비스
 		int idCheck(String memberId);
+		
+		// 6. 로그인 입력용 서비스
+		int insertMemberLogin(Member m);
 
 }
