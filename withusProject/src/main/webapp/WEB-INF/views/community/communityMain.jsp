@@ -194,17 +194,20 @@
                 <button type="submit" class="searchBtn btn btn-secondary">검색</button>
               </form>
               <br><br><br><br><br>
-              <!-- 로그인후 상태일 경우만 보여지는 글쓰기 버튼-->
+              
               <div>
                 <ul class="filter-btn-list">
                   <li>
                     <button>조회순</button>
                     <button>최신순</button>
                   </li>
+                  <!-- 로그인후 상태일 경우만 보여지는 글쓰기 버튼-->
+                  <c:if test="${ !empty loginMember }">
                   <li>
                     <a class="btn btn-secondary" style="float:right; background-color: rgb(60, 145, 224); border: none;"
-                      href="">새글쓰기</a>
+                      href="commu.enroll">새글쓰기</a>
                   </li>
+                  </c:if>
                 </ul>
               </div>
               <table id="boardList" class="table table-hover" align="center">
@@ -219,75 +222,56 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>5</td>
-                    <td>
-                      <div class="badge-primary">공구모집</div>
-                    </td>
-                    <td>마지막 공지사항제목</td>
-                    <td>3</td>
-                    <td>10</td>
-                    <td>2020-02-10</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>
-                      <div class="badge-primary">자유</div>
-                    </td>
-                    <td>마지막 공지사항제목</td>
-                    <td>6</td>
-                    <td>10</td>
-                    <td>2020-02-07</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>
-                      <div class="badge-primary">질문</div>
-                    </td>
-                    <td>마지막 공지사항제목</td>
-                    <td>8</td>
-                    <td>10</td>
-                    <td>2020-02-03</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>
-                      <div class="badge-primary">자유</div>
-                    </td>
-                    <td>마지막 공지사항제목</td>
-                    <td>2</td>
-                    <td>100</td>
-                    <td>2020-02-01</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>
-                      <div class="badge-primary">질문</div>
-                    </td>
-                    <td>마지막 공지사항제목</td>
-                    <td>10</td>
-                    <td>45</td>
-                    <td>2019-12-25</td>
-                  </tr>
+                <c:forEach var="c" items="${ list }">
+	                    <tr>
+	                        <td class="cno">${ c.commuNo }</td>
+	                        <td>${ c.commuCate }</td>
+	                        <td>${ c.commuTitle }</td>
+	                        <td>${  }</td>
+	                        <td>${ c.count }</td>
+	                         <td>${ c.commuCreate }</td>
+	                    </tr>
+                    </c:forEach>
                 </tbody>
               </table>
-              <br>
+              
+              <script>
+            	$(function(){
+            		$("#communityList tbody tr").click(function(){
+            			location.href="commu.detail?cno=" + $(this).children(".cno").text();
+            		})
+            	})
+            </script>
+            <br>
 
               <div id="pagingArea">
-
+            
                 <ul class="pagination">
-
-                  <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">4</a></li>
-                  <li class="page-item"><a class="page-link" href="#">5</a></li>
-                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                  
+                	
+                	<c:choose>
+                		<c:when test="${ pi.currentPage eq 1 }">
+	                    	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+	                    </c:when>
+	                    <c:otherwise>
+	                    	<li class="page-item"><a class="page-link" href="community.main?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+                    	</c:otherwise>
+                    </c:choose>
+                    
+                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                    	<li class="page-item"><a class="page-link" href="community.main?currentPage=${ p }">${ p }</a></li>
+                    </c:forEach>
+                    
+                    <c:choose>
+                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+	                    	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+	                    </c:when>
+	                    <c:otherwise>
+	                    	<li class="page-item"><a class="page-link" href="community.main?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                    	</c:otherwise>
+                    </c:choose>
                 </ul>
-
-              </div>
+                
+            </div>
 
               <br clear="both"><br>
               <br><br>

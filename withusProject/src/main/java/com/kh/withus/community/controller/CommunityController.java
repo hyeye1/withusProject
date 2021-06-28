@@ -27,19 +27,20 @@ public class CommunityController {
 	}
 	*/
 	@RequestMapping("community.main")
-	public ModelAndView selectCommunityList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
+	public String selectCommunityList() {
 		
-		int listCount = cService.selectListCount();
-		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 5);
-		
-		ArrayList<Community> list = cService.selectList(pi);
-		
-		
-		mv.addObject("pi", pi)
-		  .addObject("list", list)
-		  .setViewName("community/communityMain");
-		
-		return mv;
+//		int listCount = cService.selectListCount();
+//		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 5);
+//		
+//		ArrayList<Community> list = cService.selectList(pi);
+//		
+//		
+//		mv.addObject("pi", pi)
+//		  .addObject("list", list)
+//		  .setViewName("community/communityMain");
+//		
+//		return mv;
+		return "community/communityMain";
 	}
 	
 	

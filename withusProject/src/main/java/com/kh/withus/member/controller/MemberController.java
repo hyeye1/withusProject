@@ -46,10 +46,6 @@ public class MemberController {
 		
 	}
 	
-//	@RequestMapping("insert.login")
-//	public String insertMemberLogin(Member m, HttpSession session) {
-//		return
-//	}
 	
 	
 	@RequestMapping("logout.me")
@@ -81,6 +77,8 @@ public class MemberController {
 	
 	@RequestMapping("insert.me")
 	public String insertMember(Member m, HttpSession session, Model model) {
+		
+		System.out.println(m);
 		
 		//System.out.println(m);
 		//System.out.println(session);
