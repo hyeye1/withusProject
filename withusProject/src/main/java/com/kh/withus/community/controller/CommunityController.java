@@ -6,14 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.withus.common.model.vo.PageInfo;
+import com.kh.withus.common.template.pagination;
 import com.kh.withus.community.model.service.CommunityService;
 import com.kh.withus.community.model.vo.Community;
 
-import javafx.scene.control.Pagination;
 
 @Controller
 public class CommunityController {
@@ -31,7 +30,7 @@ public class CommunityController {
 	public ModelAndView selectCommunityList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
 		int listCount = cService.selectListCount();
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		ArrayList<Community> list = cService.selectList(pi);
 		
