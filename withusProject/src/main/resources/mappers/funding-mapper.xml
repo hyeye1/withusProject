@@ -15,7 +15,37 @@
 		<result column="project_start_dt" property="projectStartDT" />
 		<result column="project_end_dt" property="projectEndDT" />
 	</resultMap>
-	 
+	
+	<resultMap id="fundingDetail" type="FundingDetail">
+		<result column="cat_no" property="catNo" />
+		<result column="cat_name" property="catName" />
+		<result column="project_no" property="projectNo" />
+		<result column="project_title" property="projectTitle" />
+		<result column="total_price" property="totalPrice" />
+		<result column="project_gprice" property="projectGprice" />
+		<result column="dday" property="dday" />
+		<result column="supporter" property="supporter" />
+		<result column="project_end_dt" property="projectEndDt" />
+		<result column="pay_date" property="payDate" />
+		<result column="delivery_date" property="deliveryDate" />
+		<result column="project_content" property="projectContent" />
+		<result column="project_refcon" property="projectRefcon" />
+		<result column="hashtag" property="hashtag" />
+		<result column="member_no" property="memberNo" />
+		<result column="partner_name" property="partnerName" />
+		<result column="partner_intro" property="partnerIntro" />
+		<result column="member_profile" property="memberProfile" />
+		<result column="partner_phone" property="partnerPhone" />
+		<result column="partner_email" property="partnerEmail" />
+		<result column="phone_yn" property="phoneYn" />
+		<result column="reward_no" property="rewardNo" />
+		<result column="reward_price" property="rewardPrice" />
+		<result column="reward_stock" property="rewardStock" />
+		<result column="reward_title" property="rewardTitle" />
+		<result column="reward_content" property="rewardContent" />
+		<result column="option_yn" property="optionYn" />
+	</resultMap>
+	
  	<select id="selectList" resultMap="fundingListResultSet">
 		select
                p.project_no
@@ -47,5 +77,61 @@
          order 
             by p.project_no desc
 	</select>
+	
+	
+	<update id="increaseCount" parameterType="_int">
+		update
+		       project
+		   set project_count = project_count+1
+		 where project_no = #{projectNo}
+		   and project_status = 3
+	</update>
+    
+    <select id="selectFunding" resultMap="fundingDetail" parameterType="_int">
+	    select
+	       cat_no
+	     , cat_name
+	     , project_no
+	     , project_title
+	     , (select sum(total_price)
+	          from tb_order
+	         where project_no = #{projectNo}) total_price
+	     , project_gprice
+	     , ceil(project_end_dt - sysdate) dday
+	     , (select count(*)
+	          from tb_order
+	         where project_no = #{projectNo}) supporter
+	     , project_end_dt
+	     , project_end_dt + 1 pay_date
+	     , delivery_date
+	     , project_content
+	     , project_refcon
+	     , hashtag
+	     , member_no
+	     , partner_name
+	     , partner_intro
+	     , member_profile
+	     , partner_phone
+	     , partner_email
+	     , phone_yn
+	  from project
+	  join member using(member_no)
+	  join category using(cat_no)
+	 where project_status = 3
+	   and project_no = #{projectNo}
+    </select>
+    
+    <select id="selectReward" resultMap="fundingDetail" parameterType="_int" >
+    	select
+	       reward_no
+	     , reward_price
+	     , reward_stock
+	     , reward_title
+	     , reward_content
+	     , option_yn
+	  from reward
+	 where project_no = #{projectNo}
+    </select>
+    
  
  </mapper>
