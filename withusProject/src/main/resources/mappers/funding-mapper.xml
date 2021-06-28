@@ -109,7 +109,7 @@
 	          from tb_order
 	         where project_no = #{projectNo}) supporter
 	     , project_end_dt
-	     , project_end_dt + 1 pay_date
+	     , to_char(project_end_dt + 1, 'MM"월" DD"일"') pay_date
 	     , delivery_date
 	     , project_content
 	     , project_refcon

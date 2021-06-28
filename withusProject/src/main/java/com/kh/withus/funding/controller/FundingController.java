@@ -49,6 +49,8 @@ public class FundingController {
 		if(result>0) {
 			FundingDetail p = funService.selectFunding(pno);
 			model.addAttribute("p", p);
+			ArrayList<FundingDetail> rList = funService.selectReward(pno);
+			model.addAttribute("rList", rList);
 			return "funding/fundingDetails";
 		}else {
 			model.addAttribute("errorMsg", "상세페이지 조회 실패");
