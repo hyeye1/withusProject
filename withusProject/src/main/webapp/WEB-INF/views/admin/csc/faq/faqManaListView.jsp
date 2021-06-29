@@ -33,7 +33,7 @@
     <!-- 6/14 윤경 수정 : according_list 간격 조정 -->
 
     <!-- 메뉴바 포함 -->
-    <jsp:include page="../common/manaHeader.jsp"/>
+    <jsp:include page="../../../common/manaHeader.jsp"/>
 
     <h2>FAQ</h2>
     <hr><br>

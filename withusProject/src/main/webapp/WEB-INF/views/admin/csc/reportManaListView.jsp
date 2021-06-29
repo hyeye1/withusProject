@@ -23,7 +23,7 @@
     <!-- 6/10 윤경 table 스타일 변경, form-group 수정 -->
 
     <!-- 메뉴바 포함 -->
-    <jsp:include page="../common/manaHeader.jsp" />
+    <jsp:include page="../../common/manaHeader.jsp" />
 
     <h2>신고관리</h2>
     <hr><br>

@@ -25,7 +25,7 @@
 	<!-- 6/17 윤경 수정 -->
 
     <!-- 메뉴바 포함 -->
-    <jsp:include page="../common/manaHeader.jsp"/>
+    <jsp:include page="../../../common/manaHeader.jsp"/>
 
     <h2>공지사항 상세보기</h2>
     <hr><br>
