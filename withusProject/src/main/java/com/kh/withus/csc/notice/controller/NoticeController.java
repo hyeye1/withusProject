@@ -1,5 +1,6 @@
 package com.kh.withus.csc.notice.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
@@ -37,6 +38,7 @@ public class NoticeController {
 		return mv;
 	}
 	
+	/*
 	@RequestMapping("enrollForm.no")
 	public String enrollForm() {
 		return "notice/noticeEnrollForm";
@@ -46,7 +48,7 @@ public class NoticeController {
 	public String insertNotice(Notice n, MultipartFile upfile, HttpSession session, Model model) {
 		
 		if(!upfile.getOriginalFilename().equals("")) {
-			String changeName = saveFile(session, upfile); // 파일 업로드 관련 라이브러리 추가해야됨 (파일 업로드 관련 클래스 bean등록)
+			String changeName = saveFile(session, upfile);
 			
 			n.setNoticeOriginname(upfile.getOriginalFilename());
 			n.setNoticeChangename("resources/cscUploadFile/" + changeName);
@@ -95,6 +97,7 @@ public class NoticeController {
 			return "common/errorPage";
 		}
 	}
+	*/
 	
 	/*
 	@RequestMapping("updateForm.no")

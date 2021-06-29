@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- 6/29 윤경 생성 -->
+
+<mapper namespace="categoryMapper">
+	<resultMap id="category" type="Category">
+		<result column="cat_no" property="catNo" />
+		<result column="cat_name" property="catName" />
+		<result column="cat_tag" property="catTag" />
+	</resultMap>
+	
+	<select id="menuList" resultType="_int">
+		select
+		       cat_name
+		     , cat_tag
+		  from category
+	</select>
+	
+	<insert id="insertCate">
+		insert
+		  into
+		     (
+		       cat_no
+		     , cat_name
+		     , cat_tag
+		     )
+		 value
+		     (
+		       cno.nextval
+		     , #{catName}
+		     , #{catTag}
+		     )
+	</insert>
+	
+</mapper>
