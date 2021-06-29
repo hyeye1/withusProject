@@ -595,11 +595,11 @@
                                         <b class="regiTitle" style="line-height: 1;">리워드 제공<br>가능 수 </b>
                                     </th>
                                     <td class="rewardLimitNum">
-                                        <button class="btn1">무제한</button>
-                                        <button class="btn2">제한</button>
-                                        <input type="number" name="limitNum" id="limitNum">
+                                        <button class="btn2 limitBtn1 limit" onclick="limitBtn(1); limitBtn1();">무제한</button>
+                                        <button class="btn1 limitBtn2 limit" onclick="limitBtn(2); limitBtn2();">제한</button>
+                                        <input type="number" name="limitNum" id="limitNum" class="limitNum">
                                     </td>
-                                    <td>개</td>
+                                    <td class="limitNum">개</td>
                                 </tr>
                                 <tr>
                                     <th>
@@ -970,8 +970,23 @@
                     $('.optionOnTr2').show();
                 }
 
-                funtion deleteOption() {
+                function deleteOption() {
                     $('.optionOnTr2').hide();
+                }
+
+                function limitBtn(className) {
+                    $(".limit").css('background-color', 'rgb(224, 224, 224)');
+                    $(".limit").css('color', 'black');
+                    $(".limitBtn" + className).css('background-color', 'rgb(52, 152, 219)');
+                    $(".limitBtn" + className).css('color', 'white');
+                }
+
+                function limitBtn2(){
+                    $(".limitNum").show();
+                }
+
+                function limitBtn1(){
+                    $(".limitNum").hide();
                 }
 
                 
