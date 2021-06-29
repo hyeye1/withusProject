@@ -55,13 +55,13 @@
 			<c:forEach var="p" items="${ list }">
 		        <div class="thumbnail" id="thumbnail" align="center">
 		            <input type="hidden" class="pno" value="${ p.projectNo }">
-					<input type="hidden" value="${ p.projectGprice }" id="gPrice">
+					<input type="hidden" value="${ p.projectGprice }">
 					<input type="hidden" value="">
 		            	
 		            <img src="${ p.projectThum }" width="270" height="230">
 		            <p align="left">
 		                ${ p.projectTitle } <br>
-		                ${ p.catNo } | ${ p.memberNo }<br>
+		                ${ p.catName } | ${ p.memberNo }<br>
 		                <c:choose>
 		                	<c:when test="${ p.dday >= 0 }">
 								<span id="percent">${ p.percentage }%</span>&nbsp;&nbsp;&nbsp;<span id="totalPrice">${ p.totalPrice }</span>원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>D-${ p.dday }</span>

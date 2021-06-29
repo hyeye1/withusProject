@@ -27,8 +27,6 @@ public class FundingController {
 		mv.addObject("list", list)
 		  .setViewName("funding/fundingListView");
 		
-		System.out.println(list);
-		
 		return mv;
 		
 	}
