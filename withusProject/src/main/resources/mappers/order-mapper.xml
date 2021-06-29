@@ -26,12 +26,25 @@
 		<result column="order_count" property="orderCount"/>
 		<result column="order_option" property="orderOption"/>
 		
-		<result column="member_name" property="memberName"/>
+		<result column="supporter_name" property="supporterName"/>  <!-- 서포터이름 -->
+		<result column="partner_name" property="partnerName"/>		<!-- 파트너이름 -->
 		<result column="project_end_dt" property="projectEndDt"/>
 		<result column="project_Title" property="projectTitle"/>
 		<result column="reward_Title" property="rewardTitle"/>
 		<result column="reward_price" property="rewardPrice"/>
-		<result column="card_no" property="cardNo"/>		
+		<result column="card_no" property="cardNo"/>
+		<result column="delivery_date" property="deliveryDate"/>
+		
+		<result column="noneShipping" property="noneShipping"/>
+		<result column="readyShipping" property="readyShipping"/>
+		<result column="shipping" property="shipping"/>
+		<result column="doneShipping" property="doneShipping"/>
+		<result column="dropRefund" property="dropRefund"/>
+		<result column="comRefund" property="comRefund"/>
+		<result column="refRefund" property="refRefund"/>
+		<result column="refund_no" property="refundNo"/>
+		<result column="r_changename" property="reChangeName"/>
+		<result column="r_reason" property="reReason"/>
 	</resultMap>
 	
 	<!-- 페이징 처리 -->
@@ -45,7 +58,7 @@
 	<select id="selectOrderList" resultMap="orderRset">
 		select
 			   order_no
-		     , member_name
+		     , member_name supporter_name
              , p.project_title
              , reward_title
              , order_option
@@ -61,5 +74,122 @@
 		 order
 		    by order_no desc 
 	</select>
+	
+	<!-- 상세조회 -->	
+	<select id="selectOrderDetail" resultMap="orderRset"
+            parameterType="_int">
+		select 
+		        order_no
+		      , order_date
+		      , sm.member_name supporter_name
+		      , to_char(project_end_dt, 'YYYY-MM-DD') project_end_dt
+		      , order_status
+		      , pm.member_name partner_name
+		      , project_title
+		      , reward_title
+		      , order_option
+		      , order_count
+		      , reward_price
+		      , order_plus
+		      , to_char(total_price, '999,999,999,999,999')total_price
+		      , card_no
+		      , receiver_name
+		      , address_no
+		      , address_detail
+		      , address
+		      , receiver_phone
+		      , shipping_req
+		      , shipping_status
+		   from tb_order o
+		   join member sm on(o.member_no = sm.member_no)
+		   join pay using(order_no)
+		   join reward using(project_no)
+		   join project p using(project_no)
+		   join member pm on(p.member_no = pm.member_no)
+		   where order_no = #{orderNo}
+	</select>
+	
+	<!-- 사용자(파트너) -->
+	
+	<!-- 발송리스트 갯수 -->
+	<select id="SelectDeliveryCount" resultType="_int">
+			select
+			   count(*)
+		from tb_order
+	<!-- 파트너가 게시한 프로젝트만 출력, 로그인한 mem_no = 프로젝트 mem_no-
+		  select
+		  count(order_no)
+		  from project p 
+		  join member m  on(m.member_no = p.member_no)
+		  join tb_order o on(p.project_no = o.project_no)
+		  where m.member_no = p.member_no
+		   and p.project_no = #{projectNo}
+	-->
+	</select>
+	<!--  -->
+	<select id="selecetStatsCount" resultMap="orderRset">
+	 		select
+			    count(case when o.shipping_no is null then 1 end) as noneShipping 
+			  , count(case when o.shipping_status = 1 then 1 end) as readyShipping
+			  , count(case when o.shipping_status = 2 then 1 end) as shipping
+			  , count(case when o.shipping_status = 3 then 1 end) as doneShipping
+			  , count(case when o.order_status = 2 then 1 end) as refund
+			  , count(case when o.order_status = 3 then 1 end) as dropRefund
+			  , count(case when o.order_status = 4 then 1 end) as comRefund
+			  , count(case when o.order_status = 5 then 1 end) as refRefund
+		   from tb_order o
+		   join project p on(p.project_no = o.project_no)
+		   join member m  on(m.member_no = p.member_no)
+		  where m.member_no = p.member_no
+		    and p.project_no = 3
+		    <!-- and p.project_no = #{projectNo} -->
+	</select>
+	
+	<!-- 파트너 주문현황 -->
+	<select id="selectPartnerOrderList" resultMap="orderRset">
+		select 
+		        o.order_no
+		      , m.member_name supporter_name
+		      , o.order_status
+		      , to_char(o.total_price, '999,999,999,999,999')total_price
+              , r.reward_title
+      		  , o.order_option
+      		  , o.order_count
+		      , o.shipping_status
+		      , o.shipping_com
+		      , o.shipping_no
+		      , (select 
+		         to_char(delivery_date, 'YYYY-MM-DD')delivery_date 
+		           from project p 
+		           where p.project_no = o.project_no) delivery_date  
+		   from tb_order o
+  		   join member m on(o.member_no = m.member_no)
+ 		   join reward r on(o.project_no = r.project_no)
+ 		  where p.project_no = 3
+	</select>
+	
+	<!-- 발송정보/환불신청 모달창 -->
+	<select id="selectSendInfo" resultMap="orderRset"
+		    parameterType="_int">
+		select
+		        o.order_no
+		      , m.member_name supporter_name
+		      , o.order_option
+		      , o.order_count
+		      , o.total_price
+		      , r.reward_title
+		      , r.reward_price
+		      , re.refund_no
+		      , re.r_reason
+		      , re.r_changename
+		  from tb_order o
+		  join member m on(o.member_no = m.member_no)
+		  join reward r on(r.project_no = o.project_no)
+		  join refund re on(o.order_no = re.order_no)
+		  where o.order_no = 31 
+		  and o.reward_no = r.reward_no
+		  <!-- where order_no=#{orderNo} -->
+	</select>
+	
 </mapper>
 			    

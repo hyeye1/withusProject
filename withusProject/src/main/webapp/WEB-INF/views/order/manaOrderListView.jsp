@@ -89,7 +89,7 @@
 
             <br>
 
-            <table class="table table-bordered">
+            <table class="table table-bordered" id="orderTable">
                 <thead class="tableHead">
                     <tr>
                         <th>주문번호</th>
@@ -105,8 +105,14 @@
                  	 <c:forEach var="o" items="${ oList }">
 	                    <tr>
 	                        <td class="ono">${ o.orderNo }</td>
-	                        <td>${ o.memberName }</td>
-	                        <td>${ o.projectTitle }<br>${ o.rewardTitle }/${ o.orderOption }</td>
+	                        <td>${ o.supporterName }</td>
+	                        <td>
+	                        	${ o.projectTitle }<br>
+	                        	${ o.rewardTitle }
+		                        	<c:if test="${ not empty o.orderOption }">
+	                        		  /${ o.orderOption }
+		                        	</c:if>
+                        	</td>
 	                        <td>${ o.orderCount }</td>
 	                        <td>${ o.orderDate }</td>
                         	<c:choose>

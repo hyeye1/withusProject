@@ -103,33 +103,33 @@
 					<label>서포터 관리</label>
 					<div class="statusBox">
 						<table class="dTable">
-							<tr>
-								<th rowspan="2">펀딩·배송 상태</th>
-								<th style="color: rgb(52, 152, 219);">미발송</th>
-								<th>발송 준비 중</th>
-								<th>배송 중</th>
-								<th>배송 완료</th>
-							</tr>
-							<tr>
-								<td>3 건</td>
-								<td>0 건</td>
-								<td>0 건</td>
-								<td>0 건</td>
-							</tr>
-							<tr>
-								<th rowspan="2">펀딩금 반환 상태</th>
-								<th>신청</th>
-								<th>신청 취소</th>
-								<th>완료</th>
-								<th>거절</th>
-							</tr>
-							<tr>
-								<td>3 건</td>
-								<td>0 건</td>
-								<td>0 건</td>
-								<td>0 건</td>
-							</tr>
-						</table>
+	                  <tr>
+	                    <th rowspan="2">펀딩·배송 상태</th>
+	                    <th style="color: rgb(52, 152, 219);">미발송</th> 
+	                    <th>배송 준비 중</th>
+	                    <th>배송 중</th>
+	                    <th>배송 완료</th>
+	                  </tr>
+	                  <tr>
+	                    <td>${ sc.noneShipping } 건</td>
+	                    <td>${ sc.readyShipping } 건</td>
+	                    <td>${ sc.shipping } 건</td>
+	                    <td>${ sc.doneShipping }건</td>
+	                  </tr>
+	                  <tr>
+	                    <th rowspan="2">펀딩금 반환 상태</th>
+	                    <th>신청</th> 
+	                    <th>신청 취소</th>
+	                    <th>완료</th>
+	                    <th>거절</th>
+	                  </tr>
+	                  <tr>
+	                    <td>${ sc.refund } 건</td>
+	                    <td>${ sc.dropRefund } 건</td>
+	                    <td>${ sc.comRefund } 건</td>
+	                    <td>${ sc.refRefund } 건</td>
+	                  </tr>
+	                </table>
 					</div>
 
 					<div class="mentBox">
@@ -197,27 +197,41 @@
 									<th width="80">발송번호</th>
 									<th width="80">펀딩금 반환</th>
 								</tr>
-								<tr>
-									<td>10491</td>
-									<td>박상이</td>
-									<td>완료</td>
-									<td>35,000원</td>
-									<td>[얼리버드]가치가자 세트X1개</td>
-									<td><button type="button" class="btn btn-withus btn-sm"
-											data-toggle="modal" data-target="#sendInfoModal">발송정보
-											입력</button></td>
-									<td>2021-05-말</td>
-									<td>미발송</td>
-									<td>대한통운 <br> 10659
-									</td>
-									<td style="font-size: 10px;">
-										<!-- 조건처리 해야 되는데...--> <!-- 리워드 기간 --> 지연반환 신청기간 <br>
-										2021-05-11 ~ 2021-00-00<br> <!-- 리워드 종료일 이후 --> 신청 <br>
-										<button type="button" class="btn btn-danger btn-sm"
-											data-toggle="modal" data-target="#refundInfo">확인하기</button>
-									</td>
-								</tr>
 							</thead>
+							<tbody>
+								<c:forEach var="p" items="${ polist }">
+				                    <tr>
+										<td class=ono>${ p.orderNo }</td>
+										<td>${ p.supporterName }</td>
+										<td>${ p.orderStatus }</td>
+										<td>${ p.totalPrice } 원</td>
+										<td>${ p.rewardTitle }/${ p.orderOption }/${ p.orderCount }</td>
+										<td><button type="button" class="btn btn-withus btn-sm" id ="sendInfo" data-toggle="modal" data-target="#sendInfoModal" >발송정보 입력</button></td>
+										<td>${ p.deliveryDate }</td>
+										<c:choose>
+											<c:when test="${ p.shippingStatus == 1 }">
+												<td>배송준비중</td>
+											</c:when>
+											<c:when test="${ p.shippingStatus == 2 }">
+												<td>배송시작</td>
+											</c:when>
+											<c:when test="${ p.shippingStatus == 3 }">
+												<td>배송완료</td>
+											</c:when>
+											 </c:choose>
+										<td>${ p.shippingCom } <br> ${ p.shippingNo }</td>
+										<td style="font-size:10px;">
+										  <!-- 조건처리 해야 되는데...-->
+										  <!-- 리워드 기간 -->
+										  	지연반환 신청기간 <br>
+										  	2021-05-11 ~ 2021-00-00<br>
+										  <!-- 리워드 종료일 이후 -->
+										  	신청 <br>
+										  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundInfo">확인하기</button>
+										</td>
+				                    </tr>
+	                    		</c:forEach>
+                    		</tbody>	
 						</table>
 
 					</div>
@@ -239,26 +253,27 @@
 
 									<div class="partnerOrder">
 										<table>
-											<tr>
-												<th>펀딩번호</th>
-												<td>10491</td>
-											</tr>
-											<tr>
-												<th>서포트명</th>
-												<td>박상이</td>
-											</tr>
-											<tr rowspan="2">
-												<td><h6>[얼리버드]가치가자 세트X1개</h6></td>
-											</tr>
-											<tr>
-												<th>옵션정보..?</th>
-												<td>10658</td>
-											</tr>
-											<tr>
-												<th>총 결제 금액</th>
-												<td>35,000원</td>
-											</tr>
-										</table>
+					                          <tr>
+					                            <th>펀딩번호</th>
+					                            <td>${oi.orderNo}</td>
+					                          </tr>
+					                          <tr>
+					                            <th>서포트명</th>
+					                            <td>${oi.supporterName}</td>
+					                          </tr>
+					                          <tr>
+					                          	<td>펀딩 정보</td>
+					                            <td><h6>${ oi.rewardTitle }</h6></td>
+					                          </tr>
+					                          <tr>
+					                            <th>옵션정보</th>
+					                            <td>${ oi.orderOption }/${ oi.orderCount }</td>
+					                          </tr>
+					                          <tr>
+					                            <th>총 결제 금액</th>
+					                            <td>${ oi.totalPrice }원</td>
+					                          </tr> 
+				                        </table>
 									</div>
 
 									<hr style="width: 95%;">
@@ -299,96 +314,94 @@
 								</div>
 
 								<!-- Modal body -->
-								<div class="modal-body">
-									<label style="font-size: 14px;">서포터가 펀딩금반환 요청한 내역을 확인하고
-										승인 또는 거절 처리하세요.</label>
-									<div class="partnerOrder">
-										<table class="">
-											<tr>
-												<th>펀딩번호</th>
-												<td>10491</td>
-											</tr>
-											<tr>
-												<th>서포트명</th>
-												<td>박상이</td>
-											</tr>
-											<tr rowspan="2">
-												<td><h6>[얼리버드]가치가자 세트X1개</h6></td>
-											</tr>
-											<tr>
-												<th>옵션정보..?</th>
-												<td>10658</td>
-											</tr>
-											<tr>
-												<th>총 결제 금액</th>
-												<td>35,000원</td>
-											</tr>
-										</table>
-									</div>
-									<br>
-									<p>펀딩금 반환 신청 사유</p>
-									<table style="width: 100%">
-										<tr>
-											<th>사유</th>
-											<td>제품불량</td>
-										</tr>
-										<tr>
-											<th>상세사유</th>
-											<td>불량</td>
-										</tr>
-										<tr>
-											<th>증빙자료</th>
-											<td>파일첨부파일 : 원본명.jpg</td>
-										</tr>
-									</table>
-
-									<hr style="width: 100%;">
-									<table>
-										<tr>
-											<td colspan="2">반환 금액</td>
-										</tr>
-										<tr>
-											<td>반환 신청 금액</td>
-											<td>35,000원</td>
-										</tr>
-										<tr>
-											<td colspan="2">상세금액
-												<table class="subTable">
-													<tr>
-														<td>리워드 금액</td>
-														<td>35,000원</td>
-													</tr>
-													<tr>
-														<td>배송비</td>
-														<td>0원</td>
-													</tr>
-													<tr>
-														<td>추가 후원금</td>
-														<td>0원</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-										<tr>
-											<td colspan="2">펀딩금 반환 신청 처리
-												<table class="subTable">
-													<tr>
-														<td><b>승인</b></td>
-													</tr>
-													<tr>
-														<td class="ment">신청 사유가 반환 정책에 해당된다면, 승인처리하세요. 승인처리시, 결제 취소가 진행됩니다.</td>
-													</tr>
-													<tr>
-														<td><b>거절</b></td>
-													</tr>
-													<tr>
-														<td class="ment">신청 사유가 반환 정책에 해당하지 않은 경우, 거절 처리하세요. 결제취소가 진행되지 않습니다.</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-									</table>
-								</div>
+		                        <div class="modal-body">
+		                          <label style="font-size:14px;">서포터가 펀딩금반환 요청한 내역을 확인하고 승인 또는 거절 처리하세요.</label>
+		                            <div class="partnerOrder">
+		                                <table class="">
+		                                    <tr>
+		                                        <th>펀딩번호</th>
+		                                        <td>${oi.orderNo}</td>
+		                                    </tr>
+		                                    <tr>
+		                                        <th>서포트명</th>
+		                                        <td>${oi.supporterName}</td>
+		                                    </tr>
+		                                    <tr>
+		                                    	<td>펀딩 정보</td>
+		                                        <td><h6>${oi.rewardTitle }</h6></td>
+		                                    </tr>
+		                                    <tr>
+		                                        <th>옵션</th>
+		                                        <td>${ oi.orderOption }/${ oi.orderCount }</td>
+		                                    </tr>
+		                                    <tr>
+		                                        <th>총 결제 금액</th>
+		                                        <td>${ oi.totalPrice }원</td>
+		                                    </tr> 
+		                                </table>
+		                            </div>
+		                            <br>
+		                            <p>펀딩금 반환 신청 사유</p>
+		                            <table style="width:100%">
+		                                <tr>
+		                                    <th>환불신청번호</th>
+		                                    <td>${ oi.refundNo }</td>
+		                                </tr>
+		                                <tr>
+		                                    <th>상세사유</th>
+		                                    <td>${ oi.reReason }</td>
+		                                </tr>
+		                                <tr>
+		                                    <th>증빙자료</th>
+		                                    <td>${ oi.reChangeName }</td>
+		                                </tr>
+		                            </table>
+		            
+		                            <hr style="width: 100%;">
+		                            <table>
+		                                <tr>
+		                                    <td colspan="2">반환 금액</td>
+		                                </tr>
+		                                <tr>
+		                                    <td>반환 신청 금액</td>
+		                                    <td>${ oi.totalPrice }원</td>
+		                                </tr>
+		                                <tr>
+		                                    <td colspan="2">
+		                                                                                        상세금액
+		                                        <table class="subTable">
+		                                            <tr>
+		                                                <td>리워드 금액</td>
+		                                                <td>${ oi.rewardPrice }원</td>
+		                                            </tr>
+		                                            <tr>
+		                                                <td>추가 후원금</td>
+		                                                <td>${ oi.orderPlus }원</td>
+		                                            </tr>
+		                                        </table>
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td colspan="2">
+		                                                                               펀딩금 반환 신청 처리
+		                                    <table class="subTable">
+		                                        <tr>
+		                                        	<td><b>승인</b></td>
+		                                        </tr>
+		                                        <tr>
+		                                            <td class="ment">신청 사유가 반환 정책에 해당된다면, 승인처리하세요. 승인처리시, 결제 취소가 진행됩니다.</td>
+		                                        </tr>
+		                                        <tr>
+		                                            <td><b>거절</b></td>
+		                                        </tr>
+		                                        <tr>
+		                                            <td class="ment">신청 사유가 반환 정책에 해당하지 않은 경우, 거절 처리하세요. 결제취소가 진행되지 않습니다.</td>
+		                                        </tr>
+		                                    </table>
+		                                    </td>
+		                                </tr>
+		                            </table>
+		                        </div>
 
 								<!-- Modal footer -->
 								<div class="modal-footer none">
@@ -403,11 +416,27 @@
 		           	<!-- 페이징 -->
 		            <div id="pagingArea">
 						<ul class="pagination">
-		                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-		                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-		                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-		                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-		                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+		                   <c:choose>
+				        		<c:when test="${ pi.currentPage eq 1 }">
+					           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+					            </c:when>
+					            <c:otherwise>
+					            	<li class="page-item disabled"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
+					            </c:otherwise>
+					    	</c:choose>        
+					            
+							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
+							</c:forEach>		            
+					            
+					        <c:choose> 
+					        	<c:when test="${ pi.currentPage eq pi.maxPage }">
+					           	 	<li class="page-item"><a class="page-link" href="#">다음</a></li>
+					           	</c:when>
+					           	<c:otherwise>
+					           		<li class="page-item"><a class="page-link" href="${ pi.currentPage+1 }">다음</a></li>
+					           	</c:otherwise> 	
+				        	</c:choose>
 						</ul>
 		            </div>
 				</div>

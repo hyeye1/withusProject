@@ -36,12 +36,28 @@ public class Order {
 	private String orderOption;
 	
 	// 주문내역 조회시 필요한 컬럼 선언
-	private String memberName;
+	private String supporterName;
+	private String partnerName;
 	private String projectEndDt;
 	private String projectTitle;
 	private String rewardTitle;
-	// 주문내역 상세
 	private int rewardPrice;
 	private String cardNo;
+	
+	// 파트너 발송관리
+	private int noneShipping;
+	private int readyShipping;
+	private int shipping;
+	private int doneShipping;
+	private int refund;
+	private int dropRefund;
+	private int comRefund;
+	private int refRefund;
+	private String deliveryDate;
+
+	private int refundNo;
+	private String reOrginName;
+	private String reChangeName;
+	private String reReason;
 
 }
