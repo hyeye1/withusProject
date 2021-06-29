@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.withus.funding.model.dto.FundingDetail;
@@ -32,10 +33,15 @@ public class FundingController {
 	}
 	
 	@RequestMapping("list.rew")
-	public String selectRewardList() {
+	public String selectRewardList(int pno, @RequestParam(value="rno", defaultValue="0") int rno, Model model) {
 		
+		ArrayList<FundingDetail> drList = funService.selectDetailReward(pno);
+		model.addAttribute("drList", drList);
 		
-		
+		if(rno != 0) { // 리워드 클릭시
+			model.addAttribute("rno", rno);
+		}
+		System.out.println(drList);
 		return "funding/rewardListView";
 		
 	}

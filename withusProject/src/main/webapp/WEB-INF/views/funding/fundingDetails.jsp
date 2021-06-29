@@ -574,7 +574,7 @@
                                 </p>
                             </div>
                             <div class="infoBtn" align="center">
-                                <button>펀딩하기</button>
+                                <button onclick="location.href='list.rew?pno=${p.projectNo}'">펀딩하기</button>
                                 <img src="${ pageContext.request.contextPath }/resources/images/likey.PNG" width="36px"
                                     style="margin-right: 10px; cursor: pointer;">
                                 <img src="${ pageContext.request.contextPath }/resources/images/share.PNG" width="32px"
@@ -626,7 +626,7 @@
                             <div><b>리워드 선택</b></div>
                             <br>
                             <c:forEach var="r" items="${ rList }" >
-	                            <div class="chooseReward" onclick="">
+	                            <div class="chooseReward" onclick="location.href='list.rew?pno=${p.projectNo}&rno=${ r.rewardNo }'">
 	                                <div>
 	                                <input type="hidden" value="${ r.rewardNo }">
 	                                    <span class="rePrice">${ r.rewardPrice }원 펀딩</span>
