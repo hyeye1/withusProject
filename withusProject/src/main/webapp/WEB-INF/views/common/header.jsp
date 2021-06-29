@@ -199,7 +199,7 @@
 							<div class="style_1"><a href="#">성공 임박 프로젝트</a></div>
 							<div class="style_1"><a href="#">신규 추천 프로젝트</a></div>
 							<div class="style_1"><a href="#">공개예정 프로젝트</a></div>
-							<div class="style_1"><a href="community.main">커뮤니티</a></div>
+							<div class="style_1"><a href="commu.main">커뮤니티</a></div>
 						</div>
 
 						<div class="cateCenter">
