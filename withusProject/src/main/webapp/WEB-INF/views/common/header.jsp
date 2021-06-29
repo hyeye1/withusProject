@@ -176,6 +176,8 @@
 					color: rgb(117, 117, 117);
 					cursor: pointer;
 				}
+				
+				hr{ margin-top : 2rem;}
 			</style>
 		</head>
 
