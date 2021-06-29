@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
    
 <!DOCTYPE html>
@@ -152,13 +153,19 @@
                   <th> 상태 :
 	                  <c:choose>
 					    <c:when test="${orderList.orderStatus eq '1'}">
-					                결제완료
+					                     결제완료
 					    </c:when>
 					    <c:when test="${orderList.orderStatus eq '2'}">
-					          취소요청
+					          	환불신청
+					    </c:when>
+					    <c:when test="${orderList.orderStatus eq '3'}">
+					                      환불처리중
+					    </c:when>
+					    <c:when test="${orderList.orderStatus eq '4'}">
+					          	환불완료
 					    </c:when>
 					    <c:otherwise>
-					         취소완료
+					        	환불거절
 					    </c:otherwise>
 				     </c:choose>              	                
 	              </th>

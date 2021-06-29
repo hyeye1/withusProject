@@ -3,6 +3,7 @@ package com.kh.withus.myPage.model.service;
 import java.util.ArrayList;
 
 import com.kh.withus.common.model.vo.PageInfo;
+import com.kh.withus.member.model.vo.Member;
 import com.kh.withus.myPage.model.vo.MyPage;
 
 
@@ -17,7 +18,7 @@ public interface MyPageService {
 	//int pwdConfirm(MyPage m);
 	
 	// 회원 기본 정보수정용 서비스
-	int updateMember(MyPage m);
+	int updateMember(MyPage mp);
 	
 	
 	// 비밀번호 변경
