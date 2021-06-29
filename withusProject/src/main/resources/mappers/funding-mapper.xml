@@ -8,12 +8,15 @@
 		<id column="project_no" property="projectNo" />
 		<result column="project_thum" property="projectThum" />
 		<result column="project_title" property="projectTitle" />
-		<result column="cat_name" property="catNo" />
+		<result column="cat_no" property="catNo" />
+		<result column="cat_name" property="catName" />
 		<result column="partner_name" property="memberNo" />
 		<result column="total_price" property="totalPrice" />
 		<result column="project_gprice" property="projectGprice" />
 		<result column="project_start_dt" property="projectStartDT" />
 		<result column="project_end_dt" property="projectEndDT" />
+		<result column="percentage" property="percentage" />
+		<result column="dday" property="dday" />
 	</resultMap>
 	
 	<resultMap id="fundingDetail" type="FundingDetail">
@@ -52,12 +55,15 @@
                p.project_no
              , p.project_thum
              , p.project_title
+             , c.cat_no
              , c.cat_name
              , m.partner_name
              , sum(o.total_price) total_price
+             , floor(sum(o.total_price) / p.project_gprice * 100) percentage
              , p.project_gprice
              , p.project_start_dt
              , p.project_end_dt
+             , ceil(project_end_dt - sysdate) dday
           from 
           	   tb_order o
              , project p
@@ -70,6 +76,7 @@
          	by p.project_no
          	 , p.project_title
          	 , p.project_thum
+         	 , c.cat_no
          	 , c.cat_name
          	 , m.partner_name
          	 , p.project_gprice
