@@ -1,5 +1,8 @@
 package com.kh.withus.member.model.service;
 
+import java.util.ArrayList;
+
+import com.kh.withus.common.model.vo.PageInfo;
 import com.kh.withus.member.model.vo.Member;
 
 public interface MemberService {
@@ -23,5 +26,12 @@ public interface MemberService {
 		
 		// 6. 로그인 입력용 서비스
 		int insertMemberLogin(Member m);
+		
+		
+		// 관리자 회원조회
+		int selectListCount();
+		ArrayList<Member> selectList(PageInfo pi);
+		
+		int updateMemStatus(String mId, String mStatus);
 
 }

@@ -1,9 +1,12 @@
 package com.kh.withus.member.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.withus.common.model.vo.PageInfo;
 import com.kh.withus.member.model.dao.MemberDao;
 import com.kh.withus.member.model.vo.Member;
 
@@ -45,6 +48,22 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int insertMemberLogin(Member m) {
 		return mDao.insertMemberLogin(sqlSession, m);
+	}
+	
+	// 관리자 
+	@Override
+	public int selectListCount() {
+		return mDao.selectListCount(sqlSession);
+	}
+	
+	@Override
+	public ArrayList<Member> selectList(PageInfo pi) {
+		return mDao.selectList(sqlSession, pi);
+	}
+
+	@Override
+	public int updateMemStatus(String mId, String mStatus) {
+		return mDao.updateMemStatus(sqlSession, mId, mStatus);
 	}
 
 }

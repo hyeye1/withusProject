@@ -1,5 +1,7 @@
 package com.kh.withus.member.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +9,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.withus.common.model.vo.PageInfo;
+import com.kh.withus.common.template.pagination;
 import com.kh.withus.member.model.service.MemberService;
 import com.kh.withus.member.model.vo.Member;
+
 
 @Controller
 public class MemberController {
@@ -137,8 +143,18 @@ public class MemberController {
 
 	// 관리자쪽
 	@RequestMapping("memberListView.mana")
-	public String selectMemberList() {
-		return "member/manaMemberListView";
+	public ModelAndView selectMemberList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,ModelAndView mv) {
+		
+		int listCount = mService.selectListCount();
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 10);
+		System.out.println(pi);
+		
+		ArrayList<Member> mList = mService.selectList(pi);
+		
+		mv.addObject("mList",mList)
+		  .addObject("pi", pi)
+		  .setViewName("member/manaMemberListView");
+		return mv;
 	}
 	
 

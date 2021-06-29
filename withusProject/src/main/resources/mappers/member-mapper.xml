@@ -17,6 +17,8 @@
 		<result column="partner_name" property="partnerName"/>
 		<result column="partner_intro" property="partnerIntro"/>
 		<result column="follow_member_no" property="followMemberNo"/>
+		
+		<result column="member_create_dt" property="memberCreateDate"/>
 	</resultMap>
 	
 	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
@@ -95,5 +97,29 @@
 		  , #{memberPwd}
 		  )
 	</insert>
+	
+	
+	<!-- 관리자 -->
+	<!-- 페이징 처리 -->
+	<select id="selectListCount" resultType="_int">
+		select
+			   count(*)
+		from member
+	</select>
+	<!-- 회원조회 -->
+	<select id="selectMemList" resultMap="memberResultSet">
+		select
+			   member_no
+		     , member_id
+		     , member_name
+		     , to_char(member_create_dt,'YYYY-MM-DD') member_create_dt
+		     , partner_join
+		     , partner_name
+		     , member_status
+		  from member  
+		 order
+		    by member_no desc   
+	</select>
+	<!-- 회원상태변경 -->
 	
 </mapper>
