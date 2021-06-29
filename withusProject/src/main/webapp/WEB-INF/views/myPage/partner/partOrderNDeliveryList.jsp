@@ -13,7 +13,7 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
   *{box-sizing: border-box;} 
-  .wrap{width: 1000px; height: 1800px; position: relative;}
+  .wrap{width: 1150px; height: 1800px; position: relative;}
   .wrap>div{width: 100%;}
 
   /* 메뉴 아래 선 */
@@ -185,22 +185,22 @@
 
 						<table class="table table-border" id="orderList">
 							<thead>
-								<tr>
-									<th width="80">펀딩번호</th>
-									<th width="60">서포터 정보</th>
-									<th width="60">결제</th>
-									<th width="80">결제금액</th>
-									<th width="200">리워드</th>
-									<th width="110">발송정보</th>
+								<tr height="50">
+									<th width="60">펀딩번호</th>
+									<th width="70">서포터 정보</th>
+									<th width="60">결제상태</th>
+									<th width="90">결제금액</th>
+									<th width="180">리워드</th>
+									<th width="100">발송정보</th>
 									<th width="80">발송 예정일</th>
 									<th width="80">발송·배송</th>
 									<th width="80">발송번호</th>
-									<th width="80">펀딩금 반환</th>
+									<th width="120">펀딩금 반환</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="p" items="${ polist }">
-				                    <tr>
+				                    <tr height="100">
 										<td class=ono>${ p.orderNo }</td>
 										<td>${ p.supporterName }</td>
 										<td>${ p.orderStatus }</td>
@@ -421,7 +421,7 @@
 					           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
 					            </c:when>
 					            <c:otherwise>
-					            	<li class="page-item disabled"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
+					            	<li class="page-item"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
 					            </c:otherwise>
 					    	</c:choose>        
 					            
@@ -431,7 +431,7 @@
 					            
 					        <c:choose> 
 					        	<c:when test="${ pi.currentPage eq pi.maxPage }">
-					           	 	<li class="page-item"><a class="page-link" href="#">다음</a></li>
+					           	 	<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
 					           	</c:when>
 					           	<c:otherwise>
 					           		<li class="page-item"><a class="page-link" href="${ pi.currentPage+1 }">다음</a></li>

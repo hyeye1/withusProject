@@ -165,7 +165,7 @@
 		   from tb_order o
   		   join member m on(o.member_no = m.member_no)
  		   join reward r on(o.project_no = r.project_no)
- 		  where p.project_no = 3
+ 		  <!-- where p.project_no = 3 -->
 	</select>
 	
 	<!-- 발송정보/환불신청 모달창 -->

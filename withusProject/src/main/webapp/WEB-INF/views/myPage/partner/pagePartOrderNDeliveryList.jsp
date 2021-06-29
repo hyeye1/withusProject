@@ -12,7 +12,7 @@
     <title>Document</title>
     <style>
         
-        .mypage_wrap{width: 1100px; height: 1000px; margin: auto;}
+        .mypage_wrap{width: 1100px; margin: auto;}
 
         .mypage_wrap>div{width: 100%;}
 
@@ -26,7 +26,7 @@
 
         
        footer {
-			margin-top:100px;
+			margin-top:200px;
 	    	clear: both;
 		}
 
@@ -65,7 +65,9 @@
     
     <!-- footer자리 -->
     <footer>
+    <div class="footerSt">
 		<jsp:include page="../../common/footer.jsp"/>
+    </div>
 	</footer>
 
 
