@@ -21,6 +21,7 @@
             width: 100%;
             height: 503px;
             background-color: rgba(224, 224, 224, 0.52);
+            margin-top: 20px;
         }
         #slideImg{
             width: 830px;
