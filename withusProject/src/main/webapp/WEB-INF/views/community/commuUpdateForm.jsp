@@ -134,7 +134,7 @@
             <div class="content">
                 <br><br>
                 <div class="innerOuter">
-                    <h4 style="display: flex; justify-content: center;">새글쓰기</h4>
+                    <h4 style="display: flex; justify-content: center;">게시글 수정하기</h4>
                     <br>
 
                     <form id="enrollForm" method="post" action="insert.c" enctype="multipart/form-data">
@@ -156,7 +156,7 @@
                             </tr>
                             <tr>
                                 <th><label for="writer">작성자</label></th>
-                                <td><input type="text" id="writer" class="form-control" value="${ loginMember.memberId }" name="communityWriter" readonly>
+                                <td><input type="text" id="writer" class="form-control" value="${ loginUser.memberId }" name="communityWriter" readonly>
                                 </td>
                             </tr>
                             <tr>
@@ -168,14 +168,14 @@
                             </tr>
                             <tr>
                                 <th colspan="2"><textarea class="form-control" required name="communityContent" id="content" rows="10"
-                                        style="resize:none;"></textarea></th>
+                                        style="resize:none;">게시판내용입니다.ㅋㅋㅋㅋ</textarea></th>
                             </tr>
                         </table>
                         <br>
 
                         <div align="center">
-                            <button type="submit" class="btn btn-primary">등록하기</button>
-                            <button type="reset" class="btn btn-danger">취소하기</button>
+                            <button type="submit" class="btn btn-primary">수정하기</button>
+                            <button type="button" class="btn btn-danger" onclick="javascript:history.go(-1);">이전으로</button>
                         </div>
                     </form>
                 </div>

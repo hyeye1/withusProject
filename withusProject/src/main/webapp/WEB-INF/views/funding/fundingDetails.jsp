@@ -168,7 +168,7 @@
 	    width: 40px;
 	    float: left;
 	    margin-left: 10px;
-	    margin-right: -10px;
+	    margin-right: 0px;
 	}
 	
 	.rightPartner p {
@@ -506,7 +506,7 @@
                     </div>
 
                     <div class="partner">
-                        <img src="${ pageContext.request.contextPath }${ p.memberProfile }">
+                        <img src="${ pageContext.request.contextPath }/${ p.memberProfile }">
                         <b>${ p.partnerName }</b> <br><br><br>
                     </div>
 
@@ -607,7 +607,7 @@
 
                             <div><b>창작자 소개</b></div>
                             <div class="rightPartner">
-                                <img src="${ pageContext.request.contextPath }${ p.memberProfile }">
+                                <img src="${ pageContext.request.contextPath }/${ p.memberProfile }">
                                 <p><b>${ p.partnerName }</b> <br><br><br></p>
                                 <button>+ 팔로우</button>
                             </div>

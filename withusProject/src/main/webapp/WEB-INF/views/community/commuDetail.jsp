@@ -117,7 +117,7 @@
         <body>
             <!-- 헤더 -->
             <jsp:include page="../common/header.jsp" />
-
+			<br><br><br>
             <!-- 사이드메뉴바 -->
             <div id="page_main">
                 <section class="page-wraper__side">
@@ -138,8 +138,8 @@
                         <div class="innerOuter">
                             <!-- <h2>게시글 상세보기</h2> -->
 
-                            <!-- 로그인후 상태일 경우만 보여지는 글쓰기 버튼-->
-                            <a class="btn btn-secondary" style="float:right" href="community.me">목록으로</a>
+                            
+                            <a class="btn btn-secondary" style="float:right" href="commu.main">목록으로</a>
                             <br><br>
                             <table id="contentArea" align="center" class="table">
                                 <tr>
