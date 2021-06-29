@@ -141,9 +141,9 @@
 
                 <li><a>고객센터</a>
                     <ul class="navi_sub">
-                        <li><a href="">공지사항</a></li>
-                        <li><a href="">FAQ</a></li>
-                        <li><a href="">문의하기</a></li>
+                        <li><a href="list.no">공지사항</a></li>
+                        <li><a href="list.faq">FAQ</a></li>
+                        <li><a href="list.oto">문의하기</a></li>
                         <li><a href="">신고하기</a></li>
                         <li><a href="">실시간채팅</a></li>
                     </ul>
