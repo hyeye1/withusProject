@@ -46,6 +46,7 @@
 		<result column="reward_price" property="rewardPrice" />
 		<result column="reward_stock" property="rewardStock" />
 		<result column="reward_title" property="rewardTitle" />
+		<result column="reward_ship" property="rewardShip" />
 		<result column="reward_content" property="rewardContent" />
 		<result column="option_yn" property="optionYn" />
 	</resultMap>
@@ -135,7 +136,7 @@
 	   and project_no = #{projectNo}
     </select>
     
-    <select id="selectReward" resultMap="fundingDetail" parameterType="FundingDetail" >
+    <select id="selectReward" resultMap="fundingDetail" parameterType="FundingDetail">
     	select
 	       reward_no
 	     , reward_price
@@ -145,6 +146,23 @@
 	     , option_yn
 	  from reward
 	 where project_no = #{projectNo}
+    </select>
+    
+    <select id="selectDetailReward" resultMap="fundingDetail" parameterType="FundingDetail">
+    	select 
+		       project_title
+		     , reward_no
+		     , reward_title
+		     , reward_price
+		     , reward_stock
+		     , delivery_date
+		     , reward_ship
+		     , reward_content
+		     , option_yn
+		  from reward
+		  join project using(project_no)
+		 where 
+		       project_no = #{projectNo}
     </select>
     
  
