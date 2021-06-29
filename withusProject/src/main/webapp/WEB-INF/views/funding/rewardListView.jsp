@@ -80,56 +80,22 @@
 
         <form name="purchaseForm" class="rewardArea" method="POST">
             <h3>리워드 선택</h3>
-
-            <div class="rewardList">
-                <div class="rewardCheck" style="width: 10%;" align="center"><input type="checkbox"></div>
-                <div class="rewardContent" style="width: 89%;">
-                    <p>
-                        17900원 펀딩합니다. <br>
-                        [얼리버드] 투명 시계 3개 (10개 남음) <br>
-                        배송비 없음|리워드 제공 예상일 2021년 06월 초 예정
-                    </p>
-                </div>
-            </div>
-
-            <br>
-
-            <div class="rewardList">
-                <div class="rewardCheck" style="width: 10%;" align="center"><input type="checkbox"></div>
-                <div class="rewardContent" style="width: 89%;">
-                    <p>
-                        17900원 펀딩합니다. <br>
-                        [얼리버드] 투명 시계 3개 (10개 남음) <br>
-                        배송비 없음|리워드 제공 예상일 2021년 06월 초 예정
-                    </p>
-                </div>
-            </div>
-
-            <br>
+			
+			<c:forEach var="rd" items="${ rdList }">
+	            <div class="rewardList">
+	                <div class="rewardCheck" style="width: 10%;" align="center"><input type="radio"></div>
+	                <div class="rewardContent" style="width: 89%;">
+	                    <p>
+	                        ${ rd.rewardPrice }원 펀딩합니다. <br>
+	                        ${ rd.rewardTitle } (${ rd.rewardStock }개 남음) <br>
+	                        ${ rd.rewardContent } <br>
+	                                             리워드 제공 예상일 ${ rd.deliveryDate } 이후 발송 예정
+	                    </p>
+	                </div>
+	            </div>
+	            <br>
+			</c:forEach>
             
-            <div class="rewardList">
-                <div class="rewardCheck" style="width: 10%;" align="center"><input type="checkbox"></div>
-                <div class="rewardContent" style="width: 89%;">
-                    <p>
-                        17900원 펀딩합니다. <br>
-                        [얼리버드] 투명 시계 3개 (10개 남음) <br>
-                        배송비 없음|리워드 제공 예상일 2021년 06월 초 예정
-                    </p>
-                </div>
-            </div>
-
-            <br>
-            
-            <div class="rewardList">
-                <div class="rewardCheck" style="width: 10%;" align="center"><input type="checkbox"></div>
-                <div class="rewardContent" style="width: 89%;">
-                    <p>
-                        17900원 펀딩합니다. <br>
-                        [얼리버드] 투명 시계 3개 (10개 남음) <br>
-                        배송비 없음|리워드 제공 예상일 2021년 06월 초 예정
-                    </p>
-                </div>
-            </div>
         </form>
 
         <div class="plusArea">
