@@ -365,6 +365,37 @@
                 .pink {
                     color: rgb(245, 40, 153);
                 }
+
+                .addOptionBtn2{
+                    float:right;
+                    width:70px !important;
+                    height: 34px !important;
+                    border: 1px solid rgb(127, 127, 127)!important;
+                    border-left: none !important;
+                    border-top-left-radius: 0px!important;
+                    border-bottom-left-radius: 0px!important;
+                    margin-left: -2px !important;
+                }
+
+                .optionInput{
+                    width: 400Px !important;
+                    border: 1px solid rgb(127, 127, 127);
+                    border-right: none !important;
+                }
+
+                .optionOnTr2 button{
+                    width: 100% !important;
+                    height: 35px !important;
+                    border: 2px solid rgb(41, 128, 185);
+                    color: rgb(41, 128, 185);
+                }
+
+                .optionOnTr2 b{
+                    float: right;
+                    margin-right: 20px;
+                    margin-top: 0px;
+                }
+
             </style>
         </head>
 
@@ -589,7 +620,7 @@
                                     </td>
                                     <td>0/70</td>
                                 </tr>
-                                <tr>
+                                <tr class="addOptionTr">
                                     <th>
                                         <b class="regiTitle">리워드 옵션</b>
                                     </th>
@@ -597,16 +628,24 @@
                                         <button id="addOptionBtn" onclick="addOption();">리워드 옵션 추가하기</button>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr class="optionOnTr" style="display: none;">
                                     <th>
                                         <b class="regiTitle">리워드 옵션</b>
                                     </th>
                                     <td>
                                         <p id="regiOption">옵션선택</p>
-                                        <input type="text" placeholder="ex) S 사이즈">
+                                        <input class="optionInput" type="text" placeholder="ex) 사이즈를 입력하세요">
+                                        <button class="btn2 addOptionBtn2" onclick="addOption2();">추가</button>
                                     </td>
                                     <td>
                                         <p></p>0/20
+                                    </td>
+                                </tr>
+                                <tr class="optionOnTr2" style="display: none;">
+                                    <th></th>
+                                    <td>
+                                        <p id="regiOption">옵션내용</p>
+                                        <button onclick="deleteOption();">사이즈를 입력하세요 <b>✕</b></button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -614,8 +653,17 @@
                                         <b class="regiTitle">배송지필요여부</b>
                                     </th>
                                     <td>
-                                        <button class="btn1">배송지 필요</button>
-                                        <button class="btn2">배송지 필요없음</button>
+                                        <label for="yesShip">
+                                            <input type="radio" name="yesShip" id="yesShip" style="width: 30px;" checked> 배송지 필요
+                                        </label>
+                                        <label for="noShip">
+                                            <input type="radio" name="noShip" id="noShip" style="width: 30px;"> 배송지 필요없음
+                                        </label>
+
+                                        <!-- 
+                                            <button class="btn1">배송지 필요</button>
+                                            <button class="btn2">배송지 필요없음</button>
+                                         -->
                                     </td>
                                 </tr>
                             </table>
@@ -914,8 +962,21 @@
                 }
 
                 function addOption() {
-                    $('.optionOn').css()
+                    $('.addOptionTr').hide();
+                    $('.optionOnTr').show();
                 }
+
+                function addOption2() {
+                    $('.optionOnTr2').show();
+                }
+
+                funtion deleteOption() {
+                    $('.optionOnTr2').hide();
+                }
+
+                
+
+
             </script>
 
         </body>
