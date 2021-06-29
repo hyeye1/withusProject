@@ -74,22 +74,22 @@
 
         <div class="titleArea">
             <div class="back" style="width: 15%;" align="left"><a href=""> < 스토리로 돌아기기</a></div>
-            <div class="title" style="width: 70%;" align="center">세련되고 시크한 당신을 위한, 투명 시계</div>
+            <div class="title" style="width: 70%;" align="center">${ drList[0].projectTitle }</div>
             <div style="width: 14%;"></div>
         </div>
 
         <form name="purchaseForm" class="rewardArea" method="POST">
             <h3>리워드 선택</h3>
 			
-			<c:forEach var="rd" items="${ rdList }">
+			<c:forEach var="dr" items="${ drList }">
 	            <div class="rewardList">
 	                <div class="rewardCheck" style="width: 10%;" align="center"><input type="radio"></div>
 	                <div class="rewardContent" style="width: 89%;">
 	                    <p>
-	                        ${ rd.rewardPrice }원 펀딩합니다. <br>
-	                        ${ rd.rewardTitle } (${ rd.rewardStock }개 남음) <br>
-	                        ${ rd.rewardContent } <br>
-	                                             리워드 제공 예상일 ${ rd.deliveryDate } 이후 발송 예정
+	                        ${ dr.rewardPrice }원 펀딩합니다. <br>
+	                        ${ dr.rewardTitle } (${ dr.rewardStock }개 남음) <br>
+	                        ${ dr.rewardContent } <br>
+	                                             리워드 제공 예상일 ${ dr.deliveryDate } 이후 발송 예정
 	                    </p>
 	                </div>
 	            </div>
@@ -106,7 +106,7 @@
         </div>
 
         <div class="total">
-            <p>세련되고 시크한 당신을 위한, 투명 시계에 435,700원을 펀딩합니다.</p>
+            <p>${ drList[0].projectTitle }에 <span id="allTotalPrice"></span>원을 펀딩합니다.</p>
         </div>
     </div>
     <br>
