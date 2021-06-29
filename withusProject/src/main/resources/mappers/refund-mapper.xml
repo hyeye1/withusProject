@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="refundMapper">
+	<resultMap type="Refund" id="refundRset">
+		<result column="refund_no" property="refundNo"/>
+		<result column="order_no" property="orderNo"/>
+		<result column="r_originname" property="reOrginName"/>
+		<result column="r_changename" property="reChangeName"/>
+		<result column="r_reason" property="reReason"/>
+		<result column="refund_status" property="refundStatus"/>
+		
+		<result column="supporter_name" property="supporterName"/>
+		<result column="partner_name" property="partnerName"/>
+		<result column="reward_title" property="rewardTitle"/>
+		<result column="reward_price" property="rewardPrice"/>
+		<result column="project_title" property="projectTitle"/>
+		<result column="project_end_dt" property="projectEndDt"/>
+		<result column="order_option" property="orderOption"/>
+		<result column="order_date" property="orderDate"/>
+		<result column="order_plus" property="orderPlus"/>
+		<result column="total_price" property="totalPrice"/>
+		<result column="order_status" property="orderStatus"/>
+		<result column="order_count" property="orderCount"/>
+		<result column="bank_name" property="bankName"/>
+		<result column="bank_account" property="bankAccount"/>
+		<result column="card_no" property="cardNo"/>
+	</resultMap>
+	
+	<!-- 페이징 처리 -->
+	<select id="selectListCount" resultType="_int">
+		select
+			   count(*)
+		from refund
+	</select>
+	
+	<!-- 회원조회용 -->
+	<select id="selectList" resultMap="refundRset">
+		select 
+        		refund_no
+		      , supporter_name  
+		      , project_title
+		      , reward_title
+		      , order_option
+		      , r_reason
+		      , refund_status
+		   from refund r,
+		        (select
+		               member_name supporter_name
+		             , project_title 
+		             , reward_title
+		             , order_option
+		          from tb_order
+		          join member using (member_no)
+		          join project using (project_no)
+		          join reward using (reward_no)
+		          )
+		 order
+		    by refund_no desc   
+	</select>
+	
+	<select id="selectRefund" resultMap="refundRset" 
+	        parameterType="_int">
+		select 
+		       o.order_no
+		     , to_char(o.order_date,'YYYY-MM-DD HH24:MI:SS') order_date
+		     , sn.member_name supporter_name
+		     , to_char(p.project_end_dt,'YYYY-MM-DD') project_end_dt
+		     , o.order_status
+		     , pn.member_name partner_name
+		     , p.project_title 
+		     , rd.reward_title
+		     , o.order_option
+		     , o.order_count
+		     , to_char(rd.reward_price, '999,999,999') reward_price
+		     , to_char(o.order_plus, '999,999,999') order_plus
+		     , to_char(o.total_price, '999,999,999')total_price
+		     , py.card_no
+		     , o.bank_name
+		     , o.bank_account
+		     , r.r_reason
+		     , r.refund_status
+	      from tb_order o
+	      join member sn on(o.member_no = sn.member_no)
+	      join project p on(o.project_no = p.project_no)
+	      join member pn on(o.project_no = pn.member_no)
+	      join reward rd on(o.project_no = rd.project_no)
+	      join pay py on(o.order_no = py.order_no)
+	      join refund r on(o.order_no = r.order_no) 
+	     where r.refund_no = #{refundNo}
+	</select>
+	
+
+	
+</mapper>
+  

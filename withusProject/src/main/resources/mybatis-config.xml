@@ -18,6 +18,7 @@
 		<typeAlias type="com.kh.withus.community.model.vo.CommuReply" alias="CommuReply" />
 		<typeAlias type="com.kh.withus.member.model.vo.Member" alias="Member" />
 		<typeAlias type="com.kh.withus.order.model.vo.Order" alias="Order" />
+		<typeAlias type="com.kh.withus.refund.model.vo.Refund" alias="Refund" />
 		<typeAlias type="com.kh.withus.funding.model.dto.FundingDetail" alias="FundingDetail" />
 		<typeAlias type="com.kh.withus.myPage.model.vo.MyPage" alias="MyPage"/>
 	</typeAliases>
@@ -27,6 +28,7 @@
 		<mapper resource="/mappers/community-mapper.xml" />
 		<mapper resource="/mappers/member-mapper.xml" />
 		<mapper resource="/mappers/order-mapper.xml" />
+		<mapper resource="/mappers/refund-mapper.xml" />
 		<mapper resource="/mappers/myPage-mapper.xml"/>	
 	</mappers>
 	
