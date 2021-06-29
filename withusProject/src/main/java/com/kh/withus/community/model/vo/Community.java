@@ -20,4 +20,7 @@ public class Community {
 	private String commuCreate;
 	private int count;
 	private String commuStatus;
+	private String commuOrigin;
+	private String commuChange;
+	
 }
