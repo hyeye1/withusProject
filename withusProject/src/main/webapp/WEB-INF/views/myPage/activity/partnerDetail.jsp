@@ -43,6 +43,8 @@
         .userDetail #content_1_2{width: 30%; margin-top: 40px; margin-left: 50px;}
 
         .userDetail #content_1_2>div{float: left; margin-top: 20px; text-align: center; font-size: 12px;}
+        
+        #followBtn{color:white;}
 
         
         /* 펀딩 목록 */

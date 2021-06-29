@@ -11,6 +11,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
     
     <style>
         
@@ -30,7 +32,9 @@
         #mypage{height: 100%; margin-top: 50px;}
 
         /*큰제목*/
-        p{font-size: 23px; font-weight: bolder;}
+        p{font-size: 23px; font-weight: bolder;  width: 80%;}
+        
+        #rightIcon{width: 20px; height: 20px; float: right; margin-top: 15px;}
         
        
         /* mypage안의 세부영역 */
@@ -64,10 +68,15 @@
 
         /* 프로젝트 */
         #main_1>.fundingList{float: left; padding: 10px;}
-        .fundingList>table{width: 90%;}
+        .fundingList>table{width: 90%; font-weight: 600; font-size: 16px;}
+        
+        /* 프로젝트가 비어있을때 / 파트너 조인x일때 */
+        #empty{width: 300px; height: 250px; margin-left: 250px;}
+        #joinus{margin-left: 180px; margin-top: 10px;}
+        
 
         /* 버튼 */
-        #openBtnArea{margin-left: 250px; margin-bottom: 50px; margin-top: 150px;}
+        #openBtnArea{margin-left: 250px; margin-bottom: 50px; margin-top: 170px; }
         #openBtn{width: 300px; margin-top: 30px; background-color: rgb(52, 152, 219); color: honeydew;}
         
         
@@ -75,7 +84,8 @@
 
         /* 메뉴들 */
         #main_2>table{width: 90%;}
-        #mmenu{width: 70%; height: 60px;}
+        #mmenu{width: 70%; height: 60px; font-weight: bold;}
+        #icon{width: 40px; height: 40px; margin-right: 10px;}
        
         a{text-decoration: none; color: black;}
 
@@ -90,18 +100,27 @@
                 
                <!--좋아요-->
                 <div id="main_1">
-                  <p><a href="">오픈프로젝트</a></p>
+                  <p><a href="partnerFunding.me">오픈프로젝트<img src="resources/images/myPage/right_arrow.png" id="rightIcon"></a></p>
                   <div id="underLine"></div>
 
-                  <div style="margin-top: 10px; font-size: 20px;">나의펀딩 ${ fundingCount }</div>
+                  <div style="margin-top: 10px; font-size: 20px; font-weight: bold;">나의펀딩 ${ fundingCount }</div>
                   
 
 
                   <c:choose>
-                    	<c:when test="${ empty fundingList }">
-                    		<div class="fundingList">
-                    			목록이 없습니다
-                    		</div>
+                  		<c:when test="${ empty fundingList && loginUser.partnerJoin eq 'N' }"> 
+                    		<div class="empty">
+                    			<img src="resources/images/myPage/closed.png" id="empty">
+			                    <div id="joinus">가치가자의 파트너가 되어 펀딩 프로젝트를 오픈해보세요! </div>
+							</div>
+                    	</c:when>
+                    	
+                    	
+                    	<c:when test="${ empty fundingList && loginUser.partnerJoin eq 'Y'}">
+                    		<div class="empty">
+                    			<img src="resources/images/myPage/open.png" id="empty">
+			                    <div id="joinus">${loginUser.partnerName} 파트너님! 가치가자와함께 프로젝트를 오픈해보세요 </div>
+							</div>
                     		
                     	</c:when>
                     	<c:otherwise>
@@ -151,10 +170,10 @@
 
                     <table>
                       <tr>
-                        <td id="mmenu">펀딩발송관리 </td>
+                        <td id="mmenu"><a href=""><img src="resources/images/myPage/package.png" id="icon">펀딩발송관리</a> </td>
                       </tr>
                       <tr>
-                        <td id="mmenu">파트너 정보관리 </td>
+                        <td id="mmenu"><a href="partnerInfo.me"><img src="resources/images/myPage/pages.png" id="icon">파트너 정보관리</a> </td>
                       </tr>
                       
                     </table>  
@@ -171,19 +190,14 @@
                     <!--3개-->
                     <table>
                       <tr>
-                        <td id="mmenu">펀딩프로젝트 헬프센터</td>
+                        <td id="mmenu"><a href=""><img src="resources/images/myPage/help.png" id="icon">펀딩프로젝트 헬프센터</a></td>
                       </tr>
                       <tr>
-                        <td id="mmenu">펀딩 수수료안내</td>
+                        <td id="mmenu"><a href=""><img src="resources/images/myPage/money.png" id="icon" style="margin-top:8px;">펀딩 수수료안내</a></td>
                       </tr>
 
                     </table>
-
-
-
-
-
-                  </div>
+				 </div>
                   
                 
                 

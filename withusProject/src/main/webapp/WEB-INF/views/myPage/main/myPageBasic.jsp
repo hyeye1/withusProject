@@ -28,7 +28,10 @@
         #mypage{height: 100%; margin-top: 50px;}
 
         /*큰제목*/
-        #mainTitle {font-size: 23px; font-weight: bolder;}
+        #mainTitle {font-size: 23px; font-weight: bolder; width: 80%;}
+        #rightIcon{width: 20px; height: 20px; float: right; margin-top: 15px;}
+        #menuIcon{width: 30px; height: 30px; margin-right: 10px; margin-bottom: 2px;}
+        
         
        
         /* mypage안의 세부영역 */
@@ -63,26 +66,26 @@
 
         /* 좋아요 */
         #main_2>.like{float: left; padding: 10px;}
-        .like>table{width: 90%;}
+        .like>table{width: 90%; font-weight: 600; font-size: 16px;}
 
 
         /* 문의내역 */
-        #qTable{width: 80%;}
+        #qTable{width: 80%; font-weight: 600; font-size: 15px;}
         #qTitle{width: 50%; height: 70px;}
         #qDate{width: 20%;}
         #qTable td{cursor: pointer;}
         
         
         /* 팔로잉 테이블 */
-        #main_3_2>table{width: 100%;}
+        #main_3_2>table{width: 100%; font-weight: 500;}
         #profile{width: 10%; height: 60px;}
         #user{width: 60%}
         #status{width: 20%}
 
-        #id{font-size: 12px; font-weight: bold;}
-        #idDetail{font-size: 10px;}
+        #id{font-size: 15px; font-weight: bold;}
+        #idDetail{font-size: 13px;}
         #profile>img{cursor: pointer;}
-        #user>#id{cursor: pointer;}
+        #user>#id:hover{cursor: pointer; color: rgb(128, 128, 128);}
 
        
         a{text-decoration: none; color: black;}
@@ -104,7 +107,7 @@
                 
                 <!-- 나의 펀딩 목록-->
                 <div id="main_1">
-                  <p id="mainTitle"><a href="myFunding.me">나의 펀딩</a></p>
+                  <p id="mainTitle"><a href="myFunding.me"><img src="resources/images/myPage/shopping.png" id="menuIcon">나의 펀딩<img src="resources/images/myPage/right_arrow.png" id="rightIcon"></a></p>
                   <div id="underLine"></div>
 
                   <div id="count">밀어준 펀딩<br> ${fundingCount} 회</div>
@@ -115,7 +118,7 @@
                 
                 <!--좋아요-->
                 <div id="main_2">
-                  <p id="mainTitle"><a href="like.me">좋아요</a></p>
+                  <p id="mainTitle"><a href="like.me"><img src="resources/images/myPage/like.png" id="menuIcon">좋아요<img src="resources/images/myPage/right_arrow.png" id="rightIcon"></a></p>
                   <div id="underLine"></div>
 
                  	<c:choose>
@@ -162,7 +165,7 @@
                 <div id="main_3">
                   
                   <div id="main_3_1">
-                    <p id="mainTitle"><a href="myQuery.me">나의 문의</a></p>
+                    <p id="mainTitle"><a href="myQuery.me"><img src="resources/images/myPage/qna.png" id="menuIcon">나의 문의<img src="resources/images/myPage/right_arrow.png" id="rightIcon"></a></p>
                     <div id="underLine"></div>
 
                     <!--3개-->
@@ -199,7 +202,7 @@
                   
                   
                   <div id="main_3_2">
-                    <p id="mainTitle"><a href="followlist.me">팔로잉</a></p>
+                    <p id="mainTitle"><a href="followlist.me"><img src="resources/images/myPage/follow.png" id="menuIcon">팔로잉<img src="resources/images/myPage/right_arrow.png" id="rightIcon"></a></p>
                     <div id="underLine"></div>
 
                     <!--3개-->
@@ -212,15 +215,7 @@
 	                    	   <table id="followTable">
 		                      	<tr>
 			                        <td id="profile">
-			                        <c:choose>
-			                        	<c:when test="${ empty m.memberProfile }">
-			                            	<a href="partnerDetail.me?memberNo=${ m.memberNo }"><img src="resources/member_profile/profile_basic.jpg" width="80" height="80" class="rounded-circle"></a>
-			                        	</c:when>
-			                        	<c:otherwise>
-			                        		<a href="partnerDetail.me?memberNo=${ m.memberNo }"><img src="${ m.memberProfile }" width="80" height="80" class="rounded-circle" value="${ m.memberNo }" ></a>
-			                        	</c:otherwise> 
-			                        </c:choose>
-			                        
+			                        	<a href="partnerDetail.me?memberNo=${ m.memberNo }"><img src="${ m.memberProfile }" width="80" height="80" class="rounded-circle" value="${ m.memberNo }" ></a>
 			                        </td>
 			                        <th id="user">
 			                          <div id="id">${ m.partnerName }</div>

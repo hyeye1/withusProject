@@ -876,7 +876,7 @@ public class MyPageController {
 		
 		ArrayList<MyPage> fundingList = mpService.partnerfundingList(pi, m);					
 		
-
+		session.setAttribute("loginUser", loginUser);
 		session.setAttribute("fundingCount", fundingCount);
 		session.setAttribute("fundingList", fundingList);
 		

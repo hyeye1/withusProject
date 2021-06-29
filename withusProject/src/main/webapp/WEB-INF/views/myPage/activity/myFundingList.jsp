@@ -52,7 +52,8 @@
         
         .table>tbody>tr>td{padding-top: 30px;}
        
-		th{text-align: center;}       
+		th{text-align: center;} 
+		label{cursor: pointer;}    
 
         /* 페이징 */
         #pagingArea{width:fit-content; margin:auto;}

@@ -51,7 +51,7 @@
         #replyTitle{width: 60%;}
         #replyDate{width: 10%}
         #replyStatus{width: 10%}
-        
+        label{cursor: pointer;}
         
 
 
