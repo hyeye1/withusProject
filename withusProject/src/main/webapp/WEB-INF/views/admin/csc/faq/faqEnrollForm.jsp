@@ -12,7 +12,7 @@
     <!-- 6/12 윤경 생성? 수정? -->
 
     <!-- 메뉴바 포함 -->
-    <jsp:include page="../common/manaHeader.jsp"/>
+    <jsp:include page="../../../common/manaHeader.jsp"/>
 
     <br><br>
 

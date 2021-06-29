@@ -16,7 +16,7 @@
 
     <!-- 6/9 윤경 생성-->
     <!-- 메뉴바 포함 -->
-    <jsp:include page="../common/manaHeader.jsp"/>
+    <jsp:include page="../../../common/manaHeader.jsp"/>
 
     <h2>문의하기</h2>
     <hr><br>
