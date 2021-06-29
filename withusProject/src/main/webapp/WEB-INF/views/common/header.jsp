@@ -55,14 +55,14 @@
 
 				#searchIcon {
 					margin-top: 28px;
-					margin-left: 270px;
+					margin-left: 250px;
 					width: 31px;
 
 				}
 
 				.headerRight {
 					float: right;
-					margin-right: 26px;
+					margin-right: 30px;
 					margin-top: 33px;
 				}
 
