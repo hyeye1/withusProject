@@ -11,6 +11,8 @@
 		<result column="commu_create" property="commuCreate"/>
 		<result column="count" property="count"/>
 		<result column="commu_status" property="commuStatus"/>
+		<result column="commu_origin" property="commuOrigin"/>
+		<result column="commu_change" property="commuChange"/>
 	</resultMap>
 	
 	<resultMap id="commuReply" type="CommuReply">
@@ -26,7 +28,7 @@
 		select
 		       count(*)
 		  from community
-		 where status = 'Y'
+		 where commu_status = 'Y'
 	</select>
 	
 	<select id="selectList" resultMap="community">
@@ -37,8 +39,8 @@
 		     , commu_title
 		     , count
 		     , to_char(commu_create, 'YYYY-MM-DD') commu_create
-		  from board
-		 where status = 'Y'
+		  from community
+		 where commu_status = 'Y'
 		 order
 		    by commu_no desc 
 	</select>
@@ -70,7 +72,7 @@
 		       community
 		   set count = count+1
 		 where commu_no = #{commuNo}
-		   and status = 'Y'
+		   and commu_status = 'Y'
 	</update>
 	
 	<select id="selectCommunity" resultMap="community" parameterType="_int">
@@ -89,7 +91,7 @@
 	<update id="deleteCommunity" parameterType="_int">
 		update
 		       community
-		   set status = 'N'
+		   set commu_status = 'N'
 		 where commu_no = #{commuNo}
 	</update>
 	
@@ -112,7 +114,7 @@
 		     , member_no
 		     , to_char(com_re_create, 'YYYY-MM-DD') com_re_create
 		  from commuReply
-		 where status = 'Y'
+		 where commu_status = 'Y'
 		  and ref_cno = #{commuNo}
 		 order
 		    by com_re_no desc

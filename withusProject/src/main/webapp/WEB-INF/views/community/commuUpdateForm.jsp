@@ -152,11 +152,11 @@
                             </tr>
                             <tr>
                                 <th><label for="title">제목</label></th>
-                                <td><input type="text" id="title" class="form-control" name="communityTitle" value="${ c.commuTitle }" required></td>
+                                <td><input type="text" id="title" class="form-control" name="commuTitle" value="${ c.commuTitle }" required></td>
                             </tr>
                             <tr>
                                 <th><label for="writer">작성자</label></th>
-                                <td><input type="text" id="writer" class="form-control" value="${ loginUser.memberId }" name="communityWriter" readonly>
+                                <td><input type="text" id="writer" class="form-control" value="${ loginUser.memberId }" name="" readonly>
                                 </td>
                             </tr>
                             <tr>
@@ -175,7 +175,7 @@
                                 <th colspan="2"><label for="content">내용</label></th>
                             </tr>
                             <tr>
-                                <th colspan="2"><textarea class="form-control" required name="communityContent" id="content" rows="10"
+                                <th colspan="2"><textarea class="form-control" required name="commuContent" id="content" rows="10"
                                         style="resize:none;">${ c.commuContent }</textarea></th>
                             </tr>
                         </table>

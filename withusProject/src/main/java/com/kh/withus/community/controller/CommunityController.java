@@ -73,10 +73,10 @@ public class CommunityController {
 		// 전달된 파일이 있을 경우 => 파일명 수정 작업 후 서버에 업로드 => 파일원본명,실제서버에업로드된경로를 c 추가로 담기
 		if(!upfile.getOriginalFilename().equals("")) {
 			
-			String changeName = saveFile(session, upfile);
+			String commuChange = saveFile(session, upfile);
 			
-			c.setcommuOrigin(upfile.getOriginalFilename());
-			c.setcommuChange("resources/uploadFiles/" + commuChange); // 업로드된파일명+파일명
+			c.setCommuOrigin(upfile.getOriginalFilename());
+			c.setCommuChange("resources/uploadFiles/" + commuChange); // 업로드된파일명+파일명
 			
 		}
 		
@@ -141,7 +141,7 @@ public class CommunityController {
 			// 그리고 새로 넘어온 첨부파일 서버에 업로드 시킴
 			String commuChange = saveFile(session, reupfile);
 			c.setCommuOrigin(reupfile.getOriginalFilename());
-			c.setCommuChange("resources/uploadFiles/" + CommuChange);
+			c.setCommuChange("resources/uploadFiles/" + commuChange);
 		}
 		
 		int result = cService.updateCommunity(c);
