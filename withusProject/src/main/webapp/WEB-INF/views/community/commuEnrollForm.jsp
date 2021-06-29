@@ -156,7 +156,7 @@
                             </tr>
                             <tr>
                                 <th><label for="writer">작성자</label></th>
-                                <td><input type="text" id="writer" class="form-control" value="${ loginMember.memberId }" name="communityWriter" readonly>
+                                <td><input type="text" id="writer" class="form-control" value="${ loginUser.memberId }" name="communityWriter" readonly>
                                 </td>
                             </tr>
                             <tr>

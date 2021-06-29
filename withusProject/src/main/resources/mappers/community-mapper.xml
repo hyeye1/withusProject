@@ -1,27 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="communityMapper">
- 	<!--  
- 	<resultMap id="community" type="Community">
- 		<id column="commu_no" property="commuNo"/>
- 		<result column="commu_cate" property="commuCate"/>
- 		<result column="commu_title" property="commuTitle"/>
- 		<result column="count" property="count"/>
- 		<result column="commu_create" property="commuCreate"/>
- 	</resultMap>
- 	
- 	<resultMap id="commuReply" type="CommuReply">
+
+	<resultMap id="community" type="Community">
+		<id column="commu_no" property="commuNo"/>
+		<result column="member_no" property="memberNo"/>
+		<result column="commu_cate" property="commuCate"/>
+		<result column="commu_title" property="commuTitle"/>
+		<result column="commu_content" property="commuContent"/>
+		<result column="commu_create" property="commuCreate"/>
+		<result column="count" property="count"/>
+		<result column="commu_status" property="commuStatus"/>
+	</resultMap>
+	
+	<resultMap id="commuReply" type="CommuReply">
 		<id column="com_re_no" property="comReNo"/>
+		<result column="commu_no" property="commuNo"/>
+		<result column="member_no" property="memberNo"/>
 		<result column="com_re_content" property="comReContent"/>
 		<result column="com_re_create" property="comReCreate"/>
 		<result column="com_re_status" property="comReStatus"/>
 	</resultMap>
-	
+  
 	<select id="selectListCount" resultType="_int">
 		select
 		       count(*)
 		  from community
 		 where status = 'Y'
 	</select>
-	-->
+	
+	<select id="selectList" resultMap="community">
+		select 
+		       commu_no
+		     , member_no
+		     , commu_cate
+		     , commu_title
+		     , count
+		     , to_char(commu_create, 'YYYY-MM-DD') commu_create
+		  from board
+		 where status = 'Y'
+		 order
+		    by commu_no desc 
+	</select>
+	
+	<insert id="insertCommunnity" parameterType="Community">
+		insert 
+		  into community
+		  (
+		    commu_no
+		  , commu_cate
+		  , commu_title
+		  , member_id
+		  , commu_origin
+		  , commu_change
+		  )
+		  values
+		  (
+		    seq_comno.nextval
+		  , #{commuCate}
+		  , #{commuTitle}
+		  , #{memberId}
+		  , #{commuOrigin}
+		  , #{commuChange}
+		  )
+	</insert>
+	
+	<update id="increaseCount" parameterType="_int">
+		update
+		       community
+		   set count = count+1
+		 where commu_no = #{commuNo}
+		   and status = 'Y'
+	</update>
+	
+	<select id="selectCommunity" resultMap="community" parameterType="_int">
+		select
+			   commu_no
+			 , commu_cate
+			 , commu_title
+			 , member_id
+			 , commu_origin
+		     , commu_change
+		     , to_char(commu_create, 'YYYY-MM-DD') commu_create
+		  from community
+		 where commu_no = #{commuNo}
+	</select>
+	
+	<update id="deleteCommunity" parameterType="_int">
+		update
+		       community
+		   set status = 'N'
+		 where commu_no = #{commuNo}
+	</update>
+	
+	<update id="updateCommunity" parameterType="Community">
+		update
+		       community
+		   set commu_title = #{commuTitle}
+		     , commu_content = #{commuContent}
+		     , commu_origin = #{commuOrigin}
+		     , commu_change = #{commuChange}
+		 where commu_no = #{commuNo}
+	</update>
+	
+	<!-- 
+	<select id="selectCommuReply" resultMap="commuReply" parameterType="_int">
+		select
+		       com_re_no
+		     , com_re_content
+		     , commu_no
+		     , member_no
+		     , to_char(com_re_create, 'YYYY-MM-DD') com_re_create
+		  from commuReply
+		 where status = 'Y'
+		  and ref_cno = #{commuNo}
+		 order
+		    by com_re_no desc
+	</select>
+	
+	<insert id="insertCommuReply" parameterType="CommuReply">
+		insert
+		  into reply
+		  (
+		    reply_no
+		  , reply_content
+		  , ref_bno
+		  , reply_writer
+		  )
+		  values
+		  (
+		    seq_rno.nextval
+		  , #{replyContent}
+		  , #{refBoardNo}
+		  , #{replyWriter}
+		  )
+	</insert>
+	 -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+  
+  
 </mapper>
