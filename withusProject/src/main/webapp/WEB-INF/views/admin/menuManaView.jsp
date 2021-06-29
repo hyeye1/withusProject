@@ -149,6 +149,45 @@
 		</table>
 	 </div>
 
+	 <script>
+		$(function(){
+			fn_showList();
+		});
+
+		function fn_showList(){
+			var paramData = {};
+
+			$.ajax({
+				url : "${menuList}"
+			  , type : "post"
+			  , dataType : "json"
+			  , data : paramData
+			  , success : function(result){
+				  console.log(result);
+
+				if(result.status == "OK"){
+					if(result.menuList.lenth > 0) {
+						var list = result.menuList;
+						var htmls = "";
+						result.menuList.forEach(fucntion(e){
+							htmls += '<tr>';
+							htmls += '<td>' + e.catNo + '</td>';
+							htmls += '<td>' + e.catName + '</td>';
+							htmls += '<td>' + e.catTag + '</td>';
+							htmls += '</tr>';	
+						  });
+					} else {
+						console.log("조회실패");
+					}
+					$('#munuList').html(htmls);
+				}
+			}
+			});
+
+		}
+
+	 </script>
+
 
 		
     

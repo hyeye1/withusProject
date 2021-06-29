@@ -1,6 +1,7 @@
 package com.kh.withus.community.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,7 +21,6 @@ import com.kh.withus.common.template.pagination;
 import com.kh.withus.community.model.service.CommunityService;
 import com.kh.withus.community.model.vo.Community;
 
-import javafx.scene.control.Pagination;
 
 
 @Controller
@@ -34,7 +34,7 @@ public class CommunityController {
 	public ModelAndView selectCommunityMain(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
 		int listCount = cService.selectListCount();
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		ArrayList<Community> list = cService.selectList(pi);
 		

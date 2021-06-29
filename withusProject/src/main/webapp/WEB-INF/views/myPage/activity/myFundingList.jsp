@@ -49,6 +49,8 @@
         .fundingList #product{width: 55%;}
         .fundingList #status{width: 15%; }
         .fundingList #orderDate{width: 20%; }
+        
+        .table>tbody>tr>td{padding-top: 30px;}
        
 		th{text-align: center;}       
 
@@ -88,7 +90,7 @@
 		                   	  <c:forEach var="list" items="${ list }">
 		                   	  	<tbody>
 		                          <tr>
-		                            <td style="text-align: center;" id="orderNo"><img src="${ list.projectThum }" width="80" height="60"></td>
+		                            <th style="text-align: center;" id="orderNo"><img src="${ list.projectThum }" width="80" height="60"></th>
 		                            <td><label>${ list.projectTitle }</label>
 		                            	<input type="hidden" value="${ list.orderNo }" id="orderNo">
 		                            </td>

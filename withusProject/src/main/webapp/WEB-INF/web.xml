@@ -33,7 +33,7 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
-	<!-- 한글깨짐방지용 인코딩필터 -->
+	<!-- 한글깨짐방지용 인코팅필터 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -43,9 +43,9 @@
 		</init-param>
 	</filter>
 	
-	<filter-mappring>
+	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mappring>
+	</filter-mapping>
 
 </web-app>
