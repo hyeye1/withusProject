@@ -10,7 +10,7 @@ public interface CommunityService {
 
 		// 커뮤니티 리스트 조회 (페이징 처리)
 		int selectListCount();
-		ArrayList<Community> selecList(PageInfo pi);
+		ArrayList<Community> selectList(PageInfo pi);
 		
 		// 커뮤니티 작성
 		int insertCommunity(Community c);

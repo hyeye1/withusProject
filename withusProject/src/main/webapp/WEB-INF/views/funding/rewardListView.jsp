@@ -78,12 +78,23 @@
             <div style="width: 14%;"></div>
         </div>
 
-        <form name="purchaseForm" class="rewardArea" method="POST">
+        <form id="selectRewardForm" method="POST" action="check.fun">
             <h3>리워드 선택</h3>
+            <input type="hidden" name="projectName" value="${ drList[0].projectTitle }">
 			
 			<c:forEach var="dr" items="${ drList }">
 	            <div class="rewardList">
-	                <div class="rewardCheck" style="width: 10%;" align="center"><input type="radio"></div>
+	                <div class="rewardCheck" style="width: 10%;" align="center">
+	                	<c:choose>
+	                		<c:when test="${ rno == dr.rewardNo }">
+		                		<input type="radio" name="rewardNo" value="${ dr.rewardNo }" checked>
+		                	</c:when>
+		                	<c:otherwise>
+		                		<input type="radio" name="rewardNo" value="${ dr.rewardNo }">
+		                	</c:otherwise>
+	                	</c:choose>
+	                	<input type="hidden" value="${ dr.optionYn }">
+	                </div>
 	                <div class="rewardContent" style="width: 89%;">
 	                    <p>
 	                        ${ dr.rewardPrice }원 펀딩합니다. <br>
@@ -92,26 +103,60 @@
 	                                             리워드 제공 예상일 ${ dr.deliveryDate } 이후 발송 예정
 	                    </p>
 	                </div>
+	                <div class="input">
+	                	<c:if test="${ rno == dr.rewardNo }">
+	                		수량 : <input type="number" name="count" required> <br>
+	                		<c:if test="${ dr.optionYn == 'Y' }">
+	                			옵션 : <input type="text" name="option" required>
+	                		</c:if>
+	                	</c:if>
+	                </div>
 	            </div>
 	            <br>
 			</c:forEach>
+			
+			
+			
+			
+			
+			<script>
+				
+				$(function(){
+					$("input[name=rewardNo]").change(function(){
+						
+						$(".input").empty();
+						
+						if($(this).prop("checked")){
+							var value='수량 : <input type="number" name="count" required> <br>';
+							
+							if($(this).next().val() == 'Y'){
+								value += '옵션 : <input type="text" name="option" required>';
+							}	
+								
+							$(this).parents(".rewardList").children(".input").html(value);
+						}
+					})
+				})
+			</script>
             
+	        <div class="plusArea">
+	            <h3>후원금 더하기 (선택)</h3>
+	            <div class="plus">
+	                <input type="text"> 원을 추가로 후원합니다.
+	            </div>
+	        </div>
+	
+	        <div class="total">
+	            <p>${ drList[0].projectTitle }에 <span id="allTotalPrice"></span>원을 펀딩합니다.</p>
+	        </div>
+	    	
+	    	<br>
+	
+	    	<button type="submit" id="next" align="center">다음 단계로 ></button>
+        
         </form>
-
-        <div class="plusArea">
-            <h3>후원금 더하기 (선택)</h3>
-            <div class="plus">
-                <input type="text"> 원을 추가로 후원합니다.
-            </div>
-        </div>
-
-        <div class="total">
-            <p>${ drList[0].projectTitle }에 <span id="allTotalPrice"></span>원을 펀딩합니다.</p>
-        </div>
-    </div>
-    <br>
-
-    <button id="next" align="center">다음 단계로 ></button>
+        
+	</div>
 	<jsp:include page="../common/footer.jsp"/>
 
 </body>

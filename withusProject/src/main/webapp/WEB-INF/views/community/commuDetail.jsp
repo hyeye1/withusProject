@@ -136,9 +136,7 @@
                     <div class="content">
                         <br><br>
                         <div class="innerOuter">
-                            <!-- <h2>게시글 상세보기</h2> -->
 
-                            
                             <a class="btn btn-secondary" style="float:right" href="commu.main">목록으로</a>
                             <br><br>
                             <table id="contentArea" align="center" class="table">
@@ -159,44 +157,74 @@
                                 <br>
                                 <tr>
                                     <th width="100">제목</th>
-                                    <td colspan="3">${ b.boardTitle }</td>
+                                    <td colspan="3">${ c.commuTitle }</td>
                                 </tr>
                                 <tr>
                                     <th>첨부파일</th>
                                     <td colspan="3">
-                                        <a href="" download="">파일명.jpg</a>
+                                        <c:choose>
+				                    		<c:when test="${ empty c.commuOrigin }">
+					                    		첨부파일이 없습니다.
+					                    	</c:when>
+					                    	<c:otherwise>
+					                        	<a href="${ c.commuChange }" download="${ c.commuOrigin }">${ c.commuOrigin }</a>
+				                        	</c:otherwise>
+				                        </c:choose>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
-                                        <p style="height:150px">제가 이번에 탁상용 캘린더를 구매했는데, <br>
-                                            너무 아기자기 하니 인테리어 용으로 딱인듯 해요~^^ <br>
-                                            추천합니다 여러분~~</p>
+                                        <p style="height:150px">${ c.commuContent }</p>
                                     </td>
                                 </tr>
                             </table>
                             <br>
-						
-                            <div align="center">
-                                <!-- 수정하기, 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨 -->
-                                <a class="btn btn-primary" href="postFormSubmit(1);">수정하기</a>
-                                <a class="btn btn-danger" href="postFormSubmit(2);">삭제하기</a>
-                            </div><br><br>
+
+							<c:if test="${ loginUser.memberId eq c.memberId }">
+					            <div align="center">
+					                <!-- 수정하기, 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨 -->
+					                <a class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</a>
+					                <a class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</a>
+					            </div><br><br>
+					            
+					            <form id="postForm" action="" method="post">
+					            	<input type="hidden" name="bno" value="${ c.commuNo }">
+					            	<input type="hidden" name="filePath" value="${ c.commuChange }"> 	
+					            </form>
+					            
+					            <script>
+					            	function postFormSubmit(num){
+					            		if(num == 1){ // 수정하기 클릭시
+					            			$("#postForm").attr("action", "updateForm.co").submit();
+					            		}else{ // 삭제하기 클릭시
+					            			$("#postForm").attr("action", "delete.co").submit();
+					            		}
+					            	}
+					            </script>
+				            </c:if>
+
 
                             <!-- 댓글 기능은 나중에 ajax 배우고 접목시킬예정! 우선은 화면구현만 해놓음 -->
                             <table id="replyArea" class="table" align="center">
                                 <thead>
                                     <tr>
-                                        <th colspan="2">
-                                            <textarea class="form-control" name="" id="content" cols="55" rows="2"
-                                                style="resize:none; width:100%"></textarea>
-                                        </th>
-                                        <th style="vertical-align: middle"><button
-                                                class="btn btn-secondary">등록하기</button>
-                                        </th>
+                                        <c:choose>
+				                    		<c:when test="${ empty loginUser }">
+						                        <th colspan="2">
+						                            <textarea class="form-control" id="content" cols="55" rows="2" style="resize:none; width:100%" readonly>로그인한 사용자만 사용가능한 서비스입니다. 로그인 후 이용해주세요.</textarea>
+						                        </th>
+						                        <th style="vertical-align: middle"><button class="btn btn-secondary" disabled>등록하기</button></th>
+					                        </c:when>
+					                        <c:otherwise>
+						                        <th colspan="2">
+						                            <textarea class="form-control" id="content" cols="55" rows="2" style="resize:none; width:100%"></textarea>
+						                        </th>
+						                        <th style="vertical-align: middle"><button class="btn btn-secondary" onclick="addCommuReply();">등록하기</button></th>
+					                        </c:otherwise>
+				                        </c:choose>
                                     </tr>
                                     <tr>
-                                        <td colspan="3">댓글 (<span id="rcount">4</span>) </td>
+                                        <td colspan="3">댓글 (<span id="rcount">0</span>) </td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -204,17 +232,7 @@
                                         <th>user02</th>
                                         <td>댓글입니다.너무웃기다앙</td>
                                         <td>2020-04-10</td>
-                                    </tr>
-                                    <tr>
-                                        <th>user01</th>
-                                        <td>많이봐주세용</td>
-                                        <td>2020-04-08</td>
-                                    </tr>
-                                    <tr>
-                                        <th>admin</th>
-                                        <td>댓글입니다ㅋㅋㅋ</td>
-                                        <td>2020-04-02</td>
-                                    </tr>
+                                    </tr>                          
                                 </tbody>
                             </table>
                         </div>

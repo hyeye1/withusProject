@@ -137,7 +137,7 @@
                     <h4 style="display: flex; justify-content: center;">게시글 수정하기</h4>
                     <br>
 
-                    <form id="enrollForm" method="post" action="insert.c" enctype="multipart/form-data">
+                    <form id="enrollForm" method="post" action="update.co" enctype="multipart/form-data">
                         <table align="center">
                             
                             <tr>
@@ -152,7 +152,7 @@
                             </tr>
                             <tr>
                                 <th><label for="title">제목</label></th>
-                                <td><input type="text" id="title" class="form-control" name="communityTitle" required></td>
+                                <td><input type="text" id="title" class="form-control" name="communityTitle" value="${ c.commuTitle }" required></td>
                             </tr>
                             <tr>
                                 <th><label for="writer">작성자</label></th>
@@ -161,14 +161,22 @@
                             </tr>
                             <tr>
                                 <th><label for="upfile">첨부파일</label></th>
-                                <td><input type="file" id="upfile" class="form-control-file border" name="upfile"></td>
+                                <td>
+                                	<input type="file" id="upfile" class="form-control-file border" name="upfile">
+                                	
+                                	<c:if test="${ !empty c.commuOrigin }">
+		                            	현재 업로드된 파일 : <a href="${ c.commuChange }" download="${ c.commuOrigin }">${ c.commuOrigin }</a>
+		                            	<input type="hidden" name="commuOrigin" value="${ c.commuOrigin }">
+		                            	<input type="hidden" name="commuChange" value="${ c.commuChange }">
+                          		    </c:if>
+                                </td>
                             </tr>
                             <tr>
                                 <th colspan="2"><label for="content">내용</label></th>
                             </tr>
                             <tr>
                                 <th colspan="2"><textarea class="form-control" required name="communityContent" id="content" rows="10"
-                                        style="resize:none;">게시판내용입니다.ㅋㅋㅋㅋ</textarea></th>
+                                        style="resize:none;">${ c.commuContent }</textarea></th>
                             </tr>
                         </table>
                         <br>

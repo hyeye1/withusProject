@@ -41,7 +41,7 @@ public class FundingController {
 		if(rno != 0) { // 리워드 클릭시
 			model.addAttribute("rno", rno);
 		}
-		System.out.println(drList);
+		
 		return "funding/rewardListView";
 		
 	}
@@ -61,11 +61,12 @@ public class FundingController {
 			return "common/errorPage";
 		}
 		
+	}
+	
+	@RequestMapping("check.fun")
+	public String insertOrder() {
 		
-		
-		
-		
-		
+		return "funding/insertOrder";
 	}
 	
 	@RequestMapping("register.fd")

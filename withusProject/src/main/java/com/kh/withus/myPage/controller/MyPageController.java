@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.withus.common.model.vo.PageInfo;
 import com.kh.withus.common.template.pagination;
+import com.kh.withus.member.model.service.MemberService;
 import com.kh.withus.member.model.vo.Member;
 import com.kh.withus.myPage.model.service.MyPageService;
 import com.kh.withus.myPage.model.vo.MyPage;
@@ -33,6 +34,8 @@ import com.kh.withus.myPage.model.vo.MyPage;
 @Controller
 public class MyPageController {
 	
+	@Autowired
+	private MemberService mService;
 	@Autowired
 	private MyPageService mpService;
 	@Autowired
@@ -195,39 +198,39 @@ public class MyPageController {
 	
 	// 기본정보수정
 	@RequestMapping("update.me")
-	public String updateMember(MyPage m, MultipartFile file, HttpSession session, Model model, String deleteProfile) {
+	public String updateMember(Member m, MyPage mp, MultipartFile file, HttpSession session, Model model, String deleteProfile) {
 		
 		
 		if(!file.getOriginalFilename().equals("")) { // 넘어오는값이 있을경우
 			
-			if(m.getMemberProfile() !=null ) { // 기존 파일이 있을 경우 ->기존파일 지워버림
+			if(mp.getMemberProfile() !=null ) { // 기존 파일이 있을 경우 ->기존파일 지워버림
 				
-				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
+				new File(session.getServletContext().getRealPath(mp.getMemberProfile())).delete();
 			}
 			
 			// 새로운 파일 업로드
 			String changeName = saveFile(session, file);
-			m.setMemberProfile("resources/member_profile/" + changeName); 
+			mp.setMemberProfile("resources/member_profile/" + changeName); 
 				
 		}
 		
 		if(deleteProfile.equals("delete")) { // 기존파일을 삭제하고 기본이미지로 변경
 			
-			if(m.getMemberProfile() !=null ) { // 기존 파일이 있을 경우 ->기존파일 지워버림
+			if(mp.getMemberProfile() !=null ) { // 기존 파일이 있을 경우 ->기존파일 지워버림
 				
-				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
+				new File(session.getServletContext().getRealPath(mp.getMemberProfile())).delete();
 			}
 			
-			m.setMemberProfile("resources/member_profile/profile_basic.jpg");
+			mp.setMemberProfile("resources/member_profile/profile_basic.jpg");
 		
 		}
 		
-		int result = mpService.updateMember(m); 
+		int result = mpService.updateMember(mp); 
 		
 		if(result > 0) { // 수정성공했을 경우
 			
 			session.setAttribute("alertMsg", "성공적으로 수정되었습니다.");
-			session.setAttribute("loginUser", mpService.loginMember(m));
+			session.setAttribute("loginUser", mService.loginMember(m));
 			return "myPage/info/pageMyInfoDetail";
 			
 		}else {// 실패했을 경우 
@@ -243,7 +246,7 @@ public class MyPageController {
 	
 	// 비밀번호수정
 	@RequestMapping("updatePwd")
-	public String updatePwd(String newPwd, MyPage m, HttpSession session, Model model) {
+	public String updatePwd(String newPwd, Member m, MyPage mp, HttpSession session, Model model) {
 		
 		System.out.println(m.getMemberNo());
 		
@@ -253,11 +256,11 @@ public class MyPageController {
 		
 		m.setMemberPwd(encPwd); // 암호문 변경
 		
-		int result = mpService.updatePwd(m);
+		int result = mpService.updatePwd(mp);
 		
 		if(result > 0) { // 성공 => 알람창 출력할 문구 담아서 => 메인페이지 (url재요청)
 			session.setAttribute("alertMsg", "비밀번호가 변경되었습니다");
-			session.setAttribute("loginUser", mpService.loginMember(m));
+			session.setAttribute("loginUser", mService.loginMember(m));
 			return "myPage/info/pageMyInfoDetail";
 			
 		}else { // 실패 => 에러문구 담아서 => 에러페이지로 포워딩
@@ -945,40 +948,40 @@ public class MyPageController {
 	
 	
 	// 파트너정보수정
-	@RequestMapping("partnerUpdate.me")
-	public String updatePartner(MyPage m, MultipartFile file, HttpSession session, Model model, String deleteProfile) {
+	@RequestMapping(value="partnerUpdate.me")
+	public String updatePartner(MyPage mp, MultipartFile file, HttpSession session, Model model, String deleteProfile, Member m) {
 		
 		
 		if(!file.getOriginalFilename().equals("")) { // 넘어오는값이 있을경우
 			
-			if(m.getMemberProfile() !=null ) { // 기존 파일이 있을 경우 ->기존파일 지워버림
+			if(mp.getMemberProfile() !=null ) { // 기존 파일이 있을 경우 ->기존파일 지워버림
 				
 				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
 			}
 			
 			// 새로운 파일 업로드
 			String changeName = saveFile(session, file);
-			m.setMemberProfile("resources/member_profile/" + changeName); 
+			mp.setMemberProfile("resources/member_profile/" + changeName); 
 				
 		}
 		
 		if(deleteProfile.equals("delete")) { // 기존파일을 삭제하고 기본이미지로 변경
 			
-			if(m.getMemberProfile() !=null ) { // 기존 파일이 있을 경우 ->기존파일 지워버림
+			if(mp.getMemberProfile() !=null ) { // 기존 파일이 있을 경우 ->기존파일 지워버림
 				
-				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
+				new File(session.getServletContext().getRealPath(mp.getMemberProfile())).delete();
 			}
 			
-			m.setMemberProfile(null);
+			mp.setMemberProfile("resources/member_profile/profile_basic.jpg");
 		
 		}
 		
-		int result = mpService.updateMember(m); 
+		int result = mpService.updateMember(mp); 
 		
 		if(result > 0) { // 수정성공했을 경우
 			
 			session.setAttribute("alertMsg", "성공적으로 수정되었습니다.");
-			session.setAttribute("loginUser", mpService.loginMember(m));
+			session.setAttribute("loginUser", mService.loginMember(m));
 			return "myPage/partner/pagePartnerInfo";
 			
 		}else {// 실패했을 경우 
