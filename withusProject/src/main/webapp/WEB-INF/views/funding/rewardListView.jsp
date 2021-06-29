@@ -80,11 +80,19 @@
 
         <form id="selectRewardForm" method="POST" action="check.fun">
             <h3>리워드 선택</h3>
+            <input type="hidden" name="projectName" value="${ drList[0].projectTitle }">
 			
 			<c:forEach var="dr" items="${ drList }">
 	            <div class="rewardList">
 	                <div class="rewardCheck" style="width: 10%;" align="center">
-	                	<input type="radio" name="rewardNo" value="${ dr.rewardNo }">
+	                	<c:choose>
+	                		<c:when test="${ rno == dr.rewardNo }">
+		                		<input type="radio" name="rewardNo" value="${ dr.rewardNo }" checked>
+		                	</c:when>
+		                	<c:otherwise>
+		                		<input type="radio" name="rewardNo" value="${ dr.rewardNo }">
+		                	</c:otherwise>
+	                	</c:choose>
 	                	<input type="hidden" value="${ dr.optionYn }">
 	                </div>
 	                <div class="rewardContent" style="width: 89%;">
@@ -96,15 +104,22 @@
 	                    </p>
 	                </div>
 	                <div class="input">
-	                	
+	                	<c:if test="${ rno == dr.rewardNo }">
+	                		수량 : <input type="number" name="count" required> <br>
+	                		<c:if test="${ dr.optionYn == 'Y' }">
+	                			옵션 : <input type="text" name="option" required>
+	                		</c:if>
+	                	</c:if>
 	                </div>
 	            </div>
 	            <br>
 			</c:forEach>
 			
+			
+			
+			
+			
 			<script>
-				
-				if()
 				
 				$(function(){
 					$("input[name=rewardNo]").change(function(){
