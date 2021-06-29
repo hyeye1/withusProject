@@ -12,7 +12,7 @@
     <title>Document</title>
     <style>
         
-        .mypage_wrap{width: 1100px; height: 1000px; margin: auto;}
+        .mypage_wrap{width: 1100px; height: 600px; margin: auto;}
 
         .mypage_wrap>div{width: 100%;}
 
@@ -55,7 +55,7 @@
             
             
             <!-- 파트너 정보변경 -->
-            <div id="mypage_content">
+            <div id="mypage_content" class="ff">
                 <jsp:include page="partnerInfo.jsp"/>
 			</div>
             

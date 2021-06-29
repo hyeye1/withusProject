@@ -55,7 +55,7 @@
             
             
             <!-- 파트너 펀딩리스트 -->
-            <div id="mypage_content">
+            <div id="mypage_content" class="ff">
                 <jsp:include page="partnerFunding.jsp"/>
 			</div>
             

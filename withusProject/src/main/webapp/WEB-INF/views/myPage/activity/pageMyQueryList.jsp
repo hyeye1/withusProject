@@ -55,7 +55,7 @@
             
             
             <!-- 문의리스트 -->
-            <div id="mypage_content">
+            <div id="mypage_content" class="ff">
                 <jsp:include page="myQueryList.jsp"/>
 			</div>
             

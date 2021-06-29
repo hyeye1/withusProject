@@ -115,7 +115,7 @@
 
     <!-- 헤더 -->
     <jsp:include page="../common/header.jsp" />
-
+	<br><br><br>
     <!-- 사이드메뉴바 -->
     <div id="page_main">
         <section class="page-wraper__side">

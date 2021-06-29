@@ -15,7 +15,7 @@
     <style>
         
         /*div{border: 1px solid red; box-sizing: border-box;}*/
-        .wrap{width: 1000px; height: 800px; margin: auto;}
+        .wrap{width: 1000px; height: 700px; margin: auto;}
 
         .wrap>div{width: 100%;}
 
@@ -35,14 +35,14 @@
        
         /* mypage안의 세부영역 */
         #mypage>div{height: 100%;}
-        #content{width: 100%; margin-left: 150px;}
+        #content{width: 100%; margin-left: 110px;}
 
         /*------공통---------*/
 
         
         /* main content */
-        #main_1{height: 45%; margin-top: 50px;}
-        #main_2{height: 40%;}
+        #main_1{height: 30%; margin-top: 50px;}
+        #main_2{height: 40%; margin-top: 50px;}
         
 
         #main_2>div{float: left;}
@@ -63,12 +63,15 @@
         }
 
         /* 프로젝트 */
-        #main_1>.like{float: left; padding: 10px;}
-        .like>table{width: 90%;}
+        #main_1>.fundingList{float: left; padding: 10px;}
+        .fundingList>table{width: 90%;}
 
         /* 버튼 */
-        #openBtn{margin-left: 250px; margin-bottom: 50px;}
-        button{width: 300px}
+        #openBtnArea{margin-left: 250px; margin-bottom: 50px; margin-top: 150px;}
+        #openBtn{width: 300px; margin-top: 30px; background-color: rgb(52, 152, 219); color: honeydew;}
+        
+        
+        
 
         /* 메뉴들 */
         #main_2>table{width: 90%;}
@@ -90,65 +93,52 @@
                   <p><a href="">오픈프로젝트</a></p>
                   <div id="underLine"></div>
 
-                  <div style="margin-top: 10px; font-size: 20px;">나의펀딩 6</div>
+                  <div style="margin-top: 10px; font-size: 20px;">나의펀딩 ${ fundingCount }</div>
                   
 
 
-                  <div class="like">
-                    <table>
-                        <tr>
-                            <td colspan="2">
-                                <img src="city1.PNG" class="img-thumbnail" width="250" height="300">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">프로젝트 제목</td>
-                        </tr>
-                        <tr>
-                            <td>가격</td>
-                            <td>날짜</td>
-                        </tr>
-                    </table>
-                  </div>
-
-                  <div class="like">
-                    <table>
-                        <tr>
-                            <td colspan="2">
-                                <img src="city1.PNG" class="img-thumbnail" width="250" height="300">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">프로젝트 제목</td>
-                        </tr>
-                        <tr>
-                            <td>가격</td>
-                            <td>날짜</td>
-                        </tr>
-                    </table>
-                  </div>
-
-                  <div class="like">
-                    <table>
-                        <tr>
-                            <td colspan="2">
-                                <img src="city1.PNG" class="img-thumbnail" width="250" height="300">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">프로젝트 제목</td>
-                        </tr>
-                        <tr>
-                            <td>가격</td>
-                            <td>날짜</td>
-                        </tr>
-                    </table>
-                  </div>
-                 <br><br>
+                  <c:choose>
+                    	<c:when test="${ empty fundingList }">
+                    		<div class="fundingList">
+                    			목록이 없습니다
+                    		</div>
+                    		
+                    	</c:when>
+                    	<c:otherwise>
+                    		<c:forEach var="fundingList" items="${ fundingList }" end="2">
+			                     <div class="fundingList">
+                  					<table>
+			                            <tr>
+			                                <td colspan="2">
+			                                	<c:choose>
+			                                		<c:when test="${ empty fundingList.projectThum }">
+			                                			<img src="resources/project_thumbnail/no_image.jpg"  width="250" height="200">
+			                                		</c:when>
+			                                		<c:otherwise>
+			                                			<img src="${ fundingList.projectThum }"  width="250" height="200">
+			                                		</c:otherwise>
+			                                	</c:choose>
+			                                </td>
+			                            </tr>
+			                            <tr>
+			                                <td colspan="2" style="width:10px;">${ fundingList.projectTitle }</td>
+			                            </tr>
+			                            <tr>
+			                                <td>${ fundingList.projectGPrice }</td>
+			                                <td>~ ${ fundingList.projectEndDt }</td>
+			                            </tr>
+			                        </table>
+			                       </div>
+			                 </c:forEach>
+                    	</c:otherwise>
+                    </c:choose>
                   
-                </div>
+                  
+				</div>
+
+                  
                 
-                <div id="openBtn"><button>펀딩오픈하기</button></div>
+                <div id="openBtnArea"><button id="openBtn" class="btn btn-sm">펀딩오픈하기</button></div>
                 
 
                 

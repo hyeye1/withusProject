@@ -55,7 +55,7 @@
             
             
             <!-- 마이페이지 -->
-            <div id="mypage_content">
+            <div id="mypage_content" class="ff">
                 <jsp:include page="myPageBasic.jsp"/>
 			</div>
             

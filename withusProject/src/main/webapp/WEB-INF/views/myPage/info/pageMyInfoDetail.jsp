@@ -55,7 +55,7 @@
             
             
             <!-- 회원정보-->
-            <div id="mypage_content">
+            <div id="mypage_content" class="ff">
                 <jsp:include page="memberInfo.jsp"/>
 			</div>
             

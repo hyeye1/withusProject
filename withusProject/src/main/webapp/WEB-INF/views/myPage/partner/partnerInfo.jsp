@@ -14,7 +14,7 @@
     <style>
         
         /*div{border: 1px solid red; box-sizing: border-box;}*/
-        .wrap{width: 1000px; height: 800px; margin: auto;}
+        .wrap{width: 1000px; height: 600px; margin: auto;}
 
         .wrap>div{width: 100%;}
 
@@ -31,7 +31,7 @@
        
         /* mypage안의 세부영역 */
         #mypage>div{height: 100%;}
-        #content{width: 100%; margin-left:150px;}
+        #content{width: 100%; margin-left:110px;}
 
         
         /* info content */
@@ -120,7 +120,8 @@
                                 <td><textarea name="partnerIntro" id="partnerIntro" cols="35" rows="5" style="resize: none;">${loginUser.partnerIntro }</textarea></td>
                             </tr>
                             <tr>
-                                <th class="buttonArea">
+                            	<td></td>
+                                <td class="buttonArea">
                                 	<input type="hidden" name="memberProfile" value="${loginUser.memberProfile }">
                                 	<input type="hidden" name="memberId" value="${loginUser.memberId }">
                                 	
@@ -129,7 +130,7 @@
 	                                <input type="hidden" name="memberPwd" value="${loginUser.memberPwd }">
                                     
                                     <button type="submit" class="btn btn-light" id="btn1">정보수정</button>
-                                </th>
+                                </td>
                                 
                             </tr>
     

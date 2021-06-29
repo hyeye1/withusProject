@@ -14,7 +14,8 @@ public class Project {
 	
 	private int projectNo;
 	private String memberNo;
-	private String catNo;
+	private int catNo;
+	private String catName;
 	private String projectTitle;
 	private String projectSummary;
 	private int projectGprice;
@@ -37,5 +38,8 @@ public class Project {
 	private String partnerAcholer;
 	private String partnerWeb;
 	private String partnerSNS;
+	
 	private int totalPrice;
+	private int percentage;
+	private int dday;
 }

@@ -55,14 +55,14 @@
 
 				#searchIcon {
 					margin-top: 28px;
-					margin-left: 270px;
+					margin-left: 250px;
 					width: 31px;
 
 				}
 
 				.headerRight {
 					float: right;
-					margin-right: 26px;
+					margin-right: 30px;
 					margin-top: 33px;
 				}
 
@@ -194,7 +194,7 @@
 
 					<div id="cateContent" style="display: none; z-index: 100;">
 						<div class="cateLeft">
-							<div class="style_1"><a href="#">모든 프로젝트</a></div>
+							<div class="style_1"><a href="list.fun">모든 프로젝트</a></div>
 							<div class="style_1"><a href="#">인기 추천 프로젝트</a></div>
 							<div class="style_1"><a href="#">성공 임박 프로젝트</a></div>
 							<div class="style_1"><a href="#">신규 추천 프로젝트</a></div>
@@ -205,19 +205,19 @@
 						<div class="cateCenter">
 							<div clear="both" class="style_3">카테고리</div>
 							<div class="sub1">
-								<div class="style_2"><a class="style_2a" href="#">전체보기</a></div>
-								<div class="style_2"><a class="style_2a" href="#">테크/가전</a></div>
-								<div class="style_2"><a class="style_2a" href="#">패션/잡화</a></div>
-								<div class="style_2"><a class="style_2a" href="#">뷰티</a></div>
-								<div class="style_2"><a class="style_2a" href="#">푸드</a></div>
+								<div class="style_2"><a class="style_2a" href="list.fun">전체보기</a></div>
+								<div class="style_2"><a class="style_2a" href="list.fun?catNo=1">테크/가전</a></div>
+								<div class="style_2"><a class="style_2a" href="list.fun?catNo=2">패션/잡화</a></div>
+								<div class="style_2"><a class="style_2a" href="list.fun?catNo=3">뷰티</a></div>
+								<div class="style_2"><a class="style_2a" href="list.fun?catNo=4">푸드</a></div>
 
 							</div>
 							<div class="sub2">
-								<div class="style_2"><a class="style_2a" href="#">홈리핑</a></div>
-								<div class="style_2"><a class="style_2a" a href="#">디자인 소품</a></div>
-								<div class="style_2"><a class="style_2a" href="#">여행/레저</a></div>
-								<div class="style_2"><a class="style_2a" href="#">스포츠/모빌리티</a></div>
-								<div class="style_2"><a class="style_2a" href="#">반려동물</a></div>
+								<div class="style_2"><a class="style_2a" href="list.fun?catNo=5">홈리핑</a></div>
+								<div class="style_2"><a class="style_2a" a href="list.fun?catNo=6">디자인 소품</a></div>
+								<div class="style_2"><a class="style_2a" href="list.fun?catNo=7">여행/레저</a></div>
+								<div class="style_2"><a class="style_2a" href="list.fun?catNo=8">스포츠/모빌리티</a></div>
+								<div class="style_2"><a class="style_2a" href="list.fun?catNo=9">반려동물</a></div>
 
 							</div>
 
@@ -279,11 +279,11 @@
 			<c:remove var="alertMsg" scope="session" />
 			</c:if>
 			<c:choose>
-				<c:when test="${ empty login }">
+				<c:when test="${ empty loginUser }">
 
 					<!-- 로그인전 -->
 					<div class="headerRight">
-						<a href="login.me">로그인</a>
+						<a href="loginForm.me">로그인</a>
 						<a href="enrollForm.me"> 회원가입</a>
 						<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px"
 							style="margin-left: -3px; margin-top: -6px;">
@@ -292,9 +292,9 @@
 				<c:otherwise>
 
 					<!-- 로그인후 -->
-					<div class="headerRight" style="display:none">
+					<div class="headerRight">
 						<a href="logout.me">로그아웃</a>
-						<a href=""> 마이페이지</a>
+						<a href="myPage.me"> 마이페이지</a>
 						<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px"
 							style="margin-left: -3px; margin-top: -6px;">
 					</div>
@@ -302,13 +302,16 @@
 				</c:otherwise>
 			</c:choose>
 
-			<!-- 관리자 -->
-			<div class="headerRight" style="display:none">
-				<a href="logout.me">로그아웃</a>
-				<a href=""> 관리자</a>
-				<img src="resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
-			</div>
-			</div>
+			
+			<c:if test="${ loginUser.memberStatus eq 'A' }">
+				<!-- 관리자 -->
+				<div class="headerRight">
+					<a href="logout.me">로그아웃</a>
+					<a href=""> 관리자</a>
+					<img src="resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
+				</div>
+				</div>
+			</c:if>
 
 		</body>
 

@@ -3,24 +3,41 @@
 <mapper namespace="memberMapper">
 
 	<resultMap id="memberResultSet" type="Member">
-		<id column="member_id" property="memberId"/>
+		<id column="member_no" property="memberNo"/>
+		<result column="member_id" property="memberId"/>
 		<result column="member_pwd" property="memberPwd"/>
 		<result column="member_name" property="memberName"/>
-		<result column="member_create_dt" property="memberCreateDt"/>
-		<result column="status" property="status"/>
+		<result column="member_phone" property="memberPhone"/>
+		<result column="member_createdt" property="memberCreateDt"/>
+		<result column="member_link" property="memberLink"/>
+		<result column="report_count" property="reportCount"/>
+		<result column="member_status" property="memberStatus"/>
+		<result column="member_profile" property="memberProfile"/>
+		<result column="partner_join" property="partnerJoin"/>
+		<result column="partner_name" property="partnerName"/>
+		<result column="partner_intro" property="partnerIntro"/>
+		<result column="follow_member_no" property="followMemberNo"/>
 	</resultMap>
 	
 	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
 		
-		select 	
-			  member_name
-			, member_id
-			, member_pwd
-			, member_create_dt
-			, status
-		 from member
-  	    where status = 'Y'
-  		  and member_id = #{memberId}
+		select
+  		       member_no
+  		     , member_id
+  		     , member_pwd
+  		     , member_name
+  		     , member_phone
+  		     , member_create_dt
+  		     , member_link
+  		     , report_count
+  		     , member_status
+  		     , member_profile
+  		     , partner_join
+  		     , partner_name
+  		     , partner_intro
+  		  from member
+  		 where member_status IN ('Y', 'A')
+  		   and member_id = #{memberId}
 	</select>
 	
 	<insert id="insertMember" parameterType="Member">

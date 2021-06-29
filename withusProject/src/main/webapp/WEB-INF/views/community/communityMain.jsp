@@ -159,6 +159,7 @@
 
       <!-- 헤더 -->
       <jsp:include page="../common/header.jsp" />
+      <br><br><br>
 
       <!-- 사이드메뉴바 -->
       <div id="page_main">
@@ -202,12 +203,12 @@
                     <button>최신순</button>
                   </li>
                   <!-- 로그인후 상태일 경우만 보여지는 글쓰기 버튼-->
-                  <c:if test="${ !empty loginMember }">
+                 <c:if test="${ !empty loginUser }">
                   <li>
                     <a class="btn btn-secondary" style="float:right; background-color: rgb(60, 145, 224); border: none;"
                       href="commu.enroll">새글쓰기</a>
                   </li>
-                  </c:if>
+                 </c:if>
                 </ul>
               </div>
               <table id="boardList" class="table table-hover" align="center">
@@ -227,7 +228,7 @@
 	                        <td class="cno">${ c.commuNo }</td>
 	                        <td>${ c.commuCate }</td>
 	                        <td>${ c.commuTitle }</td>
-	                        <td>${  }</td>
+	                        <td>${ m.memberNo }</td>
 	                        <td>${ c.count }</td>
 	                         <td>${ c.commuCreate }</td>
 	                    </tr>

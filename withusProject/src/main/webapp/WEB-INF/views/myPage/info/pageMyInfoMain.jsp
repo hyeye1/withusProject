@@ -55,7 +55,7 @@
             
             
             <!-- 회원정보 비밀번호 확인 -->
-            <div id="mypage_content">
+            <div id="mypage_content" class="ff">
                 <jsp:include page="pwdConfirm.jsp"/>
 			</div>
             

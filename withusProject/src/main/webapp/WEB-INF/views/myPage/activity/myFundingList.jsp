@@ -32,7 +32,7 @@
        
         /* mypage안의 세부영역 */
         #mypage>div{height: 100%;}
-        #content{width: 100%; margin-left:150px;}
+        #content{width: 100%; margin-left:110px;}
 
         /*큰제목*/
         #mainTitle{font-size: 23px; font-weight: bolder;}
@@ -79,7 +79,7 @@
 		                	<table class="table table-hover">
 		                        <thead class="thead-light">
 		                          <tr>
-		                            <th id="orderNo">주문번호</th>
+		                            <th id="orderNo"></th>
 		                            <th id="product">펀딩 상품</th>
 		                            <th id="status">상태</th>
 		                            <th id="orderDate">구매일</th>
@@ -88,8 +88,10 @@
 		                   	  <c:forEach var="list" items="${ list }">
 		                   	  	<tbody>
 		                          <tr>
-		                            <td style="text-align: center;" id="orderNo">${ list.orderNo }</td>
-		                            <td><label>${ list.projectTitle }</label></td>
+		                            <td style="text-align: center;" id="orderNo"><img src="${ list.projectThum }" width="80" height="60"></td>
+		                            <td><label>${ list.projectTitle }</label>
+		                            	<input type="hidden" value="${ list.orderNo }" id="orderNo">
+		                            </td>
 		                            <td style="text-align: center;">
 		                            	<c:choose>
 			                            	<c:when test="${list.orderStatus eq '1'}">
@@ -119,7 +121,7 @@
                 <script>
 	            	$(function(){
 	            		$(".table>tbody td label").click(function(){
-	            			location.href="myFundingDetail.me?orderNo=" + $(this).parents().siblings("#orderNo").text();
+	            			location.href="myFundingDetail.me?orderNo=" + $(this).siblings("#orderNo").val();
 	            		})
 	            	})
 	            </script>

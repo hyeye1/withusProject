@@ -55,14 +55,21 @@
 			<c:forEach var="p" items="${ list }">
 		        <div class="thumbnail" id="thumbnail" align="center">
 		            <input type="hidden" class="pno" value="${ p.projectNo }">
-					<input type="hidden" value="${ p.projectGprice }" id="gPrice">
+					<input type="hidden" value="${ p.projectGprice }">
 					<input type="hidden" value="">
 		            	
 		            <img src="${ p.projectThum }" width="270" height="230">
 		            <p align="left">
 		                ${ p.projectTitle } <br>
-		                ${ p.catNo } | ${ p.memberNo }<br>
-						<span id="percent"></span>&nbsp;&nbsp;&nbsp;<span id="totalPrice">${ p.totalPrice }</span>원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dDay">2일 남음</span>
+		                ${ p.catName } | ${ p.memberNo }<br>
+		                <c:choose>
+		                	<c:when test="${ p.dday >= 0 }">
+								<span id="percent">${ p.percentage }%</span>&nbsp;&nbsp;&nbsp;<span id="totalPrice">${ p.totalPrice }</span>원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>D-${ p.dday }</span>
+		            		</c:when>
+		            		<c:otherwise>
+		            			<span id="percent">${ p.percentage }%</span>&nbsp;&nbsp;&nbsp;<span id="totalPrice">${ p.totalPrice }</span>원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>펀딩종료</span>
+		            		</c:otherwise>
+		            	</c:choose>
 		            </p>
 		        </div>
 	        </c:forEach>
@@ -71,25 +78,12 @@
 	
 	<script>
 		
-	 	var percent = 0;
-	 	var totalPrice = 0;
-	 	var gPrice = 0;
-	 	
-	 	totalPrice = parseInt($("#totalPrice").text());
-	 	gPrice = parseInt(document.getElementById("gPrice").value);
-	 	
-	 	percent = totalPrice / gPrice * 100;
-	 	
-	 	console.log(totalPrice);
-	 	console.log(gPrice);
-	 	
-		document.getElementById("percent").innerHTML = percent;
-		
 		$(function(){
     		$("#fundingList #thumbnail").click(function(){
     			location.href="detail.fd?pno=" + $(this).children(".pno").val();
     		})
     	})
+    	
 	</script>
 
 	<br><br>

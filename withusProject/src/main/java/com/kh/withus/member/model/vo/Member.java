@@ -19,6 +19,15 @@ public class Member {
 	private String memberId;
 	private String memberPwd;
 	private String memberName;
+	private String memberPhone;
 	private Date memberCreateDt;
-	private String status;
+	private String memberLink;
+	private int reportCount;
+	private String memberStatus;
+	private String memberProfile;
+	private String partnerJoin;
+	private String partnerName;
+	private String partnerIntro;
+	private int followMemberNo;
+
 }

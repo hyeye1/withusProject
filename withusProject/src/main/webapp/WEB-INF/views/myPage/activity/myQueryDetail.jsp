@@ -31,7 +31,7 @@
        
         /* mypage안의 세부영역 */
         #mypage>div{height: 100%;}
-        #content{width: 100%; margin-left: 150px;}
+        #content{width: 100%; margin-left: 110px;}
 
         
         /* query content */
@@ -53,7 +53,8 @@
         
         .btn{background-color: rgb(178, 185, 223); color: white;}
 		a{text-decoration:none; color:white;}
-
+	
+		#file{color:black;}
 
 
     </style>
@@ -81,14 +82,20 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
+                         <!-- 첨부파일있는경우 --><!-- 다운로드 -->
+                         <c:if test="${ !empty detail.otoChangeName}">
+	                         <tr>
+	                        	<td colspan="3" style="text-align: left;">첨부파일 : <a id="file" href="${ detail.otoChangeName }" download="${ detail.otoOriginName }">${ detail.otoOriginName }</a></td>
+	                         </tr>
+                         </c:if>
+                         <tr>
                             <td colspan="3"id="qContent">${ detail.otoContent }</td>
                          </tr>
                         </tbody>
                         <tfoot>
                           <tr>
                             <c:choose>
-                            	<c:when test="${ detail.otoReReply eq 'N'}">
+                            	<c:when test="${ detail.otoReStatus eq 'N'}">
                             		<td colspan="3" style="text-align: right;">처리중</td>
                           	
                             	</c:when>
@@ -99,20 +106,48 @@
                           </tr>
                           <!--답변완료일시에만 보이게-->
                           
-                          <c:if test="${ detail.otoReReply eq 'Y'}">
+                          <c:if test="${ detail.otoReStatus eq 'Y'}">
                           	<tr>
                             <td colspan="3" id="qReply">${ detail.otoReply }</td>
                           </tr>
                           </c:if>
                           <tr>
                             <td colspan="3" id="backBtn">
+                            	<form action="deleteQuery.me" method="post">
+                            	<input type="hidden" name="otoNo" value="${ detail.otoNo }">
                             	<button class="btn btn-sm"><a href="myQuery.me">목록</a></button>
-                            	
+                            	<button type="submit" class="btn btn-sm" onclick="return validate();">삭제</button>
+                            	</form>
                             </td>
                             
                           </tr>
                         </tfoot>
-                      </table>       
+                      </table>
+                      
+                      <!-- 문의삭제 컨펌 -->
+						<script>
+						
+						function validate(){
+		                	
+		                	
+		                	
+		                	var result = confirm("문의를 삭제 하시겠습니까?");
+		                	
+		                	if(result){
+		                		
+		                	} else {
+		                		alert("삭제가 취소되었습니다");
+		                		return false;
+		                	}
+		                
+		                }				
+						
+						
+						
+						</script>
+                      
+                      
+                             
                     
                 </div>
                 

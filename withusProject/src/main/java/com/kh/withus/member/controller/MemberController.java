@@ -1,6 +1,5 @@
 package com.kh.withus.member.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,26 +21,39 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
+	
+	@RequestMapping("loginForm.me")
+	public String loginForm() {
+		
+		
+		return "member/loginForm";
+		
+		
+	}
+	
+	
 	@RequestMapping("login.me")
-	public String loginMember(Member m, HttpSession session, ModelAndView mv) {
+	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
 		
 		
 		
 		// 암호화 작업 후 (단지 아이디 대조만)
-		Member loginMember = mService.loginMember(m);
+		Member loginUser = mService.loginMember(m);
 		// 아이디만을 가지고 조회해옴 (실제db에 저장되어있는 비번 암호문)
 		
-		if(loginMember != null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginMember.getMemberPwd())) {
+		if(loginUser!= null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
 			// 로그인 성공
-			session.setAttribute("loginMember", loginMember);
+			session.setAttribute("loginUser", loginUser);
+			session.setAttribute("alertMsg", "로그인되었습니다");
 			mv.setViewName("redirect:/");
+			
 		}else {
 			// 로그인 실패
 			mv.addObject("errorMsg", "로그인실패");
 			mv.setViewName("common/errorPage");
 		}
 		
-		return "member/loginForm";
+		return mv;
 		
 		
 	}
