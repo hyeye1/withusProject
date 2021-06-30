@@ -36,16 +36,6 @@ public class OrderDao {
 		return sqlSession.selectOne("orderMapper.SelectDeliveryCount");
 	}
 	
-	public Order selectStatusCount(SqlSessionTemplate sqlSession) {
-		
-		return sqlSession.selectOne("orderMapper.selecetStatsCount");
-	}
-	
-	public Order selectSendInfo(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("orderMapper.selectSendInfo");
-	}
-
-	
 	public ArrayList<Order> selectPartnerOrderList(SqlSessionTemplate sqlSession, PageInfo pi){
 		
 		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
@@ -56,4 +46,12 @@ public class OrderDao {
 		return (ArrayList)sqlSession.selectList("orderMapper.selectPartnerOrderList",null,rowBounds);
 	}
 
+	public Order selectStatusCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("orderMapper.selecetStatsCount");
+	}
+	
+	public Order selectSendInfo(SqlSessionTemplate sqlSession, int orderNo) {
+		return sqlSession.selectOne("orderMapper.selectSendInfo", orderNo);
+	}
 }
