@@ -121,7 +121,8 @@ public interface MyPageService {
 	// 파트너 펀딩정보
 	ArrayList<MyPage> partnerfundingList(PageInfo pi, MyPage m);
 
-
+	// 파트너조인
+	int partnerJoin(MyPage m);
 	
 
 

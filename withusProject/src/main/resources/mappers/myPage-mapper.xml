@@ -341,74 +341,6 @@
 	</select>
   
   
-  	<!-- 펀딩 내역 디테일 -->
-	<!-- 
-	<select id="myFundingDetail" resultMap="memberResultSet">
-		select
-			  a.order_no
-			, a.reward_no
-			, option_no
-			, count
-			, option_content
-			, reward_title
-			, reward_content
-			, reward_price
-			, reward_ship
-			, order_plus
-			, receiver_name
-			, receiver_phone
-			, address_no
-			, address_detail
-			, address
-			, shipping_status
-			, shipping_req
-			, shipping_com
-			, shipping_no
-			, order_date
-			, project_title
-			, order_status
-	   from or_reward a
-	   join tb_option using (option_no)
-	   join reward b on (a.reward_no = b.reward_no)
-	   join tb_order c on(a.order_no = c.order_no)
-	   join project d on(c.project_no = d.project_no)
-	  where a.order_no = #{orderNo}
-	    and c.member_no = #{memberNo}
-	</select>
-	-->
-	
-	<!--  
-	<select id="myFundingDetail" resultMap="memberResultSet">
-		select distinct
-			  a.order_no
-			, a.reward_no
-			, count
-			, reward_title
-			, reward_content
-			, reward_price
-			, reward_ship
-			, order_plus
-			, receiver_name
-			, receiver_phone
-			, address_no
-			, address_detail
-			, address
-			, shipping_status
-			, shipping_req
-			, shipping_com
-			, shipping_no
-			, order_date
-			, project_title
-			, order_status
-	   from or_reward a
-	   join tb_option using (option_no)
-	   join reward b on (a.reward_no = b.reward_no)
-	   join tb_order c on(a.order_no = c.order_no)
-	   join project d on(c.project_no = d.project_no)
-	  where a.order_no = #{orderNo}
-	    and c.member_no = #{memberNo}
-	</select>
-	-->
 	
 	<!-- 펀딩 내역 디테일 -->
 	<select id="myFundingDetail" resultMap="memberResultSet">
@@ -595,8 +527,17 @@
 		  order by project_end_dt asc
 	</select>
 	
-	
-	
+	<!-- 파트너조인 -->
+	<update id="partnerJoin" parameterType="MyPage">
+  		  update
+  		          member
+  		    set   partner_name = #{partnerName}
+  		        , partner_intro = #{partnerIntro}
+  		        , member_profile = #{memberProfile}
+  		        , partner_join = 'Y'
+  		 where member_no = #{memberNo}
+  	
+  	</update>
 	
   	
   	

@@ -248,7 +248,11 @@ public class MyPageServiceImpl implements MyPageService{
 		return mpDao.partnerfundingList(sqlSession,pi, m);
 	}
 
-
+	// 파트너조인
+	@Override
+	public int partnerJoin(MyPage m) {
+		return mpDao.partnerJoin(sqlSession,m);
+	}		
 
 
 
