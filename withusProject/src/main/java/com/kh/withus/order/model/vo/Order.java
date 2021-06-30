@@ -59,5 +59,8 @@ public class Order {
 	private String reOrginName;
 	private String reChangeName;
 	private String reReason;
+	
+	// 지환 추가
+	private String projectName;
 
 }
