@@ -53,7 +53,6 @@ public class OrderController {
 		Order o = oService.slectOrderDetail(ono);
 		
 		model.addAttribute("o", o);
-		System.out.println(o);
 		return "order/manaOrderDetailView";
 //		if(o != null) {
 //			

@@ -23,6 +23,10 @@
     .button_area button{margin: 0 10px;}
     .btn.btn-withus{background-color: #3498db; color: white;}
     .btn.btn-withus:hover{cursor: pointer; background-color: #2c83be; color: white;}
+    
+     /* text css */
+    .text_st1{color: grey; font-size: 14px;}
+    .text_st2{vertical-align:center; items-align:center;}
 
     /* modal */
     .modal-header.none, .modal-footer.none{border: none;}
@@ -69,35 +73,36 @@
 	                </tr>
 	                <tr>
 		                <th>펀딩 상태</th>
-		                <td>
-		                	<c:choose>
-                        		<c:when test="${ o.orderStatus == 1 }">
-                        			<td>결제완료</td>
-                        		</c:when>
-                        		<c:when test="${ o.orderStatus == 2 }">
-                        			<td>취소요청</td>
-                        		</c:when>
-                        		<c:when test="${ o.orderStatus == 3 }">
-                        			<td>취소완료</td>
-                        		</c:when>
-                        	</c:choose>
-		                    <!--  -->
-		                                                       결제 완료 &nbsp;&nbsp;&nbsp;&nbsp;
-		                    <!-- 펀딩마감일 +00일 이후 결제 취소버튼 노출 -->
-		                      
-		                    <button type="button" class="btn-sm" data-toggle="modal" data-target="#cancelPayModal">결제 취소</button>
-		                    
-		                </td>
+	                	<c:choose>
+                       		<c:when test="${ o.orderStatus == 1 }">
+                       			<td>
+                       				결제완료 &nbsp;&nbsp;&nbsp;&nbsp;
+				                    <!-- 펀딩마감일 +00일 이후 결제 취소버튼 노출 -->
+                       				<button type="button" class="btn-sm" data-toggle="modal" data-target="#cancelPayModal">결제 취소</button>
+                       			</td>
+                       		</c:when>
+                       		<c:when test="${ o.orderStatus == 2 }">
+                       			<td>취소요청</td>
+                       		</c:when>
+                       		<c:when test="${ o.orderStatus == 3 }">
+                       			<td>취소완료</td>
+                       		</c:when>
+                       	</c:choose>
 	                    <th>카드 번호</th>
 	                    <td>${ o.cardNo }</td>
 	                </tr>
 	                <tr>
                         <th class="text_st2">주문정보</th>
 	                    <td colspan="3">
-                            <span class="text_st1" style="font-weight: 600;">${ o.partnerName }</span> <br>
+                            <span class="text_st1" style="font-weight: 600;">[${ o.partnerName }]</span> <br>
                             <span>${ o.projectTitle }</span>
                             <span>${ o.rewardTitle }</span> <br>
-                            <span class="text_st1">${ o.orderOption } / ${ o.orderCount }</span>
+                            <span class="text_st1">
+                            	<c:if test="${ not empty o.orderOption }">
+	                        		  /${ o.orderOption }
+	                        	</c:if>
+	                        	${ o.orderCount } 개
+                           	</span>
 	                    </td>
                     </tr> 
                     <tr>

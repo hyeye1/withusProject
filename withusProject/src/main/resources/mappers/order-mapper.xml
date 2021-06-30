@@ -54,7 +54,7 @@
 		from tb_order
 	</select>
 	
-	<!-- 회원조회용 (수정필요) -->
+	<!-- 주문조회 -->
 	<select id="selectOrderList" resultMap="orderRset">
 		select
 			   order_no
@@ -79,34 +79,37 @@
 	<select id="selectOrderDetail" resultMap="orderRset"
             parameterType="_int">
 		select 
-		        order_no
-		      , order_date
-		      , sm.member_name supporter_name
-		      , to_char(project_end_dt, 'YYYY-MM-DD') project_end_dt
-		      , order_status
-		      , pm.member_name partner_name
-		      , project_title
-		      , reward_title
-		      , order_option
-		      , order_count
-		      , reward_price
-		      , order_plus
-		      , to_char(total_price, '999,999,999,999,999')total_price
-		      , card_no
-		      , receiver_name
-		      , address_no
-		      , address_detail
-		      , address
-		      , receiver_phone
-		      , shipping_req
-		      , shipping_status
-		   from tb_order o
+			    o.order_no
+			  , o.order_date
+			  , sm.member_name supporter_name
+			  , to_char(p.project_end_dt, 'YYYY-MM-DD') project_end_dt
+			  , o.order_status
+			  , pm.member_name partner_name
+			  , p.project_title
+			  , r.reward_title
+			  , o.order_option
+			  , o.order_count
+			  , r.reward_price
+			  , o.order_plus
+			  , to_char(o.total_price, '999,999,999,999,999')total_price
+			  , py.card_no
+			  , o.receiver_name
+			  , o.address_no
+			  , o.address_detail
+			  , o.address
+			  , o.receiver_phone
+			  , o.shipping_req
+			  , o.shipping_status
+  			  , o.shipping_com
+			  , o.shipping_no
+		   from tb_order o 
 		   join member sm on(o.member_no = sm.member_no)
-		   join pay using(order_no)
-		   join reward using(project_no)
-		   join project p using(project_no)
+		   join project p on(o.project_no = p.project_no)
 		   join member pm on(p.member_no = pm.member_no)
-		   where order_no = #{orderNo}
+		   join reward r on (o.project_no = r.project_no)
+		   join pay py on(o.order_no = py.order_no)
+		  where o.order_no = #{orderNo}
+		    and o.reward_no = r.reward_no
 	</select>
 	
 	<!-- 사용자(파트너) -->
