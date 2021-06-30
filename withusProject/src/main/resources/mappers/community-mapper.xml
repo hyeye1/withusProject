@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="communityMapper">
 
+	<!-- 커뮤니티상세 -->
 	<resultMap id="community" type="Community">
 		<id column="commu_no" property="commuNo"/>
 		<result column="member_no" property="memberNo"/>
@@ -15,8 +16,9 @@
 		<result column="commu_change" property="commuChange"/>
 	</resultMap>
 	
+	<!-- 댓글 -->
 	<resultMap id="commuReply" type="CommuReply">
-		<id column="com_re_no" property="comReNo"/>
+		<result column="com_re_no" property="comReNo"/>
 		<result column="commu_no" property="commuNo"/>
 		<result column="member_no" property="memberNo"/>
 		<result column="com_re_content" property="comReContent"/>
@@ -24,6 +26,7 @@
 		<result column="com_re_status" property="comReStatus"/>
 	</resultMap>
   
+  	<!-- 커뮤리스트 조회 -->
 	<select id="selectListCount" resultType="_int">
 		select
 		       count(*)
@@ -31,12 +34,13 @@
 		 where commu_status = 'Y'
 	</select>
 	
+	<!-- 커뮤리스트뷰 조회 -->
 	<select id="selectList" resultMap="community">
 		select 
 		       commu_no
-		     , member_no
 		     , commu_cate
 		     , commu_title
+		     
 		     , count
 		     , to_char(commu_create, 'YYYY-MM-DD') commu_create
 		  from community
@@ -106,7 +110,7 @@
 	</update>
 	
 	<!-- 
-	<select id="selectCommuReply" resultMap="commuReply" parameterType="_int">
+	<select id="selectCommuReplyList" resultMap="commuReply" parameterType="_int">
 		select
 		       com_re_no
 		     , com_re_content
@@ -122,19 +126,19 @@
 	
 	<insert id="insertCommuReply" parameterType="CommuReply">
 		insert
-		  into reply
+		  into commuReply
 		  (
-		    reply_no
-		  , reply_content
-		  , ref_bno
-		  , reply_writer
+		    com_re_no
+		  , com_re_content
+		  , ref_cno
+		  , com_re_writer
 		  )
 		  values
 		  (
 		    seq_rno.nextval
-		  , #{replyContent}
-		  , #{refBoardNo}
-		  , #{replyWriter}
+		  , #{comReContent}
+		  , #{refCommuNo}
+		  , #{comReWriter}
 		  )
 	</insert>
 	 -->
