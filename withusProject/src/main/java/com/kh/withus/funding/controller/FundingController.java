@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.service.FundingService;
 import com.kh.withus.funding.model.vo.Project;
+import com.kh.withus.order.model.vo.Order;
 
 @Controller
 public class FundingController {
@@ -64,9 +65,9 @@ public class FundingController {
 	}
 	
 	@RequestMapping("check.fun")
-	public String insertOrder() {
-		
-		return "funding/insertOrder";
+	public String insertOrder(Order o) {
+		System.out.println(o);
+		return "funding/payCheckForm";
 	}
 	
 	@RequestMapping("register.fd")

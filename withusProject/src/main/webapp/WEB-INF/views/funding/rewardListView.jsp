@@ -8,61 +8,42 @@
 <title>Insert title here</title>
 <style>
 	div{box-sizing: border-box;}
-	.innerOuter{
-     	display:"flex";
-	    border:3px solid blue;
-	    width:1200px;
-	    margin:auto;
-	}
+
+	/* 타이틀 */
     .titleArea{
-        border: 3px solid red;
+        outline: 1px solid red;
         background-color: rgb(220, 170, 128);
+		height: 50px;
     }
     .titleArea div{
-        display: inline-block;
-        border: 3px solid pink;
+        /* outline: 1px solid yellow; */
+		float:left;
     }
-    .back a{
-        text-decoration: none;
-        font-size: 12px;
-        color: white;
-    }
-    .title{
-        font-size: 20px;
-        font-weight: bold;
-        color: white;
-    }
-    .rewardArea{
-        border: 3px solid red;
-        margin: auto;
-        width: 80%;
-    }
-    .rewardList{
-        border: 3px solid pink;
-        background-color: lightcyan;
-    }
-    .rewardList div{
-        display: inline-block;
-        margin: auto;
-        border: 1px solid black;
-    }
-    .plusArea{
-        border: 3px solid red;
-        margin: auto;
-        width: 80%;
-    }
-    .plus{
-        margin: auto;
-        border: 1px solid black;
-    }
-    #next{
-        margin-left: 45%;
-    }
-    .total{
-        border: 3px solid red;
-        margin: auto;
-        width: 80%;
-    }
+	.back{height: 100%; width: 15%; padding: 13px 0 0 10px;}
+    .back a{text-decoration: none; font-size: 15px; color: white !important;}
+    .title{width: 70%; height: 100%; font-size: 20px; font-weight: bold; color: white; padding-top: 10px;}
+	.empty{width: 15%; height: 100%;}
+
+
+	/* 컨텐츠 */
+	.innerOuter{
+	    /* outline:1px solid blue; */
+	    width: 1000px;
+	    margin: auto;
+		padding: 50px 50px;
+	}
+
+	.rewardSelect {width: 900px; padding: 15px 0 15px 0; margin-bottom: 15px; background-color: rgb(234, 234, 234); }
+	.rewardContent tr{height: 33px;}
+	.rewardContent td{padding-left: 10px;}
+	.rewardContent th{padding-left: 10px; font-size: x-large;}
+	#rewardNo{margin-left: 32px;}
+
+	.optionContent {margin: 7px 0 0 110px;}
+	
+
+	.moneyArea {outline: 1px solid black;}
+	.moneyArea {width: 900px;}
 </style>
 </head>
 <body>
@@ -70,94 +51,103 @@
 	<jsp:include page="../common/header.jsp"/>
 	<hr>
 
+	<div class="titleArea">
+        <div class="back" align="left"><a href=""> < 스토리로 돌아기기</a></div>
+        <div class="title" align="center">${ drList[0].projectTitle }</div>
+        <div class="empty"></div>
+    </div>
+
     <div class="innerOuter">
-
-        <div class="titleArea">
-            <div class="back" style="width: 15%;" align="left"><a href=""> < 스토리로 돌아기기</a></div>
-            <div class="title" style="width: 70%;" align="center">${ drList[0].projectTitle }</div>
-            <div style="width: 14%;"></div>
-        </div>
-
-        <form id="selectRewardForm" method="POST" action="check.fun">
-            <h3>리워드 선택</h3>
-            <input type="hidden" name="projectName" value="${ drList[0].projectTitle }">
+		<form id="selectRewardForm" method="POST" action="check.fun">
+			<h3>리워드 선택</h3><br>
+			<input type="hidden" name="projectName" value="${ drList[0].projectTitle }">
 			
 			<c:forEach var="dr" items="${ drList }">
-	            <div class="rewardList">
-	                <div class="rewardCheck" style="width: 10%;" align="center">
-	                	<c:choose>
-	                		<c:when test="${ rno == dr.rewardNo }">
-		                		<input type="radio" name="rewardNo" value="${ dr.rewardNo }" checked>
-		                	</c:when>
-		                	<c:otherwise>
-		                		<input type="radio" name="rewardNo" value="${ dr.rewardNo }">
-		                	</c:otherwise>
-	                	</c:choose>
-	                	<input type="hidden" value="${ dr.optionYn }">
-	                </div>
-	                <div class="rewardContent" style="width: 89%;">
-	                    <p>
-	                        ${ dr.rewardPrice }원 펀딩합니다. <br>
-	                        ${ dr.rewardTitle } (${ dr.rewardStock }개 남음) <br>
-	                        ${ dr.rewardContent } <br>
-	                                             리워드 제공 예상일 ${ dr.deliveryDate } 이후 발송 예정
-	                    </p>
-	                </div>
-	                <div class="input">
-	                	<c:if test="${ rno == dr.rewardNo }">
-	                		수량 : <input type="number" name="count" required> <br>
-	                		<c:if test="${ dr.optionYn == 'Y' }">
-	                			옵션 : <input type="text" name="option" required>
-	                		</c:if>
-	                	</c:if>
-	                </div>
-	            </div>
-	            <br>
+				<div class="rewardSelect">
+					<table class="rewardContent">
+						<tr>
+							<c:choose>
+								<c:when test="${ rno == dr.rewardNo }">
+									<th rowspan="5" width="100"><input type="radio" id="rewardNo" name="rewardNo" value="${ dr.rewardNo }" style="width: 20px;height:20px;border:1px;" checked><input type="hidden" value="${ dr.optionYn }"></th>
+								</c:when>
+								<c:otherwise>
+									<th rowspan="5" width="100"><input type="radio" id="rewardNo" name="rewardNo" value="${ dr.rewardNo }"style="width: 20px;height:20px;border:1px;" ><input type="hidden" value="${ dr.optionYn }" ></th>
+								</c:otherwise>
+							</c:choose>
+							<th width="800">${ dr.rewardPrice }원 펀딩합니다.</th>
+						</tr>
+						<tr>
+							<td>${ dr.rewardTitle } (${ dr.rewardStock }개 남음)</td>
+						</tr>
+						<tr>
+							<td>${ dr.rewardContent }</td>
+						</tr>
+						<tr>
+							<td>리워드 제공 예상일 ${ dr.deliveryDate } 이후 발송 예정</td>
+						</tr>
+					</table>
+					
+					<table class="optionContent">
+						<tr>
+							<c:if test="${ rno == dr.rewardNo }">
+								<th width="50">수량 :</th>
+								<td width="190"><input type="number" class="form-control" name="orderCount" required style="width: 150px;"></td>
+								<c:if test="${ dr.optionYn == 'Y' }">
+									<th width="50">옵션 : </th>
+									<td width="270"><input type="text" class="form-control" name="orderOption" required style="width: 450px;"></td>
+								</c:if>
+							</c:if>
+						</tr>
+					</table>
+				</div>
 			</c:forEach>
+
+			<br><br>
 			
-			
-			
-			
-			
-			<script>
+
+<br><br><br>
+
+
+			<div class="moneyArea">
+				<div class="plusArea" style="display: table;">
+					<div style="display: table-cell;"><h3>후원금 더하기 (선택)</h3></div>
+					<div>후원금을 더하여 펀딩할 수 있습니다. 추가 후원금을 입력하시겠습니까?</div>
+				</div>
+
 				
-				$(function(){
-					$("input[name=rewardNo]").change(function(){
-						
-						$(".input").empty();
-						
-						if($(this).prop("checked")){
-							var value='수량 : <input type="number" name="count" required> <br>';
-							
-							if($(this).next().val() == 'Y'){
-								value += '옵션 : <input type="text" name="option" required>';
-							}	
-								
-							$(this).parents(".rewardList").children(".input").html(value);
-						}
-					})
-				})
-			</script>
-            
-	        <div class="plusArea">
-	            <h3>후원금 더하기 (선택)</h3>
-	            <div class="plus">
-	                <input type="text"> 원을 추가로 후원합니다.
-	            </div>
-	        </div>
+				<div class="total" align="center">
+					<div><input type="number" name="orderPlus" value="0"> 원을 추가로 후원합니다.</div>
+					<div><p>${ drList[0].projectTitle }에 <span id="allTotalPrice"></span>원을 펀딩합니다.</p></div>
+				</div>
+			</div>
+			<br>
 	
-	        <div class="total">
-	            <p>${ drList[0].projectTitle }에 <span id="allTotalPrice"></span>원을 펀딩합니다.</p>
-	        </div>
-	    	
-	    	<br>
-	
-	    	<button type="submit" id="next" align="center">다음 단계로 ></button>
-        
-        </form>
-        
+			<button type="submit" id="next">다음 단계로 ></button>
+		
+		</form>
 	</div>
+
 	<jsp:include page="../common/footer.jsp"/>
 
+	<script>
+	
+	$(function(){
+		$("input[name=rewardNo]").change(function(){
+			
+			$(".optionContent").empty();
+			
+			if($(this).prop("checked")){
+				var value='<th width="50">수량 :</th><td width="190"><input type="number" class="form-control" name="orderCount" required style="width: 150px;"></td>';
+				
+				if($(this).next().val() == 'Y'){
+					value += '<th width="50">옵션 : </th><td width="270"><input type="text" class="form-control" name="orderOption" required style="width: 450px;"></td>';
+				}	
+					
+				$(this).parents(".rewardSelect").children(".optionContent").html(value);
+			}
+		})
+	})
+	
+</script>
 </body>
 </html>
