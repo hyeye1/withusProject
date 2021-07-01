@@ -49,7 +49,12 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
-	public Order selectSendInfo(int orderNo) {
-		return oDao.selectSendInfo(sqlSession, orderNo);
+	public Order selectOrderInfo(int orderNo) {
+		return oDao.selectOrderInfo(sqlSession, orderNo);
+	}
+
+	@Override
+	public Order selectRefundInfo(int orderNo) {
+		return oDao.selectRefundInfo(sqlSession, orderNo);
 	}
 }

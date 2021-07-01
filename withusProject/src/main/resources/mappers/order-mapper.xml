@@ -118,8 +118,8 @@
 	<!-- 발송리스트 갯수 -->
 	<select id="SelectDeliveryCount" resultType="_int">
 			select
-			   count(*)
-		from tb_order
+			      count(*)
+		     from tb_order
 	<!-- 파트너가 게시한 프로젝트만 출력, 로그인한 mem_no = 프로젝트 mem_no-
 		  select
 		  count(order_no)
@@ -172,24 +172,53 @@
            and o.reward_no = r.reward_no
 	</select>
 	
-	<!-- 발송정보/환불신청 모달창 -->
-	<select id="selectSendInfo" resultMap="orderRset"
+	<!-- 발송모달창 : 펀딩내역-->
+	<select id="selectOrderInfo" resultMap="orderRset"
 		    parameterType="_int">
 		select
 		        o.order_no
-		      , m.member_name
+		      , m.member_name supporter_name
 		      , o.order_option
 		      , o.order_count
-		      , to_char(o.total_price, '999,999,999,999,999') total_price
+		      , o.total_price
 		      , r.reward_title
-		      , to_char(r.reward_price, '999,999,999,999') reward_price
+		      , r.reward_price
+		      , re.refund_no
+		      , re.r_reason
+		      , re.r_changename
 		  from tb_order o
 		  join member m on(o.member_no = m.member_no)
 		  join reward r on(r.project_no = o.project_no)
+		  join refund re on(o.order_no = re.order_no)
 		  where o.order_no = #{orderNo}
 		  and o.reward_no = r.reward_no
-		  <!-- where order_no=#{orderNo} -->
 	</select>
+	
+	<!-- 발송모달창 : 발송정보 입력 -->
+	
+	<!-- 환불모달 : 환불신청내역 조회-->
+	<select id="selectRefundInfo" resultMap="orderRset"
+			parameterType="_int">
+		select
+			    o.order_no
+			  , m.member_name supporterName
+			  , r.reward_title
+			  , o.order_option
+			  , o.order_count
+			  , o.total_price
+			  , re.refund_no
+			  , re.r_reason
+			  , re.r_changename
+			  , r.reward_price
+			  , o.order_plus
+		   from tb_order o
+		   join member m on(o.member_no = m.member_no)
+		   join reward r on(o.reward_no = r.reward_no)
+		   join refund re on (o.order_no = re.order_no)
+		  where o.order_no = #{orderNo}
+	</select>
+	
+	<!-- 환불 모달 : 승인/거절 -->
 	
 </mapper>
 			    
