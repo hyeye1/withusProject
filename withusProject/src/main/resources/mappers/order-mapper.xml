@@ -145,7 +145,7 @@
 		   join project p on(p.project_no = o.project_no)
 		   join member m  on(m.member_no = p.member_no)
 		  where m.member_no = p.member_no
-		    and p.project_no = 3
+		    and p.project_no = 2
 		    <!-- and p.project_no = #{projectNo} -->
 	</select>
 	
@@ -168,7 +168,7 @@
   		   join member m on(o.member_no = m.member_no)
  		   join reward r on(o.project_no = r.project_no)
            join project p on (o.project_no = p.project_no)
- 		   where p.project_no = 1
+ 		   where p.project_no = 2
            and o.reward_no = r.reward_no
 	</select>
 	
@@ -180,9 +180,9 @@
 		      , m.member_name supporter_name
 		      , o.order_option
 		      , o.order_count
-		      , o.total_price
+		      , to_char(o.total_price,'999,999,999,999,999') total_price
 		      , r.reward_title
-		      , r.reward_price
+		      , to_char(r.reward_price,'999,999,999,999,999') reward_price
 		      , re.refund_no
 		      , re.r_reason
 		      , re.r_changename
@@ -201,16 +201,16 @@
 			parameterType="_int">
 		select
 			    o.order_no
-			  , m.member_name supporterName
+			  , m.member_name supporter_name
 			  , r.reward_title
 			  , o.order_option
 			  , o.order_count
-			  , o.total_price
+			  , to_char(o.total_price,'999,999,999,999,999') total_price
 			  , re.refund_no
 			  , re.r_reason
 			  , re.r_changename
-			  , r.reward_price
-			  , o.order_plus
+			  , to_char(r.reward_price,'999,999,999,999,999') reward_price
+			  , to_char(o.order_plus,'999,999,999,999,999') order_plus
 		   from tb_order o
 		   join member m on(o.member_no = m.member_no)
 		   join reward r on(o.reward_no = r.reward_no)

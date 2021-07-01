@@ -251,13 +251,13 @@
                   	// 발송모달:주문내역
 	              	function ajaxSendInfo(){
 	              		var $orderNo = $(".ono").val();
-	              		console.log($orderNo);
+	              		//console.log($orderNo);
 	              		
 	              		$.ajax({
 	            			url:"send.info",
 	            			data:{ono:$orderNo},
 	              		   success:function(oi){
-	              			   console.log(oi);
+	              			   //console.log(oi);
  	              			   
 	              			   var resultSend = "<table>"
 	              			   				+ "<tr>" 
@@ -277,7 +277,7 @@
 	              			   				+ "<td>" + oi.orderOption / oi.orderCount + "</td>" 
 	              			   				+ "</tr>"	
 		              			   			+ "<th>총 결제 금액</th>"
-	              			   				+ "<td>" + oi.totalPrice + "</td>" 
+	              			   				+ "<td>" + oi.totalPrice + "원</td>" 
 	              			   				+ "</tr>"
 	              			   				+ "</table>"
 	              			   			

@@ -92,7 +92,7 @@ public class OrderController {
 	@RequestMapping(value="send.info", produces="application/json; charset=utf-8")
 	public String ajaxSelectOrderInfo(int ono) {
 		
-		System.out.println(ono); // 펀딩번호 확인		
+		//System.out.println(ono); // 펀딩번호 확인		
 		
 		Order o = oService.selectOrderInfo(ono);
 		System.out.println(o); // 펀딩내역 잘 담겼는지
@@ -107,7 +107,7 @@ public class OrderController {
 		//System.out.println(ono);
 		
 		Order r = oService.selectRefundInfo(ono);
-		//System.out.println(r);
+		System.out.println(r);
 		
 		return new Gson().toJson(r);
 	}
