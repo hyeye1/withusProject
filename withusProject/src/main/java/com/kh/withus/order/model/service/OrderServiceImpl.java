@@ -37,6 +37,11 @@ public class OrderServiceImpl implements OrderService {
 	public int selectDeliveryCount() {
 		return oDao.selectDeilveryCount(sqlSession);
 	}
+	
+	@Override
+	public ArrayList<Order> selectPartnerOrderList(PageInfo pi) {
+		return oDao.selectPartnerOrderList(sqlSession, pi);
+	}
 
 	@Override
 	public Order selectStatusCount() {
@@ -44,12 +49,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
-	public Order selectSendInfo() {
-		return oDao.selectSendInfo(sqlSession);
-	}
-	
-	@Override
-	public ArrayList<Order> selectPartnerOrderList(PageInfo pi) {
-		return oDao.selectPartnerOrderList(sqlSession, pi);
+	public Order selectSendInfo(int orderNo) {
+		return oDao.selectSendInfo(sqlSession, orderNo);
 	}
 }

@@ -13,7 +13,7 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
   *{box-sizing: border-box;} 
-  .wrap{width: 1150px; height: 1800px; position: relative;}
+  .wrap{width: 1150px; position: relative;}
   .wrap>div{width: 100%;}
 
   /* 메뉴 아래 선 */
@@ -201,11 +201,34 @@
 							<tbody>
 								<c:forEach var="p" items="${ polist }">
 				                    <tr height="100">
-										<td class=ono>${ p.orderNo }</td>
+				                    	<input type="hidden" id="ono" name="ono" value="${ p.orderNo }">
+										<td class="ono">${ p.orderNo }</td>
 										<td>${ p.supporterName }</td>
-										<td>${ p.orderStatus }</td>
+										<c:choose>
+			                        		<c:when test="${ p.orderStatus == 1 }">
+			                        			<td>결제완료</td>
+			                        		</c:when>
+			                        		<c:when test="${ p.orderStatus == 2 }">
+			                        			<td>취소요청</td>
+			                        		</c:when>
+			                        		<c:when test="${ p.orderStatus == 3 }">
+			                        			<td>취소완료</td>
+			                        		</c:when>
+			                        	</c:choose>
 										<td>${ p.totalPrice } 원</td>
-										<td>${ p.rewardTitle }/${ p.orderOption }/${ p.orderCount }</td>
+										<td>
+											<c:choose>
+												<c:when test="${!empty p.rewardTitle }">
+													${ p.rewardTitle }
+												</c:when>
+												<c:otherwise>
+													펀딩 밀어주기
+												</c:otherwise>
+											</c:choose>
+											<c:if test="${ !empty p.orderOption }">
+												/ ${ p.orderOption }
+											</c:if>
+										 	/${ p.orderCount }</td>
 										<td><button type="button" class="btn btn-withus btn-sm" id ="sendInfo" data-toggle="modal" data-target="#sendInfoModal" >발송정보 입력</button></td>
 										<td>${ p.deliveryDate }</td>
 										<c:choose>
@@ -235,6 +258,14 @@
 						</table>
 
 					</div>
+					<script>
+						$(function(){
+							$("#sendInfo").click(function(){
+								$(".ono").text(("#sendInfo").text());
+								$("#sendInfoModal").modal();
+							});
+						});
+					</script>
 
 					<!-- 발송정보 입력창  -->
 					<!-- The Modal -->
@@ -263,7 +294,14 @@
 					                          </tr>
 					                          <tr>
 					                          	<td>펀딩 정보</td>
-					                            <td><h6>${ oi.rewardTitle }</h6></td>
+					                          	<c:choose>
+												<c:when test="${!empty p.rewardTitle }">
+													<td><h6>${ oi.rewardTitle }</h6></td>
+												</c:when>
+												<c:otherwise>
+													<td><h6>펀딩 밀어주기</h6></td>
+												</c:otherwise>
+											</c:choose>
 					                          </tr>
 					                          <tr>
 					                            <th>옵션정보</th>

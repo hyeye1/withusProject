@@ -157,7 +157,20 @@
 
                   
                 
-                <div id="openBtnArea"><button id="openBtn" class="btn btn-sm">펀딩오픈하기</button></div>
+                <div id="openBtnArea">
+                	<!-- 파트너인경우와 아닌경우 매핑값 다르게 -->
+                	<!-- 파트너등록페이지 or 펀딩등록페이지 -->
+                	<c:choose>
+                		<c:when test="${ loginUser.partnerJoin eq 'N' }">
+                			<button id="openBtn" class="btn btn-sm"><a href="partnerJoinForm.me">펀딩오픈하기</a></button>
+                		</c:when>
+                		<c:otherwise>
+                			<button id="openBtn" class="btn btn-sm"><a href="">펀딩오픈하기</a></button>
+                		</c:otherwise>
+                	
+                	</c:choose>
+                	
+                </div>
                 
 
                 

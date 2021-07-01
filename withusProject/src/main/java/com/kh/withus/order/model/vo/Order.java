@@ -17,8 +17,8 @@ public class Order {
 	private int memberNo;
 	private int rewardNo;
 	private String purEmail;
-	private int orderPlus;
-	private int totalPrice;
+	private String orderPlus;
+	private String totalPrice;
 	private int orderStatus;
 	private String bankName;
 	private String bankAccount;
@@ -41,7 +41,7 @@ public class Order {
 	private String projectEndDt;
 	private String projectTitle;
 	private String rewardTitle;
-	private int rewardPrice;
+	private String rewardPrice;
 	private String cardNo;
 	
 	// 파트너 발송관리
@@ -54,6 +54,7 @@ public class Order {
 	private int comRefund;
 	private int refRefund;
 	private String deliveryDate;
+	private String rewardContent;
 
 	private int refundNo;
 	private String reOrginName;

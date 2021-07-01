@@ -279,13 +279,6 @@ public class MyPageController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
 	// 회원탈퇴
 	@RequestMapping("delete.me")
 	public String deleteMember(HttpSession session, Model model) {
@@ -683,70 +676,6 @@ public class MyPageController {
 	}
 	
 	
-	/*
-	// 오더넘버와 리워드에대한 옵션내역들 ajax로 리스트로 받아오기
-	// 리턴이안됨
-	@RequestMapping(value="optionList.me", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, ArrayList> ajaxOptionList(HttpSession session, @RequestBody OptionList o) {
-		
-		 
-		
-		System.out.println(o.getOrderNo());
-		System.out.println(o.getRewardNo());
-		
-		
-		
-		//ArrayList<MyPage> list = mService.selectOptionList(m);
-		ArrayList<OptionList> list = mService.selectOptionList(o);
-		
-		
-		Map<String, ArrayList> map = new HashMap<String, ArrayList>();
-		map.put("list", list);
-		
-		
-		System.out.println(list);
-		
-		return map;
-		//return new Gson().toJson(list);
-		
-		
-		
-		
-		
-		
-		
-	}
-	
-	
-	
-	
-	
-	// 오더넘버와 리워드에대한 옵션내역들 ajax로 리스트로 받아오기
-	// 잘 실행되나 한글이깨짐 ㅠㅠㅠ
-	@ResponseBody
-	@RequestMapping(value="optionList.me", method = RequestMethod.POST)
-	public String ajaxOptionList(@RequestBody OptionList o) {
-		
-		//ArrayList<MyPage> list = mService.selectOptionList(m);
-		//ArrayList<OptionList> list = mService.selectOptionList(o);
-		
-		//System.out.println(list);
-		//return null;
-		
-		
-		
-		
-		
-		return new Gson().toJson(mService.selectOptionList(o));
-		
-	}
-	
-	*/
-	
-	
-	
-	
 	
 	// 주문정보 수정
 	@RequestMapping("updateOrder.me")
@@ -849,13 +778,7 @@ public class MyPageController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	//-----------------------------------------------------------------------//
+	//-파트너----------------------------------------------------------------------//
 	
 	// 펀딩스튜디오메인
 	@RequestMapping("fundingMain.me")
@@ -948,7 +871,7 @@ public class MyPageController {
 	
 	
 	// 파트너정보수정
-	@RequestMapping(value="partnerUpdate.me")
+	@RequestMapping("partnerUpdate.me")
 	public String updatePartner(MyPage mp, MultipartFile file, HttpSession session, Model model, String deleteProfile, Member m) {
 		
 		
@@ -994,6 +917,75 @@ public class MyPageController {
 	
 	}
 		
+		
+	// 파트너조인 폼
+	@RequestMapping("partnerJoinForm.me")
+	public String partnerJoinForm(HttpSession session, Model model) {
+		
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		
+		if(loginUser.getPartnerJoin().equals("Y")) {
+			
+			session.setAttribute("alertMsg", "파트너님 안녕하세요");
+			return "myPage/partner/pageMyFundingMain";
+			
+		} else {
+			
+			session.setAttribute("loginUser", loginUser);
+			return "myPage/partner/partnerJoinForm";
+		}
+		
+		
+		
+		
+		
+	}
+	
+	// 파트너조인
+	@RequestMapping("partnerJoin.me")
+	public String partnerJoinForm(MyPage mp, MultipartFile file, HttpSession session, Model model, String deleteProfile, Member m) {
+		
+		if(!file.getOriginalFilename().equals("")) { // 넘어오는값이 있을경우
+			
+			if(m.getMemberProfile() !=null ) { // 기존 파일이 있을 경우 ->기존파일 지워버림
+				
+				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
+			}
+			
+			// 새로운 파일 업로드
+			String changeName = saveFile(session, file);
+			mp.setMemberProfile("resources/member_profile/" + changeName); 
+				
+		}
+		
+		if(deleteProfile.equals("delete")) { // 기존파일을 삭제하고 기본이미지로 변경
+			
+			if(mp.getMemberProfile() !=null ) { // 기존 파일이 있을 경우 ->기존파일 지워버림
+				
+				new File(session.getServletContext().getRealPath(mp.getMemberProfile())).delete();
+			}
+			
+			mp.setMemberProfile("resources/member_profile/profile_basic.jpg");
+		
+		}
+		
+		int result = mpService.partnerJoin(mp); 
+		
+		if(result > 0) { // 수정성공했을 경우
+			
+			session.setAttribute("alertMsg", "파트너 등록이 완료되었습니다.");
+			session.setAttribute("loginUser", mService.loginMember(m));
+			return "myPage/partner/pageMyFundingMain";
+			
+		}else {// 실패했을 경우 
+			model.addAttribute("errorMsg", "에러발생");
+			return "common/errorPage";
+		}
+		
+		
+	}	
 		
 	
 	
