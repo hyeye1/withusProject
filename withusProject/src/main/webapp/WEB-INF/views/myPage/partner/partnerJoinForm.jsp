@@ -13,6 +13,9 @@
     
     <style>
         
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&display=swap');
+  		.ff{font-family: 'Nanum Gothic Coding', monospace;}
+        
         /*div{border: 1px solid red; box-sizing: border-box;}*/
         .wrap{width: 1000px; height: 1000px; margin: auto;}
 
@@ -26,7 +29,7 @@
             
         }
 
-        #mypage{height: 100%; margin-top: 50px; }
+        #mypage{height: 100%; margin-top: 100px; }
         
        
         /* mypage안의 세부영역 */
@@ -62,10 +65,10 @@
         
         
         /* 버튼 부분 */
-        .buttonArea{height: 80px; text-align: center;}
+        .buttonArea{height: 120px; text-align: center;}
 
         #btn1{background-color: rgb(52, 152, 219); color: honeydew;}
-        button{width: 200px;}
+        button{width: 300px;}
 
     </style>
 </head>
@@ -73,7 +76,7 @@
 
 	<jsp:include page="../../common/header.jsp"/>
 
-    <div class="wrap">
+    <div class="wrap ff">
         
         <!-- 파트너등록 -->
         <div id="mypage" align="center">
@@ -180,7 +183,7 @@
 	  
 		$('#file').change(handleFileSelect);
 		$('.fileEdit').on('click', '#delete', function () {
-		    $("#preview").removeAttr("src").attr("src", "resources/images/profile_basic.jpg"); // db의 기본프로필파일
+		    $("#preview").removeAttr("src").attr("src", "resources/member_profile/profile_basic.jpg"); // db의 기본프로필파일
 		    $("#file").val(""); //파일밸류값 삭제
 		    $("#deleteProfile").val("delete"); // 기본이미지로 변경을위해 밸류값줘서 넘긴다
 		});
