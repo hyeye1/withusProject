@@ -10,15 +10,9 @@
 	div{box-sizing: border-box;}
 
 	/* 타이틀 */
-    .titleArea{
-        outline: 1px solid red;
-        background-color: rgb(220, 170, 128);
-		height: 50px;
-    }
-    .titleArea div{
-        /* outline: 1px solid yellow; */
-		float:left;
-    }
+	.titleArea{outline: 1px solid red;}
+    .titleArea{height: 50px; background-color: rgb(220, 170, 128);}
+    .titleArea div{float:left;}
 	.back{height: 100%; width: 15%; padding: 13px 0 0 10px;}
     .back a{text-decoration: none; font-size: 15px; color: white !important;}
     .title{width: 70%; height: 100%; font-size: 20px; font-weight: bold; color: white; padding-top: 10px;}
@@ -26,24 +20,26 @@
 
 
 	/* 컨텐츠 */
-	.innerOuter{
-	    /* outline:1px solid blue; */
-	    width: 1000px;
-	    margin: auto;
-		padding: 50px 50px;
-	}
-
+	.innerOuter{width: 1000px; margin: auto; padding: 50px 50px;}
 	.rewardSelect {width: 900px; padding: 15px 0 15px 0; margin-bottom: 15px; background-color: rgb(234, 234, 234); }
 	.rewardContent tr{height: 33px;}
 	.rewardContent td{padding-left: 10px;}
 	.rewardContent th{padding-left: 10px; font-size: x-large;}
 	#rewardNo{margin-left: 32px;}
-
 	.optionContent {margin: 7px 0 0 110px;}
 	
+	/* 후원금 */
+	/* .donationArea {outline: 1px solid purple;} */
+	.donationArea div {padding: 10px 0 10px 0; text-align: center !important;}
 
-	.moneyArea {outline: 1px solid black;}
-	.moneyArea {width: 900px;}
+	.plusInfo1 h3 {font-weight: 1000 !important;}
+	.inputSize {width: 250px !important;}
+	.plusInfo3 {font-size: 20px; font-weight: 550;}
+	.plusInfo3 span {color: rgb(52, 152, 219); font-size: 30px; font-weight: 700;}
+
+	/* 버튼 */
+	.button {text-align: center !important;}
+	.btn-primary {color: white !important; width: 200px; height:50px;}
 </style>
 </head>
 <body>
@@ -53,7 +49,7 @@
 
 	<div class="titleArea">
         <div class="back" align="left"><a href=""> < 스토리로 돌아기기</a></div>
-        <div class="title" align="center">${ drList[0].projectTitle }</div>
+        <div class="title" align="center">젖은 우산에서 두 손을 자유롭게, 친자연 우산 "텀브렐라"</div>
         <div class="empty"></div>
     </div>
 
@@ -103,29 +99,33 @@
 			</c:forEach>
 
 			<br><br>
-			
 
-<br><br><br>
-
-
-			<div class="moneyArea">
-				<div class="plusArea" style="display: table;">
+			<div class="donationArea" align="center">
+				<div class="plusInfo1" style="display: table;">
 					<div style="display: table-cell;"><h3>후원금 더하기 (선택)</h3></div>
-					<div>후원금을 더하여 펀딩할 수 있습니다. 추가 후원금을 입력하시겠습니까?</div>
+					<div style="margin-left: 15px;">후원금을 더하여 펀딩할 수 있습니다. 추가 후원금을 입력하시겠습니까?</div>
 				</div>
 
-				
-				<div class="total" align="center">
-					<div><input type="number" name="orderPlus" value="0"> 원을 추가로 후원합니다.</div>
-					<div><p>${ drList[0].projectTitle }에 <span id="allTotalPrice"></span>원을 펀딩합니다.</p></div>
+				<div class="plusInfo2" style="display: table;">
+					<div class="inputSize" style="display: table-cell;"><input type="number" name="orderPlus" value="0" class="form-control"></div>
+					<div style="margin-left: 10px;">원을 추가로 후원합니다.</div>
+				</div>
+
+				<div class="plusInfo3">
+					<div><p>${ drList[0].projectTitle }에 <span id="allTotalPrice">1000000</span>원을 펀딩합니다.</p></div>
 				</div>
 			</div>
-			<br>
 	
-			<button type="submit" id="next">다음 단계로 ></button>
-		
+			<div class="button">
+				<button type="submit" id="next" class="btn btn-primary" align="center">다음 단계로></button>
+			</div>
 		</form>
 	</div>
+
+	
+
+
+
 
 	<jsp:include page="../common/footer.jsp"/>
 
