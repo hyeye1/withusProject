@@ -9,7 +9,7 @@
 		<result column="reward_no" property="rewardNo"/>
 		<result column="pur_email" property="purEmail"/>
 		<result column="order_plus" property="orderPlus"/>
-		<result column="totalPrice" property="totalPrice"/>
+		<result column="total_price" property="totalPrice"/>
 		<result column="order_status" property="orderStatus"/>
 		<result column="bank_name" property="bankName"/>
 		<result column="bank_account" property="bankAccount"/>
@@ -32,6 +32,7 @@
 		<result column="project_Title" property="projectTitle"/>
 		<result column="reward_Title" property="rewardTitle"/>
 		<result column="reward_price" property="rewardPrice"/>
+		<result column="reward_content" property="rewardContent"/>
 		<result column="card_no" property="cardNo"/>
 		<result column="delivery_date" property="deliveryDate"/>
 		
@@ -89,9 +90,9 @@
 			  , r.reward_title
 			  , o.order_option
 			  , o.order_count
-			  , r.reward_price
-			  , o.order_plus
-			  , to_char(o.total_price, '999,999,999,999,999')total_price
+			  , to_char(r.reward_price, '999,999,999,999') reward_price
+			  , to_char(o.order_plus, '999,999,999,999') order_price
+			  , to_char(o.total_price, '999,999,999,999,999,999') total_price
 			  , py.card_no
 			  , o.receiver_name
 			  , o.address_no
@@ -117,8 +118,8 @@
 	<!-- 발송리스트 갯수 -->
 	<select id="SelectDeliveryCount" resultType="_int">
 			select
-			   count(*)
-		from tb_order
+			      count(*)
+		     from tb_order
 	<!-- 파트너가 게시한 프로젝트만 출력, 로그인한 mem_no = 프로젝트 mem_no-
 		  select
 		  count(order_no)
@@ -144,7 +145,7 @@
 		   join project p on(p.project_no = o.project_no)
 		   join member m  on(m.member_no = p.member_no)
 		  where m.member_no = p.member_no
-		    and p.project_no = 3
+		    and p.project_no = 2
 		    <!-- and p.project_no = #{projectNo} -->
 	</select>
 	
@@ -154,34 +155,34 @@
 		        o.order_no
 		      , m.member_name supporter_name
 		      , o.order_status
-		      , to_char(o.total_price, '999,999,999,999,999')total_price
+		      , to_char(o.total_price,'999,999,999,999,999') total_price
               , r.reward_title
+              , r.reward_content
       		  , o.order_option
       		  , o.order_count
 		      , o.shipping_status
 		      , o.shipping_com
 		      , o.shipping_no
-		      , (select 
-		         to_char(delivery_date, 'YYYY-MM-DD')delivery_date 
-		           from project p 
-		           where p.project_no = o.project_no) delivery_date  
+              , to_char(delivery_date, 'YYYY-MM-DD') delivery_date 
 		   from tb_order o
   		   join member m on(o.member_no = m.member_no)
  		   join reward r on(o.project_no = r.project_no)
- 		  <!-- where p.project_no = 3 -->
+           join project p on (o.project_no = p.project_no)
+ 		   where p.project_no = 2
+           and o.reward_no = r.reward_no
 	</select>
 	
-	<!-- 발송정보/환불신청 모달창 -->
-	<select id="selectSendInfo" resultMap="orderRset"
+	<!-- 발송모달창 : 펀딩내역-->
+	<select id="selectOrderInfo" resultMap="orderRset"
 		    parameterType="_int">
 		select
 		        o.order_no
 		      , m.member_name supporter_name
 		      , o.order_option
 		      , o.order_count
-		      , o.total_price
+		      , to_char(o.total_price,'999,999,999,999,999') total_price
 		      , r.reward_title
-		      , r.reward_price
+		      , to_char(r.reward_price,'999,999,999,999,999') reward_price
 		      , re.refund_no
 		      , re.r_reason
 		      , re.r_changename
@@ -189,10 +190,35 @@
 		  join member m on(o.member_no = m.member_no)
 		  join reward r on(r.project_no = o.project_no)
 		  join refund re on(o.order_no = re.order_no)
-		  where o.order_no = 31 
+		  where o.order_no = #{orderNo}
 		  and o.reward_no = r.reward_no
-		  <!-- where order_no=#{orderNo} -->
 	</select>
+	
+	<!-- 발송모달창 : 발송정보 입력 -->
+	
+	<!-- 환불모달 : 환불신청내역 조회-->
+	<select id="selectRefundInfo" resultMap="orderRset"
+			parameterType="_int">
+		select
+			    o.order_no
+			  , m.member_name supporter_name
+			  , r.reward_title
+			  , o.order_option
+			  , o.order_count
+			  , to_char(o.total_price,'999,999,999,999,999') total_price
+			  , re.refund_no
+			  , re.r_reason
+			  , re.r_changename
+			  , to_char(r.reward_price,'999,999,999,999,999') reward_price
+			  , to_char(o.order_plus,'999,999,999,999,999') order_plus
+		   from tb_order o
+		   join member m on(o.member_no = m.member_no)
+		   join reward r on(o.reward_no = r.reward_no)
+		   join refund re on (o.order_no = re.order_no)
+		  where o.order_no = #{orderNo}
+	</select>
+	
+	<!-- 환불 모달 : 승인/거절 -->
 	
 </mapper>
 			    

@@ -205,7 +205,7 @@
 
 
                             <!-- 댓글 기능은 나중에 ajax 배우고 접목시킬예정! 우선은 화면구현만 해놓음 -->
-                            <table id="replyArea" class="table" align="center">
+                            <table id="commuReplyArea" class="table" align="center">
                                 <thead>
                                     <tr>
                                         <c:choose>
@@ -228,11 +228,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th>user02</th>
-                                        <td>댓글입니다.너무웃기다앙</td>
-                                        <td>2020-04-10</td>
-                                    </tr>                          
+                                                                                  
                                 </tbody>
                             </table>
                         </div>
@@ -240,6 +236,69 @@
                     </div>
                 </section>
             </div>
+            
+             <script>
+		    	$(function(){
+		    		selectCommuReplyList();
+		    		
+		    		setInterval(selectCommuReplyList, 1000);
+		    	})
+		    	
+		    	function addCommuReply(){
+		    		
+		    		if($("#content").val().trim().length != 0){ // 댓글작성되어있을 경우 => ajax로 댓글작성요청
+		    			
+		    			$.ajax({
+		    				url:"rinsert.co",
+		    				data:{
+		    					comReContent:$("#content").val(),
+		    					refCommuNo:${c.commuNo},
+		    					comReWriter:'${loginUser.memberId}'
+		    				},
+		    				success:function(status){
+		    					if(commuStatus == "success"){
+		    						$("#content").val("");
+		    						selectCommuReplyList();
+		    					}
+		    				},error:function(){
+		    					console.log("댓글 작성용 ajax 통신 실패");
+		    				}
+		    			})
+		    			
+		    			
+		    		}else{ // 댓글미작성 => alert
+		    			alertify.alert("댓글 작성 해주세요!!");
+		    		}
+		    		
+		    	}
+		    	
+		    	function selectCommuReplyList(){
+		    		$.ajax({
+		    			url:"rlist.co",
+		    			data:{cno:${c.commuNo}},
+		    			success:function(list){
+		    				//console.log(list);
+		    				
+		    				var value="";
+		    				$.each(list, function(i, obj){
+		    					value += "<tr>"
+		    						   +    "<td>" + obj.comReWriter + "</td>"
+		    						   +    "<td>" + obj.comReContent + "</td>"
+		    						   +    "<td>" + obj.comReCreate + "</td>"
+		    						   + "</tr>";
+		    				})
+		    				
+		    				$("#commuReplyArea tbody").html(value);
+		    				$("#rcount").text(list.length);
+		    				
+		    			},error:function(){
+		    				console.log("댓글 리스트 조회용 ajax실패");
+		    			}
+		    		})
+		    	}
+		    	
+		    </script>
+    
             <!-- 푸터바  -->
             <jsp:include page="../common/footer.jsp" />
 

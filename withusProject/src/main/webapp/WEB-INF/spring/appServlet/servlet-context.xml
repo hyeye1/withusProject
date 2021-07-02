@@ -57,6 +57,9 @@
 			<mapping path="/partnerFunding.me"/>
 			<mapping path="/partnerInfo.me"/>
 			
+			<mapping path="/partnerJoinForm.me"/>
+			<mapping path="/partnerJoin.me"/>
+			
 			
 			<beans:bean id="" class="com.kh.withus.common.interceptor.LoginInterceptor"/>
 		</interceptor>
