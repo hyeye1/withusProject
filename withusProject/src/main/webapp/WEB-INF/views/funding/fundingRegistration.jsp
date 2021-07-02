@@ -47,8 +47,8 @@
 
                 .registerBtn {
                     width: 170px !important;
-                    background-color: rgb(52, 152, 219) !important;
-                    color: white !important;
+                    background-color: rgb(52, 152, 219);
+                    color: white;
                 }
 
                 .regiMenubar {
@@ -103,8 +103,8 @@
 
                 .regiSubmitBtn,
                 .btn1 {
-                    background-color: rgb(52, 152, 219) !important;
-                    color: white !important;
+                    background-color: rgb(52, 152, 219);
+                    color: white;
                 }
 
                 #regiResetBtn,
@@ -243,6 +243,7 @@
                 .regiReward input,
                 textarea {
                     width: 467px;
+                    margin-right: 16px;
                 }
 
                 .regiReward textarea {
@@ -264,6 +265,7 @@
                 }
 
                 #limitNum {
+                    float: right;
                     width: 178px;
                 }
 
@@ -281,7 +283,8 @@
                 }
 
                 .registered {
-                    height: 330px;
+                    height: 370px;
+                    width: 213px;
                     padding: 20px;
                     border-radius: 5px;
                     border: rgb(94, 94, 94) 1px solid;
@@ -301,7 +304,7 @@
                 }
 
                 #editBtn {
-                    width: 80px;
+                    width: 78px;
                     margin: 5px;
                 }
 
@@ -367,7 +370,13 @@
                     color: rgb(245, 40, 153);
                 }
 
+                .delOpt{
+                    float: right;
+                    cursor: pointer;
+                    margin-right: 20px;
+                }
 
+                
 
 
             </style>
@@ -396,7 +405,7 @@
                 <!-- 바디 -->
                 <div class="regiBody">
                     <!-- 1. 기본정보 -->
-                    <div class="regiOne regi">
+                    <div class="regiOne regi" style="display: none;">
                         <div class="regiInfo">
                             <b class="regiTitle">프로젝트 성공 조건 & 수수료 안내</b>
                             <p>
@@ -554,7 +563,7 @@
 
                     <!-- 3. 리워드 -->
                     <form action="">
-                        <div class="regiThree regi" style="display: none;">
+                        <div class="regiThree regi">
                             <div>
                                 <b class="regiTitle">프로젝트 리워드를 구성해주세요</b>
                                 <p>
@@ -580,8 +589,16 @@
                                             <b class="regiTitle" style="line-height: 1;">리워드 제공<br>가능 수 </b>
                                         </th>
                                         <td class="rewardLimitNum">
-                                            <button class="btn2 limitBtn1 limit" onclick="limitBtn(1); limitBtn1();">무제한</button>
-                                            <button class="btn1 limitBtn2 limit" onclick="limitBtn(2); limitBtn2();">제한</button>
+                                            <!-- 예쁜 버튼 
+                                                <button type="button" class="btn2 limitBtn1 limit" onclick="limitBtn(1); limitBtn1();">무제한</button>
+                                                <button type="button" class="btn1 limitBtn2 limit" onclick="limitBtn(2); limitBtn2();">제한</button>
+                                            -->
+                                            <label for="limited" style="width:130px;">
+                                                <input type="radio" name="limit" id="limited" value="limited" style="width: 30px;" onclick="limitBtn(2); limitBtn2();" checked> 제한
+                                            </label>
+                                            <label for="unlimited">
+                                                <input type="radio" name="limit" id="unlimited" value="unlimited" style="width: 30px;"  onclick="limitBtn(1); limitBtn1();"> 무제한
+                                            </label>
                                             <input type="number" name="limitNum" id="limitNum" class="limitNum" required>
                                         </td>
                                         <td class="limitNum">개</td>
@@ -610,7 +627,7 @@
                                             <b class="regiTitle">리워드 옵션</b>
                                         </th>
                                         <td>
-                                            <button id="addOptionBtn" onclick="addOption();" required>리워드 옵션 추가하기</button>
+                                            <button type="button" id="addOptionBtn" onclick="addOption();" required>리워드 옵션 추가하기</button>
                                         </td>
                                     </tr>
                                     <tr class="optionOnTr" style="display: none;">
@@ -618,7 +635,7 @@
                                             <b class="regiTitle">리워드 옵션</b>
                                         </th>
                                         <td>
-                                            <p id="regiOption">옵션설명</p>
+                                            <p id="regiOption">옵션설명 <b class="pink delOpt" onclick="delOpt();">옵션취소</b></p>
                                             <input class="optionInput" name="option" type="text" placeholder="ex) 사이즈를 입력하세요">
                                         </td>
                                         <td>
@@ -630,8 +647,8 @@
                                             <b class="regiTitle">배송지필요여부</b>
                                         </th>
                                         <td>
-                                            <label for="yesShip">
-                                                <input type="radio" name="ship" id="yesShip" value="yesShip" style="width: 30px;" checked> 배송지 필요
+                                            <label for="yesShip" style="width:180px">
+                                                <input type="radio" name="ship" id="yesShip" value="yesShip" style="width: 30px; " checked> 배송지 필요
                                             </label>
                                             <label for="noShip">
                                                 <input type="radio" name="ship" id="noShip" value="noShip" style="width: 30px;"> 배송지 필요없음
@@ -650,6 +667,24 @@
                             <div class="regiBtn">
                                 <button type="button" class="regiSubmitBtn threeSubmit" onclick="addedReward();">등록</button>
                                 <button type="reset" class="regiResetBtn threeReset">초기화</button>
+                            </div>
+                                <!-- 등록된 리워드  -->
+                            <div class="rewardOn" style="display: none;">
+                                <table class="registeredTable">
+                                    <hr><br>
+                                    <tr>
+                                        <th>
+                                            <b class="regiTitle" style="line-height: 1;">등록된 리워드 <br> 미리보기</b>
+                                        </th>
+                                        <!-- <td> <td> <td>-->
+                                    </tr>
+                            <!--    <tr>
+                                        <th>
+                                        </th>
+                                        +1 =
+                                    </tr>
+                                    -->
+                                </table>
                             </div>
                         </div>
                     </form>
@@ -781,55 +816,75 @@
                         </div>
                     </div>
 
-                    <!-- 등록된 리워드  -->
-                    <div class="rewardOn" style="display: none;">
-                        <table class="registeredTable">
-                            <hr><br>
-                            <tr>
-                                <th>
-                                    <b class="regiTitle" style="line-height: 1;">등록된 리워드 <br> 미리보기</b>
-                                </th>
-                            </tr>
-                        </table>
-                    </div>
+                    
                 </div>
 
                 <script>
                     function addedReward(){
                         var price = $('input[name=rePrice]').val();
                         var limit = $('input[name=limitNum]').val();
+                        var limited = $('input:radio[name=limit]:checked').val();
                         var title = $('input[name=reTitle').val();
                         var content = $('textarea[name=reContent]').val();
                         var option = $('input[name=option]').val();
                         var ship = $('input[name=ship]').val();
-                
-                        $('.registeredTable th').after(        
-                            '<td>'
-                                +'<div class="registered registered1">'+
-                                    '<div>'+
-                                        '<p><b id="registeredName"></b></p>'+
-                                        '<span id="registeredSpan1"></span>'+
-                                        '<!-- <span>0개 펀딩</span> 수정될때를 위해 가지고 있어야 함--> <br>'+
-                                    '</div><br>'+
-                                    '<div><p id="registeredTC"></p></div>'+
 
-                                    '<div class="optionOn" style="display: none;">'+
-                                        '<input type="text" placeholder="" disabled>'+
-                                    '</div><br>'+
+                        // limited가 선택되어있는데, limit이 비어있을 경우 => 안된다
+                        // unlimited가 선택되어있으면 , limit비어있든 말든 상관없음
+                        if ( limited == "limited" && limit == ""){
+                            alert("입력창을 입력해주세요.");
+                            //console.log(limited);
+                        }else{
+                            if( price == "" || title == "" || content == "" ){
+                                
+                                alert("입력창을 입력해주세요.");
+                                //console.log('안된다');
+                                
+                            }else{
+                                
+                                var aa = '<td class="td">'+
+                                            '<div class="registered registered1">'+
+                                                '<div style="height: 290px;">'+
+                                                    '<div>'+
+                                                        '<p><b id="registeredName"></b></p>'+
+                                                        '<span id="registeredSpan1"></span>'+
+                                                        '<!-- <span>0개 펀딩</span> 수정될때를 위해 가지고 있어야 함--> <br>'+
+                                                    '</div><br>'+
+                                                    '<div><p id="registeredTC"></p></div>';
+                                    
+                                if(option != ""){
+                                    aa += '<p id="optionP"></p>';
+                                }
 
-                                    '<div>'+
-                                        '<img id="editBtn" src="${ pageContext.request.contextPath }/resources/images/editBtn.PNG" onclick="">'+
-                                        '<img id="deleteBtn"src="${ pageContext.request.contextPath }/resources/images/deleteBtn.PNG" onclick="">'+
-                                    '</div>'+
-                                '</div>'+
-                            '</td>');
-                        
-                        $(".rewardOn").show();
-                        $("#registeredName").append(price+"원 펀딩");
-                        $('#registeredSpan1').append(limit + "개 남음");
-                        $('#registeredTC').append("리워드명 <br> <b>" + title + " </b> <br> " + content);
-                        $('.optionOn').append("<input type="+text+" placeholder="+ option +" disabled>");
+                                    aa +=   '</div>'+
+                                                '<div class="editDel">'+
+                                                    '<img id="editBtn" src="${ pageContext.request.contextPath }/resources/images/editBtn.PNG" onclick="">'+
+                                                    '<img id="deleteBtn"src="${ pageContext.request.contextPath }/resources/images/deleteBtn.PNG" onclick="">'+
+                                                '</div>'+
+                                            '</div>'+
+                                        '</td>';
+                                        
+                                
+                                console.log(($('td[class=td]').length+1)%3 == 0);
+                                $('.registeredTable').append(aa);
+                                $(".rewardOn").show();
+                                $("#registeredName").append(price+"원 펀딩");
+                                $('#registeredSpan1').append(limit + "개 남음");
+                                $('#registeredTC').append("리워드명 <br> <b>" + title + " </b> <br> " + content);
+                                $('#optionP').append("<input placeholder="+ option +" disabled>");
+                                
+                                if( ($('td[class=td]').length+1)%3 == 0 ) {
+                                    $('.registeredTable').append("<tr><th></th></tr>");
+                                }
+                                /*
+                                $(this).trigger('reset');
+                                $('input').val('');
+                                $('textarea').val('');
+*/
+                            }
+                        }
 
+                        /* 3개 이상이면 tr추가!*/
                         
                     }
                 </script>
@@ -867,7 +922,12 @@
                 function addOption() {
                     $('.addOptionTr').hide();
                     $('.optionOnTr').show();
-                    $('.optionOn').show();
+                    
+                }
+
+                function delOpt(){
+                    $('.optionOnTr').hide();
+                    $('.addOptionTr').show();
                 }
 
                 function limitBtn(className) {

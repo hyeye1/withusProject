@@ -312,8 +312,8 @@
 					<a href=""> 관리자</a>
 					<img src="resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
 				</div>
-				</div>
 			</c:if>
+		</div>
 
 		</body>
 
