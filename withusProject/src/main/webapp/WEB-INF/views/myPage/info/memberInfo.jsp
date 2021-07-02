@@ -164,7 +164,7 @@
 					  
 						$('#file').change(handleFileSelect);
 						$('.fileEdit').on('click', '#delete', function () {
-						    $("#preview").removeAttr("src").attr("src", "resources/images/profile_basic.jpg"); // db의 기본프로필파일
+						    $("#preview").removeAttr("src").attr("src", "resources/member_profile/profile_basic.jpg"); // db의 기본프로필파일
 						    $("#file").val(""); //파일밸류값 삭제
 						    $("#deleteProfile").val("delete"); // 기본이미지로 변경을위해 밸류값줘서 넘긴다
 						});

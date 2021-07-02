@@ -51,7 +51,12 @@ public class OrderDao {
 		return sqlSession.selectOne("orderMapper.selecetStatsCount");
 	}
 	
-	public Order selectSendInfo(SqlSessionTemplate sqlSession, int orderNo) {
-		return sqlSession.selectOne("orderMapper.selectSendInfo", orderNo);
+	public Order selectOrderInfo(SqlSessionTemplate sqlSession, int orderNo) {
+		return sqlSession.selectOne("orderMapper.selectOrderInfo", orderNo);
 	}
+
+	public Order selectRefundInfo(SqlSessionTemplate sqlSession, int orderNo) {
+		return sqlSession.selectOne("orderMapper.selectRefundInfo", orderNo);
+	}
+	
 }
