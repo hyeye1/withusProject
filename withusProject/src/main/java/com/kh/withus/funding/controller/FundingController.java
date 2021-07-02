@@ -65,8 +65,10 @@ public class FundingController {
 	}
 	
 	@RequestMapping("check.fun")
-	public String insertOrder(Order o) {
+	public String insertOrder(Order o, Model model) {
 		System.out.println(o);
+		
+		model.addAttribute("o", o);
 		return "funding/payCheckForm";
 	}
 	
