@@ -283,7 +283,8 @@
 	           	 		where ${condition} like '%' || #{keyword} || '%' 
 	          		</otherwise>
 	          </choose>
-          and and o.reward_no = r.reward_no
+	      and p.project_no = 2   
+          and o.reward_no = r.reward_no
 			 order
 			    by order_no desc
 </select>
