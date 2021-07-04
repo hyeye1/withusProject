@@ -113,8 +113,42 @@
 		    and o.reward_no = r.reward_no
 	</select>
 	
-	<!-- 사용자(파트너) -->
+	<!-- 검색 페이징 처리 -->
 	
+	<!-- 일다나 검색만 -->
+	<select id="searchOrder" resultMap="orderRset" parameterType="hashmap">
+		select
+			   order_no
+		     , member_name supporter_name
+             , p.project_title
+             , reward_title
+             , order_option
+             , order_count
+		     , to_char(order_date,'YYYY-MM-DD HH24:MI:SS') order_date
+			 , order_status
+			 , shipping_status
+		  from tb_order o 
+          join member using (member_no)
+          full join project p
+          on (o.project_no = p.project_no)
+         join reward using (reward_no)
+           <choose>
+           		<when test="orderKeyword == 'orderAll'">
+           			where order_no like '%' || #{keyword} || '%' 
+           			   or member_name like '%' || #{keyword} || '%' 
+           		</when>
+           		<otherwise>
+	           	 	where ${orderKeyword} like '%' || #{keyword} || '%' 
+           		</otherwise>
+           </choose>
+		 order
+		    by order_no desc
+	</select>
+	
+	
+	
+	
+	<!-- 사용자(파트너) -->
 	<!-- 발송리스트 갯수 -->
 	<select id="SelectDeliveryCount" resultType="_int">
 			select

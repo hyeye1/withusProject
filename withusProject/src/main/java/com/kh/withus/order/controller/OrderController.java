@@ -1,6 +1,9 @@
 package com.kh.withus.order.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,9 +37,9 @@ public class OrderController {
 		int listCount = oService.selectListCount();
 		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 5, 10);
 
-		ArrayList<Order> oList = oService.selectList(pi);
+		ArrayList<Order> olist = oService.selectList(pi);
 		
-		mv.addObject("oList", oList)
+		mv.addObject("olist", olist)
 		  .addObject("pi", pi)
 		  .setViewName("order/manaOrderListView");;
 		
@@ -64,9 +67,29 @@ public class OrderController {
 //		}
 	}
 	
+	//검색 일단 키워드로만
+	@RequestMapping("orderSearch.mana")
+	public String selectOrderList(HttpServletRequest request, Model model) {
+		
+		String orderKeyword = request.getParameter("orderKeyword"); 
+		String keyword = request.getParameter("keyword");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("orderKeyword", orderKeyword);
+		map.put("keyword", keyword);
+		
+		
+		ArrayList<Order> olist = oService.searchOrder(map);
+		
+		model.addAttribute("olist", olist)
+		     .addAttribute("orderKeyword",orderKeyword)
+		     .addAttribute("keyword",keyword);
+
+		return "order/manaOrderListView";
+	}
+	
 	
 	// 사용자
-
 	// 파트너 발송관리
 	@RequestMapping("orderNDeliveryList.part")
 	public ModelAndView selectPartnerOrderList(@RequestParam(value="currentPage", defaultValue="1") int currentPage

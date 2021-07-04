@@ -26,14 +26,14 @@ public class NoticeController {
 	private NoticeService nService;
 	
 	@RequestMapping("list.no")
-	public ModelAndView selectNoticeList(@RequestParam (value="currentPage", defaultValue="1")int currentPage, ModelAndView mv) {
+	public ModelAndView selectNoticeList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
 		int listCount = nService.selectListCount();
-		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 5, 10);
 		
 		ArrayList<Notice> list = nService.selectList(pi);
 		
-		mv.addObject("pi", pi).addObject("list", list).setViewName("notice/noticeListView");
+		mv.addObject("pi", pi).addObject("list", list).setViewName("csc/noticeListView");
 		
 		return mv;
 	}

@@ -27,10 +27,11 @@
 		       notice_no
 		     , notice_title
 		     , to_char(create_date, 'YYYY-MM-DD') create_date
+		     , count
 		  from notice
 		 where notice_status = 'Y'
 		 order
-		    by notice_no desc
+		    by create_date desc
 	</select>
 	
 	<!--
