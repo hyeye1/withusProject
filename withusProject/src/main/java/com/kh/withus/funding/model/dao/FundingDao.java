@@ -31,4 +31,7 @@ public class FundingDao {
 		return (ArrayList)sqlSession.selectList("fundingMapper.selectDetailReward", projectNo);
 	}
 	
+	public FundingDetail selectOneReward(SqlSessionTemplate sqlSession, int rewardNo) {
+		return sqlSession.selectOne("fundingMapper.selectOneReward", rewardNo);
+	}
 }

@@ -57,8 +57,8 @@
 	<hr>
 	
     <div class="titleArea">
-        <div class="back" align="left"><a href=""> < 스토리로 돌아기기</a></div>
-        <div class="title" align="center">세련되고 시크한 당신을 위한, 투명 시계</div>
+        <div class="back" align="left"><a href=""> < 스토리로 돌아가기</a></div>
+        <div class="title" align="center">${ o.projectName }</div>
         <div class="empty"></div>
     </div>
 
@@ -69,21 +69,21 @@
                 <table id="table1" class="table table-borderless">
                     <tr style="border-top: 1px solid darkgray;">
                         <th colspan="2" style="color: rgb(52, 152, 219); font-size: 22px; font-weight: 800;">
-                            [얼리버드] 투명시계 3개
+                            ${ fd.rewardTitle }
                         </th>
                     </tr>
                     <tr>
-                        <td colspan="2" style="text-align: left !important;">펀딩 내용입니다. 펀딩 내용입니다. 펀딩 내용입니다. 펀딩 내용입니다. 펀딩 내용입니다.</td>
+                        <td colspan="2" style="text-align: left !important;">${ fd.rewardContent }</td>
                     </tr>
                     <tr>
-                        <td colspan="2">수량 : 5</td>
+                        <td colspan="2">수량 : ${ o.orderCount }개</td>
                     </tr>
                     <tr>
-                        <td colspan="2">옵션 : s사이즈로 주세요 </td>
+                        <td colspan="2">옵션 : ${ o.orderOption } </td>
                     </tr>
                     <tr style="border-top: 1px solid darkgray;">
                         <th>추가 후원금</th>
-                        <td>100,000원</td>
+                        <td>${ o.orderPlus }원</td>
                     </tr>
                     <tr style="border-top: 1px solid darkgray; border-bottom: 1px solid darkgray;">
                         <th>배송비</th>
@@ -93,11 +93,11 @@
                 <table id="table2" class="table table-borderless">
                     <tr>
                         <th>펀딩금액</th>
-                        <td>335,700원</td>
+                        <td>${ fd.rewardPrice * o.orderCount }원</td>
                     </tr>
                     <tr>
                         <th>추가 후원금</th>
-                        <td>100,000원</td>
+                        <td>${ o.orderPlus }원</td>
                     </tr>
                     <tr>
                         <th>배송비</th>
@@ -105,7 +105,7 @@
                     </tr>
                     <tr>
                         <th style="color: rgb(52, 152, 219);">최종 결제금액</th>
-                        <td style="color: rgb(52, 152, 219);">435,700원</td>
+                        <td style="color: rgb(52, 152, 219);">${ fd.rewardPrice * o.orderCount + o.orderPlus}원</td>
                     </tr>
                 </table>
             </div>

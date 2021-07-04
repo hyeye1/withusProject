@@ -86,7 +86,7 @@
 					<table class="optionContent">
 						<tr>
 							<c:if test="${ rno == dr.rewardNo }">
-								<th width="50">수량 :</th>
+								<th width="50">수량 : </th>
 								<td width="190"><input type="number" class="form-control" name="orderCount" required style="width: 150px;"></td>
 								<c:if test="${ dr.optionYn == 'Y' }">
 									<th width="50">옵션 : </th>
@@ -121,12 +121,7 @@
 			</div>
 		</form>
 	</div>
-
 	
-
-
-
-
 	<jsp:include page="../common/footer.jsp"/>
 
 	<script>

@@ -136,7 +136,7 @@
 	   and project_no = #{projectNo}
     </select>
     
-    <select id="selectReward" resultMap="fundingDetail" parameterType="FundingDetail">
+    <select id="selectReward" resultMap="fundingDetail" parameterType="Order">
     	select
 	       reward_no
 	     , reward_price
@@ -165,6 +165,16 @@
 		       project_no = #{projectNo}
     </select>
     
+    <select id="selectOneReward" resultMap="fundingDetail" parameterType="Order">
+    	select
+    	       reward_title
+    	     , reward_price
+    	     , reward_content
+    	  from reward
+    	 where
+    	       reward_no = #{rewardNo}
+    </select>
+    	
  
 
  </mapper>

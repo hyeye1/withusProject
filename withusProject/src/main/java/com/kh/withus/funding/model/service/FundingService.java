@@ -18,4 +18,7 @@ public interface FundingService {
 	// 버튼 또는 div 클릭 후 리워드 조회
 	ArrayList<FundingDetail> selectDetailReward(int projectNo);
 	
+	//
+	FundingDetail selectOneReward(int rewardNo);
+	
 }

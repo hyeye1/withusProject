@@ -43,6 +43,11 @@ public class FundingServiceImpl implements FundingService {
 	public ArrayList<FundingDetail> selectDetailReward(int projectNo) {
 		return funDao.selectDetailReward(sqlSession, projectNo);
 	}
+
+	@Override
+	public FundingDetail selectOneReward(int rewardNo) {
+		return funDao.selectOneReward(sqlSession, rewardNo);
+	}
 	
 	
 
