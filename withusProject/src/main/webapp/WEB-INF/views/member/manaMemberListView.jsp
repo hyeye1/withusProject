@@ -30,6 +30,8 @@
 	.fa.fa-search{color: white;}
 	
 	/* table */
+    .none{margin: 100px 0;}
+    
 	tbody>tr:hover{cursor: pointer;}
 	table *{text-align: center; font-size: 15px;}
 	table.table-bordered td, table.table-bordered th {padding: .35rem;}
@@ -104,41 +106,48 @@
 	        </div>
 	
 	        <table class="table table-bordered">
-	            <thead class="tableHead">
-	                <tr>
-	                    <th>회원번호</th>
-	                    <th>이메일</th>
-	                    <th>이름</th>
-	                    <th>가입일</th>
-	                    <th>파트너 유무</th>
-	                    <th width="200">파트너명</th>
-	                    <th>상태</th>
-	                    <th>관리</th>
-	                </tr>
-	            </thead>
-	            <tbody>
-	             	<c:forEach var="m" items="${ mList }">
+	        <c:choose>
+           	 	<c:when test="${ empty mList }">
+       	 			<div class="none"><h4 align="center">검색어와 일치하는 내용이 존재하지 않습니다:(</h4></div>
+           	 	</c:when>
+           	 	<c:otherwise>
+		            <thead class="tableHead">
 		                <tr>
-		                    <td>${ m.memberNo }</td>
-		                    <td>${ m.memberId }</td>
-		                    <td>${ m.memberName }</td>
-		                    <td>${ m.memberCreateDate }</td>
-		                    <td>${ m.partnerJoin }</td>
-		                    <td>
-		                    	<c:choose>
-		                    	<c:when test="${!empty m.partnerName }">
-		                    		${ m.partnerName }
-		                    	</c:when>
-		                    	<c:otherwise>
-		                    		-
-		                    	</c:otherwise>
-		                    	</c:choose>
-		                    </td>
-		                    <td>${ m.memberStatus }</td>
-		                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
+		                    <th>회원번호</th>
+		                    <th>이메일</th>
+		                    <th>이름</th>
+		                    <th>가입일</th>
+		                    <th>파트너 유무</th>
+		                    <th width="200">파트너명</th>
+		                    <th>상태</th>
+		                    <th>관리</th>
 		                </tr>
-	                </c:forEach> 
-	            </tbody>
+		            </thead>
+		            <tbody>
+		             	<c:forEach var="m" items="${ mList }">
+			                <tr>
+			                    <td>${ m.memberNo }</td>
+			                    <td>${ m.memberId }</td>
+			                    <td>${ m.memberName }</td>
+			                    <td>${ m.memberCreateDate }</td>
+			                    <td>${ m.partnerJoin }</td>
+			                    <td>
+			                    	<c:choose>
+			                    	<c:when test="${!empty m.partnerName }">
+			                    		${ m.partnerName }
+			                    	</c:when>
+			                    	<c:otherwise>
+			                    		-
+			                    	</c:otherwise>
+			                    	</c:choose>
+			                    </td>
+			                    <td>${ m.memberStatus }</td>
+			                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
+			                </tr>
+		                </c:forEach> 
+		            </tbody>
+	        	</c:otherwise>
+	        </c:choose>
 	        </table>
 	    </div>
 	
@@ -184,32 +193,34 @@
 	    <br clear="both"><br>
 	
 	    <!-- 페이징 -->
-	    <div class="paging_wrap">
-	        <ul class="pagination">	             
-	        	<c:choose>
-	        		<c:when test="${ pi.currentPage eq 1 }">
-		           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-		            </c:when>
-		            <c:otherwise>
-		            	<li class="page-item"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
-		            </c:otherwise>
-		    	</c:choose>     
-		    	   
-				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-	            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
-				</c:forEach>		            
-		            
-		        <c:choose> 
-		        	<c:when test="${ pi.currentPage eq pi.maxPage }">
-		           	 	<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
-		           	</c:when>
-		           	<c:otherwise>
-		           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
-		           	</c:otherwise> 	
-	        	</c:choose>
-	        </ul>
-	    </div>
-	
+	    <c:if test="${ !empty olist }">
+		    <div class="paging_wrap">
+		        <ul class="pagination">	             
+		        	<c:choose>
+		        		<c:when test="${ pi.currentPage eq 1 }">
+			           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+			            </c:when>
+			            <c:otherwise>
+			            	<li class="page-item"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
+			            </c:otherwise>
+			    	</c:choose>     
+			    	   
+					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+		            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
+					</c:forEach>		            
+			            
+			        <c:choose> 
+			        	<c:when test="${ pi.currentPage eq pi.maxPage }">
+			           	 	<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+			           	</c:when>
+			           	<c:otherwise>
+			           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
+			           	</c:otherwise> 	
+		        	</c:choose>
+		        </ul>
+		    </div>
+		</c:if>
+		
 	</div>
 
 </body>

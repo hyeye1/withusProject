@@ -272,8 +272,10 @@
 					<script>
                   	// 발송모달:주문내역
                   	$(function(){
-                  		$("#test").click(function(){
-	                  		var orderNo = $(this).parents("#ono").text();
+                  		$("#orderList tbody tr td botton").click(function(){
+	                  		var orderNo = $("#ono").find("td").text();
+	                  			/* $(this).parents("#ono").text(); */
+	                  		
 	                  		console.log(orderNo);
                   			
                   		});

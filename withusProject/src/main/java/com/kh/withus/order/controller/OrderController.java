@@ -57,14 +57,15 @@ public class OrderController {
 		
 		Order o = oService.slectOrderDetail(ono);
 		
-		model.addAttribute("o", o);
-		return "order/manaOrderDetailView";
-//		if(o != null) {
-//			
-//		}else {
-//			model.addAttribute("errorMsg","주문내역 상세 조회 실패");
-//			return "";
-//		}
+		if(o != null)
+		{
+			model.addAttribute("o", o);
+			return "order/manaOrderDetailView";
+			
+		}else {
+			model.addAttribute("errorMsg","주문내역 항목 중 누락된 내용이 포함되어 있습니다.");
+			return "common/manaErrorPage";
+		}
 	}
 	
 	//검색 일단 키워드로만
@@ -80,12 +81,13 @@ public class OrderController {
 		
 		
 		ArrayList<Order> olist = oService.selectSearchOrder(map);
-		
+			
 		model.addAttribute("olist", olist)
-		     .addAttribute("orderKeyword",orderKeyword)
-		     .addAttribute("keyword",keyword);
-
+		.addAttribute("orderKeyword",orderKeyword)
+		.addAttribute("keyword",keyword);
+		
 		return "order/manaOrderListView";
+	
 	}
 	
 	
