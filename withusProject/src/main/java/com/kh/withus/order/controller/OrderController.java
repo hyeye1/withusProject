@@ -79,7 +79,7 @@ public class OrderController {
 		map.put("keyword", keyword);
 		
 		
-		ArrayList<Order> olist = oService.searchOrder(map);
+		ArrayList<Order> olist = oService.selectSearchOrder(map);
 		
 		model.addAttribute("olist", olist)
 		     .addAttribute("orderKeyword",orderKeyword)
@@ -123,6 +123,7 @@ public class OrderController {
 		return new Gson().toJson(o);
 	}	
 
+	// 환불 모달 - 환불신청내역
 	@ResponseBody
 	@RequestMapping(value="refund.info", produces="apllication/json; charset=utf-8")
 		public String ajaxSelectRefundinfo(int ono) {
@@ -133,6 +134,33 @@ public class OrderController {
 		System.out.println(r);
 		
 		return new Gson().toJson(r);
+	}
+	
+	// 검색	
+	@RequestMapping("orderNDeliverySearch.part")
+	public String selectSearchPartOrder(@RequestParam(value="currentPage", defaultValue="1") int currentPage
+            									, Model model, HttpServletRequest request) {
+		
+		String condition = request.getParameter("condition"); 
+		String keyword = request.getParameter("keyword");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		
+		ArrayList<Order> polist = oService.selectSearchPartOrder(map);
+		
+		model.addAttribute("polist", polist)
+		     .addAttribute("condition",condition)
+		     .addAttribute("keyword",keyword);
+		
+		System.out.println(condition);
+		System.out.println(keyword);
+		System.out.println(polist);
+
+
+		return "myPage/partner/pagePartOrderNDeliveryList";
+		
 	}
 	
 }

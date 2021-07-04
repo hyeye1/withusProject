@@ -48,8 +48,9 @@
 
   .searchForm{margin: 10px 0; }
   .searchForm select{height: 38px; border-color: lightgray; outline: none; float: left; margin-right: 5px; font-size: 13px;}
-  .keyword_1 { width: 60%;float: left;} 
-  .keyword_2 {width: 40%; float: right;} 
+  .keyword_1 { float: left;} 
+  .keyword_2 { width: 40%;float: left;}  
+  .keyword_3 {width: 40%; float: right;} 
   .input-group.search {width: 70%;}
   .btn.searchBtn{background-color: #3498db;}
   .fa.fa-search{color: white;}
@@ -57,7 +58,7 @@
   #orderList{text-align: center; margin: auto; margin-top: 70px;}
   #orderList th{font-size: 12px;}
   #orderList td{font-size: 13px;}
-  #orderList td, #orderList th{padding: .20rem; vertical-align: inherit;}
+  #orderList td, #orderList th{ padding: 0.7rem .20rem; vertical-align: middle;}
 
   
   button.btn.btn-sm {font-size: 10px; text-align: justify; padding: 5px; }
@@ -153,16 +154,18 @@
 					<div class="oList">
 						<label>목록</label>
 
-						<form action="">
+						<form action="orderNDeliverySearch.part">
 							<div class="searchForm">
 								<div class="keyword_1">
 									<select name="" id="">
 										<option value="">발송 배송 : 전체</option>
 										<option value="">미발송</option>
-										<option value="">발송준비중</option>
 										<option value="">배송 중</option>
 										<option value="">배송완료</option>
-									</select> <select name="" id="">
+									</select> 
+								</div>
+								<div class="keyword_2">	
+									<select name="" id="">
 										<option value="">결제 상태 : 전체</option>
 										<option value="">결제완료</option>
 										<option value="">취소요청</option>
@@ -170,15 +173,16 @@
 									</select>
 								</div>
 
-								<div class="keyword_2">
-									<select name="" id="">
-										<option value="">펀딩번호</option>
-										<option value="">발송번호</option>
-										<option value="">서포터</option>
+								<div class="keyword_3">
+									<select name="condition" id="condition">
+										<option value="all">전체</option>
+										<option value="order_no">펀딩번호</option>
+										<option value="shipping_no">발송번호</option>
+										<option value="member_name">서포터</option>
 									</select>
 									<div class="input-group search">
-										<input type="text" class="form-control"
-											placeholder="검색어를 입력하세요">
+										<input type="text" class="form-control" name="keyword"
+										       value="${ keyword }" placeholder="검색어를 입력하세요">
 										<div class="input-group-append">
 											<button class="btn searchBtn" type="submit">
 												<i class="fa fa-search"></i>
@@ -188,13 +192,20 @@
 								</div>
 							</div>
 						</form>
+						<c:if test="${ !empty condition }">
+							<script>
+							$(function(){
+								$(".condition option[value=${condition}]").attr("selected", true);
+							})
+							</script>
+						</c:if>
 
 
 						<table class="table table-border" id="orderList">
 							<thead>
 								<tr height="50">
 									<th width="60">펀딩번호</th>
-									<th width="70">서포터 정보</th>
+									<th width="75">서포터 정보</th>
 									<th width="60">결제상태</th>
 									<th width="90">결제금액</th>
 									<th width="180">리워드</th>
@@ -208,23 +219,33 @@
 							<tbody>
 								<c:forEach var="p" items="${ polist }">
 		                    	<tr>
-			                      <td>${ p.orderNo }</td>
+			                      <td id="ono">${ p.orderNo }</td>
 			                      <td>${ p.supporterName }</td>
-			                      <td>${ p.orderStatus }</td>
+			                      <c:choose>
+	                        		<c:when test="${ p.orderStatus eq 1 }">
+	                        			<td>결제완료</td>
+	                        		</c:when>
+	                        		<c:when test="${ p.orderStatus eq 2 }">
+	                        			<td>취소요청</td>
+	                        		</c:when>
+	                        		<c:when test="${ p.orderStatus eq 3 }">
+	                        			<td>취소완료</td>
+	                        		</c:when>
+	                        	  </c:choose>
 			                      <td>${ p.totalPrice } 원</td>
 			                      <td>${ p.rewardTitle }/${ p.orderOption }/${ p.orderCount }</td>
-			                      <td><button type="button" class="btn btn-withus btn-sm" data-toggle="modal" data-target="#sendInfoModal" onclick="ajaxSendInfo();">
+			                      <td><button type="button" id="test" class="btn btn-withus btn-sm" data-toggle="modal" data-target="#sendInfoModal" onclick="ajaxSendInfo();">
 			                      		발송정보 입력
 			                      	</button></td>
 			                      <td>${ p.deliveryDate }</td>
 			                      <c:choose>
-	                        		<c:when test="${ p.shippingStatus == 1 }">
+	                        		<c:when test="${ p.shippingStatus eq 1 }">
 	                        			<td>배송준비중</td>
 	                        		</c:when>
-	                        		<c:when test="${ p.shippingStatus == 2 }">
+	                        		<c:when test="${ p.shippingStatus eq 2 }">
 	                        			<td>배송시작</td>
 	                        		</c:when>
-	                        		<c:when test="${ p.shippingStatus == 3 }">
+	                        		<c:when test="${ p.shippingStatus eq 3 }">
 	                        			<td>배송완료</td>
 	                        		</c:when>
 			                      </c:choose>
@@ -234,11 +255,12 @@
 			                        <!-- 리워드 기간 -->
 			                        	지연반환 신청기간 <br>
 			                        	2021-05-11 ~ 2021-00-00<br>
-			                        <!-- 리워드 종료일 이후 -->
-			                        	신청 <br>
-			                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
-			                        	확인하기
-		                        	</button>
+			                        <!-- 환불 신청자만 버튼이 노출 -->
+			                        <c:if test="${ p.orderStatus eq 2 }">
+				                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
+				                        	확인하기
+			                        	</button>
+			                        </c:if>
 			                      </td>
 			                    </tr>
 			                    <input type="hidden" name="ono" class="ono" value="${ p.orderNo }">
@@ -249,11 +271,20 @@
 					
 					<script>
                   	// 발송모달:주문내역
+                  	$(function(){
+                  		$("#test").click(function(){
+	                  		var orderNo = $(this).parents("#ono").text();
+	                  		console.log(orderNo);
+                  			
+                  		});
+                  	});
+                  	
 	              	function ajaxSendInfo(){
 	              		var $orderNo = $(".ono").val();
 	              		//console.log($orderNo);
 	              		
 	              		$.ajax({
+	              			
 	            			url:"send.info",
 	            			data:{ono:$orderNo},
 	              		   success:function(oi){

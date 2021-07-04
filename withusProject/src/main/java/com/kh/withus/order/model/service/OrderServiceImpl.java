@@ -35,8 +35,14 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
-	public ArrayList<Order> searchOrder(HashMap<String, String> map) {
-		return oDao.searchOrder(sqlSession, map);
+	public int searchCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public ArrayList<Order> selectSearchOrder(HashMap<String, String> map) {
+		return oDao.selectSearchOrder(sqlSession, map);
 	}
 	
 
@@ -63,5 +69,16 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Order selectRefundInfo(int orderNo) {
 		return oDao.selectRefundInfo(sqlSession, orderNo);
+	}
+
+	@Override
+	public int searchPartOrderCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ArrayList<Order> selectSearchPartOrder(HashMap<String, String> map) {
+		return oDao.selectSearchPartOrder(sqlSession, map);
 	}
 }
