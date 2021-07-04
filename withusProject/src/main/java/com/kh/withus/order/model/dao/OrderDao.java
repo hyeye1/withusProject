@@ -1,6 +1,7 @@
 package com.kh.withus.order.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -29,6 +30,11 @@ public class OrderDao {
 	public Order selectOrderDetail(SqlSessionTemplate sqlSession, int orderNo) {
 		
 		return sqlSession.selectOne("orderMapper.selectOrderDetail", orderNo);
+	}
+	
+	public ArrayList<Order> searchOrder(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		
+		return (ArrayList)sqlSession.selectList("orderMapper.searchOrder", map);
 	}
 	
 	
