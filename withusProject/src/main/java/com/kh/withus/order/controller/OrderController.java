@@ -74,17 +74,23 @@ public class OrderController {
 		
 		String orderKeyword = request.getParameter("orderKeyword"); 
 		String keyword = request.getParameter("keyword");
+		String odStatus =request.getParameter("odStatus");
+		String shStatus =request.getParameter("shStatus");
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("orderKeyword", orderKeyword);
 		map.put("keyword", keyword);
+		map.put("odStatus", odStatus);
+		map.put("shStatus", shStatus);
 		
 		
 		ArrayList<Order> olist = oService.selectSearchOrder(map);
 			
 		model.addAttribute("olist", olist)
 		.addAttribute("orderKeyword",orderKeyword)
-		.addAttribute("keyword",keyword);
+		.addAttribute("keyword",keyword)
+		 .addAttribute("odStatus",odStatus)
+		 .addAttribute("shStatus",shStatus);
 		
 		return "order/manaOrderListView";
 	

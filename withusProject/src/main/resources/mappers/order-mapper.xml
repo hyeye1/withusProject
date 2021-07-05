@@ -129,18 +129,34 @@
 			 , shipping_status
 		  from tb_order o 
           join member using (member_no)
-          full join project p
-          on (o.project_no = p.project_no)
+          full join project p on (o.project_no = p.project_no)
          join reward using (reward_no)
-           <choose>
-           		<when test="orderKeyword == 'orderAll'">
-           			where order_no like '%' || #{keyword} || '%' 
-           			   or member_name like '%' || #{keyword} || '%' 
-           		</when>
-           		<otherwise>
-	           	 	where ${orderKeyword} like '%' || #{keyword} || '%' 
-           		</otherwise>
-           </choose>
+         
+         <choose>
+       		<when test="orderKeyword == 'orderAll' ">
+       			where order_no like '%' || #{keyword} || '%' 
+       			   or member_name like '%' || #{keyword} || '%' 
+       		</when>
+       		<otherwise>
+        	 	where ${orderKeyword} like '%' || #{keyword} || '%' 
+       		</otherwise>
+         </choose>
+         
+   	 	 <if test="odStatus != null">
+		   <choose>
+		   		<when test="odStatus == 1"> and order_status = 1 </when>
+		   		<when test="odStatus == 2"> and order_status = 2 </when>
+		   		<otherwise> and  order_status = 3  </otherwise>
+		   </choose>
+   		</if> 
+   		 
+	    <if test="shStatus != null">
+		   <choose>
+			   	<when test="shStatus == 1"> and shipping_status = 1 </when>
+			   	<when test="shStatus == 2"> and shipping_status = 2 </when>
+			   	<otherwise> and  shipping_status = 3  </otherwise>
+		   </choose>
+	    </if>
 		 order
 		    by order_no desc
 	</select>
