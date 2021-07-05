@@ -49,7 +49,7 @@
 
 	<div class="titleArea">
         <div class="back" align="left"><a href=""> < 스토리로 돌아기기</a></div>
-        <div class="title" align="center">젖은 우산에서 두 손을 자유롭게, 친자연 우산 "텀브렐라"</div>
+        <div class="title" align="center">${ drList[0].projectTitle }</div>
         <div class="empty"></div>
     </div>
 
@@ -57,6 +57,7 @@
 		<form id="selectRewardForm" method="POST" action="check.fun">
 			<h3>리워드 선택</h3><br>
 			<input type="hidden" name="projectName" value="${ drList[0].projectTitle }">
+			<input type="hidden" name="projectNo" value="${ pno }">
 			
 			<c:forEach var="dr" items="${ drList }">
 				<div class="rewardSelect">

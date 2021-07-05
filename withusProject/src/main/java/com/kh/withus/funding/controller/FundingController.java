@@ -36,6 +36,7 @@ public class FundingController {
 	@RequestMapping("list.rew")
 	public String selectRewardList(int pno, @RequestParam(value="rno", defaultValue="0") int rno, Model model) {
 		
+		model.addAttribute("pno", pno);
 		ArrayList<FundingDetail> drList = funService.selectDetailReward(pno);
 		model.addAttribute("drList", drList);
 		
@@ -83,6 +84,15 @@ public class FundingController {
 		
 		
 		return "funding/fundingRegistration";
+		
+	}
+	
+	@RequestMapping("pay.fun")
+	public String payForm(Order o, Model model) {
+		
+		System.out.println(o);
+		
+		return "funding/pay";
 		
 	}
 }
