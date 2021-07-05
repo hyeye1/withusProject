@@ -156,40 +156,6 @@ public class MyPageController {
 	
 	
 	
-	// 회원탈퇴 유저 비밀번호 확인 ajax
-	@ResponseBody
-	@RequestMapping("pwd.me")
-	public String pwd(String checkPwd, HttpSession session) {
-			
-			
-		// 비밀번호 암호화 전
-		// 입력받은 비밀번호
-		
-				
-		// 로그인된 유저
-		Member loginUser = (Member)session.getAttribute("loginUser");
-				
-		/* 암호화 전
-		if(checkPwd.equals(loginUser.getMemberPwd())) {
-			return "Y";
-					
-		}else {
-			return "N";
-		}
-		*/
-		
-		if(bcryptPasswordEncoder.matches(checkPwd, loginUser.getMemberPwd())) {
-			return "Y";
-					
-		}else {
-			return "N";
-		}
-		
-		
-		
-					
-			
-	}
 	
 	// 기본정보수정
 	@RequestMapping("update.me")
@@ -267,7 +233,7 @@ public class MyPageController {
 	}
 	//회원탈퇴폼 페이지
 	@RequestMapping("deleteForm.me")
-	public String deleteForm(HttpSession session,  Model model) {
+	public String deleteForm(HttpSession session) {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
@@ -275,7 +241,48 @@ public class MyPageController {
 		
 		return "myPage/info/memberDrop";
 	}	
+	
+	
+
+	// 회원탈퇴 유저 비밀번호 확인 ajax
+	@ResponseBody
+	@RequestMapping("pwd.me")
+	public String pwd(String checkPwd, HttpSession session) {
+			
+			
+		// 비밀번호 암호화 전
+		// 입력받은 비밀번호
 		
+				
+		// 로그인된 유저
+		Member loginUser = (Member)session.getAttribute("loginUser");
+				
+		/* 암호화 전
+		if(checkPwd.equals(loginUser.getMemberPwd())) {
+			return "Y";
+					
+		}else {
+			return "N";
+		}
+		*/
+		
+		if(bcryptPasswordEncoder.matches(checkPwd, loginUser.getMemberPwd())) {
+			return "Y";
+					
+		}else {
+			return "N";
+		}
+		
+		
+		
+					
+			
+	}
+	
+	
+	
+	
+	
 	
 	
 	// 회원탈퇴

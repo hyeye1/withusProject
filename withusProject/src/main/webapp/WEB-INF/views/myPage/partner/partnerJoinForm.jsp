@@ -29,7 +29,7 @@
             
         }
 
-        #mypage{height: 100%; margin-top: 100px; }
+        #mypage{height: 100%; margin-top: 50px; }
         
        
         /* mypage안의 세부영역 */
@@ -58,7 +58,7 @@
         .previewBox{margin-left: 100px; margin-top: 20px;}
         #preview{width:95px; height:95px;}
         .fileEdit{margin-left: 110px; margin-top: 5px; margin-bottom: 10px;}
-        label{font-size: 14px; font-weight: 700;}
+        .fileEdit>label{font-size: 14px; font-weight: 700;}
         #delete{margin-left: 20px;}
         
         
@@ -67,8 +67,8 @@
         /* 버튼 부분 */
         .buttonArea{height: 120px; text-align: center;}
 
-        #btn1{background-color: rgb(52, 152, 219); color: honeydew;}
-        button{width: 300px;}
+        #btn1{background-color: rgb(52, 152, 219); color: honeydew; width: 300px;}
+       
 
     </style>
 </head>
