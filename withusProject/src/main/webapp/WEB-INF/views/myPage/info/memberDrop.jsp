@@ -12,12 +12,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
-    <style>
+ 	<style>
 	    @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&display=swap');
 	  	.ff{font-family: 'Nanum Gothic Coding', monospace;}
         
         /*div{border: 1px solid red; box-sizing: border-box;}*/
-        .wrap{width: 1000px; height: 800px; margin: auto;}
+        .wrap{width: 1000px; height: 1000px; margin: auto;}
 
         .wrap>div{width: 100%; }
 
@@ -39,21 +39,31 @@
         
         /* content */
         #content_1{height: 50%;}
-        #content_1_1{margin-top: 50px;}
+        #content_1_1{margin-top: 20px;}
         
         
         /*큰제목*/
         #mainTitle{font-size: 23px; font-weight: bolder;}
 
-        /* 입력요소 */
-        table{margin-left: 20px;}
-        th{width: 200px; height: 40px;}
-        input text{width: 300px}
-        label{cursor: pointer; font-size: 12px;}
+        /* 내용 */
+        #dropTable{margin-left: 20px; width: 75%;}
+       
+        #dropCheck{font-size: 20px; margin-top: 10px;}
+        #contentTitle{font-weight: 650; font-size: 16px; color: rgb(52, 73, 94)}
+        #contentDetail{font-size: 15px; margin-left: 25px; margin-top: 5px;}
+
+        #checkImg{width: 18px; height: 18px; margin-right: 5px;}
+
+        
+        #tableTitle{font-size: 20px; margin-top: 25px;}
+        #checkboxArea{font-size: 15px; margin-bottom: 40px;  margin-top: 20px; margin-left: 5px; }
+
+        #pwdInput{width: 400px; font-size: 15px; margin-bottom: 60px; margin-left: 5px;}
+        #checkResult{margin-left: 5px;}
 
         /* 버튼 부분 */
-        .confirmArea{height: 10px;}
-        button{width:80px;}
+        tbody, tfoot{border-top: solid 0.2px rgb(192, 189, 189);}
+        #submitBtn{width:200px; margin-top: 60px; margin-left: 5px;}
         
         
 
@@ -74,48 +84,82 @@
                 
                     <p id="mainTitle">회원탈퇴</p>
                     <div id="underLine"></div>
-                    
-                    <div id="aa" style="margin-top: 20px;">
-                    
-
-                         
-                        가치가자는 회원님의 개인정보를 신중히 취급하며, 
-
-                        회원님의 동의 없이는 기재하신 회원정보가 공개되지 않습니다.<br><br>
-
-                        보다 다양한 서비스를 받으시려면 정확한 정보를 항상 유지해 주셔야 합니다.
-                        
-                    </div>
-
-                    
+                   
 
                     <div id="content_1_1">
-                        <table>
-                            <tr style="height: 50px;">
-                                <th style="font-size: 20px;">본인 확인</th>
-                                
-                            </tr>
-
-                            <tr>
-                                <td class="confirmArea">
-                                    <input type="password" style="width: 500px;" placeholder="안전한 탈퇴를 위해서 비밀번호를 입력해주세요" name="memberPwd" id="pwdInput"> 
-                                    <div id="checkResult"  style="display:none;"></div>
-                                </td>
-                                
-                            </tr>
-                            <tr>
-                                <td style="height: 80px;">
-                                    <input type="checkbox">회원탈퇴 유의사항에 동의합니다
-                                </td>
-                            </tr>
-                        </table>
+                        <form action="delete.me" method="post">
+	                        <table id="dropTable">
+	                            <thead>
+	                                <tr>
+	                                    <th><p id="dropCheck">회원탈퇴 유의사항</p></th>
+	                                </tr>
+	                                <tr>
+	                                    <td>
+	                                        <p id="dropContent">
+	                                            <div id="contentTitle">
+	                                                <img src="resources/images/myPage/check.png" id="checkImg">사용하고 계신 아이디(${loginUser.memberId})는 탈퇴할 경우 재사용 및 복구가 불가능합니다.
+	                                            </div>
+	                                            <div id="contentDetail">
+	                                                	탈퇴한 아이디는 본인과 타인 모두 재사용 및 복구가 불가하오니 신중하게 선택하시기 바랍니다.
+	                                            </div>
+	                                        </p>
+	                                    </td>
+	                                </tr>
+	                                <tr>
+	                                    <td>
+	                                        <p id="dropContent">
+	                                            <div id="contentTitle">
+	                                                <img src="resources/images/myPage/check.png" id="checkImg">탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제됩니다.
+	                                            </div>
+	                                            <div id="contentDetail">
+	                                                	회원 정보 및 프로젝트 등 개인 정보 일괄 삭제되며 데이터는 복구되지 않습니다.
+	                                            </div>
+	                                        </p>
+	                                    </td>
+	                                </tr>
+	                                <tr>
+	                                    <td>
+	                                        <p id="dropContent">
+	                                            <div id=contentTitle>
+	                                                <img src="resources/images/myPage/check.png" id="checkImg">탈퇴 후에도 게시판형 서비스에 등록한 게시물은 그대로 남아 있습니다.
+	                                            </div>
+	                                            <div id="contentDetail">
+							                                                게시글, 댓글, 펀딩한 프로젝트에 남겨진 이름 등은 자동 삭제되지 않고 그대로 남아 있습니다.<br>
+							                                                삭제를 원하는 게시글이 있다면 반드시 탈퇴 전 비공개 처리하거나 삭제하시기 바랍니다.
+	                                            </div>
+	                                        </p>
+	                                    </td>
+	                                </tr>
+	                                <tr>
+	                                    <td>
+	                                        <div id="checkboxArea"><input type="checkbox">&nbsp;회원탈퇴 유의사항에 동의합니다</div>
+	                                    </td>
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+	                                <tr>
+	                                    <th><p id="tableTitle">본인 확인</p></th>
+	                                </tr>
+	
+	                                <tr>
+	                                    <td class="confirmArea">
+	                                        <input type="password" placeholder="안전한 탈퇴를 위해서 비밀번호를 입력해주세요" name="memberPwd" id="pwdInput"> 
+	                                        <label id="checkResult"  style="display:none;"></label>
+	                                    </td>
+	                                </tr>
+	                            </tbody>
+	                            <tfoot>
+	                                <tr>
+	                                    <td style="text-align: center;">
+	                                        <button type="button" class="btn btn-dark btn-sm" id="submitBtn" disabled onclick="return check();">회원탈퇴</button>
+	                                    </td>
+	                                </tr>
+	                            </tfoot>
+	                            
+	                        </table>
+                        </form>
                     </div>
 
-                    <br>
-                    <div align="center">
-                        
-                        <button type="button" class="btn btn-dark btn-sm" id="submitBtn" disabled onclick="return check();"><a href="delete.me" style="text-decoration: none; color:white;">회원탈퇴</a></button>
-                    </div>
                     
                     
                     <script>
@@ -137,7 +181,7 @@
 				      						if(result == "N"){ // 사용 불가능
 				      							// 메세지 빨간색 출력, 버튼 비활성화
 				      							$("#checkResult").show();
-				      							$("#checkResult").css("color", "red").text("비밀번호가 일치하지 않습니다. 다시 입력해주세요");
+				      							$("#checkResult").css("color", "red").text("비밀번호가 일치하지 않습니다.");
 				      							$("#submitBtn").attr("disabled", true);
 				      							
 				      						}else{ // 사용가능
@@ -206,6 +250,6 @@
 
     </div>
     
-    <jsp:include page="../../common/footer.jsp"/>
+    
 </body>
 </html>

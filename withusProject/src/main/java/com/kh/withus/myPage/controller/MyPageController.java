@@ -154,11 +154,6 @@ public class MyPageController {
 		
 	}
 	
-	//회원탈퇴폼 페이지
-	@RequestMapping("deleteForm.me")
-	public String deleteForm() {
-		return "myPage/info/memberDrop";
-	}
 	
 	
 	// 회원탈퇴 유저 비밀번호 확인 ajax
@@ -269,14 +264,18 @@ public class MyPageController {
 		}
 		
 		
-		
-		
-		
-		
-		
-		
-		
 	}
+	//회원탈퇴폼 페이지
+	@RequestMapping("deleteForm.me")
+	public String deleteForm(HttpSession session,  Model model) {
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		session.setAttribute("loginUser", loginUser);
+		
+		return "myPage/info/memberDrop";
+	}	
+		
 	
 	
 	// 회원탈퇴
