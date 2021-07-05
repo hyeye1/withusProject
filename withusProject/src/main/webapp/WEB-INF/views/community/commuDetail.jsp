@@ -142,7 +142,7 @@
                             <table id="contentArea" align="center" class="table">
                                 <tr>
                                     <div class="ray1">
-                                        <div id="nav1_1">
+                                        <!-- <div id="nav1_1">
                                             <img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG"
                                                 width="50" height="50" class="rounded-circle">
                                         </div>
@@ -151,10 +151,16 @@
                                             <div class="date">
                                                 2021-04-12 12:25:19
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </tr>
                                 <br>
+                                <tr>
+                                    <th>작성자</th>
+                                    <td>${ c.commuWriter }</td>
+                                    <th>작성일</th>
+                                    <td>${ c.commuCreate }</td>
+                                </tr>
                                 <tr>
                                     <th width="100">제목</th>
                                     <td colspan="3">${ c.commuTitle }</td>
@@ -180,7 +186,7 @@
                             </table>
                             <br>
 
-							<c:if test="${ loginUser.memberId eq c.memberId }">
+							<c:if test="${ loginUser.memberId eq c.commuWriter }">
 					            <div align="center">
 					                <!-- 수정하기, 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨 -->
 					                <a class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</a>
