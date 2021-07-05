@@ -57,14 +57,15 @@ public class OrderController {
 		
 		Order o = oService.slectOrderDetail(ono);
 		
-		model.addAttribute("o", o);
-		return "order/manaOrderDetailView";
-//		if(o != null) {
-//			
-//		}else {
-//			model.addAttribute("errorMsg","주문내역 상세 조회 실패");
-//			return "";
-//		}
+		if(o != null)
+		{
+			model.addAttribute("o", o);
+			return "order/manaOrderDetailView";
+			
+		}else {
+			model.addAttribute("errorMsg","주문내역 항목 중 누락된 내용이 포함되어 있습니다.");
+			return "common/manaErrorPage";
+		}
 	}
 	
 	//검색 일단 키워드로만
@@ -79,13 +80,14 @@ public class OrderController {
 		map.put("keyword", keyword);
 		
 		
-		ArrayList<Order> olist = oService.searchOrder(map);
-		
+		ArrayList<Order> olist = oService.selectSearchOrder(map);
+			
 		model.addAttribute("olist", olist)
-		     .addAttribute("orderKeyword",orderKeyword)
-		     .addAttribute("keyword",keyword);
-
+		.addAttribute("orderKeyword",orderKeyword)
+		.addAttribute("keyword",keyword);
+		
 		return "order/manaOrderListView";
+	
 	}
 	
 	
@@ -123,6 +125,7 @@ public class OrderController {
 		return new Gson().toJson(o);
 	}	
 
+	// 환불 모달 - 환불신청내역
 	@ResponseBody
 	@RequestMapping(value="refund.info", produces="apllication/json; charset=utf-8")
 		public String ajaxSelectRefundinfo(int ono) {
@@ -133,6 +136,33 @@ public class OrderController {
 		System.out.println(r);
 		
 		return new Gson().toJson(r);
+	}
+	
+	// 검색	
+	@RequestMapping("orderNDeliverySearch.part")
+	public String selectSearchPartOrder(@RequestParam(value="currentPage", defaultValue="1") int currentPage
+            									, Model model, HttpServletRequest request) {
+		
+		String condition = request.getParameter("condition"); 
+		String keyword = request.getParameter("keyword");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		
+		ArrayList<Order> polist = oService.selectSearchPartOrder(map);
+		
+		model.addAttribute("polist", polist)
+		     .addAttribute("condition",condition)
+		     .addAttribute("keyword",keyword);
+		
+		System.out.println(condition);
+		System.out.println(keyword);
+		System.out.println(polist);
+
+
+		return "myPage/partner/pagePartOrderNDeliveryList";
+		
 	}
 	
 }

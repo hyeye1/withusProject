@@ -82,7 +82,10 @@
                        			</td>
                        		</c:when>
                        		<c:when test="${ o.orderStatus == 2 }">
-                       			<td>취소요청</td>
+                       			<td>
+                       				취소요청 &nbsp;&nbsp;&nbsp;&nbsp;
+                       				<button type="button" class="btn-sm" data-toggle="modal" data-target="#cancelPayModal">결제 취소</button>
+                       			</td>
                        		</c:when>
                        		<c:when test="${ o.orderStatus == 3 }">
                        			<td>취소완료</td>

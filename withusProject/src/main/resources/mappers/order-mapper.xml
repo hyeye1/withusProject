@@ -116,7 +116,7 @@
 	<!-- 검색 페이징 처리 -->
 	
 	<!-- 일다나 검색만 -->
-	<select id="searchOrder" resultMap="orderRset" parameterType="hashmap">
+	<select id="selectSearchOrder" resultMap="orderRset" parameterType="hashmap">
 		select
 			   order_no
 		     , member_name supporter_name
@@ -150,7 +150,7 @@
 	
 	<!-- 사용자(파트너) -->
 	<!-- 발송리스트 갯수 -->
-	<select id="SelectDeliveryCount" resultType="_int">
+	<select id="selectDeliveryCount" resultType="_int">
 			select
 			      count(*)
 		     from tb_order
@@ -253,6 +253,43 @@
 	</select>
 	
 	<!-- 환불 모달 : 승인/거절 -->
+	
+	<!-- 검색 -->
+	<select id="selectSearchPartOrder" resultMap="orderRset">
+		select 
+		        o.order_no
+		      , m.member_name supporter_name
+		      , o.order_status
+		      , to_char(o.total_price,'999,999,999,999,999') total_price
+              , r.reward_title
+              , r.reward_content
+      		  , o.order_option
+      		  , o.order_count
+		      , o.shipping_status
+		      , o.shipping_com
+		      , o.shipping_no
+              , to_char(delivery_date, 'YYYY-MM-DD') delivery_date 
+		   from tb_order o
+  		   join member m on(o.member_no = m.member_no)
+ 		   join reward r on(o.project_no = r.project_no)
+           join project p on (o.project_no = p.project_no)
+			<choose>
+	          		<when test="condition == 'all'">
+	          			where order_no like '%' || #{keyword} || '%' 
+          			    or shipping_no like '%' || #{keyword} || '%'
+          			    or member_name like '%' || #{keyword} || '%'  
+	          		</when>
+	          		<otherwise>
+	           	 		where ${condition} like '%' || #{keyword} || '%' 
+	          		</otherwise>
+	          </choose>
+	      and p.project_no = 2   
+          and o.reward_no = r.reward_no
+			 order
+			    by order_no desc
+</select>
+	
+	
 	
 </mapper>
 			    

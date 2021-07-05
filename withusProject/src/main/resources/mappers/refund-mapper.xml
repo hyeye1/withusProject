@@ -33,29 +33,24 @@
 		from refund
 	</select>
 	
-	<!-- 회원조회용 -->
+	<!-- 환불신청내역 조회 -->
 	<select id="selectList" resultMap="refundRset">
 		select 
-        		refund_no
-		      , supporter_name  
-		      , project_title
-		      , reward_title
-		      , order_option
-		      , r_reason
-		      , refund_status
-		   from refund r,
-		        (select
-		               member_name supporter_name
-		             , project_title 
-		             , reward_title
-		             , order_option
-		          from tb_order
-		          join member using (member_no)
-		          join project using (project_no)
-		          join reward using (reward_no)
-		          )
+        		r.refund_no
+		      , m.member_name supporter_name 
+		      , p.project_title
+		      , rd.reward_title
+		      , o.order_option
+		      , r.r_reason
+		      , r.refund_status
+          from tb_order o
+          join refund r on(o.order_no = r.order_no)
+          join member m on(o.member_no = m.member_no)
+          join project p on(o.project_no = p.project_no)
+          join reward rd on(o.reward_no = rd.reward_no)
+         where o.order_no = r.order_no 
 		 order
-		    by refund_no desc   
+		    by refund_no desc  
 	</select>
 	
 	<select id="selectRefund" resultMap="refundRset" 
@@ -87,6 +82,7 @@
 	      join pay py on(o.order_no = py.order_no)
 	      join refund r on(o.order_no = r.order_no) 
 	     where r.refund_no = #{refundNo}
+	       and o.reward_no = rd.reward_no
 	</select>
 	
 

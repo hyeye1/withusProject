@@ -10,7 +10,7 @@
 
     /* searchBox */
      .search_box{
-         height: 130px; 
+         height: 158px; 
          background-color: #f4f4f4; 
          padding: 20px; 
      }
@@ -23,16 +23,21 @@
      }
      .form-control.order{width: 400px;}
      .orderAllStatus{width: 80%; float: left;}
-     .orderRadios {font-size: 13px; float: left; margin: 4px 15px;}
-     .searchBtns{width: 20%; float: right;}
+     .oStatus, .dStatus {float: left; margin: 0 15px;}
+     .dStatus {flat: }
+     .searchBtns{width: 20%; float: right; margin: 30px 0 0 0;}
      .searchBtns button{margin: 0 7px;} 
      .btn.btn-withus{background-color: #3498db; color: white;}
      .btn.btn-withus:hover{cursor: pointer; background-color: #2c83be;  color: white;}
 
-     table *{text-align: center; font-size: 15px;}
-     tbody>tr:hover{cursor: pointer;}
-     table.table-bordered td, table.table-bordered th  {padding: .35rem; vertical-align: inherit;}
-     .tableHead{background-color: #eaeaea;}
+	/* table */
+    .none{margin: 100px 0;}
+    
+    table *{text-align: center; font-size: 15px;}
+    tbody>tr:hover{cursor: pointer;}
+    table.table-bordered td, table.table-bordered th  {padding: .35rem; vertical-align: inherit;}
+    .tableHead{background-color: #eaeaea;}
+     
         
 	/* pagination */
 	.paging_wrap{width:fit-content;margin:auto; margin-top: 50px;}
@@ -69,14 +74,17 @@
                     </div>
                     <br>
                     <div class="orderAllStatus">
-                        <label for="" style="float: left;"><b>펀딩상태</b></label> &nbsp;&nbsp;
-                        <div class="orderRadios">
-                            <input type="radio" name="orderStatus" value=""> 결제예약
+                        <div class="oStatus">
+                        	<label for="" style="float: left;"><b>결제상태</b></label> &nbsp;&nbsp;
                             <input type="radio" name="orderStatus" value=""> 결제완료
-                            <input type="radio" name="orderStatus" value=""> 결제취소
-                            <input type="radio" name="orderStatus" value=""> 리워드 준비중
-                            <input type="radio" name="orderStatus" value=""> 리워드 배송중
-                            <input type="radio" name="orderStatus" value=""> 리워드 배송 완료
+                            <input type="radio" name="orderStatus" value=""> 취소요청
+                            <input type="radio" name="orderStatus" value=""> 취소완료
+                        </div>
+                        <div class="dStatus">
+                        	<label for="" style="float: left;"><b>배송 상태</b></label> &nbsp;&nbsp;
+                            <input type="radio" name="orderStatus" value=""> 배송 준비중
+                            <input type="radio" name="orderStatus" value=""> 배송중
+                            <input type="radio" name="orderStatus" value=""> 배송 완료
                             <input type="radio" name="orderStatus" value=""> 리워드 미발송
                         </div>
                     </div>
@@ -96,56 +104,63 @@
             <br>
 
             <table class="table table-bordered" id="orderTable">
-                <thead class="tableHead">
-                    <tr>
-                        <th>주문번호</th>
-                        <th>펀딩 서포터명</th>
-                        <th width="420">펀딩 정보</th>
-                        <th>수량</th>
-                        <th>주문 날짜</th>
-                        <th>결제 상태</th>
-                        <th>배송 상태</th>
-                    </tr>
-                </thead>
-                <tbody>
-                 	 <c:forEach var="o" items="${ olist }">
+            <c:choose>
+           	 	<c:when test="${ empty olist }">
+       	 			<div class="none"><h4 align="center">검색어와 일치하는 내용이 존재하지 않습니다:(</h4></div>
+           	 	</c:when>
+           	 	<c:otherwise>
+	                <thead class="tableHead">
 	                    <tr>
-	                        <td class="ono">${ o.orderNo }</td>
-	                        <td>${ o.supporterName }</td>
-	                        <td>
-	                        	${ o.projectTitle }<br>
-	                        	${ o.rewardTitle }
-		                        	<c:if test="${ not empty o.orderOption }">
-	                        		  /${ o.orderOption }
-		                        	</c:if>
-                        	</td>
-	                        <td>${ o.orderCount }</td>
-	                        <td>${ o.orderDate }</td>
-                        	<c:choose>
-                        		<c:when test="${ o.orderStatus == 1 }">
-                        			<td>결제완료</td>
-                        		</c:when>
-                        		<c:when test="${ o.orderStatus == 2 }">
-                        			<td>취소요청</td>
-                        		</c:when>
-                        		<c:when test="${ o.orderStatus == 3 }">
-                        			<td>취소완료</td>
-                        		</c:when>
-                        	</c:choose>
-                        	<c:choose>
-                        		<c:when test="${ o.shippingStatus == 1 }">
-                        			<td>배송준비중</td>
-                        		</c:when>
-                        		<c:when test="${ o.shippingStatus == 2 }">
-                        			<td>배송시작</td>
-                        		</c:when>
-                        		<c:when test="${ o.shippingStatus == 3 }">
-                        			<td>배송완료</td>
-                        		</c:when>
-                        	</c:choose>
-                    	</tr>
-                   	</c:forEach>
-                </tbody>
+	                        <th>주문번호</th>
+	                        <th>펀딩 서포터명</th>
+	                        <th width="420">펀딩 정보</th>
+	                        <th>수량</th>
+	                        <th>주문 날짜</th>
+	                        <th>결제 상태</th>
+	                        <th>배송 상태</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                 	 <c:forEach var="o" items="${ olist }">
+		                    <tr>
+		                        <td class="ono">${ o.orderNo }</td>
+		                        <td>${ o.supporterName }</td>
+		                        <td>
+		                        	${ o.projectTitle }<br>
+		                        	${ o.rewardTitle }
+			                        	<c:if test="${ not empty o.orderOption }">
+		                        		  /${ o.orderOption }
+			                        	</c:if>
+	                        	</td>
+		                        <td>${ o.orderCount }</td>
+		                        <td>${ o.orderDate }</td>
+	                        	<c:choose>
+	                        		<c:when test="${ o.orderStatus == 1 }">
+	                        			<td>결제완료</td>
+	                        		</c:when>
+	                        		<c:when test="${ o.orderStatus == 2 }">
+	                        			<td>취소요청</td>
+	                        		</c:when>
+	                        		<c:when test="${ o.orderStatus == 3 }">
+	                        			<td>취소완료</td>
+	                        		</c:when>
+	                        	</c:choose>
+	                        	<c:choose>
+	                        		<c:when test="${ o.shippingStatus == 1 }">
+	                        			<td>배송준비중</td>
+	                        		</c:when>
+	                        		<c:when test="${ o.shippingStatus == 2 }">
+	                        			<td>배송시작</td>
+	                        		</c:when>
+	                        		<c:when test="${ o.shippingStatus == 3 }">
+	                        			<td>배송완료</td>
+	                        		</c:when>
+	                        	</c:choose>
+	                    	</tr>
+	                   	</c:forEach>
+	                </tbody>
+                </c:otherwise>
+            </c:choose>    
             </table>
             
            <!-- 주문상세 정보 -->
@@ -162,31 +177,33 @@
         <br clear="both"><br>
 
         <!-- 페이징 -->
-        <div class="paging_wrap">
-            <ul class="pagination">
-                <c:choose>
-	        		<c:when test="${ pi.currentPage eq 1 }">
-		           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-		            </c:when>
-		            <c:otherwise>
-		            	<li class="page-item"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
-		            </c:otherwise>
-		    	</c:choose>        
-		            
-				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-	            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
-				</c:forEach>		            
-		            
-		        <c:choose> 
-		        	<c:when test="${ pi.currentPage eq pi.maxPage }">
-		           	 	<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
-		           	</c:when>
-		           	<c:otherwise>
-		           		<li class="page-item"><a class="page-link" href="${ pi.currentPage+1 }">다음</a></li>
-		           	</c:otherwise> 	
-	        	</c:choose>
-            </ul>
-        </div>
+        <c:if test="${ !empty olist }">
+	        <div class="paging_wrap">
+	            <ul class="pagination">
+	                <c:choose>
+		        		<c:when test="${ pi.currentPage eq 1 }">
+			           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+			            </c:when>
+			            <c:otherwise>
+			            	<li class="page-item"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
+			            </c:otherwise>
+			    	</c:choose>        
+			            
+					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+		            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
+					</c:forEach>		            
+			            
+			        <c:choose> 
+			        	<c:when test="${ pi.currentPage eq pi.maxPage }">
+			           	 	<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+			           	</c:when>
+			           	<c:otherwise>
+			           		<li class="page-item"><a class="page-link" href="${ pi.currentPage+1 }">다음</a></li>
+			           	</c:otherwise> 	
+		        	</c:choose>
+	            </ul>
+	        </div>
+        </c:if>
 
     </div>
 
