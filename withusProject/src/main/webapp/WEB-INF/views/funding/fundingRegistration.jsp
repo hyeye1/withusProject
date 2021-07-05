@@ -405,7 +405,7 @@
                 <!-- 바디 -->
                 <div class="regiBody">
                     <!-- 1. 기본정보 -->
-                    <div class="regiOne regi" style="display: none;">
+                    <div class="regiOne regi">
                         <div class="regiInfo">
                             <b class="regiTitle">프로젝트 성공 조건 & 수수료 안내</b>
                             <p>
@@ -563,7 +563,7 @@
 
                     <!-- 3. 리워드 -->
                     <form action="">
-                        <div class="regiThree regi">
+                        <div class="regiThree regi" style="display: none;">
                             <div>
                                 <b class="regiTitle">프로젝트 리워드를 구성해주세요</b>
                                 <p>
@@ -672,18 +672,12 @@
                             <div class="rewardOn" style="display: none;">
                                 <table class="registeredTable">
                                     <hr><br>
+                                    
                                     <tr>
-                                        <th>
-                                            <b class="regiTitle" style="line-height: 1;">등록된 리워드 <br> 미리보기</b>
+                                        <th colspan="4">
+                                            <b class="regiTitle" style="line-height: 1;"> &nbsp; 등록된 리워드 미리보기 <br>&nbsp;</b>
                                         </th>
-                                        <!-- <td> <td> <td>-->
                                     </tr>
-                            <!--    <tr>
-                                        <th>
-                                        </th>
-                                        +1 =
-                                    </tr>
-                                    -->
                                 </table>
                             </div>
                         </div>
@@ -820,6 +814,8 @@
                 </div>
 
                 <script>
+                    var count = 0;
+
                     function addedReward(){
                         var price = $('input[name=rePrice]').val();
                         var limit = $('input[name=limitNum]').val();
@@ -846,14 +842,13 @@
                                             '<div class="registered registered1">'+
                                                 '<div style="height: 290px;">'+
                                                     '<div>'+
-                                                        '<p><b id="registeredName"></b></p>'+
-                                                        '<span id="registeredSpan1"></span>'+
-                                                        '<!-- <span>0개 펀딩</span> 수정될때를 위해 가지고 있어야 함--> <br>'+
+                                                        '<p><b id="registeredName">' + price + '원 펀딩</b></p>'+
+                                                        '<span id="registeredSpan1">' + limit + '개 남음</span><br>'+
                                                     '</div><br>'+
-                                                    '<div><p id="registeredTC"></p></div>';
+                                                    '<div><p id="registeredTC">리워드명 <br> <b>' + title + " </b> <br> " + content + '</p></div>';
                                     
                                 if(option != ""){
-                                    aa += '<p id="optionP"></p>';
+                                    aa += '<p id="optionP"><input placeholder='+ option + ' disabled></p>';
                                 }
 
                                     aa +=   '</div>'+
@@ -865,27 +860,21 @@
                                         '</td>';
                                         
                                 
-                                console.log(($('td[class=td]').length+1)%3 == 0);
-                                $('.registeredTable').append(aa);
-                                $(".rewardOn").show();
-                                $("#registeredName").append(price+"원 펀딩");
-                                $('#registeredSpan1').append(limit + "개 남음");
-                                $('#registeredTC').append("리워드명 <br> <b>" + title + " </b> <br> " + content);
-                                $('#optionP').append("<input placeholder="+ option +" disabled>");
+                                //console.log(($('td[class=td]').length+1)%3 == 0);
                                 
-                                if( ($('td[class=td]').length+1)%3 == 0 ) {
-                                    $('.registeredTable').append("<tr><th></th></tr>");
+                                if(count % 4 == 0) {
+                                    $('.registeredTable').append('<tr></tr>');
                                 }
-                                /*
+                                
+                                $('.registeredTable tr').last().append(aa);
+                                $(".rewardOn").show();
+                                
+                                count++;
+                                
                                 $(this).trigger('reset');
-                                $('input').val('');
-                                $('textarea').val('');
-*/
                             }
                         }
 
-                        /* 3개 이상이면 tr추가!*/
-                        
                     }
                 </script>
 
