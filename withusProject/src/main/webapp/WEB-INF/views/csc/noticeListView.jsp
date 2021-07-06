@@ -40,13 +40,23 @@
 				<c:forEach var="n" items="${ list }">
 					<tr align="center">
 						<td>${ n.noticeNo }</td>
-						<td><a href="detail.no">${ n.noticeTitle }</a></td>
+						<td><a href="detail.no?nno=${ n.noticeNo }">${ n.noticeTitle }</a></td>
 						<td>${ n.createDate }</td>
 						<td>${ n.count }</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+		
+		<script>
+            	$(function(){
+            		$("#noticeList tbody tr").click(function(){
+            			location.href="detail.no?nno=" + $(this).children(".nno").text()
+            		})
+            	})
+            </script>
+             
+		
 	    <br>
 
 	    <!-- 페이징 바 추가예정 -->

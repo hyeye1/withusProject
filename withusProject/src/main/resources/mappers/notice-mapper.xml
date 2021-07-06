@@ -70,6 +70,7 @@
 		     , notice_title
 		     , notice_originname
 		     , notice_changename
+		     , notice_content
 		     , to_char(create_date, 'YYYY-MM-DD') create_date
 		  from notice
 		 where notice_no = #{noticeNo}

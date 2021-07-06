@@ -96,7 +96,7 @@ public class NoticeController {
 		if(result > 0) {
 			Notice n = nService.selectNotice(nno);
 			model.addAttribute("n", n);
-			return "csc/noticeDetatilView";
+			return "csc/noticeDetailView";
 		}else {
 			model.addAttribute("errorMsg", "공지사항 상세조회를 실패했습니다.");
 			return "common/errorPage";
@@ -104,9 +104,9 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("delete.no")
-	public String deleteNotice(int noticeNo, String filePath, HttpSession session, Model model) {
+	public String deleteNotice(int nno, String filePath, HttpSession session, Model model) {
 		
-		int result = nService.deleteNotice(noticeNo);
+		int result = nService.deleteNotice(nno);
 		
 		if(result > 0) {
 			if(!filePath.equals("")) {
