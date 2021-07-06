@@ -115,7 +115,7 @@
 	
 	<!-- 검색 페이징 처리 -->
 	
-	<!-- 일다나 검색만 -->
+	<!-- 검색 -->
 	<select id="selectSearchOrder" resultMap="orderRset" parameterType="hashmap">
 		select
 			   order_no

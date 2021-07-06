@@ -68,9 +68,9 @@ public class OrderController {
 		}
 	}
 	
-	//검색 일단 키워드로만
+	// 검색 : 페이징 처리는 아직...
 	@RequestMapping("orderSearch.mana")
-	public String selectOrderList(HttpServletRequest request, Model model) {
+	public String selectSearchOrder(HttpServletRequest request, Model model) {
 		
 		String orderKeyword = request.getParameter("orderKeyword"); 
 		String keyword = request.getParameter("keyword");

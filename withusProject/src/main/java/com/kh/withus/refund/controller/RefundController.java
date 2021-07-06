@@ -1,6 +1,9 @@
 package com.kh.withus.refund.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,7 @@ public class RefundController {
 	private RefundService rService;
 
 	// 관리자
+	// 환불신청 리스트 조회
 	@RequestMapping("refundListView.mana")
 	public ModelAndView selectRefundList(@RequestParam(value="currentPage", defaultValue="1")
 										int currentPage, ModelAndView mv) {
@@ -28,26 +32,53 @@ public class RefundController {
 		int totalList = rService.selectListCount();
 		PageInfo pi = pagination.getPageInfo(totalList, currentPage, 5, 10);
 		
-		ArrayList<Refund> rList = rService.selectList(pi);
+		ArrayList<Refund> rlist = rService.selectList(pi);
 		
-		mv.addObject("rList", rList)
+		mv.addObject("rlist", rlist)
 		  .addObject("pi", pi)
 		  .setViewName("refund/manaRefundListView");
 		
 		return mv;
 	}
+	
+	// 환불 신청내역 상세 보기
 	@RequestMapping("refundDetail.mana")
 	public String selectRefund(int rno, Model model) {
 		
 		Refund r = rService.selectRefund(rno);
-		model.addAttribute("r", r);
-		return "refund/manaRefundDetailView";
-//		if(r != null) {
-//		}else{
-//			model.addAttribute("errorMsg","환물신청 내역 상세 조회 실패");
-//			return ""; 
-//		}
+
+		if(r != null) {
+			model.addAttribute("r", r);
+			return "refund/manaRefundDetailView";
 		
+		}else{
+			model.addAttribute("errorMsg","환물신청 내역 상세 조회 실패");
+			return "common/manaErrorPage"; 
+		}
+		
+	}
+	
+	// 검색 : 페이징 처리는 아직...
+	@RequestMapping("refundSearch.mana")
+	public String selectSearchRefund(HttpServletRequest request, Model model) {
+		
+		String refundKey = request.getParameter("refundKey");
+		String keyword = request.getParameter("keyword");
+		String rfStatus= request.getParameter("rfStatus");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("refundKey", refundKey);
+		map.put("keyword", keyword);
+		map.put("rfStatus", rfStatus);
+		
+		ArrayList<Refund> rlist = rService.selectSearchRefund(map);
+		
+		model.addAttribute("rlist", rlist)
+		     .addAttribute("refundKey", refundKey)
+		     .addAttribute("rfStatus", rfStatus);
+		
+		return "refund/manaRefundListView";
+		     
 	}
   
 

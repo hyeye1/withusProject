@@ -153,6 +153,7 @@ public class MemberController {
 	
 
 	// 관리자쪽
+	// 회원 조회
 	@RequestMapping("memberListView.mana")
 	public ModelAndView selectMemberList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,ModelAndView mv) {
 		
@@ -166,6 +167,8 @@ public class MemberController {
 		  .setViewName("member/manaMemberListView");
 		return mv;
 	}
+	
+	// 회원 검사
 	
 
 }

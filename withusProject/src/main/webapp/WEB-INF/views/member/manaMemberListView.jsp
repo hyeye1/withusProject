@@ -88,10 +88,10 @@
 	            <div class="searchKey_3">
 	                <div class="memberKeyword">
 	                    <select name="memberInfo" id="memberInfo">
-	                        <option value="">전체</option>
-	                        <option value="memberNo">회원번호</option>
-	                        <option value="memberName">이름</option>
-	                        <option value="email">이메일</option>
+	                        <option value="all">전체</option>
+	                        <option value="member_no">회원번호</option>
+	                        <option value="member_name">이름</option>
+	                        <option value="member_id">이메일</option>
 	                    </select>
 	                </div>
 	
