@@ -40,7 +40,7 @@
 	    <br><br>
 
 		<div class="list" align="center">
-			<button><a href="/list.no">목록</a></button>
+			<button><a href="list.no">목록</a></button>
 		</div>
     </div>
 
