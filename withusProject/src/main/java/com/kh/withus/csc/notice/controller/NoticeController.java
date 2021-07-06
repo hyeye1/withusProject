@@ -26,7 +26,7 @@ public class NoticeController {
 	private NoticeService nService;
 	
 	@RequestMapping("list.no")
-	public ModelAndView selectNoticeList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
+	public ModelAndView selectListCount(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
 		int listCount = nService.selectListCount();
 		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 5, 10);
