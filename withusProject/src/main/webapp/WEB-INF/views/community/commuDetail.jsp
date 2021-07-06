@@ -283,8 +283,8 @@
 		    			url:"rlist.co",
 		    			data:{cno:${c.commuNo}},
 		    			success:function(list){
-		    				//console.log(list);
-		    				
+		    				console.log(list);
+		    			
 		    				var value="";
 		    				$.each(list, function(i, obj){
 		    					value += "<tr>"
@@ -295,11 +295,12 @@
 		    				})
 		    				
 		    				$("#commuReplyArea tbody").html(value);
-		    				$("#rcount").text(list.length);
+		    				$("#comReCount").text(list.length);
 		    				
 		    			},error:function(){
 		    				console.log("댓글 리스트 조회용 ajax실패");
 		    			}
+		    			
 		    		})
 		    	}
 		    	

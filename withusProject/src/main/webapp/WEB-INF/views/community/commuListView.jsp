@@ -211,7 +211,7 @@
                  </c:if>
                 </ul>
               </div>
-              <table id="boardList" class="table table-hover" align="center">
+              <table id="commuList" class="table table-hover" align="center">
                 <thead>
                   <tr>
                     <th>글번호</th>
@@ -238,7 +238,7 @@
               
               <script>
             	$(function(){
-            		$("#communityList tbody tr").click(function(){
+            		$("#commuList tbody tr").click(function(){
             			location.href="commu.detail?cno=" + $(this).children(".cno").text();
             		})
             	})

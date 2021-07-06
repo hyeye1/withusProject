@@ -116,8 +116,8 @@
 		     , com_re_content
 			 , com_re_writer
 		     , to_char(com_re_create, 'YYYY-MM-DD') com_re_create
-		  from commuReply
-		 where commu_status = 'Y'
+		  from commu_Reply
+		 where com_re_status = 'Y'
 		  and ref_cno = #{commuNo}
 		 order
 		    by com_re_no desc
@@ -125,7 +125,7 @@
 	
 	<insert id="insertCommuReply" parameterType="CommuReply">
 		insert
-		  into commuReply
+		  into commu_Reply
 		  (
 		    com_re_no
 		  , com_re_content
@@ -134,7 +134,7 @@
 		  )
 		  values
 		  (
-		    seq_rno.nextval
+		    seq_comrno.nextval
 		  , #{comReContent}
 		  , #{refCommuNo}
 		  , #{comReWriter}
