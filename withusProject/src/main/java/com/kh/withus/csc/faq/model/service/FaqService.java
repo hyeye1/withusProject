@@ -9,7 +9,7 @@ public interface FaqService {
 	// 6/27 윤경 생성
 	
 	// faq 리스트 조회(페이징 처리x)
-	//int selectList();
+	int selectListCount();
 	ArrayList<Faq> selectList(Faq f);
 	
 	// faq 작성

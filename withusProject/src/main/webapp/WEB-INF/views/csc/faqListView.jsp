@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +26,7 @@
 	
 	<!-- 6/12 윤경 생성-->
     <!-- 해더바 포함 -->
-    <jsp:include page=""/>
+    <jsp:include page="../common/header.jsp"/>
 
     <h2>FAQ</h2>
     <hr><br>
@@ -51,17 +51,12 @@
             <div class="faqCon">
                 <ul class="accodrding_list">
                     <li> <!-- 얘 규격? 좀 어케 해야됨 ㅡㅡ -->
-                        <button type="button" class="btn btn-light" data-toggle="collapse" data-target="#faqContent" style="width:80%;">
-                            Q &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 카테고리 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            FAQ제목 ▼
+                        <button type="button" class="btn btn-light titleBtn" data-toggle="collapse" data-target="#faqContent" style="width:80%;">
+                            <span style="width: 25%;">Q &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 카테고리</span> 
+                            <span style="width: 60%;">FAQ 제목 </span>
+                            <span style="width: 15%;">▼</span>
                         </button>
                         <div id="faqContent" class="collapse" style="background-color: rgb(224,224,224); width:80%;">
-                            
-                            <!-- 관리자 페이지만 or 관리자로 로그인 했을 시에만 보이는 버튼-->
-                            <div class="faqConBtn" align="right">
-                                <button type="button" class="btn btn-warning">수정</button>
-                                <button type="button" class="btn btn-danger">삭제</button> <br>
-                            </div>
 
 
                             <p align="left" style="padding-left: 5%;">
@@ -79,7 +74,7 @@
     <br><br>
 
     <!-- 푸터바 포함 -->
-    <jsp:include page=""/>
+    <jsp:include page="../common/footer.jsp"/>
 
 </body>
 </html>

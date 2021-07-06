@@ -12,6 +12,8 @@
 		<result column="faq_status" property="faqStatus" />
 	</resultMap>
 	
+	<select id="selectListCount"></select>
+	
 	<select id="selectList"></select>
 	 
 	<insert id="insertFaq"></insert>

@@ -1,11 +1,19 @@
 package com.kh.withus.csc.oto.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.withus.common.model.vo.PageInfo;
@@ -28,9 +36,52 @@ public class OtoController {
 		
 		ArrayList<Oto> list = oService.selectList(pi);
 		
-		mv.addObject("pi", pi).addObject("list", list).setViewName("oto/otoListView");
+		mv.addObject("pi", pi).addObject("list", list).setViewName("csc/otoListView");
 		
 		return mv;
 	}
+	
+	@RequestMapping("enrollForm.oto")
+	public String insertOto(Oto o, MultipartFile upfile, HttpSession session, Model model) {
+		
+		if(!upfile.getOriginalFilename().equals("")) {
+			String changeName = saveFile(session, upfile);
+			
+			o.setOtoOriginname(upfile.getOriginalFilename());
+			o.setOtoChangename("resources/cscUploadFile/" + changeName);
+		}
+		
+		int result = oService.insertOto(o);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "1:1문의가 등록되었습니다.");
+			return "redirect:myPage.me";
+		}else {
+			model.addAttribute("errorMsg", "1:1문의가 등록되지않았습니다.");
+			return "common/errorPage";
+		}
+	}
+	
+	private String saveFile(HttpSession session, MultipartFile upfile) {
+		String savePath = session.getServletContext().getRealPath("/resources/cscUpFiles/");
+		
+		String originName = upfile.getOriginalFilename(); // 원본명("aaa.jpg")
+		
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		int ranNum = (int)(Math.random() * 90000 + 10000);
+		String ext = originName.substring(originName.lastIndexOf("."));
+		
+		String changeName = currentTime + ranNum + ext;
+		
+		try {
+			upfile.transferTo(new File(savePath + changeName));
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		return changeName;	
+		}
+
+
 	
 }

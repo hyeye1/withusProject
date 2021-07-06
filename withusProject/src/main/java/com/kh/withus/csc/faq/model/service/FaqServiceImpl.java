@@ -19,13 +19,13 @@ public class FaqServiceImpl implements FaqService {
 	@Autowired
 	private FaqDao fDao;
 	
-	/*
+	
 	@Override
-	public int selectList() {
-		return fDao.selectList(sqlSession);
+	public int selectListCount() {
+		return fDao.selectListCount(sqlSession);
 	}
-	*/
-
+	
+	// 페이지로 안넘길건데....
 	@Override
 	public ArrayList<Faq> selectList(Faq f) {
 		return fDao.selectList(sqlSession, f);
