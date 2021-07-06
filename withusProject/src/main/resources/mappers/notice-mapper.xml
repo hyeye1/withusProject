@@ -34,7 +34,7 @@
 		    by create_date desc
 	</select>
 	
-	<!--
+	
 	<insert id="insertNotice" parameterType="Notice">
 		insert
 		  into notice
@@ -81,7 +81,7 @@
 		   set notice_status = 'N'
 		 where notice_no = #{noticeNo}
 	</update>
-	-->
+	
 	
 	
 </mapper>

@@ -1,6 +1,9 @@
 package com.kh.withus.csc.notice.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
@@ -38,7 +41,7 @@ public class NoticeController {
 		return mv;
 	}
 	
-	/*
+	
 	@RequestMapping("enrollForm.no")
 	public String enrollForm() {
 		return "notice/noticeEnrollForm";
@@ -65,6 +68,27 @@ public class NoticeController {
 		}
 	}
 	
+	private String saveFile(HttpSession session, MultipartFile upfile) {
+		String savePath = session.getServletContext().getRealPath("/resources/cscUpFiles/");
+		
+		String originName = upfile.getOriginalFilename(); // 원본명("aaa.jpg")
+		
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		int ranNum = (int)(Math.random() * 90000 + 10000);
+		String ext = originName.substring(originName.lastIndexOf("."));
+		
+		String changeName = currentTime + ranNum + ext;
+		
+		try {
+			upfile.transferTo(new File(savePath + changeName));
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		return changeName;	
+		}
+
+
 	@RequestMapping("detail.no")
 	public String selectNotice(int nno, Model model) {
 		int result = nService.increaseCount(nno);
@@ -72,7 +96,7 @@ public class NoticeController {
 		if(result > 0) {
 			Notice n = nService.selectNotice(nno);
 			model.addAttribute("n", n);
-			return "notice/noticeDetatilView";
+			return "csc/noticeDetatilView";
 		}else {
 			model.addAttribute("errorMsg", "공지사항 상세조회를 실패했습니다.");
 			return "common/errorPage";
@@ -80,9 +104,9 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("delete.no")
-	public String deleteNotice(int nno, String filePath, HttpSession session, Model model) {
+	public String deleteNotice(int noticeNo, String filePath, HttpSession session, Model model) {
 		
-		int result = nService.deleteNotice(nno);
+		int result = nService.deleteNotice(noticeNo);
 		
 		if(result > 0) {
 			if(!filePath.equals("")) {
@@ -97,7 +121,7 @@ public class NoticeController {
 			return "common/errorPage";
 		}
 	}
-	*/
+	
 	
 	/*
 	@RequestMapping("updateForm.no")
