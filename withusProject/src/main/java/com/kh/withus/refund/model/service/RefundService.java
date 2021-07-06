@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.kh.withus.common.model.vo.PageInfo;
+import com.kh.withus.community.model.vo.CommuReply;
 import com.kh.withus.refund.model.vo.Refund;
 
 public interface RefundService {

@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.withus.common.model.vo.PageInfo;
+import com.kh.withus.community.model.vo.CommuReply;
 import com.kh.withus.refund.model.vo.Refund;
 
 @Repository
@@ -42,4 +43,5 @@ public class RefundDao {
 		
 		return (ArrayList)sqlSession.selectList("refundMapper.selectSearchRefund", map);
 	}
+	
 }

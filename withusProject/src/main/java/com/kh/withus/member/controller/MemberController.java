@@ -99,11 +99,6 @@ public class MemberController {
 		
 		System.out.println(m);
 		
-		//System.out.println(m);
-		//System.out.println(session);
-		//System.out.println(model);
-		//System.out.println("암호화 전 : " + m.getUserPwd());
-		
 		// 암호화 작업
 		
 		String encPwd = bcryptPasswordEncoder.encode(m.getMemberPwd());
@@ -137,9 +132,7 @@ public class MemberController {
 	
 	
 	
-	
-	
-	
+		
 	
 	
 	

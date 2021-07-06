@@ -10,10 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.withus.common.model.vo.PageInfo;
 import com.kh.withus.common.template.pagination;
+import com.kh.withus.community.model.vo.CommuReply;
 import com.kh.withus.refund.model.service.RefundService;
 import com.kh.withus.refund.model.vo.Refund;
 
@@ -82,9 +84,4 @@ public class RefundController {
 	}
   
 
-	// 파트너 등록
-	@RequestMapping("partnerEnrollForm.me") 
-	public String selectPartnerEnroll() {
-		return "refund/partnerEnrollForm"; 
-	}
 }

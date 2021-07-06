@@ -33,5 +33,6 @@ public interface MemberService {
 		ArrayList<Member> selectList(PageInfo pi);
 		
 		int updateMemStatus(String mId, String mStatus);
-
+		
+		
 }

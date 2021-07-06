@@ -44,4 +44,5 @@ public class RefundServiceImpl implements RefundService {
 	public ArrayList<Refund> selectSearchRefund(HashMap<String, String> map) {
 		return rDao.selectSearchRefund(sqlSession, map);
 	}
+	
 }

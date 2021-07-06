@@ -39,7 +39,6 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.deleteMember(sqlSession, memberId);
 	}
 
-	
 	@Override
 	public int idCheck(String memberId) {
 		return mDao.idCheck(sqlSession, memberId);
@@ -49,13 +48,13 @@ public class MemberServiceImpl implements MemberService {
 	public int insertMemberLogin(Member m) {
 		return mDao.insertMemberLogin(sqlSession, m);
 	}
-	
-	// 관리자 
+
+	// 관리자
 	@Override
 	public int selectListCount() {
 		return mDao.selectListCount(sqlSession);
 	}
-	
+
 	@Override
 	public ArrayList<Member> selectList(PageInfo pi) {
 		return mDao.selectList(sqlSession, pi);
@@ -65,5 +64,11 @@ public class MemberServiceImpl implements MemberService {
 	public int updateMemStatus(String mId, String mStatus) {
 		return mDao.updateMemStatus(sqlSession, mId, mStatus);
 	}
+
+	
+	
+	
+	
+	
 
 }
