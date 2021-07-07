@@ -11,6 +11,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>With Us</title>
+<style>
+	
+</style>
 </head>
 <body>
 
@@ -25,6 +28,13 @@
 
 	<div class="container">
 
+		<br>
+		<c:if test="${ loginUser == 'admin%' }">
+			<div>
+				<a class="btn btn-secondary" style="float:right" href="enrollFrom.no">등록</a>
+			</div>
+		</c:if>
+		
 		<br>
 	    <!-- 표 N행 6열 -->
 		<table class="table table-bordered">
@@ -56,7 +66,9 @@
             	})
             </script>
              
-		
+	    <br>
+	    <a href="updateForm.no">수정</a> <a href="delete.no">삭제</a>
+	    
 	    <br>
 
 	    <!-- 페이징 바 추가예정 -->
