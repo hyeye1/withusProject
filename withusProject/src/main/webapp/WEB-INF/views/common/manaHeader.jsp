@@ -113,14 +113,16 @@
             <div class="logo_img"><a href="${ pageContext.servletContext.contextPath }"><img src="resources/images/logo.PNG" alt="로고" width="125px"></a></div>
             <div class="head_center"></div>
             <div class="login_area">
-                <!-- 로그인전 -->
-                <a data-toggle="modal" data-target="#manaLogin">로그인</a>
-            
-                <!-- 로그인 후 -->
-                <!-- 
-                <span>관리자님</span> &nbsp;
-                <a href="">로그아웃</a>
-                -->
+                <c:choose>
+                	<c:when test="${ empty loginAdmin }">
+                		<span>관리자  off</span> &nbsp;
+		                <a data-toggle="modal" data-target="#manaLogin">로그인</a>
+                	</c:when>
+                	<c:otherwise>
+		                <span>관리자  on</span> &nbsp;
+		                <a href="logout.mana">로그아웃</a>
+                	</c:otherwise>
+                </c:choose>
             </div>
         </div>
 
@@ -151,7 +153,7 @@
             </ul>
         </div>
     </div>
-
+    
    
     <!-- 로그인 클릭시 뜨는 모달 -->
     <!-- The Modal -->
@@ -161,23 +163,24 @@
         
             <!-- Modal Header -->
             <div class="modal-header">
-            <h4 class="modal-title">로그인</h4>
+            <h4 class="modal-title">관리자 로그인</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             
             <!-- Modal body -->
+            <form action="login.mana" method="post">
             <div class="modal-body">
                 <label for="userId" class="mr-sm-2">ID :</label>
-                <input type="text" name="userId" class="form-control mb-2 mr-sm-2" placeholder="Enter ID" id="userId"> 
+                <input type="text" name="memberId" class="form-control mb-2 mr-sm-2" placeholder="Enter ID" id="userId"> 
                 <label for="userPwd" class="mr-sm-2">Password:</label>
-                <input type="password" name="userPwd" class="form-control mb-2 mr-sm-2" placeholder="Enter password" id="userPwd">
+                <input type="password" name="memberPwd" class="form-control mb-2 mr-sm-2" placeholder="Enter password" id="userPwd">
             </div>
             
             <!-- Modal footer -->
             <div class="modal-footer">
-            <button type="button" class="btn btn-info btn-block" data-dismiss="modal">로그인</button>
+            <button type="button" onclick="form.submit();" class="btn btn-info btn-block" data-dismiss="modal">로그인</button>
             </div>
-            
+            </form>
         </div>
         </div>
     </div>                            

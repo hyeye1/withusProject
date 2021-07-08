@@ -30,6 +30,9 @@ public interface MemberService {
 		
 		
 		// 관리자
+		// 로그인
+		Member loginAdmin(Member m);
+		
 		// 관리자 회원조회
 		int selectListCount();
 		ArrayList<Member> selectList(PageInfo pi);

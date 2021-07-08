@@ -37,7 +37,12 @@ public class MemberDao {
 		return sqlSession.insert("memberMapper,insertMemberLogin", m);
 	}
 	
-	//관리자
+	// 관리자
+	// 로그인
+	public Member loginAdmin(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.loginAdmin", m);
+	}
+	
 	// 페이징 처리
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("memberMapper.selectListCount");

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.withus.category.model.vo.Category;
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.service.FundingService;
 import com.kh.withus.funding.model.vo.Project;
@@ -23,10 +24,14 @@ public class FundingController {
 	@RequestMapping("list.fun")
 	public ModelAndView selectFundingList(ModelAndView mv) {
 		
+		// 전체 카테고리 사진, 명 조회
+		ArrayList<Category> cList = funService.selectCate();
+		
 		// 펀딩 상품 조회
 		ArrayList<Project> list = funService.selectList();
 		
 		mv.addObject("list", list)
+		  .addObject("cList", cList)
 		  .setViewName("funding/fundingListView");
 		
 		return mv;

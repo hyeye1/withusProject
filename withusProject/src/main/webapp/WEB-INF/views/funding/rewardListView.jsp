@@ -112,7 +112,7 @@
 				</div>
 
 				<div class="plusInfo3">
-					<div><p>${ drList[0].projectTitle }에 <span id="allTotalPrice">1000000</span>원을 펀딩합니다.</p></div>
+					<div><p>${ drList[0].projectTitle }에 펀딩합니다.</p></div>
 				</div>
 			</div>
 	
