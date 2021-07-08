@@ -1,5 +1,7 @@
 package com.kh.withus.funding.model.vo;
 
+import java.util.ArrayList;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,4 +44,7 @@ public class Project {
 	private int totalPrice;
 	private int percentage;
 	private int dday;
+	
+	private ArrayList<Reward> rewardList;
+	
 }

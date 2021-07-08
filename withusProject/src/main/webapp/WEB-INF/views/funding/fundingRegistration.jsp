@@ -6,12 +6,6 @@
         <head>
             <meta charset="UTF-8">
             <title>Insert title here</title>
-            <!-- jQuery 라이브러리 -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <!-- 부트스트랩에서 제공하고 있는 스타일 -->
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-            <!-- 부트스트랩에서 제공하고 있는 스크립트 -->
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
             <style>
                 .regiOuter {
                     width: 1200px;
@@ -146,7 +140,7 @@
                 }
 
                 #projectDday::placeholder {
-                    padding-left: 145px;
+                    text-align: right;
                 }
 
                 #projectPeriod,
@@ -451,9 +445,25 @@
                         <div>
                             <b class="regiTitle">프로젝트의 진행 기간을 적어주세요</b>
                             <p>최소 7일부터 최대 60일까지 가능합니다.</p>
-                            <input type="text" id="projectDday" placeholder="0">일 남음 <input type="date"
-                                name="projectPeriod" id="projectPeriod">
+                            <input type="text" id="projectDday" placeholder="0" disabled>일 남음 
+                            <input type="date" name="projectPeriod" id="projectPeriod">
+
+                            <script>
+                                // 디데이 계산
+                               $(function(){
+                                $("#projectPeriod").change(function(){
+                                    var today = new Date();
+                                    var dueDay = $("#projectPeriod").val();   
+                                    var gap = today.getTime() - new Date(dueDay).getTime();
+                                    var result = Math.floor(gap / (1000 * 60 * 60 * 24)) * -1;
+                                    //console.log(result);
+
+                                    $("#projectDday").attr('placeholder', result);
+                                })
+                               })
+                            </script>
                         </div><br>
+                        
 
                         <div>
                             <b class="regiTitle">프로젝트의 예상 배송일을 적어주세요</b>
@@ -462,8 +472,23 @@
                             </p>
 
                             <!-- 체크박스 선택시 데이트 인풋 사라지게 -->
-                            <input type="checkbox" name="projectShipment" id="projectShipment"> 배송지 필요없어요
+                            <label for="projectShipment">
+                                <input type="checkbox" name="projectShipment" id="projectShipment" onclick="deliverYN();"> 배송지 필요없어요
+                            </label>
+
                             <input type="date" name="projectShipDate" id="projectShipDate">
+
+                            <script>
+                                var shipDate = $('input[name=projectShipDate]');
+                               
+                                $('input[name=projectShipment]').change(function(){
+                                    if($(this).prop("checked")){
+                                        shipDate.hide();
+                                    }else{
+                                        shipDate.show();
+                                    }
+                                });
+                            </script>
                         </div><br>
 
                         <div>
@@ -487,13 +512,26 @@
                             <b class="regiTitle">프로젝트 키워드를 적어주세요</b><br>
                             <p style="font-size: 26px;">
                                 # <input type="text" name="projectKeyword" id="projectKeyword"
-                                    placeholder=" 키워드를 입력해주세요"> <button id="keywordBtn">해시태그 등록</button>
+                                    placeholder=" 키워드를 입력해주세요"> <button id="keywordBtn" onclick="addHash()">해시태그 등록</button>
                             </p>
                             <div id="keywordBox">
-                                <span>#인테리어</span>
-                                <span>#디자인</span>
-                                <span>#어항</span>
+                                <input type="hidden" name="hashtagList" value="">
                             </div>
+
+                            <script>
+                                var hashs = ""; // input type hidden에 들어가있는 값
+                                function addHash(){
+                                    var hashtag = $('input[id=projectKeyword]').val();
+                                    if(hashtag == ""){
+                                        alert("입력창을 입력해주세요.");
+                                    }else{
+                                        $('#keywordBox').last().append('<span> #' + hashtag + '</span>');
+                                        $('input[name=hashtagList]').val(hashs);
+                                        $('input[id=projectKeyword]').val('');
+                                        hashs += '#'+ hashtag + " ";
+                                    }
+                                }
+                            </script>
                         </div>
                         
                         <!-- 등록/초기화 버튼 -->
@@ -503,9 +541,11 @@
                         </div>
                     </div>
 
+
                     <!-- 2. 스토리 -->
                     <div class="regiTwo regi" style="display: none;">
 
+                        <!-- 
                         <div>
                             <b class="regiTitle">프로젝트 소개 영상과 이미지를 등록해주세요</b>
                             <p>
@@ -514,27 +554,23 @@
                         </div>
                         <br>
 
-                        <!-- 동영상 주소 -->
-                        <div>
-                            <b class="regiTitle">동영상 주소를 적어주세요</b><br>
-                            <input type="text" name="regiVideo" id="regiVideo">
-                            <input type="file" name="" id=""><!-- +버튼으로 고치기 -->
-                        </div>
-                        <br>
+    
+                             이미지
+                            <div>
+                                <b class="regiTitle">이미지를 등록해주세요</b><br>
+                                <button
+                                    style="width: 255px; height: 185px; border: 1px solid rgb(127, 127, 127); border-radius: 5px; background-color: white;">
+                                    최적 사이즈 740*417 px
+                                </button>
+                                <button
+                                    style="width: 255px; height: 185px; border: 1px solid rgb(127, 127, 127); border-radius: 5px; background-color: white;">
+                                    +
+                                </button>
+                            </div>
+                            <br>
 
-                        <!-- 이미지 -->
-                        <div>
-                            <b class="regiTitle">이미지를 등록해주세요</b><br>
-                            <button
-                                style="width: 255px; height: 185px; border: 1px solid rgb(127, 127, 127); border-radius: 5px; background-color: white;">
-                                최적 사이즈 740*417 px
-                            </button>
-                            <button
-                                style="width: 255px; height: 185px; border: 1px solid rgb(127, 127, 127); border-radius: 5px; background-color: white;">
-                                +
-                            </button>
-                        </div>
-                        <br>
+                         -->
+                        
 
                         <!-- 에디터 -->
                         <div>
@@ -546,10 +582,33 @@
                                 적절한 문단/줄 바꿈만으로 멋진 프로젝트를 완성 할 수 있습니다! <br>
                                 이미지와 영상은 꼭 버튼을 이용하여 첨부해주세요. <br>
                             </p>
-                            <button
-                                style="width: 770px; height: 592px; border: 1px solid rgb(127, 127, 127); border-radius: 5px; background-color: white;">
-                                에디터자리
-                            </button>
+                            <textarea  id="summernote"   name="editordata"
+                                style="width: 770px; height: 592px; border: 1px solid rgb(127, 127, 127); border-radius: 5px; background-color: white; resize: none;">
+                            </textarea>
+                            <!-- include libraries(jQuery, bootstrap) -->
+                            <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+                            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+                            <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+                            <!-- include summernote css/js -->
+                            <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+                            <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+                            <script>
+                                // 썸머노트
+                                $(document).ready(function() {
+                                    
+                                    
+                                    $('#summernote').summernote({
+                                        height: 592,                    // 에디터 높이
+                                        width: 770,                     // 에디터 가로 넓이
+                                        minHeight: null,                // 최소 높이
+                                        maxHeight: 700,                // 최대 높이
+                                        focus: true,                    // 에디터 로딩후 포커스를 맞출지 여부
+                                        lang: "ko-KR"                  // 한글 설정         
+                                    });
+   
+                                });           
+                            </script>
 
                         </div>
                             
@@ -562,126 +621,204 @@
                     </div>
 
                     <!-- 3. 리워드 -->
-                    <form action="">
-                        <div class="regiThree regi" style="display: none;">
-                            <div>
-                                <b class="regiTitle">프로젝트 리워드를 구성해주세요</b>
-                                <p>
-                                    프로젝트 시작을 위해서는 최소 1개 이상의 리워드가 있어야 합니다. <br>
-    
-                                    배송이 필요한 리워드는 배송비가 포함된 가격을 적어주세요.
-                                </p>
-                            </div>
-    
-                            <div class="regiReward">
-                                <table>
-                                    <tr>
-                                        <th>
-                                            <b class="regiTitle">리워드 금액</b>
-                                        </th>
-                                        <td>
-                                            <input type="text" placeholder="1,000원 이상 입력해 주세요." name="rePrice" required>
-                                        </td>
-                                        <td>원</td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <b class="regiTitle" style="line-height: 1;">리워드 제공<br>가능 수 </b>
-                                        </th>
-                                        <td class="rewardLimitNum">
-                                            <!-- 예쁜 버튼 
-                                                <button type="button" class="btn2 limitBtn1 limit" onclick="limitBtn(1); limitBtn1();">무제한</button>
-                                                <button type="button" class="btn1 limitBtn2 limit" onclick="limitBtn(2); limitBtn2();">제한</button>
-                                            -->
-                                            <label for="limited" style="width:130px;">
-                                                <input type="radio" name="limit" id="limited" value="limited" style="width: 30px;" onclick="limitBtn(2); limitBtn2();" checked> 제한
-                                            </label>
-                                            <label for="unlimited">
-                                                <input type="radio" name="limit" id="unlimited" value="unlimited" style="width: 30px;"  onclick="limitBtn(1); limitBtn1();"> 무제한
-                                            </label>
-                                            <input type="number" name="limitNum" id="limitNum" class="limitNum" required>
-                                        </td>
-                                        <td class="limitNum">개</td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <b class="regiTitle">리워드 제목</b>
-                                        </th>
-                                        <td>
-                                            <input type="text" name="reTitle" id="reTitle" required>
-                                        </td>
-                                        <td>0/30</td>
-                                    </tr>
-                                    <tr class="regiRewardContent">
-                                        <th>
-                                            <b class="regiTitle">리워드 내용</b>
-                                        </th>
-                                        <td>
-                                            <textarea name="reContent" id="reContent" placeholder="준비된 리워드와 설명을 적어주세요"
-                                                style="resize: none;" required></textarea>
-                                        </td>
-                                        <td>0/70</td>
-                                    </tr>
-                                    <tr class="addOptionTr">
-                                        <th>
-                                            <b class="regiTitle">리워드 옵션</b>
-                                        </th>
-                                        <td>
-                                            <button type="button" id="addOptionBtn" onclick="addOption();" required>리워드 옵션 추가하기</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="optionOnTr" style="display: none;">
-                                        <th>
-                                            <b class="regiTitle">리워드 옵션</b>
-                                        </th>
-                                        <td>
-                                            <p id="regiOption">옵션설명 <b class="pink delOpt" onclick="delOpt();">옵션취소</b></p>
-                                            <input class="optionInput" name="option" type="text" placeholder="ex) 사이즈를 입력하세요">
-                                        </td>
-                                        <td>
-                                            <p></p>0/20
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <b class="regiTitle">배송지필요여부</b>
-                                        </th>
-                                        <td>
-                                            <label for="yesShip" style="width:180px">
-                                                <input type="radio" name="ship" id="yesShip" value="yesShip" style="width: 30px; " checked> 배송지 필요
-                                            </label>
-                                            <label for="noShip">
-                                                <input type="radio" name="ship" id="noShip" value="noShip" style="width: 30px;"> 배송지 필요없음
-                                            </label>
-    
-                                            <!-- 
-                                                <button class="btn1">배송지 필요</button>
-                                                <button class="btn2">배송지 필요없음</button>
-                                             -->
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            
-                            <!-- 등록/초기화 버튼 -->
-                            <div class="regiBtn">
-                                <button type="button" class="regiSubmitBtn threeSubmit" onclick="addedReward();">등록</button>
-                                <button type="reset" class="regiResetBtn threeReset">초기화</button>
-                            </div>
-                                <!-- 등록된 리워드  -->
-                            <div class="rewardOn" style="display: none;">
-                                <table class="registeredTable">
-                                    <hr><br>
-                                    
-                                    <tr>
-                                        <th colspan="4">
-                                            <b class="regiTitle" style="line-height: 1;"> &nbsp; 등록된 리워드 미리보기 <br>&nbsp;</b>
-                                        </th>
-                                    </tr>
-                                </table>
-                            </div>
+                    <div class="regiThree regi" style="display: none;">
+                        <div>
+                            <b class="regiTitle">프로젝트 리워드를 구성해주세요</b>
+                            <p>
+                                프로젝트 시작을 위해서는 최소 1개 이상의 리워드가 있어야 합니다. <br>
+
+                                배송이 필요한 리워드는 배송비가 포함된 가격을 적어주세요.
+                            </p>
                         </div>
-                    </form>
+
+                        <div class="regiReward">
+                            <table>
+                                <tr>
+                                    <th>
+                                        <b class="regiTitle">리워드 금액</b>
+                                    </th>
+                                    <td>
+                                        <input type="text" placeholder="1,000원 이상 입력해 주세요." name="rewardList[count].rewardPrice" class="rePrice" required>
+                                    </td>
+                                    <td>원</td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <b class="regiTitle" style="line-height: 1;">리워드 제공<br>가능 수 </b>
+                                    </th>
+                                    <td class="rewardLimitNum">
+                                        <!-- 예쁜 버튼 
+                                            <button type="button" class="btn2 limitBtn1 limit" onclick="limitBtn(1); limitBtn1();">무제한</button>
+                                            <button type="button" class="btn1 limitBtn2 limit" onclick="limitBtn(2); limitBtn2();">제한</button>
+                                        -->
+                                        <label for="limited" style="width:130px;">
+                                            <input type="radio" class="limit" name="limit" id="limited" value="limited" style="width: 30px;" onclick="limitBtn(2); limitBtn2();" checked> 제한
+                                        </label>
+                                        <label for="unlimited">
+                                            <input type="radio" class="limit" name="limit" id="unlimited" value="unlimited" style="width: 30px;"  onclick="limitBtn(1); limitBtn1();"> 무제한
+                                        </label>
+                                        <input type="number" name="limitNum" id="limitNum" class="limitNum" required>
+                                    </td>
+                                    <td class="limitNum">개</td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <b class="regiTitle">리워드 제목</b>
+                                    </th>
+                                    <td>
+                                        <input type="text" name="reTitle" id="reTitle" class="reTitle" required>
+                                    </td>
+                                    <td>0/30</td>
+                                </tr>
+                                <tr class="regiRewardContent">
+                                    <th>
+                                        <b class="regiTitle">리워드 내용</b>
+                                    </th>
+                                    <td>
+                                        <textarea name="reContent" id="reContent" placeholder="준비된 리워드와 설명을 적어주세요"
+                                            style="resize: none;" required></textarea>
+                                    </td>
+                                    <td>0/70</td>
+                                </tr>
+                                <tr class="addOptionTr">
+                                    <th>
+                                        <b class="regiTitle">리워드 옵션</b>
+                                    </th>
+                                    <td>
+                                        <button type="button" id="addOptionBtn" onclick="addOption();" required>리워드 옵션 추가하기</button>
+                                    </td>
+                                </tr>
+                                <tr class="optionOnTr" style="display: none;">
+                                    <th>
+                                        <b class="regiTitle">리워드 옵션</b>
+                                    </th>
+                                    <td>
+                                        <p id="regiOption">옵션설명 <b class="pink delOpt" onclick="delOpt();">옵션취소</b></p>
+                                        <input class="optionInput" name="option" type="text" placeholder="ex) 사이즈를 입력하세요">
+                                    </td>
+                                    <td>
+                                        <p></p>0/20
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <b class="regiTitle">배송지필요여부</b>
+                                    </th>
+                                    <td>
+                                        <label for="yesShip" style="width:180px">
+                                            <input type="radio" name="ship" id="yesShip" value="Y" style="width: 30px; " checked> 배송지 필요
+                                        </label>
+                                        <label for="noShip">
+                                            <input type="radio" name="ship" id="noShip" value="N" style="width: 30px;"> 배송지 필요없음
+                                        </label>
+
+                                        <!-- 
+                                            <button class="btn1">배송지 필요</button>
+                                            <button class="btn2">배송지 필요없음</button>
+                                            -->
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <!-- 등록/초기화 버튼 -->
+                        <div class="regiBtn">
+                            <button type="button" class="regiSubmitBtn threeSubmit" onclick="addedReward();">등록</button>
+                            <button type="reset" class="regiResetBtn threeReset">초기화</button>
+                        </div>
+                            <!-- 등록된 리워드  -->
+                        <div class="rewardOn" style="display: none;">
+                            <table class="registeredTable">
+                                <hr><br>
+                                
+                                <tr>
+                                    <th colspan="4">
+                                        <b class="regiTitle" style="line-height: 1;"> &nbsp; 등록된 리워드 미리보기 <br>&nbsp;</b>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="rewardList[0].rewardPrice" value="리워드금액">
+                    <input type="hidden" name="rewardList[0].rewardTitle" value="리워드금액">
+
+                    <input type="hidden" name="rewardList[1].rewardPrice" value="리워드금액">
+                    <input type="hidden" name="rewardList[1].rewardTitle" value="리워드금액">
+
+                    <script>
+                        var count = 0;
+    
+                        function addedReward(){
+                            var price = $('input[class=rePrice]').val();
+                            var limit = $('input[class=limitNum]').val();
+                            var limited = $('input:radio[name=limit]:checked').val();
+                            var title = $('input[class=reTitle').val();
+                            var content = $('textarea[name=reContent]').val();
+                            var option = $('input[name=option]').val();
+                            var ship = $('input[name=ship]:checked').val();
+                            var optionYn = 'N';
+                            var all = $('.regiReward input, textarea');
+                            
+                            // limited가 선택되어있는데, limit이 비어있을 경우 => 안된다
+                            // unlimited가 선택되어있으면 , limit비어있든 말든 상관없음
+                            if ( limited == "limited" && limit == ""){
+                                alert("입력창을 입력해주세요.");
+                            }else{
+                                if( price == "" || title == "" || content == "" ){
+                                    
+                                    alert("입력창을 입력해주세요.");
+                                    //console.log('안된다');
+                                    
+                                }else{
+                                    
+                                    var aa = '<td class="td">'+
+                                                '<div class="registered registered1">'+
+                                                    '<div style="height: 290px;">'+
+                                                        '<div>'+
+                                                            '<p><b id="registeredName">' + price + '원 펀딩</b></p>'+
+                                                            '<span id="registeredSpan1">' + limit + '개 남음</span><br>'+
+                                                        '</div><br>'+
+                                                        '<div><p id="registeredTC">리워드명 <br> <b>' + title + " </b> <br> " + content + '</p></div>';
+                                        
+                                    if(option != ""){
+                                        aa += '<p id="optionP"><input placeholder='+ option + ' disabled></p>';
+                                        optionYn = 'Y';
+                                    }
+    
+                                        aa +=   '</div>'+
+                                                    '<div class="editDel">'+
+                                                        '<img id="editBtn" src="${ pageContext.request.contextPath }/resources/images/editBtn.PNG" onclick="">'+
+                                                        '<img id="deleteBtn"src="${ pageContext.request.contextPath }/resources/images/deleteBtn.PNG" onclick="">'+
+                                                    '</div>'+
+                                                '</div>'+
+                                            '</td>';
+
+                                        aa += '<input type="hidden" name="rewardList[' + count + '].rewardPrice" value="' + price +'">'+
+                                              '<input type="hidden" name="rewardList[' + count + '].rewardStatus" value="' + limited +'">'+ //무제한: 'unlimited' 제한: 'limited' 
+                                              '<input type="hidden" name="rewardList[' + count + '].rewardStock" value="' + limit +'">'+
+                                              '<input type="hidden" name="rewardList[' + count + '].rewardShip" value="' + ship +'">'+
+                                              '<input type="hidden" name="rewardList[' + count + '].rewardTitle" value="' + title +'">'+
+                                              '<input type="hidden" name="rewardList[' + count + '].rewardContent" value="' + content +'">';
+                                              '<input type="hidden" name="rewardList[' + count + '].optionYn" value="' + optionYn +'">'+
+                                              '<input type="hidden" name="rewardList[' + count + '].rewardOption" value="' + option +'">';
+                                    
+                                    if(count % 4 == 0) {
+                                        $('.registeredTable').append('<tr></tr>');
+                                    }
+                                    
+                                    $('.registeredTable tr').last().append(aa);
+                                    $(".rewardOn").show();
+                                    
+                                    count++;
+                                    console.log(optionYn);
+                                    
+                                    
+                                }
+                                $(all).val('');
+                            }
+                        }
+                    </script>
 
                     <!-- 4. 안내사항 -->
                     <div class="regiFour regi" style="display: none;">
@@ -813,71 +950,6 @@
                     
                 </div>
 
-                <script>
-                    var count = 0;
-
-                    function addedReward(){
-                        var price = $('input[name=rePrice]').val();
-                        var limit = $('input[name=limitNum]').val();
-                        var limited = $('input:radio[name=limit]:checked').val();
-                        var title = $('input[name=reTitle').val();
-                        var content = $('textarea[name=reContent]').val();
-                        var option = $('input[name=option]').val();
-                        var ship = $('input[name=ship]').val();
-
-                        // limited가 선택되어있는데, limit이 비어있을 경우 => 안된다
-                        // unlimited가 선택되어있으면 , limit비어있든 말든 상관없음
-                        if ( limited == "limited" && limit == ""){
-                            alert("입력창을 입력해주세요.");
-                            //console.log(limited);
-                        }else{
-                            if( price == "" || title == "" || content == "" ){
-                                
-                                alert("입력창을 입력해주세요.");
-                                //console.log('안된다');
-                                
-                            }else{
-                                
-                                var aa = '<td class="td">'+
-                                            '<div class="registered registered1">'+
-                                                '<div style="height: 290px;">'+
-                                                    '<div>'+
-                                                        '<p><b id="registeredName">' + price + '원 펀딩</b></p>'+
-                                                        '<span id="registeredSpan1">' + limit + '개 남음</span><br>'+
-                                                    '</div><br>'+
-                                                    '<div><p id="registeredTC">리워드명 <br> <b>' + title + " </b> <br> " + content + '</p></div>';
-                                    
-                                if(option != ""){
-                                    aa += '<p id="optionP"><input placeholder='+ option + ' disabled></p>';
-                                }
-
-                                    aa +=   '</div>'+
-                                                '<div class="editDel">'+
-                                                    '<img id="editBtn" src="${ pageContext.request.contextPath }/resources/images/editBtn.PNG" onclick="">'+
-                                                    '<img id="deleteBtn"src="${ pageContext.request.contextPath }/resources/images/deleteBtn.PNG" onclick="">'+
-                                                '</div>'+
-                                            '</div>'+
-                                        '</td>';
-                                        
-                                
-                                //console.log(($('td[class=td]').length+1)%3 == 0);
-                                
-                                if(count % 4 == 0) {
-                                    $('.registeredTable').append('<tr></tr>');
-                                }
-                                
-                                $('.registeredTable tr').last().append(aa);
-                                $(".rewardOn").show();
-                                
-                                count++;
-                                
-                                $(this).trigger('reset');
-                            }
-                        }
-
-                    }
-                </script>
-
 
                 <!-- 왼쪽 메뉴바 -->
                 <div class="regiMenubar">
@@ -916,6 +988,7 @@
 
                 function delOpt(){
                     $('.optionOnTr').hide();
+                    $('.optionInput').val('');
                     $('.addOptionTr').show();
                 }
 
