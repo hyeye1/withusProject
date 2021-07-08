@@ -161,7 +161,7 @@
 		        like '%' || #{keyword} || '%'
 	</select>
 	
-	<select id="selectSearchList" resultMap="boardResultSet" parameterType="hashmap">
+	<select id="selectSearchList" resultMap="community" parameterType="hashmap">
 		select 
                commu_no
              , commu_title
