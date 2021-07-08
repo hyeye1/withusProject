@@ -63,17 +63,11 @@
             		})
             	})
             </script>
-             
-	    <br><br>
-	    <c:if test="${ loginUser.memberStatus eq 'A' }">
-	    	<a class="btn btn-success" href="updateForm.no">수정</a> &nbsp;
-	    	<a class="btn btn-warning" href="delete.no">삭제</a>
-	    </c:if>
 	    
-	    <br>
+	    <br><br>
 
 	    <!-- 페이징 바 추가예정 -->
-	    <div id="pagingArea">
+	    <div id="pagingArea" align="center">
 	    	<ul class="pagination">
 	    		
 	    		<c:choose>

@@ -52,9 +52,16 @@
 	    </table>
 	    <br>
 	    <br><br>
+	    
+	    <c:if test="${ loginUser.memberStatus eq 'A' }">
+		    <div align="right">
+		    	<a class="btn btn-success" href="updateForm.no">수정</a> &nbsp;
+		    	<a class="btn btn-warning" href="delete.no">삭제</a>
+	    	</div>
+	    </c:if>
 
 		<div class="list" align="center">
-			<button><a href="list.no">목록</a></button>
+			<button><a class="btn btn-secondary" href="list.no">목록</a></button>
 		</div>
     </div>
 

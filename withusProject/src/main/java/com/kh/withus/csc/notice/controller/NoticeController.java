@@ -57,7 +57,6 @@ public class NoticeController {
 			n.setNoticeOriginname(cscUpfile.getOriginalFilename());
 			n.setNoticeChangename("resources/cscUploadFile/" + changeName);
 		}
-		System.out.println(n);
 		int result = nService.insertNotice(n);
 		
 		if(result > 0) {
@@ -130,11 +129,27 @@ public class NoticeController {
 	@RequestMapping("updateForm.no")
 	public String updateForm(int nno, Model model) {
 		model.addAttribute("n", nService.selectNotice(nno));
-		return "admin/csc/notice/noticeEnrollForm";
+		return "csc/noticeUpdateEnroll";
 	}
 	
 	@RequestMapping("update.no")
-	public String updateNotice(Notice n, MultipartFile upfile, HttpSession session, Model model){
+	public String updateNotice(Notice n, MultipartFile cscUpfile, HttpSession session, Model model){
+		
+		if(!cscUpfile.getOriginalFilename().equals("")) {
+			String changeName = saveFile(session, cscUpfile);
+			
+			n.setNoticeOriginname(cscUpfile.getOriginalFilename());
+			n.setNoticeChangename("resources/cscUploadFile/" + changeName);
+		}
+		int result = nService.updateNotice(n);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "공지사항이 등록되었습니다.");
+			return "redirect:list.no";
+		}else {
+			model.addAttribute("errorMsg", "공지사항이 등록되지않았습니다.");
+			return "common/errorPage";
+		}
 		
 	}
 	
