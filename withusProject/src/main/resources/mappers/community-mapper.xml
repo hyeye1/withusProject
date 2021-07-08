@@ -185,11 +185,6 @@
            		like '%' || #{keyword} || '%'           	
          order
             by create_date desc
-	</select>/otherwise>
-           </choose>
-           		like '%' || #{keyword} || '%'           	
-         order
-            by create_date desc
 	</select>
 	
 	
