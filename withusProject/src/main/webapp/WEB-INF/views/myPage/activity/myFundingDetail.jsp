@@ -37,22 +37,24 @@
         #content{width: 100%; margin-left: 130px;}
 
         /*큰제목*/
-        p{font-size: 23px; font-weight: bolder;}
+        p{font-size: 23px; font-weight: bolder; margin-left: 18px;}
 
         
         /* fundingDetail content */
         .fundingDetail #content_1{height: 10%; margin-top: 50px;}
-        .fundingDetail #content_2{height: 30%; margin-top: 50px;}
-        .fundingDetail #content_3{height: 30%; margin-top: 30px;}
+        .fundingDetail #content_2{height: 30%; margin-top: 70px;}
+        .fundingDetail #content_3{height: 30%; margin-top: 70px;}
 
         
         /* 각각 테이블 */
-        .fundingDetail table{margin-left: 20px; width: 80%; border-top:rgb(192, 189, 189) solid 0.2px;}
-        #orderBasic th{width: 150px; height: 40px;}
-        #orderBasic td{width: 150px; height: 30px;}
+        .fundingDetail table{margin-left: 20px; width: 80%; border-top:rgb(192, 189, 189) solid 0.2px;  }
+        #orderBasic{border-bottom: rgb(192, 189, 189) solid 0.2px;}
+        #orderBasic th{width: 150px; height: 50px;}
+        
 
         /* 펀딩내역 */
-        #orderDetail th{width: 150px; height: 40px;}
+        #orderDetail{border-bottom: rgb(192, 189, 189) solid 0.2px;}
+        #orderDetail th{height: 30px;}
         #orderDetail td{height: 50px; }
         #orderDetail thead{font-weight: 900;}
         
@@ -69,21 +71,23 @@
         #delivery td{height: 50px;}
         #delivery input{margin-top: 5px; height: 30px;}
         #post_btn{margin-bottom: 5px; height: 29px; width: 75px; background-color: rgb(52, 73, 94); color: honeydew;}
-        .modifyArea{text-align: center; margin-top: 2000px;}
+        .modifyArea{text-align: center; margin-top: 2000px; border-top:rgb(192, 189, 189) solid 0.2px;}
         #modify{width: 150px; margin-top: 30px; background-color: rgb(52, 152, 219); color: honeydew;}
 
 
         /* 결제정보 */
-        #payInfo td{width: 200px; height: 40px; text-align: center;}
-        #payInfo th{width: 200px; height: 100px; text-align: center;}
+        #payInfo th{width: 200px; height: 80px; text-align: center;}
+        #payInfo thead>tr>td{width: 200px; height: 60px; text-align: center;}
+        #payInfo thead{font-size: 18px; font-weight: 900;}
+        #payInfo tbody>tr>td{width: 200px; height: 10px; text-align: center;}
         #payInfo thead{font-size: 18px; font-weight: 900;}
         
         a{text-decoration: none; color:white; text-decoration-line: none;}
 
         /* 맨아래 목록 버튼 부분 */
-        .bottom_btnarea{height: 200px; margin-top:10px; text-align: center; }
-        #listBtn{width: 150px; background-color: rgb(52, 152, 219); color: honeydew;}
-        #refundBtn{width: 150px; background-color: rgb(52, 152, 219); color: honeydew;}
+        .bottom_btnarea{height: 300px; margin-top:30px; text-align: center; border-top:rgb(192, 189, 189) solid 0.2px;}
+        #listBtn{width: 150px; background-color: rgb(52, 152, 219); color: honeydew; margin-top:30px; margin-bottom: 100px;}
+        #refundBtn{width: 150px; background-color: rgb(52, 152, 219); color: honeydew; margin-top: 30px; margin-bottom: 100px;}
         
 		
 		/* 팝업*/
@@ -145,7 +149,8 @@
               
               
               <div id="underLine"></div>
-                
+               
+              <p>주문정보</p>  
               <table id="orderBasic">
                 <tr>
                   <th>펀딩날짜 : ${orderList.orderDate }</th>
@@ -202,7 +207,7 @@
                                 <div>${orderList.rewardTitle }</div>
                                 <div>${orderList.rewardContent }</div>               
                             </td>
-                            <td><img src="${ orderList.projectThum }" width="100" height="90"></td>
+                            <td><img src="${ orderList.projectThum }" width="100" height="90" ></td>
                             <td style="text-align: center;">${ orderList.rewardPrice }</td>
                             <td style="text-align: center;">${ orderList.orderCount }</td>
                         </tr>
@@ -218,7 +223,12 @@
 	                        </tr>
                         </c:if>                                   	
                     </tbody>
-				 </table>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+				  </table>
                   
                 </div>
                 <input type="hidden" name="orderNo" value="${ orderList.orderNo }">
@@ -236,98 +246,9 @@
 	            
 	             </script>
                 
-                <!-- 옵션 내역들 가져오기 ajax 
-                <script>
-                  	$(function() {
-						$('#orderDetail #selectOption').click( function() {
-	                	   var rewardNo = $(this).children().val(); // 선택한 상품번호
-						   var orderNo = $("input[name=orderNo]").val(); // 주문번호
-						   
-						   // 반복문이기때문에 선택한 영역에 새로운 클래스로 표시
-						   $(this).siblings("#optionPlace").attr("class", "optionPlace"); 
-						   // 옵션값을 보여주고 버튼 사라짐
-						   $(this).attr("style", "display:none");
-						   
-						   		$.ajax({
-					    			url:"optionList.me",
-					    			type : "POST",
-					    			data: {rewardNo:rewardNo, orderNo:orderNo},
-					    			dataType: "json",
-					    			success:function(list){
-					    				//console.log(list);
-					    				
-					    				value="";
-					    				$.each(list, function(i, obj){
-					    					value += "<tr>"
-					    								+ "<td>" + obj.optionContent + "</td>"
-					    							+ "</tr>";	
-					    				})
-					    				
-					    				// 원하는 곳에 받아온 값을 넣어주고, 영역표시 삭제
-					    				$("#orderDetail .optionPlace").html(value).removeAttr("class", ".optionPlace");
-					    				
-					    			
-					    			}, error:function(){
-					    				console.log("ajax 실패")
-					    			}	
-					    			
-					    		})
-					   		})
-	                	})
-	            
-	             </script>
-	             
-	             -->
-	             
-	             <!-- 
-	             <script>
-                  	$(function() {
-						$('#orderDetail #selectOption').click( function() {
-	                	   var rewardNo = $(this).children().val(); // 선택한 상품번호
-						   var orderNo = $("input[name=orderNo]").val(); // 주문번호
-						   var optionVal ={
-								   "rewardNo": rewardNo,
-								   "orderNo": orderNo
-						   }
-						   
-						   
-						   // 반복문이기때문에 선택한 영역에 새로운 클래스로 표시
-						   $(this).siblings("#optionPlace").attr("class", "optionPlace"); 
-						   // 옵션값을 보여주고 버튼 사라짐
-						   $(this).attr("style", "display:none");
-						   
-						   		$.ajax({
-						   			type : "post",
-					    			url:"optionList.me",
-					    			data: JSON.stringify(optionVal),
-					    			dataType: "json",
-					    			contentType:"application/json; charset=utf-8",
-					    			success:function(list){
-					    				console.log(list);
-					    				
-					    				value="";
-					    				$.each(list, function(i, obj){
-					    					value += "<tr>"
-					    								+ "<td>" + obj.optionContent + "</td>"
-					    							+ "</tr>";	
-					    				})
-					    				
-					    				// 원하는 곳에 받아온 값을 넣어주고, 영역표시 삭제
-					    				$("#orderDetail .optionPlace").html(value).removeAttr("class", ".optionPlace");
-					    				
-					    			
-					    			}, error:function(){
-					    				console.log("ajax 실패")
-					    			}	
-					    			
-					    		})
-					   		})
-	                	})
-	            
-	             </script>
-				 -->
+               
                 
-                <!-- 배송지 정보 / 배송지가 필요한 리워드인경우에만 보여짐????? 없으면 걍 빈칸으로 둘까 생각즁-->
+                <!-- 배송지 정보 / 배송지가 필요한 리워드인경우에만 보여짐 -->
                 <form action="updateOrder.me" method="post">
 	                <c:choose>
 	                	<c:when test="${orderList.rewardShip eq 'Y' }">
@@ -336,7 +257,7 @@
 			                  <table id="delivery">
 			                    <tr>
 			                      <th>받는사람</th>
-			                      <td style="width: 600px;"><input type="text" placeholder="이름" value="${ orderList.receiverName }" name="receiverName" readonly required></td>
+			                      <td style="width: 600px;"><input type="text" placeholder="이름" value="${ orderList.receiverName }" name="receiverName" readonly required style="margin-top: 20px;"></td>
 			                    </tr>
 			                    <tr>
 			                      <th>휴대폰번호</th>
@@ -356,7 +277,7 @@
 			                    <tr>
 			                      <th>배송상황</th>
 			                      <td>
-			                          <div style="margin-top: 10px;">
+			                          <div style="margin-top: 15px;">
 				                          <c:choose>
 							            	<c:when test="${orderList.shippingStatus eq '1'}">
 							                                        배송준비중
@@ -369,7 +290,7 @@
 							                </c:otherwise>
 							              </c:choose>      
 			                          </div>
-			                          <div>${orderList.shippingCom }  ${orderList.shippingNo }</div>
+			                          <div style="margin-bottom: 20px;">${orderList.shippingCom }  ${orderList.shippingNo }</div>
 			                          <!--시간되면 택배조회 api-->
 			                      </td>
 			                    </tr>

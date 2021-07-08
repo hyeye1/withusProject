@@ -66,11 +66,13 @@ public class OrderDao {
 	
 	// 발송모달:펀딩내역
 	public Order selectOrderInfo(SqlSessionTemplate sqlSession, int orderNo) {
+		
 		return sqlSession.selectOne("orderMapper.selectOrderInfo", orderNo);
 	}
 
 	// 환불모달:펀딩내역+환불신청내역
 	public Order selectRefundInfo(SqlSessionTemplate sqlSession, int orderNo) {
+		
 		return sqlSession.selectOne("orderMapper.selectRefundInfo", orderNo);
 	}
 	

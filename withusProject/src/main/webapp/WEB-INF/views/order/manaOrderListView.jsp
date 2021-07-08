@@ -23,12 +23,12 @@
      }
      .form-control.order{width: 400px;}
      .orderAllStatus{width: 80%; float: left;}
-     .oStatus, .dStatus {float: left; margin: 0 15px;}
-     .dStatus {flat: }
+     .oStatus, .dStatus {float: left; margin: 0 26px 0 0;}
      .searchBtns{width: 20%; float: right; margin: 30px 0 0 0;}
      .searchBtns button{margin: 0 7px;} 
      .btn.btn-withus{background-color: #3498db; color: white;}
      .btn.btn-withus:hover{cursor: pointer; background-color: #2c83be;  color: white;}
+     input[type=radio]{ margin: 0 0 0 12px;}
 
 	/* table */
     .none{margin: 100px 0;}
@@ -76,31 +76,49 @@
                     <div class="orderAllStatus">
                         <div class="oStatus">
                         	<label for="" style="float: left;"><b>결제상태</b></label> &nbsp;&nbsp;
-                            <input type="radio" name="orderStatus" value=""> 결제완료
-                            <input type="radio" name="orderStatus" value=""> 취소요청
-                            <input type="radio" name="orderStatus" value=""> 취소완료
+                            <input type="radio" name="odStatus" value="1"> 결제완료
+                            <input type="radio" name="odStatus" value="2"> 취소요청
+                            <input type="radio" name="odStatus" value="3"> 취소완료
                         </div>
                         <div class="dStatus">
                         	<label for="" style="float: left;"><b>배송 상태</b></label> &nbsp;&nbsp;
-                            <input type="radio" name="orderStatus" value=""> 배송 준비중
-                            <input type="radio" name="orderStatus" value=""> 배송중
-                            <input type="radio" name="orderStatus" value=""> 배송 완료
-                            <input type="radio" name="orderStatus" value=""> 리워드 미발송
+                            <input type="radio" name="shStatus" value="1"> 배송 준비중
+                            <input type="radio" name="shStatus" value="2"> 배송 시작
+                            <input type="radio" name="shStatus" value="3"> 배송 완료
                         </div>
                     </div>
                     <div class="searchBtns" align="right">
-                        <button type="reset" class="btn btn-secondary btn-sm">초기화</button>
+                        <button type="reset" id="resetBtn" class="btn btn-secondary btn-sm">초기화</button>
                         <button type="submit" class="btn btn-withus btn-sm">검색</button>
                     </div>
                 </form>
             </div>
-			<c:if test="${ !empty orderKeyword }">
+            <!-- 검색 조건이 선택되어 있을 경우 -->
+			<c:if test="${ !empty orderKeyword or !empty odStatus or !empty shStatus}">
 	        	<script>
 	        		$(function(){
+	        			/* 선택된 값에 체크하기 */
 	        			$("#orderKeyword option[value=${orderKeyword}]").attr("selected", true);
-	        		})
+	        			$(".oStatus :input[value=${odStatus}]").attr("checked", true);
+	        			$(".dStatus :input[value=${shStatus}]").attr("checked", true);
+
+	        		});
+	        		
+	        		/* 초기화 버튼 클릭시 기재된 검색 조건 전부제거 */
+	        		$("#resetBtn").click(function(){
+	        			$("#orderKeyword option[value=${orderKeyword}").removeAttr("selected");	// 옵션 기본값으로 초기화
+	        			$('input[name="keyword"]').empty();								// 키워드 박스 초기화
+	        			$("input:radio").removeAttr("checked");				// 라디오버튼 해제
+	        		});
+	        		
+	        		
 	        	</script>
        		 </c:if>
+       		 <script>
+       		
+       		 </script>
+       		  
+             
             <br>
 
             <table class="table table-bordered" id="orderTable">

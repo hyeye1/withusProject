@@ -15,7 +15,7 @@
 	    background-color: #f4f4f4; 
 	    padding: 20px; 
 	}
-	#refundKeyword{
+	#refundKey{
 	    height: 36px; 
 	    float: left; 
 	    margin-right: 10px; 
@@ -62,54 +62,81 @@
         <div class="container">
 
             <div class="search_box">
-                <form action="">
+                <form action="refundSearch.mana">
                     <div class="searchForm">
-                        <select name="refundKeyword" id="refundKeyword">
+                        <select name="refundKey" id="refundKey">
                             <option value="refundAll">전체</option>
-                            <option value="refundName">신청인</option>
-                            <option value="refundNo">신청번호</option>
+                            <option value="member_name">신청인</option>
+                            <option value="refund_no">신청번호</option>
                         </select>
-                        <input type="text" class="form-control refund" placeholder="검색어를 입력하세요">
+                        <input type="text" name="keyword" value="${keyword}" class="form-control refund" placeholder="검색어를 입력하세요">
                     </div>
                     <br>
                     <div class="refundAllStatus">
                         <label for="" style="float: left;"><b>환불상태</b></label> &nbsp;&nbsp;
                         <div class="refundRadios">
-                            <input type="radio" name="refundStatus" value=""> 환불대기
-                            <input type="radio" name="refundStatus" value=""> 환불완료
+                            <input type="radio" name="rfStatus" value="N"> 환불대기
+                            <input type="radio" name="rfStatus" value="Y"> 환불완료
                         </div>
                     </div>
                     <div class="searchBtns" align="right">
-                        <button type="reset" class="btn btn-secondary btn-sm">초기화</button>
+                        <button type="reset" id="resetBtn" class="btn btn-secondary btn-sm">초기화</button>
                         <button type="submit" class="btn btn-withus btn-sm">검색</button>
                     </div>
                 </form>
             </div>
-
+            
+            <!-- 검색 조건이 선택되어 있을 경우 -->
+            <c:if test="${ !empty refundKey or !empty rfStatus}">
+            
+            	<script>
+            		$(function(){
+            			$("#refundKey option[value=${refundKey}]").attr("selected", true);
+            			$(".refundRadios :input[value=${rfStatus}]").attr("checked", true);
+            		});
+            		
+            		/* 초기화 버튼 클릭시 기재된 검색 조건 전부 제거 */
+            		$("#resetBtn").click(function(){
+            			$("#refundKey option[value=${refundKey}]").removeAttr("selected");
+            			$("input[name='keyword']").empty();
+            			$(".refundRadios :input[value=${rfStatus}]").removeAttr("checked");
+            		});
+            	</script>
+            </c:if>
+            
             <br>
+
 
             <table class="table table-bordered" id="refundList">
                 <thead class="tableHead">
-                    <tr>
-                        <th>신청번호</th>
-                        <th>환불 신청인</th>
-                        <th width="460">펀딩 정보</th>
-                        <th width="180">환불 사유</th>
-                        <th>환불 상태</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="r" items="${ rList }">
+                <c:choose>
+           	 		<c:when test="${ empty rlist }">
+       	 				<div class="none"><h4 align="center">검색어와 일치하는 내용이 존재하지 않습니다:(</h4></div>
+           	 		</c:when>
+           	 	<c:otherwise>
 	                    <tr>
-	                        <td class="rno">${ r.refundNo }</td>
-	                        <td>${ r.supporterName }</td>
-	                        <td>${ r.projectTitle }<br>${ r.rewardTitle }/${ r.orderOption }</td>
-	                        <td>${ r.reReason }</td>
-	                        <td>${ r.refundStatus }</td>
+	                        <th>신청번호</th>
+	                        <th>환불 신청인</th>
+	                        <th width="460">펀딩 정보</th>
+	                        <th width="180">환불 사유</th>
+	                        <th>환불 상태</th>
 	                    </tr>
-                    </c:forEach>
-                </tbody>
+	                </thead>
+	                <tbody>
+	                    <c:forEach var="r" items="${ rlist }">
+		                    <tr>
+		                        <td class="rno">${ r.refundNo }</td>
+		                        <td>${ r.supporterName }</td>
+		                        <td>${ r.projectTitle }<br>${ r.rewardTitle }/${ r.orderOption }</td>
+		                        <td>${ r.reReason }</td>
+		                        <td>${ r.refundStatus }</td>
+		                    </tr>
+	                    </c:forEach>
+	                </tbody>
+	        	</c:otherwise>
+            </c:choose>           
             </table>
+            
             <script>
             $(function(){
             	$("#refundList tbody tr").click(function(){

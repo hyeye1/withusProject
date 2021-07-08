@@ -17,7 +17,7 @@
     <!-- 6/12 윤경 수정-->
 
     <!-- 해더바 포함 -->
-    <jsp:include page=""/>
+    <jsp:include page="../common/header.jsp"/>
 
     <div class="container">
         <div class="content">
@@ -59,7 +59,7 @@
     <br><br>
 
     <!-- 푸터바 포함 -->
-    <jsp:include page=""/>
+    <jsp:include page="../common/footer.jsp"/>
 
 </body>
 </html>

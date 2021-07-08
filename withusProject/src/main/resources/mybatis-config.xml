@@ -21,6 +21,9 @@
 		<typeAlias type="com.kh.withus.refund.model.vo.Refund" alias="Refund" />
 		<typeAlias type="com.kh.withus.funding.model.dto.FundingDetail" alias="FundingDetail" />
 		<typeAlias type="com.kh.withus.myPage.model.vo.MyPage" alias="MyPage"/>
+		<typeAlias type="com.kh.withus.csc.notice.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.withus.csc.faq.model.vo.Faq" alias="Faq"/>
+		<typeAlias type="com.kh.withus.csc.oto.model.vo.Oto" alias="Oto"/>
 	</typeAliases>
 	
 	<mappers>
@@ -30,6 +33,9 @@
 		<mapper resource="/mappers/order-mapper.xml" />
 		<mapper resource="/mappers/refund-mapper.xml" />
 		<mapper resource="/mappers/myPage-mapper.xml"/>	
+		<mapper resource="/mappers/notice-mapper.xml"/>
+		<mapper resource="/mappers/faq-mapper.xml"/>
+		<mapper resource="/mappers/oto-mapper.xml"/>	
 	</mappers>
 	
 </configuration>

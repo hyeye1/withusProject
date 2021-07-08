@@ -12,7 +12,10 @@ public class FaqDao {
 	
 	// 6/27 윤경 생성
 	
-	// 왜 안되는데 ㅡㅡ;;
+	public int selectListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("faqMapper.selectListCount");
+	}
+	
 	public ArrayList<Faq> selectList(SqlSessionTemplate sqlSession, Faq f) {
 		return (ArrayList)sqlSession.selectList("faqMapper.selectList", f);
 	}

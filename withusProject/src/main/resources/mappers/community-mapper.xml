@@ -5,7 +5,7 @@
 	<!-- 커뮤니티상세 -->
 	<resultMap id="community" type="Community">
 		<id column="commu_no" property="commuNo"/>
-		<result column="member_no" property="memberNo"/>
+		<result column="commu_writer" property="commuWriter"/>
 		<result column="commu_cate" property="commuCate"/>
 		<result column="commu_title" property="commuTitle"/>
 		<result column="commu_content" property="commuContent"/>
@@ -19,11 +19,9 @@
 	<!-- 댓글 -->
 	<resultMap id="commuReply" type="CommuReply">
 		<result column="com_re_no" property="comReNo"/>
-		<result column="commu_no" property="commuNo"/>
-		<result column="member_no" property="memberNo"/>
+		<result column="com_re_writer" property="comReWriter"/>
 		<result column="com_re_content" property="comReContent"/>
 		<result column="com_re_create" property="comReCreate"/>
-		<result column="com_re_status" property="comReStatus"/>
 	</resultMap>
   
   	<!-- 커뮤리스트 조회 -->
@@ -40,7 +38,7 @@
 		       commu_no
 		     , commu_cate
 		     , commu_title
-		     
+		     , commu_writer
 		     , count
 		     , to_char(commu_create, 'YYYY-MM-DD') commu_create
 		  from community
@@ -56,7 +54,8 @@
 		    commu_no
 		  , commu_cate
 		  , commu_title
-		  , member_id
+		  , commu_writer
+		  , commu_content
 		  , commu_origin
 		  , commu_change
 		  )
@@ -65,7 +64,8 @@
 		    seq_comno.nextval
 		  , #{commuCate}
 		  , #{commuTitle}
-		  , #{memberId}
+		  , #{commuWriter}
+		  , #{commuContent}
 		  , #{commuOrigin}
 		  , #{commuChange}
 		  )
@@ -84,7 +84,7 @@
 			   commu_no
 			 , commu_cate
 			 , commu_title
-			 , member_id
+			 , commu_writer
 			 , commu_origin
 		     , commu_change
 		     , to_char(commu_create, 'YYYY-MM-DD') commu_create
@@ -109,16 +109,15 @@
 		 where commu_no = #{commuNo}
 	</update>
 	
-	<!-- 
+	 
 	<select id="selectCommuReplyList" resultMap="commuReply" parameterType="_int">
 		select
 		       com_re_no
 		     , com_re_content
-		     , commu_no
-		     , member_no
+			 , com_re_writer
 		     , to_char(com_re_create, 'YYYY-MM-DD') com_re_create
-		  from commuReply
-		 where commu_status = 'Y'
+		  from commu_Reply
+		 where com_re_status = 'Y'
 		  and ref_cno = #{commuNo}
 		 order
 		    by com_re_no desc
@@ -126,7 +125,7 @@
 	
 	<insert id="insertCommuReply" parameterType="CommuReply">
 		insert
-		  into commuReply
+		  into commu_Reply
 		  (
 		    com_re_no
 		  , com_re_content
@@ -135,13 +134,13 @@
 		  )
 		  values
 		  (
-		    seq_rno.nextval
+		    seq_comrno.nextval
 		  , #{comReContent}
 		  , #{refCommuNo}
 		  , #{comReWriter}
 		  )
 	</insert>
-	 -->
+	 
 	
 	
 	

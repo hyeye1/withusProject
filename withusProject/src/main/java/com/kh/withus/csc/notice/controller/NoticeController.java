@@ -1,6 +1,9 @@
 package com.kh.withus.csc.notice.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
@@ -26,7 +29,7 @@ public class NoticeController {
 	private NoticeService nService;
 	
 	@RequestMapping("list.no")
-	public ModelAndView selectNoticeList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
+	public ModelAndView selectListCount(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
 		int listCount = nService.selectListCount();
 		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 5, 10);
@@ -38,12 +41,13 @@ public class NoticeController {
 		return mv;
 	}
 	
-	/*
+	// 관리자(user01@withus.com) 일때만 보이는 버튼
 	@RequestMapping("enrollForm.no")
 	public String enrollForm() {
-		return "notice/noticeEnrollForm";
+		return "admin/csc/notice/noticeEnrollForm";
 	}
 	
+	// 관리자(user01@withus.com) 일때만 보이는 버튼
 	@RequestMapping("insert.bo")
 	public String insertNotice(Notice n, MultipartFile upfile, HttpSession session, Model model) {
 		
@@ -65,6 +69,27 @@ public class NoticeController {
 		}
 	}
 	
+	private String saveFile(HttpSession session, MultipartFile upfile) {
+		String savePath = session.getServletContext().getRealPath("/resources/cscUpFiles/");
+		
+		String originName = upfile.getOriginalFilename(); // 원본명("aaa.jpg")
+		
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		int ranNum = (int)(Math.random() * 90000 + 10000);
+		String ext = originName.substring(originName.lastIndexOf("."));
+		
+		String changeName = currentTime + ranNum + ext;
+		
+		try {
+			upfile.transferTo(new File(savePath + changeName));
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		return changeName;	
+		}
+
+
 	@RequestMapping("detail.no")
 	public String selectNotice(int nno, Model model) {
 		int result = nService.increaseCount(nno);
@@ -72,13 +97,14 @@ public class NoticeController {
 		if(result > 0) {
 			Notice n = nService.selectNotice(nno);
 			model.addAttribute("n", n);
-			return "notice/noticeDetatilView";
+			return "csc/noticeDetailView";
 		}else {
 			model.addAttribute("errorMsg", "공지사항 상세조회를 실패했습니다.");
 			return "common/errorPage";
 		}
 	}
 	
+	// 관리자(user01@withus.com) 일때만 보이는 버튼
 	@RequestMapping("delete.no")
 	public String deleteNotice(int nno, String filePath, HttpSession session, Model model) {
 		
@@ -97,12 +123,17 @@ public class NoticeController {
 			return "common/errorPage";
 		}
 	}
-	*/
 	
-	/*
 	@RequestMapping("updateForm.no")
-	public String updateForm(int nno, Model model){
+	public String updateForm(int nno, Model model) {
+		model.addAttribute("n", nService.selectNotice(nno));
+		return "admin/csc/notice/noticeEnrollForm";
 	}
-	*/
+	
+	@RequestMapping("update.no")
+	public String updateNotice(Notice n, MultipartFile upfile, HttpSession session, Model model){
+		
+	}
+	
 
 }

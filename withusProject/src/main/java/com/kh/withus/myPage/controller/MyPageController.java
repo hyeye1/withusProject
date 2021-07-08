@@ -154,59 +154,22 @@ public class MyPageController {
 		
 	}
 	
-	//회원탈퇴폼 페이지
-	@RequestMapping("deleteForm.me")
-	public String deleteForm() {
-		return "myPage/info/memberDrop";
-	}
 	
 	
-	// 회원탈퇴 유저 비밀번호 확인 ajax
-	@ResponseBody
-	@RequestMapping("pwd.me")
-	public String pwd(String checkPwd, HttpSession session) {
-			
-			
-		// 비밀번호 암호화 전
-		// 입력받은 비밀번호
-		
-				
-		// 로그인된 유저
-		Member loginUser = (Member)session.getAttribute("loginUser");
-				
-		/* 암호화 전
-		if(checkPwd.equals(loginUser.getMemberPwd())) {
-			return "Y";
-					
-		}else {
-			return "N";
-		}
-		*/
-		
-		if(bcryptPasswordEncoder.matches(checkPwd, loginUser.getMemberPwd())) {
-			return "Y";
-					
-		}else {
-			return "N";
-		}
-		
-		
-		
-					
-			
-	}
 	
 	// 기본정보수정
 	@RequestMapping("update.me")
 	public String updateMember(Member m, MyPage mp, MultipartFile file, HttpSession session, Model model, String deleteProfile) {
 		
 		
+		// 기본이미지까지 지워버림 --> 경로가 기본이미지경로일때는 파일 삭제하지말기
 		if(!file.getOriginalFilename().equals("")) { // 넘어오는값이 있을경우
 			
-			if(mp.getMemberProfile() !=null ) { // 기존 파일이 있을 경우 ->기존파일 지워버림
+			if(!mp.getMemberProfile().equals("resources/member_profile/profile_basic.jpg"))   { // 기본파일경로명이 아닐때는 그 파일 삭제
 				
 				new File(session.getServletContext().getRealPath(mp.getMemberProfile())).delete();
-			}
+			} 
+			
 			
 			// 새로운 파일 업로드
 			String changeName = saveFile(session, file);
@@ -216,14 +179,14 @@ public class MyPageController {
 		
 		if(deleteProfile.equals("delete")) { // 기존파일을 삭제하고 기본이미지로 변경
 			
-			if(mp.getMemberProfile() !=null ) { // 기존 파일이 있을 경우 ->기존파일 지워버림
+			if(!mp.getMemberProfile().equals("resources/member_profile/profile_basic.jpg"))   { // 기본파일경로명이 아닐때는 그 파일 삭제
 				
 				new File(session.getServletContext().getRealPath(mp.getMemberProfile())).delete();
-			}
+			} 
 			
 			mp.setMemberProfile("resources/member_profile/profile_basic.jpg");
 		
-		}
+		}		
 		
 		int result = mpService.updateMember(mp); 
 		
@@ -269,14 +232,59 @@ public class MyPageController {
 		}
 		
 		
-		
-		
-		
-		
-		
-		
-		
 	}
+	//회원탈퇴폼 페이지
+	@RequestMapping("deleteForm.me")
+	public String deleteForm(HttpSession session) {
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		session.setAttribute("loginUser", loginUser);
+		
+		return "myPage/info/memberDrop";
+	}	
+	
+	
+
+	// 회원탈퇴 유저 비밀번호 확인 ajax
+	@ResponseBody
+	@RequestMapping("pwd.me")
+	public String pwd(String checkPwd, HttpSession session) {
+			
+			
+		// 비밀번호 암호화 전
+		// 입력받은 비밀번호
+		
+				
+		// 로그인된 유저
+		Member loginUser = (Member)session.getAttribute("loginUser");
+				
+		/* 암호화 전
+		if(checkPwd.equals(loginUser.getMemberPwd())) {
+			return "Y";
+					
+		}else {
+			return "N";
+		}
+		*/
+		
+		if(bcryptPasswordEncoder.matches(checkPwd, loginUser.getMemberPwd())) {
+			return "Y";
+					
+		}else {
+			return "N";
+		}
+		
+		
+		
+					
+			
+	}
+	
+	
+	
+	
+	
 	
 	
 	// 회원탈퇴
@@ -875,12 +883,14 @@ public class MyPageController {
 	public String updatePartner(MyPage mp, MultipartFile file, HttpSession session, Model model, String deleteProfile, Member m) {
 		
 		
+		// 기본이미지까지 지워버림 --> 경로가 기본이미지경로일때는 파일 삭제하지말기
 		if(!file.getOriginalFilename().equals("")) { // 넘어오는값이 있을경우
 			
-			if(mp.getMemberProfile() !=null ) { // 기존 파일이 있을 경우 ->기존파일 지워버림
+			if(!mp.getMemberProfile().equals("resources/member_profile/profile_basic.jpg"))   { // 기본파일경로명이 아닐때는 그 파일 삭제
 				
-				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
-			}
+				new File(session.getServletContext().getRealPath(mp.getMemberProfile())).delete();
+			} 
+			
 			
 			// 새로운 파일 업로드
 			String changeName = saveFile(session, file);
@@ -890,14 +900,14 @@ public class MyPageController {
 		
 		if(deleteProfile.equals("delete")) { // 기존파일을 삭제하고 기본이미지로 변경
 			
-			if(mp.getMemberProfile() !=null ) { // 기존 파일이 있을 경우 ->기존파일 지워버림
+			if(!mp.getMemberProfile().equals("resources/member_profile/profile_basic.jpg"))   { // 기본파일경로명이 아닐때는 그 파일 삭제
 				
 				new File(session.getServletContext().getRealPath(mp.getMemberProfile())).delete();
-			}
+			} 
 			
 			mp.setMemberProfile("resources/member_profile/profile_basic.jpg");
 		
-		}
+		}				
 		
 		int result = mpService.updateMember(mp); 
 		
@@ -949,10 +959,11 @@ public class MyPageController {
 		
 		if(!file.getOriginalFilename().equals("")) { // 넘어오는값이 있을경우
 			
-			if(m.getMemberProfile() !=null ) { // 기존 파일이 있을 경우 ->기존파일 지워버림
+			if(!mp.getMemberProfile().equals("resources/member_profile/profile_basic.jpg"))   { // 기본파일경로명이 아닐때는 그 파일 삭제
 				
-				new File(session.getServletContext().getRealPath(m.getMemberProfile())).delete();
-			}
+				new File(session.getServletContext().getRealPath(mp.getMemberProfile())).delete();
+			} 
+			
 			
 			// 새로운 파일 업로드
 			String changeName = saveFile(session, file);
@@ -962,10 +973,10 @@ public class MyPageController {
 		
 		if(deleteProfile.equals("delete")) { // 기존파일을 삭제하고 기본이미지로 변경
 			
-			if(mp.getMemberProfile() !=null ) { // 기존 파일이 있을 경우 ->기존파일 지워버림
+			if(!mp.getMemberProfile().equals("resources/member_profile/profile_basic.jpg"))   { // 기본파일경로명이 아닐때는 그 파일 삭제
 				
 				new File(session.getServletContext().getRealPath(mp.getMemberProfile())).delete();
-			}
+			} 
 			
 			mp.setMemberProfile("resources/member_profile/profile_basic.jpg");
 		

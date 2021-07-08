@@ -10,7 +10,7 @@
 		<result column="oto_cat" property="otoCat" />
 		<result column="oto_title" property="otoTitle" />
 		<result column="oto_content" property="otoContent" />
-		<result column="oto_orginname" property="otoOrginname" />
+		<result column="oto_originname" property="otoOriginname" />
 		<result column="oto_changename" property="otoOrginname" />
 		<result column="oto_date" property="otoDate" />
 		<result column="oto_reply" property="otoReply" />
@@ -19,17 +19,47 @@
 		<result column="oto_status" property="otoStatus" />
 	</resultMap>
 	
-	<select id="selectListCount"></select>
+	<select id="selectListCount" resultType="_int">
+		select
+		       count(*)
+		  from oto
+		 where oto_status = 'Y'
+	</select>
 	
-	<select id="selectList"></select>
+	<!-- 로그인 유저글만 보이도록 -->
+	<select id="selectList" resultMap="oto">
+		select
+		       oto_no
+		     , member_no
+		     , oto_cat
+		     , oto_title
+		     , oto_content
+		     , oto_originname
+		     , oto_changename
+		     , to_char(oto_date, 'YYYY-MM-DD') oto_date
+		 from oto
+		where oto_status = 'Y'
+		  and member_no = #{memberNo}
+		order
+		   by oto_date desc
+	</select>
 	 
-	<insert id="insertOto"></insert>
+	<insert id="insertOto">
+	
+	</insert>
 	
 	<insert id="increaseCount"></insert>
 	
 	<select id="selectOto"></select>
 	
+	<!-- 
 	<update id="updateOto"></update>
-	
-	<delete id="deleteOto"></delete>
+	 -->
+	 
+	<update id="deleteOto">
+		update
+		       oto
+		   set oto_status = 'N'
+		 where oto_no = #{otoNo}
+	</update>
 </mapper>

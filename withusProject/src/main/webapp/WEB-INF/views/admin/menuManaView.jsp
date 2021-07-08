@@ -1,22 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Script-Type" content="text/javascript">
-<meta http-equiv="Content-Style-Type" content="text/css">
-
-
 <title>Admin With Us</title>
 <style>
-	#paginationBox{ padding : 10px 0px; }
+	
 </style>
 </head>
 <body>
@@ -25,12 +18,13 @@
 	<!-- 6/10 윤경 라디오버튼 수정 -->
 	<!-- 6/22 윤경 전체적 div 수정-->
 	<!-- 6/28 윤경 전체적 ui 변경 -->
+	<!-- 7/6 윤경 ui 변경 -->
 
 	<!-- 메뉴바 포함 -->
     <jsp:include page="../common/manaHeader.jsp"/>
 
 	<div class="container">
-	    <div class="outer" id="categoryConfigureView">
+	    <div class="outer" id="categoryListView">
 	        <br><br>
 	
 	        <h2 class="contnent-title">
@@ -83,111 +77,29 @@
 
 			<hr>
 
-		<!-- Menu form -->
-		<h4 class="mb-3">Menu Info</h4> 
-		<div> 
-			<form:form name="form" id="form" role="form" modelAttribute="menuVO" method="post" action="${pageContext.request.contextPath}/menu/saveMenu"> 
-			<form:hidden path="mid" id="mid"/> 
-			<div class="row"> 
-				<div class="col-md-4 mb-3"> 
-					<label for="code">Code</label> 
-					<form:input path="code" id="code" class="form-control" placeholder="" value="" required="" /> <div class="invalid-feedback"> Valid Code is required. 
+			<table class="table table-bordered" >
+				<thead>
+				  <tr align="center" style="height: 10px; background-color: rgb(224, 224, 224); font-size:smaller ;">
+					<th width="200" height="30">카테고리<br>번호</th>
+					<th width="100">이름</th>
+					<th width="500">해시태그1</th>
+					<th width="200">수정/삭제</th>
+				  </tr>
+				</thead>
 
-					</div> 
-				</div>
-				<div class="col-md-5 mb-3"> 
-					<label for="codename">Code name</label> 
-					<form:input path="codename" class="form-control" id="codename" placeholder="" value="" required="" /> 
-					<div class="invalid-feedback"> Valid Code name is required. 
-
-					</div> 
-				</div> 
-				<div class="col-md-3 mb-3"> 
-					<label for="sort_num">Sort</label> 
-					<form:input path="sort_num" class="form-control" id="sort_num" placeholder="" required="" /> 
-				</div> 
-			</div> 
-			<div class="row"> 
-				<div class="col-md-12 mb-3"> 
-					<label for="comment">Comment</label> 
-					<form:input path="comment" class="form-control" id="comment" placeholder="" value="" required="" /> 
-				</div> 
-			</div> 
-		</form:form> 
-	</div> 
-	
-	<div> 
-		<button type="button" class="btn btn-sm btn-primary" id="btnSave">저장</button> 
-		<button type="button" class="btn btn-sm btn-primary" id="btnDelete">삭제</button> 
-		<button type="button" class="btn btn-sm btn-primary" id="btnInit">초기화</button> 
-	</div> 
-	
-	<h4 class="mb-3" style="padding-top:15px">Menu List</h4> 
-	
-	<!-- List --> 
-	<div class="table-responsive"> 
-		<table class="table table-striped table-sm"> 
-			<colgroup> 
-				<col style="width:10%;" /> 
-				<col style="width:15%;" /> 
-				<col style="width:15%;" /> 
-				<col style="width:10%;" /> 
-				<col style="width:auto;" /> 
-			</colgroup> 
-			<thead> 
-				<tr> 
-					<th>menu id</th> 
-					<th>code</th> 
-					<th>codename</th> 
-					<th>sort</th> 
-					<th>command</th> 
-				</tr> 
-			</thead> 
-			<tbody id="menuList"> 
-
-			</tbody> 
-		</table>
-	 </div>
-
-	 <script>
-		$(function(){
-			fn_showList();
-		});
-
-		function fn_showList(){
-			var paramData = {};
-
-			$.ajax({
-				url : "${menuList}"
-			  , type : "post"
-			  , dataType : "json"
-			  , data : paramData
-			  , success : function(result){
-				  console.log(result);
-
-				if(result.status == "OK"){
-					if(result.menuList.lenth > 0) {
-						var list = result.menuList;
-						var htmls = "";
-						result.menuList.forEach(fucntion(e){
-							htmls += '<tr>';
-							htmls += '<td>' + e.catNo + '</td>';
-							htmls += '<td>' + e.catName + '</td>';
-							htmls += '<td>' + e.catTag + '</td>';
-							htmls += '</tr>';	
-						  });
-					} else {
-						console.log("조회실패");
-					}
-					$('#munuList').html(htmls);
-				}
-			}
-			});
-
-		}
-
-	 </script>
-
+				<!-- 반복문 -->
+				<tbody>
+					<tr align="center">
+						<td>1</td>
+						<td>테크/가전</td>
+						<td>#가전제품 #IT #기술</td>
+						<td>
+							<button>수정</button>
+							<button>삭제</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 
 		
     

@@ -19,7 +19,7 @@ public class Oto {
 	private String otoCat;
 	private String otoTitle;
 	private String otoContent;
-	private String otoOrginname;
+	private String otoOriginname;
 	private String otoChangename;
 	private String otoDate;
 	private String otoReply;

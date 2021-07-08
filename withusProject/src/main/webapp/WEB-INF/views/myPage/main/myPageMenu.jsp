@@ -17,7 +17,7 @@
   	@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&display=swap');
   	.ff{font-family: 'Nanum Gothic Coding', monospace;}
   
-    #left_menu{width: 200px; height: 1300px; margin: left;}
+    #left_menu{width: 200px; height: 1100px; margin: left;}
 
     #left_menu>div{width: 100%;}
 

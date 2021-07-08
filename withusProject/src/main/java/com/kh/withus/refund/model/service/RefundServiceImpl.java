@@ -1,6 +1,7 @@
 package com.kh.withus.refund.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class RefundServiceImpl implements RefundService {
 	@Autowired
 	private RefundDao rDao;
 	
+	// 관리자
 	@Override
 	public int selectListCount() {
 		return rDao.selectListCount(sqlSession);
@@ -32,4 +34,15 @@ public class RefundServiceImpl implements RefundService {
 	public Refund selectRefund(int refundNo) {
 		return rDao.selectRefund(sqlSession, refundNo);
 	}
+
+	@Override
+	public int serarchRefundOrderCount() {
+		return 0;
+	}
+
+	@Override
+	public ArrayList<Refund> selectSearchRefund(HashMap<String, String> map) {
+		return rDao.selectSearchRefund(sqlSession, map);
+	}
+	
 }

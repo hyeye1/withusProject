@@ -29,6 +29,5 @@ public class Member {
 	private String partnerName;
 	private String partnerIntro;
 	private int followMemberNo;
-
 	private String memberCreateDate;
 }

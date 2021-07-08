@@ -99,11 +99,6 @@ public class MemberController {
 		
 		System.out.println(m);
 		
-		//System.out.println(m);
-		//System.out.println(session);
-		//System.out.println(model);
-		//System.out.println("암호화 전 : " + m.getUserPwd());
-		
 		// 암호화 작업
 		
 		String encPwd = bcryptPasswordEncoder.encode(m.getMemberPwd());
@@ -137,9 +132,7 @@ public class MemberController {
 	
 	
 	
-	
-	
-	
+		
 	
 	
 	
@@ -153,6 +146,7 @@ public class MemberController {
 	
 
 	// 관리자쪽
+	// 회원 조회
 	@RequestMapping("memberListView.mana")
 	public ModelAndView selectMemberList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,ModelAndView mv) {
 		
@@ -166,6 +160,8 @@ public class MemberController {
 		  .setViewName("member/manaMemberListView");
 		return mv;
 	}
+	
+	// 회원 검사
 	
 
 }

@@ -115,7 +115,7 @@
 	
 	<!-- 검색 페이징 처리 -->
 	
-	<!-- 일다나 검색만 -->
+	<!-- 검색 -->
 	<select id="selectSearchOrder" resultMap="orderRset" parameterType="hashmap">
 		select
 			   order_no
@@ -129,18 +129,31 @@
 			 , shipping_status
 		  from tb_order o 
           join member using (member_no)
-          full join project p
-          on (o.project_no = p.project_no)
+          full join project p on (o.project_no = p.project_no)
          join reward using (reward_no)
-           <choose>
-           		<when test="orderKeyword == 'orderAll'">
-           			where order_no like '%' || #{keyword} || '%' 
-           			   or member_name like '%' || #{keyword} || '%' 
-           		</when>
-           		<otherwise>
-	           	 	where ${orderKeyword} like '%' || #{keyword} || '%' 
-           		</otherwise>
-           </choose>
+         
+         <choose>
+       		<when test="orderKeyword == 'orderAll' ">
+       			where (order_no like '%' || #{keyword} || '%' 
+       			    or member_name like '%' || #{keyword} || '%' )
+       		</when>
+       		<otherwise>
+        	 	where ${orderKeyword} like '%' || #{keyword} || '%' 
+       		</otherwise>
+         </choose>
+         
+   	 	 
+		   <choose>
+		   		<when test="odStatus == 1"> and order_status = 1 </when>
+		   		<when test="odStatus == 2"> and order_status = 2 </when>
+		   		<when test="odStatus == 3"> and  order_status = 3  </when>
+		   </choose>
+   	
+		   <choose>
+			   	<when test="shStatus == 1"> and shipping_status = 1 </when>
+			   	<when test="shStatus == 2"> and shipping_status = 2 </when>
+			   	<when test="shStatus == 3"> and  shipping_status = 3  </when>
+		   </choose>
 		 order
 		    by order_no desc
 	</select>
@@ -202,8 +215,8 @@
   		   join member m on(o.member_no = m.member_no)
  		   join reward r on(o.project_no = r.project_no)
            join project p on (o.project_no = p.project_no)
- 		   where p.project_no = 2
-           and o.reward_no = r.reward_no
+ 		   where  p.project_no = 2
+             and o.reward_no = r.reward_no
 	</select>
 	
 	<!-- 발송모달창 : 펀딩내역-->
@@ -217,13 +230,9 @@
 		      , to_char(o.total_price,'999,999,999,999,999') total_price
 		      , r.reward_title
 		      , to_char(r.reward_price,'999,999,999,999,999') reward_price
-		      , re.refund_no
-		      , re.r_reason
-		      , re.r_changename
 		  from tb_order o
 		  join member m on(o.member_no = m.member_no)
 		  join reward r on(r.project_no = o.project_no)
-		  join refund re on(o.order_no = re.order_no)
 		  where o.order_no = #{orderNo}
 		  and o.reward_no = r.reward_no
 	</select>

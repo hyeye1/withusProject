@@ -39,7 +39,7 @@
         		r.refund_no
 		      , m.member_name supporter_name 
 		      , p.project_title
-		      , rd.reward_title
+		      , rw.reward_title
 		      , o.order_option
 		      , r.r_reason
 		      , r.refund_status
@@ -47,12 +47,13 @@
           join refund r on(o.order_no = r.order_no)
           join member m on(o.member_no = m.member_no)
           join project p on(o.project_no = p.project_no)
-          join reward rd on(o.reward_no = rd.reward_no)
+          join reward rw on(o.reward_no = rw.reward_no)
          where o.order_no = r.order_no 
 		 order
 		    by refund_no desc  
 	</select>
 	
+	<!-- 환불신청 내역 상세조회 -->
 	<select id="selectRefund" resultMap="refundRset" 
 	        parameterType="_int">
 		select 
@@ -85,6 +86,47 @@
 	       and o.reward_no = rd.reward_no
 	</select>
 	
+	<!-- 검색 페이징 -->
+	
+	<!-- 검색 -->
+	<select id="selectSearchRefund" resultMap="refundRset"
+			parameterType="hashmap">
+			
+		select 
+        		r.refund_no
+		      , m.member_name supporter_name 
+		      , p.project_title
+		      , rd.reward_title
+		      , o.order_option
+		      , r.r_reason
+		      , r.refund_status
+          from tb_order o
+          join refund r on(o.order_no = r.order_no)
+          join member m on(o.member_no = m.member_no)
+          join project p on(o.project_no = p.project_no)
+          join reward rd on(o.reward_no = rd.reward_no)
+          <if test="refundKey != null">
+	         <choose>
+	      		<when test="refundKey == 'refundAll' ">
+	      			where refund_no like '%' || #{keyword} || '%' 
+	      			   or member_name like '%' || #{keyword} || '%' 
+	      		</when>
+	      		<otherwise>
+	       	 	where ${refundKey} like '%' || #{keyword} || '%' 
+	      		</otherwise>
+	        </choose>
+        </if>
+        <if test="rfStatus != null">
+		   <choose>
+		   		<when test="rfStatus == N"> and refund_status = N </when>
+		   		<when test="rfStatus == Y"> and refund_status = Y </when>
+		   </choose>
+   		</if>
+           and o.order_no = r.order_no 
+		 order
+		    by refund_no desc
+	
+	</select>
 
 	
 </mapper>

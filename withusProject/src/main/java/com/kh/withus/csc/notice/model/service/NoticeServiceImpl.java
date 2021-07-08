@@ -27,38 +27,32 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public ArrayList<Notice> selectList(PageInfo pi) {
-		//return nDao.selectList(sqlSession, pi);
-		return null ;
+		return nDao.selectList(sqlSession, pi);
 	}
 
 	@Override
 	public int insertNotice(Notice n) {
-		//return nDao.insertNotice(sqlSession, n);
-		return 0;
+		return nDao.insertNotice(sqlSession, n);
 	}
 
 	@Override
 	public int increaseCount(int noticeNo) {
-		//return nDao.increaseCount(sqlSession, noticeNo);
-		return 0;
+		return nDao.increaseCount(sqlSession, noticeNo);
 	}
 
 	@Override
 	public Notice selectNotice(int noticeNo) {
-		//return nDao.selectNotice(sqlSession, noticeNo);
-		return null;
+		return nDao.selectNotice(sqlSession, noticeNo);
 	}
 
 	@Override
 	public int updateNotice(Notice n) {
-		//return nDao.updateNotice(sqlSession, n);
-		return 0;
+		return nDao.updateNotice(sqlSession, n);
 	}
 
 	@Override
 	public int deleteNotice(int noticeNo) {
-		//return nDao.deleteNotice(sqlSession, noticeNo);
-		return 0;
+		return nDao.deleteNotice(sqlSession, noticeNo);
 	}
 	
 	

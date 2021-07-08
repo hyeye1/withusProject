@@ -32,7 +32,7 @@ public class CommunityController {
 	@Autowired
 	private CommunityService cService;
 
-	
+	// 커뮤 조회
 	@RequestMapping("commu.main")
 	public ModelAndView selectCommunityMain(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
@@ -48,7 +48,7 @@ public class CommunityController {
 		return mv;
 	}
 	
-	
+	// 커뮤 상세 조회
 	@RequestMapping("commu.detail")
 	public String selectCommunity(int cno, Model model) {
 		int result = cService.increaseCount(cno);  
@@ -64,7 +64,7 @@ public class CommunityController {
 		}
 	}
 	
-	
+	// 커뮤 새글쓰기
 	@RequestMapping("commu.enroll")
 	public String commuEnroll() {
 		return "community/commuEnrollForm";
@@ -99,7 +99,7 @@ public class CommunityController {
 	}
 	
 	
-	
+	// 커뮤 삭제
 	@RequestMapping("delete.co")
 	public String deleteCommunity(int cno, String filePath, 
 							  HttpSession session, Model model) {
@@ -125,6 +125,7 @@ public class CommunityController {
 			
 		}
 	}
+	
 	
 	@RequestMapping("updateForm.co")
 	public String updateForm(int cno, Model model) {
@@ -184,7 +185,7 @@ public class CommunityController {
 			
 		}
 		
-		
+		// 댓글들
 		@ResponseBody
 		@RequestMapping(value="rlist.co", produces="application/json; charset=utf-8")
 		public String ajaxSelectCommuReplyList(int cno) {
@@ -202,13 +203,27 @@ public class CommunityController {
 			}
 		}
 		
+	/*
+	// 커뮤 검색 리스트 조회
+		@RequestMapping("commu.search")
+		public String selectCommunitySearch(int cno, Model model) {
+			int result = cService.increaseCount(cno);  
+			
+			if(result > 0) {
+				Community c = cService.selectCommunity(cno); 
+				model.addAttribute("c", c);
+				return "community/commuDetail";
+				
+			}else {
+				model.addAttribute("errorMsg", "게시글 상세조회 실패");
+				return "common/errorPage";      
+			}
+		}
+	
+	*/
 	
 	
-	
-	
-	
-	
-	
+	// 카테고리 리스트 조회
 	
 	
 	

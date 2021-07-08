@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +11,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>With Us</title>
+<style>
+	
+</style>
 </head>
 <body>
 
@@ -26,6 +29,13 @@
 	<div class="container">
 
 		<br>
+		<c:if test="${ loginUser == 'admin%' }">
+			<div>
+				<a class="btn btn-secondary" style="float:right" href="enrollFrom.no">등록</a>
+			</div>
+		</c:if>
+		
+		<br>
 	    <!-- 표 N행 6열 -->
 		<table class="table table-bordered">
 			<thead>
@@ -40,13 +50,25 @@
 				<c:forEach var="n" items="${ list }">
 					<tr align="center">
 						<td>${ n.noticeNo }</td>
-						<td><a href="">${ n.noticeTitle }</a></td>
+						<td><a href="detail.no?nno=${ n.noticeNo }">${ n.noticeTitle }</a></td>
 						<td>${ n.createDate }</td>
 						<td>${ n.count }</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+		
+		<script>
+            	$(function(){
+            		$("#noticeList tbody tr").click(function(){
+            			location.href="detail.no?nno=" + $(this).children(".nno").text()
+            		})
+            	})
+            </script>
+             
+	    <br>
+	    <a href="updateForm.no">수정</a> <a href="delete.no">삭제</a>
+	    
 	    <br>
 
 	    <!-- 페이징 바 추가예정 -->

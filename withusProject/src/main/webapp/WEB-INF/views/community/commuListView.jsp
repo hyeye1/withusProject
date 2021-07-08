@@ -211,13 +211,13 @@
                  </c:if>
                 </ul>
               </div>
-              <table id="boardList" class="table table-hover" align="center">
+              <table id="commuList" class="table table-hover" align="center">
                 <thead>
                   <tr>
                     <th>글번호</th>
                     <th>카테고리</th>
                     <th>제목</th>
-                    <th>댓글수</th>
+                    <th>작성자</th>
                     <th>조회수</th>
                     <th>작성일</th>
                   </tr>
@@ -228,7 +228,7 @@
 	                        <td class="cno">${ c.commuNo }</td>
 	                        <td>${ c.commuCate }</td>
 	                        <td>${ c.commuTitle }</td>
-	                        <td>${ m.memberNo }</td>
+	                        <td>${ c.commuWriter }</td>
 	                        <td>${ c.count }</td>
 	                         <td>${ c.commuCreate }</td>
 	                    </tr>
@@ -238,7 +238,7 @@
               
               <script>
             	$(function(){
-            		$("#communityList tbody tr").click(function(){
+            		$("#commuList tbody tr").click(function(){
             			location.href="commu.detail?cno=" + $(this).children(".cno").text();
             		})
             	})

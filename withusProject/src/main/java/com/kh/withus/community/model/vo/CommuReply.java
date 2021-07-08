@@ -13,9 +13,9 @@ import lombok.ToString;
 public class CommuReply {
 	
 	private int comReNo;
-	private int commuNo;
-	private int memberNo;
 	private String comReContent;
+	private int refCommuNo;
+	private String comReWriter;
 	private String comReCreate;
 	private String comReStatus;
 }
