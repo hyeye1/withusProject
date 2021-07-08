@@ -309,7 +309,7 @@
 				<!-- 관리자 -->
 				<div class="headerRight">
 					<a href="logout.me">로그아웃</a>
-					<a href=""> 관리자</a>
+					<a href="memberListView.mana"> 관리자</a>
 					<img src="resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
 				</div>
 			</c:if>

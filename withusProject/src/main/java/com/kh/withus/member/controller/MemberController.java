@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -147,7 +148,53 @@ public class MemberController {
 	
 	
 
-	// 관리자쪽
+	// 관리자
+	// 로그인
+	@RequestMapping("login.mana")
+	public ModelAndView loginAdmin(Member m, HttpSession session, ModelAndView mv) {
+		
+		// 암호화 작업 후 (단지 아이디 대조만)
+		Member loginAdmin = mService.loginAdmin(m);
+		//System.out.println(m);
+		
+		if(loginAdmin!= null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginAdmin.getMemberPwd())) {
+			// 로그인 성공
+			session.setAttribute("loginAdmin", loginAdmin);
+			session.setAttribute("alertMsg", "로그인되었습니다");
+			mv.setViewName("redirect:memberListView.mana");
+			
+			
+		}else {
+			// 로그인 실패
+			mv.addObject("errorMsg", "로그인실패");
+			mv.setViewName("common/manaErrorPage");
+		}
+		return mv;
+	}
+	
+	
+	// 로그아웃
+	@RequestMapping("logout.mana")
+	public String logoutAdmin(HttpSession session) {
+		session.invalidate();
+		return "redirect:main.mana";
+	}
+	
+	// 관리자 로그인전 페인페이지
+	@RequestMapping("main.mana")
+	public String test(HttpSession session, Model mv) {
+		
+		// 사용자페이지에서 관리자 페이지로 넘어오기
+		// 사용자 페이지에서 관리자 로그인일 경우
+		// 사용자로그인에 담겨있는 loginUser로 같이 넘겨서 , 사용자 페이지에서 관리자로그인시  로그인 상태 유지해서 넘어오기
+		
+		// 로그인 안한 상태에서는 페이지 안보여지게
+		
+		return "common/manaErrorPage";
+	}
+	
+	
+	
 	// 회원 조회
 	@RequestMapping("memberListView.mana")
 	public ModelAndView selectMemberList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,ModelAndView mv) {
@@ -199,7 +246,45 @@ public class MemberController {
 		}
 		
 	}
+	
 	// 회원 검색
+	@RequestMapping("searchMember.mana")
+	public ModelAndView searchMember(@RequestParam(defaultValue="") String partnerJoin,
+									 @RequestParam(defaultValue="") String memberStatus,
+									 @RequestParam(defaultValue="") String memKey,
+									 @RequestParam(defaultValue="") String keyword,
+									 @RequestParam(value="currentPage", defaultValue="1") int currentPage,
+									 ModelAndView mv) {
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("partnerJoin", partnerJoin);
+		map.put("memberStatus", memberStatus);
+		map.put("memKey", memKey);
+		map.put("keyword", keyword);
+		//System.out.println(map);
+		
+		// 검색결과 리스트 총 갯수
+		int count = mService.countSearch(map);
+		
+		// 페이징 처리
+		PageInfo pi = pagination.getPageInfo(count, currentPage, 10, 10);
+		
+		// 검색결과 담아내기
+		ArrayList<Member> mList = mService.searchMember(map, pi);
+		//System.out.println(mList);
+		
+		mv.addObject("pi", pi)
+		  .addObject("mList",mList)
+		  .addObject("partnerJoin", partnerJoin)
+		  .addObject("memberStatus", memberStatus)
+		  .addObject("memKey", memKey)
+		  .addObject("keyword", keyword)
+		  .setViewName("member/manaMemberListView");
+		
+		return mv;
+		
+	}
+	
 	
 
 }

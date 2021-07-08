@@ -30,6 +30,9 @@ public interface MemberService {
 		
 		
 		// 관리자
+		// 로그인
+		Member loginAdmin(Member m);
+		
 		// 관리자 회원조회
 		int selectListCount();
 		ArrayList<Member> selectList(PageInfo pi);
@@ -40,5 +43,9 @@ public interface MemberService {
 		// 탈퇴(회원 상태 변경)
 		int deleteMemberMana(HashMap<String, Object> map);
 		
+		// 검색된 총 게시글 수
+		int countSearch(HashMap<String, String> map);
+		// 검색 기능
+		ArrayList<Member> searchMember(HashMap<String, String> map, PageInfo pi);
 		
 }

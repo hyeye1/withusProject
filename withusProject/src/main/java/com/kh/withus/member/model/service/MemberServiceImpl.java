@@ -52,6 +52,11 @@ public class MemberServiceImpl implements MemberService {
 
 	// 관리자
 	@Override
+	public Member loginAdmin(Member m) {
+		return mDao.loginAdmin(sqlSession, m);
+	}
+	
+	@Override
 	public int selectListCount() {
 		return mDao.selectListCount(sqlSession);
 	}
@@ -71,6 +76,15 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.deleteMemberMana(sqlSession, map);
 	}
 
+	@Override
+	public int countSearch(HashMap<String, String> map) {
+		return mDao.countSearch(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<Member> searchMember(HashMap<String, String> map, PageInfo pi) {
+		return mDao.searchMember(sqlSession, map, pi);
+	}
 	
 	
 	

@@ -69,15 +69,17 @@
 	    <div class="container">
 	
 	        <div class="search_area">
+	             <form action="searchMember.mana" name="searchForm" method="">
+	        	<input type="hidden" name="currentPage" value="1">
 	             <div class="searchKey_1">
-	                 <select name="partnerJoin" id="partnerJoin">
+	                 <select name="partnerJoin" class="partnerJoin">
 	                     <option value="memberAll">전체</option>
 	                     <option value="supporter">서포터</option>
 	                     <option value="partner">파트너</option>
 	                 </select>
 	             </div>
 	             <div class="searchKey_2">
-	                <select name="memberStatus" id="memberStatus">
+	                <select name="memberStatus" class="memberStatus">
 	                    <option value="T">전체</option>
 	                    <option value="Y">활동</option>
 	                    <option value="N">탈퇴</option>
@@ -87,7 +89,7 @@
 	
 	            <div class="searchKey_3">
 	                <div class="memberKeyword">
-	                    <select name="memberInfo" id="memberInfo">
+	                    <select name="memKey" class="memKey">
 	                        <option value="all">전체</option>
 	                        <option value="member_no">회원번호</option>
 	                        <option value="member_name">이름</option>
@@ -96,14 +98,27 @@
 	                </div>
 	
 	                <div class="input-group search">
-	                    <input type="text" class="form-control" placeholder="검색어를 입력하세요">
+	                    <input type="text" name="keyword" value="${ keyword }" class="form-control" placeholder="검색어를 입력하세요">
 	                    <div class="input-group-append">
 	                        <button class="btn searchBtn" type="submit"><i class="fa fa-search"></i></button>
 	                    </div>
 	                </div>
 	            </div>
-	
+				</form>
 	        </div>
+		
+			 <c:if test="${ !empty partnerJoin or !empty memberStatus or !empty memKey }">
+	        	<script>
+	        	$(function(){
+	        		$(".partnerJoin option[value=${partnerJoin}]").attr("selected", true);
+	        		$(".memberStatus option[value=${memberStatus}]").attr("selected", true);
+	        		$(".memKey option[value=${memKey}]").attr("selected", true);
+	        		
+	        		
+	        	});
+	        	</script>
+	        </c:if>
+	        
 	
 	        <table class="table table-bordered">
 	        <c:choose>
@@ -232,28 +247,54 @@
 	    <!-- 페이징 -->
 	    <c:if test="${ !empty mList }">
 		    <div class="paging_wrap">
-		        <ul class="pagination">	             
+		        <ul class="pagination">	 
+		                    
 		        	<c:choose>
 		        		<c:when test="${ pi.currentPage eq 1 }">
 			           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
 			            </c:when>
 			            <c:otherwise>
-			            	<li class="page-item"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
+			            	<c:choose>
+			            		<c:when test="${ empty partnerJoin or empty memberStatus or empty memKey  }">
+					            	<li class="page-item"><a class="page-link" href="${ pi.currentPage - 1 }">이전</a></li>
+					            </c:when>
+					            <c:otherwise>
+					            	<li class="page-item"><a class="page-link" href="searchMember.mana?currentPage=${pi.currentPage - 1}&partnerJoin=${partnerJoin}&memberStatus=${memberStatus}&memKey=${memKey}&keyword=${keyword}">이전</a></li>
+			            		</c:otherwise>
+			            	</c:choose>
 			            </c:otherwise>
 			    	</c:choose>     
 			    	   
+			    	   
 					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-		            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
+						<c:choose>
+							<c:when test="${ empty partnerJoin or empty memberStatus or empty memKey  }">
+				            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link" href="searchMember.mana?currentPage=${p}&partnerJoin=${partnerJoin}&memberStatus=${memberStatus}&memKey=${memKey}&keyword=${keyword}">${ p }</a></li>
+							</c:otherwise>
+						</c:choose>
 					</c:forEach>		            
+			            
 			            
 			        <c:choose> 
 			        	<c:when test="${ pi.currentPage eq pi.maxPage }">
 			           	 	<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
 			           	</c:when>
 			           	<c:otherwise>
-			           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
+			           		<c:choose>
+			            		<c:when test="${ empty partnerJoin or empty memberStatus or empty memKey  }">
+					           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
+					            </c:when>
+					            <c:otherwise>
+					            	<li class="page-item"><a class="page-link" href="searchMember.mana?currentPage=${pi.currentPage + 1}&partnerJoin=${partnerJoin}&memberStatus=${memberStatus}&memKey=${memKey}&keyword=${keyword}">다음</a></li>
+			            		</c:otherwise>
+			            	</c:choose>
 			           	</c:otherwise> 	
 		        	</c:choose>
+		        	
+		        	
 		        </ul>
 		    </div>
 		</c:if>
