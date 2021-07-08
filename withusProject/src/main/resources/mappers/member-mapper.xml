@@ -100,6 +100,27 @@
 	
 	
 	<!-- 관리자 -->
+	<!-- 관리자 로그인 -->
+	<select id="loginAdmin" resultMap="memberResultSet" parameterType="Member">
+		select
+  		       member_no
+  		     , member_id
+  		     , member_pwd
+  		     , member_name
+  		     , member_phone
+  		     , member_create_dt
+  		     , member_link
+  		     , report_count
+  		     , member_status
+  		     , member_profile
+  		     , partner_join
+  		     , partner_name
+  		     , partner_intro
+  		  from member
+  		 where member_status = 'A'
+  		   and member_id = #{memberId}
+	</select>
+	
 	<!-- 페이징 처리 -->
 	<select id="selectListCount" resultType="_int">
 		select

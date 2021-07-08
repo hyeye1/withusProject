@@ -52,6 +52,11 @@ public class MemberServiceImpl implements MemberService {
 
 	// 관리자
 	@Override
+	public Member loginAdmin(Member m) {
+		return mDao.loginAdmin(sqlSession, m);
+	}
+	
+	@Override
 	public int selectListCount() {
 		return mDao.selectListCount(sqlSession);
 	}
