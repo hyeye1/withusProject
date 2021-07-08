@@ -29,11 +29,9 @@
 	<div class="container">
 
 		<br>
-		
-			<div>
-				<a class="btn btn-secondary" style="float:right" href="enrollForm.no">등록</a>
-			</div>
-		
+		<c:if test="${ loginUser.memberStatus eq 'A' }">
+			<a class="btn btn-secondary" style="float:right" href="enrollForm.no">등록</a>
+		</c:if>
 		
 		<br>
 	    <!-- 표 N행 6열 -->
@@ -66,8 +64,11 @@
             	})
             </script>
              
-	    <br>
-	    <a href="updateForm.no">수정</a> <a href="delete.no">삭제</a>
+	    <br><br>
+	    <c:if test="${ loginUser.memberStatus eq 'A' }">
+	    	<a class="btn btn-success" href="updateForm.no">수정</a> &nbsp;
+	    	<a class="btn btn-warning" href="delete.no">삭제</a>
+	    </c:if>
 	    
 	    <br>
 
