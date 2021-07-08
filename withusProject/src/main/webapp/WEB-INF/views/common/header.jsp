@@ -280,39 +280,45 @@
 					
 			<c:remove var="alertMsg" scope="session" />
 			</c:if>
-			<c:choose>
-				<c:when test="${ empty loginUser }">
-
-					<!-- 로그인전 -->
-					<div class="headerRight">
-						<a href="loginForm.me">로그인</a>
-						<a href="enrollForm.me"> 회원가입</a>
-						<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px"
-							style="margin-left: -3px; margin-top: -6px;">
-					</div>
-				</c:when>
-				<c:otherwise>
-
-					<!-- 로그인후 -->
-					<div class="headerRight">
-						<a href="logout.me">로그아웃</a>
-						<a href="myPage.me"> 마이페이지</a>
-						<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px"
-							style="margin-left: -3px; margin-top: -6px;">
-					</div>
-
-				</c:otherwise>
-			</c:choose>
-
 			
-			<c:if test="${ loginUser.memberStatus eq 'A' }">
-				<!-- 관리자 -->
+			<c:choose>
+				<!-- 관리자 로그인시 -->
+				<c:when test="${loginUser.memberStatus eq 'A' }">
+					<!-- 관리자 -->
 				<div class="headerRight">
 					<a href="logout.me">로그아웃</a>
-					<a href=""> 관리자</a>
-					<img src="resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
+					<a href="memberListView.mana"> 관리자</a>
+					<img src="resources/images/memberIcon.PNG" width="30px" 
+	 					 style="margin-left: -3px; margin-top: -6px;">
 				</div>
-			</c:if>
+				</c:when>
+				
+				<!-- 사용자 로그인시 -->
+				<c:otherwise>
+					<c:choose>
+						<c:when test="${ empty loginUser }">
+							<!-- 로그인전 -->
+							<div class="headerRight">
+								<a href="loginForm.me">로그인</a>
+								<a href="enrollForm.me"> 회원가입</a>
+								<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px"
+									style="margin-left: -3px; margin-top: -6px;">
+							</div>
+						</c:when>
+						<c:otherwise>
+							<!-- 로그인후 -->
+							<div class="headerRight">
+								<a href="logout.me">로그아웃</a>
+								<a href="myPage.me"> 마이페이지</a>
+								<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px"
+									style="margin-left: -3px; margin-top: -6px;">
+							</div>
+						</c:otherwise>
+					</c:choose>
+				</c:otherwise>
+				
+			</c:choose>
+
 		</div>
 
 		</body>
