@@ -205,7 +205,7 @@ public class CommunityController {
 		
 	/*
 	// 커뮤 검색 리스트 조회
-		@RequestMapping("commu.search")
+		@RequestMapping("search.co")
 		public String selectCommunitySearch(int cno, Model model) {
 			int result = cService.increaseCount(cno);  
 			
