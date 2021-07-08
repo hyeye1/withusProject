@@ -1,6 +1,7 @@
 package com.kh.withus.member.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.withus.common.model.vo.PageInfo;
 import com.kh.withus.common.template.pagination;
 import com.kh.withus.member.model.service.MemberService;
@@ -161,7 +163,43 @@ public class MemberController {
 		return mv;
 	}
 	
-	// 회원 검사
+	// 탈퇴클릭시 ->모달
+	@ResponseBody
+	@RequestMapping(value="memStatus.mana", produces="apllication/json; charset=utf-8")
+		public String ajaxSelectMemStatus(int mno) {
+		
+		//System.out.println(mno);
+		
+		Member ms = mService.selectMemStatus(mno);
+		//System.out.println(ms);
+		
+		return new Gson().toJson(ms);
+	}
+	// 회원 탈퇴
+	@RequestMapping("deleteMem.mana")
+	public String deleteMemberMana(@RequestParam(defaultValue="") String mStatus,
+									 @RequestParam(defaultValue= "") String mamberName,
+									 HttpSession session) {
+		
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("mStatus", mStatus );
+		map.put("mamberName", mamberName );
+		
+		System.out.println(map);
+		
+		int delMem = mService.deleteMemberMana(map);
+		
+		if (delMem > 0) {
+			//session.setAttribute("alertMsg", "탈퇴처리 성공");
+			return "redirect:/memberListView.mana";
+		}else {
+			session.setAttribute("alertMsg", "실패실패");
+			return "redirect:/memberListView.mana";
+		}
+		
+	}
+	// 회원 검색
 	
 
 }

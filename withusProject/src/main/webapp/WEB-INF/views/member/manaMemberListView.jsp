@@ -40,11 +40,11 @@
 	.btn-sm:hover{outline: none; border: none;}
 	
 	/* delModal */
-	.modal-header.none, .modal-footer.none{border: none;}
+	.modal-header, .modal-footer{border: none;}
 	.input-group.mb-s {width: 100%; padding: 0 50px;}
 	button.btn.btn-secondary{ width: 47%; float: left;}
 	button.btn.btn-withus{ width: 47%;}
-	.modal-footer.none{height: 80%;}
+	.modal-footer{height: 80%;}
 	
 	/* pagination */
 	.paging_wrap{width:fit-content;margin:auto; margin-top: 50px;}
@@ -126,7 +126,7 @@
 		            <tbody>
 		             	<c:forEach var="m" items="${ mList }">
 			                <tr>
-			                    <td>${ m.memberNo }</td>
+			                    <td class="mno">${ m.memberNo }</td>
 			                    <td>${ m.memberId }</td>
 			                    <td>${ m.memberName }</td>
 			                    <td>${ m.memberCreateDate }</td>
@@ -142,58 +142,95 @@
 			                    	</c:choose>
 			                    </td>
 			                    <td>${ m.memberStatus }</td>
-			                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
+			                    <td><button type="button" class="btn-sm" onclick="ajaxMemInfo();"	
+			                    			data-toggle="modal" data-target="#delModal">
+	                    			탈퇴</button></td>
 			                </tr>
 		                </c:forEach> 
 		            </tbody>
 	        	</c:otherwise>
 	        </c:choose>
 	        </table>
+			
+			<script>
+	        	// 탈퇴 모달
+	        	function ajaxMemInfo(){
+        			var $memberNo = $(event.target).parent().siblings(".mno").text();
+        			//console.log($memberNo);
+        			
+        			$.ajax({
+	        			url:"memStatus.mana",
+	        			data:{mno:$memberNo},
+	        			success:function(ms){
+	        				//console.log(ms);
+	        				var result = "<div name ="
+	        							+ "'mamberName'" + " value ="
+	        							+ "'" + ms.memberName + "'" + ">"
+	        							+ ms.memberName 
+	        							+ " 회원을 탈퇴시키겠습니까?</div>"
+	        				// value가 안넘어가...			
+
+   							console.log(result);
+	        				$(".modal-title").html(result);
+	        				
+	        							
+	        			}, error: function(){
+	        				console.log("모달 조회 실패")
+	        			}
+	        		});
+        			
+	        	}
+	        	
+	        </script>			
+	    
 	    </div>
+	    
 	
 	    <!-- 탈퇴 클릭 시 모달  -->
 	    <!-- The Modal -->
-	    <div class="modal fade" id="delModal">
-	        <div class="modal-dialog modal-dialog-centered" style="width: 380px;">
-	        <div class="modal-content">
-	        
-	            <!-- Modal Header -->
-	            <div class="modal-header none">
-	            <h5 class="modal-title">김지원 회원을 탈퇴시키겠습니까?</h5>
-	            <button type="button" class="close" data-dismiss="modal">&times;</button>
-	            </div>
-	            
-	            <!-- Modal body -->
-	            <div class="modal-body">
-	                <form>
-	                    <div class="input-group mb-s" >
-	                        <div class="input-group-prepend">
-	                          <span class="input-group-text">회원상태</span>
-	                        </div>
-	                        <select type="text" class="form-control" id="memberStatus" name="memberStatus">
-	                          <option value="Y">활동</option>
-	                          <option value="N">탈퇴</option>
-	                        </select>
-	                    </div>
-	                </form>
-	            </div>
-	            
-	            <!-- Modal footer -->
-	            <div class="modal-footer none">
-	            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-	            <button type="button" class="btn btn-withus" data-dismiss="modal">수정</button>
-	            </div>
-	            
-	        </div>
-	        </div>
-	    </div>
-	
+	    <form action="deleteMem.mana" method="post">
+			    <div class="modal fade" id="delModal">
+			        <div class="modal-dialog modal-dialog-centered" style="width: 380px;">
+			        <div class="modal-content">
+			        	
+			            <!-- Modal Header -->
+			            <div class="modal-header">
+			            	<h5 class="modal-title"> </h5>
+			            	<button type="button" class="close" data-dismiss="modal">&times;</button>
+			            </div>
+			            
+			            <!-- Modal body -->
+			            <div class="modal-body">
+		            		
+		                     <div class="input-group mb-s" >
+		                        <div class="input-group-prepend">
+		                          <span class="input-group-text">회원상태</span>
+		                        </div>
+		                        
+		                        <select class="form-control" id=mStatus name="mStatus">
+		                          <option value="Y">활동</option>
+		                          <option value="N">탈퇴</option>
+		                        </select>
+		                         
+		                    	</div>
+			            	</div>
+			            
+				            <!-- Modal footer -->
+				            <div class="modal-footer">
+				            	<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				            	<button type="submit" onclick="form.submit();" class="btn btn-withus" data-dismiss="modal">확인</button>
+				            	<!-- ?궁금?  타입'submit'에서는 작동을 안하는데   클릭이벤트론 되네... 왜? -->
+				            </div>
+			        </div>
+			        </div>
+			    </div>	
+       			</form>
 	
 	    
 	    <br clear="both"><br>
 	
 	    <!-- 페이징 -->
-	    <c:if test="${ !empty olist }">
+	    <c:if test="${ !empty mList }">
 		    <div class="paging_wrap">
 		        <ul class="pagination">	             
 		        	<c:choose>
