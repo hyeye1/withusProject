@@ -100,12 +100,34 @@
 	
 	
 	<!-- 관리자 -->
+	<!-- 관리자 로그인 -->
+	<select id="loginAdmin" resultMap="memberResultSet" parameterType="Member">
+		select
+  		       member_no
+  		     , member_id
+  		     , member_pwd
+  		     , member_name
+  		     , member_phone
+  		     , member_create_dt
+  		     , member_link
+  		     , report_count
+  		     , member_status
+  		     , member_profile
+  		     , partner_join
+  		     , partner_name
+  		     , partner_intro
+  		  from member
+  		 where member_status = 'A'
+  		   and member_id = #{memberId}
+	</select>
+	
 	<!-- 페이징 처리 -->
 	<select id="selectListCount" resultType="_int">
 		select
 			   count(*)
 		from member
 	</select>
+	
 	<!-- 회원조회 -->
 	<select id="selectMemList" resultMap="memberResultSet">
 		select
@@ -120,6 +142,99 @@
 		 order
 		    by member_no desc   
 	</select>
-	<!-- 회원상태변경 -->
+	
+	<!-- 탈퇴클릭시 모달 -->
+	<select id="selectMemStatus" resultMap="memberResultSet" 
+			parameterType="_int">
+		select
+				member_no
+			  , member_name
+		 from member
+		 where member_no = #{memberNo}
+	
+	</select>
+	
+	<!-- 탈퇴(회원상태변경) -->
+	<update id="deleteMemberMana" parameterType="hashmap" >
+		update 
+		       member
+		   set member_status = #{mStatus} 
+		 where member_name =  #{memberName}      
+	</update>
+	
+	<!-- 검색 페이징 처리 -->
+	<select id="countSearch" resultType="_int" parameterType="hashmap">
+		select
+				count(*)
+		   from	member m
+			  <choose>
+           		<when test='memKey == "all"' >
+           			where ( member_no  like '%' || #{keyword} || '%' 
+           			       or member_name like '%' || #{keyword} || '%' 
+           			       or member_id like '%' || #{keyword} || '%' )
+           		</when>
+           		<otherwise>
+           			where ${memKey} like '%' || #{keyword} || '%' 
+           		</otherwise>
+           </choose>
+            <if test='partnerJoin != null'>
+   			   <choose>
+	   			   	<when test='partnerJoin == "supporter"'> and partner_join = 'N' </when>
+	   			   	<when test='partnerJoin == "partner"'> and partner_join = 'Y' </when>
+   			   </choose>
+		   </if>
+		   <if test='memberStatus != null'>
+   			   <choose>
+	   			   	<when test='memberStatus == "Y"'> and member_status = 'Y' </when>
+	   			   	<when test='memberStatus == "N"'> and member_status = 'N' </when>
+	   			   	<when test='memberStatus == "A"'> and member_status = 'A' </when>
+   			   </choose>
+		   </if>
+		  
+	</select>
+		
+	<!-- 검색 -->
+	<select id="searchMember" resultMap="memberResultSet" parameterType="hashmap">
+		select 
+               member_no
+		     , member_id
+		     , member_name
+		     , to_char(member_create_dt,'YYYY-MM-DD') member_create_dt
+		     , partner_join
+		     , partner_name
+		     , member_status
+		     , member_link
+          from member
+           <choose>
+           		<when test="memKey == 'all'">
+           			where ( member_no  like '%' || #{keyword} || '%' 
+           			       or member_name like '%' || #{keyword} || '%' 
+           			       or member_id like '%' || #{keyword} || '%' )
+           		</when>
+           		<otherwise>
+           			where ${memKey} like '%' || #{keyword} || '%' 
+           		</otherwise>
+           </choose>
+           
+            <if test='partnerJoin != null'>
+   			   <choose>
+	   			   	<when test='partnerJoin == "supporter"'> and partner_join = 'N' </when>
+	   			   	<when test='partnerJoin == "partner"'> and partner_join = 'Y' </when>
+   			   </choose>
+		   </if>
+		   <if test='memberStatus != null'>
+   			   <choose>
+	   			   	<when test='memberStatus == "Y"'> and member_status = 'Y' </when>
+	   			   	<when test='memberStatus == "N"'> and member_status = 'N' </when>
+	   			   	<when test='memberStatus == "A"'> and member_status = 'A' </when>
+   			   </choose>
+		   </if>
+           		           	
+         order
+            by member_no desc
+	</select>
+	
+	
+	
 	
 </mapper>

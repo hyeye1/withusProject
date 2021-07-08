@@ -35,6 +35,11 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
+	public int updateOrderCancle(int orderNo) {
+		return oDao.updateOrderCancle(sqlSession, orderNo);
+	}
+	
+	@Override
 	public int searchCount() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -81,4 +86,11 @@ public class OrderServiceImpl implements OrderService {
 	public ArrayList<Order> selectSearchPartOrder(HashMap<String, String> map) {
 		return oDao.selectSearchPartOrder(sqlSession, map);
 	}
+	
+	// 발송정보입력
+	@Override
+	public int insertShippingInfo(HashMap<String, Object> map) {
+		return oDao.insertShippingInfo(sqlSession, map);
+	}
+
 }

@@ -40,11 +40,11 @@
 	.btn-sm:hover{outline: none; border: none;}
 	
 	/* delModal */
-	.modal-header.none, .modal-footer.none{border: none;}
+	.modal-header, .modal-footer{border: none;}
 	.input-group.mb-s {width: 100%; padding: 0 50px;}
 	button.btn.btn-secondary{ width: 47%; float: left;}
 	button.btn.btn-withus{ width: 47%;}
-	.modal-footer.none{height: 80%;}
+	.modal-footer{height: 80%;}
 	
 	/* pagination */
 	.paging_wrap{width:fit-content;margin:auto; margin-top: 50px;}
@@ -69,15 +69,17 @@
 	    <div class="container">
 	
 	        <div class="search_area">
+	             <form action="searchMember.mana" name="searchForm" method="">
+	        	<input type="hidden" name="currentPage" value="1">
 	             <div class="searchKey_1">
-	                 <select name="partnerJoin" id="partnerJoin">
+	                 <select name="partnerJoin" class="partnerJoin">
 	                     <option value="memberAll">전체</option>
 	                     <option value="supporter">서포터</option>
 	                     <option value="partner">파트너</option>
 	                 </select>
 	             </div>
 	             <div class="searchKey_2">
-	                <select name="memberStatus" id="memberStatus">
+	                <select name="memberStatus" class="memberStatus">
 	                    <option value="T">전체</option>
 	                    <option value="Y">활동</option>
 	                    <option value="N">탈퇴</option>
@@ -87,7 +89,7 @@
 	
 	            <div class="searchKey_3">
 	                <div class="memberKeyword">
-	                    <select name="memberInfo" id="memberInfo">
+	                    <select name="memKey" class="memKey">
 	                        <option value="all">전체</option>
 	                        <option value="member_no">회원번호</option>
 	                        <option value="member_name">이름</option>
@@ -96,14 +98,27 @@
 	                </div>
 	
 	                <div class="input-group search">
-	                    <input type="text" class="form-control" placeholder="검색어를 입력하세요">
+	                    <input type="text" name="keyword" value="${ keyword }" class="form-control" placeholder="검색어를 입력하세요">
 	                    <div class="input-group-append">
 	                        <button class="btn searchBtn" type="submit"><i class="fa fa-search"></i></button>
 	                    </div>
 	                </div>
 	            </div>
-	
+				</form>
 	        </div>
+		
+			 <c:if test="${ !empty partnerJoin or !empty memberStatus or !empty memKey }">
+	        	<script>
+	        	$(function(){
+	        		$(".partnerJoin option[value=${partnerJoin}]").attr("selected", true);
+	        		$(".memberStatus option[value=${memberStatus}]").attr("selected", true);
+	        		$(".memKey option[value=${memKey}]").attr("selected", true);
+	        		
+	        		
+	        	});
+	        	</script>
+	        </c:if>
+	        
 	
 	        <table class="table table-bordered">
 	        <c:choose>
@@ -126,7 +141,7 @@
 		            <tbody>
 		             	<c:forEach var="m" items="${ mList }">
 			                <tr>
-			                    <td>${ m.memberNo }</td>
+			                    <td class="mno">${ m.memberNo }</td>
 			                    <td>${ m.memberId }</td>
 			                    <td>${ m.memberName }</td>
 			                    <td>${ m.memberCreateDate }</td>
@@ -142,81 +157,144 @@
 			                    	</c:choose>
 			                    </td>
 			                    <td>${ m.memberStatus }</td>
-			                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
+			                    <td><button type="button" class="btn-sm" onclick="ajaxMemInfo();"	
+			                    			data-toggle="modal" data-target="#delModal">
+	                    			탈퇴</button></td>
 			                </tr>
 		                </c:forEach> 
 		            </tbody>
 	        	</c:otherwise>
 	        </c:choose>
 	        </table>
+			
+			<script>
+	        	// 탈퇴 모달
+	        	function ajaxMemInfo(){
+        			var $memberNo = $(event.target).parent().siblings(".mno").text();
+        			//console.log($memberNo);
+        			
+        			$.ajax({
+	        			url:"memStatus.mana",
+	        			data:{mno:$memberNo},
+	        			success:function(ms){
+	        				//console.log(ms);
+	        				var result = "<div name ="
+	        							+ "'mamberName'" + " value ="
+	        							+ "'" + ms.memberName + "'" + ">"
+	        							+ ms.memberName 
+	        							+ " 회원을 탈퇴시키겠습니까?</div>"
+	        				// value가 안넘어가...			
+
+   							console.log(result);
+	        				$(".modal-title").html(result);
+	        				
+	        							
+	        			}, error: function(){
+	        				console.log("모달 조회 실패")
+	        			}
+	        		});
+        			
+	        	}
+	        	
+	        </script>			
+	    
 	    </div>
+	    
 	
 	    <!-- 탈퇴 클릭 시 모달  -->
 	    <!-- The Modal -->
-	    <div class="modal fade" id="delModal">
-	        <div class="modal-dialog modal-dialog-centered" style="width: 380px;">
-	        <div class="modal-content">
-	        
-	            <!-- Modal Header -->
-	            <div class="modal-header none">
-	            <h5 class="modal-title">김지원 회원을 탈퇴시키겠습니까?</h5>
-	            <button type="button" class="close" data-dismiss="modal">&times;</button>
-	            </div>
-	            
-	            <!-- Modal body -->
-	            <div class="modal-body">
-	                <form>
-	                    <div class="input-group mb-s" >
-	                        <div class="input-group-prepend">
-	                          <span class="input-group-text">회원상태</span>
-	                        </div>
-	                        <select type="text" class="form-control" id="memberStatus" name="memberStatus">
-	                          <option value="Y">활동</option>
-	                          <option value="N">탈퇴</option>
-	                        </select>
-	                    </div>
-	                </form>
-	            </div>
-	            
-	            <!-- Modal footer -->
-	            <div class="modal-footer none">
-	            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-	            <button type="button" class="btn btn-withus" data-dismiss="modal">수정</button>
-	            </div>
-	            
-	        </div>
-	        </div>
-	    </div>
-	
+	    <form action="deleteMem.mana" method="post">
+			    <div class="modal fade" id="delModal">
+			        <div class="modal-dialog modal-dialog-centered" style="width: 380px;">
+			        <div class="modal-content">
+			        	
+			            <!-- Modal Header -->
+			            <div class="modal-header">
+			            	<h5 class="modal-title"> </h5>
+			            	<button type="button" class="close" data-dismiss="modal">&times;</button>
+			            </div>
+			            
+			            <!-- Modal body -->
+			            <div class="modal-body">
+		            		
+		                     <div class="input-group mb-s" >
+		                        <div class="input-group-prepend">
+		                          <span class="input-group-text">회원상태</span>
+		                        </div>
+		                        
+		                        <select class="form-control" id=mStatus name="mStatus">
+		                          <option value="Y">활동</option>
+		                          <option value="N">탈퇴</option>
+		                        </select>
+		                         
+		                    	</div>
+			            	</div>
+			            
+				            <!-- Modal footer -->
+				            <div class="modal-footer">
+				            	<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				            	<button type="submit" onclick="form.submit();" class="btn btn-withus" data-dismiss="modal">확인</button>
+				            	<!-- ?궁금?  타입'submit'에서는 작동을 안하는데   클릭이벤트론 되네... 왜? -->
+				            </div>
+			        </div>
+			        </div>
+			    </div>	
+       			</form>
 	
 	    
 	    <br clear="both"><br>
 	
 	    <!-- 페이징 -->
-	    <c:if test="${ !empty olist }">
+	    <c:if test="${ !empty mList }">
 		    <div class="paging_wrap">
-		        <ul class="pagination">	             
+		        <ul class="pagination">	 
+		                    
 		        	<c:choose>
 		        		<c:when test="${ pi.currentPage eq 1 }">
 			           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
 			            </c:when>
 			            <c:otherwise>
-			            	<li class="page-item"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
+			            	<c:choose>
+			            		<c:when test="${ empty partnerJoin or empty memberStatus or empty memKey  }">
+					            	<li class="page-item"><a class="page-link" href="${ pi.currentPage - 1 }">이전</a></li>
+					            </c:when>
+					            <c:otherwise>
+					            	<li class="page-item"><a class="page-link" href="searchMember.mana?currentPage=${pi.currentPage - 1}&partnerJoin=${partnerJoin}&memberStatus=${memberStatus}&memKey=${memKey}&keyword=${keyword}">이전</a></li>
+			            		</c:otherwise>
+			            	</c:choose>
 			            </c:otherwise>
 			    	</c:choose>     
 			    	   
+			    	   
 					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-		            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
+						<c:choose>
+							<c:when test="${ empty partnerJoin or empty memberStatus or empty memKey  }">
+				            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link" href="searchMember.mana?currentPage=${p}&partnerJoin=${partnerJoin}&memberStatus=${memberStatus}&memKey=${memKey}&keyword=${keyword}">${ p }</a></li>
+							</c:otherwise>
+						</c:choose>
 					</c:forEach>		            
+			            
 			            
 			        <c:choose> 
 			        	<c:when test="${ pi.currentPage eq pi.maxPage }">
 			           	 	<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
 			           	</c:when>
 			           	<c:otherwise>
-			           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
+			           		<c:choose>
+			            		<c:when test="${ empty partnerJoin or empty memberStatus or empty memKey  }">
+					           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
+					            </c:when>
+					            <c:otherwise>
+					            	<li class="page-item"><a class="page-link" href="searchMember.mana?currentPage=${pi.currentPage + 1}&partnerJoin=${partnerJoin}&memberStatus=${memberStatus}&memKey=${memKey}&keyword=${keyword}">다음</a></li>
+			            		</c:otherwise>
+			            	</c:choose>
 			           	</c:otherwise> 	
 		        	</c:choose>
+		        	
+		        	
 		        </ul>
 		    </div>
 		</c:if>

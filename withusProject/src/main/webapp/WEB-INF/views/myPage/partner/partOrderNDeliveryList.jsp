@@ -398,6 +398,7 @@
 
 					<!-- 발송정보 입력창  -->
 					<!-- The Modal -->
+					<form action="insertShippingInfo" method="post">
 					<div class="modal" id="sendInfoModal">
 						<div class="modal-dialog modal-dialog-centered">
 							<div class="modal-content" style="width: 400px;">
@@ -418,13 +419,15 @@
 									<hr style="width: 95%;">
 
 									<div class="trackingInfo">
-										<label>택배사</label> <select>
-											<option value="">대한통운</option>
-											<option value="">우체국 택배</option>
-											<option value="">로젠 택배</option>
-											<option value="">000택배</option>
-										</select> <label>송장번호</label> <input type="text"
-											placeholder="숫자만 입력하세요">
+										<label>택배사</label> 
+										<select id="company" name="company">
+				                          	<option value="대한통운">대한통운</option>
+				                            <option value="우체국">우체국 택배</option>
+				                            <option value="로젠">로젠 택배</option>
+				                            <option value="한진">한진 택배</option>
+										</select> 
+										<label>송장번호</label> 
+										<input type="text" placeholder="숫자만 입력하세요" name="dno" value="${dno}">
 										<p>특수문자(-)없이 숫자만 입력해주세요</p>
 
 									</div>
@@ -439,6 +442,7 @@
 							</div>
 						</div>
 					</div>
+                    </form>
 
 					<!-- 환불신청내역 조회  -->
 					<!-- The Modal -->

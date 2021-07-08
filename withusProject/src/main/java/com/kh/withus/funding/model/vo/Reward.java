@@ -21,5 +21,6 @@ public class Reward {
 	private String rewardTitle;
 	private String rewardContent;
 	private String optionYn;
+	private String rewardOption;
 
 }

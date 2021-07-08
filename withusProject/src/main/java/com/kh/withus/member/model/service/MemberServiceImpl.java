@@ -1,6 +1,7 @@
 package com.kh.withus.member.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,11 @@ public class MemberServiceImpl implements MemberService {
 
 	// 관리자
 	@Override
+	public Member loginAdmin(Member m) {
+		return mDao.loginAdmin(sqlSession, m);
+	}
+	
+	@Override
 	public int selectListCount() {
 		return mDao.selectListCount(sqlSession);
 	}
@@ -61,10 +67,24 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int updateMemStatus(String mId, String mStatus) {
-		return mDao.updateMemStatus(sqlSession, mId, mStatus);
+	public Member selectMemStatus(int memberNo) {
+		return mDao.selectMemStatus(sqlSession, memberNo);
+	}
+	
+	@Override
+	public int deleteMemberMana(HashMap<String, Object> map) {
+		return mDao.deleteMemberMana(sqlSession, map);
 	}
 
+	@Override
+	public int countSearch(HashMap<String, String> map) {
+		return mDao.countSearch(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<Member> searchMember(HashMap<String, String> map, PageInfo pi) {
+		return mDao.searchMember(sqlSession, map, pi);
+	}
 	
 	
 	

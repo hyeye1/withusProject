@@ -1,6 +1,7 @@
 package com.kh.withus.member.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.withus.common.model.vo.PageInfo;
 import com.kh.withus.member.model.vo.Member;
@@ -28,11 +29,23 @@ public interface MemberService {
 		int insertMemberLogin(Member m);
 		
 		
+		// 관리자
+		// 로그인
+		Member loginAdmin(Member m);
+		
 		// 관리자 회원조회
 		int selectListCount();
 		ArrayList<Member> selectList(PageInfo pi);
 		
-		int updateMemStatus(String mId, String mStatus);
+		// 탈퇴 클릭시 모달
+		Member selectMemStatus(int memberNo);
 		
+		// 탈퇴(회원 상태 변경)
+		int deleteMemberMana(HashMap<String, Object> map);
+		
+		// 검색된 총 게시글 수
+		int countSearch(HashMap<String, String> map);
+		// 검색 기능
+		ArrayList<Member> searchMember(HashMap<String, String> map, PageInfo pi);
 		
 }

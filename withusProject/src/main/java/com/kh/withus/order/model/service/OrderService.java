@@ -9,19 +9,23 @@ import com.kh.withus.order.model.vo.Order;
 public interface OrderService {
 
 	// 관리자
-	// 관리자 주문내역 게시글 수 / 리스트 조회
+	// 주문내역 게시글 수 / 리스트 조회
 	int selectListCount();
 	ArrayList<Order> selectList(PageInfo pi);
 	
-	// 관리자 주문내역 상세 조회
+	// 주문내역 상세 조회
 	Order slectOrderDetail(int orderNo);
+	
+	// 결제취소
+	int updateOrderCancle(int orderNo);
 	
 	// 검색 기능
 	int searchCount();
 	ArrayList<Order> selectSearchOrder(HashMap<String, String> map);
 	
+	
 		
-	// 파트너 발송관리
+	// 사용자-파트너 발송관리
 	// 프로젝트 총 주문내역 게시글 수 / 리스트
 	int selectDeliveryCount();
 	ArrayList<Order> selectPartnerOrderList(PageInfo pi);
@@ -38,4 +42,9 @@ public interface OrderService {
 	// 검색기능
 	int searchPartOrderCount();
 	ArrayList<Order> selectSearchPartOrder(HashMap<String, String> map);
+	
+
+	// 발송모달 : 발송정보 입력
+	int insertShippingInfo(HashMap<String, Object> map);
+	
 }
