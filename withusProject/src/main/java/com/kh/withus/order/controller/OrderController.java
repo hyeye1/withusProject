@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,10 +27,7 @@ public class OrderController {
 	private OrderService oService;
 
 	// 관리자
-	/*
-	 * @RequestMapping("orderListView.mana") public String selectManaOrderList() {
-	 * return "order/manaOrderListView"; }
-	 */
+	// 주무내역 조회
 	@RequestMapping("orderListView.mana")
 	public ModelAndView selectManaOrderList(@RequestParam(value="currentPage", defaultValue="1")
 	                                        int currentPage, ModelAndView mv) {
@@ -46,12 +44,7 @@ public class OrderController {
 		return mv;
 	}
 	
-/*	
-	@RequestMapping("orderDetailView.mana")
-	public String selectManaOrder() {
-		return "order/manaOrderDetailView";
-	}
-*/
+	// 주문내역 상세
 	@RequestMapping("orderDetail.mana")
 	public String selectOrder(int ono, Model model) {
 		
@@ -67,6 +60,22 @@ public class OrderController {
 			return "common/manaErrorPage";
 		}
 	}
+	
+	// 주문 결제 취소
+		@RequestMapping("orderUpdate.mana")
+		public String updateOrderCancle(int ono, Model model, HttpSession session) {
+			
+			int result = oService.updateOrderCancle(ono);
+			
+			if(result > 0) {
+				session.setAttribute("alertMsg", "성공적으로 수정되었습니다.");
+				return "redirect:manaOrderListView";
+			}else {
+				model.addAttribute("alertMsg", "실패");
+				return "admin/manaOrderListView";
+			}
+			
+		}
 	
 	// 검색 : 페이징 처리는 아직...
 	@RequestMapping("orderSearch.mana")
@@ -169,6 +178,29 @@ public class OrderController {
 
 
 		return "myPage/partner/pagePartOrderNDeliveryList";
+		
+	}
+	// 발송정보 입력
+	@RequestMapping("insertShippingInfo")
+	public String insertShippingInfo(@RequestParam(defaultValue="") String company,
+									 @RequestParam(defaultValue="") String dno,
+									 HttpSession session) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("company", company);
+		map.put("dno", dno);
+		
+		System.out.println(map);
+		
+		int result = oService.insertShippingInfo(map);
+		
+		if (result > 0) {
+			//session.setAttribute("alertMsg", "탈퇴처리 성공");
+			return "redirect:/memberListView.mana";
+		}else {
+			session.setAttribute("alertMsg", "실패실패");
+			return "redirect:/memberListView.mana";
+		}
 		
 	}
 	

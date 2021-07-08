@@ -14,7 +14,7 @@ import com.kh.withus.order.model.vo.Order;
 public class OrderDao {
 	
 	// 관리자
-	// 관리자 주문내역 게시글 수 / 리스트 조회
+	// 주문내역 게시글 수 / 리스트 조회
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("orderMapper.selectOrderListCount");
 	}
@@ -29,10 +29,18 @@ public class OrderDao {
 		return (ArrayList)sqlSession.selectList("orderMapper.selectOrderList", null, rowBounds);
 	}
 	
-	// 관리자 주문내역 상세 조회
+	// 주문내역 상세 조회
 	public Order selectOrderDetail(SqlSessionTemplate sqlSession, int orderNo) {
 		
 		return sqlSession.selectOne("orderMapper.selectOrderDetail", orderNo);
+	}
+	
+	// 결제 취소
+	public int updateOrderCancle(SqlSessionTemplate sqlSession, int orderNo) {
+		
+		int test = sqlSession.selectOne("orderMapper.updateOrderCancle", orderNo);
+		System.out.println(test);
+		return test;
 	}
 	
 	// 검색 기능 
@@ -79,6 +87,13 @@ public class OrderDao {
 	public ArrayList<Order> selectSearchPartOrder(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
 		
 		return (ArrayList)sqlSession.selectList("orderMapper.selectSearchPartOrder", map);
+	}
+	
+	
+	//운송장입력
+	public int insertShippingInfo(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		
+		return sqlSession.insert("orderMapper.insertShippingInfo", map);
 	}
 	
 }
