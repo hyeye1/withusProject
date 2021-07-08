@@ -84,7 +84,11 @@
 	
 	<script>
 		
-			
+		$(function(){
+			$(".category1 .cateThum").click(function(){
+				location.href="list.fun?cno=" + $(this).children(".cno").val();
+			})
+		})	
 			
 		$(function(){
     		$("#fundingList #thumbnail").click(function(){
