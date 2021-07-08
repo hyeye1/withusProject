@@ -1,9 +1,7 @@
 package com.kh.withus.community.model.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,16 +67,13 @@ public class CommunityServiceImpl implements CommunityService{
 
 	// 검색
 	@Override
-	public int selectSearchCommuListCount(int commuNo) {
-		return cDao.selectListCount(sqlSession);
+	public int selectSearchCommuListCount() {
+		return cDao.selectSearchCommuListCount(sqlSession);
 	}
 
-	@Override
-	public ArrayList<Community> selectSearchCommuList(int commuNo) {
-		return cDao.selectSearchCommuList(sqlSession, commuNo);
+	public ArrayList<Community> selectSearchCommuList(PageInfo pi) {
+		return cDao.selectSearchCommuList(sqlSession, pi);
 	}
-
-	
 
 	
 	

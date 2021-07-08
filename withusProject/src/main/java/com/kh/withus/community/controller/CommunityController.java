@@ -203,26 +203,24 @@ public class CommunityController {
 			}
 		}
 		
-	/*
+	
 	// 커뮤 검색 리스트 조회
+	
+	
 		@RequestMapping("search.co")
-		public String selectCommunitySearch(int cno, Model model) {
-			int result = cService.increaseCount(cno);  
+		public String selectSearchCommuList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
 			
-			if(result > 0) {
-				Community c = cService.selectCommunity(cno); 
-				model.addAttribute("c", c);
-				return "community/commuDetail";
-				
-			}else {
-				model.addAttribute("errorMsg", "게시글 상세조회 실패");
-				return "common/errorPage";      
-			}
+			int searchCount = cService.selectSearchCommuListCount();
+			PageInfo pi = pagination.getPageInfo(searchCount, currentPage, 10, 5);
+			
+			ArrayList<Community> list = cService.selectSearchCommuList(pi);
+			
+			mv.addObject("pi", pi)
+			  .addObject("list", list)
+			  .setViewName("community/commuListView");
+			
+			return "community/commuListView";
 		}
-	
-	*/
-	
-	
 	// 카테고리 리스트 조회
 	
 	
