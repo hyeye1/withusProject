@@ -38,10 +38,12 @@ public class MemberDao {
 	}
 	
 	//관리자
+	// 페이징 처리
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("memberMapper.selectListCount");
 	}
 	
+	// 전체 회원 조회
 	public ArrayList<Member> selectList (SqlSessionTemplate sqlSession, PageInfo pi){
 
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit(); //몇개의 게시물을 건너 뛰고
@@ -52,12 +54,29 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectMemList", null, rowBounds);
 	}	
 	
+	// 탈퇴클릭시 모달 
 	public Member selectMemStatus(SqlSessionTemplate sqlSession, int memberNo) {
 		return sqlSession.selectOne("memberMapper.selectMemStatus", memberNo);
 	}
 	
+	// 회원 탈퇴
 	public int deleteMemberMana(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
 		return sqlSession.update("memberMapper.deleteMemberMana", map);
 	}
+	
+	// 검색 페이징 처리
+	public int countSearch(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.selectOne("memberMapper.countSearch", map);
+	}
+	
+	// 검색
+	public ArrayList<Member> searchMember(SqlSessionTemplate sqlSession, HashMap<String, String> map, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.searchMember", map, rowBounds);
+	}
+
 	
 }

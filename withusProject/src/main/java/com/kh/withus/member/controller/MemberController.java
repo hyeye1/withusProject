@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -199,7 +200,45 @@ public class MemberController {
 		}
 		
 	}
+	
 	// 회원 검색
+	@RequestMapping("searchMember.mana")
+	public ModelAndView searchMember(@RequestParam(defaultValue="") String partnerJoin,
+									 @RequestParam(defaultValue="") String memberStatus,
+									 @RequestParam(defaultValue="") String memKey,
+									 @RequestParam(defaultValue="") String keyword,
+									 @RequestParam(value="currentPage", defaultValue="1") int currentPage,
+									 ModelAndView mv) {
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("partnerJoin", partnerJoin);
+		map.put("memberStatus", memberStatus);
+		map.put("memKey", memKey);
+		map.put("keyword", keyword);
+		//System.out.println(map);
+		
+		// 검색결과 리스트 총 갯수
+		int count = mService.countSearch(map);
+		
+		// 페이징 처리
+		PageInfo pi = pagination.getPageInfo(count, currentPage, 10, 10);
+		
+		// 검색결과 담아내기
+		ArrayList<Member> mList = mService.searchMember(map, pi);
+		//System.out.println(mList);
+		
+		mv.addObject("pi", pi)
+		  .addObject("mList",mList)
+		  .addObject("partnerJoin", partnerJoin)
+		  .addObject("memberStatus", memberStatus)
+		  .addObject("memKey", memKey)
+		  .addObject("keyword", keyword)
+		  .setViewName("member/manaMemberListView");
+		
+		return mv;
+		
+	}
+	
 	
 
 }

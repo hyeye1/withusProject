@@ -71,6 +71,15 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.deleteMemberMana(sqlSession, map);
 	}
 
+	@Override
+	public int countSearch(HashMap<String, String> map) {
+		return mDao.countSearch(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<Member> searchMember(HashMap<String, String> map, PageInfo pi) {
+		return mDao.searchMember(sqlSession, map, pi);
+	}
 	
 	
 	

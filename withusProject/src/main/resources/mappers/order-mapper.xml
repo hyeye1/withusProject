@@ -153,7 +153,7 @@
 		   <choose>
 		   		<when test="odStatus == 1"> and order_status = 1 </when>
 		   		<when test="odStatus == 2"> and order_status = 2 </when>
-		   		<when test="odStatus == 3"> and  order_status = 3  </when>
+		   		<when test="odStatus == 3"> and order_status = 3  </when>
 		   </choose>
    	
 		   <choose>
