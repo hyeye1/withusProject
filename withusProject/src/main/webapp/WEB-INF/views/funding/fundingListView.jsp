@@ -44,8 +44,14 @@
 	<div class="innerOuter">
 
 		<div class="category1">
+			<c:forEach var="c" items="${ cList }">
+				<div class="cateThum" id="cateThum" align="center">
+					<img src="${ c.catFile }" width="120" height="120">
+					<p>${ c.catName }</p>
+					
+				</div>	
+			</c:forEach>
 			
-
 			
 		</div>
 
@@ -78,6 +84,8 @@
 	
 	<script>
 		
+			
+			
 		$(function(){
     		$("#fundingList #thumbnail").click(function(){
     			location.href="detail.fd?pno=" + $(this).children(".pno").val();

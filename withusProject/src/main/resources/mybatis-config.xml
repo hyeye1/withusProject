@@ -24,6 +24,7 @@
 		<typeAlias type="com.kh.withus.csc.notice.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.withus.csc.faq.model.vo.Faq" alias="Faq"/>
 		<typeAlias type="com.kh.withus.csc.oto.model.vo.Oto" alias="Oto"/>
+		<typeAlias type="com.kh.withus.category.model.vo.Category" alias="Category"/>
 	</typeAliases>
 	
 	<mappers>

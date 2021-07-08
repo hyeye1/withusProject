@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.withus.funding.model.dto.FundingDetail;
+import com.kh.withus.category.model.vo.Category;
 import com.kh.withus.funding.model.dao.FundingDao;
 import com.kh.withus.funding.model.vo.Project;
 import com.kh.withus.order.model.vo.Order;
@@ -19,7 +20,12 @@ public class FundingServiceImpl implements FundingService {
 	
 	@Autowired
 	private FundingDao funDao;
-
+	
+	@Override
+	public ArrayList<Category> selectCate() {
+		return funDao.selectCate(sqlSession);
+	}
+	
 	@Override
 	public ArrayList<Project> selectList() {
 		return funDao.selectList(sqlSession);
@@ -59,7 +65,5 @@ public class FundingServiceImpl implements FundingService {
 	public int minusStock(Order o) {
 		return funDao.minusStock(sqlSession, o);
 	}
-	
-	
 
 }

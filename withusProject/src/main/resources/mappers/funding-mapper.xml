@@ -51,6 +51,21 @@
 		<result column="option_yn" property="optionYn" />
 	</resultMap>
 	
+	<resultMap id="Category" type="Category">
+		<id column="cat_no" property="catNo" />
+		<result column="cat_name" property="catName" />
+		<result column="cat_tag" property="catTag" />
+		<result column="cat_file" property="catFile" />
+	</resultMap>
+	
+	<select id="selectCate" resultMap="Category">
+		select
+			   cat_no
+			 , cat_name
+			 , cat_file
+		  from category
+	</select>
+	
  	<select id="selectList" resultMap="fundingListResultSet">
 		select
                p.project_no

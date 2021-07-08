@@ -5,13 +5,18 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.withus.category.model.vo.Category;
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.vo.Project;
 import com.kh.withus.order.model.vo.Order;
 
 @Repository
 public class FundingDao {
-
+	
+	public ArrayList<Category> selectCate(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectCate");
+	}
+	
 	public ArrayList<Project> selectList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("fundingMapper.selectList");
 	}

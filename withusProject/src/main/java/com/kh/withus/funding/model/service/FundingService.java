@@ -2,12 +2,16 @@ package com.kh.withus.funding.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.withus.category.model.vo.Category;
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.vo.Project;
 import com.kh.withus.order.model.vo.Order;
 
 public interface FundingService {
 
+	// 카테고리 리스트 조회
+	ArrayList<Category> selectCate();
+	
 	// 펀딩 리스트 조회
 	ArrayList<Project> selectList();
 	

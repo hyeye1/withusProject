@@ -15,5 +15,6 @@ public class Category {
 	private int catNo;
 	private String catName;
 	private String catTag;
+	private String catFile;
 
 }
