@@ -40,25 +40,11 @@
 			</thead>
 			<tbody>
 				<tr align="center">
-					<td><input type="checkbox"></td>
-					<td>30</td>
-					<td><a href="">공지사항 제목입니다.</a></td>
-					<td>2021-06-09</td>
-					<td>Y</td>
-				</tr>
-				<tr align="center">
-					<td><input type="checkbox"></td>
-					<td>30</td>
-					<td><a href="">공지사항 제목입니다.</a></td>
-					<td>2021-06-09</td>
-					<td>Y</td>
-				</tr>
-				<tr align="center">
-					<td><input type="checkbox"></td>
-					<td>30</td>
-					<td><a href="">공지사항 제목입니다.</a></td>
-					<td>2021-06-09</td>
-					<td>Y</td>
+					<td><input type="checkbox" value="false"></td>
+					<td>${ noticeNo }</td>
+					<td><a href="">${ noticeTitle }</a></td>
+					<td>${ createDate }</td>
+					<td>${ noticeStatus }</td>
 				</tr>
 			</tbody>
 		</table>
@@ -68,8 +54,36 @@
 	    	<button type="button" class="btn btn-success">수정</button> &nbsp;
 			<button type="button" class="btn btn-warning">삭제</button>
 		</div>
+		
 
 	    <!-- 페이징 바 추가예정 -->
+	    <div id="pagingArea">
+	    	<ul class="pagination">
+	    		
+	    		<c:choose>
+	    			<c:when test="${ pi.currentPage eq 1 }">
+		    			<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+		    		</c:when>
+		    		<c:otherwise>
+		    			<li class="page-item"><a class="page-link" href="list.no?currentPage=${ pi.currentPage -1 }">이전</a></li>
+	    			</c:otherwise>
+	    		</c:choose>
+	    		
+	    		<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	    			<li class="page-item"><a class="page-link" href="list.no?currentPage=${ p }">${ p }</a></li>
+	    		</c:forEach>
+	    	
+	    		<c:choose>
+	    			<c:when test="${ pi.currentPage eq pi.maxPage }">
+	    				<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+	    			</c:when>
+	    			<c:otherwise>
+	    				<li class="page-item"><a class="page-link" href="list.no?currentPage=${ pi.currentPage+1 }">다음</a></li>
+	    			</c:otherwise>
+	    		</c:choose>
+	    	</ul>
+	    
+	    </div>
 		
     </div>
 

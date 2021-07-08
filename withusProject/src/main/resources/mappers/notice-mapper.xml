@@ -31,7 +31,7 @@
 		  from notice
 		 where notice_status = 'Y'
 		 order
-		    by create_date desc
+		    by notice_no desc
 	</select>
 	
 	

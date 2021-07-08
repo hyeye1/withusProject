@@ -33,6 +33,20 @@
 	            <td style="padding-left: 10px;">${ n.createDate }</td>
 	        </tr>
 	        <tr>
+            	<th>첨부파일</th>
+                    <td colspan="2">
+                    	
+                    	<c:choose>
+	                    	<c:when test="${ empty n.noticeOriginname }">
+	                    		첨부파일이 없습니다.
+	                    	</c:when>
+	                    	<c:otherwise>
+	                        	<a href="${ n.noticeOriginname }" download="${ n.noticeOriginname }">${ n.noticeOriginname }</a>
+							</c:otherwise>                        
+                        </c:choose>
+                    </td>
+                </tr>
+	        <tr>
 	            <td colspan="2" style="width:500px;">${ n.noticeContent }</td>
 	        </tr>
 	    </table>
