@@ -29,11 +29,11 @@
 	<div class="container">
 
 		<br>
-		<c:if test="${ loginUser == 'admin%' }">
+		
 			<div>
-				<a class="btn btn-secondary" style="float:right" href="enrollFrom.no">등록</a>
+				<a class="btn btn-secondary" style="float:right" href="enrollForm.no">등록</a>
 			</div>
-		</c:if>
+		
 		
 		<br>
 	    <!-- 표 N행 6열 -->
