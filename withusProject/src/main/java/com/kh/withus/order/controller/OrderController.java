@@ -83,14 +83,15 @@ public class OrderController {
 		map.put("odStatus", odStatus);
 		map.put("shStatus", shStatus);
 		
+		//System.out.println(map);
 		
 		ArrayList<Order> olist = oService.selectSearchOrder(map);
 			
 		model.addAttribute("olist", olist)
-		.addAttribute("orderKeyword",orderKeyword)
-		.addAttribute("keyword",keyword)
-		 .addAttribute("odStatus",odStatus)
-		 .addAttribute("shStatus",shStatus);
+			.addAttribute("orderKeyword",orderKeyword)
+			.addAttribute("keyword",keyword)
+			.addAttribute("odStatus",odStatus)
+			.addAttribute("shStatus",shStatus);
 		
 		return "order/manaOrderListView";
 	
@@ -126,7 +127,7 @@ public class OrderController {
 		//System.out.println(ono); // 펀딩번호 확인		
 		
 		Order o = oService.selectOrderInfo(ono);
-		System.out.println(o); // 펀딩내역 잘 담겼는지
+		//System.out.println(o); // 펀딩내역 잘 담겼는지
 		
 		return new Gson().toJson(o);
 	}	
@@ -139,7 +140,7 @@ public class OrderController {
 		//System.out.println(ono);
 		
 		Order r = oService.selectRefundInfo(ono);
-		System.out.println(r);
+		//System.out.println(r);
 		
 		return new Gson().toJson(r);
 	}

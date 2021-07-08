@@ -41,12 +41,13 @@ public class NoticeController {
 		return mv;
 	}
 	
-	
+	// 관리자(user01@withus.com) 일때만 보이는 버튼
 	@RequestMapping("enrollForm.no")
 	public String enrollForm() {
-		return "notice/noticeEnrollForm";
+		return "admin/csc/notice/noticeEnrollForm";
 	}
 	
+	// 관리자(user01@withus.com) 일때만 보이는 버튼
 	@RequestMapping("insert.bo")
 	public String insertNotice(Notice n, MultipartFile upfile, HttpSession session, Model model) {
 		
@@ -103,6 +104,7 @@ public class NoticeController {
 		}
 	}
 	
+	// 관리자(user01@withus.com) 일때만 보이는 버튼
 	@RequestMapping("delete.no")
 	public String deleteNotice(int nno, String filePath, HttpSession session, Model model) {
 		
@@ -122,11 +124,16 @@ public class NoticeController {
 		}
 	}
 	
-	
-	/*
 	@RequestMapping("updateForm.no")
-	public String updateForm(int nno, Model model){
+	public String updateForm(int nno, Model model) {
+		model.addAttribute("n", nService.selectNotice(nno));
+		return "admin/csc/notice/noticeEnrollForm";
 	}
-	*/
+	
+	@RequestMapping("update.no")
+	public String updateNotice(Notice n, MultipartFile upfile, HttpSession session, Model model){
+		
+	}
+	
 
 }

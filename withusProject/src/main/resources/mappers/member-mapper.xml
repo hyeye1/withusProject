@@ -106,6 +106,7 @@
 			   count(*)
 		from member
 	</select>
+	
 	<!-- 회원조회 -->
 	<select id="selectMemList" resultMap="memberResultSet">
 		select
@@ -120,6 +121,29 @@
 		 order
 		    by member_no desc   
 	</select>
-	<!-- 회원상태변경 -->
+	
+	<!-- 탈퇴클릭시 모달 -->
+	<select id="selectMemStatus" resultMap="memberResultSet" 
+			parameterType="_int">
+		select
+				member_no
+			  , member_name
+		 from member
+		 where member_no = #{memberNo}
+	
+	</select>
+	
+	<!-- 탈퇴(회원상태변경) -->
+	<update id="deleteMemberMana" parameterType="hashmap" >
+		update 
+		       member
+		   set member_status = #{mStatus} 
+		 where member_name =  #{memberName}      
+	</update>
+	
+	<!-- 검색 페이징 처리 -->
+	
+	<!-- 검색 -->
+	
 	
 </mapper>

@@ -59,5 +59,25 @@ public class CommunityDao {
 	}
 	
 	
+	// 검색
+	public int selectSearchCommuListCount(SqlSessionTemplate sqlSession, int commuNo) {
+		
+		return sqlSession.selectOne("communityMapper.selectSearchCommuListCount", commuNo);
+		
+	}
+	
+	public ArrayList<Community> selectSearchCommuList(SqlSessionTemplate sqlSession, int commuNo){
+		return (ArrayList)sqlSession.selectList("communityMapper.selectSearchCommuList", commuNo);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

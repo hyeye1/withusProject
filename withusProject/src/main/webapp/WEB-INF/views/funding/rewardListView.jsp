@@ -10,8 +10,7 @@
 	div{box-sizing: border-box;}
 
 	/* 타이틀 */
-	.titleArea{outline: 1px solid red;}
-    .titleArea{height: 50px; background-color: rgb(220, 170, 128);}
+    .titleArea{height: 50px; background-color: rgb(220, 170, 128); margin-top: -17px;}
     .titleArea div{float:left;}
 	.back{height: 100%; width: 15%; padding: 13px 0 0 10px;}
     .back a{text-decoration: none; font-size: 15px; color: white !important;}

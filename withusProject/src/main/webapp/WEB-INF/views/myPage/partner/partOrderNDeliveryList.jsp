@@ -204,6 +204,7 @@
 						<table class="table table-border" id="orderList">
 							<thead>
 								<tr height="50">
+								
 									<th width="60">펀딩번호</th>
 									<th width="75">서포터 정보</th>
 									<th width="60">결제상태</th>
@@ -219,7 +220,7 @@
 							<tbody>
 								<c:forEach var="p" items="${ polist }">
 		                    	<tr>
-			                      <td id="ono">${ p.orderNo }</td>
+			                      <td class="ono">${ p.orderNo }</td>
 			                      <td>${ p.supporterName }</td>
 			                      <c:choose>
 	                        		<c:when test="${ p.orderStatus eq 1 }">
@@ -234,12 +235,13 @@
 	                        	  </c:choose>
 			                      <td>${ p.totalPrice } 원</td>
 			                      <td>${ p.rewardTitle }/${ p.orderOption }/${ p.orderCount }</td>
-			                      <td><button type="button" id="test" class="btn btn-withus btn-sm" data-toggle="modal" data-target="#sendInfoModal" onclick="ajaxSendInfo();">
+			                      <td><button type="button" class="btn btn-withus btn-sm" data-toggle="modal" data-target="#sendInfoModal" onclick="ajaxSendInfo();">
 			                      		발송정보 입력
 			                      	</button></td>
 			                      <td>${ p.deliveryDate }</td>
+			                      <!-- 운송장 번호가 비어 있을 경우 배송준비 중, 배송완료 조건은 뭘로 해야되나? -->
 			                      <c:choose>
-	                        		<c:when test="${ p.shippingStatus eq 1 }">
+	                        		<c:when test="${ empty p.shippingCom or p.shippingStatus eq 1}">
 	                        			<td>배송준비중</td>
 	                        		</c:when>
 	                        		<c:when test="${ p.shippingStatus eq 2 }">
@@ -263,7 +265,6 @@
 			                        </c:if>
 			                      </td>
 			                    </tr>
-			                    <input type="hidden" name="ono" class="ono" value="${ p.orderNo }">
 	                    		</c:forEach>
 	                    		</tbody>	
 							</table>
@@ -271,20 +272,12 @@
 					
 					<script>
                   	// 발송모달:주문내역
-                  	$(function(){
-                  		$("#orderList tbody tr td botton").click(function(){
-	                  		var orderNo = $("#ono").find("td").text();
-	                  			/* $(this).parents("#ono").text(); */
-	                  		
-	                  		console.log(orderNo);
-                  			
-                  		});
-                  	});
-                  	
 	              	function ajaxSendInfo(){
-	              		var $orderNo = $(".ono").val();
+	              		//var $orderNo = $(".ono").val();  // 실패1
+	              		// 이벤트적 타켓 -> js로 하려면 $()로 감싸주기
+	              		var $orderNo = $(event.target).parent().siblings(".ono").text();
 	              		//console.log($orderNo);
-	              		
+                  		
 	              		$.ajax({
 	              			
 	            			url:"send.info",
@@ -323,8 +316,8 @@
                   
 	              	// 환불모달:펀딩내역+환불신청내역
 	              	function ajaxRefundInfo(){
-	              		var $orderNo = $(".ono").val();
-	              		console.log($orderNo);
+	              		var $orderNo = $(event.target).parent().siblings(".ono").text(); 
+	              		//console.log($orderNo);
 	              		
 	              		$.ajax({
 	              			url:"refund.info",
@@ -405,6 +398,7 @@
 
 					<!-- 발송정보 입력창  -->
 					<!-- The Modal -->
+					<form action="insertShippingInfo" method="post">
 					<div class="modal" id="sendInfoModal">
 						<div class="modal-dialog modal-dialog-centered">
 							<div class="modal-content" style="width: 400px;">
@@ -425,13 +419,15 @@
 									<hr style="width: 95%;">
 
 									<div class="trackingInfo">
-										<label>택배사</label> <select>
-											<option value="">대한통운</option>
-											<option value="">우체국 택배</option>
-											<option value="">로젠 택배</option>
-											<option value="">000택배</option>
-										</select> <label>송장번호</label> <input type="text"
-											placeholder="숫자만 입력하세요">
+										<label>택배사</label> 
+										<select id="company" name="company">
+				                          	<option value="대한통운">대한통운</option>
+				                            <option value="우체국">우체국 택배</option>
+				                            <option value="로젠">로젠 택배</option>
+				                            <option value="한진">한진 택배</option>
+										</select> 
+										<label>송장번호</label> 
+										<input type="text" placeholder="숫자만 입력하세요" name="dno" value="${dno}">
 										<p>특수문자(-)없이 숫자만 입력해주세요</p>
 
 									</div>
@@ -446,6 +442,7 @@
 							</div>
 						</div>
 					</div>
+                    </form>
 
 					<!-- 환불신청내역 조회  -->
 					<!-- The Modal -->

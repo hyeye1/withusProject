@@ -194,7 +194,7 @@
 					            </div><br><br>
 					            
 					            <form id="postForm" action="" method="post">
-					            	<input type="hidden" name="bno" value="${ c.commuNo }">
+					            	<input type="hidden" name="cno" value="${ c.commuNo }">
 					            	<input type="hidden" name="filePath" value="${ c.commuChange }"> 	
 					            </form>
 					            
@@ -261,7 +261,7 @@
 		    					refCommuNo:${c.commuNo},
 		    					comReWriter:'${loginUser.memberId}'
 		    				},
-		    				success:function(status){
+		    				success:function(commuStatus){
 		    					if(commuStatus == "success"){
 		    						$("#content").val("");
 		    						selectCommuReplyList();
@@ -295,7 +295,7 @@
 		    				})
 		    				
 		    				$("#commuReplyArea tbody").html(value);
-		    				$("#comReCount").text(list.length);
+		    				$("#rcount").text(list.length);
 		    				
 		    			},error:function(){
 		    				console.log("댓글 리스트 조회용 ajax실패");

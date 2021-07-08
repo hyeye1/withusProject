@@ -1,6 +1,7 @@
 package com.kh.withus.community.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.withus.common.model.vo.PageInfo;
 import com.kh.withus.community.model.vo.CommuReply;
@@ -30,4 +31,9 @@ public interface CommunityService {
 		
 		// 댓글 작성
 		int insertCommuReply(CommuReply cr);
+		
+		// 게시판 검색 리스트 조회
+		int selectSearchCommuListCount(int commuNo);
+		
+		ArrayList<Community> selectSearchCommuList(int commuNo);
 }

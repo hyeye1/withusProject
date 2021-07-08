@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.dao.FundingDao;
 import com.kh.withus.funding.model.vo.Project;
+import com.kh.withus.order.model.vo.Order;
 
 @Service
 public class FundingServiceImpl implements FundingService {
@@ -47,6 +48,16 @@ public class FundingServiceImpl implements FundingService {
 	@Override
 	public FundingDetail selectOneReward(int rewardNo) {
 		return funDao.selectOneReward(sqlSession, rewardNo);
+	}
+
+	@Override
+	public int insertOrderTable(Order o) {
+		return funDao.insertOrderTable(sqlSession, o);
+	}
+
+	@Override
+	public int minusStock(Order o) {
+		return funDao.minusStock(sqlSession, o);
 	}
 	
 	
