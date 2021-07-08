@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.vo.Project;
+import com.kh.withus.order.model.vo.Order;
 
 @Repository
 public class FundingDao {
@@ -33,5 +34,13 @@ public class FundingDao {
 	
 	public FundingDetail selectOneReward(SqlSessionTemplate sqlSession, int rewardNo) {
 		return sqlSession.selectOne("fundingMapper.selectOneReward", rewardNo);
+	}
+	
+	public int insertOrderTable(SqlSessionTemplate sqlSession, Order o) {
+		return sqlSession.insert("fundingMapper.insertOrderTable", o);
+	}
+	
+	public int minusStock(SqlSessionTemplate sqlSession, Order o) {
+		return sqlSession.update("fundingMapper.minusStock", o);
 	}
 }

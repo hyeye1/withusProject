@@ -12,8 +12,7 @@
     div{box-sizing: border-box;}
 
 	/* 타이틀 */
-	.titleArea{outline: 1px solid red;}
-    .titleArea{height: 50px; background-color: rgb(220, 170, 128);}
+    .titleArea{height: 50px; background-color: rgb(220, 170, 128); margin-top: -17px;}
     .titleArea div{float:left;}
 	.back{height: 100%; width: 15%; padding: 13px 0 0 10px;}
     .back a{text-decoration: none; font-size: 15px; color: white !important;}
@@ -66,7 +65,7 @@
     </div>
 	
 	<c:if test="${ !empty loginUser }">
-	    <form action="pay.fun">
+	    <form action="pay.fun" id="sss">
 	        <div class="innerOuter">
 	
 	            <div class="content1">
@@ -130,7 +129,7 @@
 	                        </tr>
 	                        <tr>
 	                            <td><input type="text" class="form-control" value="${ loginUser.memberName }" readonly></td>
-	                            <td><input type="hidden" id="memberPhone" value="${ loginUser.memberPhone}"></td>
+	                            <td><input type="hidden" name="memberNo" value="${ loginUser.memberNo}"></td>
 	                        </tr>
 	                        <tr>
 	                            <td colspan="2">이메일 <button class="btn btn-primary" style="margin-left: 10px;">인증번호 발송</button></td>
@@ -233,7 +232,7 @@
 	        </div> 
 	
 	        <div class="buttonArea">
-	            <button type="submit" id="next" class="btn btn-primary" align="center">다음 단계로></button>
+	            <button type="button" id="pay" class="btn btn-primary" align="center">다음 단계로></button>
 	        </div>
 	        
 	    </form>   
@@ -299,7 +298,7 @@
         <button id="check_module" type="button">아임 서포트 결제 모듈 테스트 해보기</button>
     </p>
     <script>
-        $("#check_module").click(function () {
+        $("#pay").click(function () {
             var IMP = window.IMP;
             IMP.init('imp92038952');
             IMP.request_pay({
@@ -310,7 +309,7 @@
                 amount: $(".content1 #table2").find("input").val(),
                 buyer_email: '',
                 buyer_name: $("#table3").find("input").val(),
-                buyer_tel: $("#table3").find("#memberPhone").val(),
+                buyer_tel: '',
                 buyer_addr: '',
                 buyer_postcode: '',
                 m_redirect_url: 'https://www.yourdomain.com/payments/complete'
@@ -322,6 +321,8 @@
                 msg += '상점 거래ID : ' + rsp.merchant_uid;
                 msg += '결제 금액 : ' + rsp.paid_amount;
                 msg += '카드 승인번호 : ' + rsp.apply_num;
+                
+                $("#sss").submit();
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;

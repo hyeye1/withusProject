@@ -70,8 +70,8 @@ public class FundingController {
 		
 		FundingDetail fd = funService.selectOneReward(rewardNo);
 		
-		System.out.println(o);
-		System.out.println(fd);
+		//System.out.println(o);
+		//System.out.println(fd);
 		
 		model.addAttribute("fd", fd);
 		model.addAttribute("o", o);
@@ -92,7 +92,21 @@ public class FundingController {
 		
 		System.out.println(o);
 		
-		return "funding/pay";
+		FundingDetail fd = funService.selectOneReward(o.getRewardNo());
+		
+		model.addAttribute("fd", fd);
+		model.addAttribute("o", o);
+		
+		int result = funService.insertOrderTable(o);
+		
+		if(result>0) {
+			funService.minusStock(o);
+			return "funding/payComplete";
+		}else {
+			model.addAttribute("errorMsg", "데이터 저장 실패");
+			return "common/errorPage";
+		}
 		
 	}
+	
 }

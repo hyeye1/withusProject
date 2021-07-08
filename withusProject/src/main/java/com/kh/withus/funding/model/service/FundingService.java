@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.vo.Project;
+import com.kh.withus.order.model.vo.Order;
 
 public interface FundingService {
 
@@ -20,5 +21,11 @@ public interface FundingService {
 	
 	//
 	FundingDetail selectOneReward(int rewardNo);
+	
+	// order 테이블 펀딩 주문 삽입
+	int insertOrderTable(Order o);
+	
+	// 주문 후 재고 마이너스 하기
+	int minusStock(Order o);
 	
 }

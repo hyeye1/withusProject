@@ -73,6 +73,7 @@
          where p.project_no = o.project_no 
            and p.cat_no = c.cat_no 
            and p.member_no = m.member_no 
+           and o.order_status = 1
          group
          	by p.project_no
          	 , p.project_title
@@ -174,6 +175,60 @@
     	 where
     	       reward_no = #{rewardNo}
     </select>
+    
+    <insert id="insertOrderTable" parameterType="Order">
+    	insert
+    	  into tb_order
+    	     (
+    	       order_no
+    	     , project_no
+    	     , member_no
+    	     , reward_no
+    	     , pur_email
+    	     , order_plus
+    	     , total_price
+    	     , bank_name
+    	     , bank_account
+    	     , receiver_name
+    	     , receiver_phone
+    	     , address_no
+    	     , address_detail
+    	     , address
+    	     , shipping_req
+    	     , order_date
+    	     , order_count
+    	     , order_option
+    	     )
+    	values
+    	     (
+    	       seq_odrno.nextval
+    	     , #{projectNo}
+    	     , #{memberNo}
+    	     , #{rewardNo}
+    	     , #{purEmail}
+    	     , #{orderPlus}
+    	     , #{totalPrice}
+    	     , #{bankName}
+    	     , #{bankAccount}
+    	     , #{receiverName}
+    	     , #{receiverPhone}
+    	     , #{addressNo}
+    	     , #{addressDetail}
+    	     , #{address}
+    	     , #{shippingReq}
+    	     , sysdate
+    	     , #{orderCount}
+    	     , #{orderOption}
+    	     )
+    </insert>
+    
+    <update id="minusStock" parameterType="Order">
+    	update
+		       reward
+		   set reward_stock = reward_stock-#{orderCount}
+		 where reward_no = #{rewardNo}
+		   and reward_status = 'Y'
+    </update>
     	
  
 
