@@ -36,13 +36,13 @@ public class RefundServiceImpl implements RefundService {
 	}
 
 	@Override
-	public int serarchRefundOrderCount() {
-		return 0;
+	public int countSearch(HashMap<String, String> map) {
+		return rDao.countSearch(sqlSession, map);
 	}
 
 	@Override
-	public ArrayList<Refund> selectSearchRefund(HashMap<String, String> map) {
-		return rDao.selectSearchRefund(sqlSession, map);
+	public ArrayList<Refund> selectSearchRefund(HashMap<String, String> map, PageInfo pi) {
+		return rDao.selectSearchRefund(sqlSession, map, pi);
 	}
 	
 }

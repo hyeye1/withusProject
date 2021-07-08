@@ -24,7 +24,8 @@
 	}
 	.form-control.refund{width: 400px;}
 	.refundAllStatus{width: 80%; float: left;}
-	.refundRadios {font-size: 13px; float: left; margin: 4px 15px;}
+	.refundRadios {float: left; margin: 0 0 0 20px;}
+	input[type=radio] {margin: 0 0 0 12px; }
 	.searchBtns{width: 20%; float: right;}
 	.searchBtns button{margin: 0 7px;} 
 	.btn.btn-withus{background-color: #3498db; color: white;}
@@ -62,7 +63,7 @@
         <div class="container">
 
             <div class="search_box">
-                <form action="refundSearch.mana">
+                <form action="searchRefund.mana">
                     <div class="searchForm">
                         <select name="refundKey" id="refundKey">
                             <option value="refundAll">전체</option>
@@ -151,25 +152,50 @@
         <!-- 페이징 -->
         <div class="paging_wrap">
             <ul class="pagination">
+            
             	<c:choose>
-            		<c:when test="${ pi.currentPage eq 1 }">
-	                	<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-            		</c:when>
-            		<c:otherwise>
-            			<li class="page-item"><a class="page-link" href="${ pi.currentPage-1 }">이전</a></li>
-            		</c:otherwise>
-            	</c:choose>
-                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                	<li class="page-item"><a class="page-link" href="refundListView.mana?currentPage=${ p }">${ p }</a></li>
-                </c:forEach>
-                <c:choose>
-                	<c:when test="${ pi.currentPage eq maxPage }">
-                		<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
-                	</c:when>
-                	<c:otherwise>
-	                	<li class="page-item"><a class="page-link" href="${ pi.currentPage+1 }">다음</a></li>
-                	</c:otherwise>
-                </c:choose>
+	        		<c:when test="${ pi.currentPage eq 1 }">
+		           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+		            </c:when>
+		            <c:otherwise>
+		            	<c:choose>
+		            		<c:when test="${ empty refundKey or empty keyword or empty rfStatus }">
+				            	<li class="page-item"><a class="page-link" href="${ pi.currentPage - 1 }">이전</a></li>
+				            </c:when>
+				            <c:otherwise>
+				            	<li class="page-item"><a class="page-link" href="searchRefund.mana?currentPage=${pi.currentPage - 1}&refundKey=${refundKey}&keyword=${keyword}&rfStatus=${rfStatus}">이전</a></li>
+		            		</c:otherwise>
+		            	</c:choose>
+		            </c:otherwise>
+		    	</c:choose>     
+			    	   
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<c:choose>
+						<c:when test="${ empty refundKey or empty keyword or empty rfStatus }">
+               				<li class="page-item"><a class="page-link" href="refundListView.mana?currentPage=${ p }">${ p }</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="searchRefund.mana?currentPage=${p}&refundKey=${refundKey}&keyword=${keyword}&rfStatus=${rfStatus}">${ p }</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>		            
+			            
+		        <c:choose> 
+		        	<c:when test="${ pi.currentPage eq pi.maxPage }">
+		           	 	<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+		           	</c:when>
+		           	<c:otherwise>
+		           		<c:choose>
+		            		<c:when test="${ empty refundKey or empty keyword or empty rfStatus }">
+				           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
+				            </c:when>
+				            <c:otherwise>
+				            	<li class="page-item"><a class="page-link" href="searchRefund.mana?currentPage=${pi.currentPage + 1}&refundKey=${refundKey}&keyword=${keyword}&rfStatus=${rfStatus}">다음</a></li>
+		            		</c:otherwise>
+		            	</c:choose>
+		           	</c:otherwise> 	
+	        	</c:choose>
+            
             </ul>
         </div>
 

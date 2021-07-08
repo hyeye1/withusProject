@@ -87,6 +87,32 @@
 	</select>
 	
 	<!-- 검색 페이징 -->
+	<select id="countSearch" resultType="_int"
+			parameterType="hashmap">
+		select
+			   count(*)
+		from tb_order o
+		join refund r on(o.order_no = r.order_no)
+		join member m on(o.member_no = m.member_no)
+		<if test="refundKey != null">
+	         <choose>
+	      		<when test="refundKey == 'refundAll' ">
+	      			where refund_no like '%' || #{keyword} || '%' 
+	      			   or m.member_name like '%' || #{keyword} || '%' 
+	      		</when>
+	      		<otherwise>
+	       	 	where ${refundKey} like '%' || #{keyword} || '%' 
+	      		</otherwise>
+	        </choose>
+        </if>
+        <if test="rfStatus != null">
+		   <choose>
+		   		<when test="rfStatus == N"> and refund_status = 'N' </when>
+		   		<when test="rfStatus == Y"> and refund_status = 'Y' </when>
+		   </choose>
+   		</if>
+           and o.order_no = r.order_no 
+	</select>
 	
 	<!-- 검색 -->
 	<select id="selectSearchRefund" resultMap="refundRset"
@@ -118,8 +144,8 @@
         </if>
         <if test="rfStatus != null">
 		   <choose>
-		   		<when test="rfStatus == N"> and refund_status = N </when>
-		   		<when test="rfStatus == Y"> and refund_status = Y </when>
+		   		<when test="rfStatus == N"> and refund_status = 'N' </when>
+		   		<when test="rfStatus == Y"> and refund_status = 'Y' </when>
 		   </choose>
    		</if>
            and o.order_no = r.order_no 

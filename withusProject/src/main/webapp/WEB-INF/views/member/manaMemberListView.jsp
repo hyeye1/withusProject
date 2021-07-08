@@ -143,7 +143,7 @@
 			                <tr>
 			                    <td class="mno">${ m.memberNo }</td>
 			                    <td>${ m.memberId }</td>
-			                    <td>${ m.memberName }</td>
+			                    <td class="mamName">${ m.memberName }</td>
 			                    <td>${ m.memberCreateDate }</td>
 			                    <td>${ m.partnerJoin }</td>
 			                    <td>
@@ -221,7 +221,7 @@
 		                        <div class="input-group-prepend">
 		                          <span class="input-group-text">회원상태</span>
 		                        </div>
-		                        
+		                        <div name="mamName" value="$(event.target).parent().siblings('.mamName').text()"></div>
 		                        <select class="form-control" id=mStatus name="mStatus">
 		                          <option value="Y">활동</option>
 		                          <option value="N">탈퇴</option>
@@ -293,7 +293,6 @@
 			            	</c:choose>
 			           	</c:otherwise> 	
 		        	</c:choose>
-		        	
 		        	
 		        </ul>
 		    </div>

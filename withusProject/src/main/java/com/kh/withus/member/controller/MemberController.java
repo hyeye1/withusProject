@@ -225,13 +225,13 @@ public class MemberController {
 	// 회원 탈퇴
 	@RequestMapping("deleteMem.mana")
 	public String deleteMemberMana(@RequestParam(defaultValue="") String mStatus,
-									 @RequestParam(defaultValue= "") String mamberName,
+									 @RequestParam(defaultValue= "") String mamName,
 									 HttpSession session) {
 		
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("mStatus", mStatus );
-		map.put("mamberName", mamberName );
+		map.put("mamName", mamName );
 		
 		System.out.println(map);
 		

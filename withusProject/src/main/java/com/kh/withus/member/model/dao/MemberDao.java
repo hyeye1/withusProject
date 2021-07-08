@@ -52,9 +52,8 @@ public class MemberDao {
 	public ArrayList<Member> selectList (SqlSessionTemplate sqlSession, PageInfo pi){
 
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit(); //몇개의 게시물을 건너 뛰고
-		int limit = pi.getBoardLimit();
 		
-		RowBounds rowBounds = new RowBounds(offset, limit);
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("memberMapper.selectMemList", null, rowBounds);
 	}	

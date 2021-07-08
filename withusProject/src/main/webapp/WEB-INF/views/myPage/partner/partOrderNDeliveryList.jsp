@@ -157,24 +157,24 @@
 						<form action="orderNDeliverySearch.part">
 							<div class="searchForm">
 								<div class="keyword_1">
-									<select name="" id="">
-										<option value="">발송 배송 : 전체</option>
-										<option value="">미발송</option>
-										<option value="">배송 중</option>
-										<option value="">배송완료</option>
+									<select name="shStatus" class="shStatus">
+										<option value="0">발송 배송 : 전체</option>
+										<option value="1">배송 준비 중</option>
+										<option value="2">배송 중</option>
+										<option value="3">배송 완료</option>
 									</select> 
 								</div>
 								<div class="keyword_2">	
-									<select name="" id="">
-										<option value="">결제 상태 : 전체</option>
-										<option value="">결제완료</option>
-										<option value="">취소요청</option>
-										<option value="">취소완료</option>
+									<select name="orStatus" class="orStatus">
+										<option value="0">결제 상태 : 전체</option>
+										<option value="1">결제 완료</option>
+										<option value="2">취소 요청</option>
+										<option value="3">취소 완료</option>
 									</select>
 								</div>
 
 								<div class="keyword_3">
-									<select name="condition" id="condition">
+									<select name="condition" class="condition">
 										<option value="all">전체</option>
 										<option value="order_no">펀딩번호</option>
 										<option value="shipping_no">발송번호</option>
@@ -192,11 +192,13 @@
 								</div>
 							</div>
 						</form>
-						<c:if test="${ !empty condition }">
+						<c:if test="${ !empty shStatus or !empty orStatus or !empty condition }">
 							<script>
-							$(function(){
-								$(".condition option[value=${condition}]").attr("selected", true);
-							})
+								$(function(){
+									$(".shStatus option[value=${shStatus}]").attr("selected", true);
+									$(".orStatus option[value=${orStatus}]").attr("selected", true);
+									$(".condition option[value=${condition}]").attr("selected", true);
+								});
 							</script>
 						</c:if>
 
@@ -506,27 +508,52 @@
 		           	<!-- 페이징 -->
 		            <div id="pagingArea">
 						<ul class="pagination">
-		                   <c:choose>
+						
+							<c:choose>
 				        		<c:when test="${ pi.currentPage eq 1 }">
 					           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
 					            </c:when>
 					            <c:otherwise>
-					            	<li class="page-item"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
+					            	<c:choose>
+					            		<c:when test="${ empty shStatus or empty memberSorStatustatus or empty condition or empty keyword }">
+							            	<li class="page-item"><a class="page-link" href="${ pi.currentPage - 1 }">이전</a></li>
+							            </c:when>
+							            <c:otherwise>
+							            	<li class="page-item"><a class="page-link" href="orderNDeliverySearch.part?currentPage=${pi.currentPage - 1}&shStatus=${shStatus}&orStatus=${orStatus}&condition=${condition}&keyword=${keyword}">이전</a></li>
+					            		</c:otherwise>
+					            	</c:choose>
 					            </c:otherwise>
-					    	</c:choose>        
-					            
+					    	</c:choose>     
+					    	   
+					    	   
 							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-				            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
+								<c:choose>
+									<c:when test="${ empty shStatus or empty memberSorStatustatus or empty condition or empty keyword }">
+						            	<li class="page-item"><a class="page-link" href="orderNDeliveryList.part?currentPage=${p}">${ p }</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item"><a class="page-link" href="orderNDeliverySearch.part?currentPage=${p}&shStatus=${shStatus}&orStatus=${orStatus}&condition=${condition}&keyword=${keyword}">${ p }</a></li>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>		            
+					            
 					            
 					        <c:choose> 
 					        	<c:when test="${ pi.currentPage eq pi.maxPage }">
 					           	 	<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
 					           	</c:when>
 					           	<c:otherwise>
-					           		<li class="page-item"><a class="page-link" href="${ pi.currentPage+1 }">다음</a></li>
+					           		<c:choose>
+					            		<c:when test="${ empty shStatus or empty memberSorStatustatus or empty condition or empty keyword }">
+							           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
+							            </c:when>
+							            <c:otherwise>
+							            	<li class="page-item"><a class="page-link" href="orderNDeliverySearch.part?currentPage=${pi.currentPage + 1}&shStatus=${shStatus}&orStatus=${orStatus}&condition=${condition}&keyword=${keyword}">다음</a></li>
+					            		</c:otherwise>
+					            	</c:choose>
 					           	</c:otherwise> 	
 				        	</c:choose>
+					
 						</ul>
 		            </div>
 				</div>

@@ -18,10 +18,11 @@ public interface OrderService {
 	
 	// 결제취소
 	int updateOrderCancle(int orderNo);
-	
+
+	// 검색 페이징
+	int countSearch(HashMap<String, String> map);
 	// 검색 기능
-	int searchCount();
-	ArrayList<Order> selectSearchOrder(HashMap<String, String> map);
+	ArrayList<Order> selectSearchOrder(HashMap<String, String> map, PageInfo pi);
 	
 	
 		
@@ -33,15 +34,15 @@ public interface OrderService {
 	// 프로젝트 진행 현황
 	Order selectStatusCount();
 	
+	// 검색기능
+	int countSearchPartOrder(HashMap<String, String> map);
+	ArrayList<Order> selectSearchPartOrder(HashMap<String, String> map, PageInfo pi);
+	
 	// 발송모달:펀딩내역
 	Order selectOrderInfo(int orderNo);
 	
 	// 환불모달:펀딩내역+환불신청내역
 	Order selectRefundInfo(int orderNo);
-	
-	// 검색기능
-	int searchPartOrderCount();
-	ArrayList<Order> selectSearchPartOrder(HashMap<String, String> map);
 	
 
 	// 발송모달 : 발송정보 입력

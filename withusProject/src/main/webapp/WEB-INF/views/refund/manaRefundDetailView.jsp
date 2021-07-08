@@ -89,7 +89,6 @@
                             <span>${ r.rewardTitle }</span> <br>
                             <span class="text_st1">${ r.orderOption } / ${ r.orderCount }</span>
 	                    </td>       
-	                    </td>
 	                </tr>     
                 </table>
             </div>
@@ -130,35 +129,10 @@
 
 
         <div class="button_area">
-            <button type="button" class="btn btn-withus"  data-toggle="modal" data-target="#cancelPayModal">수 정</button>
             <button type="button" class="btn btn-secondary"  onclick="history.back()">목록으로</button>
         </div>
 
-        <!-- 탈퇴 클릭 시 모달  -->
-        <!-- The Modal -->
-        <div class="modal fade" id="cancelPayModal">
-            <div class="modal-dialog modal-dialog-centered" style="width: 380px;">
-            <div class="modal-content">
-            
-                <!-- Modal Header -->
-                <div class="modal-header none" style="height: 5px;">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <h6>결제 취소를 진행하시겠습니까?</h6>
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer none">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-withus" data-dismiss="modal">확인</button>
-                </div>
-                
-            </div>
-            </div>
-        </div>
+   
 
     </div>
 

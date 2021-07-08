@@ -16,6 +16,7 @@ public class OrderDao {
 	// 관리자
 	// 주문내역 게시글 수 / 리스트 조회
 	public int selectListCount(SqlSessionTemplate sqlSession) {
+		
 		return sqlSession.selectOne("orderMapper.selectOrderListCount");
 	}
 		
@@ -43,25 +44,35 @@ public class OrderDao {
 		return test;
 	}
 	
-	// 검색 기능 
-	public ArrayList<Order> selectSearchOrder(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+	// 검색 페이징 처리
+	public int countSearch(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
 		
-		return (ArrayList)sqlSession.selectList("orderMapper.selectSearchOrder", map);
+		return sqlSession.selectOne("orderMapper.countSearch", map);
+	}
+	
+	// 검색 기능 
+	public ArrayList<Order> selectSearchOrder(SqlSessionTemplate sqlSession, HashMap<String, String> map, 
+			PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1 ) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("orderMapper.selectSearchOrder", map, rowBounds);
 	}
 	
 	
 	// 파트너 발송관리
 	// 프로젝트 총 주문내역 게시글 수 / 리스트
 	public int selectDeilveryCount(SqlSessionTemplate sqlSession) {
+		
 		return sqlSession.selectOne("orderMapper.selectDeliveryCount");
 	}
 	
 	public ArrayList<Order> selectPartnerOrderList(SqlSessionTemplate sqlSession, PageInfo pi){
 		
 		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
-		int limit = pi.getBoardLimit();
 		
-		RowBounds rowBounds = new RowBounds(offset, limit);
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("orderMapper.selectPartnerOrderList",null,rowBounds);
 	}
@@ -70,6 +81,22 @@ public class OrderDao {
 	public Order selectStatusCount(SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.selectOne("orderMapper.selecetStatsCount");
+	}
+	
+	// 검색 페이징
+	public int countSearchPartOrder(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		
+		return sqlSession.selectOne("orderMapper.countSearchPartOrder", map);
+	}
+	
+	// 검색 
+	public ArrayList<Order> selectSearchPartOrder(SqlSessionTemplate sqlSession, HashMap<String, String> map,
+			PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1 ) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("orderMapper.selectSearchPartOrder", map, rowBounds);
 	}
 	
 	// 발송모달:펀딩내역
@@ -89,11 +116,12 @@ public class OrderDao {
 		return (ArrayList)sqlSession.selectList("orderMapper.selectSearchPartOrder", map);
 	}
 	
-	
 	//운송장입력
 	public int insertShippingInfo(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
 		
 		return sqlSession.insert("orderMapper.insertShippingInfo", map);
 	}
+
+
 	
 }

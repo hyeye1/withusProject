@@ -64,6 +64,7 @@ public class OrderController {
 	// 주문 결제 취소
 		@RequestMapping("orderUpdate.mana")
 		public String updateOrderCancle(int ono, Model model, HttpSession session) {
+			System.out.println(ono);
 			
 			int result = oService.updateOrderCancle(ono);
 			
@@ -77,14 +78,14 @@ public class OrderController {
 			
 		}
 	
-	// 검색 : 페이징 처리는 아직...
+	// 검색 
 	@RequestMapping("orderSearch.mana")
-	public String selectSearchOrder(HttpServletRequest request, Model model) {
-		
-		String orderKeyword = request.getParameter("orderKeyword"); 
-		String keyword = request.getParameter("keyword");
-		String odStatus =request.getParameter("odStatus");
-		String shStatus =request.getParameter("shStatus");
+	public ModelAndView selectSearchOrder(@RequestParam(defaultValue="") String orderKeyword,
+										  @RequestParam(defaultValue="") String keyword,
+										  @RequestParam(defaultValue="") String odStatus,
+										  @RequestParam(defaultValue="") String shStatus,
+										  @RequestParam(value="currentPage", defaultValue="1") int currentPage,
+										 ModelAndView mv) {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("orderKeyword", orderKeyword);
@@ -94,15 +95,21 @@ public class OrderController {
 		
 		//System.out.println(map);
 		
-		ArrayList<Order> olist = oService.selectSearchOrder(map);
-			
-		model.addAttribute("olist", olist)
-			.addAttribute("orderKeyword",orderKeyword)
-			.addAttribute("keyword",keyword)
-			.addAttribute("odStatus",odStatus)
-			.addAttribute("shStatus",shStatus);
+		int count = oService.countSearch(map);
 		
-		return "order/manaOrderListView";
+		PageInfo pi = pagination.getPageInfo(count, currentPage, 10, 10);
+		
+		ArrayList<Order> olist = oService.selectSearchOrder(map, pi);
+			
+		mv.addObject("pi", pi)
+		  .addObject("olist", olist)
+		  .addObject("orderKeyword",orderKeyword)
+		  .addObject("keyword",keyword)
+		  .addObject("odStatus",odStatus)
+		  .addObject("shStatus",shStatus)
+		  .setViewName("order/manaOrderListView");
+		
+		return mv;
 	
 	}
 	
@@ -126,6 +133,38 @@ public class OrderController {
 		  .addObject("sc", sc)
 		  .setViewName("myPage/partner/pagePartOrderNDeliveryList");
 		return mv;
+	}
+	
+	// 검색	
+	@RequestMapping("orderNDeliverySearch.part")
+	public ModelAndView selectSearchPartOrder(@RequestParam(defaultValue="") String shStatus,
+										@RequestParam(defaultValue="") String orStatus,
+		  								@RequestParam(defaultValue="") String condition,
+		  								@RequestParam(defaultValue="") String keyword,
+	  									@RequestParam(value="currentPage", defaultValue="1") int currentPage,
+	  									ModelAndView mv) {
+		
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("shStatus", shStatus);
+		map.put("orStatus", orStatus);
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		
+		int count = oService.countSearchPartOrder(map);
+		
+		PageInfo pi = pagination.getPageInfo(count, currentPage, 10, 10);
+		
+		ArrayList<Order> polist = oService.selectSearchPartOrder(map, pi);
+		
+		mv.addObject("polist", polist)
+		  .addObject("pi", pi)
+		  .addObject("condition",condition)
+		  .addObject("keyword",keyword)
+		  .setViewName("myPage/partner/pagePartOrderNDeliveryList");
+		
+		return mv;
+		
 	}
 	
 	// 발송모달 -  주문내역
@@ -154,32 +193,7 @@ public class OrderController {
 		return new Gson().toJson(r);
 	}
 	
-	// 검색	
-	@RequestMapping("orderNDeliverySearch.part")
-	public String selectSearchPartOrder(@RequestParam(value="currentPage", defaultValue="1") int currentPage
-            									, Model model, HttpServletRequest request) {
-		
-		String condition = request.getParameter("condition"); 
-		String keyword = request.getParameter("keyword");
-		
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("condition", condition);
-		map.put("keyword", keyword);
-		
-		ArrayList<Order> polist = oService.selectSearchPartOrder(map);
-		
-		model.addAttribute("polist", polist)
-		     .addAttribute("condition",condition)
-		     .addAttribute("keyword",keyword);
-		
-		System.out.println(condition);
-		System.out.println(keyword);
-		System.out.println(polist);
-
-
-		return "myPage/partner/pagePartOrderNDeliveryList";
-		
-	}
+	
 	// 발송정보 입력
 	@RequestMapping("insertShippingInfo")
 	public String insertShippingInfo(@RequestParam(defaultValue="") String company,

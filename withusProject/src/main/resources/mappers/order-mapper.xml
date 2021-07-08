@@ -121,9 +121,42 @@
 	</update>
 	
 	<!-- 검색 페이징 처리 -->
+	<select id="countSearch" resultType="_int" 
+			parameterType="hashmap">
+		select
+			   count(*)
+		from tb_order o 
+        join member using (member_no)
+		<choose>
+       		<when test="orderKeyword == 'orderAll' ">
+       			where (order_no like '%' || #{keyword} || '%' 
+       			    or member_name like '%' || #{keyword} || '%' )
+       		</when>
+       		<otherwise>
+        	 	where ${orderKeyword} like '%' || #{keyword} || '%' 
+       		</otherwise>
+         </choose>
+   	 	 
+   	 	 <if test='odStatus != null'>
+			 <choose>
+		   		<when test="odStatus == 1"> and order_status = 1 </when>
+		   		<when test="odStatus == 2"> and order_status = 2 </when>
+		   		<when test="odStatus == 3"> and order_status = 3  </when>
+			 </choose>
+		 </if>
+   	
+   		<if test='shStatus != null'>
+	 	     <choose>
+			   	<when test="shStatus == 1"> and shipping_status = 1 </when>
+			   	<when test="shStatus == 2"> and shipping_status = 2 </when>
+			   	<when test="shStatus == 3"> and shipping_status = 3  </when>
+			 </choose>
+		 </if>
+	</select>
 	
 	<!-- 검색 -->
-	<select id="selectSearchOrder" resultMap="orderRset" parameterType="hashmap">
+	<select id="selectSearchOrder" resultMap="orderRset" 
+			parameterType="hashmap">
 		select
 			   order_no
 		     , member_name supporter_name
@@ -138,7 +171,6 @@
           join member using (member_no)
           full join project p on (o.project_no = p.project_no)
          join reward using (reward_no)
-         
          <choose>
        		<when test="orderKeyword == 'orderAll' ">
        			where (order_no like '%' || #{keyword} || '%' 
@@ -148,19 +180,22 @@
         	 	where ${orderKeyword} like '%' || #{keyword} || '%' 
        		</otherwise>
          </choose>
-         
    	 	 
-		   <choose>
+		 <if test='odStatus != null'>
+			 <choose>
 		   		<when test="odStatus == 1"> and order_status = 1 </when>
 		   		<when test="odStatus == 2"> and order_status = 2 </when>
 		   		<when test="odStatus == 3"> and order_status = 3  </when>
-		   </choose>
+			 </choose>
+		 </if>
    	
-		   <choose>
+   		<if test='shStatus != null'>
+	 	     <choose>
 			   	<when test="shStatus == 1"> and shipping_status = 1 </when>
 			   	<when test="shStatus == 2"> and shipping_status = 2 </when>
-			   	<when test="shStatus == 3"> and  shipping_status = 3  </when>
-		   </choose>
+			   	<when test="shStatus == 3"> and shipping_status = 3  </when>
+			 </choose>
+		 </if>
 		 order
 		    by order_no desc
 	</select>
@@ -226,6 +261,93 @@
              and o.reward_no = r.reward_no
 	</select>
 	
+	<!-- 검색 페이징 -->
+	<select id="countSearchPartOrder" resultType="_int"
+			parameterType="hashmap">
+		select
+			      count(*)
+		     from tb_order o
+		     join member m on(o.member_no = m.member_no)
+		     join reward r on(o.project_no = r.project_no)
+           	 join project p on (o.project_no = p.project_no)
+		     <choose>
+	          		<when test="condition == 'all'">
+	          			where order_no like '%' || #{keyword} || '%' 
+          			    or shipping_no like '%' || #{keyword} || '%'
+          			    or m.member_name like '%' || #{keyword} || '%'  
+	          		</when>
+	          		<otherwise>
+	           	 		where ${condition} like '%' || #{keyword} || '%' 
+	          		</otherwise>
+	          </choose>
+	          <if test='shStatus != null'>
+	          	<choose>
+	          		<when test="shStatus == 1"> and shipping_status = 1 </when>
+				   	<when test="shStatus == 2"> and shipping_status = 2 </when>
+				   	<when test="shStatus == 3"> and shipping_status = 3  </when>
+          		</choose>
+	          </if>
+	          <if test='odStatus != null'>
+			 <choose>
+		   		<when test="odStatus == 1"> and order_status = 1 </when>
+		   		<when test="odStatus == 2"> and order_status = 2 </when>
+		   		<when test="odStatus == 3"> and order_status = 3  </when>
+			 </choose>
+		 </if>
+	      and p.project_no = 2   
+          and o.reward_no = r.reward_no
+	</select>
+	
+	<!-- 검색 -->
+	<select id="selectSearchPartOrder" resultMap="orderRset"
+			parameterType="hashmap">
+		select 
+		        o.order_no
+		      , m.member_name supporter_name
+		      , o.order_status
+		      , to_char(o.total_price,'999,999,999,999,999') total_price
+              , r.reward_title
+              , r.reward_content
+      		  , o.order_option
+      		  , o.order_count
+		      , o.shipping_status
+		      , o.shipping_com
+		      , o.shipping_no
+              , to_char(delivery_date, 'YYYY-MM-DD') delivery_date 
+		   from tb_order o
+  		   join member m on(o.member_no = m.member_no)
+ 		   join reward r on(o.project_no = r.project_no)
+           join project p on (o.project_no = p.project_no)
+			<choose>
+	          		<when test="condition == 'all'">
+	          			where order_no like '%' || #{keyword} || '%' 
+          			    or shipping_no like '%' || #{keyword} || '%'
+          			    or member_name like '%' || #{keyword} || '%'  
+	          		</when>
+	          		<otherwise>
+	           	 		where ${condition} like '%' || #{keyword} || '%' 
+	          		</otherwise>
+	          </choose>
+	          <if test='shStatus != null'>
+	          	<choose>
+	          		<when test="shStatus == 1"> and shipping_status = 1 </when>
+				   	<when test="shStatus == 2"> and shipping_status = 2 </when>
+				   	<when test="shStatus == 3"> and shipping_status = 3  </when>
+          		</choose>
+	          </if>
+	          <if test='odStatus != null'>
+			 <choose>
+		   		<when test="odStatus == 1"> and order_status = 1 </when>
+		   		<when test="odStatus == 2"> and order_status = 2 </when>
+		   		<when test="odStatus == 3"> and order_status = 3  </when>
+			 </choose>
+		 </if>
+	      and p.project_no = 2   
+          and o.reward_no = r.reward_no
+			 order
+			    by order_no desc
+	</select>
+	
 	<!-- 발송모달창 : 펀딩내역-->
 	<select id="selectOrderInfo" resultMap="orderRset"
 		    parameterType="_int">
@@ -284,40 +406,7 @@
 	
 	<!-- 환불 모달 : 승인/거절 -->
 	
-	<!-- 검색 -->
-	<select id="selectSearchPartOrder" resultMap="orderRset">
-		select 
-		        o.order_no
-		      , m.member_name supporter_name
-		      , o.order_status
-		      , to_char(o.total_price,'999,999,999,999,999') total_price
-              , r.reward_title
-              , r.reward_content
-      		  , o.order_option
-      		  , o.order_count
-		      , o.shipping_status
-		      , o.shipping_com
-		      , o.shipping_no
-              , to_char(delivery_date, 'YYYY-MM-DD') delivery_date 
-		   from tb_order o
-  		   join member m on(o.member_no = m.member_no)
- 		   join reward r on(o.project_no = r.project_no)
-           join project p on (o.project_no = p.project_no)
-			<choose>
-	          		<when test="condition == 'all'">
-	          			where order_no like '%' || #{keyword} || '%' 
-          			    or shipping_no like '%' || #{keyword} || '%'
-          			    or member_name like '%' || #{keyword} || '%'  
-	          		</when>
-	          		<otherwise>
-	           	 		where ${condition} like '%' || #{keyword} || '%' 
-	          		</otherwise>
-	          </choose>
-	      and p.project_no = 2   
-          and o.reward_no = r.reward_no
-			 order
-			    by order_no desc
-</select>
+
 	
 	
 	

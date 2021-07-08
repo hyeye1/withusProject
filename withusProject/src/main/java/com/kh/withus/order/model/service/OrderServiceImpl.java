@@ -40,14 +40,13 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
-	public int searchCount() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int countSearch(HashMap<String, String> map) {
+		return oDao.countSearch(sqlSession, map);
 	}
 	
 	@Override
-	public ArrayList<Order> selectSearchOrder(HashMap<String, String> map) {
-		return oDao.selectSearchOrder(sqlSession, map);
+	public ArrayList<Order> selectSearchOrder(HashMap<String, String> map, PageInfo pi) {
+		return oDao.selectSearchOrder(sqlSession, map, pi);
 	}
 	
 
@@ -67,6 +66,16 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
+	public int countSearchPartOrder(HashMap<String, String> map) {
+		return oDao.countSearchPartOrder(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<Order> selectSearchPartOrder(HashMap<String, String> map, PageInfo pi) {
+		return oDao.selectSearchPartOrder(sqlSession, map, pi);
+	}
+	
+	@Override
 	public Order selectOrderInfo(int orderNo) {
 		return oDao.selectOrderInfo(sqlSession, orderNo);
 	}
@@ -76,17 +85,6 @@ public class OrderServiceImpl implements OrderService {
 		return oDao.selectRefundInfo(sqlSession, orderNo);
 	}
 
-	@Override
-	public int searchPartOrderCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public ArrayList<Order> selectSearchPartOrder(HashMap<String, String> map) {
-		return oDao.selectSearchPartOrder(sqlSession, map);
-	}
-	
 	// 발송정보입력
 	@Override
 	public int insertShippingInfo(HashMap<String, Object> map) {
