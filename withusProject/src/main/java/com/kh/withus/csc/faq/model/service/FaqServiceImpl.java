@@ -20,9 +20,15 @@ public class FaqServiceImpl implements FaqService {
 	private FaqDao fDao;
 	
 	
+	/*
 	@Override
 	public ArrayList<Faq> selectList(Faq f) {
 		return fDao.selectList(sqlSession, f);
+	}
+	*/
+	@Override
+	public Faq selectFaq(int faqNo) {
+		return fDao.selectFaq(sqlSession, faqNo);
 	}
 
 	@Override
