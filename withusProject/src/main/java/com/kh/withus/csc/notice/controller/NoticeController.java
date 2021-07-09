@@ -144,10 +144,10 @@ public class NoticeController {
 		int result = nService.updateNotice(n);
 		
 		if(result > 0) {
-			session.setAttribute("alertMsg", "공지사항이 등록되었습니다.");
+			session.setAttribute("alertMsg", "공지사항이 수정되었습니다.");
 			return "redirect:list.no";
 		}else {
-			model.addAttribute("errorMsg", "공지사항이 등록되지않았습니다.");
+			model.addAttribute("errorMsg", "공지사항이 수정되지않았습니다.");
 			return "common/errorPage";
 		}
 		

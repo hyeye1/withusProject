@@ -12,15 +12,13 @@
 		<result column="faq_status" property="faqStatus" />
 	</resultMap>
 	
-	<select id="selectListCount"></select>
-	
-	<select id="selectList"></select>
+	<!-- 
+	<select id="selectList" parameterMap="Faq"></select>
 	 
-	<insert id="insertFaq"></insert>
+	<insert id="insertFaq" parameterType="_int"></insert>
 	
-	<select id="selectFaq"></select>
+	<update id="updateFaq" parameterMap="Faq"></update>
 	
-	<update id="updateFaq"></update>
-	
-	<update id="deleteFaq"></update>
+	<update id="deleteFaq" parameterType="_int"></update>
+	 -->
 </mapper>

@@ -9,20 +9,16 @@ public interface FaqService {
 	// 6/27 윤경 생성
 	
 	// faq 리스트 조회(페이징 처리x)
-	int selectListCount();
 	ArrayList<Faq> selectList(Faq f);
 	
 	// faq 작성
-	int insertFaq(Faq f);
-	
-	// faq 상세조회
-	Faq selectFaq(int faqNo);
+	String insertFaq(int faqNo);
 	
 	// faq 수정
-	int updateFaq(Faq f);
+	ArrayList<Faq> updateFaq(Faq f);
 	
 	// faq 삭제
-	int deleteFaq(int faqNo);
+	String deleteFaq(int fno);
 	
 
 }

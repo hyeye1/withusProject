@@ -41,7 +41,7 @@
 	                    		첨부파일이 없습니다.
 	                    	</c:when>
 	                    	<c:otherwise>
-	                        	<a href="${ n.noticeOriginname }" download="${ n.noticeOriginname }">${ n.noticeOriginname }</a>
+	                        	<a href="${ n.noticeChangename }" download="${ n.noticeOriginname }">${ n.noticeOriginname }</a>
 							</c:otherwise>                        
                         </c:choose>
                     </td>
@@ -55,10 +55,25 @@
 	    
 	    <c:if test="${ loginUser.memberStatus eq 'A' }">
 		    <div align="right">
-		    	<a class="btn btn-success" href="updateForm.no">수정</a> &nbsp;
-		    	<a class="btn btn-warning" href="delete.no">삭제</a>
+		    	<a class="btn btn-success" onclick="postFormSubmit(1)">수정</a> &nbsp;
+		    	<a class="btn btn-warning" onclick="postFormSubmit(2)">삭제</a>
 	    	</div>
 	    </c:if>
+
+		<form id="postForm" action="" method="post">
+			<input type="hidden" name="nno" value="${ n.noticeNo }">
+			<input type="hidden" name="filePath" value="${ n.noticeChangename }" >
+		</form>
+
+		<script>
+			function postFormSubmit(num){
+				if(num == 1){// 수정 클릭
+					$("#postForm").attr("action", "updateForm.no").submit();
+				} else { // 삭제 클릭
+					$("#postForm").attr("action", "delete.no").submit();
+				}
+			}
+		</script>
 
 		<div class="list" align="center">
 			<button><a class="btn btn-secondary" href="list.no">목록</a></button>

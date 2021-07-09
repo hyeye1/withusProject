@@ -21,34 +21,27 @@ public class FaqServiceImpl implements FaqService {
 	
 	
 	@Override
-	public int selectListCount() {
-		return fDao.selectListCount(sqlSession);
-	}
-	
-	// 페이지로 안넘길건데....
-	@Override
 	public ArrayList<Faq> selectList(Faq f) {
 		return fDao.selectList(sqlSession, f);
 	}
 
 	@Override
-	public int insertFaq(Faq f) {
-		return fDao.insertFaq(sqlSession, f);
+	public String insertFaq(int faqNo) {
+		//return fDao.insertFaq(sqlSession, faqNo);
+		return null;
 	}
 
 	@Override
-	public Faq selectFaq(int faqNo) {
-		return fDao.selectFaq(sqlSession, faqNo);
+	public ArrayList<Faq> updateFaq(Faq f) {
+		//return fDao.updateFaq(sqlSession, f);
+		return null;
 	}
 
 	@Override
-	public int updateFaq(Faq f) {
-		return fDao.updateFaq(sqlSession, f);
+	public String deleteFaq(int fno) {
+		//return fDao.deleteFaq(sqlSession, fno);
+		return null;
 	}
 
-	@Override
-	public int deleteFaq(int faqNo) {
-		return fDao.deleteFaq(sqlSession, faqNo);
-	}
 
 }
