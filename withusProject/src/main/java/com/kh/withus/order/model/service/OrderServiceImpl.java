@@ -91,4 +91,11 @@ public class OrderServiceImpl implements OrderService {
 		return oDao.insertShippingInfo(sqlSession, map);
 	}
 
+	// 환불승인처리
+	@Override
+	public int updateRefundStatus(int refundNo) {
+		return oDao.updateRefundStatus(sqlSession, refundNo);
+	}
+	
+
 }

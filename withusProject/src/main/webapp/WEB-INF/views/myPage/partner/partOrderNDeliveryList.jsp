@@ -310,8 +310,25 @@
 	              			   				+ "<td>" + oi.totalPrice + "원</td>" 
 	              			   				+ "</tr>"
 	              			   				+ "</table>"
-	              			   			
-	              		  	 $(".partnerOrder").html(resultSend);
+	              			   				
+           			   			$(".partnerOrder").html(resultSend);		
+   	              			
+		   				
+		   					// 발송정보 update시 필요한 pk값
+	              			 var ono = oi.orderNo;			// 주문번호
+							 var company = oi.shippingCom;	// 택배사
+							 var sno = oi.shippingNo;		// 운송장번호
+							 
+							 //console.log(ono);							 
+							 //console.log(company);
+							 //console.log(sno);
+	              			 
+							 // 값 넘겨주기
+	              			 $(".ono").val(ono);
+							 $(".company").val(company);
+							 $(".sno").val(sno);
+							 
+	              		  	 
 	              		},error:function(){
 	    					console.log("발송ajax 조회실패");
 	              		}
@@ -354,7 +371,7 @@
    	              									+ "<table>"
 				          			   				+ "<tr>" 
 				          			   				+ "<th>환불신청번호</th>"
-				          			   				+ "<td>" + ri.refundNo + "</td>" 
+				          			   				+ "<td class=" + "'rno'" + ">" + ri.refundNo + "</td>" 
 				          			   				+ "</tr>"
 				              			   			+ "<tr>" 
 				          			   				+ "<th>상세사유</th>"
@@ -377,7 +394,7 @@
 											        + "</tr>"
 											        + "<tr>"
 											        + "<td colspan=" + "2><b>상세금액</b>"
-												        + "<table class=" + "detailTb" + ">" 
+												        + "<table class=" + "'detailTb'" + ">" 
 												        + "<tr>"
 												        + "<td>리워드 금액</td>"
 												        + "<td>"+ ri.rewardPrice + " 원 </td>"
@@ -398,6 +415,26 @@
 	              			}
 	              			});
 		              	}
+	              	
+	              	function ajaxTest(){
+	              		
+	              		console.log($(event.target).parent().sibling(".modal-body").contents(".rno").text());
+	              		//var $refundNo = $(event.target).parent().siblings(".modal-body").text();
+	              		//console.log($refundNo);
+	              		$.ajax({
+	              			url:"refund.part",
+	              			data:{rno:$refundNo},
+	              			success:function(status){
+								if(status == "success"){
+									console.log("어떤 화면을...");
+									location.href = "orderNDeliveryList.part";
+								}
+									
+	              			}, error:function(){
+              					console.log("승인처리 실패!!");
+	              			}
+              			});
+	              	}
 					</script>
 
 					<!-- 발송정보 입력창  -->
@@ -422,25 +459,33 @@
 
 									<hr style="width: 95%;">
 
+									<input type="hidden" class="ono" name="ono" value="">
 									<div class="trackingInfo">
 										<label>택배사</label> 
-										<select id="company" name="company">
+										<select id="company" name="company" required>
 				                          	<option value="대한통운">대한통운</option>
 				                            <option value="우체국">우체국 택배</option>
 				                            <option value="로젠">로젠 택배</option>
 				                            <option value="한진">한진 택배</option>
 										</select> 
 										<label>송장번호</label> 
-										<input type="text" placeholder="숫자만 입력하세요" name="dno" value="${dno}">
+										<input type="text" placeholder="숫자만 입력하세요" class="sno" name="sno" value="" required>
 										<p>특수문자(-)없이 숫자만 입력해주세요</p>
-
 									</div>
-
+									
+									<c:if test="${ !empty company }">
+										<script>
+										$(function(){
+							        		$(".company option[value=${company}]").attr("selected", true);
+							        	});
+										</script>
+									</c:if>
+										
 								</div>
 
 								<!-- Modal footer -->
 								<div class="modal-footer none">
-									<button type="button" class="btn btn-withus btn-block" data-dismiss="modal">완료</button>
+									<button type="submit" onclick="form.submit();" class="btn btn-withus btn-block" data-dismiss="modal">완료</button>
 								</div>
 
 							</div>
@@ -465,47 +510,48 @@
 		                          <label style="font-size:14px;">서포터가 펀딩금반환 요청한 내역을 확인하고 승인 또는 거절 처리하세요.</label>
 		                            <div class="partnerRefund">
                                 
-                            </div>
-                            <br>
-                            <div class="partnerRefundInfo">
-	                            
-                            </div>
-            
-                            <table>
-                                 <div class="refundTb">
-							        
-							    </div>
-                                <tr>
-                                    <td colspan="2" style="padding: 20px 0 0;">
-                                         [펀딩금 반환 신청 처리]
-                                    <table class="subTable">
-                                        <tr>
-                                            <td><b>승인</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="ment">신청 사유가 반환 정책에 해당된다면, 승인처리하세요. 승인처리시, 결제 취소가 진행됩니다.</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b>거절</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="ment">신청 사유가 반환 정책에 해당하지 않은 경우, 거절 처리하세요. 결제취소가 진행되지 않습니다.</td>
-                                        </tr>
-                                    </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-
-								<!-- Modal footer -->
-								<div class="modal-footer none">
-									<button type="button" class="btn btn-withus approvalBtn" data-dismiss="modal">승인</button>
-									<button type="button" class="btn btn-danger oppositionBtn" data-dismiss="modal">거절</button>
-								</div>
-
+		                           </div>
+		                           <br>
+		                           <div class="partnerRefundInfo">
+		                            
+		                           </div>
+		           
+		                           <table>
+		                                <div class="refundTb">
+								        
+								    </div>
+		                               <tr>
+		                                   <td colspan="2" style="padding: 20px 0 0;">
+		                                        [펀딩금 반환 신청 처리]
+		                                   <table class="subTable">
+		                                       <tr>
+		                                           <td><b>승인</b></td>
+		                                       </tr>
+		                                       <tr>
+		                                           <td class="ment">신청 사유가 반환 정책에 해당된다면, 승인처리하세요. 승인처리시, 결제 취소가 진행됩니다.</td>
+		                                       </tr>
+		                                       <tr>
+		                                           <td><b>거절</b></td>
+		                                       </tr>
+		                                       <tr>
+		                                           <td class="ment">신청 사유가 반환 정책에 해당하지 않은 경우, 거절 처리하세요. 결제취소가 진행되지 않습니다.</td>
+		                                       </tr>
+		                                   </table>
+		                                   </td>
+		                               </tr>
+		                           </table>
+		                       </div>
+		
+							<!-- Modal footer -->
+							<div class="modal-footer none">
+								<button type="button" onclick="ajaxTest();" class="btn btn-withus approvalBtn" data-dismiss="modal">승인</button>
+								<button type="button" class="btn btn-danger oppositionBtn" data-dismiss="modal">거절</button>
+							</div>
+		
 							</div>
 						</div>
 					</div>
+				
 
 		           	<!-- 페이징 -->
 		            <div id="pagingArea">

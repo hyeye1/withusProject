@@ -321,8 +321,8 @@
 			<choose>
 	          		<when test="condition == 'all'">
 	          			where (order_no like '%' || #{keyword} || '%' 
-          			    or shipping_no like '%' || #{keyword} || '%'
-          			    or member_name like '%' || #{keyword} || '%' ) 
+          			       or shipping_no like '%' || #{keyword} || '%'
+          			       or member_name like '%' || #{keyword} || '%' ) 
 	          		</when>
 	          		<otherwise>
 	           	 		where ${condition} like '%' || #{keyword} || '%' 
@@ -359,6 +359,8 @@
 		      , to_char(o.total_price,'999,999,999,999,999') total_price
 		      , r.reward_title
 		      , to_char(r.reward_price,'999,999,999,999,999') reward_price
+		      , o.shipping_com
+     		  , o.shipping_no
 		  from tb_order o
 		  join member m on(o.member_no = m.member_no)
 		  join reward r on(r.project_no = o.project_no)
@@ -367,20 +369,13 @@
 	</select>
 	
 	<!-- 발송모달창 : 발송정보 입력 -->
-	<insert id="insertShippingInfo" parameterType="hashmap">
-		insert
-				into tb_order
-				(
-				   shipping_com
-				 , shipping_no
-				)
-				values
-				(
-				   #{company}
-				 , #{dno}
-				)
-	
-	</insert>
+	<update id="insertShippingInfo" parameterType="hashmap">
+		update tb_order
+		   set 
+		       shipping_com = #{company}
+		     , shipping_no = #{sno}
+		where order_no = #{ono}
+	</update>
 	
 	<!-- 환불모달 : 환불신청내역 조회-->
 	<select id="selectRefundInfo" resultMap="orderRset"
@@ -405,6 +400,11 @@
 	</select>
 	
 	<!-- 환불 모달 : 승인/거절 -->
+	<update id="updateRefundStatus" parameterType="_int">
+		update refund
+		   set refund_status = 'Y'
+		 where refund_no = #{refundNo}  
+	</update>
 	
 
 	

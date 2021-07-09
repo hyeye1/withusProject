@@ -104,24 +104,25 @@ public class OrderDao {
 		
 		return sqlSession.selectOne("orderMapper.selectOrderInfo", orderNo);
 	}
-
+	
 	// 환불모달:펀딩내역+환불신청내역
 	public Order selectRefundInfo(SqlSessionTemplate sqlSession, int orderNo) {
 		
 		return sqlSession.selectOne("orderMapper.selectRefundInfo", orderNo);
 	}
 	
-	public ArrayList<Order> selectSearchPartOrder(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
-		
-		return (ArrayList)sqlSession.selectList("orderMapper.selectSearchPartOrder", map);
-	}
 	
 	//운송장입력
 	public int insertShippingInfo(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
 		
-		return sqlSession.insert("orderMapper.insertShippingInfo", map);
+		return sqlSession.update("orderMapper.insertShippingInfo", map);
 	}
 
+	// 환불모달: 승인처리
+	public int updateRefundStatus(SqlSessionTemplate sqlSession, int refundNo){
+		
+		return sqlSession.update("orderMapper.updateRefundStatus", refundNo);
+	}
 
 	
 }
