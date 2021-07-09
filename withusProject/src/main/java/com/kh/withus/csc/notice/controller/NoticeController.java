@@ -133,19 +133,18 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("update.no")
-	public String updateNotice(Notice n, MultipartFile cscUpfile, HttpSession session, Model model){
+	public String updateNotice(Notice n, MultipartFile cscReUpfile, HttpSession session, Model model){
 		
-		if(!cscUpfile.getOriginalFilename().equals("")) {
-			String changeName = saveFile(session, cscUpfile);
-			
-			n.setNoticeOriginname(cscUpfile.getOriginalFilename());
+		if(!cscReUpfile.getOriginalFilename().equals("")) {
+			String changeName = saveFile(session, cscReUpfile);
+			n.setNoticeOriginname(cscReUpfile.getOriginalFilename());
 			n.setNoticeChangename("resources/cscUploadFile/" + changeName);
 		}
 		int result = nService.updateNotice(n);
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "공지사항이 수정되었습니다.");
-			return "redirect:list.no";
+			return "redirect:detail.no?nno=" + n.getNoticeNo();
 		}else {
 			model.addAttribute("errorMsg", "공지사항이 수정되지않았습니다.");
 			return "common/errorPage";

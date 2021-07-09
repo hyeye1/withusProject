@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-        #enrollForm>table{width:100%;}
-        #enrollForm>table *{ margin:5px;}
+        #updatelForm>table{width:100%;}
+        #updateForm>table *{ margin:5px;}
 </style>
 </head>
 <body>
@@ -23,23 +23,31 @@
 	        <div class="content">
 	            <br><br>
 	            <div class="innerOuter">
-	                <h2>게시글 작성하기</h2>
+	                <h2>게시글 수정하기</h2>
 	                <br>
 	
-	                <form id="enrollForm" method="post" action="insert.no" enctype="multipart/form-data">
-	                    <table align="center" border="1px">
+	                <form id="updateForm" method="post" action="update.no" enctype="multipart/form-data">
+	                	<input type="hidden" id="noticeNo" name="noticeNo" value="${ n.noticeNo }">
+	                    <table align="center">
 	                        <tr>
 	                            <th><label for="title">제목</label></th>
-	                            <td><input type="text" id="noticeTitle" class="form-control" name="noticeTitle" required></td>
+	                            <td><input type="text" id="noticeTitle" class="form-control" name="noticeTitle" value="${ n.noticeTitle }" required></td>
 	                        </tr>
 	                    
 	                        <tr>
 	                            <th><label>첨부파일</label></th>
-	                            <td><input type="file" id="cscUpfile" class="form-control-file border" name="cscUpfile"></td>
+	                            <td><input type="file" id="cscReUpfile" class="form-control-file border" name="cscReUpfile"></td>
+	                            <c:if test="${ !empty n.noticeOriginname }">
+                            		현재 업로드된 파일 : <a href="${ n.noticeChangename }" download="${ n.noticeOriginname }">${ n.noticeOriginname }</a> 
+                            		<input type="hidden" name="noticeOriginname" value="${ n.noticeOriginname }">
+                            		<input type="hidden" name="noticeChangename" value="${ n.noticeChangename }">
+                            		
+                            	</c:if>
+                            		
 	                        </tr>
 	                        <tr>
 	                            <td colspan="2">
-	                            	<textarea class="form-control" required name="noticeContent" id="noticeContent" style="height:500px; resize:none;"></textarea>
+	                            	<textarea class="form-control" required name="noticeContent" id="noticeContent" value="${ n.noticeContent }" style="height:500px; resize:none;"></textarea>
 	                            </td>
 	                        </tr>
 	                    </table>

@@ -83,13 +83,13 @@
 		 where notice_no = #{noticeNo}
 	</update>
 	
-	<update id="updateNotice" parameterType="_int">
+	<update id="updateNotice" parameterType="Notice">
 		update
 		       notice
 		   set notice_title = #{noticeTitle}
 		     , notice_content = #{noticeContent}
 		     , notice_originname = #{noticeOriginname}
-		     , notice_changename =#{noticeChangename}
+		     , notice_changename = #{noticeChangename}
 		 where notice_no = #{noticeNo}
 	</update>
 	
