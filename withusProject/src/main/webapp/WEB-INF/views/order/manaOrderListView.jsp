@@ -64,6 +64,7 @@
 
             <div class="search_box">
                 <form action="orderSearch.mana">
+                <input type="hidden" name="currentPage" value="1">
                     <div class="searchForm">
                         <select name="orderKeyword" id="orderKeyword">
                             <option value="orderAll">전체</option>

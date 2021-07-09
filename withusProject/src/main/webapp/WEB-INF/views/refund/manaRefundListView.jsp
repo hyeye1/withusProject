@@ -64,6 +64,7 @@
 
             <div class="search_box">
                 <form action="searchRefund.mana">
+                <input type="hidden" name="currentPage" value="1">
                     <div class="searchForm">
                         <select name="refundKey" id="refundKey">
                             <option value="refundAll">전체</option>

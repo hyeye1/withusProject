@@ -272,9 +272,9 @@
            	 join project p on (o.project_no = p.project_no)
 		     <choose>
 	          		<when test="condition == 'all'">
-	          			where order_no like '%' || #{keyword} || '%' 
+	          			where (order_no like '%' || #{keyword} || '%' 
           			    or shipping_no like '%' || #{keyword} || '%'
-          			    or m.member_name like '%' || #{keyword} || '%'  
+          			    or m.member_name like '%' || #{keyword} || '%' )  
 	          		</when>
 	          		<otherwise>
 	           	 		where ${condition} like '%' || #{keyword} || '%' 
@@ -320,9 +320,9 @@
            join project p on (o.project_no = p.project_no)
 			<choose>
 	          		<when test="condition == 'all'">
-	          			where order_no like '%' || #{keyword} || '%' 
+	          			where (order_no like '%' || #{keyword} || '%' 
           			    or shipping_no like '%' || #{keyword} || '%'
-          			    or member_name like '%' || #{keyword} || '%'  
+          			    or member_name like '%' || #{keyword} || '%' ) 
 	          		</when>
 	          		<otherwise>
 	           	 		where ${condition} like '%' || #{keyword} || '%' 
