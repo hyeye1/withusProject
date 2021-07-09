@@ -69,7 +69,7 @@
 	    <div class="container">
 	
 	        <div class="search_area">
-	             <form action="searchMember.mana" name="searchForm" method="">
+	             <form action="searchMember.mana" name="searchForm">
 	        	<input type="hidden" name="currentPage" value="1">
 	             <div class="searchKey_1">
 	                 <select name="partnerJoin" class="partnerJoin">

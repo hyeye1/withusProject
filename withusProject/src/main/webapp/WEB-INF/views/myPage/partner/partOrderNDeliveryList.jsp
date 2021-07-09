@@ -155,6 +155,7 @@
 						<label>목록</label>
 
 						<form action="orderNDeliverySearch.part">
+						<input type="hidden" name="currentPage" value="1">
 							<div class="searchForm">
 								<div class="keyword_1">
 									<select name="shStatus" class="shStatus">
@@ -198,6 +199,7 @@
 									$(".shStatus option[value=${shStatus}]").attr("selected", true);
 									$(".orStatus option[value=${orStatus}]").attr("selected", true);
 									$(".condition option[value=${condition}]").attr("selected", true);
+									
 								});
 							</script>
 						</c:if>
@@ -247,7 +249,7 @@
 	                        			<td>배송준비중</td>
 	                        		</c:when>
 	                        		<c:when test="${ p.shippingStatus eq 2 }">
-	                        			<td>배송시작</td>
+	                        			<td>배송중</td>
 	                        		</c:when>
 	                        		<c:when test="${ p.shippingStatus eq 3 }">
 	                        			<td>배송완료</td>

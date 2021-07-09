@@ -159,6 +159,8 @@ public class OrderController {
 		
 		mv.addObject("polist", polist)
 		  .addObject("pi", pi)
+		  .addObject("shStatus",shStatus)
+		  .addObject("orStatus",orStatus)
 		  .addObject("condition",condition)
 		  .addObject("keyword",keyword)
 		  .setViewName("myPage/partner/pagePartOrderNDeliveryList");
