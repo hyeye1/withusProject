@@ -90,7 +90,7 @@
                        			</td>
                        		</c:when>
                        		<c:when test="${ o.orderStatus == 3 }">
-                       			<td>취소완료</td>
+                       			<td style="color:red;">취소완료</td>
                        		</c:when>
                        	</c:choose>
 	                    <th>카드 번호</th>
@@ -155,19 +155,10 @@
                         
                     </tr>      
                 </table>
-                <script>
-	           		function cancleOrder(){
-	           			console.log(event.target);
-	           			// 펀딩 상태를 '3'으로 변경 어떻게?
-	           			//var test = $(event.target).parent().siblings("cancle").text();
-	           			console.log(test);
-	           			
-	           		}
-           		</script> 
             </div> 
 
 	       <div class="button_area">
-	           <button type="submit" class="btn btn-withus">수 정</button>
+	           <button type="button" onclick="form.submit();" class="btn btn-withus">수 정</button>
 	           <button type="button" class="btn btn-secondary" onclick="history.back()">목록으로</button>
 	       </div>
 	       </from>

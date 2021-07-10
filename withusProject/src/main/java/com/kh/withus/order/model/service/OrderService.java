@@ -48,5 +48,7 @@ public interface OrderService {
 	int insertShippingInfo(HashMap<String, Object> map);
 	
 	// 환불모달 : 승인처리
-	int updateRefundStatus(int refundNo);
+	int updateRefundStatus(int orderNo);
+	
+	int updateOrderStatus(int orderNo);
 }

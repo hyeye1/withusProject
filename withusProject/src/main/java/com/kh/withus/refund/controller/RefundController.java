@@ -32,7 +32,7 @@ public class RefundController {
 										int currentPage, ModelAndView mv) {
 		
 		int totalList = rService.selectListCount();
-		PageInfo pi = pagination.getPageInfo(totalList, currentPage, 5, 10);
+		PageInfo pi = pagination.getPageInfo(totalList, currentPage, 10, 10);
 		
 		ArrayList<Refund> rlist = rService.selectList(pi);
 		

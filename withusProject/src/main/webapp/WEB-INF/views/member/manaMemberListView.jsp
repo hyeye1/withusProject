@@ -183,11 +183,11 @@
 	        									
 	        				// value가 안넘어가...			
 	        				// -> form태그 안에 회원탈퇴시 넘길 키값만 제시해두고 벨류값은 여기서 넘기기! 
-	        				var test = ms.memberName
-   							//console.log(test);  --> 성공!!
+	        				var mname = ms.memberName
+   							//console.log(mname);  --> 성공!!
 	        				
     						$(".modal-title").html(result);
-	        				$(".test").val(test);
+	        				$(".mname").val(mname);
 	        				
  	        			}, error: function(){
 	        				console.log("모달 조회 실패")
@@ -221,7 +221,7 @@
 		                        <div class="input-group-prepend">
 		                          <span class="input-group-text">회원상태</span>
 		                        </div>
-		                        <input class="test" type="hidden" name="memName" value="">
+		                        <input class="mname" type="hidden" name="memName" value="">
 		                        <select class="form-control" id=mStatus name="mStatus">
 		                          <option value="Y">활동</option>
 		                          <option value="N">탈퇴</option>

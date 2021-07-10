@@ -259,14 +259,19 @@
 			                      <td style="font-size:10px;">
 			                        <!-- 환불 가능 기간을 언제로 할껀지?-->
 			                        <!-- 리워드 기간 -->
-			                        	지연반환 신청기간 <br>
-			                        	2021-05-11 ~ 2021-00-00<br>
 			                        <!-- 환불 신청자만 버튼이 노출 -->
-			                        <c:if test="${ p.orderStatus eq 2 }">
-				                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
-				                        	확인하기
-			                        	</button>
-			                        </c:if>
+			                        <c:choose>
+				                        <c:when test="${ p.orderStatus eq 2 }">
+					                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
+					                        	확인하기
+				                        	</button>
+				                        </c:when>
+			                        	<c:when test="${ p.orderStatus eq 3 }">
+					                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
+					                        	승인완료
+				                        	</button>
+			                        	</c:when>
+			                        </c:choose>
 			                      </td>
 			                    </tr>
 	                    		</c:forEach>
@@ -275,6 +280,7 @@
 						</div>
 					
 					<script>
+					
                   	// 발송모달:주문내역
 	              	function ajaxSendInfo(){
 	              		//var $orderNo = $(".ono").val();  // 실패1
@@ -290,31 +296,31 @@
 	              			   //console.log(oi);
  	              			   
 	              			   var resultSend = "<table>"
-	              			   				+ "<tr>" 
-	              			   				+ "<th>펀딩번호</th>"
-	              			   				+ "<td>" + oi.orderNo + "</td>" 
-	              			   				+ "</tr>"
-		              			   			+ "<tr>" 
-	              			   				+ "<th>서포터명</th>"
-	              			   				+ "<td>" + oi.supporterName + "</td>" 
-	              			   				+ "</tr>"
-		              			   			+ "<tr>" 
-	              			   				+ "<th>펀딩내역</th>"
-	              			   				+ "<td>" + oi.rewardTitle + "</td>" 
-	              			   				+ "</tr>"
-		              			   			+ "<tr>" 
-	              			   				+ "<th>옵션</th>"
-	              			   				+ "<td>" + oi.orderOption / oi.orderCount + "</td>" 
-	              			   				+ "</tr>"	
-		              			   			+ "<th>총 결제 금액</th>"
-	              			   				+ "<td>" + oi.totalPrice + "원</td>" 
-	              			   				+ "</tr>"
-	              			   				+ "</table>"
+		              			   				+ "<tr>" 
+		              			   				+ "<th>펀딩번호</th>"
+		              			   				+ "<td>" + oi.orderNo + "</td>" 
+		              			   				+ "</tr>"
+			              			   			+ "<tr>" 
+		              			   				+ "<th>서포터명</th>"
+		              			   				+ "<td>" + oi.supporterName + "</td>" 
+		              			   				+ "</tr>"
+			              			   			+ "<tr>" 
+		              			   				+ "<th>펀딩내역</th>"
+		              			   				+ "<td>" + oi.rewardTitle + "</td>" 
+		              			   				+ "</tr>"
+			              			   			+ "<tr>" 
+		              			   				+ "<th>옵션</th>"
+		              			   				+ "<td>" + oi.orderOption / oi.orderCount + "</td>" 
+		              			   				+ "</tr>"	
+			              			   			+ "<th>총 결제 금액</th>"
+		              			   				+ "<td>" + oi.totalPrice + "원</td>" 
+		              			   				+ "</tr>"
+		              			   				+ "</table>"
 	              			   				
            			   			$(".partnerOrder").html(resultSend);		
    	              			
 		   				
-		   					// 발송정보 update시 필요한 pk값
+		   					// 발송정보 update시 필요한 값
 	              			 var ono = oi.orderNo;			// 주문번호
 							 var company = oi.shippingCom;	// 택배사
 							 var sno = oi.shippingNo;		// 운송장번호
@@ -345,6 +351,8 @@
 	              			data:{ono:$orderNo},
 	              			success:function(ri){
 	              				//console.log(ri);
+	              				var ono = ri.orderNo;
+	              				
 	              				var resultOrder = "<table>"
 				          			   				+ "<tr>" 
 				          			   				+ "<td>펀딩번호</td>"
@@ -394,47 +402,30 @@
 											        + "</tr>"
 											        + "<tr>"
 											        + "<td colspan=" + "2><b>상세금액</b>"
-												        + "<table class=" + "'detailTb'" + ">" 
-												        + "<tr>"
-												        + "<td>리워드 금액</td>"
-												        + "<td>"+ ri.rewardPrice + " 원 </td>"
-												        + "</tr>" 
-												        + "<tr>"
-												        + "<td>추가 후원금</td>"
-												        + "<td>" + ri.orderPlus + " 원 </td>"
-												        + "</tr>"
-												        + "</table>"
+											        + "<table class=" + "'detailTb'" + ">" 
+											        + "<tr>"
+											        + "<td>리워드 금액</td>"
+											        + "<td>"+ ri.rewardPrice + " 원 </td>"
+											        + "</tr>" 
+											        + "<tr>"
+											        + "<td>추가 후원금</td>"
+											        + "<td>" + ri.orderPlus + " 원 </td>"
+											        + "</tr>"
+											        + "</table>"
 											        + "</td>"
 											        + "</tr>"   				
-	              		
+
+								$(".ono").val(ono);			        	
 	   	              			$(".partnerRefund").html(resultOrder);
 	              				$(".partnerRefundInfo").html(resultRefund);
 	              				$(".refundTb").html(resultTable);
+	              				
 	              			},error:function(){
 	              				console.log("환불 ajax 조회실패");
 	              			}
 	              			});
 		              	}
 	              	
-	              	function ajaxTest(){
-	              		
-	              		console.log($(event.target).parent().sibling(".modal-body").contents(".rno").text());
-	              		//var $refundNo = $(event.target).parent().siblings(".modal-body").text();
-	              		//console.log($refundNo);
-	              		$.ajax({
-	              			url:"refund.part",
-	              			data:{rno:$refundNo},
-	              			success:function(status){
-								if(status == "success"){
-									console.log("어떤 화면을...");
-									location.href = "orderNDeliveryList.part";
-								}
-									
-	              			}, error:function(){
-              					console.log("승인처리 실패!!");
-	              			}
-              			});
-	              	}
 					</script>
 
 					<!-- 발송정보 입력창  -->
@@ -508,6 +499,8 @@
 								<!-- Modal body -->
 		                        <div class="modal-body">
 		                          <label style="font-size:14px;">서포터가 펀딩금반환 요청한 내역을 확인하고 승인 또는 거절 처리하세요.</label>
+		                          	<form action="refundable.part" method="post">
+		                          	<input type="hidden" class="ono" name="ono" value="">
 		                            <div class="partnerRefund">
                                 
 		                           </div>
@@ -517,9 +510,9 @@
 		                           </div>
 		           
 		                           <table>
-		                                <div class="refundTb">
+		                               <div class="refundTb">
 								        
-								    </div>
+								       </div>
 		                               <tr>
 		                                   <td colspan="2" style="padding: 20px 0 0;">
 		                                        [펀딩금 반환 신청 처리]
@@ -544,9 +537,12 @@
 		
 							<!-- Modal footer -->
 							<div class="modal-footer none">
-								<button type="button" onclick="ajaxTest();" class="btn btn-withus approvalBtn" data-dismiss="modal">승인</button>
-								<button type="button" class="btn btn-danger oppositionBtn" data-dismiss="modal">거절</button>
+								<button type="button" onclick="form.submit();" name="refundable" value="Y"
+										class="btn btn-withus approvalBtn" data-dismiss="modal">승인</button>
+								<button type="button" name="refundable" value="N"
+										class="btn btn-danger oppositionBtn" data-dismiss="modal">거절</button>
 							</div>
+							</form>
 		
 							</div>
 						</div>
@@ -563,7 +559,7 @@
 					            </c:when>
 					            <c:otherwise>
 					            	<c:choose>
-					            		<c:when test="${ empty shStatus or empty memberSorStatustatus or empty condition or empty keyword }">
+					            		<c:when test="${ empty shStatus or empty orStatus or empty condition or empty keyword }">
 							            	<li class="page-item"><a class="page-link" href="${ pi.currentPage - 1 }">이전</a></li>
 							            </c:when>
 							            <c:otherwise>
@@ -576,7 +572,7 @@
 					    	   
 							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 								<c:choose>
-									<c:when test="${ empty shStatus or empty memberSorStatustatus or empty condition or empty keyword }">
+									<c:when test="${ empty shStatus or empty orStatus or empty condition or empty keyword }">
 						            	<li class="page-item"><a class="page-link" href="orderNDeliveryList.part?currentPage=${p}">${ p }</a></li>
 									</c:when>
 									<c:otherwise>
@@ -592,7 +588,7 @@
 					           	</c:when>
 					           	<c:otherwise>
 					           		<c:choose>
-					            		<c:when test="${ empty shStatus or empty memberSorStatustatus or empty condition or empty keyword }">
+					            		<c:when test="${ empty shStatus or empty orStatus or empty condition or empty keyword }">
 							           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
 							            </c:when>
 							            <c:otherwise>

@@ -93,8 +93,13 @@ public class OrderServiceImpl implements OrderService {
 
 	// 환불승인처리
 	@Override
-	public int updateRefundStatus(int refundNo) {
-		return oDao.updateRefundStatus(sqlSession, refundNo);
+	public int updateRefundStatus(int orderNo) {
+		return oDao.updateRefundStatus(sqlSession, orderNo);
+	}
+
+	@Override
+	public int updateOrderStatus(int orderNo) {
+		return oDao.updateOrderStatus(sqlSession, orderNo);
 	}
 	
 

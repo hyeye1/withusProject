@@ -46,7 +46,8 @@
 		<result column="refund_no" property="refundNo"/>
 		<result column="r_changename" property="reChangeName"/>
 		<result column="r_reason" property="reReason"/>
-	</resultMap>
+		<result column="refund_status" property="refundStatus"/>
+ 	</resultMap>
 	
 	<!-- 페이징 처리 -->
 	<select id="selectOrderListCount" resultType="_int">
@@ -114,7 +115,7 @@
 	</select>
 	
 	<!-- 결제 취소 -->
-	<update id="updateOrderCancle" parameterType="hashmap">
+	<update id="updateOrderCancle" parameterType="_int" >
 		update tb_order
  		   set order_status = '3'
 		 where order_no = #{orderNo}
@@ -208,7 +209,9 @@
 	<select id="selectDeliveryCount" resultType="_int">
 			select
 			      count(*)
-		     from tb_order
+		     from tb_order o
+		     join project p on(o.project_no = p.project_no)
+		     where o.project_no = 2
 	<!-- 파트너가 게시한 프로젝트만 출력, 로그인한 mem_no = 프로젝트 mem_no-
 		  select
 		  count(order_no)
@@ -253,12 +256,16 @@
 		      , o.shipping_com
 		      , o.shipping_no
               , to_char(delivery_date, 'YYYY-MM-DD') delivery_date 
+              , re.refund_status
 		   from tb_order o
   		   join member m on(o.member_no = m.member_no)
  		   join reward r on(o.project_no = r.project_no)
            join project p on (o.project_no = p.project_no)
+           join refund re on(re.order_no = o.order_no)
  		   where  p.project_no = 2
              and o.reward_no = r.reward_no
+           order
+	    	  by order_no desc
 	</select>
 	
 	<!-- 검색 페이징 -->
@@ -313,11 +320,13 @@
 		      , o.shipping_status
 		      , o.shipping_com
 		      , o.shipping_no
-              , to_char(delivery_date, 'YYYY-MM-DD') delivery_date 
+              , to_char(delivery_date, 'YYYY-MM-DD') delivery_date
+              , re.refund_status 
 		   from tb_order o
   		   join member m on(o.member_no = m.member_no)
  		   join reward r on(o.project_no = r.project_no)
            join project p on (o.project_no = p.project_no)
+           join refund re on(re.order_no = o.order_no)
 			<choose>
 	          		<when test="condition == 'all'">
 	          			where (order_no like '%' || #{keyword} || '%' 
@@ -374,6 +383,7 @@
 		   set 
 		       shipping_com = #{company}
 		     , shipping_no = #{sno}
+		     , shipping_status = 2
 		where order_no = #{ono}
 	</update>
 	
@@ -402,8 +412,16 @@
 	<!-- 환불 모달 : 승인/거절 -->
 	<update id="updateRefundStatus" parameterType="_int">
 		update refund
-		   set refund_status = 'Y'
-		 where refund_no = #{refundNo}  
+		   set 
+		   	   refund_status = 'Y'
+		 where order_no = #{orderNo}  
+	</update>
+	
+	<update id="updateOrderStatus" parameterType="_int">
+		update tb_order
+		   set 
+		       order_status = 3
+		 where order_no = #{orderNo}    
 	</update>
 	
 

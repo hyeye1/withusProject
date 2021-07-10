@@ -119,9 +119,13 @@ public class OrderDao {
 	}
 
 	// 환불모달: 승인처리
-	public int updateRefundStatus(SqlSessionTemplate sqlSession, int refundNo){
+	public int updateRefundStatus(SqlSessionTemplate sqlSession, int orderNo){
 		
-		return sqlSession.update("orderMapper.updateRefundStatus", refundNo);
+		return sqlSession.update("orderMapper.updateRefundStatus", orderNo);
+	}
+
+	public int updateOrderStatus(SqlSessionTemplate sqlSession, int orderNo) {
+		return sqlSession.update("orderMapper.updateOrderStatus", orderNo);
 	}
 
 	
