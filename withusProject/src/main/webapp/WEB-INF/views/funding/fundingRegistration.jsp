@@ -415,17 +415,17 @@
                             <!-- 카테고리+제목 -->
                             <div>
                                 <b class="regiTitle">프로젝트의 제목과 카테고리를 설정해주세요.</b> <br>
-                                <select class="catOption" name="catOption">
-                                    <option value="category">카테고리</option>
-                                    <option value="tech">테크/가전</option>
-                                    <option value="fashion">패션/잡화</option>
-                                    <option value="beauty">뷰티</option>
-                                    <option value="food">푸드</option>
-                                    <option value="living">홈리빙</option>
-                                    <option value="design">디자인소품</option>
-                                    <option value="travel">여행/레저</option>
-                                    <option value="sports">스포츠/모빌리티</option>
-                                    <option value="pet">반려동물</option>
+                                <select class="catOption" name="catNo">
+                                    <option value="1">카테고리</option>
+                                    <option value="2">패션/잡화</option>
+                                    <option value="3">뷰티</option>
+                                    <option value="4">푸드</option>
+                                    <option value="5">홈리빙</option>
+                                    <option value="6">디자인소품</option>
+                                    <option value="7">여행/레저</option>
+                                    <option value="8">스포츠/모빌리티</option>
+                                    <option value="9">반려동물</option>
+                                    <option value="10">테크/가전</option>
                                 </select>
                                 <input type="text" id="projectTitle" name="projectTitle" placeholder="제목을 입력해주세요">
                             </div><br>
@@ -485,6 +485,7 @@
                                     $('input[name=projectShipment]').change(function(){
                                         if($(this).prop("checked")){
                                             shipDate.hide();
+                                            $('#deliveryDate').val('');
                                         }else{
                                             shipDate.show();
                                         }
@@ -499,7 +500,7 @@
                                     style="width: 449px; height: 311px; border: 1px solid rgb(127, 127, 127); border-radius: 5px; background-color: white;">
                                     최적 사이즈 740*492 px
                                 </button><br><br>
-                                <input type="file" name="projectThum"> <!-- html 이미지 미리보기 -->
+                                <input type="file" name="upfile"> <!-- html 이미지 미리보기 -->
                             </div><br>
     
                             <div>
@@ -632,7 +633,7 @@
                                             <b class="regiTitle">리워드 금액</b>
                                         </th>
                                         <td>
-                                            <input type="text" placeholder="1,000원 이상 입력해 주세요." name="rewardList[count].rewardPrice" class="rePrice">
+                                            <input type="text" placeholder="1,000원 이상 입력해 주세요." class="rePrice">
                                         </td>
                                         <td>원</td>
                                     </tr>
@@ -956,7 +957,7 @@
                                                     style="height: 33px;">
                                             </td>
                                             <td>
-                                                <input type="text" name="partnerSns" id="partnerSns" class="partnerWebSns">
+                                                <input type="text" name="partnerSNS" id="partnerSns" class="partnerWebSns">
                                             </td>
                                         </tr>
                                     </table>

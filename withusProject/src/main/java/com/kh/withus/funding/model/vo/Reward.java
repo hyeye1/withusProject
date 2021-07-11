@@ -14,9 +14,9 @@ public class Reward {
 	
 	private int rewardNo;
 	private int projectNo;
-	private int rewardPrice;
+	private String rewardPrice;
 	private String rewardStatus;
-	private int rewardStock;
+	private String rewardStock;
 	private String rewardShip;
 	private String rewardTitle;
 	private String rewardContent;

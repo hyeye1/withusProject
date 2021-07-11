@@ -10,6 +10,7 @@ import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.category.model.vo.Category;
 import com.kh.withus.funding.model.dao.FundingDao;
 import com.kh.withus.funding.model.vo.Project;
+import com.kh.withus.funding.model.vo.Reward;
 import com.kh.withus.order.model.vo.Order;
 
 @Service
@@ -65,5 +66,16 @@ public class FundingServiceImpl implements FundingService {
 	public int minusStock(Order o) {
 		return funDao.minusStock(sqlSession, o);
 	}
+
+	@Override
+   	public int insertProject(Project p) {
+    	return funDao.insertProject(sqlSession, p);
+   	}
+	
+	@Override
+   	public int insertReward(Reward r) {
+    	return funDao.insertReward(sqlSession, r);
+   	}
+   
 
 }
