@@ -20,12 +20,23 @@ public class FaqController {
 	@Autowired
 	private FaqService fService;
 	
+	/*
 	@RequestMapping("list.faq")
 	public ArrayList<Faq> selectList(Faq f, ModelAndView mv) {
 		
 		ArrayList<Faq> list = fService.selectList(f);
 		mv.addObject("f", f).addObject("list", list).setViewName("csc/faqListView");
 		return list;
+		
+	}
+	*/
+	
+	@RequestMapping("list.faq")
+	public String selectFaq(int fno, Model model) {
+		
+		Faq f = fService.selectFaq(fno);
+		model.addAttribute("f", f);
+		return "csc/faqListView";
 		
 	}
 	

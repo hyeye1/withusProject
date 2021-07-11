@@ -6,6 +6,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +34,7 @@ public class OrderController {
 	                                        int currentPage, ModelAndView mv) {
 		
 		int listCount = oService.selectListCount();
-		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 5, 10);
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 10);
 
 		ArrayList<Order> olist = oService.selectList(pi);
 		
@@ -64,16 +65,17 @@ public class OrderController {
 	// 주문 결제 취소
 		@RequestMapping("orderUpdate.mana")
 		public String updateOrderCancle(int ono, Model model, HttpSession session) {
-			System.out.println(ono);
+			//System.out.println(ono);
 			
 			int result = oService.updateOrderCancle(ono);
+			System.out.println(result);
 			
 			if(result > 0) {
 				session.setAttribute("alertMsg", "성공적으로 수정되었습니다.");
-				return "redirect:manaOrderListView";
+				return "redirect:/orderListView.mana";
 			}else {
 				model.addAttribute("alertMsg", "실패");
-				return "admin/manaOrderListView";
+				return "common/manaErrorPage";
 			}
 			
 		}
@@ -127,6 +129,7 @@ public class OrderController {
 		PageInfo pi = pagination.getPageInfo(totalList, currentPage, 10, 10);
 		// 주문현황 리스트 
 		ArrayList<Order> polist = oService.selectPartnerOrderList(pi);
+		//System.out.println(polist);
 		
 		mv.addObject("polist", polist)
 		  .addObject("pi",pi)
@@ -174,7 +177,7 @@ public class OrderController {
 	@RequestMapping(value="send.info", produces="application/json; charset=utf-8")
 	public String ajaxSelectOrderInfo(int ono) {
 		
-		//System.out.println(ono); // 펀딩번호 확인		
+		//System.out.println(ono); // 펀딩번호 확인	
 		
 		Order o = oService.selectOrderInfo(ono);
 		//System.out.println(o); // 펀딩내역 잘 담겼는지
@@ -199,25 +202,51 @@ public class OrderController {
 	// 발송정보 입력
 	@RequestMapping("insertShippingInfo")
 	public String insertShippingInfo(@RequestParam(defaultValue="") String company,
-									 @RequestParam(defaultValue="") String dno,
+									 @RequestParam(defaultValue="") String sno,
+									 @RequestParam(defaultValue="") String ono,
 									 HttpSession session) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("company", company);
-		map.put("dno", dno);
-		
-		System.out.println(map);
+		map.put("sno", sno);
+		map.put("ono", ono);
+		//System.out.println(map);
 		
 		int result = oService.insertShippingInfo(map);
 		
 		if (result > 0) {
-			//session.setAttribute("alertMsg", "탈퇴처리 성공");
-			return "redirect:/memberListView.mana";
+			session.setAttribute("alertMsg", "발송정보 입력 완료");
+			return "redirect:orderNDeliveryList.part";
 		}else {
 			session.setAttribute("alertMsg", "실패실패");
-			return "redirect:/memberListView.mana";
+			return "redirect:orderNDeliveryList.part";
 		}
 		
 	}
+	
+	// 환불 승인/거절
+	@ResponseBody
+	@RequestMapping("refundable.part")
+	public String updateRefundStatus(int ono,  HttpSession session) {
+		
+		//System.out.println(ono);
+		
+		int refund = oService.updateRefundStatus(ono);
+		int order = oService.updateOrderStatus(ono);
+		System.out.println(order);
+		
+		if(refund > 0 && order > 0 ) {
+			session.setAttribute("alertMsg", "환불 승인");
+			return "redirect:orderNDeliveryList.part";
+		}else {
+			session.setAttribute("alertMsg", "실패실패");
+			return "redirect:orderNDeliveryList.part";
+		}
+		 
+	
+	}
+	
+	
+	
 	
 }

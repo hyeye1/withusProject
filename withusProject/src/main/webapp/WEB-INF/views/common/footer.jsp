@@ -80,7 +80,7 @@
                 <b>고객센터</b>
                 <li>&nbsp;</li>
                 <li><a href="list.no">공지사항</a></li>
-                <li><a href="list.fa">FAQ</a></li>
+                <li><a href="list.faq">FAQ</a></li>
                 <li><a href="">이용약관</a></li>
                 <li><a href="">개인정보 처리방침</a></li>
                 <li><a href="">창작자 가이드</a></li>

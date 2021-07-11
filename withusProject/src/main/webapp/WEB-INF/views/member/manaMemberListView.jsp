@@ -178,18 +178,18 @@
 	        			data:{mno:$memberNo},
 	        			success:function(ms){
 	        				//console.log(ms);
-	        				var result = "<div name ="
-	        							+ "'mamberName'" + " value ="
-	        							+ "'" + ms.memberName + "'" + ">"
-	        							+ ms.memberName 
+	        				var result = "<div>"+ ms.memberName 
 	        							+ " 회원을 탈퇴시키겠습니까?</div>"
+	        									
 	        				// value가 안넘어가...			
-
-   							console.log(result);
-	        				$(".modal-title").html(result);
+	        				// -> form태그 안에 회원탈퇴시 넘길 키값만 제시해두고 벨류값은 여기서 넘기기! 
+	        				var mname = ms.memberName
+   							//console.log(mname);  --> 성공!!
 	        				
-	        							
-	        			}, error: function(){
+    						$(".modal-title").html(result);
+	        				$(".mname").val(mname);
+	        				
+ 	        			}, error: function(){
 	        				console.log("모달 조회 실패")
 	        			}
 	        		});
@@ -203,7 +203,7 @@
 	
 	    <!-- 탈퇴 클릭 시 모달  -->
 	    <!-- The Modal -->
-	    <form action="deleteMem.mana" method="post">
+	    <form action="deleteMem.mana" method="">
 			    <div class="modal fade" id="delModal">
 			        <div class="modal-dialog modal-dialog-centered" style="width: 380px;">
 			        <div class="modal-content">
@@ -221,7 +221,7 @@
 		                        <div class="input-group-prepend">
 		                          <span class="input-group-text">회원상태</span>
 		                        </div>
-		                        <div name="mamName" value="$(event.target).parent().siblings('.mamName').text()"></div>
+		                        <input class="mname" type="hidden" name="memName" value="">
 		                        <select class="form-control" id=mStatus name="mStatus">
 		                          <option value="Y">활동</option>
 		                          <option value="N">탈퇴</option>

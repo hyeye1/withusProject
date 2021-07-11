@@ -12,13 +12,27 @@
 		<result column="faq_status" property="faqStatus" />
 	</resultMap>
 	
-	<!-- 
-	<select id="selectList" parameterMap="Faq"></select>
+	
+	<select id="selectFaq" resultMap="Faq" parameterType="_int">
+		select
+		       faq_no
+		     , faq_cat
+		     , faq_title
+		     , faq_content
+		  from faq
+		 where faq_no = #{faqNo}
+	</select>
+	 
+	 
 	 
 	<insert id="insertFaq" parameterType="_int"></insert>
 	
-	<update id="updateFaq" parameterMap="Faq"></update>
+	
+	
+	<update id="updateFaq" parameterType="Faq">
+	
+	</update>
 	
 	<update id="deleteFaq" parameterType="_int"></update>
-	 -->
+	 
 </mapper>

@@ -44,8 +44,11 @@ public interface OrderService {
 	// 환불모달:펀딩내역+환불신청내역
 	Order selectRefundInfo(int orderNo);
 	
-
 	// 발송모달 : 발송정보 입력
 	int insertShippingInfo(HashMap<String, Object> map);
 	
+	// 환불모달 : 승인처리
+	int updateRefundStatus(int orderNo);
+	
+	int updateOrderStatus(int orderNo);
 }

@@ -161,7 +161,7 @@
 	                        			<td>취소요청</td>
 	                        		</c:when>
 	                        		<c:when test="${ o.orderStatus == 3 }">
-	                        			<td>취소완료</td>
+	                        			<td style="color:red;">취소완료</td>
 	                        		</c:when>
 	                        	</c:choose>
 	                        	<c:choose>
@@ -221,7 +221,7 @@
 					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 						<c:choose>
 							<c:when test="${ empty orderKeyword or empty keyword or empty odStatus or empty shStatus }">
-		            			<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
+		            			<li class="page-item"><a class="page-link" href="orderListView.mana?currentPage=${p}">${ p }</a></li>
 	            			</c:when>
 	            			<c:otherwise>
 	            				<li class="page-item"><a class="page-link" href="orderSearch.mana?currentPage=${p}&orderKeyword=${orderKeyword}&keyword=${keyword}&odStatus=${odStatus}&shStatus=${shStatus}">${ p }</a></li>
