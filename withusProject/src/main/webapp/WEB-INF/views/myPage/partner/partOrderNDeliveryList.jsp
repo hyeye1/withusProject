@@ -156,7 +156,7 @@
 					<div class="oList">
 						<label>목록</label>
 
-						<form action="orderNDeliverySearch.part">
+						<form action="orderNDeliverySearch.part" name=searchPart>
 						<input type="hidden" name="currentPage" value="1">
 							<div class="searchForm">
 								<div class="keyword_1">
@@ -279,7 +279,7 @@
 							                        	확인하기
 						                        	</button>
 						                        </c:when>
-					                        	<c:when test="${ p.orderStatus eq 3 }">
+					                        	<c:when test="${ p.orderStatus eq 3 or p.orderStatus eq 4}">
 							                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
 							                        	승인완료
 						                        	</button>
@@ -514,7 +514,7 @@
 								<!-- Modal body -->
 		                        <div class="modal-body">
 		                          <label style="font-size:14px;">서포터가 펀딩금반환 요청한 내역을 확인하고 승인 또는 거절 처리하세요.</label>
-		                          	<form action="refundable.part" method="post">
+		                          	<form name="refundResult">
 		                          	<input type="hidden" class="ono" name="ono" value="">
 		                            <div class="partnerRefund">
                                 
@@ -552,11 +552,23 @@
 		
 							<!-- Modal footer -->
 							<div class="modal-footer none">
-								<button type="button" onclick="form.submit();" name="refundable" value="Y"
+								<button type="button" name="rstatus" value="Y"
 										class="btn btn-withus approvalBtn" data-dismiss="modal">승인</button>
-								<button type="button" name="refundable" value="N"
+								<button type="button" name="rstatus" value="R"
 										class="btn btn-danger oppositionBtn" data-dismiss="modal">거절</button>
 							</div>
+							<script>
+								$(function() {
+								    $("button[name=rstatus]").on('click', function() {
+								        var rstatus = $(event.target).val();    
+								        console.log(rstatus);
+								        $("form[name=refundResult]")
+						                .attr({ action:"refundable.part?rstatus="+rstatus, method:"post" })
+						                .submit();
+								    });
+								});
+							</script>
+							
 							</form>
 		
 							</div>
