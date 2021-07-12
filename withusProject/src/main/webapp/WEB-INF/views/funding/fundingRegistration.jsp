@@ -328,11 +328,11 @@
                     color: rgb(64, 64, 64);
                 }
 
-                .registeredTable td {
+                .regiOuter .registeredTable td {
                     padding: 7px;
                 }
 
-                #partnersPolicy {
+                .regiOuter #partnersPolicy {
                     height: 150px !important;
                     resize: none;
                 }
@@ -347,7 +347,7 @@
                     padding: 20px;
                 }
 
-                #showPhone {
+                .regiOuter #showPhone {
                     width: 20px;
                     margin-left: 30px;
                 }
@@ -370,8 +370,10 @@
                     margin-right: 20px;
                 }
 
+                .cateLeft a {font-size: 16px !important; margin-bottom: 0.35rem !important;}
                 
-
+				.cateCenter {font-size: 16px !important;}
+				#cateContent{margin-left: -40px !important;}
 
             </style>
         </head>
