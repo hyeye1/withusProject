@@ -413,6 +413,18 @@
                                     * 수수료 (vat 별도) 가치가자 수수료 5% + 결제 수수료 3%
                                 </p>
                             </div><br>
+
+                            
+                        <script>
+                            $(function(){
+                                $('input').on('keydown', function (e) {
+                                    if (e.which == 13) {
+                                        e.preventDefault();
+                                    }
+                                });
+                            })
+                        </script>                            
+                        
     
                             <!-- 카테고리+제목 -->
                             <div>
@@ -517,6 +529,15 @@
     
                                 <script>
                                     var hashs = ""; // input type hidden에 들어가있는 값
+                                    $(function(){
+                                        $('#projectKeyword').on('keydown', function(e) {
+                                            if (e.which == 13) {
+                                                e.preventDefault();
+                                                addHash();
+                                            }
+                                        });
+                                    })
+
                                     function addHash(){
                                         var hashtagi = $('input[id=projectKeyword]').val();
                                         if(hashtagi == ""){
@@ -920,14 +941,14 @@
                             <!-- 은행/계좌번호 -->
                             <div>
                                 <b class="regiTitle">계좌 번호를 적어주세요</b><br>
-                                <select class="bankOption" name="bankOption"> <!-- name="partnerBank" -->
+                                <select class="bankOption" name="partnerBank">
                                     <option value="selectBank">거래은행</option>
-                                    <option value="kb">국민은행</option>
-                                    <option value="woori">우리</option>
-                                    <option value="hana">하나</option>
-                                    <option value="shinhan">신한</option>
-                                    <option value="nh">농협</option>
-                                    <option value="kakao">카카오뱅크</option>
+                                    <option value="국민은행">국민은행</option>
+                                    <option value="우리은행">우리</option>
+                                    <option value="하나은행">하나</option>
+                                    <option value="신한은행">신한</option>
+                                    <option value="농협">농협</option>
+                                    <option value="카카오뱅크">카카오뱅크</option>
                                 </select>
                                 <input type="text" id="bankAccount" name="partnerAccount" placeholder="계좌번호">
                             </div><br>
@@ -1031,8 +1052,8 @@
                         function limitBtn1(){
                             $(".limitNum").hide();
                         }
-    
-    
+
+
                     </script>
                 </div> <!-- outer /div -->
             </form>
