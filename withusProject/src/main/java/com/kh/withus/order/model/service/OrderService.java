@@ -28,15 +28,15 @@ public interface OrderService {
 		
 	// 사용자-파트너 발송관리
 	// 프로젝트 총 주문내역 게시글 수 / 리스트
-	int selectDeliveryCount();
-	ArrayList<Order> selectPartnerOrderList(PageInfo pi);
+	int selectDeliveryCount(int memberNo);
+	ArrayList<Order> selectPartnerOrderList(PageInfo pi, int memberNo);
 	
 	// 프로젝트 진행 현황
-	Order selectStatusCount();
+	Order selectStatusCount(int memberNo);
 	
 	// 검색기능
-	int countSearchPartOrder(HashMap<String, String> map);
-	ArrayList<Order> selectSearchPartOrder(HashMap<String, String> map, PageInfo pi);
+	int countSearchPartOrder(HashMap<String, Object> map);
+	ArrayList<Order> selectSearchPartOrder(HashMap<String, Object> map, PageInfo pi);
 	
 	// 발송모달:펀딩내역
 	Order selectOrderInfo(int orderNo);

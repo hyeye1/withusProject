@@ -36,6 +36,7 @@
 		<result column="card_no" property="cardNo"/>
 		<result column="delivery_date" property="deliveryDate"/>
 		
+		<!-- 파트너 발송관리 -->
 		<result column="noneShipping" property="noneShipping"/>
 		<result column="readyShipping" property="readyShipping"/>
 		<result column="shipping" property="shipping"/>
@@ -47,6 +48,8 @@
 		<result column="r_changename" property="reChangeName"/>
 		<result column="r_reason" property="reReason"/>
 		<result column="refund_status" property="refundStatus"/>
+		<result column="project_thum" property="projectThum"/>
+		<result column="member_no" property="memberNo"/>
  	</resultMap>
 	
 	<!-- 페이징 처리 -->
@@ -211,7 +214,7 @@
 			      count(*)
 		     from tb_order o
 		     join project p on(o.project_no = p.project_no)
-		     where o.project_no = 2
+		     where p.member_no = #{memberNo}
 	<!-- 파트너가 게시한 프로젝트만 출력, 로그인한 mem_no = 프로젝트 mem_no-
 		  select
 		  count(order_no)
@@ -222,7 +225,8 @@
 		   and p.project_no = #{projectNo}
 	-->
 	</select>
-	<!--  -->
+	
+	<!-- 서포터관리  -->
 	<select id="selecetStatsCount" resultMap="orderRset">
 	 		select
 			    count(case when o.shipping_no is null then 1 end) as noneShipping 
@@ -230,15 +234,14 @@
 			  , count(case when o.shipping_status = 2 then 1 end) as shipping
 			  , count(case when o.shipping_status = 3 then 1 end) as doneShipping
 			  , count(case when o.order_status = 2 then 1 end) as refund
-			  , count(case when o.order_status = 3 then 1 end) as dropRefund
-			  , count(case when o.order_status = 4 then 1 end) as comRefund
-			  , count(case when o.order_status = 5 then 1 end) as refRefund
+			  <!-- , count(case when o.order_status = 3 then 1 end) as dropRefund -->
+			  , count(case when o.order_status = 3 then 1 end) as comRefund
+			  , count(case when o.order_status = 4 then 1 end) as refRefund
 		   from tb_order o
 		   join project p on(p.project_no = o.project_no)
 		   join member m  on(m.member_no = p.member_no)
 		  where m.member_no = p.member_no
-		    and p.project_no = 2
-		    <!-- and p.project_no = #{projectNo} -->
+		    and p.member_no = #{memberNo}
 	</select>
 	
 	<!-- 파트너 주문현황 -->
@@ -256,16 +259,17 @@
 		      , o.shipping_com
 		      , o.shipping_no
               , to_char(delivery_date, 'YYYY-MM-DD') delivery_date 
-              , re.refund_status
+              , re.refund_status 
+              , p.project_thum
 		   from tb_order o
   		   join member m on(o.member_no = m.member_no)
  		   join reward r on(o.project_no = r.project_no)
            join project p on (o.project_no = p.project_no)
-           join refund re on(re.order_no = o.order_no)
- 		   where  p.project_no = 2
-             and o.reward_no = r.reward_no
-           order
-	    	  by order_no desc
+      full join refund re on(re.order_no = o.order_no) -->
+ 		  where p.member_no = #{memberNo}
+            and o.reward_no = r.reward_no
+          order
+	    	  by o.order_no desc
 	</select>
 	
 	<!-- 검색 페이징 -->
@@ -279,29 +283,35 @@
            	 join project p on (o.project_no = p.project_no)
 		     <choose>
 	          		<when test="condition == 'all'">
-	          			where (order_no like '%' || #{keyword} || '%' 
-          			    or shipping_no like '%' || #{keyword} || '%'
-          			    or m.member_name like '%' || #{keyword} || '%' )  
+	          			where (o.order_no like '%' || #{keyword} || '%' 
+          			       or o.shipping_no like '%' || #{keyword} || '%'
+          			       or m.member_name like '%' || #{keyword} || '%' )  
 	          		</when>
-	          		<otherwise>
-	           	 		where ${condition} like '%' || #{keyword} || '%' 
-	          		</otherwise>
+					<when test="contion == 'order_no'">
+						where o.order_no like '%' || #{keyword} || '%' 
+					</when>
+					<when test="contion == 'shipping_no'">
+						where o.shipping_no like '%' || #{keyword} || '%' 
+					</when>
+					<when test="contion == 'member_name'">
+						where m.member_name like '%' || #{keyword} || '%' 
+					</when>
 	          </choose>
 	          <if test='shStatus != null'>
 	          	<choose>
-	          		<when test="shStatus == 1"> and shipping_status = 1 </when>
-				   	<when test="shStatus == 2"> and shipping_status = 2 </when>
-				   	<when test="shStatus == 3"> and shipping_status = 3  </when>
+	          		<when test="shStatus == 1"> and o.shipping_status = 1 </when>
+				   	<when test="shStatus == 2"> and o.shipping_status = 2 </when>
+				   	<when test="shStatus == 3"> and o.shipping_status = 3  </when>
           		</choose>
 	          </if>
 	          <if test='odStatus != null'>
 			 <choose>
-		   		<when test="odStatus == 1"> and order_status = 1 </when>
-		   		<when test="odStatus == 2"> and order_status = 2 </when>
-		   		<when test="odStatus == 3"> and order_status = 3  </when>
+		   		<when test="odStatus == 1"> and o.order_status = 1 </when>
+		   		<when test="odStatus == 2"> and o.order_status = 2 </when>
+		   		<when test="odStatus == 3"> and o.order_status = 3  </when>
 			 </choose>
 		 </if>
-	      and p.project_no = 2   
+	      and p.member_no = #{memberNo}   
           and o.reward_no = r.reward_no
 	</select>
 	
@@ -321,17 +331,17 @@
 		      , o.shipping_com
 		      , o.shipping_no
               , to_char(delivery_date, 'YYYY-MM-DD') delivery_date
-              , re.refund_status 
+              , re.refund_status
 		   from tb_order o
   		   join member m on(o.member_no = m.member_no)
  		   join reward r on(o.project_no = r.project_no)
            join project p on (o.project_no = p.project_no)
-           join refund re on(re.order_no = o.order_no)
+      full join refund re on(re.order_no = o.order_no) 
 			<choose>
 	          		<when test="condition == 'all'">
-	          			where (order_no like '%' || #{keyword} || '%' 
-          			       or shipping_no like '%' || #{keyword} || '%'
-          			       or member_name like '%' || #{keyword} || '%' ) 
+	          			where (o.order_no like '%' || #{keyword} || '%' 
+          			       or o.shipping_no like '%' || #{keyword} || '%'
+          			       or m.member_name like '%' || #{keyword} || '%' ) 
 	          		</when>
 	          		<otherwise>
 	           	 		where ${condition} like '%' || #{keyword} || '%' 
@@ -339,22 +349,22 @@
 	          </choose>
 	          <if test='shStatus != null'>
 	          	<choose>
-	          		<when test="shStatus == 1"> and shipping_status = 1 </when>
-				   	<when test="shStatus == 2"> and shipping_status = 2 </when>
-				   	<when test="shStatus == 3"> and shipping_status = 3  </when>
+	          		<when test="shStatus == 1"> and o.shipping_status = 1 </when>
+				   	<when test="shStatus == 2"> and o.shipping_status = 2 </when>
+				   	<when test="shStatus == 3"> and o.shipping_status = 3  </when>
           		</choose>
 	          </if>
 	          <if test='odStatus != null'>
 			 <choose>
-		   		<when test="odStatus == 1"> and order_status = 1 </when>
-		   		<when test="odStatus == 2"> and order_status = 2 </when>
-		   		<when test="odStatus == 3"> and order_status = 3  </when>
+		   		<when test="odStatus == 1"> and o.order_status = 1 </when>
+		   		<when test="odStatus == 2"> and o.order_status = 2 </when>
+		   		<when test="odStatus == 3"> and o.order_status = 3  </when>
 			 </choose>
 		 </if>
-	      and p.project_no = 2   
+	      and p.member_no = #{memberNo}   
           and o.reward_no = r.reward_no
 			 order
-			    by order_no desc
+			    by o.order_no desc
 	</select>
 	
 	<!-- 발송모달창 : 펀딩내역-->
@@ -400,12 +410,13 @@
 			  , re.refund_no
 			  , re.r_reason
 			  , re.r_changename
+			  , re.refund_status
 			  , to_char(r.reward_price,'999,999,999,999,999') reward_price
 			  , to_char(o.order_plus,'999,999,999,999,999') order_plus
 		   from tb_order o
 		   join member m on(o.member_no = m.member_no)
 		   join reward r on(o.reward_no = r.reward_no)
-		   join refund re on (o.order_no = re.order_no)
+	  full join refund re on (o.order_no = re.order_no)
 		  where o.order_no = #{orderNo}
 	</select>
 	
@@ -421,6 +432,7 @@
 		update tb_order
 		   set 
 		       order_status = 3
+		     , shipping_status = 4
 		 where order_no = #{orderNo}    
 	</update>
 	

@@ -37,6 +37,7 @@
     tbody>tr:hover{cursor: pointer;}
     table.table-bordered td, table.table-bordered th  {padding: .35rem; vertical-align: inherit;}
     .tableHead{background-color: #eaeaea;}
+    .none{margin: 100px 0;}
      
         
 	/* pagination */

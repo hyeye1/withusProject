@@ -164,7 +164,7 @@
 	       </from>
         </div>
 
-        <!-- 탈퇴 클릭 시 모달  -->
+        <!-- 결제취소시 모달  -->
         <!-- The Modal -->
         <div class="modal fade" id="cancelPayModal">
             <div class="modal-dialog modal-dialog-centered" style="width: 380px;">

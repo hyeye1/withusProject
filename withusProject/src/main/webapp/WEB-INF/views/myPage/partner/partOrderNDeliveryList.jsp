@@ -91,6 +91,8 @@
 
   button.btn.btn-withus.approvalBtn{ width: 48%; float: left;}
   button.btn.btn-danger.oppositionBtn{ width: 48%;}
+  
+  .cancle{color: red;}
 
 
 </style>
@@ -127,13 +129,13 @@
 	                  <tr>
 	                    <th rowspan="2">펀딩금 반환 상태</th>
 	                    <th>신청</th> 
-	                    <th>신청 취소</th>
+	                    <!-- <th>신청 취소</th> -->
 	                    <th>완료</th>
 	                    <th>거절</th>
 	                  </tr>
 	                  <tr>
 	                    <td>${ sc.refund } 건</td>
-	                    <td>${ sc.dropRefund } 건</td>
+	                    <%-- <td>${ sc.dropRefund } 건</td> --%>
 	                    <td>${ sc.comRefund } 건</td>
 	                    <td>${ sc.refRefund } 건</td>
 	                  </tr>
@@ -208,74 +210,87 @@
 						<table class="table table-border" id="orderList">
 							<thead>
 								<tr height="50">
-								
 									<th width="60">펀딩번호</th>
 									<th width="75">서포터 정보</th>
 									<th width="60">결제상태</th>
-									<th width="90">결제금액</th>
-									<th width="180">리워드</th>
-									<th width="100">발송정보</th>
+									<th width="70">결제금액</th>
+									<th width="220">리워드</th>
+									<th width="85">발송정보</th>
 									<th width="80">발송 예정일</th>
 									<th width="80">발송·배송</th>
 									<th width="80">발송번호</th>
-									<th width="120">펀딩금 반환</th>
+									<th width="80">펀딩금 반환</th>
 								</tr>
 							</thead>
-							<tbody>
-								<c:forEach var="p" items="${ polist }">
-		                    	<tr>
-			                      <td class="ono">${ p.orderNo }</td>
-			                      <td>${ p.supporterName }</td>
-			                      <c:choose>
-	                        		<c:when test="${ p.orderStatus eq 1 }">
-	                        			<td>결제완료</td>
-	                        		</c:when>
-	                        		<c:when test="${ p.orderStatus eq 2 }">
-	                        			<td>취소요청</td>
-	                        		</c:when>
-	                        		<c:when test="${ p.orderStatus eq 3 }">
-	                        			<td>취소완료</td>
-	                        		</c:when>
-	                        	  </c:choose>
-			                      <td>${ p.totalPrice } 원</td>
-			                      <td>${ p.rewardTitle }/${ p.orderOption }/${ p.orderCount }</td>
-			                      <td><button type="button" class="btn btn-withus btn-sm" data-toggle="modal" data-target="#sendInfoModal" onclick="ajaxSendInfo();">
-			                      		발송정보 입력
-			                      	</button></td>
-			                      <td>${ p.deliveryDate }</td>
-			                      <!-- 운송장 번호가 비어 있을 경우 배송준비 중, 배송완료 조건은 뭘로 해야되나? -->
-			                      <c:choose>
-	                        		<c:when test="${ empty p.shippingCom or p.shippingStatus eq 1}">
-	                        			<td>배송준비중</td>
-	                        		</c:when>
-	                        		<c:when test="${ p.shippingStatus eq 2 }">
-	                        			<td>배송중</td>
-	                        		</c:when>
-	                        		<c:when test="${ p.shippingStatus eq 3 }">
-	                        			<td>배송완료</td>
-	                        		</c:when>
-			                      </c:choose>
-			                      <td>${ p.shippingCom } <br> ${ p.shippingNo }</td>
-			                      <td style="font-size:10px;">
-			                        <!-- 환불 가능 기간을 언제로 할껀지?-->
-			                        <!-- 리워드 기간 -->
-			                        <!-- 환불 신청자만 버튼이 노출 -->
-			                        <c:choose>
-				                        <c:when test="${ p.orderStatus eq 2 }">
-					                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
-					                        	확인하기
-				                        	</button>
-				                        </c:when>
-			                        	<c:when test="${ p.orderStatus eq 3 }">
-					                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
-					                        	승인완료
-				                        	</button>
-			                        	</c:when>
-			                        </c:choose>
-			                      </td>
-			                    </tr>
-	                    		</c:forEach>
-	                    		</tbody>	
+							<c:choose>
+				           	 	<c:when test="${ empty polist }">
+				       	 			<tr style="height: 100px;"><td colspan="10"><b>내용이 존재하지 않습니다 :(</b></td></tr>
+				           	 	</c:when>
+				           	 	<c:otherwise>
+									<tbody>
+										<c:forEach var="p" items="${ polist }">
+				                    	<tr>
+					                      <td class="ono">${ p.orderNo }</td>
+					                      <td>${ p.supporterName }</td>
+					                      <c:choose>
+			                        		<c:when test="${ p.orderStatus eq 1 }">
+			                        			<td>결제완료</td>
+			                        		</c:when>
+			                        		<c:when test="${ p.orderStatus eq 2 }">
+			                        			<td>환불신청</td>
+			                        		</c:when>
+			                        		<c:when test="${ p.orderStatus eq 3 }">
+			                        			<td class="cancle">화불완료</td>
+			                        		</c:when>
+			                        		<c:when test="${ p.orderStatus eq 4 }">
+			                        			<td>화불거절</td>
+			                        		</c:when>
+			                        	  </c:choose>
+					                      <td>${ p.totalPrice } 원</td>
+					                      <td><img src="${p.projectThum }" width="60" height="40">&nbsp;&nbsp; ${ p.rewardTitle } 
+					                      		<br>옵션: ${ p.orderOption } / 수량: ${ p.orderCount }개</td>
+					                      <td><button type="button" class="btn btn-withus btn-sm" data-toggle="modal" data-target="#sendInfoModal" onclick="ajaxSendInfo();">
+					                      		발송정보 입력
+					                      	</button></td>
+					                      <td>${ p.deliveryDate }</td>
+					                      <!-- 운송장 번호가 비어 있을 경우 배송준비 중, 배송완료 조건은 뭘로 해야되나? -->
+					                      <c:choose>
+			                        		<c:when test="${ empty p.shippingCom or p.shippingStatus eq 1}">
+			                        			<td>배송준비중</td>
+			                        		</c:when>
+			                        		<c:when test="${ p.shippingStatus eq 2 }">
+			                        			<td>배송중</td>
+			                        		</c:when>
+			                        		<c:when test="${ p.shippingStatus eq 3 }">
+			                        			<td>배송완료</td>
+			                        		</c:when>
+			                        		<c:when test="${ p.shippingStatus eq 4 }">
+			                        			<td class="cancle">환불</td>
+			                        		</c:when>
+					                      </c:choose>
+					                      <td>${ p.shippingCom } <br> ${ p.shippingNo }</td>
+					                      <td style="font-size:10px;">
+					                        <!-- 환불 가능 기간을 언제로 할껀지?-->
+					                        <!-- 리워드 기간 -->
+					                        <!-- 환불 신청자만 버튼이 노출 -->
+					                        <c:choose>
+						                        <c:when test="${ p.orderStatus eq 2 }">
+							                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
+							                        	확인하기
+						                        	</button>
+						                        </c:when>
+					                        	<c:when test="${ p.orderStatus eq 3 }">
+							                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
+							                        	승인완료
+						                        	</button>
+					                        	</c:when>
+					                        </c:choose>
+					                      </td>
+					                    </tr>
+			                    		</c:forEach>
+			                    		</tbody>
+		                    		</c:otherwise>
+            					</c:choose>   	
 							</table>
 						</div>
 					

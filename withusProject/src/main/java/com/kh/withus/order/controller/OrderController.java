@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.withus.common.model.vo.PageInfo;
 import com.kh.withus.common.template.pagination;
+import com.kh.withus.member.model.vo.Member;
 import com.kh.withus.order.model.service.OrderService;
 import com.kh.withus.order.model.vo.Order;
 
@@ -119,40 +120,60 @@ public class OrderController {
 	// 사용자
 	// 파트너 발송관리
 	@RequestMapping("orderNDeliveryList.part")
-	public ModelAndView selectPartnerOrderList(@RequestParam(value="currentPage", defaultValue="1") int currentPage
-			                                   , ModelAndView mv) {
+	public String selectPartnerOrderList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
+												HttpSession session, Model model) {
 		
-		int totalList = oService.selectDeliveryCount();
+		// 로그인한 회원 정보
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		//System.out.println(loginUser);
+		
+		// 로그인한 회원번호 
+		int mno = loginUser.getMemberNo();
+		//System.out.println(mno);
+		
+		int totalList = oService.selectDeliveryCount(mno);
+		
 		// statusBox에 출력될 건수
-		Order sc = oService.selectStatusCount();
+		Order sc = oService.selectStatusCount(mno);
+		
 		// 페이징 처리
 		PageInfo pi = pagination.getPageInfo(totalList, currentPage, 10, 10);
+		
 		// 주문현황 리스트 
-		ArrayList<Order> polist = oService.selectPartnerOrderList(pi);
+		ArrayList<Order> polist = oService.selectPartnerOrderList(pi, mno);
 		//System.out.println(polist);
 		
-		mv.addObject("polist", polist)
-		  .addObject("pi",pi)
-		  .addObject("sc", sc)
-		  .setViewName("myPage/partner/pagePartOrderNDeliveryList");
-		return mv;
+		if(polist.size() > 0) {
+			model.addAttribute("polist", polist);
+			model.addAttribute("pi",pi);
+			model.addAttribute("sc", sc);
+			return "myPage/partner/pagePartOrderNDeliveryList";
+		}else {
+			session.setAttribute("alertMsg", "프로젝트 등록을 해주세요");
+			return "myPage/partner/pageMyFundingMain";
+		}
+		
 	}
 	
 	// 검색	
 	@RequestMapping("orderNDeliverySearch.part")
 	public ModelAndView selectSearchPartOrder(@RequestParam(defaultValue="") String shStatus,
-										@RequestParam(defaultValue="") String orStatus,
-		  								@RequestParam(defaultValue="") String condition,
-		  								@RequestParam(defaultValue="") String keyword,
-	  									@RequestParam(value="currentPage", defaultValue="1") int currentPage,
-	  									ModelAndView mv) {
+												@RequestParam(defaultValue="") String orStatus,
+				  								@RequestParam(defaultValue="") String condition,
+				  								@RequestParam(defaultValue="") String keyword,
+			  									@RequestParam(value="currentPage", defaultValue="1") int currentPage,
+			  									HttpSession session, ModelAndView mv) {
 		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		int mno = loginUser.getMemberNo();
 		
-		HashMap<String, String> map = new HashMap<String, String>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("shStatus", shStatus);
 		map.put("orStatus", orStatus);
 		map.put("condition", condition);
 		map.put("keyword", keyword);
+		map.put("mno", loginUser.getMemberNo());
+		//System.out.println(map);
 		
 		int count = oService.countSearchPartOrder(map);
 		
@@ -190,10 +211,10 @@ public class OrderController {
 	@RequestMapping(value="refund.info", produces="apllication/json; charset=utf-8")
 		public String ajaxSelectRefundinfo(int ono) {
 		
-		//System.out.println(ono);
+		System.out.println(ono);
 		
 		Order r = oService.selectRefundInfo(ono);
-		//System.out.println(r);
+		System.out.println(r);
 		
 		return new Gson().toJson(r);
 	}
@@ -225,7 +246,6 @@ public class OrderController {
 	}
 	
 	// 환불 승인/거절
-	@ResponseBody
 	@RequestMapping("refundable.part")
 	public String updateRefundStatus(int ono,  HttpSession session) {
 		
@@ -233,10 +253,10 @@ public class OrderController {
 		
 		int refund = oService.updateRefundStatus(ono);
 		int order = oService.updateOrderStatus(ono);
-		System.out.println(order);
+		//System.out.println(order);
 		
 		if(refund > 0 && order > 0 ) {
-			session.setAttribute("alertMsg", "환불 승인");
+			//session.setAttribute("alertMsg", "환불 승인");
 			return "redirect:orderNDeliveryList.part";
 		}else {
 			session.setAttribute("alertMsg", "실패실패");
@@ -245,6 +265,9 @@ public class OrderController {
 		 
 	
 	}
+	
+	
+	
 	
 	
 	
