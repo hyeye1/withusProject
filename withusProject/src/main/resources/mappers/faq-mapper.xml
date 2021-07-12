@@ -13,7 +13,7 @@
 	</resultMap>
 	
 	
-	<select id="selectFaq" resultMap="Faq" parameterType="_int">
+	<select id="selectFaq" resultMap="faq" parameterType="_int">
 		select
 		       faq_no
 		     , faq_cat
