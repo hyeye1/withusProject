@@ -68,13 +68,14 @@ public class FundingServiceImpl implements FundingService {
 	}
 
 	@Override
-   	public int insertProject(Project p) {
+   	public int insertProject(Project p, ArrayList<Reward> list) {
+    	
+    	for(Reward r : list){
+    		  funDao.insertReward(sqlSession, r); 
+    		}
+
     	return funDao.insertProject(sqlSession, p);
-   	}
-	
-	@Override
-   	public int insertReward(Reward r) {
-    	return funDao.insertReward(sqlSession, r);
+    	
    	}
    
 

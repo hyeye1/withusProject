@@ -51,10 +51,11 @@ public class FundingDao {
 	}
 
 	public int insertProject(SqlSessionTemplate sqlSession, Project p) {
-        return sqlSession.insert("fundingMapper.insertProject", p);
+		return sqlSession.insert("fundingMapper.insertProject", p);
     }
-	
+
 	public int insertReward(SqlSessionTemplate sqlSession, Reward r) {
-        return sqlSession.insert("fundingMapper.insertReward", r);
-    }
+		return sqlSession.insert("fundingMapper.insertReward", r);		
+	}
+	
 }

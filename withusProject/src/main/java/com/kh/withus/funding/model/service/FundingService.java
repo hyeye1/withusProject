@@ -34,8 +34,6 @@ public interface FundingService {
 	int minusStock(Order o);
 	
 	// 펀딩 등록
-    int insertProject(Project p);
+    int insertProject(Project p, ArrayList<Reward> list);
     
-    // 리워드 등록
-    int insertReward(Reward r);
 }

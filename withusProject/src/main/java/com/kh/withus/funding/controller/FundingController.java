@@ -93,13 +93,21 @@ public class FundingController {
 	}
 	
 	@RequestMapping("register.fd")
-	public String FundingRegistration() {
-		return "funding/fundingRegistration";
+	public String FundingRegistration(HttpSession session) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		if(loginUser == null) {
+			session.setAttribute("alertMsg", "로그인해주세요.");
+			return "redirect:loginForm.me";
+		}else {
+			return "funding/fundingRegistration";
+			
+		}
 	}
 
 	   
 	@RequestMapping("success.fd")
-	public String fundingSuccess(Project p, Reward r, MultipartFile upfile, HttpSession session, Model model) {
+	public String fundingSuccess(Project p, ArrayList<Reward> list, MultipartFile upfile, HttpSession session, Model model) {
 		/*
 		 * 만약 다중 첨부파일 업로드 기능일 겨웅?
 		 * <input type="file"> 요소들 다 동일한 키값으로 부여
@@ -140,23 +148,25 @@ public class FundingController {
 		//}
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
+		
 		p.setMemberNo(loginUser.getMemberNo());
 		
+		System.out.println(p);
+		System.out.println(list);
 		
 		// servieImpl, dao, sql 작성
-		int result = funService.insertProject(p);
-		int rewardResult = funService.insertReward(r);
+		int result = funService.insertProject(p, list);
 
 		if(result>0) {
 			// 성공했을 경우
-			if(rewardResult>0) {
-				session.setAttribute("alertMsg", "성공적으로 프로젝트 등록 승인 요청을 보냈습니다.");
-				return "redirect:list.rew";
-			}else {
+			//if(rewardResult>0) {
+			//	session.setAttribute("alertMsg", "성공적으로 프로젝트 등록 승인 요청을 보냈습니다.");
+			//	return "redirect:list.rew";
+			//}else {
 				// 프로젝트는 성공 리워드는 실패
 				session.setAttribute("alertMsg", "리워드 등록 실패하였습니다.");
 				return "redirect:list.rew";
-			}
+			//}
 			
 			
 		}else {

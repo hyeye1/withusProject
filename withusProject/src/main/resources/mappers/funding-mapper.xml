@@ -262,9 +262,6 @@
 			 , project_content
 			 , project_refcon
 			 , hashtag
-			 , project_status   
-			 , project_cr_dt    
-			 , project_temporary
 			 , delivery_date
 			 , partner_phone
 			 , phone_yn
@@ -290,9 +287,6 @@
 			 , #{projectContent}
 			 , #{projectRefcon}
 			 , #{hashtag}
-			 , #{projectStatus}
-			 , #{projectCrDT}
-			 , #{projectTemporary}
 			 , #{deliveryDate}
 			 , #{partnerPhone}
 			 , #{phoneYN}
@@ -322,7 +316,7 @@
  		     )
  		value
  		     (
- 		       seq_rno.nextval
+ 		       seq_rno.currval
  		     , #{projectNo}
  		     , #{rewardPrice}
  		     , #{rewardStatus}
