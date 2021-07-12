@@ -119,6 +119,15 @@ public class OrderDao {
 	}
 
 	// 환불모달: 승인처리
+	public int updateRefundStatus(SqlSessionTemplate sqlSession,HashMap<String, Object> map){
+		
+		return sqlSession.update("orderMapper.updateRefundStatus", map);
+	}
+	
+	public int updateOrderStatus(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		return sqlSession.update("orderMapper.updateOrderStatus", map);
+	}
+	/*
 	public int updateRefundStatus(SqlSessionTemplate sqlSession, int orderNo){
 		
 		return sqlSession.update("orderMapper.updateRefundStatus", orderNo);
@@ -127,6 +136,6 @@ public class OrderDao {
 	public int updateOrderStatus(SqlSessionTemplate sqlSession, int orderNo) {
 		return sqlSession.update("orderMapper.updateOrderStatus", orderNo);
 	}
-
+	*/
 	
 }

@@ -175,6 +175,9 @@ public class OrderController {
 		map.put("mno", loginUser.getMemberNo());
 		//System.out.println(map);
 		
+		// statusBox에 출력될 건수
+		Order sc = oService.selectStatusCount(mno);
+		
 		int count = oService.countSearchPartOrder(map);
 		
 		PageInfo pi = pagination.getPageInfo(count, currentPage, 10, 10);
@@ -187,6 +190,7 @@ public class OrderController {
 		  .addObject("orStatus",orStatus)
 		  .addObject("condition",condition)
 		  .addObject("keyword",keyword)
+		  .addObject("sc", sc)
 		  .setViewName("myPage/partner/pagePartOrderNDeliveryList");
 		
 		return mv;
@@ -211,10 +215,10 @@ public class OrderController {
 	@RequestMapping(value="refund.info", produces="apllication/json; charset=utf-8")
 		public String ajaxSelectRefundinfo(int ono) {
 		
-		System.out.println(ono);
+		//System.out.println(ono);
 		
 		Order r = oService.selectRefundInfo(ono);
-		System.out.println(r);
+		//System.out.println(r);
 		
 		return new Gson().toJson(r);
 	}
@@ -231,7 +235,7 @@ public class OrderController {
 		map.put("company", company);
 		map.put("sno", sno);
 		map.put("ono", ono);
-		//System.out.println(map);
+		System.out.println(map);
 		
 		int result = oService.insertShippingInfo(map);
 		
@@ -246,6 +250,7 @@ public class OrderController {
 	}
 	
 	// 환불 승인/거절
+/*	
 	@RequestMapping("refundable.part")
 	public String updateRefundStatus(int ono,  HttpSession session) {
 		
@@ -266,6 +271,32 @@ public class OrderController {
 	
 	}
 	
+*/	
+	
+	@RequestMapping("refundable.part")
+	public String updateRefundStatus(@RequestParam(defaultValue="") int ono,
+										@RequestParam(defaultValue="") String rstatus,
+										HttpSession session) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ono", ono);
+		map.put("rstatus", rstatus);
+		//System.out.println(map);
+		
+		int refund = oService.updateRefundStatus(map);
+		int order = oService.updateOrderStatus(map);
+		
+		
+		if(refund > 0 && order > 0 ) {
+			//session.setAttribute("alertMsg", "환불 승인");
+			return "redirect:orderNDeliveryList.part";
+		}else {
+			session.setAttribute("alertMsg", "실패실패");
+			return "redirect:orderNDeliveryList.part";
+		}
+		 
+	
+	}
 	
 	
 	

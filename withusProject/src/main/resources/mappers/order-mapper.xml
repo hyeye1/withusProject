@@ -132,7 +132,7 @@
 		from tb_order o 
         join member using (member_no)
 		<choose>
-       		<when test="orderKeyword == 'orderAll' ">
+       		<when test="orderKeyword == 'orderAll'">
        			where (order_no like '%' || #{keyword} || '%' 
        			    or member_name like '%' || #{keyword} || '%' )
        		</when>
@@ -176,7 +176,7 @@
           full join project p on (o.project_no = p.project_no)
          join reward using (reward_no)
          <choose>
-       		<when test="orderKeyword == 'orderAll' ">
+       		<when test="orderKeyword == 'orderAll'">
        			where (order_no like '%' || #{keyword} || '%' 
        			    or member_name like '%' || #{keyword} || '%' )
        		</when>
@@ -215,15 +215,6 @@
 		     from tb_order o
 		     join project p on(o.project_no = p.project_no)
 		     where p.member_no = #{memberNo}
-	<!-- 파트너가 게시한 프로젝트만 출력, 로그인한 mem_no = 프로젝트 mem_no-
-		  select
-		  count(order_no)
-		  from project p 
-		  join member m  on(m.member_no = p.member_no)
-		  join tb_order o on(p.project_no = o.project_no)
-		  where m.member_no = p.member_no
-		   and p.project_no = #{projectNo}
-	-->
 	</select>
 	
 	<!-- 서포터관리  -->
@@ -343,9 +334,15 @@
           			       or o.shipping_no like '%' || #{keyword} || '%'
           			       or m.member_name like '%' || #{keyword} || '%' ) 
 	          		</when>
-	          		<otherwise>
-	           	 		where ${condition} like '%' || #{keyword} || '%' 
-	          		</otherwise>
+	          		<when test="contion == 'order_no'">
+						where o.order_no like '%' || #{keyword} || '%' 
+					</when>
+					<when test="contion == 'shipping_no'">
+						where o.shipping_no like '%' || #{keyword} || '%' 
+					</when>
+					<when test="contion == 'member_name'">
+						where m.member_name like '%' || #{keyword} || '%' 
+					</when>
 	          </choose>
 	          <if test='shStatus != null'>
 	          	<choose>
@@ -355,12 +352,12 @@
           		</choose>
 	          </if>
 	          <if test='odStatus != null'>
-			 <choose>
-		   		<when test="odStatus == 1"> and o.order_status = 1 </when>
-		   		<when test="odStatus == 2"> and o.order_status = 2 </when>
-		   		<when test="odStatus == 3"> and o.order_status = 3  </when>
-			 </choose>
-		 </if>
+				 <choose>
+			   		<when test="odStatus == 1"> and o.order_status = 1 </when>
+			   		<when test="odStatus == 2"> and o.order_status = 2 </when>
+			   		<when test="odStatus == 3"> and o.order_status = 3  </when>
+				 </choose>
+		 	</if>
 	      and p.member_no = #{memberNo}   
           and o.reward_no = r.reward_no
 			 order
@@ -421,19 +418,26 @@
 	</select>
 	
 	<!-- 환불 모달 : 승인/거절 -->
-	<update id="updateRefundStatus" parameterType="_int">
+	<update id="updateRefundStatus" parameterType="hashmap">
 		update refund
 		   set 
-		   	   refund_status = 'Y'
-		 where order_no = #{orderNo}  
+		   	   refund_status = #{rstatus}
+		 where order_no = #{ono}  
 	</update>
 	
-	<update id="updateOrderStatus" parameterType="_int">
+	<update id="updateOrderStatus" parameterType="hashmap">
 		update tb_order
 		   set 
-		       order_status = 3
-		     , shipping_status = 4
-		 where order_no = #{orderNo}    
+		   <choose>
+		   		<when test='rstatus == "Y"'>
+			       order_status = 3
+			     , shipping_status = 4
+		   		</when>
+		   		<when test="rstatus == 'R'.toString()">
+		   			order_status = 4
+		   		</when>
+		   </choose>
+		 where order_no = #{ono}    
 	</update>
 	
 

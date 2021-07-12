@@ -93,6 +93,17 @@ public class OrderServiceImpl implements OrderService {
 
 	// 환불승인처리
 	@Override
+	public int updateRefundStatus(HashMap<String, Object> map) {
+		return oDao.updateRefundStatus(sqlSession, map);
+	}
+	
+	@Override
+	public int updateOrderStatus(HashMap<String, Object> map) {
+		return oDao.updateOrderStatus(sqlSession, map);
+	}
+	
+	/*
+	@Override
 	public int updateRefundStatus(int orderNo) {
 		return oDao.updateRefundStatus(sqlSession, orderNo);
 	}
@@ -101,6 +112,7 @@ public class OrderServiceImpl implements OrderService {
 	public int updateOrderStatus(int orderNo) {
 		return oDao.updateOrderStatus(sqlSession, orderNo);
 	}
+	*/
 	
 
 }
