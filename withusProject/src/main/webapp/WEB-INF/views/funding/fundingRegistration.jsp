@@ -656,7 +656,7 @@
                                             <b class="regiTitle">리워드 금액</b>
                                         </th>
                                         <td>
-                                            <input type="text" placeholder="1,000원 이상 입력해 주세요." class="rePrice">
+                                            <input type="text" placeholder="1,000원 이상 입력해 주세요." name="rePrice" class="rePrice reAll">
                                         </td>
                                         <td>원</td>
                                     </tr>
@@ -675,7 +675,8 @@
                                             <label for="unlimited">
                                                 <input type="radio" class="limit" name="limit" id="unlimited" value="unlimited" style="width: 30px;"  onclick="limitBtn(1); limitBtn1();"> 무제한
                                             </label>
-                                            <input type="number" name="limitNum" id="limitNum" class="limitNum">
+                                            <input type="hidden" class="limitation" name="limitation" value="Y">
+                                            <input type="number" name="limitNum" id="limitNum" name="limitNum" class="limitNum reAll">
                                         </td>
                                         <td class="limitNum">개</td>
                                     </tr>
@@ -684,7 +685,7 @@
                                             <b class="regiTitle">리워드 제목</b>
                                         </th>
                                         <td>
-                                            <input type="text" name="reTitle" id="reTitle" class="reTitle">
+                                            <input type="text" name="reTitle" id="reTitle" class="reTitle reAll">
                                         </td>
                                         <td>0/30</td>
                                     </tr>
@@ -693,7 +694,7 @@
                                             <b class="regiTitle">리워드 내용</b>
                                         </th>
                                         <td>
-                                            <textarea name="reContent" id="reContent" placeholder="준비된 리워드와 설명을 적어주세요"
+                                            <textarea class="reAll reContent" name="reContent" placeholder="준비된 리워드와 설명을 적어주세요"
                                                 style="resize: none;"></textarea>
                                         </td>
                                         <td>0/70</td>
@@ -704,7 +705,7 @@
                                         </th>
                                         <td>
                                             <button type="button" id="addOptionBtn" onclick="addOption();">리워드 옵션 추가하기</button>
-                                            <input type="hidden" name="optionYn" value="N">
+                                            <input type="hidden" class="optionYn" name="optionYn" value="N">
                                         </td>
                                     </tr>
                                     <tr class="optionOnTr" style="display: none;">
@@ -713,7 +714,7 @@
                                         </th>
                                         <td>
                                             <p id="regiOption">옵션설명 <b class="pink delOpt" onclick="delOpt();">옵션취소</b></p>
-                                            <input class="optionInput" name="option" type="text" placeholder="ex) 사이즈를 입력하세요">
+                                            <input class="optionInput reAll" name="option" type="text" placeholder="ex) 사이즈를 입력하세요">
                                         </td>
                                         <td>
                                             <p></p>0/20
@@ -730,7 +731,7 @@
                                             <label for="noShip">
                                                 <input type="radio" name="ship" id="noShip" value="N" style="width: 30px;"> 배송지 필요없음
                                             </label>
-    
+                                            <input type="hidden" class="shipment" name="shipment" value="Y">
                                             <!-- 
                                                 <button class="btn1">배송지 필요</button>
                                                 <button class="btn2">배송지 필요없음</button>
@@ -758,21 +759,48 @@
                                 </table>
 
                                 <script>
+                                    function addOption() {
+                                        $('.addOptionTr').hide();
+                                        $('.optionOnTr').show();
+                                        $('.optionYn').val('Y');
+                                    }
+                
+                                    function delOpt(){
+                                        $('.optionOnTr').hide();
+                                        $('.optionInput').val('');
+                                        $('.addOptionTr').show();
+                                        $('.optionYn').val('N');
+                                    }
+
                                     var count = 0;
                 
                                     function addedReward(){
-                                        var price = $('input[class=rePrice]').val();
-                                        var limit = $('input[class=limitNum]').val();
-                                        var limited = $('input:radio[name=limit]:checked').val();
-                                        var title = $('input[class=reTitle').val();
-                                        var content = $('textarea[name=reContent]').val();
-                                        var option = $('input[name=option]').val();
-                                        var ship = $('input[name=ship]:checked').val();
-                                        var optionYn = $('input[name=optionYn]').val();;
-                                        var all = $('.regiReward input, textarea');
-                                        
-                                        console.log(limited);
+                                        if($('#unlimited').prop("checked")){
+                                            $('.limitation').val('N');
+                                        }else{
+                                            $('.limitation').val('Y');
+                                        }
 
+                                        $('#noShip').change(function(){
+                                            if($('#noShip').prop("checked")){
+                                                $('.shipment').val('N');
+                                            }else{
+                                                $('.shipment').val('Y');
+                                            }
+                                        })
+
+                                        var price = $('input[name=rePrice]').val();
+                                        var limit = $('input[name=limitNum]').val();
+                                        var limited = $('input:radio[name=limit]:checked').val();
+                                        var limitation = $('input[name=limitation]').val();
+                                        var title = $('input[name=reTitle]').val();
+                                        var content = $('.reContent').val();
+                                        var option = $('input[name=option]').val();
+                                        var optionYn = $('input[name=optionYn]').val();
+                                        var ship = $('input[name=ship]:checked').val();
+                                        var shipment = $('input[name=shipment]').val();
+                                    
+                                        
                                         // limited가 선택되어있는데, limit이 비어있을 경우 => 안된다
                                         // unlimited가 선택되어있으면 , limit비어있든 말든 상관없음
                                         if ( limited == "limited" && limit == ""){
@@ -808,11 +836,11 @@
                                                         '</td>';
         
                                                     aa += '<input type="hidden" name="rewardList[' + count + '].rewardPrice" value="' + price +'">'+
-                                                          '<input type="hidden" name="rewardList[' + count + '].rewardStatus" value="' + limited +'">'+ //무제한: 'unlimited' 제한: 'limited' 
+                                                          '<input type="hidden" name="rewardList[' + count + '].rewardStatus" value="' + limitation +'">'+ //무제한: 'unlimited' 제한: 'limited' 
                                                           '<input type="hidden" name="rewardList[' + count + '].rewardStock" value="' + limit +'">'+
-                                                          '<input type="hidden" name="rewardList[' + count + '].rewardShip" value="' + ship +'">'+
+                                                          '<input type="hidden" name="rewardList[' + count + '].rewardShip" value="' + shipment +'">'+
                                                           '<input type="hidden" name="rewardList[' + count + '].rewardTitle" value="' + title +'">'+
-                                                          '<input type="hidden" name="rewardList[' + count + '].rewardContent" value="' + content +'">';
+                                                          '<input type="hidden" name="rewardList[' + count + '].rewardContent" value="' + content +'">'+
                                                           '<input type="hidden" name="rewardList[' + count + '].optionYn" value="' + optionYn +'">'+
                                                           '<input type="hidden" name="rewardList[' + count + '].rewardOption" value="' + option +'">';
                                                     
@@ -824,11 +852,26 @@
                                                 $(".rewardOn").show();
                                                 
                                                 count++;
-                                                console.log(optionYn);      
                                                 
                                             }
-                                            $(all).val('');
+
+                                            
+                                        console.log(optionYn);  
+                                        console.log(option);
                                         }
+                                        $('.reAll').val('');
+                                        $('#limited').prop('checked', true);
+                                        $(limitation).val('Y');
+                                        $('.optionOnTr').hide();
+                                        $('.addOptionTr').show();
+                                        $(optionYn).val('N');
+                                        $('#limitNum').show();
+                                        $('#yesShip').prop('checked', true);
+                                        $(shipment).val('Y');
+
+
+                                        //console.log(limitation);    
+                                        //console.log(shipment);
                                     }
                                 </script>
 
@@ -1027,18 +1070,6 @@
                             $(".regiMenu").css('color', 'black');
                             $(".li" + className).css('color', 'rgb(41, 128, 185)');
                             $(window).scrollTop(0);
-                        }
-    
-                        function addOption() {
-                            $('.addOptionTr').hide();
-                            $('.optionOnTr').show();
-                            
-                        }
-    
-                        function delOpt(){
-                            $('.optionOnTr').hide();
-                            $('.optionInput').val('');
-                            $('.addOptionTr').show();
                         }
     
                         function limitBtn(className) {

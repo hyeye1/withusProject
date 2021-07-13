@@ -348,13 +348,13 @@
  		     , reward_ship
  		     , reward_title
  		     , reward_content
- 		     , reward_yn
+ 		     , option_yn
  		     , reward_option
  		     )
- 		value
+ 		values
  		     (
  		       seq_rno.nextval
- 		     , seq_pno.currval
+ 		     , #{projectNo}
  		     , #{rewardPrice}
  		     , #{rewardStatus}
  		     , #{rewardStock}
