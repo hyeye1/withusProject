@@ -10,6 +10,7 @@ import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.category.model.vo.Category;
 import com.kh.withus.funding.model.dao.FundingDao;
 import com.kh.withus.funding.model.vo.Project;
+import com.kh.withus.funding.model.vo.Reward;
 import com.kh.withus.order.model.vo.Order;
 
 @Service
@@ -27,9 +28,14 @@ public class FundingServiceImpl implements FundingService {
 	}
 	
 	@Override
-	public ArrayList<Project> selectList() {
-		return funDao.selectList(sqlSession);
-	}
+    public ArrayList<Project> selectAllList() {
+       return funDao.selectAllList(sqlSession);
+    }
+    
+    @Override
+    public ArrayList<Project> selectList(int catNo) {
+       return funDao.selectList(sqlSession, catNo);
+    }
 	
 	@Override
 	public int increaseCount(int projectNo) {
@@ -66,6 +72,16 @@ public class FundingServiceImpl implements FundingService {
 		return funDao.minusStock(sqlSession, o);
 	}
 
-	
+	@Override
+    public int insertProject(Project p) {
+     
+     for(Reward r : p.getRewardList()){
+          funDao.insertReward(sqlSession, r); 
+        }
+
+     return funDao.insertProject(sqlSession, p);
+     
+    }
+   
 
 }
