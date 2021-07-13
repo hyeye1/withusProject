@@ -203,19 +203,19 @@
 						<div class="cateCenter">
 							<div clear="both" class="style_3">카테고리</div>
 							<div class="sub1">
-								<div class="style_2"><a class="style_2a" href="list.fun">전체보기</a></div>
-								<div class="style_2"><a class="style_2a" href="list.fun?catNo=1">테크/가전</a></div>
-								<div class="style_2"><a class="style_2a" href="list.fun?catNo=2">패션/잡화</a></div>
-								<div class="style_2"><a class="style_2a" href="list.fun?catNo=3">뷰티</a></div>
-								<div class="style_2"><a class="style_2a" href="list.fun?catNo=4">푸드</a></div>
+								<div class="style_2"><a class="style_2a" href="list.fun?catNo=1">전체보기</a></div>
+								<div class="style_2"><a class="style_2a" href="list.fun?catNo=2">테크/가전</a></div>
+								<div class="style_2"><a class="style_2a" href="list.fun?catNo=3">패션/잡화</a></div>
+								<div class="style_2"><a class="style_2a" href="list.fun?catNo=4">뷰티</a></div>
+								<div class="style_2"><a class="style_2a" href="list.fun?catNo=5">푸드</a></div>
 
 							</div>
 							<div class="sub2">
-								<div class="style_2"><a class="style_2a" href="list.fun?catNo=5">홈리핑</a></div>
-								<div class="style_2"><a class="style_2a" a href="list.fun?catNo=6">디자인 소품</a></div>
-								<div class="style_2"><a class="style_2a" href="list.fun?catNo=7">여행/레저</a></div>
-								<div class="style_2"><a class="style_2a" href="list.fun?catNo=8">스포츠/모빌리티</a></div>
-								<div class="style_2"><a class="style_2a" href="list.fun?catNo=9">반려동물</a></div>
+								<div class="style_2"><a class="style_2a" href="list.fun?catNo=6">홈리핑</a></div>
+								<div class="style_2"><a class="style_2a" a href="list.fun?catNo=7">디자인 소품</a></div>
+								<div class="style_2"><a class="style_2a" href="list.fun?catNo=8">여행/레저</a></div>
+								<div class="style_2"><a class="style_2a" href="list.fun?catNo=9">스포츠/모빌리티</a></div>
+								<div class="style_2"><a class="style_2a" href="list.fun?catNo=10">반려동물</a></div>
 
 							</div>
 
