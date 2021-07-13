@@ -119,17 +119,14 @@ public class FundingController {
 		 * <input type="file"> 요소들 다 동일한 키값으로 부여
 		 * Controller쪽에서 매개변수로 MultipartFile[] 키값 으로 받아오면됨
 		 */
-		
-		
-		
-		//System.out.println(b);
-		//System.out.println(upfile.getOriginalFilename());
+		System.out.println(p.getProjectThum());
+		//System.out.println(.getOriginalFilename());
 		// 곧바로 받아내지지 않음 => 파일업로드 관련 라이브러리 추가 + 파일업로드 관련 클래스 빈등록
 		
 		// 전달된 파일이 있을 경우 => 파일명 수정 작업 후 서버에 업로드 => 파일원본명,실제서버에업로드된경로를 b 추가로 담기
-		//if(!upfile.getOriginalFilename().equals("")) {
+		if(!upfile.getOriginalFilename().equals("")) {
+		
 			
-			/*
 			String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
 			
 			String originName = upfile.getOriginalFilename();  // 원본명 ("aaa.jpg")
@@ -145,16 +142,20 @@ public class FundingController {
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
-			*/
-		//	String projectThum = saveFile(session, upfile);
 			
-		//	p.setProjectThum(upfile.getOriginalFilename());
-		//	p.setProjectThum("resources/project_thumbnail/" + projectThum); // 업로드된파일명+파일명
+			String projectThum = saveFile(session, upfile);
 			
-		//}
+			p.setProjectThum(upfile.getOriginalFilename());
+			//p.setProjectThum("resources/project_thumbnail/" + projectThum); // 업로드된파일명+파일명
+			
+		}
 		
+		String projectThum = p.getProjectThum();
+		
+		p.setProjectThum("resources/project_thumbnail/" + projectThum);
+	
 		Member loginUser = (Member)session.getAttribute("loginUser");
-		
+
 		p.setMemberNo(loginUser.getMemberNo());
 		
 		System.out.println(p);
@@ -163,16 +164,8 @@ public class FundingController {
 		int result = funService.insertProject(p);
 
 		if(result>0) {
-			// 성공했을 경우
-			//if(rewardResult>0) {
-			//	session.setAttribute("alertMsg", "성공적으로 프로젝트 등록 승인 요청을 보냈습니다.");
-			//	return "redirect:list.rew";
-			//}else {
-				// 프로젝트는 성공 리워드는 실패
-				session.setAttribute("alertMsg", "리워드 등록 실패하였습니다.");
-				return "redirect:/";
-			//}
-			
+			session.setAttribute("alertMsg", "성공적으로 프로젝트 등록 승인 요청을 보냈습니다.");
+			return "redirect:/";
 			
 		}else {
 			// 프로젝트 등록 실패했을 경우 

@@ -354,7 +354,7 @@
  		values
  		     (
  		       seq_rno.nextval
- 		     , #{projectNo}
+ 		     , seq_pno.currval
  		     , #{rewardPrice}
  		     , #{rewardStatus}
  		     , #{rewardStock}
