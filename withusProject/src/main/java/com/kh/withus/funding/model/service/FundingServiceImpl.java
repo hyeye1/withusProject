@@ -28,9 +28,14 @@ public class FundingServiceImpl implements FundingService {
 	}
 	
 	@Override
-	public ArrayList<Project> selectList() {
-		return funDao.selectList(sqlSession);
-	}
+    public ArrayList<Project> selectAllList() {
+       return funDao.selectAllList(sqlSession);
+    }
+    
+    @Override
+    public ArrayList<Project> selectList(int catNo) {
+       return funDao.selectList(sqlSession, catNo);
+    }
 	
 	@Override
 	public int increaseCount(int projectNo) {

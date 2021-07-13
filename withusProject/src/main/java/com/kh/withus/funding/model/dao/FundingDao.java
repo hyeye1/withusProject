@@ -18,9 +18,13 @@ public class FundingDao {
 		return (ArrayList)sqlSession.selectList("fundingMapper.selectCate");
 	}
 	
-	public ArrayList<Project> selectList(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("fundingMapper.selectList");
-	}
+    public ArrayList<Project> selectAllList(SqlSessionTemplate sqlSession) {
+       return (ArrayList)sqlSession.selectList("fundingMapper.selectAllList");
+    }
+   
+    public ArrayList<Project> selectList(SqlSessionTemplate sqlSession, int catNo) {
+       return (ArrayList)sqlSession.selectList("fundingMapper.selectList", catNo);
+    }
 	
 	public int increaseCount(SqlSessionTemplate sqlSession, int projectNo) {
 		return sqlSession.update("fundingMapper.increaseCount", projectNo);

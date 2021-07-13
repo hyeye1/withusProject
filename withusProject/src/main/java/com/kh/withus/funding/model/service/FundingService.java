@@ -14,7 +14,8 @@ public interface FundingService {
 	ArrayList<Category> selectCate();
 	
 	// 펀딩 리스트 조회
-	ArrayList<Project> selectList();
+	ArrayList<Project> selectAllList();
+    ArrayList<Project> selectList(int catNo);
 	
 	// 상세페이지 조회
 	int increaseCount(int projectNo);

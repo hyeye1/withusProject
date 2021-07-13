@@ -31,21 +31,27 @@ public class FundingController {
 	private FundingService funService;
 	
 	@RequestMapping("list.fun")
-	public ModelAndView selectFundingList(ModelAndView mv) {
+    public ModelAndView selectFundingList(int catNo, ModelAndView mv) {
 		
 		// 전체 카테고리 사진, 명 조회
 		ArrayList<Category> cList = funService.selectCate();
+		ArrayList<Project> list = null;
 		
 		// 펀딩 상품 조회
-		ArrayList<Project> list = funService.selectList();
+		if(catNo == 1) {
+			list = funService.selectAllList();
+		} else {
+			list = funService.selectList(catNo);
+		}
 		
 		mv.addObject("list", list)
-		  .addObject("cList", cList)
-		  .setViewName("funding/fundingListView");
+		.addObject("cList", cList)
+		.addObject("catNo", catNo)
+		.setViewName("funding/fundingListView");
 		
 		return mv;
-		
 	}
+		      
 	
 	@RequestMapping("list.rew")
 	public String selectRewardList(int pno, @RequestParam(value="rno", defaultValue="0") int rno, Model model) {
