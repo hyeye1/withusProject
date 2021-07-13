@@ -10,7 +10,7 @@
 		<result column="project_title" property="projectTitle" />
 		<result column="cat_no" property="catNo" />
 		<result column="cat_name" property="catName" />
-		<result column="partner_name" property="memberNo" />
+		<result column="partner_name" property="partnerName" />
 		<result column="total_price" property="totalPrice" />
 		<result column="project_gprice" property="projectGprice" />
 		<result column="project_start_dt" property="projectStartDT" />

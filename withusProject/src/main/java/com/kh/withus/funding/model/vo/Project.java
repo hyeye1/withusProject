@@ -16,6 +16,7 @@ public class Project {
 	
 	private int projectNo;
 	private int memberNo;
+	private String partnerName;
 	private int catNo;
 	private String catName;
 	private String projectTitle;
