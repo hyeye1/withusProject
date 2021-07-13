@@ -42,6 +42,11 @@ public class OtoController {
 	}
 	
 	@RequestMapping("enrollForm.oto")
+	public String enrollForm() {
+		return "csc/otoEnrollForm";
+	}
+	
+	@RequestMapping("insert.oto")
 	public String insertOto(Oto o, MultipartFile upfile, HttpSession session, Model model) {
 		
 		if(!upfile.getOriginalFilename().equals("")) {
@@ -83,5 +88,35 @@ public class OtoController {
 		}
 
 
+	@RequestMapping("detail.oto")
+	public String selectOto(int ono, Model model) {
+		int result = oService.increaseCount(ono);
+		
+		if(result > 0) {
+			Oto o = oService.selectOto(ono);
+			model.addAttribute("o", o);
+			return "csc/otoDetailView";
+		}else {
+			model.addAttribute("errorMsg", "문의하기 조회를 실패했습니다.");
+			return "common/errorPage";
+		}
+	}
+	
+	@RequestMapping("delete.oto")
+	public String deleteOto(int ono, String filePath, HttpSession session, Model model) {
+		int result = oService.deleteOto(ono);
+		
+		if(result > 0) {
+			if(!filePath.contentEquals("")) {
+				new File(session.getServletContext().getRealPath(filePath)).delete();
+			}
+			
+			session.setAttribute("alertMsg", "성공적으로 삭제되었습니다.");
+			return "redirect:list.oto";
+		}else {
+			model.addAttribute("errorMsg", "삭제를 실패했습니다.");
+			return "common/errorPage";
+		}
+	}
 	
 }

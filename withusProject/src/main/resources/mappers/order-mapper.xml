@@ -118,10 +118,10 @@
 	</select>
 	
 	<!-- 결제 취소 -->
-	<update id="updateOrderCancle" parameterType="_int" >
+	<update id="updateOrderCancle" parameterType="hashmap" >
 		update tb_order
- 		   set order_status = '3'
-		 where order_no = #{orderNo}
+ 		   set order_status = #{cancleBtn}
+		 where order_no = #{ono}
 	</update>
 	
 	<!-- 검색 페이징 처리 -->

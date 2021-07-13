@@ -268,7 +268,7 @@
 			    	   
 					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 						<c:choose>
-							<c:when test="${ empty partnerJoin or empty memberStatus or empty memKey  }">
+							<c:when test="${ empty partnerJoin and empty memberStatus and empty memKey  }">
 				            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
 							</c:when>
 							<c:otherwise>
@@ -284,7 +284,7 @@
 			           	</c:when>
 			           	<c:otherwise>
 			           		<c:choose>
-			            		<c:when test="${ empty partnerJoin or empty memberStatus or empty memKey  }">
+			            		<c:when test="${ empty partnerJoin and empty memberStatus and empty memKey  }">
 					           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
 					            </c:when>
 					            <c:otherwise>

@@ -36,6 +36,7 @@
 	table.table-bordered td, table.table-bordered th {padding: .35rem; vertical-align: inherit;}
 	.tableHead{background-color: #eaeaea;}
 	.none{margin: 100px 0;}
+	.cancle{color: red;}
 	
 	
 	/* pagination */
@@ -78,8 +79,9 @@
                     <div class="refundAllStatus">
                         <label for="" style="float: left;"><b>환불상태</b></label> &nbsp;&nbsp;
                         <div class="refundRadios">
-                            <input type="radio" name="rfStatus" value="N"> 환불대기
-                            <input type="radio" name="rfStatus" value="Y"> 환불완료
+                            <input type="radio" name="rfStatus" value="S"> 대기
+                            <input type="radio" name="rfStatus" value="Y"> 승인
+                            <input type="radio" name="rfStatus" value="N"> 거절
                         </div>
                     </div>
                     <div class="searchBtns" align="right">
@@ -132,7 +134,17 @@
 		                        <td>${ r.supporterName }</td>
 		                        <td>${ r.projectTitle }<br>${ r.rewardTitle }/${ r.orderOption }</td>
 		                        <td>${ r.reReason }</td>
-		                        <td>${ r.refundStatus }</td>
+		                        <c:choose>
+		                       		<c:when test="${ r.refundStatus eq 'S'}">
+		                       			<td>대기</td>
+		                       		</c:when>
+		                       		<c:when test="${ r.refundStatus eq 'Y' }">
+		                       			<td>승인</td>
+		                       		</c:when>
+		                       		<c:when test="${ r.refundStatus eq 'N' }">
+		                       			<td>거절</td>
+		                       		</c:when>
+		                      	</c:choose>
 		                    </tr>
 	                    </c:forEach>
 	                </tbody>
@@ -161,7 +173,7 @@
 		            </c:when>
 		            <c:otherwise>
 		            	<c:choose>
-		            		<c:when test="${ empty refundKey or empty keyword or empty rfStatus }">
+		            		<c:when test="${ empty refundKey and empty keyword and empty rfStatus }">
 				            	<li class="page-item"><a class="page-link" href="${ pi.currentPage - 1 }">이전</a></li>
 				            </c:when>
 				            <c:otherwise>
@@ -173,7 +185,7 @@
 			    	   
 				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 					<c:choose>
-						<c:when test="${ empty refundKey or empty keyword or empty rfStatus }">
+						<c:when test="${ empty refundKey and empty keyword and empty rfStatus }">
                				<li class="page-item"><a class="page-link" href="refundListView.mana?currentPage=${ p }">${ p }</a></li>
 						</c:when>
 						<c:otherwise>
@@ -188,7 +200,7 @@
 		           	</c:when>
 		           	<c:otherwise>
 		           		<c:choose>
-		            		<c:when test="${ empty refundKey or empty keyword or empty rfStatus }">
+		            		<c:when test="${ empty refundKey and empty keyword and empty rfStatus }">
 				           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
 				            </c:when>
 				            <c:otherwise>

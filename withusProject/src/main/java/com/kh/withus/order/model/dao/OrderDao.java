@@ -37,11 +37,9 @@ public class OrderDao {
 	}
 	
 	// 결제 취소
-	public int updateOrderCancle(SqlSessionTemplate sqlSession, int orderNo) {
+	public int updateOrderCancle(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
 		
-		int test = sqlSession.selectOne("orderMapper.updateOrderCancle", orderNo);
-		System.out.println(test);
-		return test;
+		return sqlSession.update("orderMapper.updateOrderCancle", map);
 	}
 	
 	// 검색 페이징 처리

@@ -35,8 +35,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
-	public int updateOrderCancle(int orderNo) {
-		return oDao.updateOrderCancle(sqlSession, orderNo);
+	public int updateOrderCancle(HashMap<String, Object> map) {
+		return oDao.updateOrderCancle(sqlSession, map);
 	}
 	
 	@Override
