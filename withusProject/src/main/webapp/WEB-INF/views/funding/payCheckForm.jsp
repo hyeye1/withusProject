@@ -49,6 +49,7 @@
     .content3 {margin-top: 50px;}
     .content3 h3 {font-weight: 700; margin-bottom: 15px;}
     #table5 th {padding-left: 35px !important; height: 50px;}
+    #termImage {width:750px; margin:auto;}
     
 </style>
 <body>
@@ -149,7 +150,7 @@
 	                            <td colspan="2">환급받을 계좌정보 입력</td>
 	                        </tr>
 	                        <tr>
-	                            <td><input type="text" class="form-control" name="bankName" placeholder="ex) 국민은행"></td>
+	                            <td><input type="text" class="form-control" name="bankName" placeholder="ex) 국민은행" required></td>
 	                            <td></td>
 	                        </tr>
 	                        <tr>
@@ -204,7 +205,7 @@
 	                    <tr>
 	                        <th width="800">
 	                            <label class="form-check-label">
-	                                <input type="radio" class="form-check-input" name="optradio">전체 동의하기
+	                                <input type="checkbox" class="form-check-input" id="allAgree" name="optradio">전체 동의하기
 	                            </label>
 	                        </th>
 	                        <td></td>
@@ -212,18 +213,18 @@
 	                    <tr>
 	                        <th>
 	                            <label class="form-check-label">
-	                                <input type="checkbox" class="form-check-input" name="optradio" required>제 3자에 대한 개인정보 제공 동의
+	                                <input type="checkbox" class="form-check-input" id="agree1" name="optradio">제 3자에 대한 개인정보 제공 동의
 	                            </label>
 	                        </th>
-	                        <td><a href="">보기</a></td>
+	                        <td><a data-toggle="modal" data-target="#myModal1">보기</a></td>
 	                    </tr>
 	                    <tr>
 	                        <th>
 	                            <label class="form-check-label">
-	                                <input type="checkbox" class="form-check-input" name="optradio" required>책임 규정에 대한 동의
+	                                <input type="checkbox" class="form-check-input" id="agree1" name="optradio">책임 규정에 대한 동의
 	                            </label>
 	                        </th>
-	                        <td><a href="">보기</a></td>
+	                        <td><a data-toggle="modal" data-target="#myModal2">보기</a></td>
 	                    </tr>
 	
 	                </table>
@@ -232,12 +233,62 @@
 	        </div> 
 	
 	        <div class="buttonArea">
-	            <button type="button" id="pay" class="btn btn-primary" align="center">다음 단계로></button>
+	            <button type="button" id="pay" class="btn btn-primary" align="center" disabled="disabled">다음 단계로></button>
 	        </div>
 	        
 	    </form>   
 		
     </c:if>
+    
+    <!-- The Modal -->
+	<div class="modal" id="myModal1">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">제 3자에 대한 개인정보 제공 동의</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	        <img id="termImage" src="resources/images/agree1.png" >
+	      </div>
+	
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+	      </div>
+	
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- The Modal -->
+	<div class="modal" id="myModal2">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">책임 규정에 대한 동의</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	        <img id="termImage" src="resources/images/agree2.png">
+	      </div>
+	
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+	      </div>
+	
+	    </div>
+	  </div>
+	</div>
 
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
@@ -290,13 +341,73 @@
             }).open();
         }
         
+        /*
+        var $allAgree = $('#allAgree');
+        $allAgree.change(function () {
+          var $this = $(this);
+          var checked = $this.prop('checked');
+          $('input[name="optradio"]').prop('checked', checked);
+
+        });
+
+        var boxes = $('input[name="optradio"]');
+        boxes.change(function () {
+
+          var boxLength = boxes.length;
+          // 체크된 체크박스 갯수를 확인하기 위해 :checked 필터를 사용하여 체크박스만 선택한 후 length 프로퍼티를 확인
+          var checkedLength = $('input[name="optradio"]:checked').length;
+          var selectAll = (boxLength == checkedLength);
+
+          $al.prop('checked', selectAll);
+
+        });
+        */
+        $(document).ready(function(){
+
+        	//전체 체크 클릭 시, 나머지 체크 
+        	$("#allAgree").click(function(){
+        	var allAgree=$('input[name="optradio"]').prop("checked");
+
+        	    if(allAgree){
+        	        $('input[name="optradio"]').prop("checked",true);
+        	        $("#pay").prop("disabled",false);
+        	    }
+        	    else{
+        	        $('input[name="optradio"]').prop("checked",false);
+        	        $("#pay").prop("disabled",true);
+        	    }
+        	});
+
+        	// 모든 체크박스를 클릭하면 버튼 활성화시키기
+        	$('input[name="optradio"]').click(function(){
+        	    var tmpp = $(this).prop('checked'); 
+        	    //자식 체크 전체 체크시, 부모 체크박스 체크 됨
+        	    var tt = $('input[name="optradio"]').length;
+        	    var ss = $('input[name="optradio"]:checked').length;
+        	    
+        	    //선택한 체크박스 값이 true 이거나 체크박스 1개 이상 체크시 버튼 활성화시키기
+        	    if(tmpp==true){
+        	    $("#pay").prop("disabled",false);
+        	    }
+        	    else{
+        	    $("#pay").prop("disabled",true);
+        	    }
+        	    
+        	    
+        	    // 체크박스가 모두 선택되었을 때 상위 체크박스 선택되도록 설정
+        	    if(tt == ss){
+        	    	$("#allAgree").prop("checked",true);
+        	    }else{
+        	    	$("#allAgree").prop("checked",false);
+        	    }
+        	    
+        		});
+        	  
+        	});
     </script>
 	
     <br><br><br>
-	<p>
-        <p>아임 서포트 결제 모듈 테스트 해보기</p>
-        <button id="check_module" type="button">아임 서포트 결제 모듈 테스트 해보기</button>
-    </p>
+    
     <script>
         $("#pay").click(function () {
             var IMP = window.IMP;
