@@ -15,7 +15,7 @@ import lombok.ToString;
 public class Project {
 	
 	private int projectNo;
-	private String memberNo;
+	private int memberNo;
 	private int catNo;
 	private String catName;
 	private String projectTitle;
