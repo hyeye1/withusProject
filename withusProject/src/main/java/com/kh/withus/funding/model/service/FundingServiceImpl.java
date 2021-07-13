@@ -66,4 +66,6 @@ public class FundingServiceImpl implements FundingService {
 		return funDao.minusStock(sqlSession, o);
 	}
 
+	
+
 }

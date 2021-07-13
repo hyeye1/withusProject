@@ -14,11 +14,6 @@
 	    width:1200px;
 	    margin:auto;
 	}
-	.category1{
-		margin: auto;
-		width: 80%;
-		height: 100px;
-	}
 	.fundingList{
 		margin: auto;
 		width: 80%;
@@ -33,6 +28,16 @@
         cursor:pointer;
         opacity:0.5;
     }
+	 
+	/* .outer div {outline:1px solid purple;} */
+	.outer {margin:auto; margin-bottom:50px; width:1050px;}
+	.inner {display:flex;}
+   	.cateTable {margin-right:26px; text-align:center;}
+	.cateTable:hover {cursor:pointer; opacity:0.5;}
+ 	.cateImage {width:80px; height:80px; border-radius:70%; overflow:hidden;}
+	.cateImage:hover {}
+   	.cateFile {width:100%; height:100%;}
+	.cateText:hover {}
 	
 </style>
 </head>
@@ -43,20 +48,60 @@
 
 	<div class="innerOuter">
 
-		<div class="category1">
-			<c:forEach var="c" items="${ cList }">
-				<div class="cateThum" id="cateThum" align="center">
-					<img src="${ c.catFile }" width="120" height="120">
-					<p>${ c.catName }</p>
-					
-				</div>	
-			</c:forEach>
-			
-			
-		</div>
+		<div class="outer">
+			<div class="inner">
+			   <c:forEach var="c" items="${ cList }">
+				  <table class="cateTable" align="center">
+					 <tr>
+						<td>
+							<div class="cateImage"><img class="cateFile" src="${ c.catFile }">
+									<input type="hidden" class="cno" value="${ c.catNo }">
+							</div>
+						</td>
+					 </tr>
+					 <tr>
+						<td height="40" ><div class="cateText">${ c.catName }</div></td>
+					 </tr>
+				  </table>
+			   </c:forEach>
+			</div>
+		 </div>
 
 		<div class="fundingList" id="fundingList">
-			<h3>전체보기</h3>
+			<c:choose>
+		        <c:when test="${ catNo eq 1 }">
+					<span class="title"><h3>전체보기</h3></span>
+		        </c:when>
+		        <c:when test="${ catNo eq 2 }">
+					<span class="title"><h3>패션·잡화</h3></span>
+		        </c:when>
+		        <c:when test="${ catNo eq 3 }">
+					<span class="title"><h3>뷰티</h3></span>
+		        </c:when>
+		        <c:when test="${ catNo eq 4 }">
+					<span class="title"><h3>푸드</h3></span>
+		        </c:when>
+		        <c:when test="${ catNo eq 5 }">
+					<span class="title"><h3>홈리빙</h3></span>
+		        </c:when>
+		        <c:when test="${ catNo eq 6 }">
+					<span class="title"><h3>디자인소품</h3></span>
+		        </c:when>
+		        <c:when test="${ catNo eq 7 }">
+					<span class="title"><h3>여행·레저</h3></span>
+		        </c:when>
+		        <c:when test="${ catNo eq 8 }">
+					<span class="title"><h3>스포츠</h3></span>
+		        </c:when>
+		        <c:when test="${ catNo eq 9 }">
+					<span class="title"><h3>반려동물</h3></span>
+		        </c:when>
+		        <c:otherwise>
+		        	<span class="title"><h3>테크·가전</h3></span>
+		        </c:otherwise>
+		    </c:choose>
+				
+				
 			<hr>
 			<c:forEach var="p" items="${ list }">
 		        <div class="thumbnail" id="thumbnail" align="center">
@@ -85,8 +130,9 @@
 	<script>
 		
 		$(function(){
-			$(".category1 .cateThum").click(function(){
-				location.href="list.fun?cno=" + $(this).children(".cno").val();
+			$(".cateImage").click(function(){
+				location.href="list.fun?catNo=" + $(this).children(".cno").val();
+			   
 			})
 		})	
 			

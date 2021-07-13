@@ -20,12 +20,10 @@
 	.empty{width: 15%; height: 100%;}
     
     /* 버튼 */
-    .btn-primary {color: white !important;}
     .buttonArea{text-align: center !important;}
-    .buttonArea button {width: 200px;}
+	.btn-primary {width: 150px; margin-top: 35px;}
 
     /* 컨텐츠 */
-    /* .innerOuter div {outline: 1px solid peru;} */
 	.innerOuter{width: 1000px; margin: auto; padding: 50px 50px;}
 
     /* 1구역 */
@@ -36,20 +34,21 @@
     #table1 td, #table2 td {text-align: right;}
     #table2{background-color: rgb(242, 242, 242); padding: 40px 0 0 40px !important;}
 
-
     /* 2구역 */
     .content2 h3{font-weight: 700; margin-bottom: 15px;}
     #table3, #table4 {width: 440px; padding: 20px 20px 20px 20px;}
     #table3 {background-color: rgb(238, 238, 238); margin-right: 20px;}
-    #table4 {background-color: rgb(224, 224, 224);}    
-
-    /* input {height: 60x !important;} */
+    #table4 {background-color: rgb(224, 224, 224);}
 
     /* 약관동의 */
     .content3 {margin-top: 50px;}
     .content3 h3 {font-weight: 700; margin-bottom: 15px;}
     #table5 th {padding-left: 35px !important; height: 50px;}
     
+	.orderFinish {width: 900px; height: 300px; padding-top: 100px;}
+	.orderFinish h1 {
+		width: 500px; height: 100px; margin: auto; padding-top: 25px; text-align: center; 
+		border-radius: 0.2em; background-color: rgb(94, 94, 94); color: white;} 
 </style>
 <body>
 
@@ -69,7 +68,11 @@
 	    <form action="pay.fun" id="sss">
 	    
 	        <div class="innerOuter">
-	
+
+				<div class="orderFinish">
+					<h1>결제가 완료되었습니다.</h1>
+				</div>
+
 	            <div class="content1">
 	                <table id="table1" class="table table-borderless">
 	                    <tr style="border-top: 1px solid darkgray;">
@@ -115,7 +118,11 @@
 	                        </td>
 	                    </tr>
 	                </table>
-	            </div>
+
+					<div class="buttonArea">
+						<a class="btn btn-primary btn-lg" href="${ pageContext.request.contextPath }">홈으로</a>
+					</div>
+				</div>
 	        </div>
 		</form>
 	</c:if>
