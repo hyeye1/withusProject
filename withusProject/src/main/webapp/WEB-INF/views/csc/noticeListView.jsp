@@ -29,11 +29,9 @@
 	<div class="container">
 
 		<br>
-		
-			<div>
-				<a class="btn btn-secondary" style="float:right" href="enrollForm.no">등록</a>
-			</div>
-		
+		<c:if test="${ loginUser.memberStatus eq 'A' }">
+			<a class="btn btn-secondary" style="float:right" href="enrollForm.no">등록</a>
+		</c:if>
 		
 		<br>
 	    <!-- 표 N행 6열 -->
@@ -65,14 +63,11 @@
             		})
             	})
             </script>
-             
-	    <br>
-	    <a href="updateForm.no">수정</a> <a href="delete.no">삭제</a>
 	    
-	    <br>
+	    <br><br>
 
 	    <!-- 페이징 바 추가예정 -->
-	    <div id="pagingArea">
+	    <div id="pagingArea" align="center">
 	    	<ul class="pagination">
 	    		
 	    		<c:choose>

@@ -35,35 +35,44 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
-	public int updateOrderCancle(int orderNo) {
-		return oDao.updateOrderCancle(sqlSession, orderNo);
+	public int updateOrderCancle(HashMap<String, Object> map) {
+		return oDao.updateOrderCancle(sqlSession, map);
 	}
 	
 	@Override
-	public int searchCount() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int countSearch(HashMap<String, String> map) {
+		return oDao.countSearch(sqlSession, map);
 	}
 	
 	@Override
-	public ArrayList<Order> selectSearchOrder(HashMap<String, String> map) {
-		return oDao.selectSearchOrder(sqlSession, map);
+	public ArrayList<Order> selectSearchOrder(HashMap<String, String> map, PageInfo pi) {
+		return oDao.selectSearchOrder(sqlSession, map, pi);
 	}
 	
+	// 파트너
+	@Override
+	public int selectDeliveryCount(int memberNo) {
+		return oDao.selectDeilveryCount(sqlSession, memberNo);
+	}
+	
+	@Override
+	public ArrayList<Order> selectPartnerOrderList(PageInfo pi, int memberNo) {
+		return oDao.selectPartnerOrderList(sqlSession, pi, memberNo);
+	}
 
 	@Override
-	public int selectDeliveryCount() {
-		return oDao.selectDeilveryCount(sqlSession);
+	public Order selectStatusCount(int memberNo) {
+		return oDao.selectStatusCount(sqlSession, memberNo);
 	}
 	
 	@Override
-	public ArrayList<Order> selectPartnerOrderList(PageInfo pi) {
-		return oDao.selectPartnerOrderList(sqlSession, pi);
+	public int countSearchPartOrder(HashMap<String, Object> map) {
+		return oDao.countSearchPartOrder(sqlSession, map);
 	}
 
 	@Override
-	public Order selectStatusCount() {
-		return oDao.selectStatusCount(sqlSession);
+	public ArrayList<Order> selectSearchPartOrder(HashMap<String, Object> map, PageInfo pi) {
+		return oDao.selectSearchPartOrder(sqlSession, map, pi);
 	}
 	
 	@Override
@@ -76,21 +85,34 @@ public class OrderServiceImpl implements OrderService {
 		return oDao.selectRefundInfo(sqlSession, orderNo);
 	}
 
-	@Override
-	public int searchPartOrderCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public ArrayList<Order> selectSearchPartOrder(HashMap<String, String> map) {
-		return oDao.selectSearchPartOrder(sqlSession, map);
-	}
-	
 	// 발송정보입력
 	@Override
 	public int insertShippingInfo(HashMap<String, Object> map) {
 		return oDao.insertShippingInfo(sqlSession, map);
 	}
+
+	// 환불승인처리
+	@Override
+	public int updateRefundStatus(HashMap<String, Object> map) {
+		return oDao.updateRefundStatus(sqlSession, map);
+	}
+	
+	@Override
+	public int updateOrderStatus(HashMap<String, Object> map) {
+		return oDao.updateOrderStatus(sqlSession, map);
+	}
+	
+	/*
+	@Override
+	public int updateRefundStatus(int orderNo) {
+		return oDao.updateRefundStatus(sqlSession, orderNo);
+	}
+
+	@Override
+	public int updateOrderStatus(int orderNo) {
+		return oDao.updateOrderStatus(sqlSession, orderNo);
+	}
+	*/
+	
 
 }

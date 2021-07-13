@@ -183,7 +183,8 @@
 
                     <table>
                       <tr>
-                        <td id="mmenu"><a href=""><img src="resources/images/myPage/package.png" id="icon">펀딩발송관리</a> </td>
+                      	<!-- 현정:발송관리 링크추가 -->
+                        <td id="mmenu"><a href="orderNDeliveryList.part"><img src="resources/images/myPage/package.png" id="icon">펀딩발송관리</a> </td>
                       </tr>
                       <tr>
                         <td id="mmenu"><a href="partnerInfo.me"><img src="resources/images/myPage/pages.png" id="icon">파트너 정보관리</a> </td>

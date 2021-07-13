@@ -16,6 +16,7 @@ public class OrderDao {
 	// 관리자
 	// 주문내역 게시글 수 / 리스트 조회
 	public int selectListCount(SqlSessionTemplate sqlSession) {
+		
 		return sqlSession.selectOne("orderMapper.selectOrderListCount");
 	}
 		
@@ -36,40 +37,64 @@ public class OrderDao {
 	}
 	
 	// 결제 취소
-	public int updateOrderCancle(SqlSessionTemplate sqlSession, int orderNo) {
+	public int updateOrderCancle(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
 		
-		int test = sqlSession.selectOne("orderMapper.updateOrderCancle", orderNo);
-		System.out.println(test);
-		return test;
+		return sqlSession.update("orderMapper.updateOrderCancle", map);
+	}
+	
+	// 검색 페이징 처리
+	public int countSearch(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		
+		return sqlSession.selectOne("orderMapper.countSearch", map);
 	}
 	
 	// 검색 기능 
-	public ArrayList<Order> selectSearchOrder(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+	public ArrayList<Order> selectSearchOrder(SqlSessionTemplate sqlSession, HashMap<String, String> map, 
+			PageInfo pi) {
 		
-		return (ArrayList)sqlSession.selectList("orderMapper.selectSearchOrder", map);
+		int offset = (pi.getCurrentPage() - 1 ) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("orderMapper.selectSearchOrder", map, rowBounds);
 	}
 	
 	
 	// 파트너 발송관리
 	// 프로젝트 총 주문내역 게시글 수 / 리스트
-	public int selectDeilveryCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("orderMapper.selectDeliveryCount");
+	public int selectDeilveryCount(SqlSessionTemplate sqlSession, int memberNo) {
+		
+		return sqlSession.selectOne("orderMapper.selectDeliveryCount", memberNo);
 	}
 	
-	public ArrayList<Order> selectPartnerOrderList(SqlSessionTemplate sqlSession, PageInfo pi){
+	public ArrayList<Order> selectPartnerOrderList(SqlSessionTemplate sqlSession, PageInfo pi, int memberNo){
 		
 		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
-		int limit = pi.getBoardLimit();
 		
-		RowBounds rowBounds = new RowBounds(offset, limit);
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("orderMapper.selectPartnerOrderList",null,rowBounds);
+		return (ArrayList)sqlSession.selectList("orderMapper.selectPartnerOrderList", memberNo, rowBounds);
 	}
 
 	// 프로젝트 진행 현황
-	public Order selectStatusCount(SqlSessionTemplate sqlSession) {
+	public Order selectStatusCount(SqlSessionTemplate sqlSession, int memberNo) {
 		
-		return sqlSession.selectOne("orderMapper.selecetStatsCount");
+		return sqlSession.selectOne("orderMapper.selecetStatsCount", memberNo);
+	}
+	
+	// 검색 페이징
+	public int countSearchPartOrder(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		
+		return sqlSession.selectOne("orderMapper.countSearchPartOrder", map);
+	}
+	
+	// 검색 
+	public ArrayList<Order> selectSearchPartOrder(SqlSessionTemplate sqlSession, HashMap<String, Object> map,
+			PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1 ) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("orderMapper.selectSearchPartOrder", map, rowBounds);
 	}
 	
 	// 발송모달:펀딩내역
@@ -77,23 +102,38 @@ public class OrderDao {
 		
 		return sqlSession.selectOne("orderMapper.selectOrderInfo", orderNo);
 	}
-
+	
 	// 환불모달:펀딩내역+환불신청내역
 	public Order selectRefundInfo(SqlSessionTemplate sqlSession, int orderNo) {
 		
 		return sqlSession.selectOne("orderMapper.selectRefundInfo", orderNo);
 	}
 	
-	public ArrayList<Order> selectSearchPartOrder(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
-		
-		return (ArrayList)sqlSession.selectList("orderMapper.selectSearchPartOrder", map);
-	}
-	
 	
 	//운송장입력
 	public int insertShippingInfo(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
 		
-		return sqlSession.insert("orderMapper.insertShippingInfo", map);
+		return sqlSession.update("orderMapper.insertShippingInfo", map);
 	}
+
+	// 환불모달: 승인처리
+	public int updateRefundStatus(SqlSessionTemplate sqlSession,HashMap<String, Object> map){
+		
+		return sqlSession.update("orderMapper.updateRefundStatus", map);
+	}
+	
+	public int updateOrderStatus(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		return sqlSession.update("orderMapper.updateOrderStatus", map);
+	}
+	/*
+	public int updateRefundStatus(SqlSessionTemplate sqlSession, int orderNo){
+		
+		return sqlSession.update("orderMapper.updateRefundStatus", orderNo);
+	}
+
+	public int updateOrderStatus(SqlSessionTemplate sqlSession, int orderNo) {
+		return sqlSession.update("orderMapper.updateOrderStatus", orderNo);
+	}
+	*/
 	
 }

@@ -69,7 +69,7 @@
 	    <div class="container">
 	
 	        <div class="search_area">
-	             <form action="searchMember.mana" name="searchForm" method="">
+	             <form action="searchMember.mana" name="searchForm">
 	        	<input type="hidden" name="currentPage" value="1">
 	             <div class="searchKey_1">
 	                 <select name="partnerJoin" class="partnerJoin">
@@ -143,7 +143,7 @@
 			                <tr>
 			                    <td class="mno">${ m.memberNo }</td>
 			                    <td>${ m.memberId }</td>
-			                    <td>${ m.memberName }</td>
+			                    <td class="mamName">${ m.memberName }</td>
 			                    <td>${ m.memberCreateDate }</td>
 			                    <td>${ m.partnerJoin }</td>
 			                    <td>
@@ -178,18 +178,18 @@
 	        			data:{mno:$memberNo},
 	        			success:function(ms){
 	        				//console.log(ms);
-	        				var result = "<div name ="
-	        							+ "'mamberName'" + " value ="
-	        							+ "'" + ms.memberName + "'" + ">"
-	        							+ ms.memberName 
+	        				var result = "<div>"+ ms.memberName 
 	        							+ " 회원을 탈퇴시키겠습니까?</div>"
+	        									
 	        				// value가 안넘어가...			
-
-   							console.log(result);
-	        				$(".modal-title").html(result);
+	        				// -> form태그 안에 회원탈퇴시 넘길 키값만 제시해두고 벨류값은 여기서 넘기기! 
+	        				var mname = ms.memberName
+   							//console.log(mname);  --> 성공!!
 	        				
-	        							
-	        			}, error: function(){
+    						$(".modal-title").html(result);
+	        				$(".mname").val(mname);
+	        				
+ 	        			}, error: function(){
 	        				console.log("모달 조회 실패")
 	        			}
 	        		});
@@ -203,7 +203,7 @@
 	
 	    <!-- 탈퇴 클릭 시 모달  -->
 	    <!-- The Modal -->
-	    <form action="deleteMem.mana" method="post">
+	    <form action="deleteMem.mana" method="">
 			    <div class="modal fade" id="delModal">
 			        <div class="modal-dialog modal-dialog-centered" style="width: 380px;">
 			        <div class="modal-content">
@@ -221,7 +221,7 @@
 		                        <div class="input-group-prepend">
 		                          <span class="input-group-text">회원상태</span>
 		                        </div>
-		                        
+		                        <input class="mname" type="hidden" name="memName" value="">
 		                        <select class="form-control" id=mStatus name="mStatus">
 		                          <option value="Y">활동</option>
 		                          <option value="N">탈퇴</option>
@@ -268,7 +268,7 @@
 			    	   
 					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 						<c:choose>
-							<c:when test="${ empty partnerJoin or empty memberStatus or empty memKey  }">
+							<c:when test="${ empty partnerJoin and empty memberStatus and empty memKey  }">
 				            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
 							</c:when>
 							<c:otherwise>
@@ -284,7 +284,7 @@
 			           	</c:when>
 			           	<c:otherwise>
 			           		<c:choose>
-			            		<c:when test="${ empty partnerJoin or empty memberStatus or empty memKey  }">
+			            		<c:when test="${ empty partnerJoin and empty memberStatus and empty memKey  }">
 					           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
 					            </c:when>
 					            <c:otherwise>
@@ -293,7 +293,6 @@
 			            	</c:choose>
 			           	</c:otherwise> 	
 		        	</c:choose>
-		        	
 		        	
 		        </ul>
 		    </div>

@@ -328,11 +328,11 @@
                     color: rgb(64, 64, 64);
                 }
 
-                .registeredTable td {
+                .regiOuter .registeredTable td {
                     padding: 7px;
                 }
 
-                #partnersPolicy {
+                .regiOuter #partnersPolicy {
                     height: 150px !important;
                     resize: none;
                 }
@@ -347,7 +347,7 @@
                     padding: 20px;
                 }
 
-                #showPhone {
+                .regiOuter #showPhone {
                     width: 20px;
                     margin-left: 30px;
                 }
@@ -370,8 +370,10 @@
                     margin-right: 20px;
                 }
 
+                .cateLeft a {font-size: 16px !important; margin-bottom: 0.35rem !important;}
                 
-
+				.cateCenter {font-size: 16px !important;}
+				#cateContent{margin-left: -40px !important;}
 
             </style>
         </head>
@@ -411,21 +413,33 @@
                                     * 수수료 (vat 별도) 가치가자 수수료 5% + 결제 수수료 3%
                                 </p>
                             </div><br>
+
+                            
+                        <script>
+                            $(function(){
+                                $('input').on('keydown', function (e) {
+                                    if (e.which == 13) {
+                                        e.preventDefault();
+                                    }
+                                });
+                            })
+                        </script>                            
+                        
     
                             <!-- 카테고리+제목 -->
                             <div>
                                 <b class="regiTitle">프로젝트의 제목과 카테고리를 설정해주세요.</b> <br>
-                                <select class="catOption" name="catOption">
-                                    <option value="category">카테고리</option>
-                                    <option value="tech">테크/가전</option>
-                                    <option value="fashion">패션/잡화</option>
-                                    <option value="beauty">뷰티</option>
-                                    <option value="food">푸드</option>
-                                    <option value="living">홈리빙</option>
-                                    <option value="design">디자인소품</option>
-                                    <option value="travel">여행/레저</option>
-                                    <option value="sports">스포츠/모빌리티</option>
-                                    <option value="pet">반려동물</option>
+                                <select class="catOption" name="catNo">
+                                    <option value="1">카테고리</option>
+                                    <option value="2">패션/잡화</option>
+                                    <option value="3">뷰티</option>
+                                    <option value="4">푸드</option>
+                                    <option value="5">홈리빙</option>
+                                    <option value="6">디자인소품</option>
+                                    <option value="7">여행/레저</option>
+                                    <option value="8">스포츠/모빌리티</option>
+                                    <option value="9">반려동물</option>
+                                    <option value="10">테크/가전</option>
                                 </select>
                                 <input type="text" id="projectTitle" name="projectTitle" placeholder="제목을 입력해주세요">
                             </div><br>
@@ -485,6 +499,7 @@
                                     $('input[name=projectShipment]').change(function(){
                                         if($(this).prop("checked")){
                                             shipDate.hide();
+                                            $('#deliveryDate').val('');
                                         }else{
                                             shipDate.show();
                                         }
@@ -499,7 +514,7 @@
                                     style="width: 449px; height: 311px; border: 1px solid rgb(127, 127, 127); border-radius: 5px; background-color: white;">
                                     최적 사이즈 740*492 px
                                 </button><br><br>
-                                <input type="file" name="projectThum"> <!-- html 이미지 미리보기 -->
+                                <input type="file" name="upfile"> <!-- html 이미지 미리보기 -->
                             </div><br>
     
                             <div>
@@ -514,6 +529,15 @@
     
                                 <script>
                                     var hashs = ""; // input type hidden에 들어가있는 값
+                                    $(function(){
+                                        $('#projectKeyword').on('keydown', function(e) {
+                                            if (e.which == 13) {
+                                                e.preventDefault();
+                                                addHash();
+                                            }
+                                        });
+                                    })
+
                                     function addHash(){
                                         var hashtagi = $('input[id=projectKeyword]').val();
                                         if(hashtagi == ""){
@@ -632,7 +656,7 @@
                                             <b class="regiTitle">리워드 금액</b>
                                         </th>
                                         <td>
-                                            <input type="text" placeholder="1,000원 이상 입력해 주세요." name="rewardList[count].rewardPrice" class="rePrice">
+                                            <input type="text" placeholder="1,000원 이상 입력해 주세요." class="rePrice">
                                         </td>
                                         <td>원</td>
                                     </tr>
@@ -680,6 +704,7 @@
                                         </th>
                                         <td>
                                             <button type="button" id="addOptionBtn" onclick="addOption();">리워드 옵션 추가하기</button>
+                                            <input type="hidden" name="optionYn" value="N">
                                         </td>
                                     </tr>
                                     <tr class="optionOnTr" style="display: none;">
@@ -743,9 +768,11 @@
                                         var content = $('textarea[name=reContent]').val();
                                         var option = $('input[name=option]').val();
                                         var ship = $('input[name=ship]:checked').val();
-                                        var optionYn = 'N';
+                                        var optionYn = $('input[name=optionYn]').val();;
                                         var all = $('.regiReward input, textarea');
                                         
+                                        console.log(limited);
+
                                         // limited가 선택되어있는데, limit이 비어있을 경우 => 안된다
                                         // unlimited가 선택되어있으면 , limit비어있든 말든 상관없음
                                         if ( limited == "limited" && limit == ""){
@@ -834,15 +861,15 @@
                                     </p>
                                     <div>
                                         <input type="text" name="partnerPhone" id="partnerPhone" placeholder="번호를 적어주세요 (예. 010-1234-5678)">
-                                        <label><input type="checkbox" name="phoneYN" id="showPhone" value="N">
+                                        <label><input type="checkbox" id="showPhone"><input type="hidden" class="phoneHidden" value="N" name="phoneYN"  >
                                             번호공개</label>
                                         <script>
                                             $(function(){
                                                 $('#showPhone').change(function(){
                                                     if($(this).prop("checked")){
-                                                        $('#showPhone').val('Y');
+                                                        $('.phoneHidden').val('Y');
                                                     }else{
-                                                        $('#showPhone').val('N');
+                                                        $('.phoneHidden').val('N');
                                                     }
                                                     // console.log($('#showPhone').val());
                                                 })
@@ -917,14 +944,14 @@
                             <!-- 은행/계좌번호 -->
                             <div>
                                 <b class="regiTitle">계좌 번호를 적어주세요</b><br>
-                                <select class="bankOption" name="bankOption"> <!-- name="partnerBank" -->
+                                <select class="bankOption" name="partnerBank">
                                     <option value="selectBank">거래은행</option>
-                                    <option value="kb">국민은행</option>
-                                    <option value="woori">우리</option>
-                                    <option value="hana">하나</option>
-                                    <option value="shinhan">신한</option>
-                                    <option value="nh">농협</option>
-                                    <option value="kakao">카카오뱅크</option>
+                                    <option value="국민은행">국민은행</option>
+                                    <option value="우리은행">우리</option>
+                                    <option value="하나은행">하나</option>
+                                    <option value="신한은행">신한</option>
+                                    <option value="농협">농협</option>
+                                    <option value="카카오뱅크">카카오뱅크</option>
                                 </select>
                                 <input type="text" id="bankAccount" name="partnerAccount" placeholder="계좌번호">
                             </div><br>
@@ -956,7 +983,7 @@
                                                     style="height: 33px;">
                                             </td>
                                             <td>
-                                                <input type="text" name="partnerSns" id="partnerSns" class="partnerWebSns">
+                                                <input type="text" name="partnerSNS" id="partnerSns" class="partnerWebSns">
                                             </td>
                                         </tr>
                                     </table>
@@ -1028,8 +1055,8 @@
                         function limitBtn1(){
                             $(".limitNum").hide();
                         }
-    
-    
+
+
                     </script>
                 </div> <!-- outer /div -->
             </form>

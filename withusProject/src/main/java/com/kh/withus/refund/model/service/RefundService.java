@@ -20,8 +20,8 @@ public interface RefundService {
 	Refund selectRefund(int refundNo);
 	
 	// 검색 결과 페이징처리
-	int serarchRefundOrderCount();
+	int countSearch(HashMap<String, String> map);
 	// 검색 기능
-	ArrayList<Refund> selectSearchRefund(HashMap<String, String> map);
+	ArrayList<Refund> selectSearchRefund(HashMap<String, String> map, PageInfo pi);
 
 }

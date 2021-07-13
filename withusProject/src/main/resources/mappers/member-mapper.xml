@@ -159,7 +159,7 @@
 		update 
 		       member
 		   set member_status = #{mStatus} 
-		 where member_name =  #{memberName}      
+		 where member_name =  #{memName}      
 	</update>
 	
 	<!-- 검색 페이징 처리 -->

@@ -60,19 +60,21 @@ public class CommunityDao {
 	
 	
 	// 검색
-	public int selectSearchCommuListCount(SqlSessionTemplate sqlSession, int commuNo) {
-		
-		return sqlSession.selectOne("communityMapper.selectSearchCommuListCount", commuNo);
-		
+	
+	public int selectSearchCommuListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("communityMapper.selectSearchCommuListCount");
 	}
 	
-	public ArrayList<Community> selectSearchCommuList(SqlSessionTemplate sqlSession, int commuNo){
-		return (ArrayList)sqlSession.selectList("communityMapper.selectSearchCommuList", commuNo);
+	public ArrayList<Community> selectSearchCommuList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("communityMapper.selectSearchCommuList", null, rowBounds);
 		
 	}
-	
-	
-	
 	
 	
 	

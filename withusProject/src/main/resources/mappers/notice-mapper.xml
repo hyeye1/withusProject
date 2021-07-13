@@ -31,7 +31,7 @@
 		  from notice
 		 where notice_status = 'Y'
 		 order
-		    by create_date desc
+		    by notice_no desc
 	</select>
 	
 	
@@ -80,6 +80,16 @@
 		update
 			   notice
 		   set notice_status = 'N'
+		 where notice_no = #{noticeNo}
+	</update>
+	
+	<update id="updateNotice" parameterType="Notice">
+		update
+		       notice
+		   set notice_title = #{noticeTitle}
+		     , notice_content = #{noticeContent}
+		     , notice_originname = #{noticeOriginname}
+		     , notice_changename = #{noticeChangename}
 		 where notice_no = #{noticeNo}
 	</update>
 	

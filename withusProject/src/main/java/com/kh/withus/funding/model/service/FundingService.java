@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.withus.category.model.vo.Category;
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.vo.Project;
+import com.kh.withus.funding.model.vo.Reward;
 import com.kh.withus.order.model.vo.Order;
 
 public interface FundingService {
@@ -13,7 +14,8 @@ public interface FundingService {
 	ArrayList<Category> selectCate();
 	
 	// 펀딩 리스트 조회
-	ArrayList<Project> selectList();
+	ArrayList<Project> selectAllList();
+    ArrayList<Project> selectList(int catNo);
 	
 	// 상세페이지 조회
 	int increaseCount(int projectNo);
@@ -32,4 +34,7 @@ public interface FundingService {
 	// 주문 후 재고 마이너스 하기
 	int minusStock(Order o);
 	
+	// 펀딩 등록
+    int insertProject(Project p);
+    
 }

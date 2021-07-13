@@ -2,9 +2,9 @@ package com.kh.withus.csc.notice.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -44,20 +44,19 @@ public class NoticeController {
 	// 관리자(user01@withus.com) 일때만 보이는 버튼
 	@RequestMapping("enrollForm.no")
 	public String enrollForm() {
-		return "admin/csc/notice/noticeEnrollForm";
+		return "csc/noticeEnrollForm";
 	}
 	
 	// 관리자(user01@withus.com) 일때만 보이는 버튼
-	@RequestMapping("insert.bo")
-	public String insertNotice(Notice n, MultipartFile upfile, HttpSession session, Model model) {
+	@RequestMapping("insert.no")
+	public String insertNotice(Notice n, MultipartFile cscUpfile, HttpSession session, Model model) {
 		
-		if(!upfile.getOriginalFilename().equals("")) {
-			String changeName = saveFile(session, upfile);
+		if(!cscUpfile.getOriginalFilename().equals("")) {
+			String changeName = saveFile(session, cscUpfile);
 			
-			n.setNoticeOriginname(upfile.getOriginalFilename());
+			n.setNoticeOriginname(cscUpfile.getOriginalFilename());
 			n.setNoticeChangename("resources/cscUploadFile/" + changeName);
 		}
-		
 		int result = nService.insertNotice(n);
 		
 		if(result > 0) {
@@ -67,12 +66,15 @@ public class NoticeController {
 			model.addAttribute("errorMsg", "공지사항이 등록되지않았습니다.");
 			return "common/errorPage";
 		}
+		
+	
+		
 	}
 	
-	private String saveFile(HttpSession session, MultipartFile upfile) {
+	private String saveFile(HttpSession session, MultipartFile cscUpfile) {
 		String savePath = session.getServletContext().getRealPath("/resources/cscUpFiles/");
 		
-		String originName = upfile.getOriginalFilename(); // 원본명("aaa.jpg")
+		String originName = cscUpfile.getOriginalFilename(); // 원본명("aaa.jpg")
 		
 		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 		int ranNum = (int)(Math.random() * 90000 + 10000);
@@ -81,7 +83,7 @@ public class NoticeController {
 		String changeName = currentTime + ranNum + ext;
 		
 		try {
-			upfile.transferTo(new File(savePath + changeName));
+			cscUpfile.transferTo(new File(savePath + changeName));
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
@@ -127,11 +129,26 @@ public class NoticeController {
 	@RequestMapping("updateForm.no")
 	public String updateForm(int nno, Model model) {
 		model.addAttribute("n", nService.selectNotice(nno));
-		return "admin/csc/notice/noticeEnrollForm";
+		return "csc/noticeUpdateEnroll";
 	}
 	
 	@RequestMapping("update.no")
-	public String updateNotice(Notice n, MultipartFile upfile, HttpSession session, Model model){
+	public String updateNotice(Notice n, MultipartFile cscReUpfile, HttpSession session, Model model){
+		
+		if(!cscReUpfile.getOriginalFilename().equals("")) {
+			String changeName = saveFile(session, cscReUpfile);
+			n.setNoticeOriginname(cscReUpfile.getOriginalFilename());
+			n.setNoticeChangename("resources/cscUploadFile/" + changeName);
+		}
+		int result = nService.updateNotice(n);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "공지사항이 수정되었습니다.");
+			return "redirect:detail.no?nno=" + n.getNoticeNo();
+		}else {
+			model.addAttribute("errorMsg", "공지사항이 수정되지않았습니다.");
+			return "common/errorPage";
+		}
 		
 	}
 	

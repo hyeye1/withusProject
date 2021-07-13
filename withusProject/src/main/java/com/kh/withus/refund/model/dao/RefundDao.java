@@ -38,10 +38,18 @@ public class RefundDao {
 		return sqlSession.selectOne("refundMapper.selectRefund", refundNo);
 	}
 	
-	// 검색 기능
-	public ArrayList<Refund> selectSearchRefund(SqlSessionTemplate sqlSession, HashMap<String, String> map){
+	// 검색 페이징
+	public int countSearch(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.selectOne("refundMapper.countSearch", map);
+	}
+	
+	// 검색 
+	public ArrayList<Refund> selectSearchRefund(SqlSessionTemplate sqlSession, HashMap<String, String> map, PageInfo pi){
 		
-		return (ArrayList)sqlSession.selectList("refundMapper.selectSearchRefund", map);
+		int offset = (pi.getCurrentPage() - 1 ) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("refundMapper.selectSearchRefund", map, rowBounds);
 	}
 	
 }

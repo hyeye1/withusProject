@@ -44,11 +44,11 @@
             <label>주문내역 상세정보</label>
         </div>
         <div class="container">
-        	<form action="orderUpdate.mana" method="post">
+        	<form name="cancleBtn" action="" method="">
             <div class="data1">
                 <label class="tableName">펀딩 내역</label>
                 <table class="table table-bordered">
-                	<input type="hidden" name="ono" value="${ o.orderNo }">
+                	<input type="hidden" class="ono" name="ono" value="${ o.orderNo }">
 	                <tr>
 	                    <th>펀딩번호</th>
 	                    <td>${ o.orderNo }</td>
@@ -80,19 +80,39 @@
                        			<td>
                        				결제완료 &nbsp;&nbsp;&nbsp;&nbsp;
 				                    <!-- 펀딩마감일 +00일 이후 결제 취소버튼 노출 -->
-                       				<button type="button" class="btn-sm" data-toggle="modal" data-target="#cancelPayModal">결제 취소</button>
+                       				<button type="button" class="btn-sm" name="cancleBtn" value="3" 
+                       						>결제 취소</button>
+                       						<!-- data-toggle="modal" data-target="#cancelPayModal" -->
                        			</td>
                        		</c:when>
                        		<c:when test="${ o.orderStatus == 2 }">
                        			<td>
                        				취소요청 &nbsp;&nbsp;&nbsp;&nbsp;
-                       				<button type="button" class="btn-sm" data-toggle="modal" data-target="#cancelPayModal">결제 취소</button>
+                       				<button type="button" class="btn-sm" name="cancleBtn" value="3" 
+                       						">결제 취소</button>
                        			</td>
                        		</c:when>
                        		<c:when test="${ o.orderStatus == 3 }">
-                       			<td>취소완료</td>
+                       			<td style="color:red;">취소완료</td>
+                       		</c:when>
+                       		<c:when test="${ o.orderStatus == 4 }">
+                       			<td style="color:red;">취소거절</td>
                        		</c:when>
                        	</c:choose>
+                       	
+                       	<!-- 결제 취소 버튼에 있는 val값 넘겨주기 -->
+                       	<script>
+							$(function() {
+							    $("button[name=cancleBtn]").on('click', function() {
+							        var cancleBtn = $(event.target).val();
+							        var ono = $("input[name=ono]").val();
+							        console.log(cancleBtn, ono);
+							        $("form[name=cancleBtn]")
+					                .attr({ action:"orderUpdate.mana?ono="+ono+"&cancleBtn="+cancleBtn, method:"post" })
+					                .submit();
+							    });
+							});
+						</script>
 	                    <th>카드 번호</th>
 	                    <td>${ o.cardNo }</td>
 	                </tr>
@@ -155,25 +175,16 @@
                         
                     </tr>      
                 </table>
-                <script>
-	           		function cancleOrder(){
-	           			console.log(event.target);
-	           			// 펀딩 상태를 '3'으로 변경 어떻게?
-	           			//var test = $(event.target).parent().siblings("cancle").text();
-	           			console.log(test);
-	           			
-	           		}
-           		</script> 
             </div> 
 
 	       <div class="button_area">
-	           <button type="submit" class="btn btn-withus">수 정</button>
-	           <button type="button" class="btn btn-secondary" onclick="history.back()">목록으로</button>
+	           <!-- <button type="button" onclick="form.submit();" class="btn btn-withus">수 정</button> -->
+	           <button type="button" class="btn btn-secondary" onclick="location.href='orderListView.mana'">목록으로</button>
 	       </div>
 	       </from>
         </div>
 
-        <!-- 탈퇴 클릭 시 모달  -->
+        <!-- 결제취소시 모달  -->
         <!-- The Modal -->
         <div class="modal fade" id="cancelPayModal">
             <div class="modal-dialog modal-dialog-centered" style="width: 380px;">

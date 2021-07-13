@@ -68,7 +68,6 @@
 
 				.headerRight>a {
 					padding: 0 3px;
-					font-size: 1.03rem;
 					font-weight: 900;
 				}
 
@@ -139,7 +138,6 @@
 
 				.tagBox>a {
 					color: white;
-					font-size: 1.0rem;
 					font-weight: bolder;
 				}
 
@@ -147,7 +145,6 @@
 					margin-bottom: 0.35rem;
 					display: flex;
 					align-items: center;
-					font-size: 1.05rem;
 					font-weight: bolder;
 				}
 
@@ -158,7 +155,6 @@
 				}
 
 				.style_2a {
-					font-size: 1.0rem;
 					font-weight: 540;
 				}
 
@@ -196,7 +192,7 @@
 
 					<div id="cateContent" style="display: none; z-index: 100;">
 						<div class="cateLeft">
-							<div class="style_1"><a href="list.fun">모든 프로젝트</a></div>
+							<div class="style_1"><a href="list.fun?catNo=1">모든 프로젝트</a></div>
 							<div class="style_1"><a href="#">인기 추천 프로젝트</a></div>
 							<div class="style_1"><a href="#">성공 임박 프로젝트</a></div>
 							<div class="style_1"><a href="#">신규 추천 프로젝트</a></div>
@@ -284,35 +280,37 @@
 				<c:when test="${ empty loginUser }">
 
 					<!-- 로그인전 -->
-					<div class="headerRight">
+					<div class="headerRight" style="font-size: 17px !important;">
 						<a href="loginForm.me">로그인</a>
 						<a href="enrollForm.me"> 회원가입</a>
 						<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px"
 							style="margin-left: -3px; margin-top: -6px;">
 					</div>
 				</c:when>
+				
+				<c:when test="${ loginUser.memberStatus eq 'A' }">
+					<!-- 관리자 -->
+					<div class="headerRight" style="font-size: 17px !important;">
+						<a href="logout.me">로그아웃</a>
+						<a href="memberListView.mana"> 관리자</a>
+						<img src="resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
+					</div>
+				</c:when>
 				<c:otherwise>
-
 					<!-- 로그인후 -->
-					<div class="headerRight">
+					<div class="headerRight" style="font-size: 17px !important;">
 						<a href="logout.me">로그아웃</a>
 						<a href="myPage.me"> 마이페이지</a>
 						<img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG" width="30px"
 							style="margin-left: -3px; margin-top: -6px;">
 					</div>
-
 				</c:otherwise>
+					
+				
 			</c:choose>
 
 			
-			<c:if test="${ loginUser.memberStatus eq 'A' }">
-				<!-- 관리자 -->
-				<div class="headerRight">
-					<a href="logout.me">로그아웃</a>
-					<a href="memberListView.mana"> 관리자</a>
-					<img src="resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
-				</div>
-			</c:if>
+			
 		</div>
 
 		</body>

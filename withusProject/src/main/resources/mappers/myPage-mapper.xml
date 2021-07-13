@@ -36,7 +36,7 @@
 		<result column="oto_reply" property="otoReply"/>
 		<result column="oto_re_status" property="otoReStatus"/>
 		<result column="oto_status" property="otoStatus"/>
-		<result column="oto_orginname" property="otoOriginName"/>
+		<result column="oto_originname" property="otoOriginName"/>
 		<result column="oto_changename" property="otoChangeName"/>
 		
 		<!-- 주문서 -->
@@ -299,7 +299,7 @@
 		      , TO_CHAR(oto_date, 'YYYY-MM-DD') oto_date
 		      , oto_reply
 		      , oto_re_status
-		      , oto_orginname
+		      , oto_originname
 		      , oto_changename
 		  from oto
 		 where oto_no = #{otoNo}

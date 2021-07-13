@@ -37,6 +37,7 @@
     tbody>tr:hover{cursor: pointer;}
     table.table-bordered td, table.table-bordered th  {padding: .35rem; vertical-align: inherit;}
     .tableHead{background-color: #eaeaea;}
+    .none{margin: 100px 0;}
      
         
 	/* pagination */
@@ -64,6 +65,7 @@
 
             <div class="search_box">
                 <form action="orderSearch.mana">
+                <input type="hidden" name="currentPage" value="1">
                     <div class="searchForm">
                         <select name="orderKeyword" id="orderKeyword">
                             <option value="orderAll">전체</option>
@@ -83,7 +85,7 @@
                         <div class="dStatus">
                         	<label for="" style="float: left;"><b>배송 상태</b></label> &nbsp;&nbsp;
                             <input type="radio" name="shStatus" value="1"> 배송 준비중
-                            <input type="radio" name="shStatus" value="2"> 배송 시작
+                            <input type="radio" name="shStatus" value="2"> 배송 중
                             <input type="radio" name="shStatus" value="3"> 배송 완료
                         </div>
                     </div>
@@ -160,7 +162,7 @@
 	                        			<td>취소요청</td>
 	                        		</c:when>
 	                        		<c:when test="${ o.orderStatus == 3 }">
-	                        			<td>취소완료</td>
+	                        			<td style="color:red;">취소완료</td>
 	                        		</c:when>
 	                        	</c:choose>
 	                        	<c:choose>
@@ -198,27 +200,53 @@
         <c:if test="${ !empty olist }">
 	        <div class="paging_wrap">
 	            <ul class="pagination">
+	            
 	                <c:choose>
 		        		<c:when test="${ pi.currentPage eq 1 }">
 			           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
 			            </c:when>
 			            <c:otherwise>
-			            	<li class="page-item"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
+			            	<c:choose>
+			            		<c:when test="${ empty orderKeyword and empty keyword and empty odStatus and empty shStatus }">
+					            	<li class="page-item"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
+					            </c:when>
+					            <c:otherwise>
+					            	<li class="page-item"><a class="page-link" href="orderSearch.mana?currentPage=${pi.currentPage - 1}&orderKeyword=${orderKeyword}&keyword=${keyword}&odStatus=${odStatus}&shStatus=${shStatus}">이전</a></li>
+			           			</c:otherwise>
+			           		</c:choose>
+			            	
 			            </c:otherwise>
 			    	</c:choose>        
 			            
 					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-		            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
+						<c:choose>
+							<c:when test="${ empty orderKeyword and empty keyword and empty odStatus and empty shStatus }">
+		            			<li class="page-item"><a class="page-link" href="orderListView.mana?currentPage=${p}">${ p }</a></li>
+	            			</c:when>
+	            			<c:otherwise>
+	            				<li class="page-item"><a class="page-link" href="orderSearch.mana?currentPage=${p}&orderKeyword=${orderKeyword}&keyword=${keyword}&odStatus=${odStatus}&shStatus=${shStatus}">${ p }</a></li>
+	            			</c:otherwise>
+            			</c:choose>
+	            			
 					</c:forEach>		            
+			            
 			            
 			        <c:choose> 
 			        	<c:when test="${ pi.currentPage eq pi.maxPage }">
 			           	 	<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
 			           	</c:when>
 			           	<c:otherwise>
-			           		<li class="page-item"><a class="page-link" href="${ pi.currentPage+1 }">다음</a></li>
-			           	</c:otherwise> 	
+		           			<c:choose>
+			            		<c:when test="${ empty orderKeyword and empty keyword and empty odStatus and empty shStatus }">
+					           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
+					            </c:when>
+					            <c:otherwise>
+					            	<li class="page-item"><a class="page-link" href="orderSearch.mana?currentPage=${pi.currentPage + 1}&orderKeyword=${orderKeyword}&keyword=${keyword}&odStatus=${odStatus}&shStatus=${shStatus}">다음</a></li>
+			           			</c:otherwise>
+			           		</c:choose>	
+		           		</c:otherwise>
 		        	</c:choose>
+		        	
 	            </ul>
 	        </div>
         </c:if>

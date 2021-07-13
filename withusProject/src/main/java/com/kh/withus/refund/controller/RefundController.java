@@ -32,7 +32,7 @@ public class RefundController {
 										int currentPage, ModelAndView mv) {
 		
 		int totalList = rService.selectListCount();
-		PageInfo pi = pagination.getPageInfo(totalList, currentPage, 5, 10);
+		PageInfo pi = pagination.getPageInfo(totalList, currentPage, 10, 10);
 		
 		ArrayList<Refund> rlist = rService.selectList(pi);
 		
@@ -60,26 +60,33 @@ public class RefundController {
 		
 	}
 	
-	// 검색 : 페이징 처리는 아직...
-	@RequestMapping("refundSearch.mana")
-	public String selectSearchRefund(HttpServletRequest request, Model model) {
-		
-		String refundKey = request.getParameter("refundKey");
-		String keyword = request.getParameter("keyword");
-		String rfStatus= request.getParameter("rfStatus");
+	// 검색 
+	@RequestMapping("searchRefund.mana")
+	public ModelAndView selectSearchRefund(@RequestParam(defaultValue="") String refundKey,
+									 @RequestParam(defaultValue="") String keyword,
+									 @RequestParam(defaultValue="") String rfStatus,
+									 @RequestParam(value="currentPage", defaultValue="1") int currentPage,
+									 ModelAndView mv) {
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("refundKey", refundKey);
 		map.put("keyword", keyword);
 		map.put("rfStatus", rfStatus);
 		
-		ArrayList<Refund> rlist = rService.selectSearchRefund(map);
+		int count = rService.countSearch(map);
 		
-		model.addAttribute("rlist", rlist)
-		     .addAttribute("refundKey", refundKey)
-		     .addAttribute("rfStatus", rfStatus);
+		PageInfo pi = pagination.getPageInfo(count, currentPage, 10, 10);
 		
-		return "refund/manaRefundListView";
+		ArrayList<Refund> rlist = rService.selectSearchRefund(map, pi);
+		
+		mv.addObject("pi", pi)
+		  .addObject("rlist", rlist)
+		  .addObject("refundKey", refundKey)
+		  .addObject("keyword",keyword)
+		  .addObject("rfStatus", rfStatus)
+		  .setViewName("refund/manaRefundListView");
+		
+		return mv;
 		     
 	}
   

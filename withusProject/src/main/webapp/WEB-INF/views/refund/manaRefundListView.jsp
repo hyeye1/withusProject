@@ -24,7 +24,8 @@
 	}
 	.form-control.refund{width: 400px;}
 	.refundAllStatus{width: 80%; float: left;}
-	.refundRadios {font-size: 13px; float: left; margin: 4px 15px;}
+	.refundRadios {float: left; margin: 0 0 0 20px;}
+	input[type=radio] {margin: 0 0 0 12px; }
 	.searchBtns{width: 20%; float: right;}
 	.searchBtns button{margin: 0 7px;} 
 	.btn.btn-withus{background-color: #3498db; color: white;}
@@ -34,6 +35,8 @@
 	tbody>tr:hover{cursor: pointer;}
 	table.table-bordered td, table.table-bordered th {padding: .35rem; vertical-align: inherit;}
 	.tableHead{background-color: #eaeaea;}
+	.none{margin: 100px 0;}
+	.cancle{color: red;}
 	
 	
 	/* pagination */
@@ -62,7 +65,8 @@
         <div class="container">
 
             <div class="search_box">
-                <form action="refundSearch.mana">
+                <form action="searchRefund.mana">
+                <input type="hidden" name="currentPage" value="1">
                     <div class="searchForm">
                         <select name="refundKey" id="refundKey">
                             <option value="refundAll">전체</option>
@@ -75,8 +79,9 @@
                     <div class="refundAllStatus">
                         <label for="" style="float: left;"><b>환불상태</b></label> &nbsp;&nbsp;
                         <div class="refundRadios">
-                            <input type="radio" name="rfStatus" value="N"> 환불대기
-                            <input type="radio" name="rfStatus" value="Y"> 환불완료
+                            <input type="radio" name="rfStatus" value="S"> 대기
+                            <input type="radio" name="rfStatus" value="Y"> 승인
+                            <input type="radio" name="rfStatus" value="N"> 거절
                         </div>
                     </div>
                     <div class="searchBtns" align="right">
@@ -129,7 +134,17 @@
 		                        <td>${ r.supporterName }</td>
 		                        <td>${ r.projectTitle }<br>${ r.rewardTitle }/${ r.orderOption }</td>
 		                        <td>${ r.reReason }</td>
-		                        <td>${ r.refundStatus }</td>
+		                        <c:choose>
+		                       		<c:when test="${ r.refundStatus eq 'S'}">
+		                       			<td>대기</td>
+		                       		</c:when>
+		                       		<c:when test="${ r.refundStatus eq 'Y' }">
+		                       			<td>승인</td>
+		                       		</c:when>
+		                       		<c:when test="${ r.refundStatus eq 'N' }">
+		                       			<td>거절</td>
+		                       		</c:when>
+		                      	</c:choose>
 		                    </tr>
 	                    </c:forEach>
 	                </tbody>
@@ -151,25 +166,50 @@
         <!-- 페이징 -->
         <div class="paging_wrap">
             <ul class="pagination">
+            
             	<c:choose>
-            		<c:when test="${ pi.currentPage eq 1 }">
-	                	<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
-            		</c:when>
-            		<c:otherwise>
-            			<li class="page-item"><a class="page-link" href="${ pi.currentPage-1 }">이전</a></li>
-            		</c:otherwise>
-            	</c:choose>
-                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                	<li class="page-item"><a class="page-link" href="refundListView.mana?currentPage=${ p }">${ p }</a></li>
-                </c:forEach>
-                <c:choose>
-                	<c:when test="${ pi.currentPage eq maxPage }">
-                		<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
-                	</c:when>
-                	<c:otherwise>
-	                	<li class="page-item"><a class="page-link" href="${ pi.currentPage+1 }">다음</a></li>
-                	</c:otherwise>
-                </c:choose>
+	        		<c:when test="${ pi.currentPage eq 1 }">
+		           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+		            </c:when>
+		            <c:otherwise>
+		            	<c:choose>
+		            		<c:when test="${ empty refundKey and empty keyword and empty rfStatus }">
+				            	<li class="page-item"><a class="page-link" href="${ pi.currentPage - 1 }">이전</a></li>
+				            </c:when>
+				            <c:otherwise>
+				            	<li class="page-item"><a class="page-link" href="searchRefund.mana?currentPage=${pi.currentPage - 1}&refundKey=${refundKey}&keyword=${keyword}&rfStatus=${rfStatus}">이전</a></li>
+		            		</c:otherwise>
+		            	</c:choose>
+		            </c:otherwise>
+		    	</c:choose>     
+			    	   
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<c:choose>
+						<c:when test="${ empty refundKey and empty keyword and empty rfStatus }">
+               				<li class="page-item"><a class="page-link" href="refundListView.mana?currentPage=${ p }">${ p }</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="searchRefund.mana?currentPage=${p}&refundKey=${refundKey}&keyword=${keyword}&rfStatus=${rfStatus}">${ p }</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>		            
+			            
+		        <c:choose> 
+		        	<c:when test="${ pi.currentPage eq pi.maxPage }">
+		           	 	<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+		           	</c:when>
+		           	<c:otherwise>
+		           		<c:choose>
+		            		<c:when test="${ empty refundKey and empty keyword and empty rfStatus }">
+				           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
+				            </c:when>
+				            <c:otherwise>
+				            	<li class="page-item"><a class="page-link" href="searchRefund.mana?currentPage=${pi.currentPage + 1}&refundKey=${refundKey}&keyword=${keyword}&rfStatus=${rfStatus}">다음</a></li>
+		            		</c:otherwise>
+		            	</c:choose>
+		           	</c:otherwise> 	
+	        	</c:choose>
+            
             </ul>
         </div>
 

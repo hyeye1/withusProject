@@ -1,6 +1,7 @@
 package com.kh.withus.csc.faq.model.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -11,29 +12,28 @@ import com.kh.withus.csc.faq.model.vo.Faq;
 public class FaqDao {
 	
 	// 6/27 윤경 생성
-	
-	public int selectListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("faqMapper.selectListCount");
-	}
-	
+	/*
 	public ArrayList<Faq> selectList(SqlSessionTemplate sqlSession, Faq f) {
 		return (ArrayList)sqlSession.selectList("faqMapper.selectList", f);
 	}
 	
-	public int insertFaq(SqlSessionTemplate sqlSession, Faq f) {
-		return sqlSession.insert("faqMaaper.insertFaq");
-	}
-	
 	public Faq selectFaq(SqlSessionTemplate sqlSession, int faqNo) {
-		return sqlSession.selectOne("faqMapper.selectFaq");
+		return sqlSession.selectList("faqMapper.selectFaq", faqNo);
+	}
+	*/
+	
+	/*
+	public String insertFaq(SqlSessionTemplate sqlSession, int faqNo) {
+		return sqlSession.insert("faqMaaper.insertFaq", faqNo);
 	}
 	
-	public int updateFaq(SqlSessionTemplate sqlSession, Faq f) {
-		return sqlSession.update("faqMapper.updateFaq");
+	public ArrayList<Faq> updateFaq(SqlSessionTemplate sqlSession, Faq f) {
+		return sqlSession.update("faqMapper.updateFaq", f);
 	}
 	
-	public int deleteFaq(SqlSessionTemplate sqlSession, int faqNo) {
-		return sqlSession.update("faqMapper.deleteFaq");
+	public String deleteFaq(SqlSessionTemplate sqlSession, int fno) {
+		return sqlSession.update("faqMapper.deleteFaq", fno);
 	}
+	*/
 
 }

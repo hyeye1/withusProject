@@ -91,6 +91,8 @@
 
   button.btn.btn-withus.approvalBtn{ width: 48%; float: left;}
   button.btn.btn-danger.oppositionBtn{ width: 48%;}
+  
+  .cancle{color: red;}
 
 
 </style>
@@ -127,13 +129,13 @@
 	                  <tr>
 	                    <th rowspan="2">펀딩금 반환 상태</th>
 	                    <th>신청</th> 
-	                    <th>신청 취소</th>
+	                    <!-- <th>신청 취소</th> -->
 	                    <th>완료</th>
 	                    <th>거절</th>
 	                  </tr>
 	                  <tr>
 	                    <td>${ sc.refund } 건</td>
-	                    <td>${ sc.dropRefund } 건</td>
+	                    <%-- <td>${ sc.dropRefund } 건</td> --%>
 	                    <td>${ sc.comRefund } 건</td>
 	                    <td>${ sc.refRefund } 건</td>
 	                  </tr>
@@ -154,27 +156,28 @@
 					<div class="oList">
 						<label>목록</label>
 
-						<form action="orderNDeliverySearch.part">
+						<form action="orderNDeliverySearch.part" name=searchPart>
+						<input type="hidden" name="currentPage" value="1">
 							<div class="searchForm">
 								<div class="keyword_1">
-									<select name="" id="">
-										<option value="">발송 배송 : 전체</option>
-										<option value="">미발송</option>
-										<option value="">배송 중</option>
-										<option value="">배송완료</option>
+									<select name="shStatus" class="shStatus">
+										<option value="0">발송 배송 : 전체</option>
+										<option value="1">배송 준비 중</option>
+										<option value="2">배송 중</option>
+										<option value="3">배송 완료</option>
 									</select> 
 								</div>
 								<div class="keyword_2">	
-									<select name="" id="">
-										<option value="">결제 상태 : 전체</option>
-										<option value="">결제완료</option>
-										<option value="">취소요청</option>
-										<option value="">취소완료</option>
+									<select name="orStatus" class="orStatus">
+										<option value="0">결제 상태 : 전체</option>
+										<option value="1">결제 완료</option>
+										<option value="2">취소 요청</option>
+										<option value="3">취소 완료</option>
 									</select>
 								</div>
 
 								<div class="keyword_3">
-									<select name="condition" id="condition">
+									<select name="condition" class="condition">
 										<option value="all">전체</option>
 										<option value="order_no">펀딩번호</option>
 										<option value="shipping_no">발송번호</option>
@@ -192,11 +195,14 @@
 								</div>
 							</div>
 						</form>
-						<c:if test="${ !empty condition }">
+						<c:if test="${ !empty shStatus or !empty orStatus or !empty condition }">
 							<script>
-							$(function(){
-								$(".condition option[value=${condition}]").attr("selected", true);
-							})
+								$(function(){
+									$(".shStatus option[value=${shStatus}]").attr("selected", true);
+									$(".orStatus option[value=${orStatus}]").attr("selected", true);
+									$(".condition option[value=${condition}]").attr("selected", true);
+									
+								});
 							</script>
 						</c:if>
 
@@ -204,73 +210,92 @@
 						<table class="table table-border" id="orderList">
 							<thead>
 								<tr height="50">
-								
 									<th width="60">펀딩번호</th>
 									<th width="75">서포터 정보</th>
 									<th width="60">결제상태</th>
-									<th width="90">결제금액</th>
-									<th width="180">리워드</th>
-									<th width="100">발송정보</th>
+									<th width="70">결제금액</th>
+									<th width="220">리워드</th>
+									<th width="85">발송정보</th>
 									<th width="80">발송 예정일</th>
 									<th width="80">발송·배송</th>
 									<th width="80">발송번호</th>
-									<th width="120">펀딩금 반환</th>
+									<th width="80">펀딩금 반환</th>
 								</tr>
 							</thead>
-							<tbody>
-								<c:forEach var="p" items="${ polist }">
-		                    	<tr>
-			                      <td class="ono">${ p.orderNo }</td>
-			                      <td>${ p.supporterName }</td>
-			                      <c:choose>
-	                        		<c:when test="${ p.orderStatus eq 1 }">
-	                        			<td>결제완료</td>
-	                        		</c:when>
-	                        		<c:when test="${ p.orderStatus eq 2 }">
-	                        			<td>취소요청</td>
-	                        		</c:when>
-	                        		<c:when test="${ p.orderStatus eq 3 }">
-	                        			<td>취소완료</td>
-	                        		</c:when>
-	                        	  </c:choose>
-			                      <td>${ p.totalPrice } 원</td>
-			                      <td>${ p.rewardTitle }/${ p.orderOption }/${ p.orderCount }</td>
-			                      <td><button type="button" class="btn btn-withus btn-sm" data-toggle="modal" data-target="#sendInfoModal" onclick="ajaxSendInfo();">
-			                      		발송정보 입력
-			                      	</button></td>
-			                      <td>${ p.deliveryDate }</td>
-			                      <!-- 운송장 번호가 비어 있을 경우 배송준비 중, 배송완료 조건은 뭘로 해야되나? -->
-			                      <c:choose>
-	                        		<c:when test="${ empty p.shippingCom or p.shippingStatus eq 1}">
-	                        			<td>배송준비중</td>
-	                        		</c:when>
-	                        		<c:when test="${ p.shippingStatus eq 2 }">
-	                        			<td>배송시작</td>
-	                        		</c:when>
-	                        		<c:when test="${ p.shippingStatus eq 3 }">
-	                        			<td>배송완료</td>
-	                        		</c:when>
-			                      </c:choose>
-			                      <td>${ p.shippingCom } <br> ${ p.shippingNo }</td>
-			                      <td style="font-size:10px;">
-			                        <!-- 환불 가능 기간을 언제로 할껀지?-->
-			                        <!-- 리워드 기간 -->
-			                        	지연반환 신청기간 <br>
-			                        	2021-05-11 ~ 2021-00-00<br>
-			                        <!-- 환불 신청자만 버튼이 노출 -->
-			                        <c:if test="${ p.orderStatus eq 2 }">
-				                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
-				                        	확인하기
-			                        	</button>
-			                        </c:if>
-			                      </td>
-			                    </tr>
-	                    		</c:forEach>
-	                    		</tbody>	
+							<c:choose>
+				           	 	<c:when test="${ empty polist }">
+				       	 			<tr style="height: 100px;"><td colspan="10"><b>내용이 존재하지 않습니다 :(</b></td></tr>
+				           	 	</c:when>
+				           	 	<c:otherwise>
+									<tbody>
+										<c:forEach var="p" items="${ polist }">
+				                    	<tr>
+					                      <td class="ono">${ p.orderNo }</td>
+					                      <td>${ p.supporterName }</td>
+					                      <c:choose>
+			                        		<c:when test="${ p.orderStatus eq 1 }">
+			                        			<td>결제완료</td>
+			                        		</c:when>
+			                        		<c:when test="${ p.orderStatus eq 2 }">
+			                        			<td>취소요청</td>
+			                        		</c:when>
+			                        		<c:when test="${ p.orderStatus eq 3 }">
+			                        			<td class="cancle">취소완료</td>
+			                        		</c:when>
+			                        		<c:when test="${ p.orderStatus eq 4 }">
+			                        			<td>이건 없어</td>
+			                        		</c:when>
+			                        	  </c:choose>
+					                      <td>${ p.totalPrice } 원</td>
+					                      <td><img src="${p.projectThum }" width="60" height="40">&nbsp;&nbsp; ${ p.rewardTitle } 
+					                      		<br>옵션: ${ p.orderOption } / 수량: ${ p.orderCount }개</td>
+					                      <td><button type="button" class="btn btn-withus btn-sm" data-toggle="modal" data-target="#sendInfoModal" onclick="ajaxSendInfo();">
+					                      		발송정보 입력
+					                      	</button></td>
+					                      <td>${ p.deliveryDate }</td>
+					                      <!-- 운송장 번호가 비어 있을 경우 배송준비 중, 배송완료 조건은 뭘로 해야되나? -->
+					                      <c:choose>
+			                        		<c:when test="${ empty p.shippingCom or p.shippingStatus eq 1}">
+			                        			<td>배송준비중</td>
+			                        		</c:when>
+			                        		<c:when test="${ p.shippingStatus eq 2 }">
+			                        			<td>배송중</td>
+			                        		</c:when>
+			                        		<c:when test="${ p.shippingStatus eq 3 }">
+			                        			<td>배송완료</td>
+			                        		</c:when>
+			                        		<c:when test="${ p.shippingStatus eq 4 }">
+			                        			<td class="cancle">환불</td>
+			                        		</c:when>
+					                      </c:choose>
+					                      <td>${ p.shippingCom } <br> ${ p.shippingNo }</td>
+					                      <td style="font-size:10px;">
+					                        <!-- 환불 가능 기간을 언제로 할껀지?-->
+					                        <!-- 리워드 기간 -->
+					                        <!-- 환불 신청자만 버튼이 노출 -->
+					                        <c:choose>
+						                        <c:when test="${ p.refundStatus eq 'S' }">
+							                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
+							                        	확인하기
+						                        	</button>
+						                        </c:when>
+					                        	<c:when test="${ p.refundStatus eq 'Y' or p.refundStatus eq 'N'}">
+							                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
+							                        	승인완료
+						                        	</button>
+					                        	</c:when>
+					                        </c:choose>
+					                      </td>
+					                    </tr>
+			                    		</c:forEach>
+			                    		</tbody>
+		                    		</c:otherwise>
+            					</c:choose>   	
 							</table>
 						</div>
 					
 					<script>
+					
                   	// 발송모달:주문내역
 	              	function ajaxSendInfo(){
 	              		//var $orderNo = $(".ono").val();  // 실패1
@@ -286,28 +311,45 @@
 	              			   //console.log(oi);
  	              			   
 	              			   var resultSend = "<table>"
-	              			   				+ "<tr>" 
-	              			   				+ "<th>펀딩번호</th>"
-	              			   				+ "<td>" + oi.orderNo + "</td>" 
-	              			   				+ "</tr>"
-		              			   			+ "<tr>" 
-	              			   				+ "<th>서포터명</th>"
-	              			   				+ "<td>" + oi.supporterName + "</td>" 
-	              			   				+ "</tr>"
-		              			   			+ "<tr>" 
-	              			   				+ "<th>펀딩내역</th>"
-	              			   				+ "<td>" + oi.rewardTitle + "</td>" 
-	              			   				+ "</tr>"
-		              			   			+ "<tr>" 
-	              			   				+ "<th>옵션</th>"
-	              			   				+ "<td>" + oi.orderOption / oi.orderCount + "</td>" 
-	              			   				+ "</tr>"	
-		              			   			+ "<th>총 결제 금액</th>"
-	              			   				+ "<td>" + oi.totalPrice + "원</td>" 
-	              			   				+ "</tr>"
-	              			   				+ "</table>"
-	              			   			
-	              		  	 $(".partnerOrder").html(resultSend);
+		              			   				+ "<tr>" 
+		              			   				+ "<th>펀딩번호</th>"
+		              			   				+ "<td>" + oi.orderNo + "</td>" 
+		              			   				+ "</tr>"
+			              			   			+ "<tr>" 
+		              			   				+ "<th>서포터명</th>"
+		              			   				+ "<td>" + oi.supporterName + "</td>" 
+		              			   				+ "</tr>"
+			              			   			+ "<tr>" 
+		              			   				+ "<th>펀딩내역</th>"
+		              			   				+ "<td>" + oi.rewardTitle + "</td>" 
+		              			   				+ "</tr>"
+			              			   			+ "<tr>" 
+		              			   				+ "<th>옵션</th>"
+		              			   				+ "<td>" + oi.orderOption / oi.orderCount + "</td>" 
+		              			   				+ "</tr>"	
+			              			   			+ "<th>총 결제 금액</th>"
+		              			   				+ "<td>" + oi.totalPrice + "원</td>" 
+		              			   				+ "</tr>"
+		              			   				+ "</table>"
+	              			   				
+           			   			$(".partnerOrder").html(resultSend);		
+   	              			
+		   				
+		   					// 발송정보 update시 필요한 값
+	              			 var ono = oi.orderNo;			// 주문번호
+							 var company = oi.shippingCom;	// 택배사
+							 var sno = oi.shippingNo;		// 운송장번호
+							 
+							 //console.log(ono);							 
+							 //console.log(company);
+							 //console.log(sno);
+	              			 
+							 // 값 넘겨주기
+	              			 $(".ono").val(ono);
+							 $(".company").val(company);
+							 $(".sno").val(sno);
+							 
+	              		  	 
 	              		},error:function(){
 	    					console.log("발송ajax 조회실패");
 	              		}
@@ -324,6 +366,8 @@
 	              			data:{ono:$orderNo},
 	              			success:function(ri){
 	              				//console.log(ri);
+	              				var ono = ri.orderNo;
+	              				
 	              				var resultOrder = "<table>"
 				          			   				+ "<tr>" 
 				          			   				+ "<td>펀딩번호</td>"
@@ -350,7 +394,7 @@
    	              									+ "<table>"
 				          			   				+ "<tr>" 
 				          			   				+ "<th>환불신청번호</th>"
-				          			   				+ "<td>" + ri.refundNo + "</td>" 
+				          			   				+ "<td class=" + "'rno'" + ">" + ri.refundNo + "</td>" 
 				          			   				+ "</tr>"
 				              			   			+ "<tr>" 
 				          			   				+ "<th>상세사유</th>"
@@ -373,27 +417,30 @@
 											        + "</tr>"
 											        + "<tr>"
 											        + "<td colspan=" + "2><b>상세금액</b>"
-												        + "<table class=" + "detailTb" + ">" 
-												        + "<tr>"
-												        + "<td>리워드 금액</td>"
-												        + "<td>"+ ri.rewardPrice + " 원 </td>"
-												        + "</tr>" 
-												        + "<tr>"
-												        + "<td>추가 후원금</td>"
-												        + "<td>" + ri.orderPlus + " 원 </td>"
-												        + "</tr>"
-												        + "</table>"
+											        + "<table class=" + "'detailTb'" + ">" 
+											        + "<tr>"
+											        + "<td>리워드 금액</td>"
+											        + "<td>"+ ri.rewardPrice + " 원 </td>"
+											        + "</tr>" 
+											        + "<tr>"
+											        + "<td>추가 후원금</td>"
+											        + "<td>" + ri.orderPlus + " 원 </td>"
+											        + "</tr>"
+											        + "</table>"
 											        + "</td>"
 											        + "</tr>"   				
-	              		
+
+								$(".ono").val(ono);			        	
 	   	              			$(".partnerRefund").html(resultOrder);
 	              				$(".partnerRefundInfo").html(resultRefund);
 	              				$(".refundTb").html(resultTable);
+	              				
 	              			},error:function(){
 	              				console.log("환불 ajax 조회실패");
 	              			}
 	              			});
 		              	}
+	              	
 					</script>
 
 					<!-- 발송정보 입력창  -->
@@ -418,25 +465,33 @@
 
 									<hr style="width: 95%;">
 
+									<input type="hidden" class="ono" name="ono" value="">
 									<div class="trackingInfo">
 										<label>택배사</label> 
-										<select id="company" name="company">
+										<select id="company" name="company" required>
 				                          	<option value="대한통운">대한통운</option>
 				                            <option value="우체국">우체국 택배</option>
 				                            <option value="로젠">로젠 택배</option>
 				                            <option value="한진">한진 택배</option>
 										</select> 
 										<label>송장번호</label> 
-										<input type="text" placeholder="숫자만 입력하세요" name="dno" value="${dno}">
+										<input type="text" placeholder="숫자만 입력하세요" class="sno" name="sno" value="" required>
 										<p>특수문자(-)없이 숫자만 입력해주세요</p>
-
 									</div>
-
+									
+									<c:if test="${ !empty company }">
+										<script>
+										$(function(){
+							        		$(".company option[value=${company}]").attr("selected", true);
+							        	});
+										</script>
+									</c:if>
+										
 								</div>
 
 								<!-- Modal footer -->
 								<div class="modal-footer none">
-									<button type="button" class="btn btn-withus btn-block" data-dismiss="modal">완료</button>
+									<button type="submit" onclick="form.submit();" class="btn btn-withus btn-block" data-dismiss="modal">완료</button>
 								</div>
 
 							</div>
@@ -459,74 +514,117 @@
 								<!-- Modal body -->
 		                        <div class="modal-body">
 		                          <label style="font-size:14px;">서포터가 펀딩금반환 요청한 내역을 확인하고 승인 또는 거절 처리하세요.</label>
+		                          	<form name="refundResult">
+		                          	<input type="hidden" class="ono" name="ono" value="">
 		                            <div class="partnerRefund">
                                 
-                            </div>
-                            <br>
-                            <div class="partnerRefundInfo">
-	                            
-                            </div>
-            
-                            <table>
-                                 <div class="refundTb">
-							        
-							    </div>
-                                <tr>
-                                    <td colspan="2" style="padding: 20px 0 0;">
-                                         [펀딩금 반환 신청 처리]
-                                    <table class="subTable">
-                                        <tr>
-                                            <td><b>승인</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="ment">신청 사유가 반환 정책에 해당된다면, 승인처리하세요. 승인처리시, 결제 취소가 진행됩니다.</td>
-                                        </tr>
-                                        <tr>
-                                            <td><b>거절</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="ment">신청 사유가 반환 정책에 해당하지 않은 경우, 거절 처리하세요. 결제취소가 진행되지 않습니다.</td>
-                                        </tr>
-                                    </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-
-								<!-- Modal footer -->
-								<div class="modal-footer none">
-									<button type="button" class="btn btn-withus approvalBtn" data-dismiss="modal">승인</button>
-									<button type="button" class="btn btn-danger oppositionBtn" data-dismiss="modal">거절</button>
-								</div>
-
+		                           </div>
+		                           <br>
+		                           <div class="partnerRefundInfo">
+		                            
+		                           </div>
+		           
+		                           <table>
+		                               <div class="refundTb">
+								        
+								       </div>
+		                               <tr>
+		                                   <td colspan="2" style="padding: 20px 0 0;">
+		                                        [펀딩금 반환 신청 처리]
+		                                   <table class="subTable">
+		                                       <tr>
+		                                           <td><b>승인</b></td>
+		                                       </tr>
+		                                       <tr>
+		                                           <td class="ment">신청 사유가 반환 정책에 해당된다면, 승인처리하세요. 승인처리시, 결제 취소가 진행됩니다.</td>
+		                                       </tr>
+		                                       <tr>
+		                                           <td><b>거절</b></td>
+		                                       </tr>
+		                                       <tr>
+		                                           <td class="ment">신청 사유가 반환 정책에 해당하지 않은 경우, 거절 처리하세요. 결제취소가 진행되지 않습니다.</td>
+		                                       </tr>
+		                                   </table>
+		                                   </td>
+		                               </tr>
+		                           </table>
+		                       </div>
+		
+							<!-- Modal footer -->
+							<div class="modal-footer none">
+								<button type="button" name="rstatus" value="Y"
+										class="btn btn-withus approvalBtn" data-dismiss="modal">승인</button>
+								<button type="button" name="rstatus" value="N"
+										class="btn btn-danger oppositionBtn" data-dismiss="modal">거절</button>
+							</div>
+							<script>
+								$(function() {
+								    $("button[name=rstatus]").on('click', function() {
+								        var rstatus = $(event.target).val();    
+								        console.log(rstatus);
+								        $("form[name=refundResult]")
+						                .attr({ action:"refundable.part?rstatus="+rstatus, method:"post" })
+						                .submit();
+								    });
+								});
+							</script>
+							
+							</form>
+		
 							</div>
 						</div>
 					</div>
+				
 
 		           	<!-- 페이징 -->
 		            <div id="pagingArea">
 						<ul class="pagination">
-		                   <c:choose>
+						
+							<c:choose>
 				        		<c:when test="${ pi.currentPage eq 1 }">
 					           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
 					            </c:when>
 					            <c:otherwise>
-					            	<li class="page-item"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
+					            	<c:choose>
+					            		<c:when test="${ empty shStatus or empty orStatus or empty condition or empty keyword }">
+							            	<li class="page-item"><a class="page-link" href="${ pi.currentPage - 1 }">이전</a></li>
+							            </c:when>
+							            <c:otherwise>
+							            	<li class="page-item"><a class="page-link" href="orderNDeliverySearch.part?currentPage=${pi.currentPage - 1}&shStatus=${shStatus}&orStatus=${orStatus}&condition=${condition}&keyword=${keyword}">이전</a></li>
+					            		</c:otherwise>
+					            	</c:choose>
 					            </c:otherwise>
-					    	</c:choose>        
-					            
+					    	</c:choose>     
+					    	   
+					    	   
 							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-				            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
+								<c:choose>
+									<c:when test="${ empty shStatus or empty orStatus or empty condition or empty keyword }">
+						            	<li class="page-item"><a class="page-link" href="orderNDeliveryList.part?currentPage=${p}">${ p }</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="page-item"><a class="page-link" href="orderNDeliverySearch.part?currentPage=${p}&shStatus=${shStatus}&orStatus=${orStatus}&condition=${condition}&keyword=${keyword}">${ p }</a></li>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>		            
+					            
 					            
 					        <c:choose> 
 					        	<c:when test="${ pi.currentPage eq pi.maxPage }">
 					           	 	<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
 					           	</c:when>
 					           	<c:otherwise>
-					           		<li class="page-item"><a class="page-link" href="${ pi.currentPage+1 }">다음</a></li>
+					           		<c:choose>
+					            		<c:when test="${ empty shStatus or empty orStatus or empty condition or empty keyword }">
+							           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
+							            </c:when>
+							            <c:otherwise>
+							            	<li class="page-item"><a class="page-link" href="orderNDeliverySearch.part?currentPage=${pi.currentPage + 1}&shStatus=${shStatus}&orStatus=${orStatus}&condition=${condition}&keyword=${keyword}">다음</a></li>
+					            		</c:otherwise>
+					            	</c:choose>
 					           	</c:otherwise> 	
 				        	</c:choose>
+					
 						</ul>
 		            </div>
 				</div>

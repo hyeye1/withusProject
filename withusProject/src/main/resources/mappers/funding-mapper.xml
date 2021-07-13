@@ -88,21 +88,58 @@
          where p.project_no = o.project_no 
            and p.cat_no = c.cat_no 
            and p.member_no = m.member_no 
-           and o.order_status = 1
+           and p.project_status = 3
          group
-         	by p.project_no
-         	 , p.project_title
-         	 , p.project_thum
-         	 , c.cat_no
-         	 , c.cat_name
-         	 , m.partner_name
-         	 , p.project_gprice
-         	 , p.project_start_dt
-         	 , p.project_end_dt  
+            by p.project_no
+             , p.project_title
+             , p.project_thum
+             , c.cat_no
+             , c.cat_name
+             , m.partner_name
+             , p.project_gprice
+             , p.project_start_dt
+             , p.project_end_dt  
          order 
             by p.project_no asc
-	</select>
-	
+   </select>
+   
+    <select id="selectList" resultMap="fundingListResultSet" parameterType="_int">
+      select
+               p.project_no
+             , p.project_thum
+             , p.project_title
+             , c.cat_no
+             , c.cat_name
+             , m.partner_name
+             , sum(o.total_price) total_price
+             , floor(sum(o.total_price) / p.project_gprice * 100) percentage
+             , p.project_gprice
+             , p.project_start_dt
+             , p.project_end_dt
+             , ceil(project_end_dt - sysdate) dday
+          from 
+                tb_order o
+             , project p
+             , category c
+             , member m
+         where p.project_no = o.project_no 
+           and p.cat_no = c.cat_no 
+           and p.member_no = m.member_no
+           and p.project_status = 3
+           and c.cat_no = #{catNo}
+         group
+            by p.project_no
+             , p.project_title
+             , p.project_thum
+             , c.cat_no
+             , c.cat_name
+             , m.partner_name
+             , p.project_gprice
+             , p.project_start_dt
+             , p.project_end_dt  
+         order 
+            by p.project_no asc
+   </select>
 	
 	<update id="increaseCount" parameterType="_int">
 		update
@@ -244,7 +281,89 @@
 		 where reward_no = #{rewardNo}
 		   and reward_status = 'Y'
     </update>
-    	
+    
+	<insert id="insertProject" parameterType="Project">
+		insert
+		  into project
+	 	  	 (
+			   project_no   
+			 , member_no 
+			 , cat_no       
+			 , project_title  
+			 , project_summary
+			 , project_gprice
+			 , project_start_dt  
+			 , project_end_dt
+			 , project_thum
+			 , project_count   
+			 , project_content
+			 , project_refcon
+			 , hashtag
+			 , delivery_date
+			 , partner_phone
+			 , phone_yn
+			 , partner_email
+			 , partner_bank
+			 , partner_account
+			 , partner_acholder
+			 , partner_web
+			 , partner_sns
+			 )
+	    values
+			 (
+			   seq_pno.nextval
+			 , #{memberNo}
+			 , #{catNo}
+			 , #{projectTitle}
+			 , #{projectSummary}
+			 , #{projectGprice}
+			 , #{projectStartDT}
+			 , #{projectEndDT}
+			 , #{projectThum}
+			 , #{projectCount}
+			 , #{projectContent}
+			 , #{projectRefcon}
+			 , #{hashtag}
+			 , #{deliveryDate}
+			 , #{partnerPhone}
+			 , #{phoneYN}
+			 , #{partnerEmail}
+			 , #{partnerBank}
+			 , #{partnerAccount}
+			 , #{partnerAcholer}
+			 , #{partnerWeb}
+			 , #{partnerSNS}
+			 )
+    </insert>
  
+  	<insert id="insertReward" parameterType="Reward">
+ 		insert 
+ 		  into Reward
+ 		     (
+ 		       reward_no
+ 		     , project_no
+ 		     , reward_price
+ 		     , reward_status
+ 		     , reward_stock
+ 		     , reward_ship
+ 		     , reward_title
+ 		     , reward_content
+ 		     , reward_yn
+ 		     , reward_option
+ 		     )
+ 		value
+ 		     (
+ 		       seq_rno.nextval
+ 		     , seq_pno.currval
+ 		     , #{rewardPrice}
+ 		     , #{rewardStatus}
+ 		     , #{rewardStock}
+ 		     , #{rewardShip}
+ 		     , #{rewardTitle}
+ 		     , #{rewardContent}
+ 		     , #{optionYn}
+ 		     , #{rewardOption}
+ 		     )
+ 	</insert>
 
  </mapper>
