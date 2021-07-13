@@ -207,21 +207,20 @@
 			            </c:when>
 			            <c:otherwise>
 			            	<c:choose>
-			            		<c:when test="${ empty orderKeyword or empty keyword or empty odStatus or empty shStatus }">
+			            		<c:when test="${ empty orderKeyword and empty keyword and empty odStatus and empty shStatus }">
 					            	<li class="page-item"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
 					            </c:when>
 					            <c:otherwise>
-					            	<li class="page-item"><a class="page-link" href="orderSearch.mana?currentPage=${pi.currentPage - 1}&orderKeyword=${orderKeyword}&keyword=${keyword}&odStatus=${odStatus}&shStatus=${shStatus}">다음</a></li>
+					            	<li class="page-item"><a class="page-link" href="orderSearch.mana?currentPage=${pi.currentPage - 1}&orderKeyword=${orderKeyword}&keyword=${keyword}&odStatus=${odStatus}&shStatus=${shStatus}">이전</a></li>
 			           			</c:otherwise>
 			           		</c:choose>
 			            	
 			            </c:otherwise>
 			    	</c:choose>        
 			            
-			            
 					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 						<c:choose>
-							<c:when test="${ empty orderKeyword or empty keyword or empty odStatus or empty shStatus }">
+							<c:when test="${ empty orderKeyword and empty keyword and empty odStatus and empty shStatus }">
 		            			<li class="page-item"><a class="page-link" href="orderListView.mana?currentPage=${p}">${ p }</a></li>
 	            			</c:when>
 	            			<c:otherwise>
@@ -238,7 +237,7 @@
 			           	</c:when>
 			           	<c:otherwise>
 		           			<c:choose>
-			            		<c:when test="${ empty orderKeyword or empty keyword or empty odStatus or empty shStatus }">
+			            		<c:when test="${ empty orderKeyword and empty keyword and empty odStatus and empty shStatus }">
 					           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
 					            </c:when>
 					            <c:otherwise>

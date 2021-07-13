@@ -20,12 +20,9 @@
     .button_area button{margin: 0 10px;}
     .btn.btn-withus{background-color: #3498db; color: white;}
     .btn.btn-withus:hover{cursor: pointer; background-color: #2c83be; color: white;}
+    .cancle{color: red;}
 
-    /* modal */
-    .modal-header.none {border-bottom: none;} 
-    .modal-footer.none{border-top: none;}
-    .modal-footer button.btn.btn-secondary{ width: 47%; float: left;}
-    .modal-footer button.btn.btn-withus{ width: 47%;}
+   
 </style>
 </head>
 <body>
@@ -66,7 +63,7 @@
 	                    <td>신용(체크)카드</td>
 	                </tr>
 	                <tr>
-	                    <th>펀딩 상태</th>
+	                    <th>펀딩 결제 상태</th>
 	                    <c:choose>
                        		<c:when test="${ r.orderStatus == 1 }">
                        			<td>결제완료</td>
@@ -75,7 +72,7 @@
                        			<td>취소요청</td>
                        		</c:when>
                        		<c:when test="${ r.orderStatus == 3 }">
-                       			<td>취소완료</td>
+                       			<td class="cancle">취소완료</td>
                        		</c:when>
                        	</c:choose>
 	                    <th>카드 번호</th>
@@ -119,7 +116,17 @@
                     </tr> 
                     <tr>
                         <th>파트너 승인여부</th>
-                        <td>${ r.refundStatus }</td>
+                        <c:choose>
+                       		<c:when test="${ r.refundStatus eq 'S'}">
+                       			<td>대기</td>
+                       		</c:when>
+                       		<c:when test="${ r.refundStatus eq 'Y' }">
+                       			<td class="cancle">승인</td>
+                       		</c:when>
+                       		<c:when test="${ r.refundStatus eq 'N' }">
+                       			<td>거절</td>
+                       		</c:when>
+                      	</c:choose>
                         
                     </tr>      
                 </table> 

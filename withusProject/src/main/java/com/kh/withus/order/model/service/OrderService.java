@@ -17,7 +17,7 @@ public interface OrderService {
 	Order slectOrderDetail(int orderNo);
 	
 	// 결제취소
-	int updateOrderCancle(int orderNo);
+	int updateOrderCancle(HashMap<String, Object> map);
 
 	// 검색 페이징
 	int countSearch(HashMap<String, String> map);

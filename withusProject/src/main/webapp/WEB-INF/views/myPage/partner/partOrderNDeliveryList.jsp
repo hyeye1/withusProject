@@ -237,13 +237,13 @@
 			                        			<td>결제완료</td>
 			                        		</c:when>
 			                        		<c:when test="${ p.orderStatus eq 2 }">
-			                        			<td>환불신청</td>
+			                        			<td>취소요청</td>
 			                        		</c:when>
 			                        		<c:when test="${ p.orderStatus eq 3 }">
-			                        			<td class="cancle">화불완료</td>
+			                        			<td class="cancle">취소완료</td>
 			                        		</c:when>
 			                        		<c:when test="${ p.orderStatus eq 4 }">
-			                        			<td>화불거절</td>
+			                        			<td>이건 없어</td>
 			                        		</c:when>
 			                        	  </c:choose>
 					                      <td>${ p.totalPrice } 원</td>
@@ -274,12 +274,12 @@
 					                        <!-- 리워드 기간 -->
 					                        <!-- 환불 신청자만 버튼이 노출 -->
 					                        <c:choose>
-						                        <c:when test="${ p.orderStatus eq 2 }">
+						                        <c:when test="${ p.refundStatus eq 'S' }">
 							                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
 							                        	확인하기
 						                        	</button>
 						                        </c:when>
-					                        	<c:when test="${ p.orderStatus eq 3 or p.orderStatus eq 4}">
+					                        	<c:when test="${ p.refundStatus eq 'Y' or p.refundStatus eq 'N'}">
 							                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
 							                        	승인완료
 						                        	</button>
@@ -554,7 +554,7 @@
 							<div class="modal-footer none">
 								<button type="button" name="rstatus" value="Y"
 										class="btn btn-withus approvalBtn" data-dismiss="modal">승인</button>
-								<button type="button" name="rstatus" value="R"
+								<button type="button" name="rstatus" value="N"
 										class="btn btn-danger oppositionBtn" data-dismiss="modal">거절</button>
 							</div>
 							<script>

@@ -65,15 +65,21 @@ public class OrderController {
 	
 	// 주문 결제 취소
 		@RequestMapping("orderUpdate.mana")
-		public String updateOrderCancle(int ono, Model model, HttpSession session) {
-			//System.out.println(ono);
+		public String updateOrderCancle(@RequestParam(defaultValue="") int ono,
+										@RequestParam(defaultValue="") String cancleBtn,
+										 Model model, HttpSession session) {
 			
-			int result = oService.updateOrderCancle(ono);
-			System.out.println(result);
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("ono", ono);
+			map.put("cancleBtn", cancleBtn);
+			//System.out.println(map);
+			
+			
+			int result = oService.updateOrderCancle(map);
 			
 			if(result > 0) {
 				session.setAttribute("alertMsg", "성공적으로 수정되었습니다.");
-				return "redirect:/orderListView.mana";
+				return "redirect:orderDetail.mana?ono="+ono;
 			}else {
 				model.addAttribute("alertMsg", "실패");
 				return "common/manaErrorPage";
