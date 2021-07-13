@@ -107,7 +107,7 @@ public class FundingController {
 
 	   
 	@RequestMapping("success.fd")
-	public String fundingSuccess(Project p, ArrayList<Reward> list, MultipartFile upfile, HttpSession session, Model model) {
+	public String fundingSuccess(Project p, MultipartFile upfile, HttpSession session, Model model) {
 		/*
 		 * 만약 다중 첨부파일 업로드 기능일 겨웅?
 		 * <input type="file"> 요소들 다 동일한 키값으로 부여
@@ -152,10 +152,9 @@ public class FundingController {
 		p.setMemberNo(loginUser.getMemberNo());
 		
 		System.out.println(p);
-		System.out.println(list);
 		
 		// servieImpl, dao, sql 작성
-		int result = funService.insertProject(p, list);
+		int result = funService.insertProject(p);
 
 		if(result>0) {
 			// 성공했을 경우
@@ -165,7 +164,7 @@ public class FundingController {
 			//}else {
 				// 프로젝트는 성공 리워드는 실패
 				session.setAttribute("alertMsg", "리워드 등록 실패하였습니다.");
-				return "redirect:list.rew";
+				return "redirect:/";
 			//}
 			
 			

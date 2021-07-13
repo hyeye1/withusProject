@@ -704,6 +704,7 @@
                                         </th>
                                         <td>
                                             <button type="button" id="addOptionBtn" onclick="addOption();">리워드 옵션 추가하기</button>
+                                            <input type="hidden" name="optionYn" value="N">
                                         </td>
                                     </tr>
                                     <tr class="optionOnTr" style="display: none;">
@@ -767,9 +768,11 @@
                                         var content = $('textarea[name=reContent]').val();
                                         var option = $('input[name=option]').val();
                                         var ship = $('input[name=ship]:checked').val();
-                                        var optionYn = 'N';
+                                        var optionYn = $('input[name=optionYn]').val();;
                                         var all = $('.regiReward input, textarea');
                                         
+                                        console.log(limited);
+
                                         // limited가 선택되어있는데, limit이 비어있을 경우 => 안된다
                                         // unlimited가 선택되어있으면 , limit비어있든 말든 상관없음
                                         if ( limited == "limited" && limit == ""){
@@ -858,15 +861,15 @@
                                     </p>
                                     <div>
                                         <input type="text" name="partnerPhone" id="partnerPhone" placeholder="번호를 적어주세요 (예. 010-1234-5678)">
-                                        <label><input type="checkbox" name="phoneYN" id="showPhone" value="N">
+                                        <label><input type="checkbox" id="showPhone"><input type="hidden" class="phoneHidden" value="N" name="phoneYN"  >
                                             번호공개</label>
                                         <script>
                                             $(function(){
                                                 $('#showPhone').change(function(){
                                                     if($(this).prop("checked")){
-                                                        $('#showPhone').val('Y');
+                                                        $('.phoneHidden').val('Y');
                                                     }else{
-                                                        $('#showPhone').val('N');
+                                                        $('.phoneHidden').val('N');
                                                     }
                                                     // console.log($('#showPhone').val());
                                                 })

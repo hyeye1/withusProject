@@ -316,8 +316,8 @@
  		     )
  		value
  		     (
- 		       seq_rno.currval
- 		     , #{projectNo}
+ 		       seq_rno.nextval
+ 		     , seq_pno.currval
  		     , #{rewardPrice}
  		     , #{rewardStatus}
  		     , #{rewardStock}
