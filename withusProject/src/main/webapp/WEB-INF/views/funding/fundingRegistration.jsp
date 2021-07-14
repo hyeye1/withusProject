@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <!DOCTYPE html>
         <html>
 
@@ -382,7 +382,7 @@
 
             <jsp:include page="../common/header.jsp" />
 
-            <form action="success.fd">
+            <form action="success.fd" method="post" enctype="multipart/form-data">
                 <div class="regiOuter">
     
                     <!-- 타이틀과 미리보기/임시저장/승인요청하기 -->
