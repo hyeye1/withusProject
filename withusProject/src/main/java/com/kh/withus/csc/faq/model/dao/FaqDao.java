@@ -17,20 +17,19 @@ public class FaqDao {
 		return (ArrayList)sqlSession.selectList("faqMapper.selectList", f);
 	}
 	
-	public Faq selectFaq(SqlSessionTemplate sqlSession, int faqNo) {
-		return sqlSession.selectList("faqMapper.selectFaq", faqNo);
+	public int selectFaq(SqlSessionTemplate sqlSession) {
+		return parseInt(sqlSession.selectList("faqMapper.selectFaq"));
 	}
 	
-	
-	public String insertFaq(SqlSessionTemplate sqlSession, int faqNo) {
-		return sqlSession.insert("faqMaaper.insertFaq", faqNo);
+	public int insertFaq(SqlSessionTemplate sqlSession, Faq f) {
+		return sqlSession.insert("faqMapper.insertFaq", f);
 	}
 	
-	public ArrayList<Faq> updateFaq(SqlSessionTemplate sqlSession, Faq f) {
+	public int updateFaq(SqlSessionTemplate sqlSession, Faq f) {
 		return sqlSession.update("faqMapper.updateFaq", f);
 	}
 	
-	public String deleteFaq(SqlSessionTemplate sqlSession, int fno) {
+	public int deleteFaq(SqlSessionTemplate sqlSession, int fno) {
 		return sqlSession.update("faqMapper.deleteFaq", fno);
 	}
 	

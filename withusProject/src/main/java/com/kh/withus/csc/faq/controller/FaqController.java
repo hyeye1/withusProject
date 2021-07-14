@@ -20,7 +20,7 @@ public class FaqController {
 	@Autowired
 	private FaqService fService;
 	
-	/*
+	
 	@RequestMapping("list.faq")
 	public ArrayList<Faq> selectList(Faq f, ModelAndView mv) {
 		
@@ -29,8 +29,8 @@ public class FaqController {
 		return list;
 		
 	}
-	*/
 	
+	/*
 	@RequestMapping("list.faq")
 	public String selectFaq(int fno, Model model) {
 		
@@ -39,6 +39,7 @@ public class FaqController {
 		return "csc/faqListView";
 		
 	}
+	*/
 	
 	@RequestMapping("enrollForm.faq")
 	public String enrollForm() {
@@ -47,15 +48,16 @@ public class FaqController {
 	
 	
 	@RequestMapping("insert.faq")
-	public String insertFaq(int faqNo, HttpSession session, Model model) {
+	public String insertFaq(Faq f, HttpSession session, Model model) {
 		
-		int result = fService.insertFaq(faqNo);
+		int result = fService.insertFaq(f);
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "faq가 등록되었습니다.");
+			return "redirect:list.faq";
 		}else {
 			model.addAttribute("errorMsg", "faq가 등록되지않았습니다.");
-			return "common.errorPage";
+			return "common/errorPage";
 		}
 		
 	}
@@ -67,8 +69,8 @@ public class FaqController {
 	}
 	
 	@RequestMapping("update.faq")
-	public ArrayList<Faq> updateFaq(Faq f, HttpSession session, Model model) {
-		int result = fService.insertFaq(f);
+	public String updateFaq(Faq f, HttpSession session, Model model) {
+		int result = fService.updateFaq(f);
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "faq가 수정되었습니다.");
@@ -76,6 +78,7 @@ public class FaqController {
 			model.addAttribute("errorMsg", "faq가 수정되지않았습니다.");
 			return "common/errorPage";
 		}
+		return f;
 	}
 	
 	@RequestMapping("delete.faq")

@@ -13,7 +13,7 @@
 	</resultMap>
 	
 	
-	<select id="selectFaqList" resultMap="faq" parameterType="_int">
+	<select id="selectList" resultMap="faq" parameterType="_int">
 		select
 		       faq_no
 		     , faq_cat
@@ -24,7 +24,17 @@
 		 order
 		    by faq_no desc
 	</select>
-	 
+	
+	<select id="selectFaq" resultMap="faq" parameterType="_int">
+		select
+		        faq_no
+		      , faq_cat
+		      , faq_title
+		      , faq_content
+		  from faq
+		 where faq_no = #{faqNo}
+	
+	</select>
 	 
 	 
 	<insert id="insertFaq" parameterType="_int">

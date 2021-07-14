@@ -20,33 +20,32 @@ public class FaqServiceImpl implements FaqService {
 	private FaqDao fDao;
 	
 	
-	/*
+	
 	@Override
 	public ArrayList<Faq> selectList(Faq f) {
 		return fDao.selectList(sqlSession, f);
 	}
-	*/
+	
+	
 	@Override
-	public Faq selectFaq(int faqNo) {
-		return fDao.selectFaq(sqlSession, faqNo);
+	public int selectFaq() {
+		return fDao.selectFaq(sqlSession);
+	}
+	
+
+	@Override
+	public int insertFaq(Faq f) {
+		return fDao.insertFaq(sqlSession, f);
 	}
 
 	@Override
-	public String insertFaq(int faqNo) {
-		//return fDao.insertFaq(sqlSession, faqNo);
-		return null;
+	public int updateFaq(Faq f) {
+		return fDao.updateFaq(sqlSession, f);
 	}
 
 	@Override
-	public ArrayList<Faq> updateFaq(Faq f) {
-		//return fDao.updateFaq(sqlSession, f);
-		return null;
-	}
-
-	@Override
-	public String deleteFaq(int fno) {
-		//return fDao.deleteFaq(sqlSession, fno);
-		return null;
+	public int deleteFaq(int fno) {
+		return fDao.deleteFaq(sqlSession, fno);
 	}
 
 
