@@ -266,7 +266,7 @@
 				</div>
 
 				<input type="image" src="${ pageContext.request.contextPath }/resources/images/searchIcon.PNG"
-					id="searchIcon">
+					id="searchIcon" data-toggle="modal" data-target="#myModal">
 
 
 				<c:if test="${ !empty alertMsg }">
@@ -309,8 +309,42 @@
 				
 			</c:choose>
 
+			<!-- The Modal -->
+			<div class="modal" id="myModal">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
 			
+						<!-- Modal Header -->
+						<div class="modal-header">
+							<h4 class="modal-title">가치가자 검색하기</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
 			
+						<!-- Modal body -->
+						<form id="searchForm" action="search.fun" method="Get" align="center">
+							<div class="modal-body">
+								<div class="select">
+									<select class="custom-select" name="condition">
+										<option value="hashtag">해씨태크</option>
+										<option value="patnerName">파트너명</option>
+									    <option value="projectTitle">편딩 제목</option>
+									    <option value="projectSummery">펀딩 요약</option>
+									</select>
+								</div>
+								
+								<div class="text">
+									<input type="text" class="form-control" name="keyword" value="${ keyword }">
+								</div>
+							</div>
+			
+							<!-- Modal footer -->
+							<div class="modal-footer">
+								<button type="submit" class="searchBtn btn btn-secondary">검색</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		</body>

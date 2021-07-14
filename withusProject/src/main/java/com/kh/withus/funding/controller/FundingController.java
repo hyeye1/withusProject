@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +21,7 @@ import com.kh.withus.category.model.vo.Category;
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.service.FundingService;
 import com.kh.withus.funding.model.vo.Project;
-import com.kh.withus.funding.model.vo.Reward;
+import com.kh.withus.funding.model.vo.Search;
 import com.kh.withus.member.model.vo.Member;
 import com.kh.withus.order.model.vo.Order;
 
@@ -29,6 +30,27 @@ public class FundingController {
 	
 	@Autowired
 	private FundingService funService;
+	
+	@RequestMapping("search.fun")
+    public ModelAndView selectSearchList(Search s, ModelAndView mv) {
+		
+		System.out.println(s);
+		
+		HashMap<String, String> map = new HashMap<>();
+		map.put("condition", s.getCondition());
+		map.put("keyword", s.getKeyword());
+		
+		System.out.println(map);
+		
+		ArrayList<Project> list = funService.selectSearchList(map);
+		
+		System.out.println(list);
+		
+		mv.addObject("list", list)
+		.setViewName("funding/fundingListView");
+		
+		return mv;
+	}
 	
 	@RequestMapping("list.fun")
     public ModelAndView selectFundingList(int catNo, ModelAndView mv) {

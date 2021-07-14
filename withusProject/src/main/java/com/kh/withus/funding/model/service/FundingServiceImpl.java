@@ -1,6 +1,7 @@
 package com.kh.withus.funding.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,11 @@ import com.kh.withus.order.model.vo.Order;
 
 @Service
 public class FundingServiceImpl implements FundingService {
+	
+	@Override
+	public ArrayList<Project> selectSearchList(HashMap<String, String> map) {
+		return funDao.selectSearchList(sqlSession, map);
+	}
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
@@ -90,6 +96,5 @@ public class FundingServiceImpl implements FundingService {
      return rewardCheck;
      
     }
-   
 
 }

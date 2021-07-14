@@ -1,6 +1,7 @@
 package com.kh.withus.funding.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -60,6 +61,10 @@ public class FundingDao {
 
 	public int insertReward(SqlSessionTemplate sqlSession, Reward r) {
 		return sqlSession.insert("fundingMapper.insertReward", r);		
+	}
+	
+	public ArrayList<Project> selectSearchList(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectSearchList", map);		
 	}
 	
 }

@@ -265,6 +265,14 @@
 	  </div>
 	</div>
 	
+	<c:if test="${ !empty condition }">
+		<script>
+			$(function(){
+				$("#search-area option[value=${ condition }]").attr("selected", true);
+			})
+		</script>
+	</c:if>
+	
 	<!-- The Modal -->
 	<div class="modal" id="myModal2">
 	  <div class="modal-dialog modal-lg">

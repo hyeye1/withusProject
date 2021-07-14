@@ -1,15 +1,18 @@
 package com.kh.withus.funding.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.withus.category.model.vo.Category;
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.vo.Project;
-import com.kh.withus.funding.model.vo.Reward;
 import com.kh.withus.order.model.vo.Order;
 
 public interface FundingService {
 
+	// 검색 후 리스트 조회
+	ArrayList<Project> selectSearchList(HashMap<String, String> map);
+	
 	// 카테고리 리스트 조회
 	ArrayList<Category> selectCate();
 	
