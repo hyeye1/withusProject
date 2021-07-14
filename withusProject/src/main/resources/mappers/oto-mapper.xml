@@ -3,7 +3,7 @@
 
 <!-- 6/27 윤경 생성 -->
 
-<mapper namespace="OtoMapper">
+<mapper namespace="otoMapper">
 	<resultMap id="oto" type="Oto">
 		<result column="oto_no" property="otoNo" />
 		<result column="member_no" property="memberNo" />
@@ -41,22 +41,57 @@
 		where oto_status = 'Y'
 		  and member_no = #{memberNo}
 		order
-		   by oto_date desc
+		   by oto_no desc
 	</select>
 	 
-	<insert id="insertOto">
-	
+	<insert id="insertOto" parameterType="Oto">
+		insert
+		  into oto
+		  (
+		    oto_no
+		  , member_no
+		  , oto_cat
+		  , oto_title
+		  , oto_content
+		  , oto_originname
+		  , oto_changename
+		  )
+		  values
+		  (
+		    seq_otono.nextval
+		  , #{memberNo}
+		  , #{otoCat}
+		  , #{otoTitle}
+		  , #{otoContent}
+		  , #{otoOriginname}
+		  , #{otoChangename}
+		  )
 	</insert>
 	
-	<insert id="increaseCount"></insert>
+	<insert id="increaseCount" parameterType="_int">
+		update
+		       oto
+		   set count = count + 1
+		 where oto_no = #{otoNo}
+		   and oto_status = 'Y'
+	</insert>
 	
-	<select id="selectOto"></select>
+	<select id="selectOto" resultMap="oto" parameterType="_int">
+		select
+		       oto_no
+		     , member_no
+		     , oto_title
+		     , oto_content
+		     , oto_originname
+		     , oto_changename
+		     , to_char(create_date, 'YYYY-MM-DD') oto_date
+		  from oto
+		 where oto_no = #{otoNo}
 	
-	<!-- 
-	<update id="updateOto"></update>
-	 -->
+	</select>
+	
 	 
-	<update id="deleteOto">
+	<update id="deleteOto" parameterType="Oto">
 		update
 		       oto
 		   set oto_status = 'N'
