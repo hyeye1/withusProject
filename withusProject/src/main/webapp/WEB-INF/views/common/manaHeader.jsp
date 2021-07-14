@@ -143,7 +143,7 @@
 
                 <li><a>고객센터</a>
                     <ul class="navi_sub">
-                        <li><a href="list.no">공지사항</a></li>
+                        <li><a href="manaList.no">공지사항</a></li>
                         <li><a href="list.faq">FAQ</a></li>
                         <li><a href="list.oto">문의하기</a></li>
                         <li><a href="">신고하기</a></li>

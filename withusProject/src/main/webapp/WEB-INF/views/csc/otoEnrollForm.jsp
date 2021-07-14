@@ -30,18 +30,18 @@
                     <table align="center" border="1px;">
                         <tr>
                             <th><label for="title">제목</label></th>
-                            <td><input type="text" id="title" class="form-control" name="" required></td>
+                            <td><input type="text" id="title" class="form-control" name="otoTitle" required></td>
                         </tr>
                         <tr>
                             <th><label for="writer">작성자</label></th>
-                            <td><input type="text" id="writer" class="form-control" value="" name="" readonly></td>
+                            <td><input type="text" id="writer" class="form-control" value="memberNo" name="memberNo" readonly></td>
                         </tr>
                         <tr>
                             <th><label for="upfile">첨부파일</label></th>
-                            <td><input type="file" id="upfile" class="form-control-file border" name=""></td>
+                            <td><input type="file" id="cscUpfile" class="form-control-file border" name="cscUpfile"></td>
                         </tr>
                         <tr>
-                            <th colspan="2"><textarea class="form-control" required name="" id="content" style="width: 1000px; height: auto;"></textarea></th>
+                            <th colspan="2"><textarea class="form-control" required name="otoContent" id="content" style="width: 1000px; height: auto;"></textarea></th>
                         </tr>
                     </table>
                     <br>

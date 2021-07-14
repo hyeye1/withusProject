@@ -9,7 +9,6 @@ import java.util.Date;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,15 +20,13 @@ import com.kh.withus.common.template.pagination;
 import com.kh.withus.csc.notice.model.service.NoticeService;
 import com.kh.withus.csc.notice.model.vo.Notice;
 
-@Controller
-public class NoticeController {
-	
-	// 6/25  윤경 생성
+public class NoticeManaContorller {
+
 	@Autowired
 	private NoticeService nService;
 	
-	/* 사용자 */ 
-	@RequestMapping("list.no")
+	/* 관리자 */	
+	@RequestMapping("manaList.no")
 	public ModelAndView selectListCount(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
 		int listCount = nService.selectListCount();
@@ -37,19 +34,17 @@ public class NoticeController {
 		
 		ArrayList<Notice> list = nService.selectList(pi);
 		
-		mv.addObject("pi", pi).addObject("list", list).setViewName("csc/noticeListView");
+		mv.addObject("pi", pi).addObject("list", list).setViewName("admin/csc/notice/noticeManaListView");
 		
 		return mv;
 	}
 	
-	// 관리자(user01@withus.com) 일때만 보이는 버튼
-	@RequestMapping("enrollForm.no")
+	@RequestMapping("manaEnrollForm.no")
 	public String enrollForm() {
-		return "csc/noticeEnrollForm";
+		return "admin/csc/notice/noticeManaEnrollForm";
 	}
 	
-	// 관리자(user01@withus.com) 일때만 보이는 버튼
-	@RequestMapping("insert.no")
+	@RequestMapping("manaInsert.no")
 	public String insertNotice(Notice n, MultipartFile cscUpfile, HttpSession session, Model model) {
 		
 		if(!cscUpfile.getOriginalFilename().equals("")) {
@@ -62,10 +57,10 @@ public class NoticeController {
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "공지사항이 등록되었습니다.");
-			return "redirect:list.no";
+			return "redirect:manaList.no";
 		}else {
 			model.addAttribute("errorMsg", "공지사항이 등록되지않았습니다.");
-			return "common/errorPage";
+			return "common/ManaErrorPage";
 		}
 		
 	
@@ -93,22 +88,21 @@ public class NoticeController {
 		}
 
 
-	@RequestMapping("detail.no")
+	@RequestMapping("manaDetail.no")
 	public String selectNotice(int nno, Model model) {
 		int result = nService.increaseCount(nno);
 		
 		if(result > 0) {
 			Notice n = nService.selectNotice(nno);
 			model.addAttribute("n", n);
-			return "csc/noticeDetailView";
+			return "admin/csc/notice/noticeManaDetailView";
 		}else {
 			model.addAttribute("errorMsg", "공지사항 상세조회를 실패했습니다.");
-			return "common/errorPage";
+			return "common/manaErrorPage";
 		}
 	}
 	
-	// 관리자(user01@withus.com) 일때만 보이는 버튼
-	@RequestMapping("delete.no")
+	@RequestMapping("manaDelete.no")
 	public String deleteNotice(int nno, String filePath, HttpSession session, Model model) {
 		
 		int result = nService.deleteNotice(nno);
@@ -119,21 +113,21 @@ public class NoticeController {
 			}
 			
 			session.setAttribute("alertMsg", "공지사항이 성공적으로 삭제되었습니다.");
-			return "redirect:list.no";
+			return "redirect:manaList.no";
 			
 		} else {
 			model.addAttribute("errorMsg", "공지사항 삭제를 실패했습니다.");
-			return "common/errorPage";
+			return "common/manaErrorPage";
 		}
 	}
 	
-	@RequestMapping("updateForm.no")
+	@RequestMapping("manaUpdateForm.no")
 	public String updateForm(int nno, Model model) {
 		model.addAttribute("n", nService.selectNotice(nno));
-		return "csc/noticeUpdateEnroll";
+		return "admin/csc/notice/noticeManaUpdateEnroll";
 	}
 	
-	@RequestMapping("update.no")
+	@RequestMapping("manaUpdate.no")
 	public String updateNotice(Notice n, MultipartFile cscReUpfile, HttpSession session, Model model){
 		
 		if(!cscReUpfile.getOriginalFilename().equals("")) {
@@ -145,18 +139,12 @@ public class NoticeController {
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "공지사항이 수정되었습니다.");
-			return "redirect:detail.no?nno=" + n.getNoticeNo();
+			return "redirect:manaDetail.no?nno=" + n.getNoticeNo();
 		}else {
 			model.addAttribute("errorMsg", "공지사항이 수정되지않았습니다.");
-			return "common/errorPage";
+			return "common/manaErrorPage";
 		}
 		
 	}
 	
-	
-	
-	
-	
-	
-
 }

@@ -76,7 +76,7 @@
 		</script>
 
 		<div class="list" align="center">
-			<button><a class="btn btn-secondary" href="list.no">목록</a></button>
+			<a class="btn btn-secondary" href="list.no">목록</a>
 		</div>
     </div>
 

@@ -17,15 +17,8 @@
     <hr><br>
 
     <div class="container">
-    
     	<br>
-    	
-    	<!-- 로그인 했을 시에만 보여지는 페이지 -->
-    	
-    		
-    	
         <table border="1">
-        	<c:forEach var="o" items="${ list }">
 	            <tr>
 	                <th width="200" height="35">제목</th>
 	                <td width="800">${ o.otoTitle }</td>
@@ -40,12 +33,20 @@
 	            </tr>
 	            <tr>
 	                <th height="35">첨부파일</th>
-	                <td><a href="" download="">${ }</a></td>
+	                <td>
+	                	<c:choose>
+	                    	<c:when test="${ empty o.otoOriginname }">
+	                    		첨부파일이 없습니다.
+	                    	</c:when>
+	                    	<c:otherwise>
+	                        	<a href="${ o.otoChangename }" download="${ o.otoOriginname }">${ o.otoOriginname }</a>
+							</c:otherwise>                        
+                        </c:choose>
+	                </td>
 	            </tr>
 	            <tr>
 	                <td colspan="2" height="700"></td>
 	            </tr>
-            </c:forEach>
 
             <!-- 답변(댓글) 기능-->
             <tr>

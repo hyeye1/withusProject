@@ -24,38 +24,54 @@
 	<div class="container">
 
 		<div class="topBtn" align="right">
-			<button type="button" class="btn btn-secondary">등록</button>
+			<a class="btn btn-secondary" style="float:right" href="ManaEnrollForm.no">등록</a>
 		</div>
 		<br>
 	    <!-- 표 N행 6열 -->
 		<table class="table table-bordered">
 			<thead>
 			  <tr align="center" style="height: 10px; background-color: rgb(224, 224, 224); font-size:smaller ;">
-				<th width="50" height="30"><input type="checkbox"></th>
 	            <th width="60">글번호</th>
 	            <th width="700">공지사항 제목</th>
 	            <th width="100">날짜</th>
 	            <th width="60">글상태<br>(Y/N)</th>
+	            <th width="140">
+	            	<a class="btn btn-success" onclick="postFormSubmit(1)">수정</a> &nbsp;
+					<a class="btn btn-warning" onclick="postFormSubmit(2)">삭제</a>
+	            </th>
 			  </tr>
 			</thead>
 			<tbody>
-				<tr align="center">
-					<td><input type="checkbox" value="false"></td>
-					<td>${ noticeNo }</td>
-					<td><a href="">${ noticeTitle }</a></td>
-					<td>${ createDate }</td>
-					<td>${ noticeStatus }</td>
-				</tr>
+				<c:forEach var="n" items="${ list }">
+					<tr align="center">
+						<td>${ n.noticeNo }</td>
+						<td><a href="">${ n.noticeTitle }</a></td>
+						<td>${ n.createDate }</td>
+						<td>${ n.noticeStatus }</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
-	    <br>
 		
-		<div class="Btn" align="right">
-	    	<button type="button" class="btn btn-success">수정</button> &nbsp;
-			<button type="button" class="btn btn-warning">삭제</button>
-		</div>
+		<script>
+            $(function(){
+            	$("#noticeList tbody tr").click(function(){
+            		location.href="detail.no?nno=" + $(this).children(".nno").text()
+            	})
+            })
+            
+            function postFormSubmit(num){
+				if(num == 1){// 수정 클릭
+					$("#postForm").attr("action", "updateForm.no").submit();
+				} else { // 삭제 클릭
+					$("#postForm").attr("action", "delete.no").submit();
+				}
+			}
+        </script>
 		
-
+		
+	    <br><br>
+		
 	    <!-- 페이징 바 추가예정 -->
 	    <div id="pagingArea">
 	    	<ul class="pagination">
@@ -84,6 +100,7 @@
 	    	</ul>
 	    
 	    </div>
+	    
 		
     </div>
 

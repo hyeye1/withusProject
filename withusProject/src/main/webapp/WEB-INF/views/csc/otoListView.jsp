@@ -47,13 +47,15 @@
 			            </tr>
 			          </thead>
 			          <tbody>
-			            <tr align="center" var="o" items="${ list }">
-			              <td>${ o.otoNo }</td>
-			              <td><a href="">펀딩상품조회</a></td>
-			              <td><a href="detail.oto?ono=${ o.otoNo }">${ o.otoTitle }</a></td>
-			              <td>${ o.memberNo }</td>
-			              <td>${ o.createDate }</td>
-			            </tr>
+			          	<c:forEach  var="o" items="${ list }">
+				            <tr align="center">
+				              <td>${ o.otoNo }</td>
+				              <td><a href="">펀딩상품조회</a></td>
+				              <td><a href="detail.oto?ono=${ o.otoNo }">${ o.otoTitle }</a></td>
+				              <td>${ o.memberNo }</td>
+				              <td>${ o.createDate }</td>
+				            </tr>
+			            </c:forEach>
 			          </tbody>
 			        </table>
 			    </div>
