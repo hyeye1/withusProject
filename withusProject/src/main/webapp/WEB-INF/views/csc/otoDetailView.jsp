@@ -17,26 +17,35 @@
     <hr><br>
 
     <div class="container">
+    
+    	<br>
+    	
+    	<!-- 로그인 했을 시에만 보여지는 페이지 -->
+    	
+    		
+    	
         <table border="1">
-            <tr>
-                <th width="200" height="35">제목</th>
-                <td width="800">공지사항입니다.</td>
-            </tr>
-            <tr>
-                <th height="35">작성자</th>
-                <td>관리자1</td>
-            </tr>
-            <tr>
-                <th height="35">작성일</th>
-                <td>2021-06-09</td>
-            </tr>
-            <tr>
-                <th height="35">첨부파일</th>
-                <td><a href="" download="">ddd.jpg</a></td>
-            </tr>
-            <tr>
-                <td colspan="2" height="700"></td>
-            </tr>
+        	<c:forEach var="o" items="${ list }">
+	            <tr>
+	                <th width="200" height="35">제목</th>
+	                <td width="800">${ o.otoTitle }</td>
+	            </tr>
+	            <tr>
+	                <th height="35">작성자</th>
+	                <td>${ o.memberNo }</td>
+	            </tr>
+	            <tr>
+	                <th height="35">작성일</th>
+	                <td>${ o.createDate }</td>
+	            </tr>
+	            <tr>
+	                <th height="35">첨부파일</th>
+	                <td><a href="" download="">${ }</a></td>
+	            </tr>
+	            <tr>
+	                <td colspan="2" height="700"></td>
+	            </tr>
+            </c:forEach>
 
             <!-- 답변(댓글) 기능-->
             <tr>
@@ -44,12 +53,15 @@
             </tr>
         </table>
         <br>
+        
         <div class="controlBtn">
-        	<button>등록/수정</button> <button>삭제</button>
+        	<button>등록</button> <button>삭제</button>
         </div>
         <br><br>
         <button>목록</button>
     </div>
+    
+    
     
     <!-- 푸터바 포함 -->
     <jsp:include page="../common/footer.jsp"/>
