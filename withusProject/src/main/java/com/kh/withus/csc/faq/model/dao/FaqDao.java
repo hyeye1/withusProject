@@ -12,7 +12,7 @@ import com.kh.withus.csc.faq.model.vo.Faq;
 public class FaqDao {
 	
 	// 6/27 윤경 생성
-	/*
+	
 	public ArrayList<Faq> selectList(SqlSessionTemplate sqlSession, Faq f) {
 		return (ArrayList)sqlSession.selectList("faqMapper.selectList", f);
 	}
@@ -20,9 +20,8 @@ public class FaqDao {
 	public Faq selectFaq(SqlSessionTemplate sqlSession, int faqNo) {
 		return sqlSession.selectList("faqMapper.selectFaq", faqNo);
 	}
-	*/
 	
-	/*
+	
 	public String insertFaq(SqlSessionTemplate sqlSession, int faqNo) {
 		return sqlSession.insert("faqMaaper.insertFaq", faqNo);
 	}
@@ -34,6 +33,6 @@ public class FaqDao {
 	public String deleteFaq(SqlSessionTemplate sqlSession, int fno) {
 		return sqlSession.update("faqMapper.deleteFaq", fno);
 	}
-	*/
+	
 
 }

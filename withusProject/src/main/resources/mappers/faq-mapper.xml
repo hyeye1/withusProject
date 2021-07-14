@@ -13,26 +13,54 @@
 	</resultMap>
 	
 	
-	<select id="selectFaq" resultMap="faq" parameterType="_int">
+	<select id="selectFaqList" resultMap="faq" parameterType="_int">
 		select
 		       faq_no
 		     , faq_cat
 		     , faq_title
 		     , faq_content
 		  from faq
-		 where faq_no = #{faqNo}
+		 where faq_status = 'Y'
+		 order
+		    by faq_no desc
 	</select>
 	 
 	 
 	 
-	<insert id="insertFaq" parameterType="_int"></insert>
+	<insert id="insertFaq" parameterType="_int">
+		insert
+		  into faq
+		  (
+		    faq_no
+		  , faq_cat
+		  , faq_title
+		  , faq_content
+		  )
+		  values
+		  (
+		    seq_faqno.nextval
+		  , #{faqCat}
+		  , #{faqTitle}
+		  , #{faqContent}
+		  )
+	</insert>
 	
 	
 	
 	<update id="updateFaq" parameterType="Faq">
-	
+		update
+		       faq
+		   set faq_cat = #{faqCat}
+		     , faq_title = #{faqTitle}
+		     , faq_content = #{faqContent}
+		 where faq_no = #{faqNo}
 	</update>
 	
-	<update id="deleteFaq" parameterType="_int"></update>
+	<update id="deleteFaq" parameterType="_int">
+		update
+		       faq
+		   set faq_status = 'N'
+		 where faq_no = #{faqNo}
+	</update>
 	 
 </mapper>

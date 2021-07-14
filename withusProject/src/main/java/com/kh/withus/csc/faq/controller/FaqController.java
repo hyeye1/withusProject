@@ -45,7 +45,7 @@ public class FaqController {
 		return "csc/faqEnrollForm";
 	}
 	
-	/*
+	
 	@RequestMapping("insert.faq")
 	public String insertFaq(int faqNo, HttpSession session, Model model) {
 		
@@ -74,7 +74,7 @@ public class FaqController {
 			session.setAttribute("alertMsg", "faq가 수정되었습니다.");
 		}else {
 			model.addAttribute("errorMsg", "faq가 수정되지않았습니다.");
-			return "common.errorPage";
+			return "common/errorPage";
 		}
 	}
 	
@@ -91,6 +91,6 @@ public class FaqController {
 			return "common/errorPage";
 		}
 	}
-	*/
+	
 
 }
