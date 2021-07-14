@@ -187,7 +187,7 @@
 	                            <td colspan="2"><input type="text" class="form-control" id="detailAddress" name="addressDetail" placeholder="상세주소"></td>
 	                        </tr>
 	                        <tr>
-	                            <td colspan="2"><input type="text" class="form-control" id="extraAddress" placeholder="너는뭐냐"></td>
+	                            <td colspan="2"><input type="hidden" class="form-control" id="extraAddress"></td>
 	                        </tr>
 	                        <tr>
 	                            <td colspan="2">배송시 요청사항(선택)</td>
@@ -213,7 +213,7 @@
 	                    <tr>
 	                        <th>
 	                            <label class="form-check-label">
-	                                <input type="checkbox" class="form-check-input" id="agree1" name="optradio">제 3자에 대한 개인정보 제공 동의
+	                                <input type="checkbox" class="form-check-input" id="agree1" name="optradio">제 3자에 대한 개인정보 제공 동의(필수)
 	                            </label>
 	                        </th>
 	                        <td><a data-toggle="modal" data-target="#myModal1">보기</a></td>
@@ -221,7 +221,7 @@
 	                    <tr>
 	                        <th>
 	                            <label class="form-check-label">
-	                                <input type="checkbox" class="form-check-input" id="agree1" name="optradio">책임 규정에 대한 동의
+	                                <input type="checkbox" class="form-check-input" id="agree1" name="optradio">책임 규정에 대한 동의(필수)
 	                            </label>
 	                        </th>
 	                        <td><a data-toggle="modal" data-target="#myModal2">보기</a></td>

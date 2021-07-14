@@ -6,6 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!-- sweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<!-- 폰트어썸 -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">		
+
 <style>
 	div{box-sizing: border-box;}
 
@@ -39,6 +46,13 @@
 	/* 버튼 */
 	.button {text-align: center !important;}
 	.btn-primary {color: white !important; width: 200px; height:50px;}
+	
+	/* 수량 */
+	.optionContent {text-align:left; padding: 15px 25px 15px 25px;}
+    .optionContent input {width: 75px; text-align: center; padding-left: 15px; margin-top: 5px;}
+    .optionContent button {padding-top: 0 !important;}
+    .optionContent button:focus {box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(255, 255, 255, 0) !important;}
+    /*#count {float:left;}*/
 </style>
 </head>
 <body>
@@ -87,10 +101,16 @@
 						<tr>
 							<c:if test="${ rno == dr.rewardNo }">
 								<th width="50">수량 : </th>
-								<td width="190"><input type="number" class="form-control" name="orderCount" required style="width: 150px;"></td>
+								<td width="200">
+									<button type="button" class="btn" onclick="fnCalCount('m', this);"><i class="fas fa-minus-circle"></i></button>
+                                    <input type="number" name="orderCount" id="count" value="1" readonly style="width:70px;"/>
+                                    <button type ="button" class="btn" onclick="fnCalCount('p',this);"><i class="fas fa-plus-circle"></i></button>
+								</td>
+								<td class="maxQuantity" hidden>5</td>
+								
 								<c:if test="${ dr.optionYn == 'Y' }">
 									<th width="50">옵션 : </th>
-									<td width="270"><input type="text" class="form-control" name="orderOption" required style="width: 450px;"></td>
+									<td width="270"><input type="text" name="orderOption" required style="width: 450px;"></td>
 								</c:if>
 							</c:if>
 						</tr>
@@ -125,6 +145,31 @@
 	<jsp:include page="../common/footer.jsp"/>
 
 	<script>
+	function fnCalCount(type, ths){
+        var $input = $(ths).parents("td").find("input[name='orderCount']");
+        var pCount = Number($input.val());
+        
+        if(type=='p'){
+            if(pCount < 5 ){
+                $input.val(Number(pCount)+1); 
+            }else if(pCount = 6){ 
+                Swal.fire({
+                    icon: 'error',
+                    text: '최대 주문수량은 5개 입니다.'
+                });
+            }
+        }else{
+            if(pCount > 1){
+                $input.val(Number(pCount)-1);
+
+            }else if(pCount = 1){
+                Swal.fire({
+                    icon: 'error',
+                    text: '수량은 1개 이상 입력해 주십시오.'
+                });
+            }
+        }
+    }
 	
 	$(function(){
 		$("input[name=rewardNo]").change(function(){
@@ -132,17 +177,27 @@
 			$(".optionContent").empty();
 			
 			if($(this).prop("checked")){
-				var value='<th width="50">수량 :</th><td width="190"><input type="number" class="form-control" name="orderCount" required style="width: 150px;"></td>';
-				
+				var value = '<th width="50">수량 : </th>'
+					value += '<td width="200">'
+					value += '<button type="button" class="btn" onclick="fnCalCount('
+					value += "'m'"
+					value += ', this);"><i class="fas fa-minus-circle"></i></button>'
+					value += '<input type="number" name="orderCount" id="count" value="1" readonly style="width:70px;"/>'
+				    value += '<button type ="button" class="btn" onclick="fnCalCount('
+				    value += "'p'"
+				    value += ',this);"><i class="fas fa-plus-circle"></i></button>'
+				    value += '</td>'
+				    value += '<td class="maxQuantity" hidden>5</td>'
 				if($(this).next().val() == 'Y'){
-					value += '<th width="50">옵션 : </th><td width="270"><input type="text" class="form-control" name="orderOption" required style="width: 450px;"></td>';
+					value += '<th width="50">옵션 : </th><td width="270"><input type="text" name="orderOption" required style="width: 450px;"></td>';
 				}	
 					
 				$(this).parents(".rewardSelect").children(".optionContent").html(value);
 			}
 		})
 	})
-	
+
+    
 </script>
 </body>
 </html>
