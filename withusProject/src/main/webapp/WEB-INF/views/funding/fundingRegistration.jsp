@@ -514,7 +514,8 @@
                                     style="width: 449px; height: 311px; border: 1px solid rgb(127, 127, 127); border-radius: 5px; background-color: white;">
                                     최적 사이즈 740*492 px
                                 </button><br><br>
-                                <input type="file" name="projectThum"> <!-- html 이미지 미리보기 -->
+                                <label for="upfile">첨부파일 :  </label>
+                                <input type="file" name="upfile" id="upfile"> <!-- html 이미지 미리보기 -->
                             </div><br>
     
                             <div>

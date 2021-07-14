@@ -114,51 +114,41 @@ public class FundingController {
 	   
 	@RequestMapping("success.fd")
 	public String fundingSuccess(Project p, MultipartFile upfile, HttpSession session, Model model) {
-		/*
-		 * 만약 다중 첨부파일 업로드 기능일 겨웅?
-		 * <input type="file"> 요소들 다 동일한 키값으로 부여
-		 * Controller쪽에서 매개변수로 MultipartFile[] 키값 으로 받아오면됨
-		 */
-		System.out.println(p.getProjectThum());
-		//System.out.println(.getOriginalFilename());
-		// 곧바로 받아내지지 않음 => 파일업로드 관련 라이브러리 추가 + 파일업로드 관련 클래스 빈등록
 		
-		// 전달된 파일이 있을 경우 => 파일명 수정 작업 후 서버에 업로드 => 파일원본명,실제서버에업로드된경로를 b 추가로 담기
-		if(!upfile.getOriginalFilename().equals("")) {
-		
-			
-			String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
-			
-			String originName = upfile.getOriginalFilename();  // 원본명 ("aaa.jpg")
-			
-			String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-			int ranNum = (int)(Math.random() * 900000 + 10000);
-			String ext = originName.substring(originName.lastIndexOf("."));
-			
-			String changeName = currentTime + ranNum + ext;
-			
-			try {
-				upfile.transferTo(new File(savePath + changeName));
-			} catch (IllegalStateException | IOException e) {
-				e.printStackTrace();
-			}
-			
-			String projectThum = saveFile(session, upfile);
-			
-			p.setProjectThum(upfile.getOriginalFilename());
-			//p.setProjectThum("resources/project_thumbnail/" + projectThum); // 업로드된파일명+파일명
-			
-		}
-		
-		String projectThum = p.getProjectThum();
-		
-		p.setProjectThum("resources/project_thumbnail/" + projectThum);
-	
 		Member loginUser = (Member)session.getAttribute("loginUser");
 
 		p.setMemberNo(loginUser.getMemberNo());
 		
+		/*
+		 * 만약 다중 첨부파일 업로드 기능일 겨웅?
+		 * <input type="file"> 요소들 다 동일한 키값으로 부여
+		 * Controller쪽에서 매개변수로 MultipartFile[] 키값 으로 받아오면됨
+		 
+		
 		System.out.println(p);
+		System.out.println(upfile);
+		System.out.println(upfile.getOriginalFilename());
+		// 곧바로 받아내지지 않음 => 파일업로드 관련 라이브러리 추가 + 파일업로드 관련 클래스 빈등록
+		
+		// 전달된 파일이 있을 경우 => 파일명 수정 작업 후 서버에 업로드 => 파일원본명,실제서버에업로드된경로를 b 추가로 담기
+		if(!upfile.getOriginalFilename().equals("")) {
+			
+			String changeName = saveFile(session, upfile);
+			
+			System.out.println(changeName);
+			
+			p.setProjectThum(upfile.getOriginalFilename());
+			
+			
+			String originName = upfile.getOriginalFilename();
+			String setChangeName = ("resources/uploadFiles/" + changeName); // 업로드된파일명+파일명
+			
+			System.out.println(originName);
+			System.out.println(setChangeName);
+		}
+
+		*/
+		//System.out.println(p);
 		
 		// servieImpl, dao, sql 작성
 		int result = funService.insertProject(p);
