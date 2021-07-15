@@ -151,11 +151,15 @@
 	<select id="selectCommuSearchList" resultMap="community" parameterType="hashmap">
 		select 
                c.commu_no
+             , c.commu_writer
+             , c.commu_cate
              , c.commu_title
              , c.commu_content
-             , c.count
-             , c.commu_writer
              , c.commu_create
+             , c.count  
+             , c.commu_status
+             , c.commu_origin
+             , c.commu_change
           from community c
          where c.commu_status = 'Y'
            <choose>
