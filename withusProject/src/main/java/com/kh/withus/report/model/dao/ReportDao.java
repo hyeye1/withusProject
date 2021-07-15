@@ -1,6 +1,7 @@
 package com.kh.withus.report.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -18,10 +19,26 @@ public class ReportDao {
 
 	public ArrayList<Report> selectList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("reportMapper.selectList", null, rowBounds);
+	}
+
+	/*
+	public int countSearch(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.selectOne("reportMapper.countSearch", map);
+	}
+
+	public ArrayList<Report> selectSearchReport(SqlSessionTemplate sqlSession, HashMap<String, String> map, PageInfo pi) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("reportMapper.selectList");
+		return (ArrayList)sqlSession.selectList("reportMapper.selectSearchReport", map, rowBounds);
 	}
+	*/
+	
 
 }
