@@ -580,14 +580,104 @@
                             </div>
                             <div class="infoBtn" align="center">
                                 <button onclick="location.href='list.rew?pno=${p.projectNo}'">펀딩하기</button>
-                                <img src="${ pageContext.request.contextPath }/resources/images/likey.PNG" width="36px"
-                                    style="margin-right: 10px; cursor: pointer;">
+                                <img src="" width="36px"
+                                    style="margin-right: 10px; cursor: pointer;" id="likeyBtn">
                                 <img src="${ pageContext.request.contextPath }/resources/images/share.PNG" width="32px"
                                     style="cursor: pointer;">
                             </div>
                         </div>
                     </div>
                 </div>
+                
+                <!-- 좋아요버튼 -->
+                <script>
+			    $(document).ready(function(){
+		        	$.ajax({
+      					url:"likeyCheck.fd",
+      					data:{memberNo: ${loginUser.memberNo},
+      						  projectNo : ${ p.projectNo } },
+      					success:function(result){
+      						console.log(result);
+      						
+      						if(result == "liked"){ // 좋아요중 중
+      							
+      							$("#likeyBtn").attr("class", "liked").attr("src", "${ pageContext.request.contextPath }/resources/images/heart.png");
+      						
+      						} else { // 안좋아요중
+      							
+      							$("#likeyBtn").attr("src", "${ pageContext.request.contextPath }/resources/images/emptyHeart.png");
+      						}
+      						
+      					}, error:function(){
+      						console.log("좋아요 상태확인 ajax통신 실패")
+      					}
+      					
+      				})
+		
+		        });                
+			                
+			                
+			    $(function() {
+					
+					$('#likeyBtn').click(function() {
+					
+						if($(this).hasClass("liked")) {
+				      
+					    	$.ajax({
+		      					url:"dislike.fd",
+		      					data:{memberNo: ${loginUser.memberNo},
+		      						  projectNo : ${ p.projectNo } },
+		      					success:function(result){
+		      						
+		      						if(result == "Y"){ // 좋아요 취소하기
+		      							
+		      							alert("좋아요를 해제하였습니다");
+		      							$("#likeyBtn").removeAttr("class", "liked").attr("src", "${ pageContext.request.contextPath }/resources/images/emptyHeart.png");
+		      							
+		      						} else { // 오류
+		      							
+		      							alert("오류가 발생했습니다");
+		      						}
+		      						
+		      					}, error:function(){
+		      						console.log("좋아요해제 ajax통신 실패");
+		      					}
+		      					
+		      				});
+				      
+					    } else {
+					    	
+					    	$.ajax({
+		      					url:"like.fd",
+		      					data:{memberNo: ${loginUser.memberNo},
+		      						  projectNo : ${ p.projectNo } },
+		      					success:function(result){
+		      						
+		      						if(result == "Y"){ // 좋아요함
+		      							
+		      							alert("이 프로젝트를 좋아요했습니다");
+		      							$("#likeyBtn").attr("class", "liked").attr("src", "${ pageContext.request.contextPath }/resources/images/heart.png");
+		      							
+		      						}else{ // 오류
+		      							
+		      							alert("오류가 발생했습니다");
+		      							
+		      						}
+		      						
+		      					}, error:function(){
+		      						console.log("좋아요기능 ajax통신 실패");
+		      					}
+		      					
+		      				});
+					      
+					    	}
+						})
+					})
+			</script>            	            
+                
+                
+                
+                
 
                 <!-- 메뉴바 -->
                 <div class="detailMenubar">

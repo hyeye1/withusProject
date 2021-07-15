@@ -17,6 +17,8 @@
 		<result column="project_end_dt" property="projectEndDT" />
 		<result column="percentage" property="percentage" />
 		<result column="dday" property="dday" />
+		<result column="member_no" property="memberNo" />
+		
 	</resultMap>
 	
 	<resultMap id="fundingDetail" type="FundingDetail">
@@ -458,6 +460,7 @@
 	
 	</select>
  	
+ 	<!-- 댓글등록 -->
  	<insert id="insertReply"  parameterType="ProjectReply">
 		insert
 			into pro_reply
@@ -477,7 +480,41 @@
 			)
 			
 	</insert>
+	
+	<!-- 좋아요 상태확인 -->
+	<select id="likeyCheck" resultType="_int">
+		select 
+		       count(*)
+		  from likey
+		 where member_no = #{memberNo}
+		   and project_no = #{projectNo}
+	</select>
+	
+	<!-- 안좋아요 -->
+ 	<delete id="dislike" parameterType="Project" >
+		delete 
+		 	from likey
+		   where member_no = #{memberNo}
+		     and project_no = #{projectNo}
+	</delete>	
+ 		
+ 		
  	
+ 	<!-- 좋아요 -->
+ 	<insert id="like" parameterType="Project">
+  		insert
+  		  into likey
+  		  (
+  		    member_no
+  		  , project_no
+  		  )
+  		  values
+  		  (
+  		    #{memberNo}
+  		  , #{projectNo}
+  		  
+  		  )
+  	</insert>
  	
  	
 

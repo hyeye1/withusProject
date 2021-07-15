@@ -307,7 +307,7 @@ public class FundingController {
 	// 팔로우 상태 확인
 	@ResponseBody
 	@RequestMapping("followCheck.fd")
-	public String unfollowMember(String memberNo, String followMemberNo, HttpSession session) {
+	public String followCheck(String memberNo, String followMemberNo, HttpSession session) {
 		
 		
 		MyPage m = new MyPage();
@@ -325,6 +325,73 @@ public class FundingController {
 					
 			
 	}
+	
+	// 좋아요 상태 확인
+	@ResponseBody
+	@RequestMapping("likeyCheck.fd")
+	public String likeyCheck(String memberNo, String projectNo, HttpSession session) {
+		
+		
+		MyPage m = new MyPage();
+		m.setMemberNo(Integer.parseInt(memberNo));
+		m.setProjectNo(Integer.parseInt(projectNo));
+		
+		System.out.println(m.getMemberNo());
+		System.out.println(m.getProjectNo());
+		int result = funService.likeyCheck(m);
+				
+		if(result>0) { // 좋아요중
+			return "liked";
+					
+		}else { // 안좋아요중
+			return "dislike";
+		}
+					
+			
+	}
+	
+	// 좋아요 해제
+	@ResponseBody
+	@RequestMapping("dislike.fd")
+	public String dislike(String memberNo, String projectNo, HttpSession session) {
+		
+		
+		MyPage m = new MyPage();
+		m.setMemberNo(Integer.parseInt(memberNo));
+		m.setProjectNo(Integer.parseInt(projectNo));
+		
+		int result = funService.dislike(m);
+				
+		if(result>0) { // 좋아요중
+			return "Y";
+					
+		}else { // 안좋아요중
+			return "N";
+		}
+					
+			
+	}
+	
+	// 좋아요
+	@ResponseBody
+	@RequestMapping("like.fd")
+	public String like(String memberNo, String projectNo, HttpSession session) {
+		
+		
+		MyPage m = new MyPage();
+		m.setMemberNo(Integer.parseInt(memberNo));
+		m.setProjectNo(Integer.parseInt(projectNo));
+		
+		int result = funService.like(m);
+				
+		if(result>0) { // 좋아요중
+			return "Y";
+					
+		}else { // 안좋아요중
+			return "N";
+		}
+			
+	}	
 	
 	
 	
