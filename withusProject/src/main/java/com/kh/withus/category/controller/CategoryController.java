@@ -24,7 +24,7 @@ public class CategoryController {
 		ArrayList<Category> list = cService.menuList();
 		 
 		model.addAttribute("list", list);
-		System.out.println(list);
+		//System.out.println(list);
 		
 		return "admin/menuManaView";
 		
@@ -40,6 +40,7 @@ public class CategoryController {
 	@RequestMapping("insert.cate")
 	public String insertCate(Category ct, HttpSession session, Model model) {
 		int result = cService.insertCate(ct);
+		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "카테고리가 추가되었습니다.");
 			return "redirect:list.cate";
@@ -47,6 +48,7 @@ public class CategoryController {
 			model.addAttribute("errorMsg", "카테고리 등록을 실패했습니다.");
 			return "common/manaErrorPage";
 		}
+		
 	}
 	
 	

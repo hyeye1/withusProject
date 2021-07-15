@@ -5,7 +5,7 @@
 
 <mapper namespace="categoryMapper">
 	<resultMap id="category" type="Category">
-		<result column="cat_no" property="catNo" />
+		<id column="cat_no" property="catNo" />
 		<result column="cat_name" property="catName" />
 		<result column="cat_tag" property="catTag" />
 		<result column="cat_file" property="catFile" />
@@ -16,6 +16,7 @@
 		       cat_no
 		     , cat_name
 		     , cat_tag
+		     , cat_file
 		  from category
 	</select>
 	
@@ -37,7 +38,7 @@
 		     , cat_name
 		     , cat_tag
 		     )
-		 value
+		values
 		     (
 		       seq_cno.nextval
 		     , #{catName}

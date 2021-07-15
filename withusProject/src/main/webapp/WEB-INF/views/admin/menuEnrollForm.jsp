@@ -32,7 +32,7 @@
 				</tr>
 				<tr>
 					<th align="center"><label for="name">태그</label></th>
-					<td><input type="text" id="catTag" class="form-control" name="catTag" required></td>
+					<td><input type="text" id="catTag" class="form-control" name="catTag"></td>
 				</tr>
 			</table>
 			<br>
