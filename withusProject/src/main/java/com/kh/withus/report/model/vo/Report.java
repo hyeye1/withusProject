@@ -19,5 +19,6 @@ public class Report {
 	private String reportStatus;
 	private String reportType;
 	private int reprotedNo;
+	private int reportCount;
 
 }
