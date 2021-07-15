@@ -16,6 +16,6 @@ public interface CategoryService {
 	int updateCate(Category ct);
 	
 	// 카테고리 삭제
-	int deleteCate(String code);
+	int deleteCate(int cno);
 
 }

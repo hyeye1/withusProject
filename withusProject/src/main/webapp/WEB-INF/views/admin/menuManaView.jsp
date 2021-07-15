@@ -76,30 +76,64 @@
 			</div>
 
 			<hr>
+			<br>
+			<div class="btn" align="right">
+				<a class="btn btn-sm" href="insert.cate">추가</button>
+			</div>
+			<br><br>
 
 			<table class="table table-bordered" >
-				<thead>
-				  <tr align="center" style="height: 10px; background-color: rgb(224, 224, 224); font-size:smaller ;">
-					<th width="200" height="30">카테고리<br>번호</th>
-					<th width="100">이름</th>
-					<th width="500">해시태그1</th>
-					<th width="200">수정/삭제</th>
-				  </tr>
-				</thead>
-
-				<!-- 반복문 -->
-				<tbody>
-					<tr align="center">
-						<td>1</td>
-						<td>테크/가전</td>
-						<td>#가전제품 #IT #기술</td>
-						<td>
-							<button>수정</button>
-							<button>삭제</button>
-						</td>
-					</tr>
-				</tbody>
+				<c:choose>
+					<c:when test="${ empty list }">
+						<div class="none">카테고리가 존재하지 않습니다.</div>
+					</c:when>
+					
+					<c:otherwise>
+						<thead>
+						  <tr align="center" style="height: 10px; background-color: rgb(224, 224, 224); font-size:smaller ;">
+							<th width="200" height="30">카테고리<br>번호</th>
+							<th width="100">이름</th>
+							<th width="500">해시태그1</th>
+							<th width="200">수정/삭제</th>
+						  </tr>
+						</thead>
+		
+						<!-- 반복문으로 조회 -->
+						<tbody>
+							<c:forEach var="c" items="${ list }">
+								<tr align="center">
+									<td>${ c.catNo }</td>
+									<td>${ c.catName }</td>
+									<td>${ c.catTag }</td>
+									<td>
+										<button type="button" onclick="updateTag();" data-toggle="modal" data-target="#upModal">수정</button>
+										<button type="button" onclick="deleteCate();" data-toggle="modal" data-target="#delModal">삭제</button>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</c:otherwise>
+				</c:choose>
 			</table>
+			
+			<script>
+				// 카테고리 태그 수정
+				function updateTag(ct){
+					var name = ct.name.value;
+					var tag = ct.tag.value;
+					
+					if(name.trim() == ''){
+						alert("카테고리명을 입력해주세요");
+						return false;
+					}
+					if(tag.trim() == ''){
+						alert("태그를 입력해주세요");
+						return false;
+					}
+					ct.submit();
+				}
+			
+			</script>
 
 		
     

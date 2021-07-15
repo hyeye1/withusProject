@@ -2,10 +2,11 @@ package com.kh.withus.category.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.withus.category.model.service.CategoryService;
 import com.kh.withus.category.model.vo.Category;
@@ -23,6 +24,48 @@ public class CategoryController {
 		
 		return "admin/menuManaView";
 		
+	}
+	
+	
+	// 카테고리 추가
+	@RequestMapping("insert.cate")
+	public String insertCate(Category ct, HttpSession session, Model model) {
+		int result = cService.insertCate(ct);
+		if(result > 0) {
+			session.setAttribute("alertMsg", "카테고리가 추가되었습니다.");
+			return "redirect:admin/menuListView";
+		}else {
+			model.addAttribute("errorMsg", "카테고리 등록을 실패했습니다.");
+			return "common/manaErrorPage";
+		}
+	}
+	
+	
+	// 카테고리 수정
+	@RequestMapping("update.cate")
+	public String updateCate(Category ct, HttpSession session, Model model) {
+		int result = cService.updateCate(ct);
+		if(result > 0) {
+			session.setAttribute("alertMsg", "카테고리가 수정되었습니다.");
+			return "redirect:admin/menuListView";
+		} else {
+			model.addAttribute("errorMsg", "수정을 실패하였습니다.");
+			return "common/manaErrorPage";
+		}
+	}
+	
+	
+	// 카테고리 삭제
+	@RequestMapping("delete.cate")
+	public String deleteCate(int cno, HttpSession session, Model model){
+		int result = cService.deleteCate(cno);
+		if(result > 0) {
+			session.setAttribute("alertMsg", "카테고리가 삭제되었습니다.");
+			return "redirect:admin/menuListView";
+		} else {
+			model.addAttribute("errorMsg", "삭제를 실패하였습니다.");
+			return "common/manaErrorPage";
+		}
 	}
 
 }

@@ -24,20 +24,17 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public int insertCate(Category ct) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cDao.insertCate(sqlSession, ct);
 	}
 
 	@Override
 	public int updateCate(Category ct) {
-		// TODO Auto-generated method stub
-		return 0;
+		return cDao.updateCate(sqlSession, ct);
 	}
 
 	@Override
-	public int deleteCate(String code) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteCate(int cno) {
+		return cDao.deleteCate(sqlSession, cno);
 	}
 
 }
