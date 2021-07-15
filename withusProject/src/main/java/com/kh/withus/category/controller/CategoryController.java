@@ -1,6 +1,6 @@
 package com.kh.withus.category.controller;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,9 +20,11 @@ public class CategoryController {
 	
 	// 카테고리 조회
 	@RequestMapping("list.cate")
-	public String MenuList(Category ct, Model model) {
-		List<Category> list = cService.MenuList(ct);
+	public String menuList(Model model) {
+		ArrayList<Category> list = cService.menuList();
+		 
 		model.addAttribute("list", list);
+		System.out.println(list);
 		
 		return "admin/menuManaView";
 		

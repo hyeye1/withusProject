@@ -1,13 +1,13 @@
 package com.kh.withus.category.model.service;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import com.kh.withus.category.model.vo.Category;
 
 public interface CategoryService {
 	
 	// 카테고리조회
-	List<Category> MenuList(Category ct);
+	ArrayList<Category> menuList();
 	
 	// 카테고리 추가
 	int insertCate(Category ct);
@@ -17,5 +17,6 @@ public interface CategoryService {
 	
 	// 카테고리 삭제
 	int deleteCate(int cno);
+
 
 }

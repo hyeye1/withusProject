@@ -1,6 +1,6 @@
 package com.kh.withus.category.model.service;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,8 @@ public class CategoryServiceImpl implements CategoryService {
 	private CategoryDao cDao;
 	
 	@Override
-	public List<Category> MenuList(Category ct) {
-		return cDao.menuList(sqlSession, ct);
+	public ArrayList<Category> menuList() {
+		return cDao.menuList(sqlSession);
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package com.kh.withus.category.model.dao;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -10,8 +10,8 @@ import com.kh.withus.category.model.vo.Category;
 @Repository
 public class CategoryDao {
 	
-	public List<Category> menuList(SqlSessionTemplate sqlSession, Category ct){
-		return sqlSession.selectList("categoryMapper.menuList");
+	public ArrayList<Category> menuList(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("categoryMapper.menuList");
 	}
 
 	public int insertCate(SqlSessionTemplate sqlSession, Category ct) {
@@ -25,7 +25,8 @@ public class CategoryDao {
 	public int deleteCate(SqlSessionTemplate sqlSession, int cno) {
 		return sqlSession.delete("categoryMapper.deleteCate");
 	}
-	
+
+
 	
 	
 	
