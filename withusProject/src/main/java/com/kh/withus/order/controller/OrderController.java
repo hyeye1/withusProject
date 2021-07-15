@@ -179,7 +179,7 @@ public class OrderController {
 		map.put("condition", condition);
 		map.put("keyword", keyword);
 		map.put("mno", loginUser.getMemberNo());
-		//System.out.println(map);
+		System.out.println(map);
 		
 		// statusBox에 출력될 건수
 		Order sc = oService.selectStatusCount(mno);
@@ -189,6 +189,8 @@ public class OrderController {
 		PageInfo pi = pagination.getPageInfo(count, currentPage, 10, 10);
 		
 		ArrayList<Order> polist = oService.selectSearchPartOrder(map, pi);
+		
+		System.out.println(polist);
 		
 		mv.addObject("polist", polist)
 		  .addObject("pi", pi)

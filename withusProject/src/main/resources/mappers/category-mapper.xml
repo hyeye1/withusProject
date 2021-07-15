@@ -11,7 +11,7 @@
 		<result column="cat_file" property="catFile" />
 	</resultMap>
 	
-	<select id="menuList" resultType="category">
+	<select id="menuList" resultMap="category">
 		select
 		       cat_no
 		     , cat_name

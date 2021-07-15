@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="refundMapper">
 	<resultMap type="Refund" id="refundRset">
-		<result column="refund_no" property="refundNo"/>
+		<id column="refund_no" property="refundNo"/>
 		<result column="order_no" property="orderNo"/>
 		<result column="r_originname" property="reOrginName"/>
 		<result column="r_changename" property="reChangeName"/>

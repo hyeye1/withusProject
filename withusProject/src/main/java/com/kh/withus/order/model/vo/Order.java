@@ -49,6 +49,7 @@ public class Order {
 	private int readyShipping;
 	private int shipping;
 	private int doneShipping;
+	private int refundShipping;
 	private int refund;
 	private int dropRefund;
 	private int comRefund;
