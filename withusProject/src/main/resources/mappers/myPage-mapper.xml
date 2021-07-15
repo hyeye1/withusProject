@@ -586,17 +586,41 @@
 	
 	<!-- 파트너 펀딩 리스트 -->
 	<select id="partnerfundingList" resultMap="memberResultSet">
-		select 
-		        project_no
-		      , project_title
-		      , project_start_dt
-		      , project_end_dt
-		      , project_thum
-		      , project_status
-		      , project_gprice
-		  from project
-		 where member_no=#{memberNo}
-		  order by project_end_dt asc
+		select
+               p.project_no
+             , p.project_thum
+             , p.project_title
+             , c.cat_no
+             , c.cat_name
+             , m.partner_name
+             , sum(o.total_price) total_price
+             , floor(sum(o.total_price) / p.project_gprice * 100) percentage
+             , p.project_gprice
+             , p.project_start_dt
+             , p.project_end_dt
+             , ceil(project_end_dt - sysdate) dday
+          from 
+          	   tb_order o
+             , project p
+             , category c
+             , member m
+         where p.project_no = o.project_no(+)
+           and p.cat_no = c.cat_no 
+           and p.member_no = m.member_no 
+           and p.project_status = 3
+           and p.member_no = #{memberNo}
+         group
+            by p.project_no
+             , p.project_title
+             , p.project_thum
+             , c.cat_no
+             , c.cat_name
+             , m.partner_name
+             , p.project_gprice
+             , p.project_start_dt
+             , p.project_end_dt  
+         order 
+            by p.project_no asc
 	</select>
 	
 	<!-- 파트너조인 -->

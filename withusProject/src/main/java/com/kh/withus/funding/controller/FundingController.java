@@ -28,6 +28,8 @@ import com.kh.withus.funding.model.vo.Project;
 import com.kh.withus.funding.model.vo.ProjectReply;
 import com.kh.withus.funding.model.vo.Search;
 import com.kh.withus.member.model.vo.Member;
+import com.kh.withus.myPage.model.service.MyPageService;
+import com.kh.withus.myPage.model.vo.MyPage;
 import com.kh.withus.order.model.vo.Order;
 
 @Controller
@@ -35,6 +37,8 @@ public class FundingController {
 	
 	@Autowired
 	private FundingService funService;
+	@Autowired
+	private MyPageService mpService;
 	
 	@RequestMapping("search.fun")
     public ModelAndView selectSearchList(Search s, ModelAndView mv) {
@@ -298,6 +302,28 @@ public class FundingController {
 		
 		
 		
+	}
+	
+	// 팔로우 상태 확인
+	@ResponseBody
+	@RequestMapping("followCheck.fd")
+	public String unfollowMember(String memberNo, String followMemberNo, HttpSession session) {
+		
+		
+		MyPage m = new MyPage();
+		m.setMemberNo(Integer.parseInt(followMemberNo));
+		m.setFollowMemberNo(Integer.parseInt(memberNo));
+		
+		int result = mpService.followCheck(m);
+				
+		if(result>0) { // 팔로우중
+			return "Y";
+					
+		}else { // 언팔중
+			return "N";
+		}
+					
+			
 	}
 	
 	
