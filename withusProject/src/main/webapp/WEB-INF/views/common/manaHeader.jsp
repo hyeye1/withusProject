@@ -130,7 +130,7 @@
             <ul class="navi">
                 <li><a href="memberListView.mana">회원관리</a></li>
 
-                <li><a href="">메뉴관리</a></li>
+                <li><a href="list.cate">메뉴관리</a></li>
 
                 <li><a href="">펀딩관리</a> </li>
 

@@ -19,7 +19,7 @@ public class CategoryController {
 	@RequestMapping("list.cate")
 	public String MenuList(Category ct, Model model) {
 		List<Category> list = cService.MenuList(ct);
-		model.addAttribute("list", list)
+		model.addAttribute("list", list);
 		
 		return "admin/menuManaView";
 		

@@ -10,7 +10,7 @@
 		<result column="cat_tag" property="catTag" />
 	</resultMap>
 	
-	<select id="menuList" resultType="_int">
+	<select id="menuList" resultType="Category">
 		select
 		       cat_name
 		     , cat_tag
