@@ -439,26 +439,44 @@
  	<!-- 펀딩 댓글(커뮤니티 -->
  	<select id="selectReplyList" resultMap="ProjectReply" parameterType="_int">
 		select
-				 reply_no
+				 r.reply_no
 			   , reply_content
-			   , reply_date
+			   , to_char(reply_date, 'YYYY-MM-DD') reply_date
 			   , reply_status
                , project_no
                , m.member_id
                , m.member_no
                , m.member_name
                , m.member_profile
-               , m.partner_name
-		    from pro_reply r
+              
+            from pro_reply r
             join member m on(m.member_no=r.member_no)
-		   where reply_status = '1'
-		   	 and project_no = #{pno}
+           where reply_status = '1'
+             and project_no = #{pno}
 		   order
 		   	  by reply_no desc 
 	
 	</select>
  	
- 	
+ 	<insert id="insertReply"  parameterType="ProjectReply">
+		insert
+			into pro_reply
+			(
+				reply_no
+			  , reply_content
+			  , member_no
+			  , project_no
+			)
+			values
+			(
+				SEQ_PRORNO.nextval
+			  , #{replyContent}
+			  , #{memberNo}
+			  , #{projectNo}
+			  
+			)
+			
+	</insert>
  	
  	
  	

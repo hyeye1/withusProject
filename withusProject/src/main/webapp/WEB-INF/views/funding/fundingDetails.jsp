@@ -417,6 +417,7 @@
 	    height: 42px;
 	    margin-top: 5px;
 	    margin-right: 12px;
+	    border-radius: 50%;
 	}
 	
 	.partnerMarks {
@@ -483,6 +484,8 @@
 	.adminShown {
 	    display: none;
 	}
+	
+	
 		
 		</style>
         </head>
@@ -506,8 +509,8 @@
                     </div>
 
                     <div class="partner">
-                        <img src="${ pageContext.request.contextPath }/${ p.memberProfile }">
-                        <b>${ p.partnerName }</b> <br><br><br>
+                        <a href="partnerDetail.me?memberNo=${ p.memberNo }" style="text-decoration: none; color: black;"><img src="${ pageContext.request.contextPath }/${ p.memberProfile }">
+                        <b>${ p.partnerName }</b> <br><br><br></a>
                     </div>
 
                     <div class="detailHeaderBody">
@@ -607,8 +610,8 @@
 
                             <div><b>창작자 소개</b></div>
                             <div class="rightPartner">
-                                <img src="${ pageContext.request.contextPath }/${ p.memberProfile }">
-                                <p><b>${ p.partnerName }</b> <br><br><br></p>
+                                <a href="partnerDetail.me?memberNo=${ p.memberNo }" style="text-decoration: none; color: black;"><img src="${ pageContext.request.contextPath }/${ p.memberProfile }">
+                                <p><b>${ p.partnerName }</b> <br><br><br></p></a>
                                 <button>+ 팔로우</button>
                             </div>
                             <p id="partnerWho">
@@ -677,9 +680,16 @@
                         </p>
 
                         <div class="loginOn">
-                            <textarea id="yesLogin" placeholder="펀딩과 관련 없는 내용, 광고, 욕설, 비방, 도배 글은 관리자 검토 후 삭제됩니다."
-                                style="resize: none;"></textarea>
-                            <button>등록</button>
+                        	<c:choose>
+                            	<c:when test="${ !empty loginUser }">
+                            		<textarea id="yesLogin" placeholder="펀딩과 관련 없는 내용, 광고, 욕설, 비방, 도배 글은 관리자 검토 후 삭제됩니다." style="resize: none;" class="rContent"></textarea>
+                            		<button onclick="insertReply();">등록</button>
+                            	</c:when>
+                            	<c:otherwise>
+                            		<textarea id="yesLogin" placeholder="로그인 후 글 작성이 가능합니다." style="resize: none;" class="rContent" readonly></textarea>
+                            	</c:otherwise>
+                            </c:choose>
+                            
                         </div>
 
                         <div id="comTitle">
@@ -728,9 +738,42 @@
                     $(function(){
                 		selectReplyList();
                 		
-                		//setInterval(selectReplyList, 1000); // 1초 간격으로 주기적으로 실시간으로 갱신된 댓글리스트 조회요청
+                		//selectReReplyList();
+                		
+                		setInterval(selectReplyList, 1000); // 1초 간격으로 주기적으로 실시간으로 갱신된 댓글리스트 조회요청
                 	})
                     
+                    function insertReply(){
+    		
+			    		if($(".rContent").val().trim().length !=0 ){ // 댓글작성되어있을 경우 => ajax로 댓글작성요청
+			    			
+			    			$.ajax({
+			    				url:"rinsert.fd",
+			    				data:{
+			    					replyContent:$(".rContent").val(),
+			    					projectNo:${p.projectNo},
+			    					memberNo:'${loginUser.memberNo}',
+			    				},
+			    				success:function(status){
+			    					if(status=="success"){
+			    						$(".rContent").val("");
+			    						alert("댓글이 등록되었습니다")
+			    						
+			    					}
+			    					
+			    					
+			    					
+			    				},error:function(){
+			    					console.log("댓글작성용 ajax통신실패");
+			    				}
+			    				
+			    			});
+			    			
+			    			
+			    		} else{ // 댓글 미작성
+			    		 	alert("댓글내용을 입력해주세요")
+			    		}
+			    	}
                     
                     
                     function selectReplyList(){
@@ -739,8 +782,8 @@
                 			data:{pno:${p.projectNo}},
                 			
                 			success:function(list){
-                				console.log(list);
                 				
+                				console.log(list);
                 				var reply = "";
                 				
                 				$.each(list, function(i, obj){
@@ -751,13 +794,16 @@
                 								+ "<div>" 
                 								+ obj.replyContent
                 								+ "</div>"
-                								+ "<label>" + obj.replyNo + "</label>";	
+                								+ "<hr>"
+                								+ "<label>" + obj.replyNo + "</label>";
+                								
+                					
                 				
                 				})
                 				
                 				$(".Reply .replyWriter").html(reply);
                 				$(".Reply .replyWriter div").attr("class", "replyContent");
-                				$(".Reply .replyWriter label").attr("style", "display:none");
+                				$(".Reply .replyWriter label").attr("style", "display:none").attr("name","replyNo");
                 				
                 				
                 			}, error:function(){
@@ -767,8 +813,27 @@
                 		});
                 	}
                     
+                    /*
+                    function selectReReplyList(){
+                		$.ajax({
+                			url:"proReReply.fd",
+                			data:{replyNo:$("label[name=replyNo]").text()},
+                			
+                			success:function(list){
+                				console.log(list);
+                				
+                				var reply = "";
+                				
+                				
+                				
+                			}, error:function(){
+                				console.log("댓글 리스트 조회용 ajax")
+                			}
+                			
+                		});
+                	}
                     
-                    
+                    */
                     
                     
                     </script>
@@ -867,6 +932,9 @@
                     $(".detail" + className).show();
                 }
             </script>
+            
+            
+            
 
         </body>
 

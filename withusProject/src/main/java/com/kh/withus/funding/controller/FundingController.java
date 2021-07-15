@@ -23,6 +23,7 @@ import com.kh.withus.category.model.vo.Category;
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.service.FundingService;
 import com.kh.withus.funding.model.vo.Project;
+import com.kh.withus.funding.model.vo.ProjectReply;
 import com.kh.withus.funding.model.vo.Search;
 import com.kh.withus.member.model.vo.Member;
 import com.kh.withus.order.model.vo.Order;
@@ -223,6 +224,26 @@ public class FundingController {
 	}
 	
 	
+	// 프로젝트 댓글입력
+	@ResponseBody
+	@RequestMapping("rinsert.fd")
+	public String ajaxInsertReply(ProjectReply r, String memberNo) {
+		 
+		r.setMemberNo(Integer.parseInt(memberNo));
+		
+		
+		
+		 int result = funService.insertReply(r);
+		 if(result>0) {
+			 return "success";
+		 }else {
+			 return "fail";
+		 }	
+		 
+		
+	}
+	
+	
 	// 프로젝트 댓글부분
 	@ResponseBody
 	@RequestMapping(value="proReply.fd", produces="application/json; charset=utf-8")
@@ -235,6 +256,23 @@ public class FundingController {
 		
 		
 	}
+	
+	// 프로젝트 대댓글부분
+	@ResponseBody
+	@RequestMapping(value="proReReply.fd", produces="application/json; charset=utf-8")
+	public String ajaxSelectReReplyList(String replyNo) {
+		System.out.println(replyNo);
+		return null;
+		
+		
+		//return new Gson().toJson(funService.selectReplyList(pno));
+		
+		
+		
+		
+	}
+	
+	
 	
 	
 	

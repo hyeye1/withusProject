@@ -99,10 +99,18 @@ public class FundingServiceImpl implements FundingService {
     }
 
 	@Override
+	public int insertReply(ProjectReply r) {
+		
+		return funDao.insertReply(sqlSession, r);
+	}
+	
+	@Override
 	public ArrayList<ProjectReply> selectReplyList(int pno) {
 		
 		return funDao.selectReplyList(sqlSession, pno);
 		
 	}
+
+	
 
 }

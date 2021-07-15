@@ -17,7 +17,7 @@ public class ProjectReply {
 	
 	private int replyNo;
 	private String replyContent;
-	private Date replyDate;
+	private String replyDate;
 	private String replyStatus;
 	private int projectNo;
 	private int memberNo;

@@ -68,8 +68,14 @@ public class FundingDao {
 		return (ArrayList)sqlSession.selectList("fundingMapper.selectSearchList", map);		
 	}
 
+	public int insertReply(SqlSessionTemplate sqlSession, ProjectReply r) {
+		return sqlSession.insert("fundingMapper.insertReply", r);
+	}
+	
 	public ArrayList<ProjectReply> selectReplyList(SqlSessionTemplate sqlSession, int pno) {
 		return (ArrayList)sqlSession.selectList("fundingMapper.selectReplyList", pno);
 	}
+
+	
 	
 }
