@@ -88,7 +88,7 @@
 						<c:forEach var="r" items="${ list }">
 							<tr align="center">
 								<td class="rno">${ r.reportNo }</td>
-			                    <td>${ r.memberName }</td>
+			                    <td>${ r.memberNo }</td>
 			                    <td>${ r.reportContent}</td>
 			                    <td>${ r.reportType}</td>
 			                    <td>${ r.reportedNo }</td>
@@ -97,7 +97,7 @@
 			                    <td>${ r.reportDate }</td>
 			                    <c:choose>
 			                    	<c:when test="${ r.reportStatus eq 'N' }">
-			                    		<td onclick="showModal(this);">진행중</td>
+			                    		<td onclick="showModal('${ r.reportNo }', '${ r.memberNo }', '${ r.reportContent }', '${ r.reportType}', '${ r.reportedNo }', '${ r.memberStatus}', '${ r.reportCount }', '${ r.reportDate }');">진행중</td>
 			                    	</c:when>
 			                    	<c:when test="${ r.reportStatus eq 'Y' }">
 			                    		<td>처리완료</td>
@@ -110,10 +110,50 @@
 			</c:choose>
 		</table>
 		
+		<!-- modal -->
+		<div class="modal fade" id="increaseCount" tabindex="-1" role="dialog" aria-labelledby="myModal">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<button type="button" class="btn btn-default" data-dismiss="modal">반려</button>
+					<button type="button" class="btn btn-primary" onclick="increaseCount();">누적</button>
+				</div>
+			</div>
+		</div>
+		
+		
 		<script>
-			function showModal(clicked_element){
-				var modal = document.getElementById("")
+			
+			var reportNo = "";
+			var memberNo = "";
+			var reportContent = "";
+			var reportType = "";
+			var reportedNo = "";
+			var memberStatus = "";
+			var reportCount = "";
+			var reportDate = "";
+		
+			$(document).ready(function(){
+				$('#increaseCount').on('show.bs.modal', function(event){
+					reportNo = $(event.relatedTarget).data('reportNo');
+					memberNo = $(event.relatedTarget).data('memberNo');
+					reportContent = $(event.relatedTarget).data('reportContent');
+					reportType = $(event.relatedTarget).data('reportType');
+					reportedNo = $(event.relatedTarget).data('reportedNo');
+					memberStatus = $(event.relatedTarget).data('memberStatus');
+					reportCount = $(event.relatedTarget).data('reportCount');
+					reportDate = $(event.relatedTarget).data('reportDate');
+				});
+			});
+			
+			function showModal(reportNo, memberNo, reportContent, reportType, reportedNo, memberStatus, reportCount, reportDate) {
+				// 눌렀을때 승인완료로 바꾸기
+				//location.href=
 			}
+			
+			function increaseCount(reportCount){
+				// 눌렀을때 카운트 1증가 후 승인완료로 바꾸기
+			}
+			
 		</script>
 		
 		
