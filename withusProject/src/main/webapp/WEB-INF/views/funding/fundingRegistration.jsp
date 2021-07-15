@@ -41,8 +41,8 @@
 
                 .registerBtn {
                     width: 170px !important;
-                    background-color: rgb(52, 152, 219);
-                    color: white;
+                    background-color: rgb(52, 152, 219) !important;
+                    color: white !important;
                 }
 
                 .regiMenubar {
@@ -396,7 +396,7 @@
                         </p>
                         <button type="submit" class="registerBtn">승인요청하기</button>
                         <button type="button">임시저장</button>
-                        <button type="button">미리보기</button>
+                        <button type="button" id="previewBtn">미리보기</button>
                     </div>
     
                     <!-- 바디 -->
@@ -1065,6 +1065,44 @@
                     <div class="regiMenuSelected regi regiFive" style="margin-top: -86px;  display: none;">&nbsp;</div>
     
                     <script>
+                        // 미리보기 ajax
+	                    $(function(){
+	                    	$(document).on("click", "#previewBtn", function(){
+	            				//console.log("클릭됨");
+                                $.ajax({
+                                    url:"preview.fun",
+                                    data:{
+                                        catNo: $("input[name=catNo]").val(),
+                                        projectTitle: $("input[name=projectTitle]").val(),
+                                        projectSummary: $("input[name=projectSummary]").val(),
+                                        projectGprice: $("input[name=projectGprice]").val(),
+                                        projectStartDT: $("input[name=projectStartDT]").val(), //sysdate
+                                        projectEndDT: $("input[name=projectEndDT]").val(),                       
+                                        projectThum : $("input[name=projectThum]").val(),
+                                        projectCount: $("input[name=projectCount]").val(), //0
+                                        projectContent: $("input[name=projectContent]").val(),
+                                        projectRefcon: $("input[name=projectRefcon]").val(),
+                                        hashtag : $("input[name=hashtag]").val(),
+                                        deliveryDate : $("input[name=deliveryDate]").val(),
+                                        partnerPhone : $("input[name=partnerPhone]").val(),
+                                        phoneYN : $("input[name=phoneYN]").val(),
+                                        partnerEmail : $("input[name=partnerEmail]").val(),
+                                        partnerBank : $("input[name=partnerBank]").val(),
+                                        partnerAccount : $("input[name=partnerAccount]").val(),
+                                        partnerAcholer : $("input[name=partnerAcholer]").val(),
+                                        partnerWeb : $("input[name=partnerWeb]").val(),
+                                        partnerSNS : $("input[name=partnerSNS]").val()
+                                    },
+                                    type:"get",
+                                    success:function(data){
+                                        window.open(data);
+                                    },error:function(){
+                                        console.log("ajax통신 실패!");
+                                    }
+                                })
+	            			})
+	                    });
+                    	
                         function regiShow(className) {
                             $(".regi").hide();
                             $(".regi" + className).show();

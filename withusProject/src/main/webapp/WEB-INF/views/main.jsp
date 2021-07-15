@@ -15,7 +15,8 @@
             width: 1200px; 
             height: 1000px;
             margin: auto;  
-            padding: 10px;
+            padding-left: 10px;
+            margin-top: -20px;
         }
         .visualSlide{
             width: 100%;
