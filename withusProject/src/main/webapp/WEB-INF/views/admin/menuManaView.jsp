@@ -43,10 +43,10 @@
 						<tr>
 							<th scope="row">카테고리 정렬</th>
 							<td>
-								<input type="radio" name="cateRadio" id="bl_01" class="inputRadioCate3" onclick="$('frmPageSize').value=this.value;" value="3"> <label for="cate_01" class="mgr2">3개</label>
-								<input type="radio" name="cateRadio" id="bl_02" class="inputRadioCate5" onclick="$('frmPageSize').value=this.value;" checked="checked" value="5"> <label for="cate_02" class="mgr2">5개</label>
-								<input type="radio" name="cateRadio" id="bl_03" class="inputRadioCate7" onclick="$('frmPageSize').value=this.value;" value="7"> <label for="cate_03" class="mgr2">7개</label>
-								<input type="radio" name="cateRadio" id="bl_04" class="inputRadioCate10" onclick="$('frmPageSize').value=this.value;" value="10"> <label for="cate_04">10개</label>
+								<input type="radio" name="cateRadio" class="inputRadioCate3" onclick="$('frmPageSize').value=this.value;" value="3"> <label for="cate_01" class="mgr2">3개</label>
+								<input type="radio" name="cateRadio" class="inputRadioCate5" onclick="$('frmPageSize').value=this.value;" checked="checked" value="5"> <label for="cate_02" class="mgr2">5개</label>
+								<input type="radio" name="cateRadio" class="inputRadioCate7" onclick="$('frmPageSize').value=this.value;" value="7"> <label for="cate_03" class="mgr2">7개</label>
+								<input type="radio" name="cateRadio" class="inputRadioCate10" onclick="$('frmPageSize').value=this.value;" value="10"> <label for="cate_04" class="mgr2">10개</label>
 							</td>
 						</tr>
 					</tbody>
@@ -64,10 +64,10 @@
 						<tr>
 							<th scope="row">태그 정렬</th>
 							<td>
-								<input type="radio" name="tagRadio" id="bl_05" class="inputRadioTag1" onclick="$('frmPageSize').value=this.value;" value="1"> <label for="tag_01" class="mgr3">3개</label>
-								<input type="radio" name="tagRadio" id="bl_06" class="inputRadioTag3" onclick="$('frmPageSize').value=this.value;" checked="checked" value="3"> <label for="tag_02" class="mgr3">5개</label>
-								<input type="radio" name="tagRadio" id="bl_07" class="inputRadioTag5" onclick="$('frmPageSize').value=this.value;" value="5"> <label for="tag_03" class="mgr3">7개</label>
-								<input type="radio" name="tagRadio" id="bl_08" class="inputRadioTag10" onclick="$('frmPageSize').value=this.value;" value="10"> <label for="tag_04">10개</label>
+								<input type="radio" name="tagRadio" class="inputRadioTag1" onclick="$('frmPageSize').value=this.value;" value="1"> <label for="tag_01" class="mgr3">3개</label>
+								<input type="radio" name="tagRadio" class="inputRadioTag3" onclick="$('frmPageSize').value=this.value;" checked="checked" value="3"> <label for="tag_02" class="mgr3">5개</label>
+								<input type="radio" name="tagRadio" class="inputRadioTag5" onclick="$('frmPageSize').value=this.value;" value="5"> <label for="tag_03" class="mgr3">7개</label>
+								<input type="radio" name="tagRadio" class="inputRadioTag10" onclick="$('frmPageSize').value=this.value;" value="10"> <label for="tag_04" class="mgr3">10개</label>
 							</td>
 						</tr>
 					</tbody>
