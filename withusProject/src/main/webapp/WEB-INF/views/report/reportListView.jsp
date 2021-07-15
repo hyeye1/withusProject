@@ -88,7 +88,7 @@
 						<c:forEach var="r" items="${ list }">
 							<tr align="center">
 								<td class="rno">${ r.reportNo }</td>
-			                    <td>${ r.memberNo }</td>
+			                    <td>${ r.memberName }</td>
 			                    <td>${ r.reportContent}</td>
 			                    <td>${ r.reportType}</td>
 			                    <td>${ r.reportedNo }</td>
@@ -97,7 +97,7 @@
 			                    <td>${ r.reportDate }</td>
 			                    <c:choose>
 			                    	<c:when test="${ r.reportStatus eq 'N' }">
-			                    		<td onclick="showModal();">진행중</td>
+			                    		<td onclick="showModal(this);">진행중</td>
 			                    	</c:when>
 			                    	<c:when test="${ r.reportStatus eq 'Y' }">
 			                    		<td>처리완료</td>
@@ -110,6 +110,11 @@
 			</c:choose>
 		</table>
 		
+		<script>
+			function showModal(clicked_element){
+				var modal = document.getElementById("")
+			}
+		</script>
 		
 		
         <br>
