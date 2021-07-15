@@ -114,13 +114,13 @@
             <div class="head_center"></div>
             <div class="login_area">
                 <c:choose>
-                	<c:when test="${ empty loginAdmin }">
-                		<span>관리자  off</span> &nbsp;
-		                <a data-toggle="modal" data-target="#manaLogin">로그인</a>
-                	</c:when>
-                	<c:otherwise>
+                	<c:when test="${ !empty loginAdmin and loginAdmin.memberStatus eq 'A' }">
 		                <span>관리자  on</span> &nbsp;
 		                <a href="logout.mana">로그아웃</a>
+                	</c:when>
+                	<c:otherwise>
+                		<span>관리자  off</span> &nbsp;
+		                <a data-toggle="modal" data-target="#manaLogin">로그인</a>
                 	</c:otherwise>
                 </c:choose>
             </div>

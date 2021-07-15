@@ -6,6 +6,7 @@ import java.util.HashMap;
 import com.kh.withus.category.model.vo.Category;
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.vo.Project;
+import com.kh.withus.funding.model.vo.ProjectReply;
 import com.kh.withus.order.model.vo.Order;
 
 public interface FundingService {
@@ -37,7 +38,14 @@ public interface FundingService {
 	// 주문 후 재고 마이너스 하기
 	int minusStock(Order o);
 	
-	// 펀딩 등록
+	// 펀딩 등록	
     int insertProject(Project p);
-    
+
+    // 펀딩 댓글 입력
+   	int insertReply(ProjectReply r);
+       
+    // 펀딩 댓글 목록조회
+    ArrayList<ProjectReply> selectReplyList (int pno);
+
+   
 }

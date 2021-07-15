@@ -44,7 +44,8 @@
 
         .userDetail #content_1_2>div{float: left; margin-top: 20px; text-align: center; font-size: 12px;}
         
-        #followBtn{color:white;}
+        .followBtn{color:black;}
+        .followingBtn{color:white;}
 
         
         /* 펀딩 목록 */
@@ -121,10 +122,10 @@
                             
                             	<c:choose>
                             		<c:when test="${ result != '0' }">
-                            			<button type="button" class="btn btn-dark btn-sm" id="followBtn">팔로잉</button>
+                            			<button type="button" class="btn btn-dark btn-sm followingBtn" id="followBtn">팔로잉</button>
                             		</c:when>
                             		<c:otherwise>
-                            			<button type="button" class="btn btn-outline-dark btn-sm" id="followBtn">팔로우</button>
+                            			<button type="button" class="btn btn-outline-dark btn-sm followBtn" id="followBtn">팔로우</button>
                             		</c:otherwise>
                             	</c:choose>
                             </div>	

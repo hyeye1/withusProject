@@ -73,8 +73,7 @@
 			 , shipping_status
 		  from tb_order o 
           join member using (member_no)
-          full join project p
-          on (o.project_no = p.project_no)
+          full join project p on (o.project_no = p.project_no)
          join reward using (reward_no)
 		 order
 		    by order_no desc 
@@ -111,8 +110,8 @@
 		   join member sm on(o.member_no = sm.member_no)
 		   join project p on(o.project_no = p.project_no)
 		   join member pm on(p.member_no = pm.member_no)
-		   join reward r on (o.project_no = r.project_no)
-		   join pay py on(o.order_no = py.order_no)
+           join reward r on (o.project_no = r.project_no)
+	  left join pay py on(o.order_no = py.order_no)
 		  where o.order_no = #{orderNo}
 		    and o.reward_no = r.reward_no
 	</select>

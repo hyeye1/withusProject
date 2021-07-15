@@ -184,13 +184,27 @@ public class MemberController {
 	@RequestMapping("main.mana")
 	public String test(HttpSession session, Model mv) {
 		
-		// 사용자페이지에서 관리자 페이지로 넘어오기
-		// 사용자 페이지에서 관리자 로그인일 경우
-		// 사용자로그인에 담겨있는 loginUser로 같이 넘겨서 , 사용자 페이지에서 관리자로그인시  로그인 상태 유지해서 넘어오기
 		
-		// 로그인 안한 상태에서는 페이지 안보여지게
+		// 사용자 페이지에서 관리자 로그인일 경우 로그인값 가져오기  -> 확인용
+		//Member loginUser = (Member)session.getAttribute("loginUser");
+		//System.out.println(loginUser);
 		
-		return "common/manaErrorPage";
+		
+		// loginAdmin에 loginUser 값 담기 == 로그인 상태 유지 시키기
+		Member loginAdmin = (Member)session.getAttribute("loginUser");
+		session.setAttribute("loginAdmin", loginAdmin);
+		//System.out.println(loginAdmin);
+		
+		
+		// 값이  관리자일 경우  회원조회 페이지, 그렇지 않을 경우 로그인실패 창
+		if(loginAdmin!= null && loginAdmin.getMemberStatus().equals("A") ) {
+			return "redirect:memberListView.mana";
+		}else {
+			session.setAttribute("alertMsg", "로그인을 해주세요");
+			return "redirect:login.mana";
+		}
+		
+		
 	}
 	
 	
@@ -238,10 +252,10 @@ public class MemberController {
 		
 		if (delMem > 0) {
 			//session.setAttribute("alertMsg", "탈퇴처리 성공");
-			return "redirect:/memberListView.mana";
+			return "redirect:memberListView.mana";
 		}else {
 			session.setAttribute("alertMsg", "실패실패");
-			return "redirect:/memberListView.mana";
+			return "common/manaErrorPage";
 		}
 		
 	}

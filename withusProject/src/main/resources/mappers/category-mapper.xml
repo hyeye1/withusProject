@@ -11,7 +11,7 @@
 		<result column="cat_file" property="catFile" />
 	</resultMap>
 	
-	<select id="menuList" resultType="Category">
+	<select id="menuList" resultType="category">
 		select
 		       cat_no
 		     , cat_name
@@ -19,6 +19,16 @@
 		  from category
 	</select>
 	
+	<!-- 
+	<select id="selectCate" resultMap="category" parameterType="_int">
+		select
+		       cat_name
+		     , cat_tag
+		  from category
+		 where cat_no = #{catNo}
+	</select>
+	 -->
+	 
 	<insert id="insertCate" parameterType="Category">
 		insert
 		  into category
@@ -26,18 +36,16 @@
 		       cat_no
 		     , cat_name
 		     , cat_tag
-		     , cat_file
 		     )
 		 value
 		     (
-		       cno.nextval
+		       seq_cno.nextval
 		     , #{catName}
 		     , #{catTag}
-		     , #{catFile}
 		     )
 	</insert>
 	
-	<update id="updateCate" parameterType="Category">
+	<update id="updateCate" parameterType="_int">
 		update
 		       category
 		   set cat_name = #{catName}
@@ -45,7 +53,7 @@
 		 where cat_no = #{catNo} 
 	</update>
 	
-	<delete id="deleteCate" parameterType="Category">
+	<delete id="deleteCate" parameterType="_int">
 		delete
 		  from category
 		 where cat_name = #{catName}

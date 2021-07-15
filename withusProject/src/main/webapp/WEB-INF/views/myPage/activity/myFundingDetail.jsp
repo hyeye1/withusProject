@@ -311,8 +311,6 @@
 				
 				function delieveryM(){
                 	
-                	
-                	
                 	var result = confirm("배송지정보를 수정 하시겠습니까?");
                 	
                 	if(result){
@@ -329,9 +327,10 @@
 				</script>
                 
                 
-                <!-- 배송준비중일경우 input, button에 readonly 제거 -->
+                <!-- 배송준비중&&결제완료 상태 input요소 readonly 제거, button에 disabled 제거 -->
                 <input type="hidden" value="${orderList.shippingStatus}"  id="shippingStatus">
                 <input type="hidden" value="${orderList.orderStatus}"  id="orderStatus">
+                
                 <script>
                     
                 
