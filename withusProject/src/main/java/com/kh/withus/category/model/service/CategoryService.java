@@ -6,12 +6,16 @@ import com.kh.withus.category.model.vo.Category;
 
 public interface CategoryService {
 	
-	public List<Category> MenuList() throws Exception;
+	// 카테고리조회
+	List<Category> MenuList(Category ct);
 	
-	public int insertCate(Category ct) throws Exception;
+	// 카테고리 추가
+	int insertCate(Category ct);
 	
-	public int updateCate(Category ct) throws Exception;
+	// 카테고리 수정
+	int updateCate(Category ct);
 	
-	public int deleteCate(String code) throws Exception;
+	// 카테고리 삭제
+	int deleteCate(String code);
 
 }
