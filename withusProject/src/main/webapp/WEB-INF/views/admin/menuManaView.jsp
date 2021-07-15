@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html>
@@ -9,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Admin With Us</title>
 <style>
-	
+	#blind{ padding:20% }
 </style>
 </head>
 <body>
@@ -78,7 +77,7 @@
 			<hr>
 			<br>
 			<div class="btn" align="right">
-				<a class="btn btn-sm" href="insert.cate">추가</button>
+				<a class="btn btn-primary" href="enrollForm.cate">추가</a>
 			</div>
 			<br><br>
 
@@ -91,23 +90,23 @@
 					<c:otherwise>
 						<thead>
 						  <tr align="center" style="height: 10px; background-color: rgb(224, 224, 224); font-size:smaller ;">
-							<th width="200" height="30">카테고리<br>번호</th>
-							<th width="100">이름</th>
-							<th width="500">해시태그1</th>
+							<th width="100" height="30">카테고리<br>번호</th>
+							<th width="300">카테고리명</th>
+							<th width="300">해시태그</th>
 							<th width="200">수정/삭제</th>
 						  </tr>
 						</thead>
 		
 						<!-- 반복문으로 조회 -->
 						<tbody>
-							<c:forEach var="c" items="${ list }">
+							<c:forEach var="ct" items="${ list }">
 								<tr align="center">
-									<td>${ c.catNo }</td>
-									<td>${ c.catName }</td>
-									<td>${ c.catTag }</td>
+									<td>${ ct.catNo }</td>
+									<td>${ ct.catName }</td>
+									<td>${ ct.catTag }</td>
 									<td>
-										<button type="button" onclick="updateTag();" data-toggle="modal" data-target="#upModal">수정</button>
-										<button type="button" onclick="deleteCate();" data-toggle="modal" data-target="#delModal">삭제</button>
+										<a class="btn btn-primary" herf="updateForm.cate">수정</a>
+										<a class="btn btn-danger" herf="delete.cate">삭제</a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -116,27 +115,6 @@
 				</c:choose>
 			</table>
 			
-			<script>
-				// 카테고리 태그 수정
-				function updateTag(ct){
-					var name = ct.name.value;
-					var tag = ct.tag.value;
-					
-					if(name.trim() == ''){
-						alert("카테고리명을 입력해주세요");
-						return false;
-					}
-					if(tag.trim() == ''){
-						alert("태그를 입력해주세요");
-						return false;
-					}
-					ct.submit();
-				}
-			
-			</script>
-
-		
-    
     </div>
 
 </body>
