@@ -39,7 +39,8 @@
 		<mapper resource="/mappers/myPage-mapper.xml"/>	
 		<mapper resource="/mappers/notice-mapper.xml"/>
 		<mapper resource="/mappers/faq-mapper.xml"/>
-		<mapper resource="/mappers/oto-mapper.xml"/>	
+		<mapper resource="/mappers/oto-mapper.xml"/>
+		<mapper resource="/mappers/category-mapper.xml"/>	
 	</mappers>
 	
 </configuration>
