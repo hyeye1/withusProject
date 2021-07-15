@@ -18,6 +18,7 @@
 		<typeAlias type="com.kh.withus.funding.model.vo.Search" alias="Search" />
 		<typeAlias type="com.kh.withus.community.model.vo.Community" alias="Community" />
 		<typeAlias type="com.kh.withus.community.model.vo.CommuReply" alias="CommuReply" />
+		<typeAlias type="com.kh.withus.community.model.vo.CommuSearch" alias="CommuSearch" />
 		<typeAlias type="com.kh.withus.member.model.vo.Member" alias="Member" />
 		<typeAlias type="com.kh.withus.order.model.vo.Order" alias="Order" />
 		<typeAlias type="com.kh.withus.refund.model.vo.Refund" alias="Refund" />

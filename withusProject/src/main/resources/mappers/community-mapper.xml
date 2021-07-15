@@ -143,43 +143,29 @@
 	 
 	
      <!-- 커뮤 검색기능 -->
-	<select id="selectSearchCommuListCount" resultType="_int" parameterType="_int">
-		select
-		       count(*)
-		  from community c
-		  join member on(commu_writer = member_no)
-		 where c.commu_status = 'Y'
-		 	<if test="condition == 'title'">
-		    	and commu_title
-		    </if>
-		    <if test="condition == 'content'">
-		    	and commu_content
-		    </if>
-		    <if test="condition == 'writer'">
-		    	and member_id
-		    </if>
-		        like '%' || #{keyword} || '%'
-	</select>
 	
-	<select id="selectSearchCommuList" resultMap="community" parameterType="_int">
+	<select id="selectCommuSearchList" resultMap="community" parameterType="hashmap">
 		select 
                commu_no
              , commu_title
-             , member_id
+             , commu_content
              , count
+             , commu_writer
              , commu_create
           from community c
-          join member on(commu_writer = member_no)
          where c.commu_status = 'Y'
            <choose>
-           		<when test="condition == 'title'">
+           		<when test="condition == 'commuTitle'">
            			and commu_title
            		</when>
-           		<when test="condition == 'content'">
+           		<when test="condition == 'commuContent'">
            			and commu_content
            		</when>
+           		<when test="condition == 'commuWriter'">
+					and commu_writer
+				</when>
            		<otherwise>
-           			and member_id
+           			and commu_create
            		</otherwise>
            </choose>
            		like '%' || #{keyword} || '%'           	

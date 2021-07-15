@@ -1,6 +1,7 @@
 package com.kh.withus.community.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -61,19 +62,8 @@ public class CommunityDao {
 	
 	// 검색
 	
-	public int selectSearchCommuListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("communityMapper.selectSearchCommuListCount");
-	}
-	
-	public ArrayList<Community> selectSearchCommuList(SqlSessionTemplate sqlSession, PageInfo pi){
-		
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		int limit = pi.getBoardLimit();
-		
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		
-		return (ArrayList)sqlSession.selectList("communityMapper.selectSearchCommuList", null, rowBounds);
-		
+	public ArrayList<Community> selectCommuSearchList(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return (ArrayList)sqlSession.selectList("communityMapper.selectCommuSearchList", map);		
 	}
 	
 	

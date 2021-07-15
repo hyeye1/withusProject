@@ -33,6 +33,5 @@ public interface CommunityService {
 		int insertCommuReply(CommuReply cr);
 		
 		// 게시판 검색 리스트 조회
-		int selectSearchCommuListCount();
-		ArrayList<Community> selectSearchCommuList(PageInfo pi);
+		ArrayList<Community> selectCommuSearchList(HashMap<String, String> map);
 }

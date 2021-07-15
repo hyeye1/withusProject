@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,6 +24,7 @@ import com.kh.withus.common.template.pagination;
 import com.kh.withus.community.model.service.CommunityService;
 import com.kh.withus.community.model.vo.CommuReply;
 import com.kh.withus.community.model.vo.Community;
+import com.kh.withus.funding.model.vo.Search;
 
 
 
@@ -208,18 +210,25 @@ public class CommunityController {
 	
 	
 		@RequestMapping("search.co")
-		public String selectSearchCommuList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
-			
-			int searchCount = cService.selectSearchCommuListCount();
-			PageInfo pi = pagination.getPageInfo(searchCount, currentPage, 10, 5);
-			
-			ArrayList<Community> list = cService.selectSearchCommuList(pi);
-			
-			mv.addObject("pi", pi)
-			  .addObject("list", list)
-			  .setViewName("community/commuListView");
-			
-			return "community/commuListView";
+		
+			public ModelAndView selectCommuSearchList(Search s, ModelAndView mv) {
+				
+				System.out.println(s);
+				
+				HashMap<String, String> map = new HashMap<>();
+				map.put("condition", s.getCondition());
+				map.put("keyword", s.getKeyword());
+				
+				System.out.println(map);
+				
+				ArrayList<Community> list = cService.selectCommuSearchList(map);
+				
+				System.out.println(list);
+				
+				mv.addObject("list", list)
+				.setViewName("community/commuListView");
+				
+				return mv;
 		}
 	// 카테고리 리스트 조회
 	

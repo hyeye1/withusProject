@@ -199,11 +199,7 @@
               <br><br><br><br><br>
 
               <div>
-                <ul class="filter-btn-list">
-                  <li>
-                    <button>조회순</button>
-                    <button>최신순</button>
-                  </li>
+                <ul class="filter-btn-list">       
                   <!-- 로그인후 상태일 경우만 보여지는 글쓰기 버튼-->
                   <c:if test="${ !empty loginUser }">
                     <li>
