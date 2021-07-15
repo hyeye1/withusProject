@@ -49,6 +49,11 @@ public class CategoryController {
 	
 	
 	// 카테고리 수정
+	@RequestMapping("updateForm.cate")
+	public String updateForm() {
+		return "admin/menuUpdateForm";
+	}
+	
 	@RequestMapping("update.cate")
 	public String updateCate(Category ct, HttpSession session, Model model) {
 		int result = cService.updateCate(ct);

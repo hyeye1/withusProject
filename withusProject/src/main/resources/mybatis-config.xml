@@ -29,6 +29,7 @@
 		<typeAlias type="com.kh.withus.csc.faq.model.vo.Faq" alias="Faq"/>
 		<typeAlias type="com.kh.withus.csc.oto.model.vo.Oto" alias="Oto"/>
 		<typeAlias type="com.kh.withus.category.model.vo.Category" alias="Category"/>
+		<typeAlias type="com.kh.withus.report.model.vo.Report" alias="Report" />
 	</typeAliases>
 	
 	<mappers>
@@ -42,7 +43,7 @@
 		<mapper resource="/mappers/faq-mapper.xml"/>
 		<mapper resource="/mappers/oto-mapper.xml"/>
 		<mapper resource="/mappers/category-mapper.xml"/>	
-		
+		<mapper resource="/mappers/report-mapper.xml" />
 	</mappers>
 	
 </configuration>

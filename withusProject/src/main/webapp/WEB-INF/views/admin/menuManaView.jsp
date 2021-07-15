@@ -105,8 +105,8 @@
 									<td>${ ct.catName }</td>
 									<td>${ ct.catTag }</td>
 									<td>
-										<a class="btn btn-primary" herf="updateForm.cate">수정</a>
-										<a class="btn btn-danger" herf="delete.cate">삭제</a>
+										<a class="btn btn-primary" href="updateForm.cate">수정</a>
+										<a class="btn btn-danger" href="delete.cate">삭제</a>
 									</td>
 								</tr>
 							</c:forEach>
