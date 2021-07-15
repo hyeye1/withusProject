@@ -18,4 +18,5 @@ public class CommuReply {
 	private String comReWriter;
 	private String comReCreate;
 	private String comReStatus;
+	private int memberNo;
 }

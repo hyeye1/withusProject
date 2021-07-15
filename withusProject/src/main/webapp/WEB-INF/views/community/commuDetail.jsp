@@ -194,7 +194,7 @@
 					            </div><br><br>
 					            
 					            <form id="postForm" action="" method="post">
-					            	<input type="hidden" name="cno" value="${ c.commuNo }">
+					          	    <input type="hidden" name="memberNo" value="${ loginUser.memberNo }">
 					            	<input type="hidden" name="filePath" value="${ c.commuChange }"> 	
 					            </form>
 					            
@@ -246,14 +246,16 @@
              <script>
 		    	$(function(){
 		    		selectCommuReplyList();
-		    		
+
 		    		setInterval(selectCommuReplyList, 1000);
 		    	})
 		    	
 		    	function addCommuReply(){
 		    		
 		    		if($("#content").val().trim().length != 0){ // 댓글작성되어있을 경우 => ajax로 댓글작성요청
-		    			
+						console.log($("#content").val());
+						console.log(${c.commuNo});
+						console.log('${loginUser.memberId}');
 		    			$.ajax({
 		    				url:"rinsert.co",
 		    				data:{
