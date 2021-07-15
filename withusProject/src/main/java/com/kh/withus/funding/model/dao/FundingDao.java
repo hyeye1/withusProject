@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.withus.category.model.vo.Category;
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.vo.Project;
+import com.kh.withus.funding.model.vo.ProjectReply;
 import com.kh.withus.funding.model.vo.Reward;
 import com.kh.withus.order.model.vo.Order;
 
@@ -65,6 +66,10 @@ public class FundingDao {
 	
 	public ArrayList<Project> selectSearchList(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
 		return (ArrayList)sqlSession.selectList("fundingMapper.selectSearchList", map);		
+	}
+
+	public ArrayList<ProjectReply> selectReplyList(SqlSessionTemplate sqlSession, int pno) {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectReplyList", pno);
 	}
 	
 }

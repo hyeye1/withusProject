@@ -58,6 +58,23 @@
 		<result column="cat_file" property="catFile" />
 	</resultMap>
 	
+	<resultMap id="ProjectReply" type="ProjectReply">
+		<id column="reply_no" property="replyNo" />
+		<result column="reply_content" property="replyContent" />
+		<result column="reply_date" property="replyDate" />
+		<result column="reply_status" property="replyStatus" />
+		<result column="project_no" property="projectNo" />
+		<result column="member_no" property="memberNo" />
+		<result column="member_name" property="memberName" />
+		<result column="member_profile" property="memberProfile" />
+		<result column="partner_name" property="partnerName" />
+		
+		<result column="subre_no" property="subReNo" />
+		<result column="subre_content" property="subReContent" />
+		<result column="subre_date" property="subReDate" />
+		<result column="subre_status" property="subReStatus" />
+	</resultMap>
+	
 	<select id="selectSearchList" resultMap="fundingListResultSet" parameterType="hashmap">
 		select
                p.project_no
@@ -417,5 +434,33 @@
  		     , #{rewardOption}
  		     )
  	</insert>
+ 	
+ 	
+ 	<!-- 펀딩 댓글(커뮤니티 -->
+ 	<select id="selectReplyList" resultMap="ProjectReply" parameterType="_int">
+		select
+				 reply_no
+			   , reply_content
+			   , reply_date
+			   , reply_status
+               , project_no
+               , m.member_id
+               , m.member_no
+               , m.member_name
+               , m.member_profile
+               , m.partner_name
+		    from pro_reply r
+            join member m on(m.member_no=r.member_no)
+		   where reply_status = '1'
+		   	 and project_no = #{pno}
+		   order
+		   	  by reply_no desc 
+	
+	</select>
+ 	
+ 	
+ 	
+ 	
+ 	
 
  </mapper>

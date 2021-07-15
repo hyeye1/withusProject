@@ -672,8 +672,8 @@
                     <!-- 커뮤니티 -->
                     <div class="detailCommunity detail detailCommu">
                         <p id="plzLogin" style="display: none;">
-                            로그인 후 글 작성이 가능합니다. <br>
-                            펀딩과 관련 없는 내용, 광고, 욕설, 비방, 도배 글은 관리자 검토 후 삭제됩니다.
+			                            로그인 후 글 작성이 가능합니다. <br>
+			                            펀딩과 관련 없는 내용, 광고, 욕설, 비방, 도배 글은 관리자 검토 후 삭제됩니다.
                         </p>
 
                         <div class="loginOn">
@@ -686,35 +686,20 @@
                             <h3><b> 응원 · 의견 · 리뷰 </b></h3>
                             <hr>
                         </div>
-
+					
+						<!-- 일반댓글 -->
                         <div class="comReply">
-                            <div class="adminShown">
-                                <button style="float: right;">삭제하기</button>
+                        	<div class="Reply">
+	                            <div class="adminShown">
+	                                <button style="float: right;">삭제하기</button>
+	                            </div>
+	                            <div class="replyWriter"></div>
                             </div>
-                            <div class="replyWriter">
-                                <img src="${ pageContext.request.contextPath }/resources/images/partnerDefault.PNG">
-                                <p>
-                                    <b>김가가</b><br>
-                                    2021-04-06
-                                </p>
-                            </div>
-                            <p class="replyContent">프로젝트 기대하고 있습니다! </p>
-                        </div>
+                        
 
-                        <div class="comReply">
-                            <div class="adminShown">
-                                <button style="float: right;">삭제하기</button>
-                            </div>
-                            <div class="replyWriter">
-                                <img src="${ pageContext.request.contextPath }/resources/images/partnerDefault.PNG">
-                                <p>
-                                    <b>박나다</b><br>
-                                    2021-04-04
-                                </p>
-                            </div>
-                            <p class="replyContent">펀딩 완료했어요!!! 기대됩니다!! </p>
-
-                            <div class="reReply">
+                        
+                           <!-- 파트너 대댓글 -->
+                           <div class="reReply">
                                 <div class="partnerShownEdit">
                                     <button style="float: right; display: none;">수정/삭제</button>
                                 </div>
@@ -722,10 +707,11 @@
                                     <button style="float: right;">삭제하기</button>
                                 </div>
                                 <hr>
+                                
                                 <div class="replyWriter">
                                     <img src="${ pageContext.request.contextPath }/resources/images/partnerDefault.PNG">
                                     <div class="partnerMarks" align="center">
-                                        파트너
+                                        	파트너
                                     </div>
                                     <p>
                                         <b>나브 Nav</b><br>
@@ -734,8 +720,69 @@
                                 </div>
                                 <p class="replyContent">펀딩, 응원 감사드립니다 :)</p>
                             </div>
+                        
                         </div>
                     </div>
+                    
+                    <script>
+                    $(function(){
+                		selectReplyList();
+                		
+                		//setInterval(selectReplyList, 1000); // 1초 간격으로 주기적으로 실시간으로 갱신된 댓글리스트 조회요청
+                	})
+                    
+                    
+                    
+                    function selectReplyList(){
+                		$.ajax({
+                			url:"proReply.fd",
+                			data:{pno:${p.projectNo}},
+                			
+                			success:function(list){
+                				console.log(list);
+                				
+                				var reply = "";
+                				
+                				$.each(list, function(i, obj){
+                					reply += "<img src=" + obj.memberProfile + ">"
+                								+ "<p><b>" + obj.memberName + "</b><br>"
+                								+ obj.replyDate + "</p>"
+                								
+                								+ "<div>" 
+                								+ obj.replyContent
+                								+ "</div>"
+                								+ "<label>" + obj.replyNo + "</label>";	
+                				
+                				})
+                				
+                				$(".Reply .replyWriter").html(reply);
+                				$(".Reply .replyWriter div").attr("class", "replyContent");
+                				$(".Reply .replyWriter label").attr("style", "display:none");
+                				
+                				
+                			}, error:function(){
+                				console.log("댓글 리스트 조회용 ajax")
+                			}
+                			
+                		});
+                	}
+                    
+                    
+                    
+                    
+                    
+                    </script>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
 
                     <!-- 상품 안내 -->
                     <div class="detailGuide detail detailNoti">

@@ -14,9 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.withus.category.model.vo.Category;
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.service.FundingService;
@@ -219,6 +221,25 @@ public class FundingController {
 		return changeName;
 		
 	}
+	
+	
+	// 프로젝트 댓글부분
+	@ResponseBody
+	@RequestMapping(value="proReply.fd", produces="application/json; charset=utf-8")
+	public String ajaxSelectReplyList(int pno) {
+		//System.out.println(pno);
+		
+		return new Gson().toJson(funService.selectReplyList(pno));
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
    
 	
 }

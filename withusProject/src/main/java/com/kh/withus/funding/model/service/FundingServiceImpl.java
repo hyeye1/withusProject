@@ -7,10 +7,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.category.model.vo.Category;
 import com.kh.withus.funding.model.dao.FundingDao;
+import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.vo.Project;
+import com.kh.withus.funding.model.vo.ProjectReply;
 import com.kh.withus.funding.model.vo.Reward;
 import com.kh.withus.order.model.vo.Order;
 
@@ -92,9 +93,16 @@ public class FundingServiceImpl implements FundingService {
 		}
 			
 	}
-
+	
      return rewardCheck;
      
     }
+
+	@Override
+	public ArrayList<ProjectReply> selectReplyList(int pno) {
+		
+		return funDao.selectReplyList(sqlSession, pno);
+		
+	}
 
 }
