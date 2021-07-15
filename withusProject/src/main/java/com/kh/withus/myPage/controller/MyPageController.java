@@ -806,7 +806,8 @@ public class MyPageController {
 		PageInfo pi = pagination.getPageInfo(fundingCount, currentPage, 5, 6);
 		//6개씩
 		
-		ArrayList<MyPage> fundingList = mpService.partnerfundingList(pi, m);					
+		ArrayList<MyPage> fundingList = mpService.partnerfundingList(pi, m);
+		Collections.shuffle(fundingList); // 섞기
 		
 		session.setAttribute("loginUser", loginUser);
 		session.setAttribute("fundingCount", fundingCount);

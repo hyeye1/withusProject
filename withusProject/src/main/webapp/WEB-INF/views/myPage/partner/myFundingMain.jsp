@@ -45,7 +45,7 @@
 
         
         /* main content */
-        #main_1{height: 30%; margin-top: 50px;}
+        #main_1{height: 35%; margin-top: 50px;}
         #main_2{height: 40%; margin-top: 50px;}
         
 
@@ -67,8 +67,13 @@
         }
 
         /* 프로젝트 */
-        #main_1>.fundingList{float: left; padding: 10px;}
-        .fundingList>table{width: 90%; font-weight: 600; font-size: 16px;}
+        #main_1>#fundingList{float: left; padding: 5px; width:280px;}
+        #fundingList>table{width: 85%;  font-size: 14px;}
+        
+        #percent{width : 30%;}
+        #totalprice{width : 35%;}
+        #dday{width : 30%;}
+        
         
         /* 프로젝트가 비어있을때 / 파트너 조인x일때 */
         #empty{width: 300px; height: 250px; margin-left: 250px;}
@@ -124,30 +129,44 @@
                     		
                     	</c:when>
                     	<c:otherwise>
-                    		<c:forEach var="fundingList" items="${ fundingList }" end="2">
-			                     <div class="fundingList">
-                  					<table>
+                    		<c:forEach var="list" items="${ fundingList }" end="2">
+			                     <div id="fundingList">
+	                    		 <input type="hidden" class="pno" value="${ list.projectNo }">
+			                        <table>
 			                            <tr>
-			                                <td colspan="2">
+			                                <td colspan="3">
 			                                	<c:choose>
-			                                		<c:when test="${ empty fundingList.projectThum }">
-			                                			<img src="resources/project_thumbnail/no_image.jpg"  width="250" height="200">
+			                                		<c:when test="${ empty list.projectThum }">
+			                                			<img src="resources/project_thumbnail/no_image.jpg"  width="230" height="200">
 			                                		</c:when>
 			                                		<c:otherwise>
-			                                			<img src="${ fundingList.projectThum }"  width="250" height="200">
+			                                			<img src="${ list.projectThum }"  width="230" height="200">
 			                                		</c:otherwise>
 			                                	</c:choose>
 			                                </td>
 			                            </tr>
 			                            <tr>
-			                                <td colspan="2" style="width:10px;">${ fundingList.projectTitle }</td>
+			                                <td colspan="3" style="width:270px;">${ list.projectTitle }</td>
 			                            </tr>
 			                            <tr>
-			                                <td>${ fundingList.projectGPrice }</td>
-			                                <td>~ ${ fundingList.projectEndDt }</td>
+			                                <td colspan="3">${ list.catName } | ${ list.partnerName }</td>
 			                            </tr>
-			                        </table>
-			                       </div>
+			                            <tr>
+				                           <c:choose>
+							                	<c:when test="${ list.dday >= 0 }">
+													<td id="percent">${ list.percentage }%</td>
+													<td id="totalPrice">${ list.totalPrice }원</td>
+													<td id="dday">D-${ list.dday }</td>
+							            		</c:when>
+							            		<c:otherwise>
+							            			<td id="percent">${ list.percentage }%</td>
+													<td id="totalPrice">${ list.totalPrice }원</td>
+													<td id="dday">펀딩종료</td>
+							            		</c:otherwise>
+							            	</c:choose>
+						            	</tr>
+			                       </table>
+			                    </div>
 			                 </c:forEach>
                     	</c:otherwise>
                     </c:choose>
