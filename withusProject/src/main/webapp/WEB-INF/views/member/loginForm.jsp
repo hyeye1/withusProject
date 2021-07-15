@@ -156,7 +156,7 @@
                         </div>
                         <br>
                         <input type="checkbox" class="check">아이디저장
-                        <a href="" class="id">아이디/비밀번호 찾기</a>
+                        <a href="" onclick="alert('시스템 내부 개발로 준비중 입니다. 죄송합니다.')" class="id">아이디/비밀번호 찾기</a>
                         <br><br>
                         <div class="loginbtn">
                             <button type="submit" class="test">로그인</button>
@@ -183,8 +183,6 @@
                     </div>
                 </div>
             </form>
-
-
 
 
             <script type="text/javascript">
