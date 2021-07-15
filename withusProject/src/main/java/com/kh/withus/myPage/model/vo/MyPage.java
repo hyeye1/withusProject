@@ -44,10 +44,15 @@ public class MyPage {
 	private String projectThum; // 프로젝트썸네일
 	private String projectStatus; // 1. 수락요청 2.블라인드 3.게시중 4.반려 5.임시저장
 	private int projectGPrice; // 목표금액
+	private String catName; // 카테고리이름
+	private int totalPrice;
+	private int percentage;
+	private int dday;
+	
 	
 	// 나의문의
 	private int otoNo;
-	private String otoCat; // 카테고리
+	private String otoCat; // 문의카테고리
 	private String otoTitle;
 	private String otoContent;
 	private String otoDate; // 작성일
@@ -76,6 +81,7 @@ public class MyPage {
 	private Date orderDate; // 주문일
 	private int orderCount; // 주문수량
 	private String orderOption; //옵션 기입
+	
 	
 	
 	// 리워드

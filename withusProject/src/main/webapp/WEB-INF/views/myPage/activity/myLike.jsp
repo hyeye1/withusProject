@@ -23,7 +23,7 @@
         #underLine{
             background-color: rgb(192, 189, 189);
             height: 1.5px;
-            width: 80%;
+            width: 85%;
             
         }
 
@@ -46,6 +46,13 @@
         /* 좋아요 목록 */
         .like #content_1{margin-top: 50px;}
         .like #content_1>div{float: left; padding: 10px;}
+        #content_1>#likeList:hover {cursor:pointer; opacity:0.5;}
+        
+        #content_1>#likeList{width:280px;}
+        #percent{width : 30%;}
+        #totalprice{width : 35%;}
+        #dday{width : 30%;}
+        
 
 
         /* 페이징 */
@@ -76,10 +83,11 @@
                     	</c:when>
                     	<c:otherwise>
                     		<c:forEach var="list" items="${ likeList }">
-	                    		<div>
+	                    		<div id="likeList">
+	                    		<input type="hidden" class="pno" value="${ list.projectNo }">
 			                        <table>
 			                            <tr>
-			                                <td colspan="2">
+			                                <td colspan="3">
 			                                	<c:choose>
 			                                		<c:when test="${ empty list.projectThum }">
 			                                			<img src="resources/project_thumbnail/no_image.jpg"  width="250" height="200">
@@ -91,19 +99,41 @@
 			                                </td>
 			                            </tr>
 			                            <tr>
-			                                <td colspan="2" style="width:30px">${ list.projectTitle }</td>
-			                                
+			                                <td colspan="3" style="width:270px;">${ list.projectTitle }</td>
 			                            </tr>
 			                            <tr>
-			                                <td>${ list.projectGPrice }</td>
-			                                <td>~ ${ list.projectEndDt }</td>
+			                                <td colspan="3">${ list.catName } | ${ list.partnerName }</td>
 			                            </tr>
-			                        </table>
+			                            <tr>
+				                           <c:choose>
+							                	<c:when test="${ list.dday >= 0 }">
+													<td id="percent">${ list.percentage }%</td>
+													<td id="totalPrice">${ list.totalPrice }원</td>
+													<td id="dday">D-${ list.dday }</td>
+							            		</c:when>
+							            		<c:otherwise>
+							            			<td id="percent">${ list.percentage }%</td>
+													<td id="totalPrice">${ list.totalPrice }원</td>
+													<td id="dday">펀딩종료</td>
+							            		</c:otherwise>
+							            	</c:choose>
+						            	</tr>
+			                       </table>
 			                    </div>
                     		</c:forEach>
                     	</c:otherwise>
                     </c:choose>
                 </div>
+                
+                <script>
+                $(function(){
+            		$("#content_1 #fundingList").click(function(){
+            			location.href="detail.fd?pno=" + $(this).children(".pno").val();
+            		})
+            	})
+                
+                
+                </script>
                 
                 
                 

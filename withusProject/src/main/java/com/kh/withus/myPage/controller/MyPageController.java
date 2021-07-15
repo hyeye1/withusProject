@@ -100,6 +100,7 @@ public class MyPageController {
 		Collections.shuffle(mainFollowList); // 섞기
 		
 		
+		
 		mv.addObject("fundingCount", fundingCount)
 		  .addObject("mainLikeList", mainLikeList)
 		  .addObject("mainQueryList", mainQueryList)

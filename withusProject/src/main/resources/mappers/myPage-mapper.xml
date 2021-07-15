@@ -26,6 +26,10 @@
 		<result column="project_thum" property="projectThum"/>
 		<result column="project_status" property="projectStatus"/>
 		<result column="project_gprice" property="projectGPrice"/>
+		<result column="cat_name" property="catName" />
+		<result column="dday" property="dday" />
+		<result column="percentage" property="percentage"/>
+		<result column="total_price" property="totalPrice" />
 		
 		<!-- 1:1문의 -->
 		<result column="oto_no" property="otoNo"/>
@@ -213,18 +217,41 @@
 	
 	<!-- 파트너 펀딩 리스트 -->
 	<select id="fundingList" resultMap="memberResultSet">
-		select 
-		        project_no
-		      , project_title
-		      , project_start_dt
-		      , project_end_dt
-		      , project_thum
-		      , project_status
-		      , project_gprice
-		  from project
-		 where member_no=#{memberNo}
-		    and project_status='3'
-		  order by project_end_dt asc
+		select
+               p.project_no
+             , p.project_thum
+             , p.project_title
+             , c.cat_no
+             , c.cat_name
+             , m.partner_name
+             , sum(o.total_price) total_price
+             , floor(sum(o.total_price) / p.project_gprice * 100) percentage
+             , p.project_gprice
+             , p.project_start_dt
+             , p.project_end_dt
+             , ceil(project_end_dt - sysdate) dday
+          from 
+          	   tb_order o
+             , project p
+             , category c
+             , member m
+         where p.project_no = o.project_no(+)
+           and p.cat_no = c.cat_no 
+           and p.member_no = m.member_no 
+           and p.project_status = 3
+           and p.member_no = #{memberNo}
+         group
+            by p.project_no
+             , p.project_title
+             , p.project_thum
+             , c.cat_no
+             , c.cat_name
+             , m.partner_name
+             , p.project_gprice
+             , p.project_start_dt
+             , p.project_end_dt  
+         order 
+            by p.project_no asc
 	</select>
 	
 	
@@ -245,22 +272,44 @@
 	
 	<!-- 좋아요 리스트 -->
 	<select id="likeList" resultMap="memberResultSet">
-		select 
-		        project_no
-		      , project_title
-		      , project_start_dt
-		      , project_end_dt
-		      , project_thum
-		      , project_status
-		      , project_gprice
-		  from project
-		  join likey using(project_no)
-		 where project_no in ( select 
-		   							 project_no
-		                        from likey
-		                       where member_no = #{memberNo})
-		    and project_status='3'
-		  order by project_end_dt asc
+		select
+               p.project_no
+             , p.project_thum
+             , p.project_title
+             , c.cat_no
+             , c.cat_name
+             , m.partner_name
+             , sum(o.total_price) total_price
+             , floor(sum(o.total_price) / p.project_gprice * 100) percentage
+             , p.project_gprice
+             , p.project_start_dt
+             , p.project_end_dt
+             , ceil(project_end_dt - sysdate) dday
+          from 
+          	   tb_order o
+             , project p
+             , category c
+             , member m
+             , likey l
+         where p.project_no = o.project_no(+)
+           and p.cat_no = c.cat_no 
+           and p.member_no = m.member_no 
+           and p.project_status = 3
+           and p.project_no = l.project_no
+           and l.member_no = #{memberNo}
+           
+         group
+            by p.project_no
+             , p.project_title
+             , p.project_thum
+             , c.cat_no
+             , c.cat_name
+             , m.partner_name
+             , p.project_gprice
+             , p.project_start_dt
+             , p.project_end_dt  
+         order 
+            by p.project_no asc
 	</select>
   	
   	
@@ -438,21 +487,44 @@
   	
   	<!-- 메인좋아요 리스트 -->
 	<select id="mainLikeList" resultMap="memberResultSet">
-		select 
-		        project_no
-		      , project_title
-		      , project_start_dt
-		      , project_end_dt
-		      , project_thum
-		      , project_status
-		      , project_gprice
-		  from project
-		  join likey using(project_no)
-		 where project_no in ( select 
-		   							 project_no
-		                        from likey
-		                       where member_no = #{memberNo})
-		    and project_status='3'
+		select
+               p.project_no
+             , p.project_thum
+             , p.project_title
+             , c.cat_no
+             , c.cat_name
+             , m.partner_name
+             , sum(o.total_price) total_price
+             , floor(sum(o.total_price) / p.project_gprice * 100) percentage
+             , p.project_gprice
+             , p.project_start_dt
+             , p.project_end_dt
+             , ceil(project_end_dt - sysdate) dday
+          from 
+          	   tb_order o
+             , project p
+             , category c
+             , member m
+             , likey l
+         where p.project_no = o.project_no(+)
+           and p.cat_no = c.cat_no 
+           and p.member_no = m.member_no 
+           and p.project_status = 3
+           and p.project_no = l.project_no
+           and l.member_no = #{memberNo}
+           
+         group
+            by p.project_no
+             , p.project_title
+             , p.project_thum
+             , c.cat_no
+             , c.cat_name
+             , m.partner_name
+             , p.project_gprice
+             , p.project_start_dt
+             , p.project_end_dt  
+         order 
+            by p.project_no asc
 		  
 	</select>
 	

@@ -65,8 +65,15 @@
         }
 
         /* 좋아요 */
-        #main_2>.like{float: left; padding: 10px;}
-        .like>table{width: 90%; font-weight: 600; font-size: 16px;}
+        #main_2>.like{float: left; padding: 5px;}
+        #main_2>.like:hover {cursor:pointer; opacity:0.5;}
+        .like>table{width: 90%;  font-size: 15px;}
+        
+        #main_2>.like{width:280px; margin-top:20px; margin-bottom:30px;}
+        #percent{width : 30%;}
+        #totalprice{width : 35%;}
+        #dday{width : 30%;}
+        
 
 
         /* 문의내역 */
@@ -131,34 +138,58 @@
                     	<c:otherwise>
                     		<c:forEach var="likeList" items="${ mainLikeList }" end="2">
 			                     <div class="like">
+			                     <input type="hidden" class="pno" value="${ likeList.projectNo }">
                   					<table>
 			                            <tr>
-			                                <td colspan="2">
+			                                <td colspan="3">
 			                                	<c:choose>
 			                                		<c:when test="${ empty likeList.projectThum }">
-			                                			<img src="resources/project_thumbnail/no_image.jpg"  width="250" height="200">
+			                                			<img src="resources/project_thumbnail/no_image.jpg"  width="240" height="200">
 			                                		</c:when>
 			                                		<c:otherwise>
-			                                			<img src="${ likeList.projectThum }"  width="250" height="200">
+			                                			<img src="${ likeList.projectThum }"  width="240" height="200">
 			                                		</c:otherwise>
 			                                	</c:choose>
 			                                </td>
 			                            </tr>
 			                            <tr>
-			                                <td colspan="2" style="width:10px;">${ likeList.projectTitle }</td>
+			                                <td colspan="3" style="width:270px;">${ likeList.projectTitle }</td>
 			                            </tr>
 			                            <tr>
-			                                <td>${ likeList.projectGPrice }</td>
-			                                <td>~ ${ likeList.projectEndDt }</td>
+			                                <td colspan="3">${ likeList.catName } | ${ likeList.partnerName }</td>
 			                            </tr>
-			                        </table>
+			                            <tr>
+				                           <c:choose>
+							                	<c:when test="${ likeList.dday >= 0 }">
+													<td id="percent">${ likeList.percentage }%</td>
+													<td id="totalPrice">${ likeList.totalPrice }원</td>
+													<td id="dday">D-${ likeList.dday }</td>
+							            		</c:when>
+							            		<c:otherwise>
+							            			<td id="percent">${ likeList.percentage }%</td>
+													<td id="totalPrice">${ likeList.totalPrice }원</td>
+													<td id="dday">펀딩종료</td>
+							            		</c:otherwise>
+							            	</c:choose>
+						            	</tr>
+			                       </table>
 			                       </div>
 			                 </c:forEach>
                     	</c:otherwise>
                     </c:choose>
-                  
-                  
-				</div>
+               </div>
+               
+               <script>
+                $(function(){
+            		$("#main_2 .like").click(function(){
+            			location.href="detail.fd?pno=" + $(this).children(".pno").val();
+            		})
+            	})
+                
+                
+                </script>
+               
+               
 
                 
                 <!--나의문의 & 팔로잉-->
