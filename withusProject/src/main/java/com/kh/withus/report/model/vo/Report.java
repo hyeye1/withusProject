@@ -24,5 +24,6 @@ public class Report {
 	// 관리자에서 신고리스트조회
 	private String memberStatus; // 회원상태
 	private String reportCount; // 신고누적횟수
+	private String memberName; // 회원이름
 
 }
