@@ -37,14 +37,27 @@
 	<!-- 커뮤리스트뷰 조회 -->
 	<select id="selectList" resultMap="community">
 		select 
-		       commu_no
-		     , commu_cate
-		     , commu_title
-		     , commu_writer
-		     , count
-		     , to_char(commu_create, 'YYYY-MM-DD') commu_create
-		  from community
+		       c.commu_no
+		     , c.commu_cate
+		     , c.commu_title
+		     , c.commu_writer
+		     , c.count
+		     , to_char(c.commu_create, 'YYYY-MM-DD') commu_create
+		     , m.member_id
+		  from community c
+		  join member m on c.commu_writer = m.member_no
 		 where commu_status = 'Y'
+		   <choose>
+           		<when test="cateFilter == 'free'">
+           			and commu_cate = '%자유%'
+           		</when>
+           		<when test="cateFilter == 'ask'">
+           			and commu_cate = '%질문%'
+           		</when>
+           		<otherwise>
+           			and commu_cate = '%공구모집%'
+           		</otherwise>
+           </choose>
 		 order
 		    by commu_no desc 
 	</select>
@@ -59,21 +72,17 @@
 		  , commu_title
 		  , commu_content
 		  , commu_create
-		  , count
-		  , commu_status
 		  , commu_origin
 		  , commu_change
 		  )
 		  values
 		  (
-		    seq_comno.nextval
+		    SEQ_COMNO.nextval
 		  , #{commuWriter}
 		  , #{commuCate}
 		  , #{commuTitle}
 		  , #{commuContent}
 		  , sysdate
-		  , #{count}
-		  , 'Y'
 		  , #{commuOrigin}
 		  , #{commuChange}
 		  )

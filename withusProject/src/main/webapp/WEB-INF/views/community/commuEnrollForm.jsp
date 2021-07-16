@@ -123,9 +123,9 @@
                 <div id="menubar">
                     <ul id="menubar_member" class="menubar_admin">
                         <p>커뮤니티</p>
-                        <li><a href="#free">자유</a></li>
-                        <li><a href="#ask">질문</a></li>
-                        <li><a href="#tool">공구모집</a></li>
+                        <li><a href="">자유</a></li>
+                        <li><a href="">질문</a></li>
+                        <li><a href="">공구모집</a></li>
                     </ul>
                 </div>
             </article>
@@ -174,7 +174,7 @@
                         <br>
 
                         <div align="center">
-                            <button type="submit" class="btn btn-primary">등록하기</button>
+                            <button type="submit" class="btn btn-primary" form="enrollForm">등록하기</button>
                             <button type="reset" class="btn btn-danger">취소하기</button>
                         </div>
                     </form>

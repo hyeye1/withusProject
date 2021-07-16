@@ -167,11 +167,11 @@
         <section class="page-wraper__side">
           <article>
             <div id="menubar">
-              <ul id="menubar_member" class="menubar_admin">
+              <ul id="menubar_member" class="menubar_admin" name="cateFilter">
                 <p>커뮤니티</p>
-                <li><a href="">자유</a></li>
-                <li><a href="">질문</a></li>
-                <li><a href="">공구모집</a></li>
+                <li><a href="" id="" value="free">자유</a></li>
+                <li><a href="" id="" value="ask">질문</a></li>
+                <li><a href="" id="" value="tool">공구모집</a></li>
               </ul>
             </div>
           </article>

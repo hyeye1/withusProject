@@ -36,14 +36,14 @@ public class CommunityController {
 
 	// 커뮤 조회
 	@RequestMapping("commu.main")
-	public ModelAndView selectCommunityMain(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
+	public ModelAndView selectCommunityMain(@RequestParam(value="currentPage", defaultValue="1") int currentPage, @RequestParam(value="cate", defaultValue="") String cate, ModelAndView mv) {
 		
 		int listCount = cService.selectListCount();
-		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 5, cate);
 		
 		ArrayList<Community> list = cService.selectList(pi);
 		
-		mv.addObject("pi", pi)
+ 		mv.addObject("pi", pi)
 		  .addObject("list", list)
 		  .setViewName("community/commuListView");
 		

@@ -10,11 +10,13 @@ public class PageInfo {
 	private int startPage;
 	private int endPage;
 	private int maxPage;
+	private String cate;
 	
 	public PageInfo() {}
 
+	
 	public PageInfo(int listCount, int currentPage, int pageLimit, int boardLimit, int startPage, int endPage,
-			int maxPage) {
+			int maxPage, String cate) {
 		super();
 		this.listCount = listCount;
 		this.currentPage = currentPage;
@@ -23,7 +25,9 @@ public class PageInfo {
 		this.startPage = startPage;
 		this.endPage = endPage;
 		this.maxPage = maxPage;
+		this.cate = cate;
 	}
+
 
 	public int getListCount() {
 		return listCount;
@@ -81,11 +85,24 @@ public class PageInfo {
 		this.maxPage = maxPage;
 	}
 
+	public String getCate() {
+		return cate;
+	}
+
+	public void setCate(String cate) {
+		this.cate = cate;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "PageInfo [listCount=" + listCount + ", currentPage=" + currentPage + ", pageLimit=" + pageLimit
 				+ ", boardLimit=" + boardLimit + ", startPage=" + startPage + ", endPage=" + endPage + ", maxPage="
-				+ maxPage + "]";
+				+ maxPage + ", cate=" + cate + "]";
 	}
+
+	
+	
 	
 }
