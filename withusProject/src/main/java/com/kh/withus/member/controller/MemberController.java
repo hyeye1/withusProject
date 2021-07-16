@@ -154,19 +154,19 @@ public class MemberController {
 	public ModelAndView loginAdmin(Member m, HttpSession session, ModelAndView mv) {
 		
 		// 암호화 작업 후 (단지 아이디 대조만)
-		Member loginAdmin = mService.loginAdmin(m);
+		Member loginUser = mService.loginMember(m);
 		//System.out.println(m);
 		
-		if(loginAdmin!= null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginAdmin.getMemberPwd())) {
+		if(loginUser!= null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
 			// 로그인 성공
-			session.setAttribute("loginAdmin", loginAdmin);
+			session.setAttribute("loginUser", loginUser);
 			session.setAttribute("alertMsg", "로그인되었습니다");
 			mv.setViewName("redirect:memberListView.mana");
 			
 			
 		}else {
 			// 로그인 실패
-			mv.addObject("errorMsg", "로그인실패");
+			session.setAttribute("alertMsg", "로그인실패");
 			mv.setViewName("common/manaErrorPage");
 		}
 		return mv;
@@ -191,13 +191,13 @@ public class MemberController {
 		
 		
 		// loginAdmin에 loginUser 값 담기 == 로그인 상태 유지 시키기
-		Member loginAdmin = (Member)session.getAttribute("loginUser");
-		session.setAttribute("loginAdmin", loginAdmin);
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		session.setAttribute("loginUser", loginUser);
 		//System.out.println(loginAdmin);
 		
 		
 		// 값이  관리자일 경우  회원조회 페이지, 그렇지 않을 경우 로그인실패 창
-		if(loginAdmin!= null && loginAdmin.getMemberStatus().equals("A") ) {
+		if(loginUser!= null && loginUser.getMemberStatus().equals("A") ) {
 			return "redirect:memberListView.mana";
 		}else {
 			session.setAttribute("alertMsg", "로그인을 해주세요");
