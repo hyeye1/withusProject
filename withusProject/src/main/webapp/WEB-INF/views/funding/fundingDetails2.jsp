@@ -402,18 +402,25 @@
 	    line-height: 1.6;
 	    font-size: 13px;
 	    color: rgb(94, 94, 94);
-	   
-	    
+	    display: table;
+	}
+	
+	.replyWriter {
+	    box-sizing: border-box;
+	}
+	
+	.replyWriter b {
+	    color: black;
+	    float: left;
 	}
 	
 	.replyWriter img {
 	    float: left;
-	    height: 50px;
-		width: 50px;
+	    height: 42px;
+	    margin-top: 5px;
+	    margin-right: 12px;
 	    border-radius: 50%;
 	}
-	.replyWriter th{width: 13%;}
-	
 	
 	.partnerMarks {
 	    background-color: rgb(52, 152, 219);
@@ -424,27 +431,19 @@
 	    font-weight: 600;
 	    margin-right: 330px;
 	    margin-top: 6px;
-	    
+	    float: right;
 	}
 	
-	#memberName {font-size:17px; font-weight:bold;}
-	#replyDate {font-size:17px;}
-	
-	
 	.replyContent {
-	    margin-left: 10px;
-	    margin-top: 30px;
+	    margin-left: 50px;
+	    margin-top: 25px;
 	    margin-bottom: 25px;
-	    font-size: 16px;
 	}
 	
 	.reReply hr {
 	    margin-top: 50px;
 	    margin-bottom: 30px;
 	}
-
-	.comReply .replyTable{width: 100%;}
-	.comReply button{margin-top: 40px;}
 	
 	.detailGuide {
 	    background-color: white;
@@ -958,6 +957,44 @@
                         
                         <div class="comReply">
 							<table class="replyTable">
+								<thead id="reply">
+									<tr class="replyWriter">
+										<td rowspan="2"><img src=""></td>
+										<td>아이디</td>
+									</tr>
+									<tr>
+										<td>2021-01-01</td>
+									</tr>
+									<tr>
+										<td colspan="2" class="replyContent">댓글내용옹오옹ㅇㄹㄴㅇㄹㄴㅇㄹ</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											<button>댓글</button>
+											<button>삭제</button>
+											<hr>
+										</td>
+									</tr>
+									
+								</thead>
+								<tbody id="reReply">
+									<tr class="replyWriter">
+										<td rowspan="2"><img src=""></td>
+										<td>아이디 
+											<label class="partnerMarks" align="center">파트너</label>
+										</td>
+									</tr>
+									<tr>
+										<td>2021-01-01</td>
+									</tr>
+									<tr>
+										<td colspan="2" class="replyContent">댓글내용옹오옹ㅇㄹㄴㅇㄹㄴㅇㄹ</td>
+									</tr>
+									<td colspan="2">
+										<button>삭제</button>
+										<hr>
+									</td>
+								</tbody>
 							</table>
 						</div>
                         
@@ -1022,69 +1059,20 @@
                 				console.log(list);
                 				var reply = "";
                 				
-                				list  = list.filter(function(item) {
-                					  return item !== null && item !== undefined && item !== '';
-                					});
-                				
-                				
-                				
                 				$.each(list, function(i, obj){
-                					reply += "<thead id='reply'>"
-	                					  		+"<tr class='replyWriter'>"
-		                					  		+"<th rowspan='2'>" + "<img src=" + obj.memberProfile + ">" + "</th>"
-		                					  		+"<td id='memberName'>" + obj.memberName +"</td>"
+                					reply += "<thead>"
+	                					  		+"<tr>"
+		                					  		+"<td>" + "<img src=" + obj.memberProfile + ">" + "</td>"
+		                					  		+"<td>" + obj.memberName +"</td>"
 		                					  	+"</tr>"	
 		                					  	+"<tr>"
-		                					  	    +"<td id='replyDate'>" + obj.replyDate +"</td>"
+		                					  	    +"<td>" + obj.replyDate +"</td>"
 		                					  	+"</tr>"
 		                					  	+"<tr>"
-		                					  	    +"<td colspan='2'><div class='replyContent'>" + obj.replyContent +"</div><hr></td>"
+		                					  	    +"<td>" + "<button>댓글</button>" +"</td>"
+		                					  	  	+"<td>" + "<button>삭제</button>" +"</td>"
 		                					  	+"</tr>"
-		                					  	
-		                					  	+"</thead>";
-		                		})
-                				
-                				$(".comReply .replyTable").html(reply);
-                				
-                				
-                				
-                			}, error:function(){
-                				console.log("댓글 리스트 조회용 ajax")
-                			}
-                			
-                		});
-                	}
-                    
-                    </script>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <!--  
-                    function selectReplyList(){
-                		$.ajax({
-                			url:"proReply.fd",
-                			data:{pno:${p.projectNo}},
-                			
-                			success:function(list){
-                				
-                				console.log(list);
-                				var reply = "";
-                				
-                				$.each(list, function(i, obj){
-                					reply += "<img src=" + obj.memberProfile + ">"
-                								+ "<p><b>" + obj.memberName + "</b><br>"
-                								+ obj.replyDate + "</p>"
-                								
-                								+ "<div>" 
-                								+ obj.replyContent
-                								+ "</div>"
-                								+ "<hr>"
-                								+ "<label>" + obj.replyNo + "</label>";
-                								
-                					
+		                					 + "</thead>" 	
                 				
                 				})
                 				
@@ -1100,8 +1088,30 @@
                 		});
                 	}
                     
+                    /*
+                    function selectReReplyList(){
+                		$.ajax({
+                			url:"proReReply.fd",
+                			data:{replyNo:$("label[name=replyNo]").text()},
+                			
+                			success:function(list){
+                				console.log(list);
+                				
+                				var reply = "";
+                				
+                				
+                				
+                			}, error:function(){
+                				console.log("댓글 리스트 조회용 ajax")
+                			}
+                			
+                		});
+                	}
                     
-                 -->
+                    */
+                    
+                    
+                    </script>
                     
                     
                     
