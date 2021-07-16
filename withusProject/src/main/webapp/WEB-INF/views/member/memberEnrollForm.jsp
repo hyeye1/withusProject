@@ -55,7 +55,6 @@
                 <br>
                 <div class="btns" align="center">
                     <button type="submit" class="btn btn-primary" id="enrollBtn" disabled>회원가입</button>
-                    <button type="reset" class="btn btn-danger"> 초기화</button>
                 </div>
             </form>
         </div>
@@ -115,8 +114,7 @@
 				$("#memberId").val(email);
 				$("#memberName").val(name);
 			}
-			
-    				
+					
     	})    	
     </script>
 

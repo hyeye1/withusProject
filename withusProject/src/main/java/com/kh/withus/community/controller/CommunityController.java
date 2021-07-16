@@ -85,9 +85,11 @@ public class CommunityController {
 			
 		}
 		
+		System.out.println(c);
 		int result = cService.insertCommunity(c); // servieImpl, dao, sql 작성
 		
 		System.out.println(result);
+		
 		
 		// 성공했을 경우
 		if(result > 0) {
