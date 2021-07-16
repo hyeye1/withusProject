@@ -76,6 +76,16 @@
 			<beans:bean id="" class="com.kh.withus.common.interceptor.PartnerInterceptor"/>
 		</interceptor>
 		
+		<!-- 관리자 확인하는 인터셈터 : 관리자 페이지 접근시 -->
+		<interceptor>
+			<mapping path="/main.mana"/>
+			<mapping path="/memberListView.mana"/>
+			<mapping path="/orderListView.mana"/>
+			<mapping path="/refundListView.mana"/>
+			
+			<beans:bean id="" class="com.kh.withus.common.interceptor.AdminLoginInterceptor"/>
+		</interceptor>
+		
 		
 	</interceptors>
 	
