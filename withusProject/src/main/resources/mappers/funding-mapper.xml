@@ -206,7 +206,44 @@
     </select>
     
     <select id="selectReadyList" resultMap="fundingListResultSet">
-		
+		select * from (
+			select
+	               p.project_no
+	             , p.project_thum
+	             , p.project_title
+	             , c.cat_no
+	             , c.cat_name
+	             , m.partner_name
+	             , sum(o.total_price) total_price
+	             , floor(sum(o.total_price) / p.project_gprice * 100) percentage
+	             , p.project_gprice
+	             , p.project_start_dt
+	             , p.project_end_dt
+	             , ceil(project_end_dt - sysdate) dday
+	             , p.project_count
+	          from 
+	          	   tb_order o
+	             , project p
+	             , category c
+	             , member m
+	         where p.project_no = o.project_no(+)
+	           and p.cat_no = c.cat_no 
+	           and p.member_no = m.member_no 
+	           and p.project_status = 1
+	           and ceil(project_end_dt - sysdate) > 0
+	         group
+	            by p.project_no
+	             , p.project_title
+	             , p.project_thum
+	             , c.cat_no
+	             , c.cat_name
+	             , m.partner_name
+	             , p.project_gprice
+	             , p.project_start_dt
+	             , p.project_end_dt 
+	             , p.project_count
+	         )
+             where rownum <![CDATA[ < ]]> 10
     </select>
 	
 	<select id="selectSearchList" resultMap="fundingListResultSet" parameterType="hashmap">

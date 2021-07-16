@@ -69,7 +69,7 @@ public class FundingController {
 		System.out.println(pList);
 		
 		mv.addObject("menu", menu)
-		.addObject("pList", pList)
+		.addObject("pList", pList) 
 		.setViewName("funding/menuListView");
 		
 		return mv;
