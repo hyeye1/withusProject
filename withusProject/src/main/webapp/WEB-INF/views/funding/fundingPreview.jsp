@@ -483,13 +483,22 @@
 	.adminShown {
 	    display: none;
 	}
+	
+	.nullImg{
+		width: 640px;
+		height: 480px;
+		background-color: rgb(224, 224, 224, 0.5);
+		border: 1px solid grey;
+		border-radius: 5px;
+		font-size: 20px;
+		line-height: 24;
+	}
 		
 		</style>
         </head>
 
         <body>
 
-            <jsp:include page="../common/header.jsp" />
             <hr color="darkgray">
 
             <!-- 전체 -->
@@ -498,7 +507,17 @@
                 <!-- 맨위 -->
                 <div class="detailHeader" align="center">
                     <div class="detailCat">
-                        <button>${ p.catName }</button>
+						<c:choose>
+							<c:when test="${ p.catNo eq null }">
+								<button>카테고리</button>
+							</c:when>
+							<c:when test="${ p.catName eq null}">
+								<button>카테고리</button>
+							</c:when>
+							<c:otherwise>
+								<button>${ p.catName }</button>
+							</c:otherwise>
+						</c:choose>
                     </div>
 
                     <div class="detailTitle">
@@ -506,8 +525,15 @@
                     </div>
 
                     <div class="partner">
-                        <img src="${ pageContext.request.contextPath }/${ p.memberProfile }">
-                        <b>${ p.partnerName }</b> <br><br><br>
+						<c:choose>
+							<c:when test="${ loginUser.memberProfile eq null}">
+								<img src="${ pageContext.request.contextPath }/resources/images/partnerDefault.PNG">
+							</c:when>
+							<c:otherwise>
+								<img src="${ pageContext.request.contextPath }/${ loginUser.memberProfile }">
+							</c:otherwise>
+						</c:choose>
+                        <b>${ loginUser.memberName }</b> <br><br><br>
                     </div>
 
                     <div class="detailHeaderBody">
@@ -515,8 +541,16 @@
                     </div>
 
                     <div class="detailThumb">
-                        <img src="${ p.projectThum }"
-                             height="480px">
+                    	<c:choose>
+	                    	<c:when test="${ p.projectThum eq null }">
+	                    		<div class="nullImg">
+	                    			프로젝트 썸네일을 등록해주세요.
+	                    		</div>
+	                    	</c:when>
+	                    	<c:otherwise>
+		                        <img src="${ p.projectThum }" height="480px">
+	                    	</c:otherwise>
+                    	</c:choose>
                     </div>
 
                     <div class="detailAside" align="left">
@@ -574,7 +608,7 @@
                                 </p>
                             </div>
                             <div class="infoBtn" align="center">
-                                <button onclick="location.href='list.rew?pno=${p.projectNo}'">펀딩하기</button>
+                                <button onclick="location.href='list.rew?pno=${projectNo}'">펀딩하기</button>
                                 <img src="${ pageContext.request.contextPath }/resources/images/likey.PNG" width="36px"
                                     style="margin-right: 10px; cursor: pointer;">
                                 <img src="${ pageContext.request.contextPath }/resources/images/share.PNG" width="32px"
@@ -607,12 +641,19 @@
 
                             <div><b>창작자 소개</b></div>
                             <div class="rightPartner">
-                                <img src="${ pageContext.request.contextPath }/${ p.memberProfile }">
-                                <p><b>${ p.partnerName }</b> <br><br><br></p>
+								<c:choose>
+									<c:when test="${ loginUser.memberProfile eq null}">
+										<img src="${ pageContext.request.contextPath }/resources/images/partnerDefault.PNG">
+									</c:when>
+									<c:otherwise>
+										<img src="${ pageContext.request.contextPath }/${ loginUser.memberProfile }">
+									</c:otherwise>
+								</c:choose>	
+                                <p><b>${ loginUser.partnerName }</b> <br><br><br></p>
                                 <button>+ 팔로우</button>
                             </div>
                             <p id="partnerWho">
-                                ${ p.partnerIntro }
+                                ${ loginUser.partnerIntro }
                             </p>
                             <div class="partnerBtn">
                                 <button><img src="${ pageContext.request.contextPath }/resources/images/send.PNG"
@@ -665,77 +706,10 @@
                     <!-- 스토리 -->
                     <div class="detailStory detail detailSto">
                         <div class="storyContent">
-                            ${ p.projectContent }
+                            ${ projectContent }
                         </div>
                     </div>
 
-                    <!-- 커뮤니티 -->
-                    <div class="detailCommunity detail detailCommu">
-                        <p id="plzLogin" style="display: none;">
-                            로그인 후 글 작성이 가능합니다. <br>
-                            펀딩과 관련 없는 내용, 광고, 욕설, 비방, 도배 글은 관리자 검토 후 삭제됩니다.
-                        </p>
-
-                        <div class="loginOn">
-                            <textarea id="yesLogin" placeholder="펀딩과 관련 없는 내용, 광고, 욕설, 비방, 도배 글은 관리자 검토 후 삭제됩니다."
-                                style="resize: none;"></textarea>
-                            <button>등록</button>
-                        </div>
-
-                        <div id="comTitle">
-                            <h3><b> 응원 · 의견 · 리뷰 </b></h3>
-                            <hr>
-                        </div>
-
-                        <div class="comReply">
-                            <div class="adminShown">
-                                <button style="float: right;">삭제하기</button>
-                            </div>
-                            <div class="replyWriter">
-                                <img src="${ pageContext.request.contextPath }/resources/images/partnerDefault.PNG">
-                                <p>
-                                    <b>김가가</b><br>
-                                    2021-04-06
-                                </p>
-                            </div>
-                            <p class="replyContent">프로젝트 기대하고 있습니다! </p>
-                        </div>
-
-                        <div class="comReply">
-                            <div class="adminShown">
-                                <button style="float: right;">삭제하기</button>
-                            </div>
-                            <div class="replyWriter">
-                                <img src="${ pageContext.request.contextPath }/resources/images/partnerDefault.PNG">
-                                <p>
-                                    <b>박나다</b><br>
-                                    2021-04-04
-                                </p>
-                            </div>
-                            <p class="replyContent">펀딩 완료했어요!!! 기대됩니다!! </p>
-
-                            <div class="reReply">
-                                <div class="partnerShownEdit">
-                                    <button style="float: right; display: none;">수정/삭제</button>
-                                </div>
-                                <div class="adminShown">
-                                    <button style="float: right;">삭제하기</button>
-                                </div>
-                                <hr>
-                                <div class="replyWriter">
-                                    <img src="${ pageContext.request.contextPath }/resources/images/partnerDefault.PNG">
-                                    <div class="partnerMarks" align="center">
-                                        파트너
-                                    </div>
-                                    <p>
-                                        <b>나브 Nav</b><br>
-                                        2021-04-05
-                                    </p>
-                                </div>
-                                <p class="replyContent">펀딩, 응원 감사드립니다 :)</p>
-                            </div>
-                        </div>
-                    </div>
 
                     <!-- 상품 안내 -->
                     <div class="detailGuide detail detailNoti">

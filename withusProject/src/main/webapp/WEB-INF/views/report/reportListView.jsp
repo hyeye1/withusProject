@@ -88,7 +88,7 @@
 						<c:forEach var="r" items="${ list }">
 							<tr align="center">
 								<td class="rno">${ r.reportNo }</td>
-			                    <td>${ r.memberNo }</td>
+			                    <td>${ r.memberName }</td>
 			                    <td>${ r.reportContent}</td>
 			                    <td>${ r.reportType}</td>
 			                    <td>${ r.reportedNo }</td>

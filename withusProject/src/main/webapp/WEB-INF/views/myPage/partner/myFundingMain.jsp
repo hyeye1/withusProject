@@ -68,6 +68,7 @@
 
         /* 프로젝트 */
         #main_1>#fundingList{float: left; padding: 5px; width:280px;}
+        #main_1>#fundingList:hover {cursor:pointer; opacity:0.5;}
         #fundingList>table{width: 85%;  font-size: 14px;}
         
         #percent{width : 30%;}
@@ -170,9 +171,17 @@
 			                 </c:forEach>
                     	</c:otherwise>
                     </c:choose>
-                  
-                  
-				</div>
+                </div>
+                
+                <script>
+                $(function(){
+            		$("#main_1 #fundingList").click(function(){
+            			location.href="detail.fd?pno=" + $(this).children(".pno").val();
+            		})
+            	})
+                
+                
+                </script>
 
                   
                 

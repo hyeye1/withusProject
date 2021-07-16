@@ -46,6 +46,16 @@
 		     )
 	</insert>
 	
+	<select id="selectCate" resultMap="category" parameterType="_int">
+		select
+		       cat_no
+		     , cat_name
+		     , cat_tag
+		  from category
+		 where cat_no = #{catNo}
+	</select>
+	
+	
 	<update id="updateCate" parameterType="_int">
 		update
 		       category
@@ -57,7 +67,7 @@
 	<delete id="deleteCate" parameterType="_int">
 		delete
 		  from category
-		 where cat_name = #{catName}
+		 where cat_no = #{catNo}
 	</delete>
 	
 </mapper>

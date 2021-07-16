@@ -364,8 +364,7 @@ public class FundingController {
 		m.setMemberNo(Integer.parseInt(memberNo));
 		m.setProjectNo(Integer.parseInt(projectNo));
 		
-		System.out.println(m.getMemberNo());
-		System.out.println(m.getProjectNo());
+		
 		int result = funService.likeyCheck(m);
 				
 		if(result>0) { // 좋아요중

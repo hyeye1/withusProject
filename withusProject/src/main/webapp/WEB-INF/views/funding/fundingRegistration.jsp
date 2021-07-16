@@ -382,7 +382,7 @@
 
             <jsp:include page="../common/header.jsp" />
 
-            <form action="success.fd" method="post" enctype="multipart/form-data">
+            <form id="insertForm" action="success.fd" method="post" enctype="multipart/form-data">
                 <div class="regiOuter">
     
                     <!-- 타이틀과 미리보기/임시저장/승인요청하기 -->
@@ -396,7 +396,7 @@
                         </p>
                         <button type="submit" class="registerBtn">승인요청하기</button>
                         <button type="button">임시저장</button>
-                        <button type="button" id="previewBtn">미리보기</button>
+                        <button type="button" id="previewBtn" onclick="preview();">미리보기</button>
                     </div>
     
                     <!-- 바디 -->
@@ -454,7 +454,7 @@
                             <!-- 목표 금액 -->
                             <div>
                                 <b class="regiTitle">목표 금액을 적어주세요</b> <br>
-                                <input type="text" id="projectGprice" name="projectGprice" placeholder="0">원
+                                <input type="text" id="projectGprice" name="projectGprice" value="0" placeholder="0">원
                             </div><br>
     
                             <div>
@@ -509,11 +509,11 @@
     
                             <div>
                                 <b class="regiTitle">프로젝트의 대표 이미지를 등록해주세요</b>
-                                <p>홈페이지와 외부 공유를 했을 때 보여집니다. 프로젝트를 한 눈에 나타낼 수 있는 이미지를 등록해주세요.</p>
-                                <button type="button"
+                                <p>홈페이지와 외부 공유를 했을 때 보여집니다. 프로젝트를 한 눈에 나타낼 수 있는 이미지를 등록해주세요.(최적 사이즈 740*492 px)</p>
+                                <!-- <button type="button"
                                     style="width: 449px; height: 311px; border: 1px solid rgb(127, 127, 127); border-radius: 5px; background-color: white;">
                                     최적 사이즈 740*492 px
-                                </button><br><br>
+                                </button><br><br> -->
                                 <label for="upfile">첨부파일 :  </label>
                                 <input type="file" name="upfile" id="upfile"> <!-- html 이미지 미리보기 -->
                             </div><br>
@@ -1065,44 +1065,15 @@
                     <div class="regiMenuSelected regi regiFive" style="margin-top: -86px;  display: none;">&nbsp;</div>
     
                     <script>
-                        // 미리보기 ajax
-	                    $(function(){
-	                    	$(document).on("click", "#previewBtn", function(){
-	            				//console.log("클릭됨");
-                                $.ajax({
-                                    url:"preview.fun",
-                                    data:{
-                                        catNo: $("input[name=catNo]").val(),
-                                        projectTitle: $("input[name=projectTitle]").val(),
-                                        projectSummary: $("input[name=projectSummary]").val(),
-                                        projectGprice: $("input[name=projectGprice]").val(),
-                                        projectStartDT: $("input[name=projectStartDT]").val(), //sysdate
-                                        projectEndDT: $("input[name=projectEndDT]").val(),                       
-                                        projectThum : $("input[name=projectThum]").val(),
-                                        projectCount: $("input[name=projectCount]").val(), //0
-                                        projectContent: $("input[name=projectContent]").val(),
-                                        projectRefcon: $("input[name=projectRefcon]").val(),
-                                        hashtag : $("input[name=hashtag]").val(),
-                                        deliveryDate : $("input[name=deliveryDate]").val(),
-                                        partnerPhone : $("input[name=partnerPhone]").val(),
-                                        phoneYN : $("input[name=phoneYN]").val(),
-                                        partnerEmail : $("input[name=partnerEmail]").val(),
-                                        partnerBank : $("input[name=partnerBank]").val(),
-                                        partnerAccount : $("input[name=partnerAccount]").val(),
-                                        partnerAcholer : $("input[name=partnerAcholer]").val(),
-                                        partnerWeb : $("input[name=partnerWeb]").val(),
-                                        partnerSNS : $("input[name=partnerSNS]").val()
-                                    },
-                                    type:"get",
-                                    success:function(data){
-                                        window.open(data);
-                                    },error:function(){
-                                        console.log("ajax통신 실패!");
-                                    }
-                                })
-	            			})
-	                    });
-                    	
+                        // 미리보기 버튼실행
+	                    function preview(){
+                            window.open('', "previewWindow(나만의창이름)", "창의속성");
+                            $("#insertForm").attr("action", "preview.fd");
+                            $("#insertForm").attr("target",  "previewWindow(나만의창이름)");
+                            $("#insertForm").submit();
+                        
+                        }
+
                         function regiShow(className) {
                             $(".regi").hide();
                             $(".regi" + className).show();

@@ -13,6 +13,7 @@
 		
 		<result column="member_status" property="memberStatus"/>
 		<result column="report_count" property="reportCount" />
+		<result column="member_name" property="memberName" />
 	</resultMap>
 	
 	<select id="selectListCount" resultType="_int">
