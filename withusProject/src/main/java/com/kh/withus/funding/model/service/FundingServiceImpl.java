@@ -13,6 +13,7 @@ import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.vo.Project;
 import com.kh.withus.funding.model.vo.ProjectReply;
 import com.kh.withus.funding.model.vo.Reward;
+import com.kh.withus.myPage.model.vo.MyPage;
 import com.kh.withus.order.model.vo.Order;
 
 @Service
@@ -109,6 +110,21 @@ public class FundingServiceImpl implements FundingService {
 		
 		return funDao.selectReplyList(sqlSession, pno);
 		
+	}
+
+	@Override
+	public int likeyCheck(MyPage m) {
+		return funDao.likeyCheck(sqlSession, m);
+	}
+
+	@Override
+	public int dislike(MyPage m) {
+		return funDao.dislike(sqlSession, m);
+	}
+
+	@Override
+	public int like(MyPage m) {
+		return funDao.like(sqlSession, m);
 	}
 
 	

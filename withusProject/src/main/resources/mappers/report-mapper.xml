@@ -2,15 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="reportMapper">
 
-	<resultMap id="reportResultSet" type="Report">
-		<id column="report_no" property="reportNo" />
+	<resultMap id="report" type="Report" >
+		<result column="report_no" property="reportNo" />
 		<result column="memeber_no" property="memberNo" />
 		<result column="report_content" property="reportContent" />
 		<result column="report_date" property="reportDate" />
 		<result column="report_status" property="reportStatus" />
 		<result column="report_type" property="reportType" />
-		<result column="reported_no" property="reprotedNo" />
+		<result column="reported_no" property="reportedNo" />
+		
+		<result column="member_status" property="memberStatus"/>
 		<result column="report_count" property="reportCount" />
+		<result column="member_name" property="memberName" />
 	</resultMap>
 	
 	<select id="selectListCount" resultType="_int">
@@ -19,20 +22,31 @@
 		  from report
 	</select>
 	
-	<select id="selectList" resultMap="reportResultSet">
+	<select id="selectList" resultMap="report">
 		select
 		       report_no
-		     , member_no
+		     , m.member_name
 		     , report_content
-		     , report_date
-		     , report_count
-		     , member_status
+		     , report_type
+             , r.reported_no
+             , m.member_status
+             , m.report_count
+             , to_char(report_date, 'YYYY-MM-DD') report_date
 		     , report_status
-		  from report
-		  join member using (member_no)
-		 order
-		    by report_no desc
+		  from report r
+		  join member m on (m.member_no = r.member_no)
+		  order 
+		     by report_date desc
 	</select>
+	
+	<!-- 
+	<select id="countSearch" resultType="_int" parameterType="hashmap">
+		select
+		       count(*)
+		  from report r
+		  join member m on (m.member_no = r.member_no)
+	</select>
+	 -->
 	
 	
 	

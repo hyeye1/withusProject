@@ -7,6 +7,7 @@ import com.kh.withus.category.model.vo.Category;
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.vo.Project;
 import com.kh.withus.funding.model.vo.ProjectReply;
+import com.kh.withus.myPage.model.vo.MyPage;
 import com.kh.withus.order.model.vo.Order;
 
 public interface FundingService {
@@ -46,6 +47,15 @@ public interface FundingService {
        
     // 펀딩 댓글 목록조회
     ArrayList<ProjectReply> selectReplyList (int pno);
+
+    //펀딩 좋아요 상태확인
+	int likeyCheck(MyPage m);
+
+	// 펀딩 안좋아요
+	int dislike(MyPage m);
+
+	// 펀딩 좋아요
+	int like(MyPage m);
 
    
 }

@@ -119,12 +119,14 @@
 	                    <th>배송 준비 중</th>
 	                    <th>배송 중</th>
 	                    <th>배송 완료</th>
+	                    <th>환불</th>
 	                  </tr>
 	                  <tr>
 	                    <td>${ sc.noneShipping } 건</td>
 	                    <td>${ sc.readyShipping } 건</td>
 	                    <td>${ sc.shipping } 건</td>
 	                    <td>${ sc.doneShipping }건</td>
+	                    <td>${ sc.refundShipping }건</td>
 	                  </tr>
 	                  <tr>
 	                    <th rowspan="2">펀딩금 반환 상태</th>
@@ -241,9 +243,6 @@
 			                        		</c:when>
 			                        		<c:when test="${ p.orderStatus eq 3 }">
 			                        			<td class="cancle">취소완료</td>
-			                        		</c:when>
-			                        		<c:when test="${ p.orderStatus eq 4 }">
-			                        			<td>이건 없어</td>
 			                        		</c:when>
 			                        	  </c:choose>
 					                      <td>${ p.totalPrice } 원</td>
@@ -550,6 +549,9 @@
 		                           </table>
 		                       </div>
 		
+							<c:if test="${ refundStatus eq 'S' }">
+							</c:if>		
+		
 							<!-- Modal footer -->
 							<div class="modal-footer none">
 								<button type="button" name="rstatus" value="Y"
@@ -586,7 +588,7 @@
 					            </c:when>
 					            <c:otherwise>
 					            	<c:choose>
-					            		<c:when test="${ empty shStatus or empty orStatus or empty condition or empty keyword }">
+					            		<c:when test="${ empty shStatus and empty orStatus and empty condition and empty keyword }">
 							            	<li class="page-item"><a class="page-link" href="${ pi.currentPage - 1 }">이전</a></li>
 							            </c:when>
 							            <c:otherwise>
@@ -599,8 +601,8 @@
 					    	   
 							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 								<c:choose>
-									<c:when test="${ empty shStatus or empty orStatus or empty condition or empty keyword }">
-						            	<li class="page-item"><a class="page-link" href="orderNDeliveryList.part?currentPage=${p}">${ p }</a></li>
+									<c:when test="${ empty shStatus and empty orStatus and empty condition and empty keyword }">
+						            	<li class="page-item"><a class="page-link" href="${p}">${ p }</a></li>
 									</c:when>
 									<c:otherwise>
 										<li class="page-item"><a class="page-link" href="orderNDeliverySearch.part?currentPage=${p}&shStatus=${shStatus}&orStatus=${orStatus}&condition=${condition}&keyword=${keyword}">${ p }</a></li>
@@ -615,7 +617,7 @@
 					           	</c:when>
 					           	<c:otherwise>
 					           		<c:choose>
-					            		<c:when test="${ empty shStatus or empty orStatus or empty condition or empty keyword }">
+					            		<c:when test="${ empty shStatus and empty orStatus and empty condition and empty keyword }">
 							           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
 							            </c:when>
 							            <c:otherwise>

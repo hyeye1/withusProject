@@ -12,7 +12,7 @@ import lombok.ToString;
 @ToString
 public class Category {
 	
-	private int catNo;
+	private String catNo;
 	private String catName;
 	private String catTag;
 	private String catFile;

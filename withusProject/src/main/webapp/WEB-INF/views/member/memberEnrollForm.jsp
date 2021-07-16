@@ -99,10 +99,24 @@
     				$("#checkResult").hide();
     			}
     			
-    			
     		})
     		
+    		console.log('Location.search : ', location.search);
+    		//"?email=yonghuy4188@naver.com&name=김가은"
     		
+			// 파라미터 유무확인
+			let parms = location.search;
+			if(parms && parms.includes("email=") && parms.includes("name=")){
+				parms = parms.replace('?', '');
+				parms = parms.split("&");
+
+				const email = parms[0].replace("email=", '');
+				const name = decodeURI(parms[1].replace("name=", ''));
+				$("#memberId").val(email);
+				$("#memberName").val(name);
+			}
+			
+    				
     	})    	
     </script>
 

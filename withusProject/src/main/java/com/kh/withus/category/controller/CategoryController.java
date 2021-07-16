@@ -1,6 +1,6 @@
 package com.kh.withus.category.controller;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,9 +20,11 @@ public class CategoryController {
 	
 	// 카테고리 조회
 	@RequestMapping("list.cate")
-	public String MenuList(Category ct, Model model) {
-		List<Category> list = cService.MenuList(ct);
+	public String menuList(Model model) {
+		ArrayList<Category> list = cService.menuList();
+		 
 		model.addAttribute("list", list);
+		//System.out.println(list);
 		
 		return "admin/menuManaView";
 		
@@ -37,7 +39,9 @@ public class CategoryController {
 	
 	@RequestMapping("insert.cate")
 	public String insertCate(Category ct, HttpSession session, Model model) {
+		//System.out.println(ct);
 		int result = cService.insertCate(ct);
+		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "카테고리가 추가되었습니다.");
 			return "redirect:list.cate";
@@ -45,12 +49,14 @@ public class CategoryController {
 			model.addAttribute("errorMsg", "카테고리 등록을 실패했습니다.");
 			return "common/manaErrorPage";
 		}
+		
 	}
 	
 	
 	// 카테고리 수정
 	@RequestMapping("updateForm.cate")
-	public String updateForm() {
+	public String updateForm(int catNo, Model model) {
+		model.addAttribute("ct", cService.selectCate(catNo));
 		return "admin/menuUpdateForm";
 	}
 	

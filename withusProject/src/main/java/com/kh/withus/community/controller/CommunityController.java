@@ -197,6 +197,7 @@ public class CommunityController {
 		@ResponseBody
 		@RequestMapping("rinsert.co")
 		public String ajaxInsertCommuReply(CommuReply cr) {
+			
 			int result = cService.insertCommuReply(cr);
 			if(result > 0) {
 				return "success";

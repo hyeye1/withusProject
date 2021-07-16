@@ -5,17 +5,18 @@
 
 <mapper namespace="categoryMapper">
 	<resultMap id="category" type="Category">
-		<result column="cat_no" property="catNo" />
+		<id column="cat_no" property="catNo" />
 		<result column="cat_name" property="catName" />
 		<result column="cat_tag" property="catTag" />
 		<result column="cat_file" property="catFile" />
 	</resultMap>
 	
-	<select id="menuList" resultType="category">
+	<select id="menuList" resultMap="category">
 		select
 		       cat_no
 		     , cat_name
 		     , cat_tag
+		     , cat_file
 		  from category
 	</select>
 	
@@ -37,13 +38,23 @@
 		     , cat_name
 		     , cat_tag
 		     )
-		 value
+		values
 		     (
 		       seq_cno.nextval
 		     , #{catName}
 		     , #{catTag}
 		     )
 	</insert>
+	
+	<select id="selectCate" resultMap="category" parameterType="_int">
+		select
+		       cat_no
+		     , cat_name
+		     , cat_tag
+		  from category
+		 where cat_no = #{catNo}
+	</select>
+	
 	
 	<update id="updateCate" parameterType="_int">
 		update
@@ -56,7 +67,7 @@
 	<delete id="deleteCate" parameterType="_int">
 		delete
 		  from category
-		 where cat_name = #{catName}
+		 where cat_no = #{catNo}
 	</delete>
 	
 </mapper>

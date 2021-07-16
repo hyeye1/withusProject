@@ -187,7 +187,7 @@
 
             <script type="text/javascript">
                 window.Kakao.init("70bef0ced683f03aafded8ae014c584c");
-
+				
                 function kakaoLogin() {
                     window.Kakao.Auth.login({
                         scope: 'profile, account_email, gender',
@@ -198,12 +198,36 @@
                                 success: function (res) {
                                     const kakao_account = res.kakao_account;
                                     console.log(kakao_account);
+                                    console.log(kakao_account.profile.nickname);
+                                    emailCheck(kakao_account);
                                 }
                             });
                         }
                     });
                 }
+                function emailCheck(account){
+                	$.ajax({
+    					url:"idCheck.me",
+    					data:{checkId:account.email},
+    					success:function(result){
+    					console.log('응답결과 :', result);
+    						if(result == "N"){ // 사용불가능
+    							// 로그인 처리 
+    							
+    						}else{ // 사용가능
+    							// 회원가입 페이지로 이동		
+    							location.href="enrollForm.me?email="+account.email + "&name=" + account.profile.nickname;
+    						}
+    						
+    					},error:function(){
+    						console.log("아이디 중복체크용 ajax 통신 실패");
+    					}
+    				})
+                }
             </script>
+            
+            
+    
 
             <script type="text/javascript">
                 var naver_id_login = new naver_id_login("dLjj3gw6QxxdyRGAZ9q6", "http://localhost:8888/withus/naver_callback.me");
@@ -224,7 +248,7 @@
                         alert(token);
                         // 로그인 성공시 서버인증을 통해 토큰발급
                         // 토큰발급까지 성공했으면 메인페이지로
-                        window.location.replace("http://localhost:8888/withus/");
+                        
                     }
 
 

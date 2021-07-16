@@ -15,103 +15,153 @@
     .form-group{
         display: inline-flex;
     }
+    
 </style>
 </head>
 <body>
 
-    <!-- 6/9 윤경 생성-->
-    <!-- 6/10 윤경 table 스타일 변경, form-group 수정 -->
-
     <!-- 메뉴바 포함 -->
-    <jsp:include page="../../common/manaHeader.jsp" />
+    <jsp:include page="../common/manaHeader.jsp" />
+    <br>
 
-    <h2>신고관리</h2>
+    <h3>신고관리</h3>
     <hr><br>
 
     <div class="container">
-        <!-- 표 N행 8열 -->        
-        <table class="table table-bordered" >
-			<thead>
-			  <tr align="center" style="height: 10px; background-color: rgb(224, 224, 224); font-size:smaller ;">
-				<th width="60" height="30">회원<br>번호</th>
-                <th width="100">이름</th>
-                <th width="490">신고 사유</th>
-                <th width="130">신고날짜</th>
-                <th width="90">누적횟수</th>
-                <th width="90">회원상태<br>(Y/N)</th>
-                <th width="150">상태수정</th>
-                <th width="90">확인유무<br>(Y/N)</th>
-			  </tr>
-			</thead>
-			<tbody>
-				<tr align="center">
-                    <td>10</td>
-                    <td>가회원</td>
-                    <td>도배</td>
-                    <td>2021-06-09</td>
-                    <td>2</td>
-                    <td>활동</td>
-                    <td>
-                        <div class="form-group">
-                            <select class="form-control" id="sel1">
-                                <option>상태유지</option>
-                                <option>강제탈퇴</option>
-                            </select>
-                        </div>
-                    </td>
-                    <td>Y</td>
-                </tr>
-                <tr align="center">
-                    <td>10</td>
-                    <td>가회원</td>
-                    <td>도배</td>
-                    <td>2021-06-09</td>
-                    <td>2</td>
-                    <td>활동</td>
-                    <td>
-                        <div class="form-group">
-                            <select class="form-control" id="sel1">
-                                <option>상태유지</option>
-                                <option>강제탈퇴</option>
-                              </select>
-                        </div>
-                    </td>
-                    <td>Y</td>
-                </tr>
-                <tr align="center">
-                    <td>10</td>
-                    <td>가회원</td>
-                    <td>도배</td>
-                    <td>2021-06-09</td>
-                    <td>2</td>
-                    <td>활동</td>
-                    <td>
-                        <div class="form-group">
-                            <select class="form-control" id="sel1">
-                                <option>상태유지</option>
-                                <option>강제탈퇴</option>
-                              </select>
-                        </div>
-                    </td>
-                    <td>Y</td>
-                </tr>
-			</tbody>
-		</table>
         
-        <br>
-
-
-
-        <!-- 이거 사이즈 왜 조정안되누;; -->
-        <div class="form-group">
-            <select class="form-control" id="sel1" style="width: 120px;">
-              <option>회원번호</option>
-              <option>이름</option>
-              <option>누적횟수</option>
-            </select> &nbsp;&nbsp;
-            <input type="text" class="form-control form-control-sm" style="width: 150px; padding-top: 5px;" placeholder="입력칸">
+        <!-- 검색기능 
+        <div class="searchArea">
+        	<form action="searchReport.mana" name="searchReport">
+        	<input type="hidden" name="currentPage" value="1">
+        	<div class="searchForm">
+		        <select id="searchKey" name="searchMenu">
+		          <option value="memberNo">회원번호</option>
+		          <option value="memberName">이름</option>
+		          <option value="reportCount">누적횟수</option>
+		        </select>
+	           <input type="text" class="form-control form-control-sm" name="keyword" value="${ keyword } placeholder="입력칸">
+	        </div>
+	        <br>
+	        <div class="searchBtn" align="right">
+	            <button class="btn searchBtn1" type="submit" id="submitB">검색</button>
+	            <button class="btn searchBtn2" type="reset" id="resetB">초기화</button>
+	        </div>
+	        </form>
         </div>
+        
+        <c:if test="${ !empty searchkey }">
+	        <script>
+	        	$(function(){
+	        		$("#searchKey option[value=${searchKey}]").attr("selected", true);
+	        	});
+	        
+	        	// 초기화버튼 클릭시
+		        $("#resetB").click(function(){
+					$("#searchKey option[value=${searchKey}]").removeAttr("selected");
+					$("input[name='keyword']").empty();
+				});
+	        </script>
+        </c:if>
+        -->	
+        
+        
+        <table class="table table-bordered" id="reportList" >
+        <c:choose>
+        	<c:when test="${ empty list }">
+        		<div class="none"><p>조회 결과가 없습니다.</p></div>
+        	</c:when>
+        	<c:otherwise>        
+					<thead class="tableHead">
+					  <tr align="center" style="height: 10px; background-color: rgb(224, 224, 224); font-size:smaller ;">
+						<th height="30">신고<br>번호</th>
+						<th>회원<br>이름</th>
+		                <th width="400">신고사유</th>
+		                <th>게시물타입</th>
+		                <th>게시물번호</th>
+		                <th>회원상태</th>
+		                <th>누적횟수</th>
+		                <th>신고일</th>
+		                <th>신고상태</th>
+					  </tr>
+					</thead>
+					<tbody>
+						<c:forEach var="r" items="${ list }">
+							<tr align="center">
+								<td class="rno">${ r.reportNo }</td>
+			                    <td>${ r.memberName }</td>
+			                    <td>${ r.reportContent}</td>
+			                    <td>${ r.reportType}</td>
+			                    <td>${ r.reportedNo }</td>
+			                    <td>${ r.memberStatus}</td>
+			                    <td>${ r.reportCount }</td>
+			                    <td>${ r.reportDate }</td>
+			                    <c:choose>
+			                    	<c:when test="${ r.reportStatus eq 'N' }">
+			                    		<td onclick="showModal('${ r.reportNo }', '${ r.memberNo }', '${ r.reportContent }', '${ r.reportType}', '${ r.reportedNo }', '${ r.memberStatus}', '${ r.reportCount }', '${ r.reportDate }');">진행중</td>
+			                    	</c:when>
+			                    	<c:when test="${ r.reportStatus eq 'Y' }">
+			                    		<td>처리완료</td>
+			                    	</c:when>
+			                    </c:choose>
+			                </tr>
+			            </c:forEach>
+					</tbody>
+				</c:otherwise>
+			</c:choose>
+		</table>
+		
+		<!-- modal -->
+		<div class="modal fade" id="increaseCount" tabindex="-1" role="dialog" aria-labelledby="myModal">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<button type="button" class="btn btn-default" data-dismiss="modal">반려</button>
+					<button type="button" class="btn btn-primary" onclick="increaseCount();">누적</button>
+				</div>
+			</div>
+		</div>
+		
+		
+		<script>
+			
+			var reportNo = "";
+			var memberNo = "";
+			var reportContent = "";
+			var reportType = "";
+			var reportedNo = "";
+			var memberStatus = "";
+			var reportCount = "";
+			var reportDate = "";
+		
+			$(document).ready(function(){
+				$('#increaseCount').on('show.bs.modal', function(event){
+					reportNo = $(event.relatedTarget).data('reportNo');
+					memberNo = $(event.relatedTarget).data('memberNo');
+					reportContent = $(event.relatedTarget).data('reportContent');
+					reportType = $(event.relatedTarget).data('reportType');
+					reportedNo = $(event.relatedTarget).data('reportedNo');
+					memberStatus = $(event.relatedTarget).data('memberStatus');
+					reportCount = $(event.relatedTarget).data('reportCount');
+					reportDate = $(event.relatedTarget).data('reportDate');
+				});
+			});
+			
+			function showModal(reportNo, memberNo, reportContent, reportType, reportedNo, memberStatus, reportCount, reportDate) {
+				// 눌렀을때 승인완료로 바꾸기
+				//location.href=
+			}
+			
+			function increaseCount(reportCount){
+				// 눌렀을때 카운트 1증가 후 승인완료로 바꾸기
+			}
+			
+		</script>
+		
+		
+        <br>
+        
+        
 
+		<!-- 페이징 처리 -->
 
     </div>
 </body>

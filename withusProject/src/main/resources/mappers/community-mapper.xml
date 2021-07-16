@@ -22,6 +22,8 @@
 		<result column="com_re_writer" property="comReWriter"/>
 		<result column="com_re_content" property="comReContent"/>
 		<result column="com_re_create" property="comReCreate"/>
+		<result column="com_re_status" property="comReStatus"/>
+		<result column="member_no" property="memberNo"/>
 	</resultMap>
   
   	<!-- 커뮤리스트 조회 -->
@@ -116,7 +118,7 @@
 		     , com_re_content
 			 , com_re_writer
 		     , to_char(com_re_create, 'YYYY-MM-DD') com_re_create
-		  from commu_Reply
+		  from commu_reply
 		 where com_re_status = 'Y'
 		  and ref_cno = #{commuNo}
 		 order
@@ -125,19 +127,21 @@
 	
 	<insert id="insertCommuReply" parameterType="CommuReply">
 		insert
-		  into commu_Reply
+		  into commu_reply
 		  (
 		    com_re_no
 		  , com_re_content
 		  , ref_cno
 		  , com_re_writer
+		  , member_no
 		  )
 		  values
 		  (
-		    seq_comrno.nextval
+		    SEQ_COMRNO.nextval
 		  , #{comReContent}
 		  , #{refCommuNo}
 		  , #{comReWriter}
+		  , #{memberNo}
 		  )
 	</insert>
 	 
@@ -146,12 +150,16 @@
 	
 	<select id="selectCommuSearchList" resultMap="community" parameterType="hashmap">
 		select 
-               commu_no
-             , commu_title
-             , commu_content
-             , count
-             , commu_writer
-             , commu_create
+               c.commu_no
+             , c.commu_writer
+             , c.commu_cate
+             , c.commu_title
+             , c.commu_content
+             , c.commu_create
+             , c.count  
+             , c.commu_status
+             , c.commu_origin
+             , c.commu_change
           from community c
          where c.commu_status = 'Y'
            <choose>
@@ -161,16 +169,13 @@
            		<when test="condition == 'commuContent'">
            			and commu_content
            		</when>
-           		<when test="condition == 'commuWriter'">
-					and commu_writer
-				</when>
            		<otherwise>
-           			and commu_create
+           			and commu_writer
            		</otherwise>
            </choose>
            		like '%' || #{keyword} || '%'           	
          order
-            by commu_create desc
+            by c.commu_create desc
 	</select>
 	
 	

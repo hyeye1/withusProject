@@ -13,13 +13,13 @@ import lombok.ToString;
 public class Community {
 	
 	private int commuNo;
+	private String commuWriter;
 	private String commuCate;
 	private String commuTitle;
 	private String commuContent;
 	private String commuCreate;
 	private int count;
 	private String commuStatus;
-	private String commuWriter;
 	private String commuOrigin;
 	private String commuChange;
 }

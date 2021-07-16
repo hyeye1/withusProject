@@ -15,7 +15,7 @@
     <style>
         
         /*div{border: 1px solid red; box-sizing: border-box;}*/
-        .wrap{width: 1000px; height: 1200px; margin: auto;}
+        .wrap{width: 1000px; height: 1000px; margin: auto;}
 
         .wrap>div{width: 100%;}
 
@@ -29,7 +29,7 @@
         
         /* content */
         #content_1{height: 15%;}
-        #content_2{height: 60%;}
+        #content_2{height: 80%;}
         #content_3{height: 20%;}
 
         /*프로필 부분*/
@@ -47,6 +47,11 @@
         /* 펀딩 목록 */
         #content_2{margin-top: 50px; margin-left: 100px; margin-right: 10px;}
         #content_2>div{float: left; padding: 10px;}
+        #content_2>#fundingList:hover {cursor:pointer; opacity:0.5;}
+        #content_2>#fundingList{width:270px;}
+        #percent{width : 30%;}
+        #totalprice{width : 35%;}
+        #dday{width : 30%;}
 
 
         /* 페이징 */
@@ -174,10 +179,11 @@
                     	</c:when>
                     	<c:otherwise>
                     		<c:forEach var="list" items="${ fundingList }">
-	                    		<div>
+	                    		<div id="fundingList">
+	                    		<input type="hidden" class="pno" value="${ list.projectNo }">
 			                        <table>
 			                            <tr>
-			                                <td colspan="2">
+			                                <td colspan="3">
 			                                	<c:choose>
 			                                		<c:when test="${ empty list.projectThum }">
 			                                			<img src="resources/project_thumbnail/no_image.jpg"  width="250" height="200">
@@ -189,12 +195,25 @@
 			                                </td>
 			                            </tr>
 			                            <tr>
-			                                <td colspan="2" style="width:10px;">${ list.projectTitle }</td>
+			                                <td colspan="3" style="width:270px;">${ list.projectTitle }</td>
 			                            </tr>
 			                            <tr>
-			                                <td>${ list.projectGPrice }</td>
-			                                <td>~ ${ list.projectEndDt }</td>
+			                                <td colspan="3">${ list.catName } | ${ list.partnerName }</td>
 			                            </tr>
+			                            <tr>
+				                           <c:choose>
+							                	<c:when test="${ list.dday >= 0 }">
+													<td id="percent">${ list.percentage }%</td>
+													<td id="totalPrice">${ list.totalPrice }원</td>
+													<td id="dday">D-${ list.dday }</td>
+							            		</c:when>
+							            		<c:otherwise>
+							            			<td id="percent">${ list.percentage }%</td>
+													<td id="totalPrice">${ list.totalPrice }원</td>
+													<td id="dday">펀딩종료</td>
+							            		</c:otherwise>
+							            	</c:choose>
+						            	</tr>
 			                            <tr>
 			                                <td>오픈 여부</td>
 			                                <td>
@@ -228,7 +247,15 @@
                     </c:choose>
                 </div>
                 
+                <script>
+                $(function(){
+            		$("#content_2 #fundingList").click(function(){
+            			location.href="detail.fd?pno=" + $(this).children(".pno").val();
+            		})
+            	})
                 
+                
+                </script>
                 
                 <!-- 페이징 -->
                 <div id="content_3">

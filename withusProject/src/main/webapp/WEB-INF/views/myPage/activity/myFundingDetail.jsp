@@ -161,16 +161,10 @@
 					                     결제완료
 					    </c:when>
 					    <c:when test="${orderList.orderStatus eq '2'}">
-					          	환불신청
-					    </c:when>
-					    <c:when test="${orderList.orderStatus eq '3'}">
-					                      환불처리중
-					    </c:when>
-					    <c:when test="${orderList.orderStatus eq '4'}">
-					          	환불완료
+					          	취소요청
 					    </c:when>
 					    <c:otherwise>
-					        	환불거절
+					        	취소완료
 					    </c:otherwise>
 				     </c:choose>              	                
 	              </th>

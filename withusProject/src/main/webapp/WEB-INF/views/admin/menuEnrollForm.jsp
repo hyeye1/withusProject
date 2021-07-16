@@ -18,13 +18,12 @@
 	<jsp:include page="../common/manaHeader.jsp"/>
 	
 	<br>
-	<h3><b>카테고리 등록/수정</b></h3>
+	<h3><b>카테고리 등록</b></h3>
 	<hr><br>
 	
 	<div class="container">
 	
-		<form id="menuEnrollForm" method="post" action="insert.cate" enctype="multipart/form-data">
-			<input type="hidden" id="catNo" name="catNo" value="${ ct.catNo }">
+		<form id="menuEnrollForm" method="get" action="insert.cate" enctype="multipart/form-data">
 			<table class="table table-bordered">
 				<tr>
 					<th align="center"><label for="name">카테고리명</label></th>
@@ -32,7 +31,7 @@
 				</tr>
 				<tr>
 					<th align="center"><label for="name">태그</label></th>
-					<td><input type="text" id="catTag" class="form-control" name="catTag" required></td>
+					<td><input type="text" id="catTag" class="form-control" name="catTag"></td>
 				</tr>
 			</table>
 			<br>

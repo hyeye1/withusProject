@@ -158,17 +158,20 @@
 	    font-size: 19px;
 	}
 	
+	
 	.rightPartner {
 	    display: table;
 	    margin-top: 25px;
 	    width: 100%;
 	}
 	
+	
 	.rightPartner img {
-	    width: 40px;
+	    width: 35px;
 	    float: left;
-	    margin-left: 10px;
-	    margin-right: 0px;
+	    margin-top: -3px;
+	    margin-right: 3px;
+	    border-radius: 50%;
 	}
 	
 	.rightPartner p {
@@ -184,8 +187,7 @@
 	    border-radius: 5px;
 	    color: white;
 	    font-size: 12px;
-	    margin-bottom: 10px;
-	    margin-right: 9px;
+	    margin-left :10px;
 	}
 	
 	#partnerWho {
@@ -485,7 +487,7 @@
 	    display: none;
 	}
 	
-	
+	a{text-decoration: none; color: black;}
 		
 		</style>
         </head>
@@ -578,14 +580,122 @@
                             </div>
                             <div class="infoBtn" align="center">
                                 <button onclick="location.href='list.rew?pno=${p.projectNo}'">펀딩하기</button>
-                                <img src="${ pageContext.request.contextPath }/resources/images/likey.PNG" width="36px"
-                                    style="margin-right: 10px; cursor: pointer;">
+                                <img src="${ pageContext.request.contextPath }/resources/images/emptyHeart.png" width="36px"
+                                    style="margin-right: 10px; cursor: pointer;" id="likeyBtn">
                                 <img src="${ pageContext.request.contextPath }/resources/images/share.PNG" width="32px"
                                     style="cursor: pointer;">
                             </div>
                         </div>
                     </div>
                 </div>
+                
+                
+                <c:choose>
+                	<c:when test="${ empty loginUser }">
+                		<input type="hidden" id="memberNo" value="0">
+                	</c:when>
+                	<c:otherwise>
+                		<input type="hidden" id="memberNo" value=${loginUser.memberNo }>
+                	</c:otherwise>
+                </c:choose>
+                
+                
+                <!-- 좋아요버튼 -->
+                <script>
+			    $(document).ready(function(){
+		        	$.ajax({
+      					url:"likeyCheck.fd",
+      					data:{memberNo: $("#memberNo").val(),
+      						  projectNo : ${ p.projectNo } },
+      					success:function(result){
+      						console.log(result);
+      						
+      						if(result == "liked"){ // 좋아요중 중
+      							
+      							$("#likeyBtn").attr("class", "liked").attr("src", "${ pageContext.request.contextPath }/resources/images/heart.png");
+      						
+      						} else { // 안좋아요중
+      							
+      							$("#likeyBtn").attr("src", "${ pageContext.request.contextPath }/resources/images/emptyHeart.png");
+      						}
+      						
+      					}, error:function(){
+      						console.log("좋아요 상태확인 ajax통신 실패");
+      					}
+      					
+      				})
+		
+		        })                
+			                
+			                
+			    $(function() {
+			    	
+			    	$('#likeyBtn').click(function(){
+			    		if($("#memberNo").val() == "0"){
+				    		
+				    		alert("로그인 후 사용가능합니다.");
+				    		
+				    	} else {
+				    		
+				    		if($(this).hasClass("liked")) {
+							      
+						    	$.ajax({
+			      					url:"dislike.fd",
+			      					data:{memberNo: $("#memberNo").val(),
+			      						  projectNo : ${ p.projectNo } },
+			      					success:function(result){
+			      						
+			      						if(result == "Y"){ // 좋아요 취소하기
+			      							
+			      							alert("좋아요를 해제하였습니다");
+			      							$("#likeyBtn").removeAttr("class", "liked").attr("src", "${ pageContext.request.contextPath }/resources/images/emptyHeart.png");
+			      							
+			      						} else { // 오류
+			      							
+			      							alert("오류가 발생했습니다");
+			      						}
+			      						
+			      					}, error:function(){
+			      						console.log("좋아요해제 ajax통신 실패");
+			      					}
+			      					
+			      				});
+					      
+						    } else {
+						    	
+						    	$.ajax({
+			      					url:"like.fd",
+			      					data:{memberNo: $("#memberNo").val(),
+			      						  projectNo : ${ p.projectNo } },
+			      					success:function(result){
+			      						
+			      						if(result == "Y"){ // 좋아요함
+			      							
+			      							alert("이 프로젝트를 좋아요했습니다");
+			      							$("#likeyBtn").attr("class", "liked").attr("src", "${ pageContext.request.contextPath }/resources/images/heart.png");
+			      							
+			      						}else{ // 오류
+			      							
+			      							alert("오류가 발생했습니다");
+			      							
+			      						}
+			      						
+			      					}, error:function(){
+			      						console.log("좋아요기능 ajax통신 실패");
+			      					}
+			      					
+			      				})
+						      
+						    }
+				    	}
+					})
+			    })
+					
+			</script>            	            
+                
+                
+                
+                
 
                 <!-- 메뉴바 -->
                 <div class="detailMenubar">
@@ -610,10 +720,120 @@
 
                             <div><b>창작자 소개</b></div>
                             <div class="rightPartner">
-                                <a href="partnerDetail.me?memberNo=${ p.memberNo }" style="text-decoration: none; color: black;"><img src="${ pageContext.request.contextPath }/${ p.memberProfile }">
-                                <p><b>${ p.partnerName }</b> <br><br><br></p></a>
-                                <button>+ 팔로우</button>
+                            	<table>
+                            		<tr>
+                            			<td><a href="partnerDetail.me?memberNo=${ p.memberNo }" style="text-decoration: none; color: black;"><img src="${ pageContext.request.contextPath }/${ p.memberProfile }">
+                                			<b>${ p.partnerName }</b></a>
+                                		</td>
+                                		<td>
+                                			<button id="followBtn"></button>
+                                		</td>
+                            			
+                            		</tr>
+                            	</table>
+                                
                             </div>
+                            
+                            <!-- 언팔/팔로 버튼 -->
+			                <script>
+				                $(document).ready(function(){
+						        	$.ajax({
+				      					url:"followCheck.fd",
+				      					data:{memberNo: $("#memberNo").val(),
+				      						  followMemberNo : ${ p.memberNo } },
+				      					success:function(result){
+				      						
+				      						console.log(result);
+				      						if(result == "Y"){ // 팔로우 중
+				      							
+				      							$("#followBtn").text("팔로잉");
+				      						
+				      						} else { // 언팔중
+				      							
+				      							$("#followBtn").text("+ 팔로우");
+				      						}
+				      						
+				      					}, error:function(){
+				      						console.log("팔로상태확인 ajax통신 실패")
+				      					}
+				      					
+				      				})
+						
+						        });
+			                
+			                
+			                	$(function() {
+									
+									$('#followBtn').click( function() {
+										
+										
+										if($("#memberNo").val() == "0"){
+								    		
+								    		alert("로그인 후 사용가능합니다.");
+								    		
+								    	} else {
+											
+											if( $(this).html() == '팔로잉' ) {
+									      
+									    	$(this).attr("id", "clicked");
+									    	$.ajax({
+						      					url:"unfollow.me",
+						      					data:{memberNo: $("#memberNo").val(),
+						      						  followMemberNo : ${ p.memberNo } },
+						      					success:function(result){
+						      						
+						      						if(result == "Y"){ // 언팔하기
+						      							
+						      							$("#clicked").html('+ 팔로우').removeAttr("class");
+						      							alert("팔로우를 해제하였습니다");
+						      							
+						      							
+						      						} else { // 오류
+						      							
+						      							alert("오류가 발생했습니다");
+						      						}
+						      						
+						      					}, error:function(){
+						      						console.log("언팔로우 ajax통신 실패")
+						      					}
+						      					
+						      				})
+									      
+									    } else {
+									    	$(this).attr("id", "clicked");
+									    	$.ajax({
+						      					url:"follow.me",
+						      					data:{memberNo: $("#memberNo").val(),
+						      						  followMemberNo : ${ p.memberNo } },
+						      					success:function(result){
+						      						
+						      						if(result == "Y"){ // 팔로우 중
+						      							
+						      							$("#clicked").html('팔로잉').removeAttr("class");
+						      							alert("해당 파트너를 팔로우했습니다");
+						      							
+						      						}else{ // 오류
+						      							
+						      							alert("오류가 발생했습니다");
+						      							
+						      						}
+						      						
+						      					}, error:function(){
+						      						console.log("팔로우 ajax통신 실패");
+						      					}
+						      					
+						      				})
+									      
+									    }
+								    }
+								})
+							})
+							</script>
+                            
+                            
+                            
+                            
+                            
                             <p id="partnerWho">
                                 ${ p.partnerIntro }
                             </p>
@@ -708,7 +928,7 @@
                         
 
                         
-                           <!-- 파트너 대댓글 -->
+                           <!-- 파트너 대댓글 
                            <div class="reReply">
                                 <div class="partnerShownEdit">
                                     <button style="float: right; display: none;">수정/삭제</button>
@@ -730,6 +950,7 @@
                                 </div>
                                 <p class="replyContent">펀딩, 응원 감사드립니다 :)</p>
                             </div>
+                            -->
                         
                         </div>
                     </div>

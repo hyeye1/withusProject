@@ -1,6 +1,7 @@
 package com.kh.withus.report.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,16 @@ public class ReportServiceImpl implements ReportService {
 	public ArrayList<Report> selectList(PageInfo pi) {
 		return rDao.selectList(sqlSession, pi);
 	}
+	
+	/*
+	@Override
+	public int countSearch(HashMap<String, String> map) {
+		return rDao.countSearch(sqlSession, map);
+	}
+	@Override
+	public ArrayList<Report> selectSearchReport(HashMap<String, String> map, PageInfo pi) {
+		return rDao.selectSearchReport(sqlSession, map, pi);
+	}
+	*/
 
 }

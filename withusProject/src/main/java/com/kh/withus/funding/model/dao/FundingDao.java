@@ -11,6 +11,7 @@ import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.vo.Project;
 import com.kh.withus.funding.model.vo.ProjectReply;
 import com.kh.withus.funding.model.vo.Reward;
+import com.kh.withus.myPage.model.vo.MyPage;
 import com.kh.withus.order.model.vo.Order;
 
 @Repository
@@ -74,6 +75,18 @@ public class FundingDao {
 	
 	public ArrayList<ProjectReply> selectReplyList(SqlSessionTemplate sqlSession, int pno) {
 		return (ArrayList)sqlSession.selectList("fundingMapper.selectReplyList", pno);
+	}
+
+	public int likeyCheck(SqlSessionTemplate sqlSession, MyPage m) {
+		return sqlSession.selectOne("fundingMapper.likeyCheck", m);
+	}
+
+	public int dislike(SqlSessionTemplate sqlSession, MyPage m) {
+		return sqlSession.delete("fundingMapper.dislike", m);
+	}
+
+	public int like(SqlSessionTemplate sqlSession, MyPage m) {
+		return sqlSession.insert("fundingMapper.like", m);
 	}
 
 	

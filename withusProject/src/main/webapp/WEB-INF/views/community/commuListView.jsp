@@ -186,13 +186,13 @@
               <form id="searchForm" action="search.co" method="Get" align="center">
                 <div class="select">
                   <select class="custom-select" name="condition">
-                    <option value="title">제목</option>
-                    <option value="content">내용</option>
-                    <option value="writer">작성자</option>
+                    <option value="commuTitle">제목</option>
+                    <option value="commuContent">내용</option>
+                    <option value="commuWriter">작성자</option>
                   </select>
                 </div>
                 <div class="text">
-                  <input type="text" class="form-control" name="keyword">
+                  <input type="text" class="form-control" name="keyword" value="${ keyword }">
                 </div>
                 <button type="submit" class="searchBtn btn btn-secondary">검색</button>
               </form>

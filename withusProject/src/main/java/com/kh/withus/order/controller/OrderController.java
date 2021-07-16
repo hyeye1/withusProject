@@ -133,31 +133,43 @@ public class OrderController {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		//System.out.println(loginUser);
 		
-		// 로그인한 회원번호 
-		int mno = loginUser.getMemberNo();
-		//System.out.println(mno);
-		
-		int totalList = oService.selectDeliveryCount(mno);
-		
-		// statusBox에 출력될 건수
-		Order sc = oService.selectStatusCount(mno);
-		
-		// 페이징 처리
-		PageInfo pi = pagination.getPageInfo(totalList, currentPage, 10, 10);
-		
-		// 주문현황 리스트 
-		ArrayList<Order> polist = oService.selectPartnerOrderList(pi, mno);
-		//System.out.println(polist);
-		
-		if(polist.size() > 0) {
-			model.addAttribute("polist", polist);
-			model.addAttribute("pi",pi);
-			model.addAttribute("sc", sc);
-			return "myPage/partner/pagePartOrderNDeliveryList";
-		}else {
-			session.setAttribute("alertMsg", "프로젝트 등록을 해주세요");
+		// 로그인한 회원이 파트너일 경우 --> 프로젝트 개설 유무에 따라
+		if(loginUser.getPartnerJoin().equals("Y")) {
+			
+			// 로그인한 회원번호 
+			int mno = loginUser.getMemberNo();
+			//System.out.println(mno);
+			
+			int totalList = oService.selectDeliveryCount(mno);
+			
+			// statusBox에 출력 될 건수
+			Order sc = oService.selectStatusCount(mno);
+			
+			// 페이징 처리
+			PageInfo pi = pagination.getPageInfo(totalList, currentPage, 10, 10);
+			
+			// 주문현황 리스트 
+			ArrayList<Order> polist = oService.selectPartnerOrderList(pi, mno);
+			//System.out.println(polist);
+			
+			if(polist.size() > 0) { // 프로젝트 o : 발송리스트 조회 
+				model.addAttribute("polist", polist);
+				model.addAttribute("pi",pi);
+				model.addAttribute("sc", sc);
+				
+				return "myPage/partner/pagePartOrderNDeliveryList";
+			}else { // 프로젝트 X : 프로젝트 먼저 등록 
+				session.setAttribute("alertMsg", "프로젝트 등록을 해주세요");
+				return "myPage/partner/pageMyFundingMain";
+			}
+		}else { //  서포터일 경우 --> 알람창 노출
+			session.setAttribute("alertMsg", "파트너만 접근 가능합니다.");
 			return "myPage/partner/pageMyFundingMain";
 		}
+		
+		
+		
+
 		
 	}
 	
@@ -179,7 +191,7 @@ public class OrderController {
 		map.put("condition", condition);
 		map.put("keyword", keyword);
 		map.put("mno", loginUser.getMemberNo());
-		//System.out.println(map);
+		System.out.println(map);
 		
 		// statusBox에 출력될 건수
 		Order sc = oService.selectStatusCount(mno);
@@ -189,6 +201,8 @@ public class OrderController {
 		PageInfo pi = pagination.getPageInfo(count, currentPage, 10, 10);
 		
 		ArrayList<Order> polist = oService.selectSearchPartOrder(map, pi);
+		
+		System.out.println(polist);
 		
 		mv.addObject("polist", polist)
 		  .addObject("pi", pi)
