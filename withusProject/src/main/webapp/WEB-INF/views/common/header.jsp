@@ -199,10 +199,10 @@
 					<div id="cateContent" style="display: none; z-index: 100;">
 						<div class="cateLeft">
 							<div class="style_1"><a href="list.fun?catNo=1">모든 프로젝트</a></div>
-							<div class="style_1"><a href="#">인기 추천 프로젝트</a></div>
-							<div class="style_1"><a href="#">성공 임박 프로젝트</a></div>
-							<div class="style_1"><a href="#">신규 추천 프로젝트</a></div>
-							<div class="style_1"><a href="#">공개예정 프로젝트</a></div>
+							<div class="style_1"><a href="menuList.fun?menu=famous">인기 추천 프로젝트</a></div>
+							<div class="style_1"><a href="menuList.fun?menu=eve">성공 임박 프로젝트</a></div>
+							<div class="style_1"><a href="menuList.fun?menu=new">신규 추천 프로젝트</a></div>
+							<div class="style_1"><a href="menuList.fun?menu=ready">공개예정 프로젝트</a></div>
 							<div class="style_1"><a href="commu.main">커뮤니티</a></div>
 						</div>
 

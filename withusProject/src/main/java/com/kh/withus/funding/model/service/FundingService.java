@@ -12,6 +12,18 @@ import com.kh.withus.order.model.vo.Order;
 
 public interface FundingService {
 
+	// 인기상품 리스트 조회
+	ArrayList<Project> selectFamousList();
+	
+	// 성공임박 리스트 조회
+	ArrayList<Project> selectEveList();
+	
+	// 새로운 펀딩 리스트 조회
+	ArrayList<Project> selectNewList();
+	
+	// 예정중인 펀딩 리스트 조회
+	ArrayList<Project> selectReadyList();
+	
 	// 검색 후 리스트 조회
 	ArrayList<Project> selectSearchList(HashMap<String, String> map);
 	
@@ -56,6 +68,8 @@ public interface FundingService {
 
 	// 펀딩 좋아요
 	int like(MyPage m);
+	
+	
 
    
 }

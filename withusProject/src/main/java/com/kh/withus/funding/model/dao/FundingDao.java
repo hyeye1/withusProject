@@ -17,6 +17,22 @@ import com.kh.withus.order.model.vo.Order;
 @Repository
 public class FundingDao {
 	
+	public ArrayList<Project> selectFamousList(SqlSessionTemplate sqlSession) {
+	    return (ArrayList)sqlSession.selectList("fundingMapper.selectFamousList");
+	    }
+	
+	public ArrayList<Project> selectEveList(SqlSessionTemplate sqlSession) {
+	    return (ArrayList)sqlSession.selectList("fundingMapper.selectEveList");
+	    }
+	
+	public ArrayList<Project> selectNewList(SqlSessionTemplate sqlSession) {
+	    return (ArrayList)sqlSession.selectList("fundingMapper.selectNewList");
+	    }
+	
+	public ArrayList<Project> selectReadyList(SqlSessionTemplate sqlSession) {
+	    return (ArrayList)sqlSession.selectList("fundingMapper.selectReadyList");
+	    }
+	
 	public ArrayList<Category> selectCate(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("fundingMapper.selectCate");
 	}

@@ -40,6 +40,41 @@ public class FundingController {
 	@Autowired
 	private MyPageService mpService;
 	
+	@RequestMapping("menuList.fun")
+    public ModelAndView selectMenuList(String menu, ModelAndView mv) {
+		
+		System.out.println(menu);
+		ArrayList<Project> pList = null;
+		
+		switch(menu){
+		
+			case "famous":
+				pList = funService.selectFamousList();
+				break;
+				
+			case "eve":
+				pList = funService.selectEveList();
+				break;
+				
+			case "new": 
+				pList = funService.selectNewList();
+				break;
+				
+			case "ready":
+				pList = funService.selectReadyList();
+				break;
+			
+		}
+		
+		System.out.println(pList);
+		
+		mv.addObject("menu", menu)
+		.addObject("pList", pList)
+		.setViewName("funding/menuListView");
+		
+		return mv;
+	}
+	
 	@RequestMapping("search.fun")
     public ModelAndView selectSearchList(Search s, ModelAndView mv) {
 		
@@ -62,7 +97,9 @@ public class FundingController {
 	}
 	
 	@RequestMapping("list.fun")
-    public ModelAndView selectFundingList(int catNo, ModelAndView mv) {
+    public ModelAndView selectFundingList(int catNo, String menu, ModelAndView mv) {
+		
+		System.out.println(menu);
 		
 		// 전체 카테고리 사진, 명 조회
 		ArrayList<Category> cList = funService.selectCate();
@@ -185,31 +222,22 @@ public class FundingController {
 		}
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "preview.fun", method = RequestMethod.GET)
-	public String fundingPreview(
-						String catNo,
-						String projectTitle,
-						String projectSummary,
-						String projectGprice,
-						String projectStartDT,
-						String projectEndDT,
-						String projectThum,
-						String projectCount,
-						String projectContent,
-						String projectRefcon,
-						String hashtag,
-						String deliveryDate,
-						String partnerPhone,
-						String phoneYN,
-						String partnerEmail,
-						String partnerBank,
-						String partnerAccount,
-						String partnerAcholer,
-						String partnerWeb,
-						String partnerSNS, HttpServletRequest request) {
-		return "funding/fundingPreview";
-	}
+	   // 미리보기(혜)
+	   @RequestMapping("preview.fd")
+	   public String fundingPreview(Project p, ArrayList<FundingDetail> rList, HttpSession session, Model model) {
+	      
+	      Member loginUser = (Member)session.getAttribute("loginUser");
+	      p.setMemberNo(loginUser.getMemberNo());
+	      
+	      // 컨트롤러에서 전달값을 Project에 받고, 
+	      // 그걸 다시 담아서 jsp에 포워딩하기.
+	      model.addAttribute("p", p);
+	      model.addAttribute("rList", rList);
+	      model.addAttribute("loginUser", loginUser);
+	      
+	      return "funding/fundingPreview";
+
+	   }
 	
 	@RequestMapping("pay.fun")
 	public String payForm(Order o, Model model) {

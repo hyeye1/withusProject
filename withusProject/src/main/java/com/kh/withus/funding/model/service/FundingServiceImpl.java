@@ -19,16 +19,36 @@ import com.kh.withus.order.model.vo.Order;
 @Service
 public class FundingServiceImpl implements FundingService {
 	
-	@Override
-	public ArrayList<Project> selectSearchList(HashMap<String, String> map) {
-		return funDao.selectSearchList(sqlSession, map);
-	}
-	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
 	@Autowired
 	private FundingDao funDao;
+	
+	@Override
+	public ArrayList<Project> selectFamousList() {
+		return funDao.selectFamousList(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Project> selectEveList() {
+		return funDao.selectEveList(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Project> selectNewList() {
+		return funDao.selectNewList(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Project> selectReadyList() {
+		return funDao.selectReadyList(sqlSession);
+	}
+	
+	@Override
+	public ArrayList<Project> selectSearchList(HashMap<String, String> map) {
+		return funDao.selectSearchList(sqlSession, map);
+	}
 	
 	@Override
 	public ArrayList<Category> selectCate() {
@@ -126,7 +146,5 @@ public class FundingServiceImpl implements FundingService {
 	public int like(MyPage m) {
 		return funDao.like(sqlSession, m);
 	}
-
-	
 
 }
