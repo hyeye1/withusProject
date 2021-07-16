@@ -15,16 +15,22 @@ public class CategoryDao {
 	}
 
 	public int insertCate(SqlSessionTemplate sqlSession, Category ct) {
-		return sqlSession.insert("categoryMapper.insertCate");
+		return sqlSession.insert("categoryMapper.insertCate", ct);
 	}
 
+	public Category selectCate(SqlSessionTemplate sqlSession, int catNo) {
+		return sqlSession.selectOne("categoryMapper.selectCate", catNo);
+	}
+	
 	public int updateCate(SqlSessionTemplate sqlSession, Category ct) {
-		return sqlSession.update("categoryMapper.updateCate");
+		return sqlSession.update("categoryMapper.updateCate", ct);
 	}
 
 	public int deleteCate(SqlSessionTemplate sqlSession, int cno) {
-		return sqlSession.delete("categoryMapper.deleteCate");
+		return sqlSession.delete("categoryMapper.deleteCate", cno);
 	}
+
+	
 
 
 	

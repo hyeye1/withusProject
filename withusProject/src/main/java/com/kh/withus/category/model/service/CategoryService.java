@@ -6,8 +6,11 @@ import com.kh.withus.category.model.vo.Category;
 
 public interface CategoryService {
 	
-	// 카테고리조회
+	// 카테고리 리스트조회
 	ArrayList<Category> menuList();
+	
+	// 카테고리 조회
+	Category selectCate(int cno);
 	
 	// 카테고리 추가
 	int insertCate(Category ct);
@@ -16,7 +19,9 @@ public interface CategoryService {
 	int updateCate(Category ct);
 	
 	// 카테고리 삭제
-	int deleteCate(int cno);
+	int deleteCate(int catNo);
+
+	
 
 
 }

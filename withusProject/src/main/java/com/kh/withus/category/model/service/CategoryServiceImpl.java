@@ -28,6 +28,11 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
+	public Category selectCate(int catNo) {
+		return cDao.selectCate(sqlSession, catNo);
+	}
+	
+	@Override
 	public int updateCate(Category ct) {
 		return cDao.updateCate(sqlSession, ct);
 	}
@@ -36,5 +41,7 @@ public class CategoryServiceImpl implements CategoryService {
 	public int deleteCate(int cno) {
 		return cDao.deleteCate(sqlSession, cno);
 	}
+
+	
 
 }

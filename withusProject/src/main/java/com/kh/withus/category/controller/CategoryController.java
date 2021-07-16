@@ -39,6 +39,7 @@ public class CategoryController {
 	
 	@RequestMapping("insert.cate")
 	public String insertCate(Category ct, HttpSession session, Model model) {
+		//System.out.println(ct);
 		int result = cService.insertCate(ct);
 		
 		if(result > 0) {
@@ -54,7 +55,8 @@ public class CategoryController {
 	
 	// 카테고리 수정
 	@RequestMapping("updateForm.cate")
-	public String updateForm() {
+	public String updateForm(int catNo, Model model) {
+		model.addAttribute("ct", cService.selectCate(catNo));
 		return "admin/menuUpdateForm";
 	}
 	

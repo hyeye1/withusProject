@@ -18,7 +18,7 @@
 	<jsp:include page="../common/manaHeader.jsp"/>
 	
 	<br>
-	<h3><b>카테고리 등록/수정</b></h3>
+	<h3><b>카테고리 수정</b></h3>
 	<hr><br>
 	
 	<div class="container">
@@ -28,17 +28,17 @@
 			<table class="table table-bordered">
 				<tr>
 					<th align="center"><label for="name">카테고리명</label></th>
-					<td><input type="text" id="catName" class="form-control" name="catName" required></td>
+					<td><input type="text" id="catName" class="form-control" name="catName" value="${ ct.catName }" required></td>
 				</tr>
 				<tr>
-					<th align="center"><label for="name">태그</label></th>
-					<td><input type="text" id="catTag" class="form-control" name="catTag" required></td>
+					<th align="center"><label for="tag">태그</label></th>
+					<td><input type="text" id="catTag" class="form-control" name="catTag" value="${ ct.catTag }"></td>
 				</tr>
 			</table>
 			<br>
 			
 			<div align="center">
-		        <button type="submit" class="btn btn-primary">등록하기</button>
+		        <button type="submit" class="btn btn-primary">수정하기</button>
 		        <button type="reset" class="btn btn-danger">취소하기</button>
 	        </div>
 		</form>
