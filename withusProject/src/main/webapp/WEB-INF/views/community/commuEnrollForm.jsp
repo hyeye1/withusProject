@@ -123,9 +123,9 @@
                 <div id="menubar">
                     <ul id="menubar_member" class="menubar_admin">
                         <p>커뮤니티</p>
-                        <li><a href="">자유</a></li>
-                        <li><a href="">질문</a></li>
-                        <li><a href="">공구모집</a></li>
+                        <li><a href="#free">자유</a></li>
+                        <li><a href="#ask">질문</a></li>
+                        <li><a href="#tool">공구모집</a></li>
                     </ul>
                 </div>
             </article>
@@ -137,26 +137,26 @@
                     <h4 style="display: flex; justify-content: center;">새글쓰기</h4>
                     <br>
 
-                    <form id="enrollForm" method="post" action="insert.c" enctype="multipart/form-data">
+                    <form id="enrollForm" method="post" action="insert.co" enctype="multipart/form-data">
                         <table align="center">
                             
                             <tr>
                                 <div class="select">
-                                    <select class="custom-select" name="condition">
+                                    <select class="custom-select" name="commuCate" id="commuCate">
                                         <option selected>카테고리 선택</option>
-                                        <option value="title">자유</option>
-                                        <option value="content">질문</option>
-                                        <option value="content">공구모집</option>
+                                        <option value="자유" id="free">자유</option>
+                                        <option value="질문" id="ask">질문</option>
+                                        <option value="공구모집" id="tool">공구모집</option>
                                     </select>
                                 </div>
                             </tr>
                             <tr>
-                                <th><label for="title">제목</label></th>
-                                <td><input type="text" id="title" class="form-control" name="communityTitle" required></td>
+                                <th><label for="commuTitle">제목</label></th>
+                                <td><input type="text" id="commuTitle" class="form-control" name="commuTitle" required></td>
                             </tr>
                             <tr>
-                                <th><label for="writer">작성자</label></th>
-                                <td><input type="text" id="writer" class="form-control" value="${ loginUser.memberId }" name="communityWriter" readonly>
+                                <th><label for="commuWriter">작성자</label></th>
+                                <td><input type="text" id="commuWriter" class="form-control" value="${ loginUser.memberId }" name="commuWriter" readonly>
                                 </td>
                             </tr>
                             <tr>
@@ -164,10 +164,10 @@
                                 <td><input type="file" id="upfile" class="form-control-file border" name="upfile"></td>
                             </tr>
                             <tr>
-                                <th colspan="2"><label for="content">내용</label></th>
+                                <th colspan="2"><label for="commuContent">내용</label></th>
                             </tr>
                             <tr>
-                                <th colspan="2"><textarea class="form-control" required name="communityContent" id="content" rows="10"
+                                <th colspan="2"><textarea class="form-control" required name="commuContent" id="commuContent" rows="10"
                                         style="resize:none;"></textarea></th>
                             </tr>
                         </table>

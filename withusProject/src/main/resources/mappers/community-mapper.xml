@@ -49,25 +49,31 @@
 		    by commu_no desc 
 	</select>
 	
-	<insert id="insertCommunnity" parameterType="Community">
+	<insert id="insertCommunity" parameterType="Community">
 		insert 
 		  into community
 		  (
 		    commu_no
+		  , commu_writer
 		  , commu_cate
 		  , commu_title
-		  , commu_writer
 		  , commu_content
+		  , commu_create
+		  , count
+		  , commu_status
 		  , commu_origin
 		  , commu_change
 		  )
 		  values
 		  (
 		    seq_comno.nextval
+		  , #{commuWriter}
 		  , #{commuCate}
 		  , #{commuTitle}
-		  , #{commuWriter}
 		  , #{commuContent}
+		  , sysdate
+		  , #{count}
+		  , 'Y'
 		  , #{commuOrigin}
 		  , #{commuChange}
 		  )
@@ -112,6 +118,7 @@
 	</update>
 	
 	 
+	<!-- 댓글 -->
 	<select id="selectCommuReplyList" resultMap="commuReply" parameterType="_int">
 		select
 		       com_re_no
@@ -177,7 +184,6 @@
          order
             by c.commu_create desc
 	</select>
-	
 	
 	
 	

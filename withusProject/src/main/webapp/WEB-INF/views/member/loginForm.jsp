@@ -199,16 +199,16 @@
                                     const kakao_account = res.kakao_account;
                                     console.log(kakao_account);
                                     console.log(kakao_account.profile.nickname);
-                                    emailCheck(kakao_account);
+                                    emailCheck(kakao_account.email, kakao_account.profile.nickname);
                                 }
                             });
                         }
                     });
                 }
-                function emailCheck(account){
+                function emailCheck(email, name){
                 	$.ajax({
     					url:"idCheck.me",
-    					data:{checkId:account.email},
+    					data:{checkId:email},
     					success:function(result){
     					console.log('응답결과 :', result);
     						if(result == "N"){ // 사용불가능
@@ -216,7 +216,7 @@
     							
     						}else{ // 사용가능
     							// 회원가입 페이지로 이동		
-    							location.href="enrollForm.me?email="+account.email + "&name=" + account.profile.nickname;
+    							location.href="enrollForm.me?email="+ email + "&name=" + name;
     						}
     						
     					},error:function(){
@@ -227,8 +227,6 @@
             </script>
             
             
-    
-
             <script type="text/javascript">
                 var naver_id_login = new naver_id_login("dLjj3gw6QxxdyRGAZ9q6", "http://localhost:8888/withus/naver_callback.me");
                 var state = naver_id_login.getUniqState();
@@ -237,18 +235,18 @@
                 naver_id_login.setState(state);
                 naver_id_login.setPopup();
                 naver_id_login.init_naver_id_login();
-
+				console.log(emailCheck);
                 function naverLoginResult(email, name, token) {
+                	
+                	console.log(email);
+                	console.log(name);
+                	console.log(token);
                     if (!token) {
                         console.log("로그인 실패하셨습니다.");
                         return;
                     } else {
-                        console.log(email);
-                        console.log(name);
-                        alert(token);
-                        // 로그인 성공시 서버인증을 통해 토큰발급
-                        // 토큰발급까지 성공했으면 메인페이지로
-                        
+                    	emailCheck(email, name);
+                   
                     }
 
 

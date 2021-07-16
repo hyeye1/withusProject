@@ -1,7 +1,5 @@
 package com.kh.withus.funding.model.vo;
 
-import java.sql.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,10 +24,10 @@ public class ProjectReply {
 	private String partnerName;
 	
 	
-	private int subReNo;
-	private String subReContent;
-	private Date subReDate;
-	private String subReStatus;
+	private int subreNo;
+	private String subreContent;
+	private String subreDate;
+	private String subreStatus;
 	
 	
 	

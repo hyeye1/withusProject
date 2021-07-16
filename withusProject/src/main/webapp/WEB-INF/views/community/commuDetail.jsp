@@ -142,16 +142,7 @@
                             <table id="contentArea" align="center" class="table">
                                 <tr>
                                     <div class="ray1">
-                                        <!-- <div id="nav1_1">
-                                            <img src="${ pageContext.request.contextPath }/resources/images/memberIcon.PNG"
-                                                width="50" height="50" class="rounded-circle">
-                                        </div>
-                                        <div id="nav1_2">
-                                            <b class="name">김미미</b>
-                                            <div class="date">
-                                                2021-04-12 12:25:19
-                                            </div>
-                                        </div> -->
+                                      
                                     </div>
                                 </tr>
                                 <br>
