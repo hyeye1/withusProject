@@ -13,6 +13,18 @@ public interface CommunityService {
 		int selectListCount();
 		ArrayList<Community> selectList(PageInfo pi);
 		
+		// 커뮤니티 리스트 조회 (페이징 처리)
+		int selectList1Count();
+		ArrayList<Community> selectList1(PageInfo pi);
+				
+		// 커뮤니티 리스트 조회 (페이징 처리)
+		int selectList2Count();
+		ArrayList<Community> selectList2(PageInfo pi);
+				
+		// 커뮤니티 리스트 조회 (페이징 처리)
+		int selectList3Count();
+		ArrayList<Community> selectList3(PageInfo pi);
+		
 		// 커뮤니티 작성
 		int insertCommunity(Community c);
 		

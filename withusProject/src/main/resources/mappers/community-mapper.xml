@@ -47,20 +47,61 @@
 		  from community c
 		  join member m on c.commu_writer = m.member_no
 		 where commu_status = 'Y'
-		   <choose>
-           		<when test="cateFilter == 'free'">
-           			and commu_cate = '%자유%'
-           		</when>
-           		<when test="cateFilter == 'ask'">
-           			and commu_cate = '%질문%'
-           		</when>
-           		<otherwise>
-           			and commu_cate = '%공구모집%'
-           		</otherwise>
-           </choose>
 		 order
 		    by commu_no desc 
 	</select>
+	
+	<select id="selectList1" resultMap="community">
+		select 
+		       c.commu_no
+		     , c.commu_cate
+		     , c.commu_title
+		     , c.commu_writer
+		     , c.count
+		     , to_char(c.commu_create, 'YYYY-MM-DD') commu_create
+		     , m.member_id
+		  from community c
+		  join member m on c.commu_writer = m.member_no
+		 where commu_status = 'Y'
+		   and (commu_cate like '자유')
+		 order
+		    by commu_no desc 
+	</select>
+	
+	<select id="selectList2" resultMap="community">
+		select 
+		       c.commu_no
+		     , c.commu_cate
+		     , c.commu_title
+		     , c.commu_writer
+		     , c.count
+		     , to_char(c.commu_create, 'YYYY-MM-DD') commu_create
+		     , m.member_id
+		  from community c
+		  join member m on c.commu_writer = m.member_no
+		 where commu_status = 'Y'
+		   and (commu_cate like '질문')
+		 order
+		    by commu_no desc 
+	</select>
+	
+	<select id="selectList3" resultMap="community">
+		select 
+		       c.commu_no
+		     , c.commu_cate
+		     , c.commu_title
+		     , c.commu_writer
+		     , c.count
+		     , to_char(c.commu_create, 'YYYY-MM-DD') commu_create
+		     , m.member_id
+		  from community c
+		  join member m on c.commu_writer = m.member_no
+		 where commu_status = 'Y'
+		   and (commu_cate like '공구모집')
+		 order
+		    by commu_no desc 
+	</select>
+	
 	
 	<insert id="insertCommunity" parameterType="Community">
 		insert 

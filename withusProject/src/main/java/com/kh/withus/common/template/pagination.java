@@ -4,7 +4,7 @@ import com.kh.withus.common.model.vo.PageInfo;
 
 public class pagination {
 
-	public static PageInfo getPageInfo(int listCount, int currentPage, int pageLimit, int boardLimit, String cate) {
+	public static PageInfo getPageInfo(int listCount, int currentPage, int pageLimit, int boardLimit) {
 		
 		int maxPage = (int)Math.ceil((double)listCount/boardLimit);
 		int startPage = (currentPage - 1) / pageLimit * pageLimit +1;
@@ -12,6 +12,6 @@ public class pagination {
 		if((endPage = startPage +pageLimit -1) > maxPage) {
 			endPage = maxPage;
 		}
-		return new PageInfo(listCount, currentPage, pageLimit, boardLimit, startPage, endPage, maxPage, cate);
+		return new PageInfo(listCount, currentPage, pageLimit, boardLimit, startPage, endPage, maxPage);
 	}
 }
