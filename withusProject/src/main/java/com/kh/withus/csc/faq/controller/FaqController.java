@@ -86,5 +86,34 @@ public class FaqController {
 		}
 	}
 	
+	
+	// faq 카테고리별 버튼
+	@RequestMapping("funding.faq")
+	public String selectFunding(Model model) {
+		ArrayList<Faq> list = fService.selectFunding();
+		model.addAttribute("list", list);
+		return "csc/faqListView";
+	}
+	
+	@RequestMapping("delivery.faq")
+	public String selectDelivery(Model model) {
+		ArrayList<Faq> list = fService.selectDelivery();
+		model.addAttribute("list", list);
+		return "csc/faqListView";
+	}
+	
+	@RequestMapping("exchange.faq")
+	public String selectExchange(Model model) {
+		ArrayList<Faq> list = fService.selectExchange();
+		model.addAttribute("list", list);
+		return "csc/faqListView";
+	}
+	
+	@RequestMapping("etc.faq")
+	public String selectEtc(Model model) {
+		ArrayList<Faq> list = fService.selectEtc();
+		model.addAttribute("list", list);
+		return "csc/faqListView";
+	}
 
 }

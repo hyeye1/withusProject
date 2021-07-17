@@ -53,11 +53,11 @@
 
 	<div class="container" align="center">
         <div class="btn" align="center">
-            <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;" value="1">전체보기</a> &nbsp;&nbsp;
-            <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;" value="2">펀딩상품관련</a> &nbsp;&nbsp;
-            <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;" value="3">배송관련</a> &nbsp;&nbsp;
-            <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;" value="4">교환/반품관련</a> &nbsp;&nbsp;
-            <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;" value="5">기타관련</a>
+            <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;">전체보기</a> &nbsp;&nbsp;
+            <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;" href="funding.faq">펀딩상품관련</a> &nbsp;&nbsp;
+            <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;" href="delivery.faq">배송관련</a> &nbsp;&nbsp;
+            <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;" href="exchange.faq">교환/반품관련</a> &nbsp;&nbsp;
+            <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;" href="etc.faq">기타관련</a>
         </div>
         <br><br><br>
 

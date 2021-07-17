@@ -43,5 +43,27 @@ public class FaqServiceImpl implements FaqService {
 		return fDao.selectFaq(sqlSession, fno);
 	}
 
+	
+	
+	@Override
+	public ArrayList<Faq> selectFunding() {
+		return fDao.selectFunding(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Faq> selectDelivery() {
+		return fDao.selectDelivery(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Faq> selectExchange() {
+		return fDao.selectExchange(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Faq> selectEtc() {
+		return fDao.selectEtc(sqlSession);
+	}
+
 
 }

@@ -23,6 +23,11 @@ public interface FaqService {
 	// faq 삭제
 	int deleteFaq(int fno);
 
+	// faq 카테고리별 조회
+	ArrayList<Faq> selectFunding();
+	ArrayList<Faq> selectDelivery();
+	ArrayList<Faq> selectExchange();
+	ArrayList<Faq> selectEtc();
 	
 
 }
