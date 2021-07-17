@@ -3,6 +3,7 @@ package com.kh.withus.member.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.RowBounds;
@@ -211,10 +212,11 @@ public class MemberController {
 	
 	// 회원 조회
 	@RequestMapping("memberListView.mana")
-	public ModelAndView selectMemberList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,ModelAndView mv) {
+	public ModelAndView selectMemberList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
+										 ModelAndView mv) {
 		
 		int listCount = mService.selectListCount();
-		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 10);
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 10, null);
 		
 		ArrayList<Member> mList = mService.selectList(pi);
 		
@@ -240,7 +242,7 @@ public class MemberController {
 	@RequestMapping("deleteMem.mana")
 	public String deleteMemberMana(@RequestParam(defaultValue="") String mStatus,
 									 @RequestParam(defaultValue= "") String memName,
-									 HttpSession session) {
+									 HttpSession session, HttpServletRequest request) {
 		
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -248,13 +250,16 @@ public class MemberController {
 		map.put("memName", memName );
 		//System.out.println(map);
 		
+		// 이전 url 가져오기
+		String referer = (String)request.getHeader("REFERER");
+		
 		int delMem = mService.deleteMemberMana(map);
 		
 		if (delMem > 0) {
 			//session.setAttribute("alertMsg", "탈퇴처리 성공");
-			return "redirect:memberListView.mana";
+			return "redirect:" + referer ;
 		}else {
-			session.setAttribute("alertMsg", "실패실패");
+			session.setAttribute("alertMsg", "탈퇴 처리 실패");
 			return "common/manaErrorPage";
 		}
 		
@@ -280,7 +285,7 @@ public class MemberController {
 		int count = mService.countSearch(map);
 		
 		// 페이징 처리
-		PageInfo pi = pagination.getPageInfo(count, currentPage, 10, 10);
+		PageInfo pi = pagination.getPageInfo(count, currentPage, 10, 10, null);
 		
 		// 검색결과 담아내기
 		ArrayList<Member> mList = mService.searchMember(map, pi);

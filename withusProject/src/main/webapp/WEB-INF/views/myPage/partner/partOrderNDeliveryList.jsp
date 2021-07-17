@@ -93,6 +93,7 @@
   button.btn.btn-danger.oppositionBtn{ width: 48%;}
   
   .cancle{color: red;}
+  .wh{width: 200px; hight: 130px;}
 
 
 </style>
@@ -269,8 +270,6 @@
 					                      </c:choose>
 					                      <td>${ p.shippingCom } <br> ${ p.shippingNo }</td>
 					                      <td style="font-size:10px;">
-					                        <!-- 환불 가능 기간을 언제로 할껀지?-->
-					                        <!-- 리워드 기간 -->
 					                        <!-- 환불 신청자만 버튼이 노출 -->
 					                        <c:choose>
 						                        <c:when test="${ p.refundStatus eq 'S' }">
@@ -278,9 +277,14 @@
 							                        	확인하기
 						                        	</button>
 						                        </c:when>
-					                        	<c:when test="${ p.refundStatus eq 'Y' or p.refundStatus eq 'N'}">
-							                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
+					                        	<c:when test="${ p.refundStatus eq 'Y'}">
+							                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#refundInfo_done" onclick="ajaxRefundInfo();">
 							                        	승인완료
+						                        	</button>
+					                        	</c:when>
+					                        	<c:when test="${ p.refundStatus eq 'N'}">
+							                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#refundInfo_done" onclick="ajaxRefundInfo();">
+							                        	거절
 						                        	</button>
 					                        	</c:when>
 					                        </c:choose>
@@ -324,10 +328,10 @@
 		              			   				+ "</tr>"
 			              			   			+ "<tr>" 
 		              			   				+ "<th>옵션</th>"
-		              			   				+ "<td>" + oi.orderOption / oi.orderCount + "</td>" 
+		              			   				+ "<td>" + oi.orderOption / oi.orderCount + " 개</td>" 
 		              			   				+ "</tr>"	
 			              			   			+ "<th>총 결제 금액</th>"
-		              			   				+ "<td>" + oi.totalPrice + "원</td>" 
+		              			   				+ "<td>" + oi.totalPrice + " 원</td>" 
 		              			   				+ "</tr>"
 		              			   				+ "</table>"
 	              			   				
@@ -401,9 +405,13 @@
 				          			   				+ "</tr>"
 				              			   			+ "<tr>" 
 				          			   				+ "<th>증빙자료</th>"
-				          			   				+ "<td>" +"<a href="+"${ ri.reChangeName }" +"download=" + "${ ri.reChangeName }" + ">"
-				          			   				+ ri.reChangeName
-				          			   				+ "</td>" 
+				          			   				//+ "<td>" +"<a href="+"${ ri.reChangeName }" +"download=" + "${ ri.reChangeName }" + ">"
+				          			   				//<img class="wh" src="${ ri.reChangeName }" >
+				          			   				if(ri.reChangeName == null){
+				          			   					+ "<td>자료없음</td>"
+				          			   				}else{
+				          			   				+ "<td>"+ "<image class=" + "'wh'" + "src="+ "'${"+ ri.reChangeName + "}'" + "></td>"
+				          			   				}
 				          			   				+ "</tr>"
 				          			   				+ "</table>"
 				          			   				
@@ -498,7 +506,7 @@
 					</div>
                     </form>
 
-					<!-- 환불신청내역 조회  -->
+					<!-- 환불신청내역 조회  / 임시 -->
 					<!-- The Modal -->
 					<div class="modal" id="refundInfo">
 						<div class="modal-dialog modal-dialog-centered">
@@ -576,6 +584,63 @@
 							</div>
 						</div>
 					</div>
+					
+					<!-- 버튼 조건처리해서 모달 하나로 통일 할꺼임 -->
+					<!-- The Modal -->
+					<div class="modal" id="refundInfo_done">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+
+								<!-- Modal Header -->
+								<div class="modal-header none">
+									<h5 class="modal-title">펀딩금 반환처리</h5>
+									<button type="button" class="close" data-dismiss="modal">×</button>
+								</div>
+
+								<!-- Modal body -->
+		                        <div class="modal-body">
+		                          <label style="font-size:14px;">서포터가 펀딩금반환 요청한 내역을 확인하고 승인 또는 거절 처리하세요.</label>
+		                          	<input type="hidden" class="ono" name="ono" value="">
+		                            <div class="partnerRefund">
+                                
+		                           </div>
+		                           <br>
+		                           <div class="partnerRefundInfo">
+		                            
+		                           </div>
+		           
+		                           <table>
+		                               <div class="refundTb">
+								        
+								       </div>
+		                               <tr>
+		                                   <td colspan="2" style="padding: 20px 0 0;">
+		                                        [펀딩금 반환 신청 처리]
+		                                   <table class="subTable">
+		                                       <tr>
+		                                           <td><b>승인</b></td>
+		                                       </tr>
+		                                       <tr>
+		                                           <td class="ment">신청 사유가 반환 정책에 해당된다면, 승인처리하세요. 승인처리시, 결제 취소가 진행됩니다.</td>
+		                                       </tr>
+		                                       <tr>
+		                                           <td><b>거절</b></td>
+		                                       </tr>
+		                                       <tr>
+		                                           <td class="ment">신청 사유가 반환 정책에 해당하지 않은 경우, 거절 처리하세요. 결제취소가 진행되지 않습니다.</td>
+		                                       </tr>
+		                                   </table>
+		                                   </td>
+		                               </tr>
+		                           </table>
+		                       </div>
+		
+							
+		
+							</div>
+						</div>
+					</div>
+					
 				
 
 		           	<!-- 페이징 -->

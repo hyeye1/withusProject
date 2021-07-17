@@ -60,6 +60,7 @@
 			<mapping path="/partnerJoinForm.me"/>
 			<mapping path="/partnerJoin.me"/>
 			
+			<mapping path="/orderNDeliveryList.part"/>
 			
 			<beans:bean id="" class="com.kh.withus.common.interceptor.LoginInterceptor"/>
 		</interceptor>

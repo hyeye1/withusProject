@@ -18,7 +18,7 @@ public class AdminLoginInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		//Member loginAdmin = (Member) session.getAttribute("loginAdmin");
-		System.out.println("사용자"+loginUser);
+		//System.out.println("사용자"+loginUser);
 		//System.out.println("관리자"+loginAdmin);
 		
 	    // 로그인 유무 확인
