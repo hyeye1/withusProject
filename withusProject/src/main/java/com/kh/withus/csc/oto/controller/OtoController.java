@@ -32,7 +32,7 @@ public class OtoController {
 	public ModelAndView selectOtoList(@RequestParam (value="currentPage", defaultValue="1")int currentPage, ModelAndView mv) {
 		
 		int listCount = oService.selectListCount();
-		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 5, null);
 		
 		ArrayList<Oto> list = oService.selectList(pi);
 		
@@ -47,12 +47,12 @@ public class OtoController {
 	}
 	
 	@RequestMapping("insert.oto")
-	public String insertOto(Oto o, MultipartFile upfile, HttpSession session, Model model) {
+	public String insertOto(Oto o, MultipartFile cscUpfile, HttpSession session, Model model) {
 		
-		if(!upfile.getOriginalFilename().equals("")) {
-			String changeName = saveFile(session, upfile);
+		if(!cscUpfile.getOriginalFilename().equals("")) {
+			String changeName = saveFile(session, cscUpfile);
 			
-			o.setOtoOriginname(upfile.getOriginalFilename());
+			o.setOtoOriginname(cscUpfile.getOriginalFilename());
 			o.setOtoChangename("resources/cscUploadFile/" + changeName);
 		}
 		
@@ -60,7 +60,7 @@ public class OtoController {
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "1:1문의가 등록되었습니다.");
-			return "redirect:myPage.me";
+			return "redirect:list.oto";
 		}else {
 			model.addAttribute("errorMsg", "1:1문의가 등록되지않았습니다.");
 			return "common/errorPage";

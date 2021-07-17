@@ -13,9 +13,6 @@
 </head>
 <body>
 
-    <!-- 6/9 윤경 생성-->
-    <!-- 6/12 윤경 수정-->
-
     <!-- 해더바 포함 -->
     <jsp:include page="../common/header.jsp"/>
 
@@ -23,25 +20,25 @@
         <div class="content">
             <br><br>
             <div class="innerOuter">
-                <h2>게시글 작성하기</h2>
-                <br>
+                <h3>게시글 작성하기</h3>
+                <hr>
 
-                <form id="enrollForm" method="post" action="" enctype="multipart/form-data">
-                    <table align="center" border="1px;">
+                <form id="enrollForm" method="post" action="insert.oto" enctype="multipart/form-data">
+                    <table class="table table-bordered" align="center" border="1px;">
                         <tr>
                             <th><label for="title">제목</label></th>
                             <td><input type="text" id="title" class="form-control" name="otoTitle" required></td>
                         </tr>
                         <tr>
                             <th><label for="writer">작성자</label></th>
-                            <td><input type="text" id="writer" class="form-control" value="memberNo" name="memberNo" readonly></td>
+                            <td><input type="text" id="memberNo" class="form-control" name="memberNo" value="${ loginUser.memberNo }" readonly></td>
                         </tr>
                         <tr>
                             <th><label for="upfile">첨부파일</label></th>
                             <td><input type="file" id="cscUpfile" class="form-control-file border" name="cscUpfile"></td>
                         </tr>
                         <tr>
-                            <th colspan="2"><textarea class="form-control" required name="otoContent" id="content" style="width: 1000px; height: auto;"></textarea></th>
+                            <th colspan="2"><textarea class="form-control" required name="otoContent" id="content" style="height: 500px;"></textarea></th>
                         </tr>
                     </table>
                     <br>

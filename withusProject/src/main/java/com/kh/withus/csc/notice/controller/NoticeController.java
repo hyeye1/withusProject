@@ -33,7 +33,7 @@ public class NoticeController {
 	public ModelAndView selectListCount(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
 		int listCount = nService.selectListCount();
-		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 5, 10);
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 5, 10, null);
 		
 		ArrayList<Notice> list = nService.selectList(pi);
 		
