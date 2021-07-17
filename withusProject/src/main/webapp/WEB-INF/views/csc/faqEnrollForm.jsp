@@ -25,16 +25,16 @@
     <br><br>
 
     <div class="container">
-        <form action="insert.faq" method="post" id="enrollForm" >
-            <table align="center" border="1px">
+        <form action="insert.faq" method="post" id="enrollForm" enctype="multipart/form-data">
+            <table align="table table-bordered">
                 <tr>
                     <th style="width:200px;"><label for="title">카테고리 선택</label></th>
                     <td>
                         <select class="select" required>
-                            <option id="select1" value="funding">펀딩상품 관련</option>
-                            <option id="select2" value="delivery">배송 관련</option>
-                            <option id="select3" value="exchange">교환/반품 관련</option>
-                            <option id="select4" value="etc">기타 관련</option>
+                            <option id="funding" value="2">펀딩상품 관련</option>
+                            <option id="delivery" value="3">배송 관련</option>
+                            <option id="exchange" value="4">교환/반품 관련</option>
+                            <option id="etc" value="5">기타 관련</option>
                         </select>
                     </td>
                 </tr>
