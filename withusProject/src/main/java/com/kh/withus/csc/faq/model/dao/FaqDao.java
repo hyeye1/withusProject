@@ -13,12 +13,8 @@ public class FaqDao {
 	
 	// 6/27 윤경 생성
 	
-	public ArrayList<Faq> selectList(SqlSessionTemplate sqlSession, Faq f) {
-		return (ArrayList)sqlSession.selectList("faqMapper.selectList", f);
-	}
-	
-	public int selectFaq(SqlSessionTemplate sqlSession) {
-		return parseInt(sqlSession.selectList("faqMapper.selectFaq"));
+	public ArrayList<Faq> selectList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("faqMapper.selectList");
 	}
 	
 	public int insertFaq(SqlSessionTemplate sqlSession, Faq f) {
@@ -31,6 +27,10 @@ public class FaqDao {
 	
 	public int deleteFaq(SqlSessionTemplate sqlSession, int fno) {
 		return sqlSession.update("faqMapper.deleteFaq", fno);
+	}
+
+	public Faq selectFaq(SqlSessionTemplate sqlSession, int fno) {
+		return sqlSession.selectOne("faqMapper.selectFaq", fno);
 	}
 	
 

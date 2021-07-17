@@ -16,9 +16,6 @@
 </head>
 <body>
 	
-    <!-- 6/12 윤경 생성? 수정? -->
-    <!-- 7/9 수정 -->
-
     <!-- 메뉴바 포함 -->
     <jsp:include page="../common/header.jsp"/>
 
@@ -40,11 +37,11 @@
                 </tr>
                 <tr>
                     <th><label for="title">제목</label></th>
-                    <td><input type="text" required>${ f.faqTitle }</td>
+                    <td><input type="text" required value="${ f.faqTitle }">${ f.faqTitle }</td>
                 </tr>
                 <tr>
                     <th><label for="title">내용</label></th>
-                    <td><textarea style="width:600px;" rows="10" required>${ f.faqContent }</textarea></td>
+                    <td><textarea style="width:600px;" rows="10" value="${ f.faqContent }" required>${ f.faqContent }</textarea></td>
                 </tr>
             </table>
         </form>
