@@ -265,7 +265,7 @@ public class FundingController {
 
 	public String saveFile(HttpSession session, MultipartFile upfile) {
 		
-		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
+		String savePath = session.getServletContext().getRealPath("/resources/project_thumbnail/");
 		
 		String originName = upfile.getOriginalFilename();  // 원본명 ("aaa.jpg")
 		

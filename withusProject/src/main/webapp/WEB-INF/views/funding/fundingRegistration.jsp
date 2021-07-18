@@ -441,32 +441,28 @@
                                     <option value="9">반려동물</option>
                                     <option value="10">테크/가전</option>
                                 </select>
-                                <input type="text" id="projectTitle" name="projectTitle" placeholder="제목을 입력해주세요">
+                                <input type="text" id="projectTitle" name="projectTitle" placeholder="제목을 입력해주세요"  required>
                             </div><br>
     
                             <!-- 프로젝트 요약 -->
                             <div>
                                 <b class="regiTitle">프로젝트 요약</b> <br>
                                 <input type="text" id="projectSummary" name="projectSummary"
-                                    placeholder="프로젝트를 간단히 설명해주세요">
+                                    placeholder="프로젝트를 간단히 설명해주세요"  required>
                             </div><br>
     
                             <!-- 목표 금액 -->
                             <div>
                                 <b class="regiTitle">목표 금액을 적어주세요</b> <br>
-                                <input type="text" id="projectGprice" name="projectGprice" placeholder="0">원
+                                <input type="text" id="projectGprice" name="projectGprice" placeholder="0" value="0" required>원
                                 
-                                <!-- typeMismatch 오류잡기: String 타입으로 변환 -->
+                                <!-- 미리보기 typeMismatch 오류잡기: String 타입으로 변환
                                 <script>
                                 	$(function(){
                                 		var gPrice = $("#projectGprice").val();
-                                		if(gPrice==null){
-                                			gPrice = "0";
-                                		}else{
-                                			gPrice = '"' + gPrice + '"' ;
-                                		}
+                                		$(gPrice).
                                 	})
-                                </script>
+                                </script> -->
                             </div><br>
     
                             <div>
