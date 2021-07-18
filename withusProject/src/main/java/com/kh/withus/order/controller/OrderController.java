@@ -35,7 +35,7 @@ public class OrderController {
 	                                        int currentPage, ModelAndView mv) {
 		
 		int listCount = oService.selectListCount();
-		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 10, null);
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 10);
 
 		ArrayList<Order> olist = oService.selectList(pi);
 		
@@ -106,7 +106,7 @@ public class OrderController {
 		
 		int count = oService.countSearch(map);
 		
-		PageInfo pi = pagination.getPageInfo(count, currentPage, 10, 10, null);
+		PageInfo pi = pagination.getPageInfo(count, currentPage, 10, 10);
 		
 		ArrayList<Order> olist = oService.selectSearchOrder(map, pi);
 			
@@ -146,7 +146,7 @@ public class OrderController {
 			Order sc = oService.selectStatusCount(mno);
 			
 			// 페이징 처리
-			PageInfo pi = pagination.getPageInfo(totalList, currentPage, 10, 10, null);
+			PageInfo pi = pagination.getPageInfo(totalList, currentPage, 10, 10);
 			
 			// 주문현황 리스트 
 			ArrayList<Order> polist = oService.selectPartnerOrderList(pi, mno);
@@ -198,7 +198,7 @@ public class OrderController {
 		
 		int count = oService.countSearchPartOrder(map);
 		
-		PageInfo pi = pagination.getPageInfo(count, currentPage, 10, 10, null);
+		PageInfo pi = pagination.getPageInfo(count, currentPage, 10, 10);
 		
 		ArrayList<Order> polist = oService.selectSearchPartOrder(map, pi);
 		
