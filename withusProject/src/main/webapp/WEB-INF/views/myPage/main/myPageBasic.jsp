@@ -146,14 +146,7 @@
                   					<table>
 			                            <tr>
 			                                <td colspan="3">
-			                                	<c:choose>
-			                                		<c:when test="${ empty likeList.projectThum }">
-			                                			<img src="resources/project_thumbnail/no_image.jpg"  width="240" height="200">
-			                                		</c:when>
-			                                		<c:otherwise>
-			                                			<img src="${ likeList.projectThum }"  width="240" height="200">
-			                                		</c:otherwise>
-			                                	</c:choose>
+			                                	<img src="${ likeList.projectThum }"  width="240" height="200">
 			                                </td>
 			                            </tr>
 			                            <tr>
