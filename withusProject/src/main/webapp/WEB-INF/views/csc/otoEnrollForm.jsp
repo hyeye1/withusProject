@@ -20,18 +20,16 @@
         <div class="content">
             <br><br>
             <div class="innerOuter">
-                <h3>게시글 작성하기</h3>
+                <h3><b>문의글 작성하기</b></h3>
                 <hr>
 
+				<input type="hidden" id="memberNo" class="form-control" name="memberNo" value="${ o.memberNo }">
                 <form id="enrollForm" method="post" action="insert.oto" enctype="multipart/form-data">
-                    <table table table-bordered align="center" border="1px;">
+                    <table class="table table-bordered" align="center">
+                    
                         <tr>
                             <th><label for="title">제목</label></th>
                             <td><input type="text" id="title" class="form-control" name="otoTitle" required></td>
-                        </tr>
-                        <tr>
-                            <th><label for="writer">작성자</label></th>
-                            <td><input type="text" id="memberNo" class="form-control" name="memberNo" value="${ loginUser.memberNo }" readonly></td>
                         </tr>
                         <tr>
                             <th><label for="upfile">첨부파일</label></th>

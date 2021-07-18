@@ -58,6 +58,10 @@ public class OtoController {
 		
 		int result = oService.insertOto(o);
 		
+		//System.out.println(o);
+		//System.out.println(cscUpfile);
+		
+		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "1:1문의가 등록되었습니다.");
 			return "redirect:list.oto";

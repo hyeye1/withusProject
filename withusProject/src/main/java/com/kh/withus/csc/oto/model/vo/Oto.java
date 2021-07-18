@@ -15,7 +15,7 @@ public class Oto {
 	// 6/27 윤경 생성
 	
 	private int otoNo;
-	private int memberNo;
+	private String memberNo;
 	private String otoCat;
 	private String otoTitle;
 	private String otoContent;
