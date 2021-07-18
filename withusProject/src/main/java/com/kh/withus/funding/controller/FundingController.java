@@ -506,11 +506,11 @@ public class FundingController {
 			System.out.println(referer);
 			
 			if(result > 0 ) {
-				//session.setAttribute("alertMsg", "환불 승인");
-				return "admin/fundingManaListView";
+				session.setAttribute("alertMsg", "프로젝트 승인 처리 완료");
+				return "redirect:fundingListView.mana";
 			}else {
 				session.setAttribute("alertMsg", "실패실패");
-				return "admin/fundingManaListView";
+				return "redirect:fundingConsiderPre.mana?pno=" + pno;
 			}
 			 
 		}
