@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.kh.withus.category.model.vo.Category;
+import com.kh.withus.common.model.vo.PageInfo;
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.vo.Project;
 import com.kh.withus.funding.model.vo.ProjectReply;
+import com.kh.withus.funding.model.vo.Reward;
+import com.kh.withus.member.model.vo.Member;
 import com.kh.withus.myPage.model.vo.MyPage;
 import com.kh.withus.order.model.vo.Order;
 
@@ -68,6 +71,26 @@ public interface FundingService {
 
 	// 펀딩 좋아요
 	int like(MyPage m);
+	
+	
+	
+	
+	// 관리자 - 펀딩관리 
+	// 펀딩 리스트 수
+	int selectFListCount();
+
+	// 펀딩 리스트
+	ArrayList<Project> selectFundingList(PageInfo pi);
+
+	// 펃딩 미리보기
+	FundingDetail fundingConsiderPre(int pno);
+	Member selectPartnerInfo(int pno);
+	ArrayList<FundingDetail> selectFundingReward(int pno);
+
+	// 펀딩 승인/반려
+	int updateProjectStatus(HashMap<String, Object> map);
+
+	
 	
 	
 

@@ -3,14 +3,17 @@ package com.kh.withus.funding.model.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.withus.category.model.vo.Category;
+import com.kh.withus.common.model.vo.PageInfo;
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.vo.Project;
 import com.kh.withus.funding.model.vo.ProjectReply;
 import com.kh.withus.funding.model.vo.Reward;
+import com.kh.withus.member.model.vo.Member;
 import com.kh.withus.myPage.model.vo.MyPage;
 import com.kh.withus.order.model.vo.Order;
 
@@ -103,6 +106,39 @@ public class FundingDao {
 
 	public int like(SqlSessionTemplate sqlSession, MyPage m) {
 		return sqlSession.insert("fundingMapper.like", m);
+	}
+
+	
+	// 관리자 
+	
+	public int selectFListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("fundingMapper.selectFListCount");
+	}
+
+	public ArrayList<Project> selectFundingList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit(); 
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectFundingList", null, rowBounds);
+	}
+
+	public FundingDetail fundingConsiderPre(SqlSessionTemplate sqlSession, int pno) {
+	
+		return sqlSession.selectOne("fundingMapper.fundingConsiderPre", pno);
+	}
+
+	public ArrayList<FundingDetail> selectFundingReward(SqlSessionTemplate sqlSession, int pno) {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectFundingReward", pno);
+	}
+
+	public Member selectPartnerInfo(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("fundingMapper.selectPartnerInfo", pno);
+	}
+
+	public int updateProjectStatus(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		return sqlSession.update("fundingMapper.updateProjectStatus", map);
 	}
 
 	

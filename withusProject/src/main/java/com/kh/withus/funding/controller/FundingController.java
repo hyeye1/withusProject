@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,10 +21,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.kh.withus.category.model.vo.Category;
+import com.kh.withus.common.model.vo.PageInfo;
+import com.kh.withus.common.template.pagination;
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.service.FundingService;
 import com.kh.withus.funding.model.vo.Project;
 import com.kh.withus.funding.model.vo.ProjectReply;
+import com.kh.withus.funding.model.vo.Reward;
 import com.kh.withus.funding.model.vo.Search;
 import com.kh.withus.member.model.vo.Member;
 import com.kh.withus.myPage.model.service.MyPageService;
@@ -423,6 +425,97 @@ public class FundingController {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// +현정 : 관리자
+	
+	// 펀딩 리스트 조회
+	@RequestMapping("fundingListView.mana")
+	public ModelAndView selectFundingList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
+			 ModelAndView mv) {
+		
+		int listCount = funService.selectFListCount();
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 10, null);
+		
+		ArrayList<Project> fdList = funService.selectFundingList(pi);
+		//System.out.println(fdList);
+		
+		mv.addObject("fdList",fdList)
+		.addObject("pi", pi)
+		.setViewName("admin/fundingManaListView");
+		return mv;
+		
+	}
+
+	// 펀딩 승인처리 , 미리보기로 처리하기
+	   @RequestMapping("fundingConsiderPre.mana")
+	   public String fundingConsiderPre(int pno, Model model) {
+	
+		   //Project p = funService.selectFundingConsider(pno);
+		   FundingDetail p = funService.fundingConsiderPre(pno);
+		   Member m = funService.selectPartnerInfo(pno);
+		   ArrayList<FundingDetail> r = funService.selectFundingReward(pno);
+		   
+		   model.addAttribute("p", p); 
+		   model.addAttribute("m", m); 
+		   model.addAttribute("r", r); 
+		   
+	      return "admin/fundingManaConsider";
+
+	   }
+	
+	   // 승인/반려
+	   @RequestMapping("fundingConsider.mana")
+		public String updateProjectStatus(@RequestParam(defaultValue="") int pno,
+											@RequestParam(defaultValue="") String considerBtn,
+											HttpSession session, HttpServletRequest request) {
+			
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("pno", pno);
+			map.put("considerBtn", considerBtn);
+			//System.out.println(map);
+			
+			int result = funService.updateProjectStatus(map);
+			
+			// 이전 url 가져오기
+			String referer = (String)request.getHeader("REFERER");
+			System.out.println(referer);
+			
+			if(result > 0 ) {
+				//session.setAttribute("alertMsg", "환불 승인");
+				return "admin/fundingManaListView";
+			}else {
+				session.setAttribute("alertMsg", "실패실패");
+				return "admin/fundingManaListView";
+			}
+			 
+		}
+	   
+	   // 펀딩 검색?정렬?
 	
 	
 	

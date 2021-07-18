@@ -19,6 +19,10 @@
 		<result column="dday" property="dday" />
 		<result column="member_no" property="memberNo" />
 		
+		<!-- 관리자 -->
+		<result column="project_status" property="projectStatus" />
+		<result column="cat_name" property="catName" />
+		
 	</resultMap>
 	
 	<resultMap id="fundingDetail" type="FundingDetail">
@@ -75,6 +79,17 @@
 		<result column="subre_content" property="subreContent" />
 		<result column="subre_date" property="subreDate" />
 		<result column="subre_status" property="subreStatus" />
+	</resultMap>
+	
+	
+	<resultMap id="memberResultSet" type="Member">
+		<id column="member_no" property="memberNo"/>
+		<result column="member_name" property="memberName"/>
+		<result column="member_phone" property="memberPhone"/>
+		<result column="member_profile" property="memberProfile"/>
+		<result column="partner_name" property="partnerName"/>
+		<result column="partner_intro" property="partnerIntro"/>
+		
 	</resultMap>
 	
 	<select id="selectFamousList" resultMap="fundingListResultSet">
@@ -687,5 +702,129 @@
   	</insert>
  	
  	
-
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	<!-- 관리자 -->
+	<!-- 페이징 처리 --> 	
+ 	<select id="selectFListCount" resultType="_int">
+ 		select
+			   count(*)
+		from project
+ 	</select>
+ 	
+ 	<!-- 펀딩 리스트 -->
+ 	<select id="selectFundingList" resultMap="fundingListResultSet">
+ 		select
+		        p.project_no
+		      , c.cat_name
+		      , p.project_title
+		      , m.partner_name
+		      <!-- , 달성률 -->
+		      , to_char(p.project_end_dt,'YYYY-MM-DD') project_end_dt
+		      <!-- ,좋아요 -->
+		      , ceil(p.project_end_dt - sysdate) dday 
+		      , p.project_status
+		  from project p 
+		  join category c on(c.cat_no = p.cat_no)
+		  join member m on(m.member_no = p.member_no)
+		  full join likey l on(l.project_no = p.project_no)
+		  order
+		     by p.project_no desc
+ 	</select>
+ 	
+ 	<!-- 프로젝트 조회 -->
+ 	<select id="fundingConsiderPre" resultMap="fundingDetail" 
+			parameterType="FundingDetail">
+	    select
+		       cat_no
+		     , cat_name
+		     , project_no
+		     , project_title
+		     , project_thum
+		     , (select sum(total_price)
+		          from tb_order
+		         where project_no = #{pno}) total_price
+		     , project_gprice
+		     , (select (select sum(total_price)
+		          from tb_order
+		         where project_no = #{pno}) / project_gprice * 100
+		          from project
+		         where project_no = #{pno}) percentage
+		     , ceil(project_end_dt - sysdate) dday
+		     , (select count(*)
+		          from tb_order
+		         where project_no = #{pno}) supporter
+		     , project_end_dt
+		     , to_char(project_end_dt + 1, 'MM"월" DD"일"') pay_date
+		     , delivery_date
+		     , project_content
+		     , project_refcon
+		     , hashtag
+		     , member_no
+		     , partner_name
+		     , partner_intro
+		     , member_profile
+		     , partner_phone
+		     , partner_email
+		     , phone_yn
+		  from project
+		  join member using(member_no)
+		  join category using(cat_no)
+		 where project_no = #{pno}
+    </select>
+    
+    <!-- 창작자 조회 -->
+    <select id="selectPartnerInfo" resultMap="memberResultSet" 
+			parameterType="Member">
+    	select
+		       m.member_profile
+			 , m.partner_name
+			 , m.partner_intro
+	      from member m
+		  join project p on(p.member_no = m.member_no)
+		 where p.project_no = #{pno}
+    </select>
+ 	
+ 	<!-- 리워드 조회 -->
+    <select id="selectFundingReward" resultMap="fundingDetail"
+    		parameterType="FundingDetail">
+    	select 
+		       project_title
+		     , reward_no
+		     , reward_title
+		     , reward_price
+		     , reward_stock
+		     , delivery_date
+		     , reward_ship
+		     , reward_content
+		     , option_yn
+		  from reward
+		  join project using(project_no)
+		 where 
+		       project_no = #{pno}
+    </select>
+    
+   	<!-- 펀딩 승인/반려 처리 -->
+   	<update id="updateProjectStatus" parameterType="hashmap">
+		update project
+		   set 
+		   	   project_status = #{considerBtn}
+		 where project_no = #{pno}  
+	</update>
+ 	
+ 
+    
  </mapper>

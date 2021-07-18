@@ -153,7 +153,7 @@
 
                 <li><a href="list.cate">메뉴관리</a></li>
 
-                <li><a href="">펀딩관리</a> </li>
+                <li><a href="fundingListView.mana">펀딩관리</a> </li>
 
                 <li><a>결제관리</a>
                     <ul class="navi_sub">
