@@ -23,7 +23,7 @@
 	        <div class="content">
 	            <br><br>
 	            <div class="innerOuter">
-	                <h2>게시글 수정하기</h2>
+	                <h3><b>공지사항 수정하기</b></h3>
 	                <br>
 	
 	                <form id="updateForm" method="post" action="update.no" enctype="multipart/form-data">

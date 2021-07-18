@@ -27,53 +27,57 @@
 
 
 	<div class="container">
+	<br><br>
 		<h3><b>공지사항 상세보기</b></h3>
     	<hr><br>
 
+		<div class="edit" align="right">
+			<a class="btn btn-success" onclick="postFormSubmit(1)">수정</a> &nbsp;
+		    <a class="btn btn-warning" onclick="postFormSubmit(2)">삭제</a>
+		</div>
+		<br>
+		
 		<table class="table table-bordered" id="noticeDetail">
 			<thead>
 			  <tr>
 				<th width="200" height="35">제목</th>
-	            <td  width="800" style="padding-left: 10px;">${ n.noticeTitle }</td>
+	            <td  width="800" style="padding-left: 10px;">${ nM.noticeTitle }</td>
 			  </tr>
 			</thead>
 			<tbody>
 				<tr>
 					<th height="35">작성일</th>
-					<td style="padding-left: 10px;">${ n.createDate }</td>
+					<td style="padding-left: 10px;">${ nM.createDate }</td>
 				</tr>
 				<tr>
-					<td colspan="2"><textarea required style="width:1000px; height: auto;">${ n.noticeContent }</textarea></td>
+					<td colspan="2" style="height: 500px;">${ nM.noticeContent }</td>
 				</tr>
 			</tbody>
 		</table>
 
 	    <br>
 
-		<div class="edit" align="right" style="padding-right: 200px;">
-			<a class="btn btn-success" onclick="postFormSubmit(1)">수정</a> &nbsp;
-		    <a class="btn btn-warning" onclick="postFormSubmit(2)">삭제</a>
-		</div>
+		
 
 	    <br><br>
 	    
 	    <form id="postForm" action="" method="post">
-			<input type="hidden" name="nno" value="${ n.noticeNo }">
-			<input type="hidden" name="filePath" value="${ n.noticeChangename }" >
+			<input type="hidden" name="nnoM" value="${ nM.noticeNo }">
+			<input type="hidden" name="filePath" value="${ nM.noticeChangename }" >
 		</form>
 	    
 	    <script>
 			function postFormSubmit(num){
 				if(num == 1){// 수정 클릭
-					$("#postForm").attr("action", "ManaUpdateForm.no").submit();
+					$("#postForm").attr("action", "manaUpdateForm.no").submit();
 				} else { // 삭제 클릭
-					$("#postForm").attr("action", "ManaDelete.no").submit();
+					$("#postForm").attr("action", "manaDelete.no").submit();
 				}
 			}
 		</script>
 
 		<div class="list" align="center">
-			<a class="btn btn-secondary" href="ManaList.no">목록</a>
+			<a class="btn btn-secondary" href="noticeList.mana">목록</a>
 		</div>
     </div>
 	
