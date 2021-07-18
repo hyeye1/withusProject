@@ -26,38 +26,41 @@
     	<h3><b>문의하기</b></h3>
     	<hr><br>
     
-	    <!-- 로그인 시에만 보여지는 페이지  -->
+	    <!-- 로그인 시에만 보여지는 페이지  
 	    <c:if test="${ !empty loginUser } "> 
 	    
 			<a id="btn1" class="btn btn-secondary" style="float:right;" href="enrollForm.oto">등록</a>
 			<br><br>
 		</c:if>
-			<!-- 작성글이 없을 시 보여지는 페이지 -->
-			<c:if test="${ empty loginUser.memberNo }">
-				<p align="center">게시글이 없습니다.</p>
-			</c:if>
-			<c:if test="${ !empty loginUser.memberNo }">
-				<div class="container">            
-				    <table class="table">
-				      <thead>
-				        <tr align="center">
-				          <th width="15%">글번호</th>
-				          <th>제목</th>
-				          <th width="15%">작성일</th>
-				        </tr>
-				      </thead>
-				      <tbody>
-				      	<c:forEach  var="o" items="${ list }">
-					  	  <tr align="center">
-					          <td>${ o.otoNo }</td>
-					          <td><a href="detail.oto?ono=${ o.otoNo }">${ o.otoTitle }</a></td>
-					          <td>${ o.createDate }</td>
-					      </tr>
-				        </c:forEach>
-				      </tbody>
-				    </table>
-				</div>
-			</c:if>
+		-->
+			<c:choose>
+			<!-- 작성글이 없을 시 보여지는 페이지 --> 
+				<c:when test="${ empty loginUser.memberNo }">
+					<p align="center">게시글이 없습니다.</p>
+				</c:when>
+				<c:otherwise>
+					<div class="otoList">            
+					    <table class="table table-bordered">
+					      <thead>
+					        <tr align="center">
+					          <th width="15%">글번호</th>
+					          <th>제목</th>
+					          <th width="15%">작성일</th>
+					        </tr>
+					      </thead>
+					      <tbody>
+					      	<c:forEach  var="o" items="${ list }">
+						  	  <tr align="center">
+						          <td>${ o.otoNo }</td>
+						          <td><a href="detail.oto?ono=${ o.otoNo }">${ o.otoTitle }</a></td>
+						          <td>${ o.createDate }</td>
+						      </tr>
+					        </c:forEach>
+					      </tbody>
+					    </table>
+					</div>
+				</c:otherwise>
+			</c:choose>
 			
 		        
 		        <script>
@@ -79,12 +82,12 @@
 				    			<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
 				    		</c:when>
 				    		<c:otherwise>
-				    			<li class="page-item"><a class="page-link" href="list.no?currentPage=${ pi.currentPage -1 }">이전</a></li>
+				    			<li class="page-item"><a class="page-link" href="list.oto?currentPage=${ pi.currentPage -1 }">이전</a></li>
 			    			</c:otherwise>
 			    		</c:choose>
 			    		
 			    		<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-			    			<li class="page-item"><a class="page-link" href="list.no?currentPage=${ p }">${ p }</a></li>
+			    			<li class="page-item"><a class="page-link" href="list.oto?currentPage=${ p }">${ p }</a></li>
 			    		</c:forEach>
 			    	
 			    		<c:choose>
@@ -92,7 +95,7 @@
 			    				<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
 			    			</c:when>
 			    			<c:otherwise>
-			    				<li class="page-item"><a class="page-link" href="list.no?currentPage=${ pi.currentPage+1 }">다음</a></li>
+			    				<li class="page-item"><a class="page-link" href="list.oto?currentPage=${ pi.currentPage+1 }">다음</a></li>
 			    			</c:otherwise>
 			    		</c:choose>
 			    	</ul>
