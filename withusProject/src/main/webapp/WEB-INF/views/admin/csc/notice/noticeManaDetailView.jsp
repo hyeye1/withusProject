@@ -25,12 +25,12 @@
     <!-- 메뉴바 포함 -->
     <jsp:include page="../../../common/manaHeader.jsp"/>
 
-    <h2>공지사항 상세보기</h2>
-    <hr><br>
 
 	<div class="container">
+		<h3><b>공지사항 상세보기</b></h3>
+    	<hr><br>
 
-		<table class="table table-bordered noticeDetail">
+		<table class="table table-bordered" id="noticeDetail">
 			<thead>
 			  <tr>
 				<th width="200" height="35">제목</th>

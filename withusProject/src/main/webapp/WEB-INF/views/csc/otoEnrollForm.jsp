@@ -24,7 +24,7 @@
                 <hr>
 
                 <form id="enrollForm" method="post" action="insert.oto" enctype="multipart/form-data">
-                    <table class="table table-bordered" align="center" border="1px;">
+                    <table table table-bordered align="center" border="1px;">
                         <tr>
                             <th><label for="title">제목</label></th>
                             <td><input type="text" id="title" class="form-control" name="otoTitle" required></td>

@@ -14,16 +14,14 @@
 </head>
 <body>
 
-	<!-- 6/12 윤경 생성-->
-
-    <!-- 해더바 포함 -->
     <jsp:include page="../common/header.jsp"/>
 
-    <h2>공지사항 상세보기</h2>
-    <hr><br>
+    
 
 	<div class="container">
-	    <table class="noticeDetail">
+	<h3><b>공지사항 상세보기</b></h3>
+    <hr><br>
+	    <table class="table table-bordered" id="noticeDetail">
 	        <tr>
 	            <th width="200" height="35">제목</th>
 	            <td width="800" style="padding-left: 10px;">${ n.noticeTitle }</td>
@@ -47,7 +45,7 @@
                     </td>
                 </tr>
 	        <tr>
-	            <td colspan="2" style="width:500px;">${ n.noticeContent }</td>
+	            <td colspan="2" style="height:500px;">${ n.noticeContent }</td>
 	        </tr>
 	    </table>
 	    <br>
@@ -78,6 +76,7 @@
 		<div class="list" align="center">
 			<a class="btn btn-secondary" href="list.no">목록</a>
 		</div>
+		<br><br>
     </div>
 
     <!-- 푸터바 포함 -->

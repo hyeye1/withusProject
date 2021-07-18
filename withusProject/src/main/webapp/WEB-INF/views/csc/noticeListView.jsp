@@ -23,12 +23,9 @@
     <!-- 해더바 포함 -->
     <jsp:include page="../common/header.jsp"/>
 
-    <h2>공지사항</h2>
-    <hr><br>
-
 	<div class="container">
-
-		<br>
+		<h3><b>공지사항</b></h3>
+    	<hr><br>
 		<c:if test="${ loginUser.memberStatus eq 'A' }">
 			<a class="btn btn-secondary" style="float:right" href="enrollForm.no">등록</a>
 		</c:if>

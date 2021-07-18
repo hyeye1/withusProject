@@ -216,7 +216,7 @@ public class MemberController {
 										 ModelAndView mv) {
 		
 		int listCount = mService.selectListCount();
-		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 10, null);
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
 		ArrayList<Member> mList = mService.selectList(pi);
 		
@@ -285,7 +285,7 @@ public class MemberController {
 		int count = mService.countSearch(map);
 		
 		// 페이징 처리
-		PageInfo pi = pagination.getPageInfo(count, currentPage, 10, 10, null);
+		PageInfo pi = pagination.getPageInfo(count, currentPage, 10, 10);
 		
 		// 검색결과 담아내기
 		ArrayList<Member> mList = mService.searchMember(map, pi);

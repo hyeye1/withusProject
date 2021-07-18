@@ -32,7 +32,7 @@ public class OtoController {
 	public ModelAndView selectOtoList(@RequestParam (value="currentPage", defaultValue="1")int currentPage, ModelAndView mv) {
 		
 		int listCount = oService.selectListCount();
-		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 5, null);
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 5);
 		
 		ArrayList<Oto> list = oService.selectList(pi);
 		

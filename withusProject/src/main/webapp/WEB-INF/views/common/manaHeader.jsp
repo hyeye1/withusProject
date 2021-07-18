@@ -164,11 +164,10 @@
 
                 <li><a>고객센터</a>
                     <ul class="navi_sub">
-                        <li><a href="manaList.no">공지사항</a></li>
-                        <li><a href="list.faq">FAQ</a></li>
-                        <li><a href="list.oto">문의하기</a></li>
-                        <li><a href="reportListView.mana">신고하기</a></li>
-                        <li><a href="">실시간채팅</a></li>
+                        <li><a href="noticeList.mana">공지사항</a></li>
+                        <li><a href="faqList.mana">FAQ</a></li>
+                        <li><a href="otoList.mana">문의하기</a></li>
+                        <li><a href="reportList.mana">신고하기</a></li>
                     </ul>
                 </li>
             </ul>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,31 +14,27 @@
 </head>
 <body>
 
-	<!-- 6/9 윤경 생성-->
-    <!-- 메뉴바 포함 -->
     <jsp:include page="../../../common/manaHeader.jsp"/>
 
-    <h2>공지사항</h2>
-    <hr><br>
-
+    
 	<div class="container">
-
+	<br>
+		<h3><b>공지사항</b></h3>
+    	<hr><br>
+		
 		<div class="topBtn" align="right">
-			<a class="btn btn-secondary" style="float:right" href="ManaEnrollForm.no">등록</a>
+			<a class="btn btn-secondary" style="float:right" href="manaEnrollForm.no">등록</a>
 		</div>
-		<br>
+		<br><br>
 	    <!-- 표 N행 6열 -->
 		<table class="table table-bordered">
 			<thead>
 			  <tr align="center" style="height: 10px; background-color: rgb(224, 224, 224); font-size:smaller ;">
-	            <th width="60">글번호</th>
-	            <th width="700">공지사항 제목</th>
-	            <th width="100">날짜</th>
-	            <th width="60">글상태<br>(Y/N)</th>
-	            <th width="140">
-	            	<a class="btn btn-success" onclick="postFormSubmit(1)">수정</a> &nbsp;
-					<a class="btn btn-warning" onclick="postFormSubmit(2)">삭제</a>
-	            </th>
+	            <th width="70px">글번호</th>
+	            <th width="400px">공지사항 제목</th>
+	            <th width="150px">날짜</th>
+	            <th width="50px">글상태<br>(Y/N)</th>
+	            <th width="150px">수정/삭제</th>
 			  </tr>
 			</thead>
 			<tbody>
@@ -48,6 +44,10 @@
 						<td><a href="">${ n.noticeTitle }</a></td>
 						<td>${ n.createDate }</td>
 						<td>${ n.noticeStatus }</td>
+						<td>
+							<a class="btn btn-success" onclick="postFormSubmit(1)">수정</a> &nbsp;
+							<a class="btn btn-warning" onclick="postFormSubmit(2)">삭제</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -72,7 +72,7 @@
 		
 	    <br><br>
 		
-	    <!-- 페이징 바 추가예정 -->
+	    <!-- 페이징 바 추가 -->
 	    <div id="pagingArea">
 	    	<ul class="pagination">
 	    		
