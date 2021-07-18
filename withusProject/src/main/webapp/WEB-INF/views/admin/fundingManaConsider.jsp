@@ -27,6 +27,7 @@
 	    margin: auto;
 	    cursor: default;
 	    position: relative;
+	    margin-top: 100px;
 	}
 	
 	.detailOuter button {
@@ -502,40 +503,51 @@
 		font-size: 20px;
 		line-height: 24;
 	}
-		
-		</style>
-        </head>
-
-        <body>
-
-            <hr color="darkgray">
-
-            <!-- 전체 -->
-            <div class="detailOuter">
-
-                <!-- 맨위 -->
-                <div class="detailHeader" align="center">
-                    <div class="detailCat">
-                    
-						<c:choose>
-							<c:when test="${ p.catNo eq null }">
-								<button>카테고리</button>
-							</c:when>
-							<c:when test="${ p.catName eq null}">
-								<button>카테고리</button>
-							</c:when>
-							<c:otherwise>
-								<button>${ p.catName }</button>
-							</c:otherwise>
-						</c:choose>
-                    </div>
-
-                    <div class="detailTitle">
-                        <p><b>${ p.projectTitle }</b></p>
-                    </div>
 	
-					<!-- 보류 -->
-<%-- 					
+	/* 추가  */
+	#backBtn{
+		margin: 0 50px;
+		width: 150px;
+	}
+		
+</style>
+</head>
+
+ <body>
+
+	<jsp:include page="../common/manaHeader.jsp"/>
+	
+		
+     
+
+     <!-- 전체 -->
+     <div class="detailOuter">
+     
+	 <button type="button" class="btn btn-secondary" id="backBtn"	
+	 		 onclick="history.back();">목록으로</button>
+
+         <!-- 맨위 -->
+         <div class="detailHeader" align="center">
+             <div class="detailCat">
+				<c:choose>
+				<c:when test="${ p.catNo eq null }">
+					<button>카테고리</button>
+				</c:when>
+				<c:when test="${ p.catName eq null}">
+					<button>카테고리</button>
+				</c:when>
+				<c:otherwise>
+					<button>${ p.catName }</button>
+				</c:otherwise>
+				</c:choose>
+             </div>
+             
+             <div class="detailTitle">
+                 <p><b>${ p.projectTitle }</b></p>
+             </div>
+
+			<!-- 보류 -->
+			<%-- 					
                     <div class="partner">
 						<c:choose>
 							<c:when test="${ loginUser.memberProfile eq null}">
@@ -547,279 +559,280 @@
 						</c:choose>
                         <b>${ loginUser.memberName }</b> <br><br><br>
                     </div>
- --%>
-                    <div class="detailHeaderBody">
+ 			--%>
+ 			
+             <div class="detailHeaderBody">
 
-                    </div>
+             </div>
 
-                    <div class="detailThumb">
-                    	<c:choose>
-	                    	<c:when test="${ p.projectThum eq null }">
-	                    		<div class="nullImg">
-	                    			프로젝트 썸네일을 등록해주세요.
-	                    		</div>
-	                    	</c:when>
-	                    	<c:otherwise>
-		                        <img src="${ p.projectThum }" height="480px">
-	                    	</c:otherwise>
-                    	</c:choose>
-                    </div>
+             <div class="detailThumb">
+             	<c:choose>
+              	<c:when test="${ p.projectThum eq null }">
+              		<div class="nullImg">
+              			프로젝트 썸네일을 등록해주세요.
+              		</div>
+              	</c:when>
+              	<c:otherwise>
+                   <img src="${ p.projectThum }" height="480px">
+              	</c:otherwise>
+             	</c:choose>
+             </div>
 
-                    <div class="detailAsideMana" align="left">
+             <div class="detailAsideMana" align="left">
 
-                        <div class="detailInfo1">
-                            <table>
-                                <tr>
-                                    <td colspan="2" class="goalPrice">펀딩 금액</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <span class="goalPrice"><b>${ p.totalPrice }</b></span>
-                                        <span class="infoSmall">원</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="font-size: 9px;"><br></td>
-                                </tr>
-                                <tr>
-                                    <td class="infoTitle">달성률</td>
-                                    <td>
-                                        <span><b>${ p.percentage }</b></span>
-                                        <span class="infoSmall">%</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td class="infoPs" style="line-height: 0;">목표금액 ${ p.projectGprice } 원</td>
-                                </tr>
-                                <tr>
-                                    <td class="infoTitle" style="line-height: 3.5;">남은 기간</td>
-                                    <td>
-                                        <span><b>${ p.dday }</b></span>
-                                        <span class="infoSmall">일</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="infoTitle">서포터</td>
-                                    <td>
-                                        <span><b>${ p.supporter }</b></span>
-                                        <span class="infoSmall">명</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="font-size: 7px;"><br></td>
-                                </tr>
-                            </table>
-                        </div>
+                 <div class="detailInfo1">
+                     <table>
+                         <tr>
+                             <td colspan="2" class="goalPrice">펀딩 금액</td>
+                         </tr>
+                         <tr>
+                             <td colspan="2">
+                                 <span class="goalPrice"><b>${ p.totalPrice }</b></span>
+                                 <span class="infoSmall">원</span>
+                             </td>
+                         </tr>
+                         <tr>
+                             <td style="font-size: 9px;"><br></td>
+                         </tr>
+                         <tr>
+                             <td class="infoTitle">달성률</td>
+                             <td>
+                                 <span><b>${ p.percentage }</b></span>
+                                 <span class="infoSmall">%</span>
+                             </td>
+                         </tr>
+                         <tr>
+                             <td></td>
+                             <td class="infoPs" style="line-height: 0;">목표금액 ${ p.projectGprice } 원</td>
+                         </tr>
+                         <tr>
+                             <td class="infoTitle" style="line-height: 3.5;">남은 기간</td>
+                             <td>
+                                 <span><b>${ p.dday }</b></span>
+                                 <span class="infoSmall">일</span>
+                             </td>
+                         </tr>
+                         <tr>
+                             <td class="infoTitle">서포터</td>
+                             <td>
+                                 <span><b>${ p.supporter }</b></span>
+                                 <span class="infoSmall">명</span>
+                             </td>
+                         </tr>
+                         <tr>
+                             <td style="font-size: 7px;"><br></td>
+                         </tr>
+                     </table>
+                 </div>
 
-                        <div class="detailInfo2">
-                            <div class="infoPs">
-                                <p>
-				                                    목표 금액 ${ p.projectGprice }원이 모여야만 결제가 진행됩니다. <br>
-				                                    목표 금액을 달성한 경우, 결제 예정일은 ${ p.payDate } 입니다.
-                                </p>
-                            </div>
-                            <form name="projectConsider">
-                            <input type="hidden" name="pno" value="${ p.projectNo }" >
-                            <div class="infoYNBtn" align="center">
-                                <button type="button" name="considerBtn" value="3"
-										class="btn btn-withus approvalBtn">승인</button>
-								<button type="button" name="considerBtn" value="4"
-										class="btn btn-danger oppositionBtn">반려</button>
-                            </div>
-                            </form>
-                            <script>
-								$(function() {
-								    $("button[name=considerBtn]").on('click', function() {
-								        var considerBtn = $(event.target).val();    
-								        //console.log(considerBtn);
-								        $("form[name=projectConsider]")
-						                .attr({ action:"fundingConsider.mana?considerBtn="+considerBtn, method:"post" })
-						                .submit();
-								    });
-								});
-							</script>
-                            
-                        </div>
-                    </div>
-                </div>
+                 <div class="detailInfo2">
+                     <div class="infoPs">
+                         <p>
+			                                 목표 금액 ${ p.projectGprice }원이 모여야만 결제가 진행됩니다. <br>
+			                                 목표 금액을 달성한 경우, 결제 예정일은 ${ p.payDate } 입니다.
+                         </p>
+                     </div>
+                     <form name="projectConsider">
+                     <input type="hidden" name="pno" value="${ p.projectNo }" >
+                     <div class="infoYNBtn" align="center">
+                         <button type="button" name="considerBtn" value="3"
+									class="btn btn-withus approvalBtn">승인</button>
+						<button type="button" name="considerBtn" value="4"
+								class="btn btn-danger oppositionBtn">반려</button>
+                     </div>
+                     </form>
+                     <script>
+						$(function() {
+						    $("button[name=considerBtn]").on('click', function() {
+						        var considerBtn = $(event.target).val();    
+						        //console.log(considerBtn);
+						        $("form[name=projectConsider]")
+					               .attr({ action:"fundingConsider.mana?considerBtn="+considerBtn, method:"post" })
+					               .submit();
+						    });
+						});
+					</script>
+                     
+                 </div>
+             </div>
+         </div>
 
-                <!-- 메뉴바 -->
-                <div class="detailMenubar">
-                    <span class="detailSto" onclick="detailShow('Sto')"><b>스토리</b></span>
-                    <span class="detailCommu" onclick="detailShow('Commu')"><b>커뮤니티</b></span>
-                    <span class="detailNoti" onclick="detailShow('Noti')"><b>펀딩 안내</b></span>
-                </div>
-                <!-- 메뉴바 스토리선택됨 표시바 -->
-                <div class="menuSelected detail detailSto" style="margin-left: 109px; ">&nbsp;</div>
-                <div class="menuSelected detail detailCommu" style="margin-left: 218px; display: none;">&nbsp;
-                </div>
-                <div class="menuSelected detail detailNoti" style="margin-left: 338px; display: none;">&nbsp;
-                </div>
-
-
-                <!-- 바디 -->
-                <div class="detailBody">
-
-                    <!-- 창작자소개/리워드선택바 -->
-                    <div class="detailRight">
-                        <div class="detailPartner">
-
-                            <div><b>창작자 소개</b></div>
-                            <div class="rightPartner">
-								<c:choose>
-									<c:when test="${ m.memberProfile eq null}">
-										<img src="${ pageContext.request.contextPath }/resources/images/partnerDefault.PNG">
-									</c:when>
-									<c:otherwise>
-										<img src="${ pageContext.request.contextPath }/${ m.memberProfile }">
-									</c:otherwise>
-								</c:choose>	
-                                <p><b>${ m.partnerName }</b> <br><br><br></p>
-                                <button>+ 팔로우</button>
-                            </div>
-                            <p id="partnerWho">
-                                ${ m.partnerIntro }
-                            </p>
-                            <div class="partnerBtn">
-                                <button><img src="${ pageContext.request.contextPath }/resources/images/send.PNG"
-                                        width="23px"><span> 창작자에게 문의하기</span></button>
-                            </div>
-
-                        </div>
-
-                        <div class="detailReward">
-
-                            <div><b>리워드 선택</b></div>
-                            <br>
-                            <c:forEach var="r" items="${ r }" >
-	                            <div class="chooseReward">
-	                                <div>
-	                                <input type="hidden" value="${ r.rewardNo }">
-	                                    <span class="rePrice">${ r.rewardPrice }원 펀딩</span>
-	                                    <span class="reNumber">${ r.rewardStock }개 남음</span>
-	                                </div>
-	                                <p class="reTitle">${ r.rewardTitle }</p>
-	                                <ul>
-	                                    <li>${ r.rewardContent }</li>
-	                                </ul>
-	                            </div>
-                            	<br>
-                            </c:forEach>
-                            </div>
-                            <br>
-                           
-	                        <!-- 해시태그 -->
-	                        <div class="hashtag">
-	                            <b>해시태그</b>
-	                            <br><br>
-	                            <table>
-	                                <tr>
-	                                    <th><a href="">#시계</a></th>
-	                                    <th><a href="">#모던</a></th>
-	                                    <th><a href="">#감성</a></th>
-	                                </tr>
-	                                <tr>
-	                                    <th><a href="">#디자인</a></th>
-	                                    <th><a href="">#소품</a></th>
-	                                </tr>
-	                            </table>
-	                            <br>
-	                        </div>
-                        </div>
+         <!-- 메뉴바 -->
+         <div class="detailMenubar">
+             <span class="detailSto" onclick="detailShow('Sto')"><b>스토리</b></span>
+             <span class="detailCommu" onclick="detailShow('Commu')"><b>커뮤니티</b></span>
+             <span class="detailNoti" onclick="detailShow('Noti')"><b>펀딩 안내</b></span>
+         </div>
+         <!-- 메뉴바 스토리선택됨 표시바 -->
+         <div class="menuSelected detail detailSto" style="margin-left: 109px; ">&nbsp;</div>
+         <div class="menuSelected detail detailCommu" style="margin-left: 218px; display: none;">&nbsp;
+         </div>
+         <div class="menuSelected detail detailNoti" style="margin-left: 338px; display: none;">&nbsp;
+         </div>
 
 
-                    <!-- 스토리 -->
-                    <div class="detailStory detail detailSto">
-                        <div class="storyContent">
-                            ${ p.projectContent }
-                        </div>
-                    </div>
+         <!-- 바디 -->
+         <div class="detailBody">
+
+             <!-- 창작자소개/리워드선택바 -->
+             <div class="detailRight">
+                 <div class="detailPartner">
+
+                     <div><b>창작자 소개</b></div>
+                     <div class="rightPartner">
+						<c:choose>
+							<c:when test="${ m.memberProfile eq null}">
+								<img src="${ pageContext.request.contextPath }/resources/images/partnerDefault.PNG">
+							</c:when>
+							<c:otherwise>
+								<img src="${ pageContext.request.contextPath }/${ m.memberProfile }">
+							</c:otherwise>
+						</c:choose>	
+                         <p><b>${ m.partnerName }</b> <br><br><br></p>
+                         <button>+ 팔로우</button>
+                     </div>
+                     <p id="partnerWho">
+                         ${ m.partnerIntro }
+                     </p>
+                     <div class="partnerBtn">
+                         <button><img src="${ pageContext.request.contextPath }/resources/images/send.PNG"
+                                 width="23px"><span> 창작자에게 문의하기</span></button>
+                     </div>
+
+                 </div>
+
+                 <div class="detailReward">
+
+                     <div><b>리워드 선택</b></div>
+                     <br>
+                     <c:forEach var="r" items="${ r }" >
+                      <div class="chooseReward">
+                          <div>
+                          <input type="hidden" value="${ r.rewardNo }">
+                              <span class="rePrice">${ r.rewardPrice }원 펀딩</span>
+                              <span class="reNumber">${ r.rewardStock }개 남음</span>
+                          </div>
+                          <p class="reTitle">${ r.rewardTitle }</p>
+                          <ul>
+                              <li>${ r.rewardContent }</li>
+                          </ul>
+                      </div>
+                     	<br>
+                     </c:forEach>
+                     </div>
+                     <br>
+                    
+                  <!-- 해시태그 -->
+                  <div class="hashtag">
+                      <b>해시태그</b>
+                      <br><br>
+                      <table>
+                          <tr>
+                              <th><a href="">#시계</a></th>
+                              <th><a href="">#모던</a></th>
+                              <th><a href="">#감성</a></th>
+                          </tr>
+                          <tr>
+                              <th><a href="">#디자인</a></th>
+                              <th><a href="">#소품</a></th>
+                          </tr>
+                      </table>
+                      <br>
+                  </div>
+                 </div>
 
 
-                    <!-- 상품 안내 -->
-                    <div class="detailGuide detail detailNoti">
-                        <div class="guideTitle">
-                            <h3><b>펀딩 진행 관련 안내 사항입니다.</b></h3>
-                        </div>
-
-                        <div class="guideDates" align="center">
-                            <table>
-                                <tr>
-                                    <th>펀딩종료일&nbsp;</th>
-                                    <td>2021-07-15</td>
-                                </tr>
-                                <tr>
-                                    <th>결제예정일</th>
-                                    <td>2021-07-22</td>
-                                </tr>
-                                <tr>
-                                    <th>예상배송일</th>
-                                    <td>2021-08-02</td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        <hr color="darkgrey">
-
-                        <div class="guidePolicy">
-                            <br>
-                            <p><b>이 프로젝트의 환불 및 교환 정책</b></p>
-                            <p>
-                                - 프로젝트 마감일 후에는 즉시 제작 및 실행에 착수하는 프로젝트 특성상 단순 변심에 의한 후원금 환불이 불가능합니다.<br>
-                                - 예상 전달일로부터 21일 이상 선물 전달이 이뤄지지 않을 경우, 환불을 원하시는 분들께는 수수료를 제한 후원금을 환불해 드립니다.<br>
-                                (플랫폼 수수료: 모금액의 5%, 부가세 별도 / 결제 수수료: 결제 성공액의 3%, 부가세 별도 )<br>
-                                - 선물 전달을 위한 배송지 정보는 2020.11.23일에 일괄 취합할 예정입니다.<br>
-                                - 이후 배송지 변경을 원하실 때에는 '창작자에게 문의하기'로 개별 문의하셔야 합니다.<br>
-                                - 파손 또는 불량품 수령 시 3일 이내로 교환이 가능합니다.<br>
-                                - 교환 및 AS 문의는 '창작자에게 문의하기' 로 신청해 주세요.<br>
-                                - 파손이나 불량품 교환시 발생하는 비용은 창작자가 부담합니다.<br> 
-                                                                          선물 확인을 위한 포장 훼손 외에 아이템의 가치가 훼손된 경우에는 교환 및 환불이 불가합니다.<br>
-                                - 후원자가 배송지를 잘못 기재하거나 창작자에게 사전 고지 없이 배송지를 수정하여 배송사고가 발생할 경우 창작자는 최대 1번까지 재발송 해 드립니다.<br> 
-                                                                           배송비 부담은 후원자에게 있습니다
-                            </p>
-                            <br>
-                            <p><b>가치가자 교환 및 환불 정책</b></p>
-                            <p>
-                                - 펀딩 취소는 프로젝트 종료 전까지만 마이페이지의 펀딩한 프로젝트에서 할 수 있으며, 가치가자의 특성상 프로젝트 종료 이후 단순 변심에 의한 펀딩 취소가  불가능합니다. <br>
-                                - 프로젝트 종료 이후의 AS, 교환 및 환불에 관한 문의는 진행자의 교환 및 환불 정책을 따르거나 진행자의 연락처로 문의해야 합니다. <br>
-                            </p>
-                            <br>
-                            <p><b>유의사항</b></p>
-                            <p>
-                                - 주소 변경은 프로젝트 종료 전까지만 마이페이지의 펀딩한 프로젝트에서 할 수 있습니다.<br>
-                                - 결제수단 변경은 결제 전까지만 가능하며 결제완료 이후에는 불가능합니다.<br>
-                                - 리워드 옵션 변경은 불가능하며, 기존 펀딩 내역을 취소하신 후 다시 펀딩하셔야 합니다.<br>
-                            </p>
+             <!-- 스토리 -->
+             <div class="detailStory detail detailSto">
+                 <div class="storyContent">
+                     ${ p.projectContent }
+                 </div>
+             </div>
 
 
-                        </div>
+             <!-- 상품 안내 -->
+             <div class="detailGuide detail detailNoti">
+                 <div class="guideTitle">
+                     <h3><b>펀딩 진행 관련 안내 사항입니다.</b></h3>
+                 </div>
 
-                        <br>
-                        <hr color="darkgray">
+                 <div class="guideDates" align="center">
+                     <table>
+                         <tr>
+                             <th>펀딩종료일&nbsp;</th>
+                             <td>${ p.projectEndDt }</td>
+                         </tr>
+                         <tr>
+                             <th>결제예정일</th>
+                             <td>${ p.payDate }</td>
+                         </tr>
+                         <tr>
+                             <th>예상배송일</th>
+                             <td>${ p.deliveryDate }</td>
+                         </tr>
+                     </table>
+                 </div>
 
-                        <div class="projectReport">
-                            <br>
-                            <p><b>프로젝트 신고하기</b></p>
+                 <hr color="darkgrey">
 
-                            <p>
-				                                해당 프로젝트에 허위사실 및 지적재산권 침해, 기타 가치가자의 정책을 위반하는 내용이 있다면
-				                                신고해주세요.
-                            </p>
-                            <button>신고하기</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                 <div class="guidePolicy">
+                     <br>
+                     <p><b>이 프로젝트의 환불 및 교환 정책</b></p>
+                     <p>
+                         - 프로젝트 마감일 후에는 즉시 제작 및 실행에 착수하는 프로젝트 특성상 단순 변심에 의한 후원금 환불이 불가능합니다.<br>
+                         - 예상 전달일로부터 21일 이상 선물 전달이 이뤄지지 않을 경우, 환불을 원하시는 분들께는 수수료를 제한 후원금을 환불해 드립니다.<br>
+                         (플랫폼 수수료: 모금액의 5%, 부가세 별도 / 결제 수수료: 결제 성공액의 3%, 부가세 별도 )<br>
+                         - 선물 전달을 위한 배송지 정보는 ${ p.payDate }일에 일괄 취합할 예정입니다.<br>
+                         - 이후 배송지 변경을 원하실 때에는 '창작자에게 문의하기'로 개별 문의하셔야 합니다.<br>
+                         - 파손 또는 불량품 수령 시 3일 이내로 교환이 가능합니다.<br>
+                         - 교환 및 AS 문의는 '창작자에게 문의하기' 로 신청해 주세요.<br>
+                         - 파손이나 불량품 교환시 발생하는 비용은 창작자가 부담합니다.<br> 
+                                                                   선물 확인을 위한 포장 훼손 외에 아이템의 가치가 훼손된 경우에는 교환 및 환불이 불가합니다.<br>
+                         - 후원자가 배송지를 잘못 기재하거나 창작자에게 사전 고지 없이 배송지를 수정하여 배송사고가 발생할 경우 창작자는 최대 1번까지 재발송 해 드립니다.<br> 
+                                                                    배송비 부담은 후원자에게 있습니다
+                     </p>
+                     <br>
+                     <p><b>가치가자 교환 및 환불 정책</b></p>
+                     <p>
+                         - 펀딩 취소는 프로젝트 종료 전까지만 마이페이지의 펀딩한 프로젝트에서 할 수 있으며, 가치가자의 특성상 프로젝트 종료 이후 단순 변심에 의한 펀딩 취소가  불가능합니다. <br>
+                         - 프로젝트 종료 이후의 AS, 교환 및 환불에 관한 문의는 진행자의 교환 및 환불 정책을 따르거나 진행자의 연락처로 문의해야 합니다. <br>
+                     </p>
+                     <br>
+                     <p><b>유의사항</b></p>
+                     <p>
+                         - 주소 변경은 프로젝트 종료 전까지만 마이페이지의 펀딩한 프로젝트에서 할 수 있습니다.<br>
+                         - 결제수단 변경은 결제 전까지만 가능하며 결제완료 이후에는 불가능합니다.<br>
+                         - 리워드 옵션 변경은 불가능하며, 기존 펀딩 내역을 취소하신 후 다시 펀딩하셔야 합니다.<br>
+                     </p>
 
-                    </div>
-            <script>
-                function detailShow(className) {
-                    $(".detail").hide();
-                    $(".detail" + className).show();
-                }
-            </script>
 
-        </body>
+                 </div>
 
-        </html>
+                 <br>
+                 <hr color="darkgray">
+
+                 <div class="projectReport">
+                     <br>
+                     <p><b>프로젝트 신고하기</b></p>
+
+                     <p>
+		                             해당 프로젝트에 허위사실 및 지적재산권 침해, 기타 가치가자의 정책을 위반하는 내용이 있다면
+		                             신고해주세요.
+                     </p>
+                     <button>신고하기</button>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+             </div>
+     <script>
+         function detailShow(className) {
+             $(".detail").hide();
+             $(".detail" + className).show();
+         }
+     </script>
+
+ </body>
+
+ </html>
