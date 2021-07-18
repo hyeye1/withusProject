@@ -14,7 +14,7 @@ import com.kh.withus.community.model.vo.Community;
 
 @Service
 public class CommunityServiceImpl implements CommunityService{
-	
+
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	@Autowired
@@ -28,6 +28,35 @@ public class CommunityServiceImpl implements CommunityService{
 	@Override
 	public ArrayList<Community> selectList(PageInfo pi) {
 		return cDao.selectList(sqlSession, pi);
+	}
+	@Override
+	public int selectList1Count() {
+		return cDao.selectListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Community> selectList1(PageInfo pi) {
+		return cDao.selectList1(sqlSession, pi);
+	}
+
+	@Override
+	public int selectList2Count() {
+		return cDao.selectListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Community> selectList2(PageInfo pi) {
+		return cDao.selectList2(sqlSession, pi);
+	}
+
+	@Override
+	public int selectList3Count() {
+		return cDao.selectListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Community> selectList3(PageInfo pi) {
+		return cDao.selectList3(sqlSession, pi);
 	}
 
 	@Override
@@ -66,11 +95,11 @@ public class CommunityServiceImpl implements CommunityService{
 		return cDao.insertCommuReply(sqlSession, cr);
 	}
 
-	// 검색
 	@Override
 	public ArrayList<Community> selectCommuSearchList(HashMap<String, String> map) {
 		return cDao.selectCommuSearchList(sqlSession, map);
 	}
+	
 
 	
 	

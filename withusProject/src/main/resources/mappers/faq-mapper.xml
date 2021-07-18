@@ -33,7 +33,46 @@
 		      , faq_content
 		  from faq
 		 where faq_no = #{faqNo}
+	</select>
 	
+	<select id="selectFunding" resultMap="faq" parameterType="_int">
+		select
+		       faq_no
+		     , faq_title
+		     , faq_content
+		  from faq
+		 where faq_cat like '펀딩%'
+		   and faq_status = 'Y'
+	</select>
+	
+	<select id="selectDelivery" resultMap="faq" parameterType="_int">
+		select
+		       faq_no
+		     , faq_title
+		     , faq_content
+		  from faq
+		 where faq_cat like '배송%'
+		   and faq_status = 'Y'
+	</select>
+	
+	<select id="selectExchange" resultMap="faq" parameterType="_int">
+		select
+		       faq_no
+		     , faq_title
+		     , faq_content
+		  from faq
+		 where faq_cat like '교환%'
+		   and faq_status = 'Y'
+	</select>
+	
+	<select id="selectEtc" resultMap="faq" parameterType="_int">
+		select
+		       faq_no
+		     , faq_title
+		     , faq_content
+		  from faq
+		 where faq_cat like '기타%'
+		   and faq_status = 'Y'
 	</select>
 	 
 	 

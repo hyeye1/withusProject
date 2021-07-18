@@ -64,8 +64,9 @@
 	    float: left;
 	}
 	
-	.detailAside {
+	.detailAsideMana {
 	    height: 450px;
+	    width: 420px;
 	    float: left;
 	    padding-left: 10px;
 	    padding-top: 10px;
@@ -97,16 +98,24 @@
 	    border-radius: 10px;
 	}
 	
-	.infoBtn button {
-	    width: 249px;
+	.infoYNBtn button {
+	    width: 200px;
 	    height: 49px;
 	    font-size: 18px;
 	    vertical-align: 8px;
-	    margin-right: 28px;
-	    background-color: rgb(52, 152, 219);
 	    border: none;
 	    color: white;
 	    border-radius: 10px;
+	}
+	
+	.btn.btn-withus{
+		background-color: #3498db; 
+		color: white;
+	}
+  	.btn.btn-withus:hover{
+  		cursor: pointer; 
+  		background-color: #2c83be; 
+  		color: white;
 	}
 	
 	.goalPrice {
@@ -158,20 +167,17 @@
 	    font-size: 19px;
 	}
 	
-	
 	.rightPartner {
 	    display: table;
 	    margin-top: 25px;
 	    width: 100%;
 	}
 	
-	
 	.rightPartner img {
-	    width: 35px;
+	    width: 40px;
 	    float: left;
-	    margin-top: -3px;
-	    margin-right: 3px;
-	    border-radius: 50%;
+	    margin-left: 10px;
+	    margin-right: 0px;
 	}
 	
 	.rightPartner p {
@@ -187,7 +193,8 @@
 	    border-radius: 5px;
 	    color: white;
 	    font-size: 12px;
-	    margin-left :10px;
+	    margin-bottom: 10px;
+	    margin-right: 9px;
 	}
 	
 	#partnerWho {
@@ -402,18 +409,24 @@
 	    line-height: 1.6;
 	    font-size: 13px;
 	    color: rgb(94, 94, 94);
-	   
-	    
+	    display: table;
+	}
+	
+	.replyWriter {
+	    box-sizing: border-box;
+	}
+	
+	.replyWriter b {
+	    color: black;
+	    float: left;
 	}
 	
 	.replyWriter img {
 	    float: left;
-	    height: 50px;
-		width: 50px;
-	    border-radius: 50%;
+	    height: 42px;
+	    margin-top: 5px;
+	    margin-right: 12px;
 	}
-	.replyWriter th{width: 13%;}
-	
 	
 	.partnerMarks {
 	    background-color: rgb(52, 152, 219);
@@ -424,27 +437,19 @@
 	    font-weight: 600;
 	    margin-right: 330px;
 	    margin-top: 6px;
-	    
+	    float: right;
 	}
 	
-	#memberName {font-size:17px; font-weight:bold;}
-	#replyDate {font-size:17px;}
-	
-	
 	.replyContent {
-	    margin-left: 10px;
-	    margin-top: 30px;
+	    margin-left: 50px;
+	    margin-top: 25px;
 	    margin-bottom: 25px;
-	    font-size: 16px;
 	}
 	
 	.reReply hr {
 	    margin-top: 50px;
 	    margin-bottom: 30px;
 	}
-
-	.comReply .replyTable{width: 100%;}
-	.comReply button{margin-top: 40px;}
 	
 	.detailGuide {
 	    background-color: white;
@@ -488,14 +493,21 @@
 	    display: none;
 	}
 	
-	a{text-decoration: none; color: black;}
+	.nullImg{
+		width: 640px;
+		height: 480px;
+		background-color: rgb(224, 224, 224, 0.5);
+		border: 1px solid grey;
+		border-radius: 5px;
+		font-size: 20px;
+		line-height: 24;
+	}
 		
 		</style>
         </head>
 
         <body>
 
-            <jsp:include page="../common/header.jsp" />
             <hr color="darkgray">
 
             <!-- 전체 -->
@@ -504,28 +516,56 @@
                 <!-- 맨위 -->
                 <div class="detailHeader" align="center">
                     <div class="detailCat">
-                        <button>${ p.catName }</button>
+                    
+						<c:choose>
+							<c:when test="${ p.catNo eq null }">
+								<button>카테고리</button>
+							</c:when>
+							<c:when test="${ p.catName eq null}">
+								<button>카테고리</button>
+							</c:when>
+							<c:otherwise>
+								<button>${ p.catName }</button>
+							</c:otherwise>
+						</c:choose>
                     </div>
 
                     <div class="detailTitle">
                         <p><b>${ p.projectTitle }</b></p>
                     </div>
-
+	
+					<!-- 보류 -->
+<%-- 					
                     <div class="partner">
-                        <a href="partnerDetail.me?memberNo=${ p.memberNo }" style="text-decoration: none; color: black;"><img src="${ pageContext.request.contextPath }/${ p.memberProfile }">
-                        <b>${ p.partnerName }</b> <br><br><br></a>
+						<c:choose>
+							<c:when test="${ loginUser.memberProfile eq null}">
+								<img src="${ pageContext.request.contextPath }/resources/images/partnerDefault.PNG">
+							</c:when>
+							<c:otherwise>
+								<img src="${ pageContext.request.contextPath }/${ loginUser.memberProfile }">
+							</c:otherwise>
+						</c:choose>
+                        <b>${ loginUser.memberName }</b> <br><br><br>
                     </div>
-
+ --%>
                     <div class="detailHeaderBody">
 
                     </div>
 
                     <div class="detailThumb">
-                        <img src="${ p.projectThum }"
-                             height="480px">
+                    	<c:choose>
+	                    	<c:when test="${ p.projectThum eq null }">
+	                    		<div class="nullImg">
+	                    			프로젝트 썸네일을 등록해주세요.
+	                    		</div>
+	                    	</c:when>
+	                    	<c:otherwise>
+		                        <img src="${ p.projectThum }" height="480px">
+	                    	</c:otherwise>
+                    	</c:choose>
                     </div>
 
-                    <div class="detailAside" align="left">
+                    <div class="detailAsideMana" align="left">
 
                         <div class="detailInfo1">
                             <table>
@@ -575,128 +615,34 @@
                         <div class="detailInfo2">
                             <div class="infoPs">
                                 <p>
-                                    목표 금액 ${ p.projectGprice }원이 모여야만 결제가 진행됩니다. <br>
-                                    목표 금액을 달성한 경우, 결제 예정일은 ${ p.payDate } 입니다.
+				                                    목표 금액 ${ p.projectGprice }원이 모여야만 결제가 진행됩니다. <br>
+				                                    목표 금액을 달성한 경우, 결제 예정일은 ${ p.payDate } 입니다.
                                 </p>
                             </div>
-                            <div class="infoBtn" align="center">
-                                <button onclick="location.href='list.rew?pno=${p.projectNo}'">펀딩하기</button>
-                                <img src="${ pageContext.request.contextPath }/resources/images/emptyHeart.png" width="36px"
-                                    style="margin-right: 10px; cursor: pointer;" id="likeyBtn">
-                                <img src="${ pageContext.request.contextPath }/resources/images/share.PNG" width="32px"
-                                    style="cursor: pointer;">
+                            <form name="projectConsider">
+                            <input type="hidden" name="pno" value="${ p.projectNo }" >
+                            <div class="infoYNBtn" align="center">
+                                <button type="button" name="considerBtn" value="3"
+										class="btn btn-withus approvalBtn">승인</button>
+								<button type="button" name="considerBtn" value="4"
+										class="btn btn-danger oppositionBtn">반려</button>
                             </div>
+                            </form>
+                            <script>
+								$(function() {
+								    $("button[name=considerBtn]").on('click', function() {
+								        var considerBtn = $(event.target).val();    
+								        //console.log(considerBtn);
+								        $("form[name=projectConsider]")
+						                .attr({ action:"fundingConsider.mana?considerBtn="+considerBtn, method:"post" })
+						                .submit();
+								    });
+								});
+							</script>
+                            
                         </div>
                     </div>
                 </div>
-                
-                
-                <c:choose>
-                	<c:when test="${ empty loginUser }">
-                		<input type="hidden" id="memberNo" value="0">
-                	</c:when>
-                	<c:otherwise>
-                		<input type="hidden" id="memberNo" value=${loginUser.memberNo }>
-                	</c:otherwise>
-                </c:choose>
-                
-                
-                <!-- 좋아요버튼 -->
-                <script>
-			    $(document).ready(function(){
-		        	$.ajax({
-      					url:"likeyCheck.fd",
-      					data:{memberNo: $("#memberNo").val(),
-      						  projectNo : ${ p.projectNo } },
-      					success:function(result){
-      						console.log(result);
-      						
-      						if(result == "liked"){ // 좋아요중 중
-      							
-      							$("#likeyBtn").attr("class", "liked").attr("src", "${ pageContext.request.contextPath }/resources/images/heart.png");
-      						
-      						} else { // 안좋아요중
-      							
-      							$("#likeyBtn").attr("src", "${ pageContext.request.contextPath }/resources/images/emptyHeart.png");
-      						}
-      						
-      					}, error:function(){
-      						console.log("좋아요 상태확인 ajax통신 실패");
-      					}
-      					
-      				})
-		
-		        })                
-			                
-			                
-			    $(function() {
-			    	
-			    	$('#likeyBtn').click(function(){
-			    		if($("#memberNo").val() == "0"){
-				    		
-				    		alert("로그인 후 사용가능합니다.");
-				    		
-				    	} else {
-				    		
-				    		if($(this).hasClass("liked")) {
-							      
-						    	$.ajax({
-			      					url:"dislike.fd",
-			      					data:{memberNo: $("#memberNo").val(),
-			      						  projectNo : ${ p.projectNo } },
-			      					success:function(result){
-			      						
-			      						if(result == "Y"){ // 좋아요 취소하기
-			      							
-			      							alert("좋아요를 해제하였습니다");
-			      							$("#likeyBtn").removeAttr("class", "liked").attr("src", "${ pageContext.request.contextPath }/resources/images/emptyHeart.png");
-			      							
-			      						} else { // 오류
-			      							
-			      							alert("오류가 발생했습니다");
-			      						}
-			      						
-			      					}, error:function(){
-			      						console.log("좋아요해제 ajax통신 실패");
-			      					}
-			      					
-			      				});
-					      
-						    } else {
-						    	
-						    	$.ajax({
-			      					url:"like.fd",
-			      					data:{memberNo: $("#memberNo").val(),
-			      						  projectNo : ${ p.projectNo } },
-			      					success:function(result){
-			      						
-			      						if(result == "Y"){ // 좋아요함
-			      							
-			      							alert("이 프로젝트를 좋아요했습니다");
-			      							$("#likeyBtn").attr("class", "liked").attr("src", "${ pageContext.request.contextPath }/resources/images/heart.png");
-			      							
-			      						}else{ // 오류
-			      							
-			      							alert("오류가 발생했습니다");
-			      							
-			      						}
-			      						
-			      					}, error:function(){
-			      						console.log("좋아요기능 ajax통신 실패");
-			      					}
-			      					
-			      				})
-						      
-						    }
-				    	}
-					})
-			    })
-					
-			</script>            	            
-                
-                
-                
-                
 
                 <!-- 메뉴바 -->
                 <div class="detailMenubar">
@@ -721,122 +667,19 @@
 
                             <div><b>창작자 소개</b></div>
                             <div class="rightPartner">
-                            	<table>
-                            		<tr>
-                            			<td><a href="partnerDetail.me?memberNo=${ p.memberNo }" style="text-decoration: none; color: black;"><img src="${ pageContext.request.contextPath }/${ p.memberProfile }">
-                                			<b>${ p.partnerName }</b></a>
-                                		</td>
-                                		<td>
-                                			<button id="followBtn"></button>
-                                		</td>
-                            			
-                            		</tr>
-                            	</table>
-                                
+								<c:choose>
+									<c:when test="${ m.memberProfile eq null}">
+										<img src="${ pageContext.request.contextPath }/resources/images/partnerDefault.PNG">
+									</c:when>
+									<c:otherwise>
+										<img src="${ pageContext.request.contextPath }/${ m.memberProfile }">
+									</c:otherwise>
+								</c:choose>	
+                                <p><b>${ m.partnerName }</b> <br><br><br></p>
+                                <button>+ 팔로우</button>
                             </div>
-                            
-                            <!-- 언팔/팔로 버튼 -->
-			                <script>
-				                $(document).ready(function(){
-						        	$.ajax({
-				      					url:"followCheck.fd",
-				      					data:{memberNo: $("#memberNo").val(),
-				      						  followMemberNo : ${ p.memberNo } },
-				      					success:function(result){
-				      						
-				      						console.log(result);
-				      						if(result == "Y"){ // 팔로우 중
-				      							
-				      							$("#followBtn").text("팔로잉");
-				      						
-				      						} else { // 언팔중
-				      							
-				      							$("#followBtn").text("+ 팔로우");
-				      						}
-				      						
-				      					}, error:function(){
-				      						console.log("팔로상태확인 ajax통신 실패")
-				      					}
-				      					
-				      				})
-						
-						        });
-			                
-			                
-			                	$(function() {
-									
-									$('#followBtn').click( function() {
-										
-										
-										if($("#memberNo").val() == "0"){
-								    		
-								    		alert("로그인 후 사용가능합니다.");
-								    		
-								    	} else {
-											
-											if( $(this).html() == '팔로잉' ) {
-									      
-									    	$(this).attr("id", "clicked");
-									    	$.ajax({
-						      					url:"unfollow.me",
-						      					data:{memberNo: $("#memberNo").val(),
-						      						  followMemberNo : ${ p.memberNo } },
-						      					success:function(result){
-						      						
-						      						if(result == "Y"){ // 언팔하기
-						      							
-						      							$("#clicked").html('+ 팔로우').removeAttr("class");
-						      							alert("팔로우를 해제하였습니다");
-						      							
-						      							
-						      						} else { // 오류
-						      							
-						      							alert("오류가 발생했습니다");
-						      						}
-						      						
-						      					}, error:function(){
-						      						console.log("언팔로우 ajax통신 실패")
-						      					}
-						      					
-						      				})
-									      
-									    } else {
-									    	$(this).attr("id", "clicked");
-									    	$.ajax({
-						      					url:"follow.me",
-						      					data:{memberNo: $("#memberNo").val(),
-						      						  followMemberNo : ${ p.memberNo } },
-						      					success:function(result){
-						      						
-						      						if(result == "Y"){ // 팔로우 중
-						      							
-						      							$("#clicked").html('팔로잉').removeAttr("class");
-						      							alert("해당 파트너를 팔로우했습니다");
-						      							
-						      						}else{ // 오류
-						      							
-						      							alert("오류가 발생했습니다");
-						      							
-						      						}
-						      						
-						      					}, error:function(){
-						      						console.log("팔로우 ajax통신 실패");
-						      					}
-						      					
-						      				})
-									      
-									    }
-								    }
-								})
-							})
-							</script>
-                            
-                            
-                            
-                            
-                            
                             <p id="partnerWho">
-                                ${ p.partnerIntro }
+                                ${ m.partnerIntro }
                             </p>
                             <div class="partnerBtn">
                                 <button><img src="${ pageContext.request.contextPath }/resources/images/send.PNG"
@@ -849,8 +692,8 @@
 
                             <div><b>리워드 선택</b></div>
                             <br>
-                            <c:forEach var="r" items="${ rList }" >
-	                            <div class="chooseReward" onclick="location.href='list.rew?pno=${p.projectNo}&rno=${ r.rewardNo }'">
+                            <c:forEach var="r" items="${ r }" >
+	                            <div class="chooseReward">
 	                                <div>
 	                                <input type="hidden" value="${ r.rewardNo }">
 	                                    <span class="rePrice">${ r.rewardPrice }원 펀딩</span>
@@ -893,226 +736,6 @@
                         </div>
                     </div>
 
-                    <!-- 커뮤니티 -->
-                    <div class="detailCommunity detail detailCommu">
-                        <p id="plzLogin" style="display: none;">
-			                            로그인 후 글 작성이 가능합니다. <br>
-			                            펀딩과 관련 없는 내용, 광고, 욕설, 비방, 도배 글은 관리자 검토 후 삭제됩니다.
-                        </p>
-
-                        <div class="loginOn">
-                        	<c:choose>
-                            	<c:when test="${ !empty loginUser }">
-                            		<textarea id="yesLogin" placeholder="펀딩과 관련 없는 내용, 광고, 욕설, 비방, 도배 글은 관리자 검토 후 삭제됩니다." style="resize: none;" class="rContent"></textarea>
-                            		<button onclick="insertReply();">등록</button>
-                            	</c:when>
-                            	<c:otherwise>
-                            		<textarea id="yesLogin" placeholder="로그인 후 글 작성이 가능합니다." style="resize: none;" class="rContent" readonly></textarea>
-                            	</c:otherwise>
-                            </c:choose>
-                            
-                        </div>
-
-                        <div id="comTitle">
-                            <h3><b> 응원 · 의견 · 리뷰 </b></h3>
-                            <hr>
-                        </div>
-					
-						<!-- 일반댓글
-                        <div class="comReply">
-                        	<div class="Reply">
-	                            <div class="adminShown">
-	                                <button style="float: right;">삭제하기</button>
-	                            </div>
-	                            <div class="replyWriter"></div>
-                            </div>
-                        
-
-                        
-                           
-                           <div class="reReply">
-                                <div class="partnerShownEdit">
-                                    <button style="float: right; display: none;">수정/삭제</button>
-                                </div>
-                                <div class="adminShown">
-                                    <button style="float: right;">삭제하기</button>
-                                </div>
-                                <hr>
-                                
-                                <div class="replyWriter">
-                                    <img src="${ pageContext.request.contextPath }/resources/images/partnerDefault.PNG">
-                                    <div class="partnerMarks" align="center">
-                                        	파트너
-                                    </div>
-                                    <p>
-                                        <b>나브 Nav</b><br>
-                                        2021-04-05
-                                    </p>
-                                </div>
-                                <p class="replyContent">펀딩, 응원 감사드립니다 :)</p>
-                            </div>
-                            
-                        
-                        </div> 
-                        -->
-                        
-                        <div class="comReply">
-							<table class="replyTable">
-							</table>
-						</div>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    </div>
-                    
-                    <script>
-                    $(function(){
-                		selectReplyList();
-                		
-                		//selectReReplyList();
-                		
-                		//setInterval(selectReplyList, 1000); // 1초 간격으로 주기적으로 실시간으로 갱신된 댓글리스트 조회요청
-                	})
-                    
-                    function insertReply(){
-    		
-			    		if($(".rContent").val().trim().length !=0 ){ // 댓글작성되어있을 경우 => ajax로 댓글작성요청
-			    			
-			    			$.ajax({
-			    				url:"rinsert.fd",
-			    				data:{
-			    					replyContent:$(".rContent").val(),
-			    					projectNo:${p.projectNo},
-			    					memberNo:'${loginUser.memberNo}',
-			    				},
-			    				success:function(status){
-			    					if(status=="success"){
-			    						$(".rContent").val("");
-			    						alert("댓글이 등록되었습니다");
-			    						selectReplyList();
-			    						
-			    					}
-			    					
-			    					
-			    					
-			    				},error:function(){
-			    					console.log("댓글작성용 ajax통신실패");
-			    				}
-			    				
-			    			});
-			    			
-			    			
-			    		} else{ // 댓글 미작성
-			    		 	alert("댓글내용을 입력해주세요")
-			    		}
-			    	}
-                    
-                    
-                    function selectReplyList(){
-                		$.ajax({
-                			url:"proReply.fd",
-                			data:{pno:${p.projectNo}},
-                			
-                			success:function(list){
-                				
-                				console.log(list);
-                				var reply = "";
-                				
-                				list  = list.filter(function(item) {
-                					  return item !== null && item !== undefined && item !== '';
-                					});
-                				
-                				
-                				
-                				$.each(list, function(i, obj){
-                					reply += "<thead id='reply'>"
-	                					  		+"<tr class='replyWriter'>"
-		                					  		+"<th rowspan='2'>" + "<img src=" + obj.memberProfile + ">" + "</th>"
-		                					  		+"<td id='memberName'>" + obj.memberName +"</td>"
-		                					  	+"</tr>"	
-		                					  	+"<tr>"
-		                					  	    +"<td id='replyDate'>" + obj.replyDate +"</td>"
-		                					  	+"</tr>"
-		                					  	+"<tr>"
-		                					  	    +"<td colspan='2'><div class='replyContent'>" + obj.replyContent +"</div><hr></td>"
-		                					  	+"</tr>"
-		                					  	
-		                					  	+"</thead>";
-		                		})
-                				
-                				$(".comReply .replyTable").html(reply);
-                				
-                				
-                				
-                			}, error:function(){
-                				console.log("댓글 리스트 조회용 ajax")
-                			}
-                			
-                		});
-                	}
-                    
-                    </script>
-                    
-                    
-                    
-                    
-                    
-                    
-                    <!--  
-                    function selectReplyList(){
-                		$.ajax({
-                			url:"proReply.fd",
-                			data:{pno:${p.projectNo}},
-                			
-                			success:function(list){
-                				
-                				console.log(list);
-                				var reply = "";
-                				
-                				$.each(list, function(i, obj){
-                					reply += "<img src=" + obj.memberProfile + ">"
-                								+ "<p><b>" + obj.memberName + "</b><br>"
-                								+ obj.replyDate + "</p>"
-                								
-                								+ "<div>" 
-                								+ obj.replyContent
-                								+ "</div>"
-                								+ "<hr>"
-                								+ "<label>" + obj.replyNo + "</label>";
-                								
-                					
-                				
-                				})
-                				
-                				$(".Reply .replyWriter").html(reply);
-                				$(".Reply .replyWriter div").attr("class", "replyContent");
-                				$(".Reply .replyWriter label").attr("style", "display:none").attr("name","replyNo");
-                				
-                				
-                			}, error:function(){
-                				console.log("댓글 리스트 조회용 ajax")
-                			}
-                			
-                		});
-                	}
-                    
-                    
-                 -->
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
 
                     <!-- 상품 안내 -->
                     <div class="detailGuide detail detailNoti">
@@ -1150,16 +773,15 @@
                                 - 이후 배송지 변경을 원하실 때에는 '창작자에게 문의하기'로 개별 문의하셔야 합니다.<br>
                                 - 파손 또는 불량품 수령 시 3일 이내로 교환이 가능합니다.<br>
                                 - 교환 및 AS 문의는 '창작자에게 문의하기' 로 신청해 주세요.<br>
-                                - 파손이나 불량품 교환시 발생하는 비용은 창작자가 부담합니다.<br> 선물 확인을 위한 포장 훼손 외에 아이템의 가치가 훼손된 경우에는 교환 및 환불이
-                                불가합니다.<br>
-                                - 후원자가 배송지를 잘못 기재하거나 창작자에게 사전 고지 없이 배송지를 수정하여 배송사고가 발생할 경우
-                                창작자는 최대 1번까지 재발송 해 드립니다.<br> 배송비 부담은 후원자에게 있습니다
+                                - 파손이나 불량품 교환시 발생하는 비용은 창작자가 부담합니다.<br> 
+                                                                          선물 확인을 위한 포장 훼손 외에 아이템의 가치가 훼손된 경우에는 교환 및 환불이 불가합니다.<br>
+                                - 후원자가 배송지를 잘못 기재하거나 창작자에게 사전 고지 없이 배송지를 수정하여 배송사고가 발생할 경우 창작자는 최대 1번까지 재발송 해 드립니다.<br> 
+                                                                           배송비 부담은 후원자에게 있습니다
                             </p>
                             <br>
                             <p><b>가치가자 교환 및 환불 정책</b></p>
                             <p>
-                                - 펀딩 취소는 프로젝트 종료 전까지만 마이페이지의 펀딩한 프로젝트에서 할 수 있으며, 가치가자의 특성상 프로젝트 종료 이후 단순 변심에 의한 펀딩 취소가
-                                불가능합니다. <br>
+                                - 펀딩 취소는 프로젝트 종료 전까지만 마이페이지의 펀딩한 프로젝트에서 할 수 있으며, 가치가자의 특성상 프로젝트 종료 이후 단순 변심에 의한 펀딩 취소가  불가능합니다. <br>
                                 - 프로젝트 종료 이후의 AS, 교환 및 환불에 관한 문의는 진행자의 교환 및 환불 정책을 따르거나 진행자의 연락처로 문의해야 합니다. <br>
                             </p>
                             <br>
@@ -1181,8 +803,8 @@
                             <p><b>프로젝트 신고하기</b></p>
 
                             <p>
-                                해당 프로젝트에 허위사실 및 지적재산권 침해, 기타 가치가자의 정책을 위반하는 내용이 있다면
-                                신고해주세요.
+				                                해당 프로젝트에 허위사실 및 지적재산권 침해, 기타 가치가자의 정책을 위반하는 내용이 있다면
+				                                신고해주세요.
                             </p>
                             <button>신고하기</button>
                         </div>
@@ -1197,9 +819,6 @@
                     $(".detail" + className).show();
                 }
             </script>
-            
-            
-            
 
         </body>
 

@@ -12,26 +12,16 @@ import com.kh.withus.csc.faq.model.vo.Faq;
 @Service
 public class FaqServiceImpl implements FaqService {
 
-	// 6/27 윤경 생성
-	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	@Autowired
 	private FaqDao fDao;
 	
 	
-	
 	@Override
-	public ArrayList<Faq> selectList(Faq f) {
-		return fDao.selectList(sqlSession, f);
+	public ArrayList<Faq> selectList() {
+		return fDao.selectList(sqlSession);
 	}
-	
-	
-	@Override
-	public int selectFaq() {
-		return fDao.selectFaq(sqlSession);
-	}
-	
 
 	@Override
 	public int insertFaq(Faq f) {
@@ -46,6 +36,33 @@ public class FaqServiceImpl implements FaqService {
 	@Override
 	public int deleteFaq(int fno) {
 		return fDao.deleteFaq(sqlSession, fno);
+	}
+
+	@Override
+	public Faq selectFaq(int fno) {
+		return fDao.selectFaq(sqlSession, fno);
+	}
+
+	
+	
+	@Override
+	public ArrayList<Faq> selectFunding() {
+		return fDao.selectFunding(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Faq> selectDelivery() {
+		return fDao.selectDelivery(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Faq> selectExchange() {
+		return fDao.selectExchange(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Faq> selectEtc() {
+		return fDao.selectEtc(sqlSession);
 	}
 
 

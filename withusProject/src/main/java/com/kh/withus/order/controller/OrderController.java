@@ -58,7 +58,7 @@ public class OrderController {
 			return "order/manaOrderDetailView";
 			
 		}else {
-			model.addAttribute("errorMsg","주문내역 항목 중 누락된 내용이 포함되어 있습니다.");
+			model.addAttribute("errorMsg","주문상세 내역 조회 실패");
 			return "common/manaErrorPage";
 		}
 	}
@@ -225,7 +225,7 @@ public class OrderController {
 		//System.out.println(ono); // 펀딩번호 확인	
 		
 		Order o = oService.selectOrderInfo(ono);
-		//System.out.println(o); // 펀딩내역 잘 담겼는지
+		System.out.println(o); // 펀딩내역 잘 담겼는지
 		
 		return new Gson().toJson(o);
 	}	
@@ -249,7 +249,7 @@ public class OrderController {
 	public String insertShippingInfo(@RequestParam(defaultValue="") String company,
 									 @RequestParam(defaultValue="") String sno,
 									 @RequestParam(defaultValue="") String ono,
-									 HttpSession session) {
+									 HttpSession session, HttpServletRequest request) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("company", company);
@@ -257,46 +257,26 @@ public class OrderController {
 		map.put("ono", ono);
 		System.out.println(map);
 		
+		// 이전 url 가져오기
+		String referer = (String)request.getHeader("REFERER");
+		
 		int result = oService.insertShippingInfo(map);
 		
 		if (result > 0) {
 			session.setAttribute("alertMsg", "발송정보 입력 완료");
-			return "redirect:orderNDeliveryList.part";
+			return "redirect:" + referer;
 		}else {
 			session.setAttribute("alertMsg", "실패실패");
-			return "redirect:orderNDeliveryList.part";
+			return "redirect:" + referer;
 		}
 		
 	}
 	
-	// 환불 승인/거절
-/*	
-	@RequestMapping("refundable.part")
-	public String updateRefundStatus(int ono,  HttpSession session) {
-		
-		//System.out.println(ono);
-		
-		int refund = oService.updateRefundStatus(ono);
-		int order = oService.updateOrderStatus(ono);
-		//System.out.println(order);
-		
-		if(refund > 0 && order > 0 ) {
-			//session.setAttribute("alertMsg", "환불 승인");
-			return "redirect:orderNDeliveryList.part";
-		}else {
-			session.setAttribute("alertMsg", "실패실패");
-			return "redirect:orderNDeliveryList.part";
-		}
-		 
-	
-	}
-	
-*/	
-	
+	// 환불 승인/거절	
 	@RequestMapping("refundable.part")
 	public String updateRefundStatus(@RequestParam(defaultValue="") int ono,
 										@RequestParam(defaultValue="") String rstatus,
-										HttpSession session) {
+										HttpSession session, HttpServletRequest request) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("ono", ono);
@@ -306,13 +286,16 @@ public class OrderController {
 		int refund = oService.updateRefundStatus(map);
 		int order = oService.updateOrderStatus(map);
 		
+		// 이전 url 가져오기
+		String referer = (String)request.getHeader("REFERER");
+		
 		
 		if(refund > 0 && order > 0 ) {
 			//session.setAttribute("alertMsg", "환불 승인");
-			return "redirect:orderNDeliveryList.part";
+			return "redirect:" + referer;
 		}else {
 			session.setAttribute("alertMsg", "실패실패");
-			return "redirect:orderNDeliveryList.part";
+			return "redirect:" + referer;
 		}
 		 
 	

@@ -11,17 +11,12 @@ import com.kh.withus.csc.faq.model.vo.Faq;
 @Repository
 public class FaqDao {
 	
-	// 6/27 윤경 생성
-	
-	public ArrayList<Faq> selectList(SqlSessionTemplate sqlSession, Faq f) {
-		return (ArrayList)sqlSession.selectList("faqMapper.selectList", f);
-	}
-	
-	public int selectFaq(SqlSessionTemplate sqlSession) {
-		return parseInt(sqlSession.selectList("faqMapper.selectFaq"));
+	public ArrayList<Faq> selectList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("faqMapper.selectList");
 	}
 	
 	public int insertFaq(SqlSessionTemplate sqlSession, Faq f) {
+		System.out.println(f);
 		return sqlSession.insert("faqMapper.insertFaq", f);
 	}
 	
@@ -32,6 +27,29 @@ public class FaqDao {
 	public int deleteFaq(SqlSessionTemplate sqlSession, int fno) {
 		return sqlSession.update("faqMapper.deleteFaq", fno);
 	}
+
+	public Faq selectFaq(SqlSessionTemplate sqlSession, int fno) {
+		return sqlSession.selectOne("faqMapper.selectFaq", fno);
+	}
+
 	
+	
+	
+	
+	public ArrayList<Faq> selectFunding(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("faqMapper.selectFunding");
+	}
+
+	public ArrayList<Faq> selectDelivery(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("faqMapper.selectDelivery");
+	}
+
+	public ArrayList<Faq> selectExchange(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("faqMapper.selectExchange");
+	}
+	
+	public ArrayList<Faq> selectEtc(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("faqMapper.selectEtc");
+	}
 
 }

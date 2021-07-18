@@ -21,37 +21,25 @@ public class FaqController {
 	private FaqService fService;
 	
 	
+	// faq 조회
 	@RequestMapping("list.faq")
-	public ArrayList<Faq> selectList(Faq f, ModelAndView mv) {
-		
-		ArrayList<Faq> list = fService.selectList(f);
-		mv.addObject("f", f).addObject("list", list).setViewName("csc/faqListView");
-		return list;
-		
-	}
-	
-	/*
-	@RequestMapping("list.faq")
-	public String selectFaq(int fno, Model model) {
-		
-		Faq f = fService.selectFaq(fno);
-		model.addAttribute("f", f);
+	public String selectList(Model model) {
+		ArrayList<Faq> list = fService.selectList();
+		model.addAttribute("list", list);
 		return "csc/faqListView";
-		
 	}
-	*/
+
 	
+	// faq 추가
 	@RequestMapping("enrollForm.faq")
 	public String enrollForm() {
 		return "csc/faqEnrollForm";
 	}
 	
-	
 	@RequestMapping("insert.faq")
 	public String insertFaq(Faq f, HttpSession session, Model model) {
 		
 		int result = fService.insertFaq(f);
-		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "faq가 등록되었습니다.");
 			return "redirect:list.faq";
@@ -59,9 +47,10 @@ public class FaqController {
 			model.addAttribute("errorMsg", "faq가 등록되지않았습니다.");
 			return "common/errorPage";
 		}
-		
 	}
 	
+	
+	// faq 수정
 	@RequestMapping("updateForm.faq")
 	public String updateForm(int fno, Model model) {
 		model.addAttribute("f", fService.selectFaq(fno));
@@ -74,13 +63,15 @@ public class FaqController {
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "faq가 수정되었습니다.");
+			return "redirect:list.faq";
 		}else {
 			model.addAttribute("errorMsg", "faq가 수정되지않았습니다.");
 			return "common/errorPage";
 		}
-		return f;
 	}
 	
+	
+	// faq 삭제
 	@RequestMapping("delete.faq")
 	public String deleteFaq(int fno, HttpSession session, Model model) {
 		
@@ -95,5 +86,34 @@ public class FaqController {
 		}
 	}
 	
+	
+	// faq 카테고리별 버튼
+	@RequestMapping("funding.faq")
+	public String selectFunding(Model model) {
+		ArrayList<Faq> list = fService.selectFunding();
+		model.addAttribute("list", list);
+		return "csc/faqListView";
+	}
+	
+	@RequestMapping("delivery.faq")
+	public String selectDelivery(Model model) {
+		ArrayList<Faq> list = fService.selectDelivery();
+		model.addAttribute("list", list);
+		return "csc/faqListView";
+	}
+	
+	@RequestMapping("exchange.faq")
+	public String selectExchange(Model model) {
+		ArrayList<Faq> list = fService.selectExchange();
+		model.addAttribute("list", list);
+		return "csc/faqListView";
+	}
+	
+	@RequestMapping("etc.faq")
+	public String selectEtc(Model model) {
+		ArrayList<Faq> list = fService.selectEtc();
+		model.addAttribute("list", list);
+		return "csc/faqListView";
+	}
 
 }

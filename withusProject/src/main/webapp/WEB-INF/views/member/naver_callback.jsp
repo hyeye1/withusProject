@@ -13,7 +13,6 @@
 
   // TODO : 토큰을 못받았을때 처리가 필요하다
   naver_id_login.get_naver_userprofile("naverSignInCallback()");
-
   
   function naverSignInCallback() {
 	  var token = naver_id_login.oauthParams.access_token;

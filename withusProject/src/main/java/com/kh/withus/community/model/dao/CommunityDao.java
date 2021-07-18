@@ -28,6 +28,39 @@ public class CommunityDao {
 		return (ArrayList)sqlSession.selectList("communityMapper.selectList", null, rowBounds);
 		
 	}
+	public ArrayList<Community> selectList1(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("communityMapper.selectList1", null, rowBounds);
+		
+	}
+	
+	public ArrayList<Community> selectList2(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("communityMapper.selectList2", null, rowBounds);
+		
+	}
+	
+	public ArrayList<Community> selectList3(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("communityMapper.selectList3", null, rowBounds);
+		
+	}
+
 	
 	public int insertCommunity(SqlSessionTemplate sqlSession, Community c) {
 		System.out.println("dao실행");

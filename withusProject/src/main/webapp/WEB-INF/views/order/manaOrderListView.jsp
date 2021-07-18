@@ -113,7 +113,6 @@
 	        			$("input:radio").removeAttr("checked");				// 라디오버튼 해제
 	        		});
 	        		
-	        		
 	        	</script>
        		 </c:if>
        		 <script>

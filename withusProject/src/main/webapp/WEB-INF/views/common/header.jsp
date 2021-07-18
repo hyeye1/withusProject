@@ -229,7 +229,7 @@
 						<div class="cateRight">
 							<div clear="both" class="style_3">태그</div> <br>
 							<div class="hash">
-								<div class="tagBox"><a href="#">#좋아요 </a></div>
+								<div class="tagBox"><a href="search.fun?condition=hashtag&keword=ㅇㅇ">#좋아요 </a></div>
 								<div class="tagBox"><a href="#">#친환경 </a></div>
 								<div class="tagBox"><a href="#">#인형놀이 </a></div>
 								<div class="tagBox"><a href="#">#얼리버드 </a></div>

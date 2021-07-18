@@ -21,7 +21,7 @@ public class ReportController {
 	private ReportService rService;
 	
 	// 신고회원 조회
-	@RequestMapping("reportListView.mana")
+	@RequestMapping("reportList.mana")
 	public ModelAndView selectReportList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
 		
 		int listCount = rService.selectListCount();

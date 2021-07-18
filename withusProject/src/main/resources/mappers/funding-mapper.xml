@@ -19,6 +19,10 @@
 		<result column="dday" property="dday" />
 		<result column="member_no" property="memberNo" />
 		
+		<!-- 관리자 -->
+		<result column="project_status" property="projectStatus" />
+		<result column="cat_name" property="catName" />
+		
 	</resultMap>
 	
 	<resultMap id="fundingDetail" type="FundingDetail">
@@ -71,10 +75,21 @@
 		<result column="member_profile" property="memberProfile" />
 		<result column="partner_name" property="partnerName" />
 		
-		<result column="subre_no" property="subReNo" />
-		<result column="subre_content" property="subReContent" />
-		<result column="subre_date" property="subReDate" />
-		<result column="subre_status" property="subReStatus" />
+		<result column="subre_no" property="subreNo" />
+		<result column="subre_content" property="subreContent" />
+		<result column="subre_date" property="subreDate" />
+		<result column="subre_status" property="subreStatus" />
+	</resultMap>
+	
+	
+	<resultMap id="memberResultSet" type="Member">
+		<id column="member_no" property="memberNo"/>
+		<result column="member_name" property="memberName"/>
+		<result column="member_phone" property="memberPhone"/>
+		<result column="member_profile" property="memberProfile"/>
+		<result column="partner_name" property="partnerName"/>
+		<result column="partner_intro" property="partnerIntro"/>
+		
 	</resultMap>
 	
 	<select id="selectFamousList" resultMap="fundingListResultSet">
@@ -206,7 +221,44 @@
     </select>
     
     <select id="selectReadyList" resultMap="fundingListResultSet">
-		
+		select * from (
+			select
+	               p.project_no
+	             , p.project_thum
+	             , p.project_title
+	             , c.cat_no
+	             , c.cat_name
+	             , m.partner_name
+	             , sum(o.total_price) total_price
+	             , floor(sum(o.total_price) / p.project_gprice * 100) percentage
+	             , p.project_gprice
+	             , p.project_start_dt
+	             , p.project_end_dt
+	             , ceil(project_end_dt - sysdate) dday
+	             , p.project_count
+	          from 
+	          	   tb_order o
+	             , project p
+	             , category c
+	             , member m
+	         where p.project_no = o.project_no(+)
+	           and p.cat_no = c.cat_no 
+	           and p.member_no = m.member_no 
+	           and p.project_status = 1
+	           and ceil(project_end_dt - sysdate) > 0
+	         group
+	            by p.project_no
+	             , p.project_title
+	             , p.project_thum
+	             , c.cat_no
+	             , c.cat_name
+	             , m.partner_name
+	             , p.project_gprice
+	             , p.project_start_dt
+	             , p.project_end_dt 
+	             , p.project_count
+	         )
+             where rownum <![CDATA[ < ]]> 10
     </select>
 	
 	<select id="selectSearchList" resultMap="fundingListResultSet" parameterType="hashmap">
@@ -572,19 +624,20 @@
  	
  	<!-- 펀딩 댓글(커뮤니티 -->
  	<select id="selectReplyList" resultMap="ProjectReply" parameterType="_int">
-		select
-				 r.reply_no
+		select 
+                 r.reply_no
 			   , reply_content
 			   , to_char(reply_date, 'YYYY-MM-DD') reply_date
 			   , reply_status
                , project_no
-               , m.member_id
                , m.member_no
                , m.member_name
                , m.member_profile
-              
+               , s.subre_content
+               , to_char(s.subre_date, 'YYYY-MM-DD') subre_date
             from pro_reply r
             join member m on(m.member_no=r.member_no)
+            left join sub_reply s on(s.reply_no=r.reply_no)
            where reply_status = '1'
              and project_no = #{pno}
 		   order
@@ -649,5 +702,129 @@
   	</insert>
  	
  	
-
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	<!-- 관리자 -->
+	<!-- 페이징 처리 --> 	
+ 	<select id="selectFListCount" resultType="_int">
+ 		select
+			   count(*)
+		from project
+ 	</select>
+ 	
+ 	<!-- 펀딩 리스트 -->
+ 	<select id="selectFundingList" resultMap="fundingListResultSet">
+ 		select
+		        p.project_no
+		      , c.cat_name
+		      , p.project_title
+		      , m.partner_name
+		      <!-- , 달성률 -->
+		      , to_char(p.project_end_dt,'YYYY-MM-DD') project_end_dt
+		      <!-- ,좋아요 -->
+		      , ceil(p.project_end_dt - sysdate) dday 
+		      , p.project_status
+		  from project p 
+		  join category c on(c.cat_no = p.cat_no)
+		  join member m on(m.member_no = p.member_no)
+		  full join likey l on(l.project_no = p.project_no)
+		  order
+		     by p.project_no desc
+ 	</select>
+ 	
+ 	<!-- 프로젝트 조회 -->
+ 	<select id="fundingConsiderPre" resultMap="fundingDetail" 
+			parameterType="FundingDetail">
+	    select
+		       cat_no
+		     , cat_name
+		     , project_no
+		     , project_title
+		     , project_thum
+		     , (select sum(total_price)
+		          from tb_order
+		         where project_no = #{pno}) total_price
+		     , project_gprice
+		     , (select (select sum(total_price)
+		          from tb_order
+		         where project_no = #{pno}) / project_gprice * 100
+		          from project
+		         where project_no = #{pno}) percentage
+		     , ceil(project_end_dt - sysdate) dday
+		     , (select count(*)
+		          from tb_order
+		         where project_no = #{pno}) supporter
+		     , project_end_dt
+		     , to_char(project_end_dt + 1, 'MM"월" DD"일"') pay_date
+		     , delivery_date
+		     , project_content
+		     , project_refcon
+		     , hashtag
+		     , member_no
+		     , partner_name
+		     , partner_intro
+		     , member_profile
+		     , partner_phone
+		     , partner_email
+		     , phone_yn
+		  from project
+		  join member using(member_no)
+		  join category using(cat_no)
+		 where project_no = #{pno}
+    </select>
+    
+    <!-- 창작자 조회 -->
+    <select id="selectPartnerInfo" resultMap="memberResultSet" 
+			parameterType="Member">
+    	select
+		       m.member_profile
+			 , m.partner_name
+			 , m.partner_intro
+	      from member m
+		  join project p on(p.member_no = m.member_no)
+		 where p.project_no = #{pno}
+    </select>
+ 	
+ 	<!-- 리워드 조회 -->
+    <select id="selectFundingReward" resultMap="fundingDetail"
+    		parameterType="FundingDetail">
+    	select 
+		       project_title
+		     , reward_no
+		     , reward_title
+		     , reward_price
+		     , reward_stock
+		     , delivery_date
+		     , reward_ship
+		     , reward_content
+		     , option_yn
+		  from reward
+		  join project using(project_no)
+		 where 
+		       project_no = #{pno}
+    </select>
+    
+   	<!-- 펀딩 승인/반려 처리 -->
+   	<update id="updateProjectStatus" parameterType="hashmap">
+		update project
+		   set 
+		   	   project_status = #{considerBtn}
+		 where project_no = #{pno}  
+	</update>
+ 	
+ 
+    
  </mapper>

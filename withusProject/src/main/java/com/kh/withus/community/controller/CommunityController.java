@@ -37,18 +37,75 @@ public class CommunityController {
 	// 커뮤 조회
 	@RequestMapping("commu.main")
 	public ModelAndView selectCommunityMain(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
-		
+	
 		int listCount = cService.selectListCount();
 		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 5);
-		
+
 		ArrayList<Community> list = cService.selectList(pi);
-		
-		mv.addObject("pi", pi)
+
+ 		mv.addObject("pi", pi)
 		  .addObject("list", list)
 		  .setViewName("community/commuListView");
 		
+ 		
 		return mv;
 	}
+	
+	// 자유 조회
+		@RequestMapping("commu.free")
+		public ModelAndView selectList1(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
+		
+			int listCount = cService.selectList1Count();
+			PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 5);
+
+			ArrayList<Community> list = cService.selectList1(pi);
+
+	 		mv.addObject("pi", pi)
+			  .addObject("list", list)
+			  .setViewName("community/commuListView");
+			
+	 		
+			return mv;
+		}
+	
+	
+	
+	// 질문 조회
+		@RequestMapping("commu.ask")
+		public ModelAndView selectList2(@RequestParam(value="currentPage", defaultValue="1") int currentPage,  ModelAndView mv) {
+		
+			int listCount = cService.selectList2Count();
+			PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 5);
+
+			ArrayList<Community> list = cService.selectList2(pi);
+
+	 		mv.addObject("pi", pi)
+			  .addObject("list", list)
+			  .setViewName("community/commuListView");
+			
+	 		
+			return mv;
+		}
+		
+		// 공구모집 조회
+		@RequestMapping("commu.tool")
+		public ModelAndView selectList3(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
+		
+			int listCount = cService.selectList3Count();
+			PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 5);
+
+			ArrayList<Community> list = cService.selectList3(pi);
+
+	 		mv.addObject("pi", pi)
+			  .addObject("list", list)
+			  .setViewName("community/commuListView");
+			
+	 		
+			return mv;
+		}
+	
+	
+	
 	
 	// 커뮤 상세 조회
 	@RequestMapping("commu.detail")
@@ -85,9 +142,11 @@ public class CommunityController {
 			
 		}
 		
+		System.out.println(c);
 		int result = cService.insertCommunity(c); // servieImpl, dao, sql 작성
 		
 		System.out.println(result);
+		
 		
 		// 성공했을 경우
 		if(result > 0) {

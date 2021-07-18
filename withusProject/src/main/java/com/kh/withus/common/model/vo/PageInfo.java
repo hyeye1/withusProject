@@ -13,6 +13,7 @@ public class PageInfo {
 	
 	public PageInfo() {}
 
+	
 	public PageInfo(int listCount, int currentPage, int pageLimit, int boardLimit, int startPage, int endPage,
 			int maxPage) {
 		super();
@@ -24,6 +25,7 @@ public class PageInfo {
 		this.endPage = endPage;
 		this.maxPage = maxPage;
 	}
+
 
 	public int getListCount() {
 		return listCount;
@@ -81,11 +83,18 @@ public class PageInfo {
 		this.maxPage = maxPage;
 	}
 
+	
+
+
+
 	@Override
 	public String toString() {
 		return "PageInfo [listCount=" + listCount + ", currentPage=" + currentPage + ", pageLimit=" + pageLimit
 				+ ", boardLimit=" + boardLimit + ", startPage=" + startPage + ", endPage=" + endPage + ", maxPage="
 				+ maxPage + "]";
 	}
+
+	
+	
 	
 }

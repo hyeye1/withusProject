@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.withus.category.model.vo.Category;
+import com.kh.withus.common.model.vo.PageInfo;
 import com.kh.withus.funding.model.dao.FundingDao;
 import com.kh.withus.funding.model.dto.FundingDetail;
 import com.kh.withus.funding.model.vo.Project;
 import com.kh.withus.funding.model.vo.ProjectReply;
 import com.kh.withus.funding.model.vo.Reward;
+import com.kh.withus.member.model.vo.Member;
 import com.kh.withus.myPage.model.vo.MyPage;
 import com.kh.withus.order.model.vo.Order;
 
@@ -146,5 +148,45 @@ public class FundingServiceImpl implements FundingService {
 	public int like(MyPage m) {
 		return funDao.like(sqlSession, m);
 	}
+
+	
+	
+	
+	
+	
+	
+	
+	// 관리자 
+	
+	@Override
+	public int selectFListCount() {
+		return funDao.selectFListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Project> selectFundingList(PageInfo pi) {
+		return funDao.selectFundingList(sqlSession, pi);
+	}
+
+	@Override
+	public FundingDetail fundingConsiderPre(int pno) {
+		return funDao.fundingConsiderPre(sqlSession, pno);
+	}
+
+	@Override
+	public Member selectPartnerInfo(int pno) {
+		return funDao.selectPartnerInfo(sqlSession, pno);
+	}
+	
+	@Override
+	public ArrayList<FundingDetail> selectFundingReward(int pno) {
+		return funDao.selectFundingReward(sqlSession, pno);
+	}
+
+	@Override
+	public int updateProjectStatus(HashMap<String, Object> map) {
+		return funDao.updateProjectStatus(sqlSession, map);
+	}
+
 
 }

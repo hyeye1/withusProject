@@ -73,15 +73,15 @@
         	<c:otherwise>        
 					<thead class="tableHead">
 					  <tr align="center" style="height: 10px; background-color: rgb(224, 224, 224); font-size:smaller ;">
-						<th height="30">신고<br>번호</th>
-						<th>회원<br>이름</th>
+						<th width="70" height="30">신고<br>번호</th>
+						<th width="100">회원<br>이름</th>
 		                <th width="400">신고사유</th>
 		                <th>게시물타입</th>
 		                <th>게시물번호</th>
 		                <th>회원상태</th>
 		                <th>누적횟수</th>
-		                <th>신고일</th>
-		                <th>신고상태</th>
+		                <th width="130">신고일</th>
+		                <th width="100">신고상태</th>
 					  </tr>
 					</thead>
 					<tbody>

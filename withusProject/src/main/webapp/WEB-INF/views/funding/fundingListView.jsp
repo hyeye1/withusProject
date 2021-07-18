@@ -99,11 +99,8 @@
 		        <c:when test="${ catNo eq 10 }">
 					<span class="title"><h3>테크·가전</h3></span>
 		        </c:when>
-		        <c:when test="${ !empty condition && !empty keyword }">
-					<span class="title"><h3>검색결과</h3></span>
-		        </c:when>
 		        <c:otherwise>
-		        	<span class="title"><h3>dd</h3></span>
+		        	<span class="title"><h3>검색결과</h3></span>
 		        </c:otherwise>
 		    </c:choose>
 				

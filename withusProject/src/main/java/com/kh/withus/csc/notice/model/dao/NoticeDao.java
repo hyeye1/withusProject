@@ -11,9 +11,8 @@ import com.kh.withus.csc.notice.model.vo.Notice;
 
 @Repository
 public class NoticeDao {
-	
-	// 6/25  윤경 생성
 
+	/* 사용자 */
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("noticeMapper.selectListCount");
 	}
@@ -44,8 +43,44 @@ public class NoticeDao {
 	}
 	
 	public int updateNotice(SqlSessionTemplate sqlSession, Notice n) {
-		System.out.println(n);
+		//System.out.println(n);
 		return sqlSession.update("noticeMapper.updateNotice", n);
+	}
+
+	
+	
+	/* 관리자 */
+	public int selectManaListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("noticeMapper.selectListCount");
+	}
+
+	public ArrayList<Notice> selectManaList(SqlSessionTemplate sqlSession, PageInfo mpi) {
+		int offset = (mpi.getCurrentPage() - 1) * mpi.getBoardLimit();
+		int limit = mpi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("noticeMapper.selectManaList", null, rowBounds);
+	}
+
+	public int insertManaNotice(SqlSessionTemplate sqlSession, Notice nM) {
+		return sqlSession.insert("noticeMapper.insertNotice", nM);
+	}
+
+	public int increaseManaCount(SqlSessionTemplate sqlSession, int noticeNoM) {
+		return sqlSession.update("noticeMapper.increaseCount", noticeNoM);
+	}
+
+	public Notice selectManaNotice(SqlSessionTemplate sqlSession, int noticeNoM) {
+		return sqlSession.selectOne("noticeMapper.selectNotice", noticeNoM);
+	}
+
+	public int updateManaNotice(SqlSessionTemplate sqlSession, Notice nM) {
+		return sqlSession.update("noticeMapper.updateNotice", nM);
+	}
+
+	public int deleteManaNotice(SqlSessionTemplate sqlSession, int noticeNoM) {
+		return sqlSession.update("noticeMapper.deleteNotice", noticeNoM);
 	}
 	
 	

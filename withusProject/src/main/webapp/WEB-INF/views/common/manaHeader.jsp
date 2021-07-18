@@ -110,11 +110,12 @@
 
     <div class="head">
         <div class="head_main">
-            <div class="logo_img"><a href="${ pageContext.servletContext.contextPath }"><img src="resources/images/logo.PNG" alt="로고" width="125px"></a></div>
+            <div class="logo_img"><a href="${ pageContext.servletContext.contextPath }">
+            	<img src="resources/images/logo.PNG" alt="로고" width="125px" ></a></div>
             <div class="head_center"></div>
             <div class="login_area">
                 <c:choose>
-                	<c:when test="${ !empty loginAdmin and loginAdmin.memberStatus eq 'A' }">
+                	<c:when test="${ !empty loginUser and loginUser.memberStatus eq 'A' }">
 		                <span>관리자  on</span> &nbsp;
 		                <a href="logout.mana">로그아웃</a>
                 	</c:when>
@@ -125,14 +126,34 @@
                 </c:choose>
             </div>
         </div>
-
+        
+<%--        
+	    <script>
+	     // 로그인이 null일때 모달창 자동으로 노출
+		    $(document).ready(function(){
+		    	//alert("작동되니?");
+		    	
+		    	// javaScript에서 session에 담긴 값 가져오기 
+		      var loginUser = '<%=(String)session.getAttribute("loginUser")%>'; 
+		    	alert(loginUser);
+		    	
+		    	if(loginUser == "null"){
+			    	//alert("작동되니?");
+			    	$("#manaLogin").modal();
+		    		
+		    	}else{
+		    		location.href = "memberListView.mana"
+		    	}
+		    });
+	    </script> 
+      --%>
         <div class="gnb_wrap">
             <ul class="navi">
                 <li><a href="memberListView.mana">회원관리</a></li>
 
                 <li><a href="list.cate">메뉴관리</a></li>
 
-                <li><a href="">펀딩관리</a> </li>
+                <li><a href="fundingListView.mana">펀딩관리</a> </li>
 
                 <li><a>결제관리</a>
                     <ul class="navi_sub">
@@ -143,17 +164,15 @@
 
                 <li><a>고객센터</a>
                     <ul class="navi_sub">
-                        <li><a href="manaList.no">공지사항</a></li>
-                        <li><a href="list.faq">FAQ</a></li>
-                        <li><a href="list.oto">문의하기</a></li>
-                        <li><a href="reportListView.mana">신고하기</a></li>
-                        <li><a href="">실시간채팅</a></li>
+                        <li><a href="noticeList.mana">공지사항</a></li>
+                        <li><a href="faqList.mana">FAQ</a></li>
+                        <li><a href="otoList.mana">문의하기</a></li>
+                        <li><a href="reportList.mana">신고하기</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
-    
    
     <!-- 로그인 클릭시 뜨는 모달 -->
     <!-- The Modal -->
@@ -183,7 +202,8 @@
             </form>
         </div>
         </div>
-    </div>                            
+    </div>  
+    
  
 
 </body>

@@ -24,7 +24,6 @@ import com.kh.withus.csc.notice.model.vo.Notice;
 @Controller
 public class NoticeController {
 	
-	// 6/25  윤경 생성
 	@Autowired
 	private NoticeService nService;
 	
@@ -156,6 +155,118 @@ public class NoticeController {
 	
 	
 	
+	// -------------------------------------------------------------------------------------------
+	
+	
+	
+	
+	
+	/* 관리자 */
+	// 공지사항 조회
+	@RequestMapping("noticeList.mana")
+	public ModelAndView selectManaListCount(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
+		
+		int listCount = nService.selectManaListCount();
+		PageInfo mpi = pagination.getPageInfo(listCount, currentPage, 5, 10);
+		
+		ArrayList<Notice> mlist = nService.selectManaList(mpi);
+		
+		mv.addObject("mpi", mpi).addObject("mlist", mlist).setViewName("admin/csc/notice/noticeManaListView");
+		
+		return mv;
+	}
+	
+	
+	
+	// 공지사항 작성
+	@RequestMapping("manaEnrollForm.no")
+	public String ManaEnrollForm() {
+		return "admin/csc/notice/noticeManaEnrollForm";
+	}
+	
+	@RequestMapping("manaInsert.no")
+	public String insertManaNotice(Notice nM, MultipartFile cscUpfileM, HttpSession sessionM, Model modelM) {
+		
+		if(!cscUpfileM.getOriginalFilename().equals("")) {
+			String changeName = saveFile(sessionM, cscUpfileM);
+			
+			nM.setNoticeOriginname(cscUpfileM.getOriginalFilename());
+			nM.setNoticeChangename("resources/cscUploadFile/" + changeName);
+		}
+		int result = nService.insertNotice(nM);
+		
+		if(result > 0) {
+			sessionM.setAttribute("alertMsg", "공지사항이 등록되었습니다.");
+			return "redirect:noticeList.mana";
+		}else {
+			modelM.addAttribute("errorMsg", "공지사항이 등록되지않았습니다.");
+			return "common/errorPage";
+		}
+	
+	}
+	
+	
+	// 공지사항 상세조회
+	@RequestMapping("manaDetail.no")
+	public String selectManaNotice(int nnoM, Model modelM) {
+		int result = nService.increaseCount(nnoM);
+		
+		if(result > 0) {
+			Notice nM = nService.selectNotice(nnoM);
+			modelM.addAttribute("nM", nM);
+			return "admin/csc/notice/noticeManaDetailView";
+		}else {
+			modelM.addAttribute("errorMsg", "공지사항 상세조회를 실패했습니다.");
+			return "common/errorPage";
+		}
+	}
+	
+	
+	// 공지사항 등록
+	@RequestMapping("manaUpdateForm.no")
+	public String updateManaForm(int nnoM, Model modelM) {
+		modelM.addAttribute("n", nService.selectNotice(nnoM));
+		return "admin/csc/notice/noticeManaUpdateEnroll";
+	}
+	
+	@RequestMapping("manaUpdate.no")
+	public String updateManaNotice(Notice nM, MultipartFile cscReUpfileM, HttpSession sessionM, Model modelM){
+		
+		if(!cscReUpfileM.getOriginalFilename().equals("")) {
+			String changeName = saveFile(sessionM, cscReUpfileM);
+			nM.setNoticeOriginname(cscReUpfileM.getOriginalFilename());
+			nM.setNoticeChangename("resources/cscUploadFile/" + changeName);
+		}
+		int result = nService.updateNotice(nM);
+		
+		if(result > 0) {
+			sessionM.setAttribute("alertMsg", "공지사항이 수정되었습니다.");
+			return "redirect:detail.no?nno=" + nM.getNoticeNo();
+		}else {
+			modelM.addAttribute("errorMsg", "공지사항이 수정되지않았습니다.");
+			return "common/errorPage";
+		}
+		
+	}
+	
+	@RequestMapping("manaDelete.no")
+	public String deleteManaNotice(int nnoM, String filePathM, HttpSession sessionM, Model modelM) {
+		
+		int result = nService.deleteNotice(nnoM);
+		
+		if(result > 0) {
+			if(!filePathM.equals("")) {
+				new File(sessionM.getServletContext().getRealPath(filePathM)).delete();
+			}
+			
+			sessionM.setAttribute("alertMsg", "공지사항이 성공적으로 삭제되었습니다.");
+			return "redirect:list.no";
+			
+		} else {
+			modelM.addAttribute("errorMsg", "공지사항 삭제를 실패했습니다.");
+			return "common/errorPage";
+		}
+	}
 	
 	
 

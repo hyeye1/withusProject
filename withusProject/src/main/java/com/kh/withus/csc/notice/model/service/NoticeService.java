@@ -7,8 +7,7 @@ import com.kh.withus.csc.notice.model.vo.Notice;
 
 public interface NoticeService {
 	
-	// 6/25  윤경 생성
-	
+	/* 사용자 */
 	// 공지사항 리스트 조회(페이징 처리)
 	int selectListCount();
 	ArrayList<Notice> selectList(PageInfo pi);
@@ -25,5 +24,31 @@ public interface NoticeService {
 	
 	// 공지사항 삭제
 	int deleteNotice(int noticeNo);
+	
+	
+	
+	
+	
+	
+	
+	/* 관리자 */
+	// 공지사항 리스트 조회
+	int selectManaListCount();
+	ArrayList<Notice> selectManaList(PageInfo mpi);
+	
+	// 공지사항 작성
+	int insertManaNotice(Notice nM);
+	
+	// 공지사항 상세조회
+	int increaseManaCount(int noticeNoM);
+	Notice selectManaNotice(int noticeNoM);
+	
+	// 공지사항 수정
+	int updateManaNotice(Notice nM);
+	
+	// 공지사항 삭제
+	int deleteManaNotice(int noticeNoM);
+	
+	
 
 }

@@ -17,24 +17,28 @@ public class AdminLoginInterceptor extends HandlerInterceptorAdapter {
 		
 		HttpSession session = request.getSession();
 		Member loginUser = (Member) session.getAttribute("loginUser");
+		//Member loginAdmin = (Member) session.getAttribute("loginAdmin");
+		//System.out.println("사용자"+loginUser);
+		//System.out.println("관리자"+loginAdmin);
 		
 	    // 로그인 유무 확인
-		if(loginUser == null) {
-			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스 입니다.");
+		if( loginUser == null || !loginUser.getMemberStatus().equals("A")) {
+			session.setAttribute("alertMsg", "접근 가능한 페이지가 아닙니다.");
 			response.sendRedirect(request.getContextPath());
 			return false;
 		}else {
+			return true;
 			// 로그인 상태에서 관리자인지 판단
-			if(loginUser.getMemberStatus().equals("A")) {  // 관리자일 경우
-				
-				return true;
-				
-			} else {	// 일반 회원일 경우
-				
-				session.setAttribute("alertMsg", "접근 가능한 페이지가 아닙니다.");
-				response.sendRedirect(request.getContextPath());
-				return false;
-			}
+			/*
+			 * if(loginAdmin.getMemberStatus().equals("A") && loginAdmin != null ) { // 관리자일
+			 * 경우
+			 * 
+			 * 
+			 * } else { // 일반 회원일 경우
+			 * 
+			 * session.setAttribute("alertMsg", "접근 가능한 페이지가 아닙니다.");
+			 * response.sendRedirect(request.getContextPath()); return false; }
+			 */
 		}
 	    
 		

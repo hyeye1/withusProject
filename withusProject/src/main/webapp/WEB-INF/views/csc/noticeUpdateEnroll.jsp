@@ -28,7 +28,7 @@
 	
 	                <form id="updateForm" method="post" action="update.no" enctype="multipart/form-data">
 	                	<input type="hidden" id="noticeNo" name="noticeNo" value="${ n.noticeNo }">
-	                    <table align="center">
+	                    <table class="table table-bordered" align="center">
 	                        <tr>
 	                            <th><label for="title">제목</label></th>
 	                            <td><input type="text" id="noticeTitle" class="form-control" name="noticeTitle" value="${ n.noticeTitle }" required></td>

@@ -13,13 +13,33 @@
 <title>With Us</title>
 <style>
 
-    .enrollBtn{
-        padding-right: 20%;
-    }
-    .according_list>li{
+	.according_list>li{
 		list-style: none;
 	}
 	
+    .title{
+        width:600px;
+        height:50px;
+        text-align:center;
+        line-height:30px;
+        border:1px solid lightgray;
+        border-radius:5px;
+        cursor:pointer;
+        font-weight:150%;
+    }
+    
+    .content{
+    	width:600px;
+    	height:150px;
+    	border:1px solid rgb(178, 185, 223);
+    	background: rgb(178, 185, 223);
+    	border-radius:5px;
+    }
+    
+    .btn{
+    	height
+    }
+    
 </style>
 </head>
 <body>
@@ -28,51 +48,79 @@
     <!-- 해더바 포함 -->
     <jsp:include page="../common/header.jsp"/>
 
-    <h2>FAQ</h2>
+    <h3><b>FAQ</b></h3>
     <hr><br>
 
-	<div class="container">
+	<div class="container" align="center">
         <div class="btn" align="center">
-            <button type="button" class="btn btn-outline-secondary" style="height: 50px; width: 150px;">전체보기</button> &nbsp;&nbsp;
-            <button type="button" class="btn btn-outline-secondary" style="height: 50px; width: 150px;">펀딩상품관련</button> &nbsp;&nbsp;
-            <button type="button" class="btn btn-outline-secondary" style="height: 50px; width: 150px;">배송관련</button> &nbsp;&nbsp;
-            <button type="button" class="btn btn-outline-secondary" style="height: 50px; width: 150px;">교환/반품관련</button> &nbsp;&nbsp;
-            <button type="button" class="btn btn-outline-secondary" style="height: 50px; width: 150px;">기타관련</button>
+            <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;">전체보기</a> &nbsp;&nbsp;
+            <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;" href="funding.faq">펀딩상품관련</a> &nbsp;&nbsp;
+            <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;" href="delivery.faq">배송관련</a> &nbsp;&nbsp;
+            <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;" href="exchange.faq">교환/반품관련</a> &nbsp;&nbsp;
+            <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;" href="etc.faq">기타관련</a>
         </div>
         <br><br><br>
 
+		<c:if test="${ loginUser.memberStatus eq 'A' }">
+			<div>
+				<a href="enrollForm.faq" class="btn btn-secondary">등록</a>
+			</div>
+		</c:if><br>
+		
 		<c:choose>
-			<c:when test="${ empty f.faqContent }">
+			<c:when test="${ empty list }">
 		        <!-- 게시글 없을 시 -->
 		        <div class="faqN" align="center">
-		            <p>FAQ가 없습니다. 등록해주세요.</p>
+		            <p>FAQ가 없습니다.</p>
 		        </div>
         	</c:when>
 			<c:otherwise>
 		        <!-- 게시글 있을 시-->
-		        <div class="faqY" align="center">
-		            <div class="faqCon">
-		                <ul class="accodrding_list">
-		                    <li>
-		                        <button type="button" class="btn btn-light titleBtn" data-toggle="collapse" data-target="#faqContent" style="width:80%;">
-		                            <span id="faqCat" name="faqCat" style="width: 25%;">Q &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${ f.faqCat }</span> 
-		                            <span id="faqTitle" name="faqTitle" style="width: 60%;">${ f.faqTitle } </span>
-		                            <span style="width: 15%;">▼</span>
-		                        </button>
-		                        <div id="faqContent" name="faqContent" class="collapse" style="background-color: rgb(224,224,224); width:80%;">
-		
-		
-		                            <p align="left" style="padding-left: 5%;">
-		                                <br><textarea colspan=10>${ f.faqContent }</textarea><br><br>
-		                            </p>
-		                        </div>
-		                    </li>
-		                </ul>
-		            </div>
+			    <div class="faqY" align="center">
+			        <c:forEach var="f" items="${ list }">
+			            <div class="faqCon">
+			                <ul class="accodrding_list">
+			                    <li>
+			                        <div class="title">
+			                        	<input type="hidden" value="${ f.faqCat }">
+			                            <span id="faqTitle" name="faqTitle">${ f.faqTitle } </span>
+			                        </div>
+			                        <div class="content">
+			                            <p id="faqContent" name="faqContent" align="left" style="padding-left: 5%;">
+			                                <br>${ f.faqContent }<br>
+			                                
+			                                <c:if test="${ loginUser.memberStatus eq 'A' }">
+				                                <div align="right" style="padding-right: 30px;">
+													<a href="update.faq?faqNo=${ f.faqNo }" class="btn btn-warning btn-sm">수정</a>
+													<a href="delete.faq?fno=${ f.faqNo }" class="btn btn-danger btn-sm" style="color:white;">삭제</a>
+												</div>
+											</c:if>
+			                            </p>
+			                        </div>
+			                    </li>
+			                </ul>
+			            </div>
+		            </c:forEach>
 		        </div>
         	</c:otherwise>
         </c:choose>
 	</div>
+	
+	<script>
+		$(function(){
+			$(".title").click(function(){
+				// slideDown or slideUp
+				var $box = $(this).next();
+				
+				if($box.css("display") == "none"){
+					$(this).siblings("box").slideUp();
+					$box.slideDown();
+				} else{
+					$box.slideUp();
+				}
+			})
+		})
+	</script>
 
     <br><br>
 

@@ -13,9 +13,6 @@
 </head>
 <body>
 
-    <!-- 6/9 윤경 생성-->
-    <!-- 6/12 윤경 수정-->
-
     <!-- 메뉴바 포함 -->
     <jsp:include page="../common/header.jsp"/>
 
@@ -26,11 +23,11 @@
 	        <div class="content">
 	            <br><br>
 	            <div class="innerOuter">
-	                <h2>게시글 작성하기</h2>
-	                <br>
+	                <h3><b>공지사항 작성하기</b></h3>
+	                <hr><br>
 	
 	                <form id="enrollForm" method="post" action="insert.no" enctype="multipart/form-data">
-	                    <table align="center" border="1px">
+	                    <table class="table table-bordered" align="center" border="1px">
 	                        <tr>
 	                            <th><label for="title">제목</label></th>
 	                            <td><input type="text" id="noticeTitle" class="form-control" name="noticeTitle" required></td>

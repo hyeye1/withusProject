@@ -37,37 +37,93 @@
 	<!-- 커뮤리스트뷰 조회 -->
 	<select id="selectList" resultMap="community">
 		select 
-		       commu_no
-		     , commu_cate
-		     , commu_title
-		     , commu_writer
-		     , count
-		     , to_char(commu_create, 'YYYY-MM-DD') commu_create
-		  from community
+		       c.commu_no
+		     , c.commu_cate
+		     , c.commu_title
+		     , c.commu_writer
+		     , c.count
+		     , to_char(c.commu_create, 'YYYY-MM-DD') commu_create
+		     , m.member_id
+		  from community c
+		  join member m on c.commu_writer = m.member_no
 		 where commu_status = 'Y'
 		 order
 		    by commu_no desc 
 	</select>
 	
-	<insert id="insertCommunnity" parameterType="Community">
+	<select id="selectList1" resultMap="community">
+		select 
+		       c.commu_no
+		     , c.commu_cate
+		     , c.commu_title
+		     , c.commu_writer
+		     , c.count
+		     , to_char(c.commu_create, 'YYYY-MM-DD') commu_create
+		     , m.member_id
+		  from community c
+		  join member m on c.commu_writer = m.member_no
+		 where commu_status = 'Y'
+		   and (commu_cate like '자유')
+		 order
+		    by commu_no desc 
+	</select>
+	
+	<select id="selectList2" resultMap="community">
+		select 
+		       c.commu_no
+		     , c.commu_cate
+		     , c.commu_title
+		     , c.commu_writer
+		     , c.count
+		     , to_char(c.commu_create, 'YYYY-MM-DD') commu_create
+		     , m.member_id
+		  from community c
+		  join member m on c.commu_writer = m.member_no
+		 where commu_status = 'Y'
+		   and (commu_cate like '질문')
+		 order
+		    by commu_no desc 
+	</select>
+	
+	<select id="selectList3" resultMap="community">
+		select 
+		       c.commu_no
+		     , c.commu_cate
+		     , c.commu_title
+		     , c.commu_writer
+		     , c.count
+		     , to_char(c.commu_create, 'YYYY-MM-DD') commu_create
+		     , m.member_id
+		  from community c
+		  join member m on c.commu_writer = m.member_no
+		 where commu_status = 'Y'
+		   and (commu_cate like '공구모집')
+		 order
+		    by commu_no desc 
+	</select>
+	
+	
+	<insert id="insertCommunity" parameterType="Community">
 		insert 
 		  into community
 		  (
 		    commu_no
+		  , commu_writer
 		  , commu_cate
 		  , commu_title
-		  , commu_writer
 		  , commu_content
+		  , commu_create
 		  , commu_origin
 		  , commu_change
 		  )
 		  values
 		  (
-		    seq_comno.nextval
+		    SEQ_COMNO.nextval
+		  , #{commuWriter}
 		  , #{commuCate}
 		  , #{commuTitle}
-		  , #{commuWriter}
 		  , #{commuContent}
+		  , sysdate
 		  , #{commuOrigin}
 		  , #{commuChange}
 		  )
@@ -112,6 +168,7 @@
 	</update>
 	
 	 
+	<!-- 댓글 -->
 	<select id="selectCommuReplyList" resultMap="commuReply" parameterType="_int">
 		select
 		       com_re_no
@@ -177,7 +234,6 @@
          order
             by c.commu_create desc
 	</select>
-	
 	
 	
 	
