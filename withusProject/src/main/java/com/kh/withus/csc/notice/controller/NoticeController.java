@@ -155,6 +155,12 @@ public class NoticeController {
 	
 	
 	
+	// -------------------------------------------------------------------------------------------
+	
+	
+	
+	
+	
 	/* 관리자 */
 	// 공지사항 조회
 	@RequestMapping("noticeList.mana")
@@ -163,9 +169,9 @@ public class NoticeController {
 		int listCount = nService.selectManaListCount();
 		PageInfo mpi = pagination.getPageInfo(listCount, currentPage, 5, 10);
 		
-		ArrayList<Notice> list = nService.selectManaList(mpi);
+		ArrayList<Notice> mlist = nService.selectManaList(mpi);
 		
-		mv.addObject("mpi", mpi).addObject("list", list).setViewName("admin/csc/notice/noticeManaListView");
+		mv.addObject("mpi", mpi).addObject("mlist", mlist).setViewName("admin/csc/notice/noticeManaListView");
 		
 		return mv;
 	}
@@ -206,8 +212,8 @@ public class NoticeController {
 		int result = nService.increaseCount(nnoM);
 		
 		if(result > 0) {
-			Notice n = nService.selectNotice(nnoM);
-			modelM.addAttribute("n", n);
+			Notice nM = nService.selectNotice(nnoM);
+			modelM.addAttribute("nM", nM);
 			return "admin/csc/notice/noticeManaDetailView";
 		}else {
 			modelM.addAttribute("errorMsg", "공지사항 상세조회를 실패했습니다.");

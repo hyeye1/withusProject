@@ -459,7 +459,7 @@ public class FundingController {
 			 ModelAndView mv) {
 		
 		int listCount = funService.selectFListCount();
-		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 10, null);
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
 		ArrayList<Project> fdList = funService.selectFundingList(pi);
 		//System.out.println(fdList);

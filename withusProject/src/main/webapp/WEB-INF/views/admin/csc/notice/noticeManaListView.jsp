@@ -27,7 +27,7 @@
 		</div>
 		<br><br>
 	    <!-- 표 N행 6열 -->
-		<table class="table table-bordered">
+		<table id="noticeManaList" class="table table-bordered">
 			<thead>
 			  <tr align="center" style="height: 10px; background-color: rgb(224, 224, 224); font-size:smaller ;">
 	            <th width="70px">글번호</th>
@@ -38,12 +38,12 @@
 			  </tr>
 			</thead>
 			<tbody>
-				<c:forEach var="n" items="${ list }">
+				<c:forEach var="nM" items="${ mlist }">
 					<tr align="center">
-						<td>${ n.noticeNo }</td>
-						<td><a href="">${ n.noticeTitle }</a></td>
-						<td>${ n.createDate }</td>
-						<td>${ n.noticeStatus }</td>
+						<td>${ nM.noticeNo }</td>
+						<td><a href="manaDetail.no">${ nM.noticeTitle }</a></td>
+						<td>${ nM.createDate }</td>
+						<td>${ nM.noticeStatus }</td>
 						<td>
 							<a class="btn btn-success" onclick="postFormSubmit(1)">수정</a> &nbsp;
 							<a class="btn btn-warning" onclick="postFormSubmit(2)">삭제</a>
@@ -53,18 +53,23 @@
 			</tbody>
 		</table>
 		
+		<form id="postForm" action="" method="post">
+			<input type="hidden" name="nnoM" value="nM.noticeNo">
+		</form>
+		
+		
 		<script>
             $(function(){
-            	$("#noticeList tbody tr").click(function(){
-            		location.href="detail.no?nno=" + $(this).children(".nno").text()
+            	$("#noticeMList tbody tr").click(function(){
+            		location.href="manaDetail.no?nnoM=" + $(this).children(".nnoM").text()
             	})
             })
             
             function postFormSubmit(num){
 				if(num == 1){// 수정 클릭
-					$("#postForm").attr("action", "updateForm.no").submit();
+					$("#postForm").attr("action", "manaUpdateForm.no").submit();
 				} else { // 삭제 클릭
-					$("#postForm").attr("action", "delete.no").submit();
+					$("#postForm").attr("action", "manaDelete.no").submit();
 				}
 			}
         </script>
