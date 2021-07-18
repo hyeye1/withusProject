@@ -454,13 +454,25 @@
                             <!-- 목표 금액 -->
                             <div>
                                 <b class="regiTitle">목표 금액을 적어주세요</b> <br>
-                                <input type="text" id="projectGprice" name="projectGprice" value="0" placeholder="0">원
+                                <input type="text" id="projectGprice" name="projectGprice" placeholder="0">원
+                                
+                                <!-- typeMismatch 오류잡기: String 타입으로 변환 -->
+                                <script>
+                                	$(function(){
+                                		var gPrice = $("#projectGprice").val();
+                                		if(gPrice==null){
+                                			gPrice = "0";
+                                		}else{
+                                			gPrice = '"' + gPrice + '"' ;
+                                		}
+                                	})
+                                </script>
                             </div><br>
     
                             <div>
                                 <b class="regiTitle">프로젝트의 진행 기간을 적어주세요</b>
                                 <p>최소 7일부터 최대 60일까지 가능합니다.</p>
-                                <input type="text" id="projectDday" placeholder="0" disabled>일 남음 
+                                <input type="text" id="projectDday" placeholder="0" disabled name="dday">일 남음 
                                 <input type="date" name="projectEndDT" id="projectPeriod">
     
                                 <script>

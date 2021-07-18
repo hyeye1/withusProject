@@ -507,21 +507,22 @@
                 <!-- 맨위 -->
                 <div class="detailHeader" align="center">
                     <div class="detailCat">
-						<c:choose>
-							<c:when test="${ p.catNo eq null }">
-								<button>카테고리</button>
-							</c:when>
-							<c:when test="${ p.catName eq null}">
-								<button>카테고리</button>
-							</c:when>
-							<c:otherwise>
-								<button>${ p.catName }</button>
-							</c:otherwise>
-						</c:choose>
+                    	<!-- 카테고리 미리보기 -->
+                    	<!-- list에 담고 catNo과 같은 인덱스의 값 가져오기 -->
+                    	<% String[] catList = {"", "카테고리", "패션/잡화", "뷰티", "푸드", "홈리빙", "디자인소품", "여행/레저", "스포츠", "반려동물", "테크/가전"};  %>
+                    	<c:set var="cList" value="<%= catList %>"/>
+						<button>${ cList[p.catNo] }</button>
                     </div>
 
                     <div class="detailTitle">
-                        <p><b>${ p.projectTitle }</b></p>
+                    	<c:choose>
+                    		<c:when test="${ p.projectTitle eq ''}">
+                    			<p><b>제목을 입력해주세요</b></p>
+                    		</c:when>
+                    		<c:otherwise>            		
+		                        <p><b>${ p.projectTitle }</b></p>
+                    		</c:otherwise>
+                    	</c:choose>
                     </div>
 
                     <div class="partner">
@@ -590,7 +591,7 @@
                                 <tr>
                                     <td class="infoTitle">서포터</td>
                                     <td>
-                                        <span><b>${ p.supporter }</b></span>
+                                        <span><b>${ supporter }</b></span>
                                         <span class="infoSmall">명</span>
                                     </td>
                                 </tr>
@@ -604,7 +605,7 @@
                             <div class="infoPs">
                                 <p>
                                     목표 금액 ${ p.projectGprice }원이 모여야만 결제가 진행됩니다. <br>
-                                    목표 금액을 달성한 경우, 결제 예정일은 ${ p.payDate } 입니다.
+                                    목표 금액을 달성한 경우, 결제 예정일은 ${ payDate } 입니다.
                                 </p>
                             </div>
                             <div class="infoBtn" align="center">
