@@ -54,14 +54,15 @@
 	.gnb_wrap {width: 100%;float: left;}
 	.navi{ margin: 0; padding: 0; list-style-type: none;}
 	.navi>li{ float: left; width: 20%; text-align: center;}
-	.navi a{
+	.navi a, .topMenu{
 	    text-decoration: none;
 	    font-size: 18px;
 	    color: white;
-	    background: rgb(44, 62, 80);;
+	    background: rgb(44, 62, 80);
 	    display: block;
 	    line-height: 55px;
 	}
+	
 	
 	.navi>li>ul a{ font-size: 16px; font-weight: bold;}
 	
@@ -155,14 +156,14 @@
 
                 <li><a href="fundingListView.mana">펀딩관리</a> </li>
 
-                <li><a>결제관리</a>
+                <li><a class="topMenu">결제관리</a>
                     <ul class="navi_sub">
                         <li><a href="orderListView.mana">주문내역</a></li>
                         <li><a href="refundListView.mana">환불신청 내역</a></li>
                     </ul>
                 </li>
 
-                <li><a>고객센터</a>
+                <li><a class="topMenu">고객센터</a>
                     <ul class="navi_sub">
                         <li><a href="noticeList.mana">공지사항</a></li>
                         <li><a href="faqList.mana">FAQ</a></li>
