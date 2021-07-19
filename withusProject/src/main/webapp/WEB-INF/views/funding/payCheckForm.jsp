@@ -154,7 +154,7 @@
 	                            <td></td>
 	                        </tr>
 	                        <tr>
-	                            <td colspan="2"><input type="text" class="form-control" name="bankAccount" placeholder="계좌번호를 입력해주세요"></td>
+	                            <td colspan="2"><input type="text" class="form-control" name="bankAccount" placeholder="계좌번호를 입력해주세요" required></td>
 	                        </tr>
 	                    </table>
 	                </div>
