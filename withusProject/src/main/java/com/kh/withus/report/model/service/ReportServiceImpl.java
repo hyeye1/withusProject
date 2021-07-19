@@ -29,6 +29,19 @@ public class ReportServiceImpl implements ReportService {
 		return rDao.selectList(sqlSession, pi);
 	}
 	
+	@Override
+	public int reportReset(int rno) {
+		return rDao.reportReset(sqlSession, rno);
+	}
+	
+	@Override
+	public int reportSubmit(int rno) {
+		return rDao.reportSubmit(sqlSession, rno);
+	}
+
+	
+	
+	
 	/*
 	@Override
 	public int countSearch(HashMap<String, String> map) {

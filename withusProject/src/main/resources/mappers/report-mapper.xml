@@ -39,6 +39,62 @@
 		     by report_date desc
 	</select>
 	
+	<select id="selectReport" resultMap="report" parameterType="_int">
+		select
+		       report_no
+		     , member_no
+		     , report_content
+		     , report_date
+		     , report_status
+		  from report
+		 where report_no = #{reportNo}	
+	</select>
+	
+	<insert id="insertReport" parameterType="Report">
+		insert
+		  into report
+		  (
+		    report_no
+		  , member_no
+		  , report_content
+		  )
+		  values
+		  (
+		    seq_rpno.nextval
+		  , #{memberNo}
+		  , #{reportContent}
+		  )
+	</insert>
+	
+	<update id="submitReport" parameterType="_int">
+		update
+		       (
+		       select 
+				       m.member_status
+				  from report r
+				  join member m on (r.member_no = m.member_no)
+				 where m.member_no = #{memberNo}
+				)
+		   set m.member_status = 'N'
+		 where report_no = #{reportNo}
+	</update>
+	
+	<update id="resetReport" parameterType="_int">
+		update
+		       (
+		       select 
+				       m.member_status
+				  from report r
+				  join member m on (r.member_no = m.member_no)
+				 where m.member_no = #{memberNo}
+				)
+		   set m.member_status = 'Y'
+		 where report_no = #{reportNo}
+	</update>
+	
+	
+	
+	
 	<!-- 
 	<select id="countSearch" resultType="_int" parameterType="hashmap">
 		select

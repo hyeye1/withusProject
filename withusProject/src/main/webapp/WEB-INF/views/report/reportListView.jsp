@@ -22,13 +22,13 @@
 
     <!-- 메뉴바 포함 -->
     <jsp:include page="../common/manaHeader.jsp" />
-    <br>
-
-    <h3>신고관리</h3>
-    <hr><br>
+    
 
     <div class="container">
-        
+        <br>
+	
+	    <h3><b>신고관리</b></h3>
+	    <hr><br>
         <!-- 검색기능 
         <div class="searchArea">
         	<form action="searchReport.mana" name="searchReport">
@@ -64,7 +64,9 @@
         </c:if>
         -->	
         
-        
+        <p>
+        	* 게시물타입 - ( 1 : 게시글, 2 : 프로젝트, 3 : 댓글 )
+        </p>
         <table class="table table-bordered" id="reportList" >
         <c:choose>
         	<c:when test="${ empty list }">
@@ -73,36 +75,26 @@
         	<c:otherwise>        
 					<thead class="tableHead">
 					  <tr align="center" style="height: 10px; background-color: rgb(224, 224, 224); font-size:smaller ;">
-						<th width="70" height="30">신고<br>번호</th>
-						<th width="100">회원<br>이름</th>
-		                <th width="400">신고사유</th>
-		                <th>게시물타입</th>
-		                <th>게시물번호</th>
-		                <th>회원상태</th>
-		                <th>누적횟수</th>
-		                <th width="130">신고일</th>
-		                <th width="100">신고상태</th>
+						<th width="10%" height="30">신고<br>번호</th>
+						<th width="10%">회원<br>이름</th>
+		                <th width="">신고사유</th>
+		                <th width="10%">회원<br>상태</th>
+		                <th width="13%">신고일</th>
+		                <th>처리현황</th>
 					  </tr>
 					</thead>
 					<tbody>
 						<c:forEach var="r" items="${ list }">
+						<input type="hidden" name="memberNo">
 							<tr align="center">
 								<td class="rno">${ r.reportNo }</td>
 			                    <td>${ r.memberName }</td>
 			                    <td>${ r.reportContent}</td>
-			                    <td>${ r.reportType}</td>
-			                    <td>${ r.reportedNo }</td>
 			                    <td>${ r.memberStatus}</td>
-			                    <td>${ r.reportCount }</td>
 			                    <td>${ r.reportDate }</td>
-			                    <c:choose>
-			                    	<c:when test="${ r.reportStatus eq 'N' }">
-			                    		<td onclick="showModal('${ r.reportNo }', '${ r.memberNo }', '${ r.reportContent }', '${ r.reportType}', '${ r.reportedNo }', '${ r.memberStatus}', '${ r.reportCount }', '${ r.reportDate }');">진행중</td>
-			                    	</c:when>
-			                    	<c:when test="${ r.reportStatus eq 'Y' }">
-			                    		<td>처리완료</td>
-			                    	</c:when>
-			                    </c:choose>
+			                    <td>
+			                    	<button name="submit" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#reportModal">처리전</button>
+			                    </td>
 			                </tr>
 			            </c:forEach>
 					</tbody>
@@ -110,59 +102,101 @@
 			</c:choose>
 		</table>
 		
-		<!-- modal -->
-		<div class="modal fade" id="increaseCount" tabindex="-1" role="dialog" aria-labelledby="myModal">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<button type="button" class="btn btn-default" data-dismiss="modal">반려</button>
-					<button type="button" class="btn btn-primary" onclick="increaseCount();">누적</button>
-				</div>
-			</div>
-		</div>
-		
-		
-		<script>
-			
-			var reportNo = "";
-			var memberNo = "";
-			var reportContent = "";
-			var reportType = "";
-			var reportedNo = "";
-			var memberStatus = "";
-			var reportCount = "";
-			var reportDate = "";
-		
-			$(document).ready(function(){
-				$('#increaseCount').on('show.bs.modal', function(event){
-					reportNo = $(event.relatedTarget).data('reportNo');
-					memberNo = $(event.relatedTarget).data('memberNo');
-					reportContent = $(event.relatedTarget).data('reportContent');
-					reportType = $(event.relatedTarget).data('reportType');
-					reportedNo = $(event.relatedTarget).data('reportedNo');
-					memberStatus = $(event.relatedTarget).data('memberStatus');
-					reportCount = $(event.relatedTarget).data('reportCount');
-					reportDate = $(event.relatedTarget).data('reportDate');
-				});
-			});
-			
-			function showModal(reportNo, memberNo, reportContent, reportType, reportedNo, memberStatus, reportCount, reportDate) {
-				// 눌렀을때 승인완료로 바꾸기
-				//location.href=
-			}
-			
-			function increaseCount(reportCount){
-				// 눌렀을때 카운트 1증가 후 승인완료로 바꾸기
-			}
-			
-		</script>
-		
-		
-        <br>
+		<!-- 승인시 뜨는 모달 -->
+		  <div class="modal fade" id="reportModal">
+		    <div class="modal-dialog">
+		      <div class="modal-content">
+		      
+		        <!-- Modal Header -->
+		        <div class="modal-header">
+		          <h4 class="modal-title">신고 승인/반려</h4>
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        </div>
+		        
+		        <!-- Modal body -->
+		        <div class="modal-body">
+		          회원이 강제 탈퇴됩니다. 다시 검토 바랍니다.
+		        </div>
+		        
+		        <!-- Modal footer -->
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-danger" data-dismiss="modal">승인</button>
+		          <button type="button" class="btn btn-secondary" data-dismiss="modal">반려</button>
+		        </div>
+		        
+		      </div>
+		    </div>
+		  </div>
         
+		  
+		<script>
+			var action='';
+			var url='';
+			var type='';
+			var rno = 0;
+			
+			$(document).ready(function(){
+				
+				// 신고 승인시
+				$("#reportModal").click(function(){
+					
+					if(action == 'create'){
+						rno = 0;
+						url = '/reportSubmit.mana';
+					}else if(action == 'modify'){
+						url = '/reportList.mana';
+					}
+					
+					var data = {
+							"rno" : rno,
+							"memberNo" : memberNo
+					};
+					
+					$.ajax({
+						url : url,
+						type : type,
+						data : data,
+						success : function(data){ $("#reportModal").modal('toggle'); }
+						complete : function(data) { location.reload(); }
+					})
+					
+				});
+				
+				
+			});
+		</script>
         
 
 		<!-- 페이징 처리 -->
-
+	    <div id="pagingArea">
+        	<ul class="pagination">
+            <!-- list가 있을때만 페이지버튼 -->
+	            <c:if test="${ !empty list }">
+		        	<c:choose>
+		            	<c:when test="${ pi.currentPage eq 1 }">
+		                	<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+		                </c:when>
+			            <c:otherwise>
+			                <li class="page-item"><a class="page-link" href="reportList.mana?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+			            </c:otherwise>
+			        </c:choose>
+			                        
+			        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				    	<li class="page-item"><a class="page-link" href="reportList.mana?currentPage=${ p }">${ p }</a></li>
+				    </c:forEach>
+			                       
+			        <c:choose>
+				       	<c:when test="${ pi.currentPage eq pi.maxPage }">
+					       	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+					    </c:when>
+					    <c:otherwise>
+					       	<li class="page-item"><a class="page-link" href="reportList.mana?currentPage=${ pi.currentPage+1 }">Next</a></li>
+				       	</c:otherwise>
+			        </c:choose>
+			    </c:if>
+            </ul>
+        </div>
+        <br>
     </div>
 </body>
 </html>

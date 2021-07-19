@@ -27,6 +27,15 @@ public class ReportDao {
 		return (ArrayList)sqlSession.selectList("reportMapper.selectList", null, rowBounds);
 	}
 
+	
+	public int reportReset(SqlSessionTemplate sqlSession, int rno) {
+		return sqlSession.update("reportMapper.resetReport", rno);
+	}
+
+	public int reportSubmit(SqlSessionTemplate sqlSession, int rno) {
+		return sqlSession.update("reportMapper.submitReport", rno);
+	}
+
 	/*
 	public int countSearch(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
 		return sqlSession.selectOne("reportMapper.countSearch", map);

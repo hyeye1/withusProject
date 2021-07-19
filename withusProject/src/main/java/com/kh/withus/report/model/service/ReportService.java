@@ -12,6 +12,12 @@ public interface ReportService {
 	int selectListCount();
 	ArrayList<Report> selectList(PageInfo pi);
 	
+	// 신고거절
+	int reportReset(int rno);
+	
+	// 신고수락
+	int reportSubmit(int rno);
+	
 	// 검색결과
 	//int countSearch(HashMap<String, String> map);
 	//ArrayList<Report> selectSearchReport(HashMap<String, String> map, PageInfo pi);

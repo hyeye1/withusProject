@@ -18,7 +18,7 @@ public class Report {
 	private String reportDate;
 	private String reportStatus;
 	private String reportType;
-	private int reportedNo; 
+	private int reportedNo; // 신고된 글넘버
 	
 	
 	// 관리자에서 신고리스트조회
