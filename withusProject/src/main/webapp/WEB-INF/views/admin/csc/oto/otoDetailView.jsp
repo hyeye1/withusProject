@@ -42,7 +42,7 @@
 	                </td>
 	            </tr>
 	            <tr>
-	                <td colspan="2" height="500px"></td>
+	                <td colspan="2" height="500px">${ o.otoContent }</td>
 	            </tr>
 		</table>
 		
