@@ -584,14 +584,14 @@
                                 <tr>
                                     <td class="infoTitle" style="line-height: 3.5;">남은 기간</td>
                                     <td>
-                                        <span><b>${ p.dday }</b></span>
+                                        <span><b>${ fd.dday }</b></span>
                                         <span class="infoSmall">일</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="infoTitle">서포터</td>
                                     <td>
-                                        <span><b>${ supporter }</b></span>
+                                        <span><b>${ fd.supporter }</b></span>
                                         <span class="infoSmall">명</span>
                                     </td>
                                 </tr>
@@ -690,7 +690,7 @@
 	                            <br><br>
 	                            <table>
 	                                <tr>
-	                                    <th><a href="">#시계</a></th>
+	                                    <th><a href="">${ p.hashtag }</a></th>
 	                                    <th><a href="">#모던</a></th>
 	                                    <th><a href="">#감성</a></th>
 	                                </tr>
@@ -707,7 +707,7 @@
                     <!-- 스토리 -->
                     <div class="detailStory detail detailSto">
                         <div class="storyContent">
-                            ${ projectContent }
+                            ${ p.projectContent }
                         </div>
                     </div>
 

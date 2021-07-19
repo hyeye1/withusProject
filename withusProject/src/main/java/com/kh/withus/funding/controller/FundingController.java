@@ -226,7 +226,7 @@ public class FundingController {
 
 	   // 미리보기(혜)
 	   @RequestMapping("preview.fd")
-	   public String fundingPreview(Project p, ArrayList<FundingDetail> rList, HttpSession session, Model model) {
+	   public String fundingPreview(Project p, FundingDetail fd, ArrayList<FundingDetail> rList, HttpSession session, Model model) {
 	      
 	      Member loginUser = (Member)session.getAttribute("loginUser");
 	      p.setMemberNo(loginUser.getMemberNo());
@@ -234,6 +234,7 @@ public class FundingController {
 	      // 컨트롤러에서 전달값을 Project에 받고, 
 	      // 그걸 다시 담아서 jsp에 포워딩하기.
 	      model.addAttribute("p", p);
+	      model.addAttribute("fd",fd);
 	      model.addAttribute("rList", rList);
 	      model.addAttribute("loginUser", loginUser);
 	      

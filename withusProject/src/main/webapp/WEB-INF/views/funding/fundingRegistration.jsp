@@ -394,7 +394,7 @@
                             <b class="regi regiFour" style="display: none;">안내사항</b>
                             <b class="regi regiFive" style="display: none;">제작자/부가 정보</b>
                         </p>
-                        <button type="submit" class="registerBtn">승인요청하기</button>
+                        <button type="submit" class="registerBtn"  onclick="submitForm();">승인요청하기</button>
                         <button type="button">임시저장</button>
                         <button type="button" id="previewBtn" onclick="preview();">미리보기</button>
                     </div>
@@ -482,6 +482,7 @@
                                         //console.log(result);
     
                                         $("#projectDday").attr('placeholder', result);
+                                        $("#projectDday").val(result);
                                     })
                                    })
                                 </script>
@@ -839,7 +840,7 @@
                                                     aa +=   '</div>'+
                                                                 '<div class="editDel">'+
                                                                     '<img id="editBtn" src="${ pageContext.request.contextPath }/resources/images/editBtn.PNG" onclick="">'+
-                                                                    '<img id="deleteBtn"src="${ pageContext.request.contextPath }/resources/images/deleteBtn.PNG" onclick="">'+
+                                                                    '<img id="deleteBtn"src="${ pageContext.request.contextPath }/resources/images/deleteBtn.PNG" onclick="deleteRe();">'+
                                                                 '</div>'+
                                                             '</div>'+
                                                         '</td>';
@@ -878,9 +879,10 @@
                                         $('#yesShip').prop('checked', true);
                                         $(shipment).val('Y');
 
-
+										
                                         //console.log(limitation);    
                                         //console.log(shipment);
+                                        
                                     }
                                 </script>
 
@@ -1044,7 +1046,7 @@
                                 
                             <!-- 등록/초기화 버튼 -->
                             <div class="regiBtn">
-                                <button type="submit" class="regiSubmitBtn fiveSubmit">승인요청</button>
+                                <button type="submit" class="regiSubmitBtn fiveSubmit" onclick="submitForm();">승인요청</button>
                                 <button type="button" class="regiResetBtn fiveReset">초기화</button>
                             </div>
                         </div>
@@ -1075,11 +1077,16 @@
                     <script>
                         // 미리보기 버튼실행
 	                    function preview(){
-                            window.open('', "previewWindow(나만의창이름)", "창의속성");
+                            window.open('', "previewWindow(preview)"/*, "창의속성"*/);
                             $("#insertForm").attr("action", "preview.fd");
-                            $("#insertForm").attr("target",  "previewWindow(나만의창이름)");
+                            $("#insertForm").attr("target",  "previewWindow(preview)");
                             $("#insertForm").submit();
+                        }
                         
+                        // 미리보기 후 승인요청 눌렀을때 서밋되게하기
+                        function submitForm(){
+                        	$("#insertForm").attr("action", "success.fd");
+                        	$("#insertForm").submit();
                         }
 
                         function regiShow(className) {
