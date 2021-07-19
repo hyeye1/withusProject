@@ -90,8 +90,10 @@ public interface FundingService {
 	// 펀딩 승인/반려
 	int updateProjectStatus(HashMap<String, Object> map);
 
-	int countSearch(HashMap<String, String> map);
+	// 검색 페이징
+	int countSearchFdMana(HashMap<String, String> map);
 
+	// 검색
 	ArrayList<Project> searchFundingMana(HashMap<String, String> map, PageInfo pi);
 
 	

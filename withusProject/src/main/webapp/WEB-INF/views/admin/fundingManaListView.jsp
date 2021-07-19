@@ -86,9 +86,9 @@
 	             </div>
 	             <div class="searchKey_2">
 	                <select name="sort" class="sort">
+						<option value="newest">최신순</option>
 						<option value="best">인기순</option> <!-- 좋아요갯수 많은 순으로 정렬-->
 						<option value="deadline">마감임박순</option>
-						<option value="newest">최신순</option>
 					</select>
 	            </div>
 	
@@ -106,7 +106,6 @@
 	        	$(function(){
 	        		$(".condition option[value=${condition}]").attr("selected", true);
 	        		$(".sort option[value=${sort}]").attr("selected", true);
-	        		
 	        		
 	        	});
 	        	</script>
@@ -142,7 +141,7 @@
 							<td>${ fd.partnerName }</td>
 							<td>${ fd.percentage } %</td>
 							<td>${ fd.projectEndDT }</td>
-							<td>-</td>
+							<td>${ fd.likeCount }</td>
 							<td>
 								<c:choose>
 			                    	<c:when test="${ fd.dday >= 0}">

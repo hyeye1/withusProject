@@ -141,14 +141,17 @@ public class FundingDao {
 		return sqlSession.update("fundingMapper.updateProjectStatus", map);
 	}
 
-	public int countSearch(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
-		return 0;
+	public int countSearchFdMana(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.selectOne("fundingMapper.countSearchFdMana", map);
 	}
 
 	public ArrayList<Project> searchFundingMana(SqlSessionTemplate sqlSession, HashMap<String, String> map,
 			PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("fundingMapper.searchFundingMana", map, rowBounds);
 	}
 
 	
