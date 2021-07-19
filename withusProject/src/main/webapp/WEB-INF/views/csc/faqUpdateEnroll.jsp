@@ -23,22 +23,19 @@
 	    <h3><b>FAQ 수정</b></h3>
 		<hr><br>
 
-        <form id="faqUpdateEnroll" action="update.faq" method="get" enctype="multipart/form-data">
+        <form id="faqUpdateEnroll" action="update.faq" method="post" enctype="multipart/form-data">
 	        <table class="table table-bordered">
 	         
 	        <input type="hidden" class="form-control" name="faqNo" id="faqNo" value="${ f.faqNo }">
-	        <input type="hidden" class="form-control" name="faqCat" id="faqCat" value="${ f.faqCat }">
 	        
 	        	<tr>
 	            	<th style="width:200px;">카테고리 선택</th>
 	                <td>
-	                    <select class="form-control" id="faqCat" name="faqCat" readonly>
-	                       
+	                    <select class="form-control" id="faqCat" name="faqCat">
 	                        <option value="펀딩상품 관련">펀딩상품 관련</option>
 	                        <option value="배송 관련">배송 관련</option>
 	                        <option value="교환/반품 관련">교환/반품 관련</option>
 	                        <option value="기타 관련">기타 관련</option>
-	                        
 	                    </select>
 	                </td>
 	            </tr>
@@ -63,6 +60,16 @@
         </form>
     </div>
 
+	<script>
+		//$("faqCat option:selected").val();
+		//$("select[name=faqCat]").val();
+		//var selec = document.getElementById("faqCat");
+		$("select[name=faqCat]").val();
+		//alert('seleted 값 : ' + selec.options[selec.selectedIndex].value);
+		
+		//console.log($("select[name=faqCat]").val());
+		
+	</script>
     
 
 
