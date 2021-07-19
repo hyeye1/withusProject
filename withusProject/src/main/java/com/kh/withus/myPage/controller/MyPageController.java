@@ -42,40 +42,7 @@ public class MyPageController {
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	
-	/*
 	
-	//임시 로그인/로그아웃 부분
-	@RequestMapping("login.me")
-	public ModelAndView loginMember(MyPage m, HttpSession session, ModelAndView mv) {
-		
-		
-		
-		MyPage loginUser = mService.loginMember(m);
-		
-		//System.out.println(loginUser.getMemberPwd());
-		
-		if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
-			// 로그인 성공
-			session.setAttribute("loginUser", loginUser);
-			mv.setViewName("redirect:/");
-		}else {
-			// 로그인 실패
-			mv.addObject("errorMsg", "로그인실패");
-			mv.setViewName("common/errorPage");
-		}
-		
-		return mv;
-		
-	}
-	
-	
-	@RequestMapping("logout.me")
-	public String logoutMember(HttpSession session) {
-		session.invalidate();
-		return "redirect:/";
-	}
-	
-	*/
 	
 	// 마이페이지메인
 	@RequestMapping("myPage.me")
@@ -212,7 +179,7 @@ public class MyPageController {
 	@RequestMapping("updatePwd")
 	public String updatePwd(String newPwd, Member m, MyPage mp, HttpSession session, Model model) {
 		
-		System.out.println(m.getMemberNo());
+		
 		
 		// 암호화 작업
 		String encPwd = bcryptPasswordEncoder.encode(newPwd);
