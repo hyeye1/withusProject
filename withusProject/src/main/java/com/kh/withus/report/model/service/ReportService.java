@@ -9,14 +9,13 @@ import com.kh.withus.report.model.vo.Report;
 public interface ReportService {
 
 	// 신고회원 조회
-	int selectListCount();
-	ArrayList<Report> selectList(PageInfo pi);
+	//int selectListCount();
+	ArrayList<Report> selectReportList(int reportNo);
 	
-	// 신고거절
-	int reportReset(int rno);
+	// 처리중 버튼(update)
+	String reportSubmit(int reportNo);
 	
-	// 신고수락
-	int reportSubmit(int rno);
+	
 	
 	// 검색결과
 	//int countSearch(HashMap<String, String> map);

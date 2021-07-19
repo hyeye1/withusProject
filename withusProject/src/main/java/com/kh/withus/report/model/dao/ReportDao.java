@@ -13,28 +13,21 @@ import com.kh.withus.report.model.vo.Report;
 @Repository
 public class ReportDao {
 
-	public int selectListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("reportMapper.selectListCount");
-	}
-
-	public ArrayList<Report> selectList(SqlSessionTemplate sqlSession, PageInfo pi) {
+	public ArrayList<Report> selectReportList(SqlSessionTemplate sqlSession, int reportNo) {
 		
+		/*
 		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		
-		return (ArrayList)sqlSession.selectList("reportMapper.selectList", null, rowBounds);
+		*/
+		return (ArrayList)sqlSession.selectList("reportMapper.selectList", reportNo);
 	}
 
-	
-	public int reportReset(SqlSessionTemplate sqlSession, int rno) {
-		return sqlSession.update("reportMapper.resetReport", rno);
+	public String reportSubmit(SqlSessionTemplate sqlSession, int reportNo) {
+		return null;
 	}
 
-	public int reportSubmit(SqlSessionTemplate sqlSession, int rno) {
-		return sqlSession.update("reportMapper.submitReport", rno);
-	}
 
 	/*
 	public int countSearch(SqlSessionTemplate sqlSession, HashMap<String, String> map) {

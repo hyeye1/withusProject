@@ -8,12 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.withus.common.model.vo.PageInfo;
-import com.kh.withus.common.template.pagination;
+import com.google.gson.Gson;
 import com.kh.withus.report.model.service.ReportService;
 import com.kh.withus.report.model.vo.Report;
 
@@ -23,6 +20,14 @@ public class ReportController {
 	@Autowired
 	private ReportService rService;
 	
+	// 신고회원 조회
+	@ResponseBody
+	@RequestMapping(value="reportList.mana", produces="application/json; charset=utf-8")
+	public String selectReportList(int rno) {
+		return new Gson().toJson(rService.selectReportList(rno));
+	}
+	
+	/*
 	// 신고회원 조회
 	@RequestMapping("reportList.mana")
 	public ModelAndView selectReportList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
@@ -37,6 +42,7 @@ public class ReportController {
 		  .setViewName("report/reportListView");
 		return mv;
 	}
+	*/
 	
 	// 신고 거절 
 	@ResponseBody

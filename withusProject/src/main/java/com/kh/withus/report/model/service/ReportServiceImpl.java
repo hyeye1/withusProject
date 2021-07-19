@@ -21,12 +21,25 @@ public class ReportServiceImpl implements ReportService {
 	
 	
 	@Override
+	public ArrayList<Report> selectReportList(int reportNo) {
+		return rDao.selectReportList(sqlSession, reportNo);
+	}
+
+	@Override
+	public String reportSubmit(int reportNo) {
+		return rDao.reportSubmit(sqlSession, reportNo);
+	}
+	
+	/*
+	@Override
 	public int selectListCount() {
 		return rDao.selectListCount(sqlSession);
 	}
+	
+	
 	@Override
-	public ArrayList<Report> selectList(PageInfo pi) {
-		return rDao.selectList(sqlSession, pi);
+	public ArrayList<Report> selectReportList(int reportNo) {
+		return rDao.selectReportList(sqlSession);
 	}
 	
 	@Override
@@ -38,6 +51,9 @@ public class ReportServiceImpl implements ReportService {
 	public int reportSubmit(int rno) {
 		return rDao.reportSubmit(sqlSession, rno);
 	}
+	*/
+
+
 
 	
 	

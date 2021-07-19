@@ -16,21 +16,13 @@
 		<result column="member_name" property="memberName" />
 	</resultMap>
 	
-	<select id="selectListCount" resultType="_int">
-		select
-		       count(*)
-		  from report
-	</select>
 	
-	<select id="selectList" resultMap="report">
+	<select id="selectReportList" resultMap="report">
 		select
 		       report_no
 		     , m.member_name
 		     , report_content
-		     , report_type
-             , r.reported_no
              , m.member_status
-             , m.report_count
              , to_char(report_date, 'YYYY-MM-DD') report_date
 		     , report_status
 		  from report r

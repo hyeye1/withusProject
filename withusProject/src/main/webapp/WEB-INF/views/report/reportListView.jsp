@@ -12,9 +12,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style>
-    .form-group{
-        display: inline-flex;
-    }
+    
     
 </style>
 </head>
@@ -68,41 +66,30 @@
         	* 게시물타입 - ( 1 : 게시글, 2 : 프로젝트, 3 : 댓글 )
         </p>
         <table class="table table-bordered" id="reportList" >
-        <c:choose>
-        	<c:when test="${ empty list }">
-        		<div class="none"><p>조회 결과가 없습니다.</p></div>
-        	</c:when>
-        	<c:otherwise>        
-					<thead class="tableHead">
-					  <tr align="center" style="height: 10px; background-color: rgb(224, 224, 224); font-size:smaller ;">
-						<th width="10%" height="30">신고<br>번호</th>
-						<th width="10%">회원<br>이름</th>
-		                <th width="">신고사유</th>
-		                <th width="10%">회원<br>상태</th>
-		                <th width="13%">신고일</th>
-		                <th>처리현황</th>
-					  </tr>
-					</thead>
-					<tbody>
-						<c:forEach var="r" items="${ list }">
-						<input type="hidden" name="memberNo">
-							<tr align="center">
-								<td class="rno">${ r.reportNo }</td>
-			                    <td>${ r.memberName }</td>
-			                    <td>${ r.reportContent}</td>
-			                    <td>${ r.memberStatus}</td>
-			                    <td>${ r.reportDate }</td>
-			                    <td>
-			                    	<button name="submit" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#reportModal">처리전</button>
-			                    </td>
-			                </tr>
-			            </c:forEach>
-					</tbody>
-				</c:otherwise>
-			</c:choose>
+        	<thead>
+        		<tr align="center" style="height: 10px; font-size:smaller ;">
+        			<c:choose>
+        				<c:when test="${ empty list }">
+        					<div class="none"><p>조회 결과가 없습니다.</p></div>
+        				</c:when>
+        				<c:otherwise>        
+							<th width="10%" height="30">신고<br>번호</th>
+							<th width="10%">회원<br>이름</th>
+			                <th width="">신고사유</th>
+			                <th width="10%">회원<br>상태</th>
+			                <th width="13%">신고일</th>
+			                <th>처리현황</th>
+			            </c:otherwise>
+					</c:choose>
+				</tr>
+			</thead>
+			<tbody>
+			
+			</tbody>
+				
 		</table>
 		
-		<!-- 승인시 뜨는 모달 -->
+		<!-- The Modal -->
 		  <div class="modal fade" id="reportModal">
 		    <div class="modal-dialog">
 		      <div class="modal-content">
@@ -127,46 +114,48 @@
 		      </div>
 		    </div>
 		  </div>
-        
-		  
+		
+		
 		<script>
-			var action='';
-			var url='';
-			var type='';
-			var rno = 0;
-			
-			$(document).ready(function(){
+			$(function(){
+				selectReportList();
+					
+			})
 				
-				// 신고 승인시
-				$("#reportModal").click(function(){
-					
-					if(action == 'create'){
-						rno = 0;
-						url = '/reportSubmit.mana';
-					}else if(action == 'modify'){
-						url = '/reportList.mana';
-					}
-					
-					var data = {
-							"rno" : rno,
-							"memberNo" : memberNo
-					};
-					
+			
+			function selectReportList(){
+				$(document).on("click", "#submit", function(){
 					$.ajax({
-						url : url,
-						type : type,
-						data : data,
-						success : function(data){ $("#reportModal").modal('toggle'); }
-						complete : function(data) { location.reload(); }
-					})
-					
+						url : "reportList.mana",
+						data : {rno:${r.reportNo}},
+						success:function(list){
+							//console.log(list);
+							var value="";
+							$.each(list, function(i, obj){
+								value += "<tr>"
+								       +    "<td>" + list[i].reportNo + "</td>"
+								       +    "<td>" + list[i].memberName + "</td>"
+								       +    "<td>" + list[i].reportContent + "</td>"
+								       +    "<td>" + list[i].memberStatus + "</td>"
+								       +    "<td>" + list[i].reportDate + "</td>"
+								       +    "<td><button id='submit' on='postForm(1)'>" + list[i].reportStatus + "</button></td>"
+								       + "</tr>";
+							})
+							
+							$("#reportList tbody").html(value);
+							
+						},error:function(){
+							console.log("테이블 조회 실패");
+						}	
 				});
 				
+				})		
+			}
 				
-			});
-		</script>
-        
-
+			
+		</script>        
+		
+		
 		<!-- 페이징 처리 -->
 	    <div id="pagingArea">
         	<ul class="pagination">
