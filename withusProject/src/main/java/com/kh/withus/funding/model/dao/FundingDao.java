@@ -141,6 +141,16 @@ public class FundingDao {
 		return sqlSession.update("fundingMapper.updateProjectStatus", map);
 	}
 
+	public int countSearch(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return 0;
+	}
+
+	public ArrayList<Project> searchFundingMana(SqlSessionTemplate sqlSession, HashMap<String, String> map,
+			PageInfo pi) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 }

@@ -20,12 +20,12 @@
 	.search_area {height: 60px;} 
 	.search_area select{height: 36px; border-color: lightgray; outline: none;}
 	
-	.searchKey_1{width: 10%; position: relative; float: left;}
+	.searchKey_1{width: 8%; position: relative; float: left;}
 	.searchKey_2{width: 10%; float: left;}
 	.searchKey_3{width: 50%; float: right; }
 	
-	.memberKeyword {width: 25%; float: left; }
-	.input-group.search {width: 75%;}
+	.memberKeyword {width: 20%; float: left; }
+	.input-group.search {width: 80%;}
 	.btn.searchBtn{background-color: #3498db;}
 	.fa.fa-search{color: white;}
 	

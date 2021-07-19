@@ -117,12 +117,16 @@
             <div class="login_area">
                 <c:choose>
                 	<c:when test="${ !empty loginUser and loginUser.memberStatus eq 'A' }">
-		                <span>관리자  on</span> &nbsp;
-		                <a href="logout.mana">로그아웃</a>
+			            <b>
+	                		<span>관리자  ON</span> &nbsp;
+			                <a href="logout.mana">로그아웃</a>
+		                </b>
                 	</c:when>
                 	<c:otherwise>
-                		<span>관리자  off</span> &nbsp;
-		                <a data-toggle="modal" data-target="#manaLogin">로그인</a>
+                		<b>
+	               			<span>관리자  OFF</span> &nbsp;
+		                	<a data-toggle="modal" data-target="#manaLogin">로그인</a>
+		                </b>
                 	</c:otherwise>
                 </c:choose>
             </div>

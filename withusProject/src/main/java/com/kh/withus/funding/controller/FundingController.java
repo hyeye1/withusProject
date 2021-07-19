@@ -517,7 +517,39 @@ public class FundingController {
 		}
 	   
 	   // 펀딩 검색?정렬?
-	
+	   @RequestMapping("searchFunding.mana")
+		public ModelAndView searchM(@RequestParam(defaultValue="") String condition,
+										 @RequestParam(defaultValue="") String sort,
+										 @RequestParam(defaultValue="") String keyword,
+										 @RequestParam(value="currentPage", defaultValue="1") int currentPage,
+										 ModelAndView mv) {
+			
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("condition", condition);
+			map.put("sort", sort);
+			map.put("keyword", keyword);
+			//System.out.println(map);
+			
+			// 검색결과 리스트 총 갯수
+			int count = funService.countSearch(map);
+			
+			// 페이징 처리
+			PageInfo pi = pagination.getPageInfo(count, currentPage, 10, 10);
+			
+			// 검색결과 담아내기
+			ArrayList<Project> fdList = funService.searchFundingMana(map, pi);
+			//System.out.println(mList);
+			
+			mv.addObject("pi", pi)
+			  .addObject("fdList",fdList)
+			  .addObject("condition", condition)
+			  .addObject("sort", sort)
+			  .addObject("keyword", keyword)
+			  .setViewName("admin/fundingManaListView");
+			
+			return mv;
+			
+		}
 	
 	
    

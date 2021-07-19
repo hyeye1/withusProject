@@ -509,6 +509,10 @@
 		margin: 0 50px;
 		width: 150px;
 	}
+	.info{
+		font-size: 16px;
+		text-align: center;
+	}
 		
 </style>
 </head>
@@ -525,11 +529,11 @@
      
 	 <button type="button" class="btn btn-secondary" id="backBtn"	
 	 		 onclick="history.back();">목록으로</button>
-
-         <!-- 맨위 -->
-         <div class="detailHeader" align="center">
-             <div class="detailCat">
-				<c:choose>
+	 		 
+     <!-- 맨위 -->
+     <div class="detailHeader" align="center">
+         <div class="detailCat">
+			<c:choose>
 				<c:when test="${ p.catNo eq null }">
 					<button>카테고리</button>
 				</c:when>
@@ -539,207 +543,213 @@
 				<c:otherwise>
 					<button>${ p.catName }</button>
 				</c:otherwise>
-				</c:choose>
-             </div>
-             
-             <div class="detailTitle">
-                 <p><b>${ p.projectTitle }</b></p>
-             </div>
-
-			<!-- 보류 -->
-			<%-- 					
-                    <div class="partner">
-						<c:choose>
-							<c:when test="${ loginUser.memberProfile eq null}">
-								<img src="${ pageContext.request.contextPath }/resources/images/partnerDefault.PNG">
-							</c:when>
-							<c:otherwise>
-								<img src="${ pageContext.request.contextPath }/${ loginUser.memberProfile }">
-							</c:otherwise>
-						</c:choose>
-                        <b>${ loginUser.memberName }</b> <br><br><br>
-                    </div>
- 			--%>
- 			
-             <div class="detailHeaderBody">
-
-             </div>
-
-             <div class="detailThumb">
-             	<c:choose>
-              	<c:when test="${ p.projectThum eq null }">
-              		<div class="nullImg">
-              			프로젝트 썸네일을 등록해주세요.
-              		</div>
-              	</c:when>
-              	<c:otherwise>
-                   <img src="${ p.projectThum }" height="480px">
-              	</c:otherwise>
-             	</c:choose>
-             </div>
-
-             <div class="detailAsideMana" align="left">
-
-                 <div class="detailInfo1">
-                     <table>
-                         <tr>
-                             <td colspan="2" class="goalPrice">펀딩 금액</td>
-                         </tr>
-                         <tr>
-                             <td colspan="2">
-                                 <span class="goalPrice"><b>${ p.totalPrice }</b></span>
-                                 <span class="infoSmall">원</span>
-                             </td>
-                         </tr>
-                         <tr>
-                             <td style="font-size: 9px;"><br></td>
-                         </tr>
-                         <tr>
-                             <td class="infoTitle">달성률</td>
-                             <td>
-                                 <span><b>${ p.percentage }</b></span>
-                                 <span class="infoSmall">%</span>
-                             </td>
-                         </tr>
-                         <tr>
-                             <td></td>
-                             <td class="infoPs" style="line-height: 0;">목표금액 ${ p.projectGprice } 원</td>
-                         </tr>
-                         <tr>
-                             <td class="infoTitle" style="line-height: 3.5;">남은 기간</td>
-                             <td>
-                                 <span><b>${ p.dday }</b></span>
-                                 <span class="infoSmall">일</span>
-                             </td>
-                         </tr>
-                         <tr>
-                             <td class="infoTitle">서포터</td>
-                             <td>
-                                 <span><b>${ p.supporter }</b></span>
-                                 <span class="infoSmall">명</span>
-                             </td>
-                         </tr>
-                         <tr>
-                             <td style="font-size: 7px;"><br></td>
-                         </tr>
-                     </table>
-                 </div>
-
-                 <div class="detailInfo2">
-                     <div class="infoPs">
-                         <p>
-			                                 목표 금액 ${ p.projectGprice }원이 모여야만 결제가 진행됩니다. <br>
-			                                 목표 금액을 달성한 경우, 결제 예정일은 ${ p.payDate } 입니다.
-                         </p>
-                     </div>
-                     <form name="projectConsider">
-                     <input type="hidden" name="pno" value="${ p.projectNo }" >
-                     <div class="infoYNBtn" align="center">
-                         <button type="button" name="considerBtn" value="3"
-									class="btn btn-withus approvalBtn">승인</button>
-						<button type="button" name="considerBtn" value="4"
-								class="btn btn-danger oppositionBtn">반려</button>
-                     </div>
-                     </form>
-                     <script>
-						$(function() {
-						    $("button[name=considerBtn]").on('click', function() {
-						        var considerBtn = $(event.target).val();    
-						        //console.log(considerBtn);
-						        $("form[name=projectConsider]")
-					               .attr({ action:"fundingConsider.mana?considerBtn="+considerBtn, method:"post" })
-					               .submit();
-						    });
-						});
-					</script>
-                     
-                 </div>
-             </div>
+			</c:choose>
+         </div>
+         
+         <div class="detailTitle">
+             <p><b>${ p.projectTitle }</b></p>
          </div>
 
-         <!-- 메뉴바 -->
-         <div class="detailMenubar">
-             <span class="detailSto" onclick="detailShow('Sto')"><b>스토리</b></span>
-             <span class="detailCommu" onclick="detailShow('Commu')"><b>커뮤니티</b></span>
-             <span class="detailNoti" onclick="detailShow('Noti')"><b>펀딩 안내</b></span>
+		<!-- 보류 -->
+		<%-- 					
+        <div class="partner">
+			<c:choose>
+				<c:when test="${ loginUser.memberProfile eq null}">
+					<img src="${ pageContext.request.contextPath }/resources/images/partnerDefault.PNG">
+				</c:when>
+				<c:otherwise>
+					<img src="${ pageContext.request.contextPath }/${ loginUser.memberProfile }">
+				</c:otherwise>
+			</c:choose>
+            <b>${ loginUser.memberName }</b> <br><br><br>
+        </div>
+		--%>
+
+         <div class="detailHeaderBody">
+
          </div>
-         <!-- 메뉴바 스토리선택됨 표시바 -->
-         <div class="menuSelected detail detailSto" style="margin-left: 109px; ">&nbsp;</div>
-         <div class="menuSelected detail detailCommu" style="margin-left: 218px; display: none;">&nbsp;
+
+         <div class="detailThumb">
+         	<c:choose>
+          	<c:when test="${ p.projectThum eq null }">
+          		<div class="nullImg">
+          			프로젝트 썸네일을 등록해주세요.
+          		</div>
+          	</c:when>
+          	<c:otherwise>
+               <img src="${ p.projectThum }" height="480px">
+          	</c:otherwise>
+         	</c:choose>
          </div>
-         <div class="menuSelected detail detailNoti" style="margin-left: 338px; display: none;">&nbsp;
-         </div>
 
+         <div class="detailAsideMana" align="left">
 
-         <!-- 바디 -->
-         <div class="detailBody">
+             <div class="detailInfo1">
+                 <table>
+                     <tr>
+                         <td colspan="2" class="goalPrice">펀딩 금액</td>
+                     </tr>
+                     <tr>
+                         <td colspan="2">
+                             <span class="goalPrice"><b>${ p.totalPrice }</b></span>
+                             <span class="infoSmall">원</span>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td style="font-size: 9px;"><br></td>
+                     </tr>
+                     <tr>
+                         <td class="infoTitle">달성률</td>
+                         <td>
+                             <span><b>${ p.percentage }</b></span>
+                             <span class="infoSmall">%</span>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td></td>
+                         <td class="infoPs" style="line-height: 0;">목표금액 ${ p.projectGprice } 원</td>
+                     </tr>
+                     <tr>
+                         <td class="infoTitle" style="line-height: 3.5;">남은 기간</td>
+                         <td>
+                             <span><b>${ p.dday }</b></span>
+                             <span class="infoSmall">일</span>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td class="infoTitle">서포터</td>
+                         <td>
+                             <span><b>${ p.supporter }</b></span>
+                             <span class="infoSmall">명</span>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td style="font-size: 7px;"><br></td>
+                     </tr>
+                 </table>
+             </div>
 
-             <!-- 창작자소개/리워드선택바 -->
-             <div class="detailRight">
-                 <div class="detailPartner">
-
-                     <div><b>창작자 소개</b></div>
-                     <div class="rightPartner">
-						<c:choose>
-							<c:when test="${ m.memberProfile eq null}">
-								<img src="${ pageContext.request.contextPath }/resources/images/partnerDefault.PNG">
-							</c:when>
-							<c:otherwise>
-								<img src="${ pageContext.request.contextPath }/${ m.memberProfile }">
-							</c:otherwise>
-						</c:choose>	
-                         <p><b>${ m.partnerName }</b> <br><br><br></p>
-                         <button>+ 팔로우</button>
-                     </div>
-                     <p id="partnerWho">
-                         ${ m.partnerIntro }
+             <div class="detailInfo2">
+                 <div class="infoPs">
+                     <p>
+		                                목표 금액 ${ p.projectGprice }원이 모여야만 결제가 진행됩니다. <br>
+		                                목표 금액을 달성한 경우, 결제 예정일은 ${ p.payDate } 입니다.
                      </p>
-                     <div class="partnerBtn">
-                         <button><img src="${ pageContext.request.contextPath }/resources/images/send.PNG"
-                                 width="23px"><span> 창작자에게 문의하기</span></button>
-                     </div>
-
                  </div>
+                 <form name="projectConsider">
+                 <input type="hidden" name="pno" value="${ p.projectNo }" >
+                 <div class="infoYNBtn" align="center">
+                     <button type="button" name="considerBtn" value="3"
+							 class="btn btn-withus approvalBtn">승인</button>
+					<button type="button" name="considerBtn" value="4"
+							class="btn btn-danger oppositionBtn">반려</button>
+                 </div>
+                 </form>
+                 
+                 <c:choose>
+                 	<c:when test="${ p.projectStatus eq 3 }">
+	                  <p class="info">※현재 게시중인 프로젝트입니다.</p>
+                 	</c:when>
+                 </c:choose>
+                 
+                 <script>
+					$(function() {
+					    $("button[name=considerBtn]").on('click', function() {
+					        var considerBtn = $(event.target).val();    
+					        //console.log(considerBtn);
+					        $("form[name=projectConsider]")
+				               .attr({ action:"fundingConsider.mana?considerBtn="+considerBtn, method:"post" })
+				               .submit();
+					    });
+					});
+				</script>
+                 
+             </div>
+         </div>
+     </div>
 
-                 <div class="detailReward">
+      <!-- 메뉴바 -->
+      <div class="detailMenubar">
+          <span class="detailSto" onclick="detailShow('Sto')"><b>스토리</b></span>
+          <span class="detailCommu" onclick="detailShow('Commu')"><b>커뮤니티</b></span>
+          <span class="detailNoti" onclick="detailShow('Noti')"><b>펀딩 안내</b></span>
+      </div>
+      <!-- 메뉴바 스토리선택됨 표시바 -->
+      <div class="menuSelected detail detailSto" style="margin-left: 109px; ">&nbsp;</div>
+      <div class="menuSelected detail detailCommu" style="margin-left: 218px; display: none;">&nbsp;
+      </div>
+      <div class="menuSelected detail detailNoti" style="margin-left: 338px; display: none;">&nbsp;
+      </div>
 
-                     <div><b>리워드 선택</b></div>
-                     <br>
-                     <c:forEach var="r" items="${ r }" >
-                      <div class="chooseReward">
-                          <div>
-                          <input type="hidden" value="${ r.rewardNo }">
-                              <span class="rePrice">${ r.rewardPrice }원 펀딩</span>
-                              <span class="reNumber">${ r.rewardStock }개 남음</span>
-                          </div>
-                          <p class="reTitle">${ r.rewardTitle }</p>
-                          <ul>
-                              <li>${ r.rewardContent }</li>
-                          </ul>
-                      </div>
-                     	<br>
-                     </c:forEach>
-                     </div>
-                     <br>
-                    
-                  <!-- 해시태그 -->
-                  <div class="hashtag">
-                      <b>해시태그</b>
-                      <br><br>
-                      <table>
-                          <tr>
-                              <th><a href="">#시계</a></th>
-                              <th><a href="">#모던</a></th>
-                              <th><a href="">#감성</a></th>
-                          </tr>
-                          <tr>
-                              <th><a href="">#디자인</a></th>
-                              <th><a href="">#소품</a></th>
-                          </tr>
-                      </table>
-                      <br>
+
+      <!-- 바디 -->
+      <div class="detailBody">
+
+          <!-- 창작자소개/리워드선택바 -->
+          <div class="detailRight">
+              <div class="detailPartner">
+
+                  <div><b>창작자 소개</b></div>
+                  <div class="rightPartner">
+					<c:choose>
+						<c:when test="${ m.memberProfile eq null}">
+							<img src="${ pageContext.request.contextPath }/resources/images/partnerDefault.PNG">
+						</c:when>
+						<c:otherwise>
+							<img src="${ pageContext.request.contextPath }/${ m.memberProfile }">
+						</c:otherwise>
+					</c:choose>	
+                      <p><b>${ m.partnerName }</b> <br><br><br></p>
+                      <button>+ 팔로우</button>
                   </div>
-                 </div>
+                  <p id="partnerWho">
+                      ${ m.partnerIntro }
+                  </p>
+                  <div class="partnerBtn">
+                      <button><img src="${ pageContext.request.contextPath }/resources/images/send.PNG"
+                              width="23px"><span> 창작자에게 문의하기</span></button>
+                  </div>
+
+              </div>
+
+              <div class="detailReward">
+
+                 <div><b>리워드 선택</b></div>
+                 <br>
+                 <c:forEach var="r" items="${ r }" >
+                  <div class="chooseReward">
+                      <div>
+                      <input type="hidden" value="${ r.rewardNo }">
+                          <span class="rePrice">${ r.rewardPrice }원 펀딩</span>
+                          <span class="reNumber">${ r.rewardStock }개 남음</span>
+                      </div>
+                      <p class="reTitle">${ r.rewardTitle }</p>
+                      <ul>
+                          <li>${ r.rewardContent }</li>
+                      </ul>
+                  </div>
+                 	<br>
+                 </c:forEach>
+               </div> <br>
+                 
+               <!-- 해시태그 -->
+               <div class="hashtag">
+                   <b>해시태그</b>
+                   <br><br>
+                   <table>
+                       <tr>
+                           <th><a href="">#시계</a></th>
+                           <th><a href="">#모던</a></th>
+                           <th><a href="">#감성</a></th>
+                       </tr>
+                       <tr>
+                           <th><a href="">#디자인</a></th>
+                           <th><a href="">#소품</a></th>
+                       </tr>
+                   </table>
+                   <br>
+               </div>
+              </div>
 
 
              <!-- 스토리 -->
@@ -825,7 +835,6 @@
          </div>
      </div>
 
-             </div>
      <script>
          function detailShow(className) {
              $(".detail").hide();

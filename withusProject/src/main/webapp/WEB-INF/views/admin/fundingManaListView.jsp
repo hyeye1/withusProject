@@ -10,16 +10,41 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Load icon library(검색) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
 <title>Admin With Us</title>
 <style>
 
 	*{box-sizing: border-box;} 
+	
+	/* search 
+	select[name=condition], select[name=sort]{
+		height: 36px; 
+		border-color: lightgray; 
+		outline: none;
+		margin: auto;
+	}
+	.input-group.search { position: relative; top: -50%; right: -279%;}
+	.btn.searchBtn{background-color: #3498db;}
+	.fa.fa-search{color: white;}
+	*/
+	.search_area {height: 60px;} 
+	.search_area select{height: 36px; border-color: lightgray; outline: none;}
+	
+	.searchKey_1{width: 14%; position: relative; float: left;}
+	.searchKey_2{width: 20%; float: left;}
+	
+	.input-group.search {width: 45%; float: right}
+	.btn.searchBtn{background-color: #3498db;}
+	.fa.fa-search{color: white;}
+	
 	
 	tbody>tr:hover{cursor: pointer;}
 	table *{text-align: center; font-size: 15px;}
 	table.table-bordered td, table.table-bordered th {padding: .35rem;}
 	.tableHead{background-color: #eaeaea;}
 	.none{margin: 100px 0;}
+	#fdTable td {vertical-align: middle;}
 	
 	/* pagination */
 	.paging_wrap{width:fit-content;margin:auto; margin-top: 50px;}
@@ -48,21 +73,46 @@
 		<input type="hidden" name="currentPage" value="1">
 
 		<div class="container">
-		    <div class="selectOption" style="display:inline-flex;">
-				<form action="lineupFunding">
-					<select name="condition" class="condition">
+				
+			<div class="search_area">
+				<form action="searchFunding.mana" name="">
+	        	<input type="hidden" name="currentPage" value="1">
+	             <div class="searchKey_1">
+	                 <select name="condition" class="condition">
 						<option value="all">모든 펀딩</option>
 						<option value="ing">진행중인 펀딩</option> <!-- 펀딩상태 'Y' -->
 						<option value="end">종료된 펀딩</option> <!-- 펀딩상태 'N' -->
 					</select>
-					&nbsp;&nbsp;&nbsp;&nbsp;
-					<select name="sort" class="sort">
+	             </div>
+	             <div class="searchKey_2">
+	                <select name="sort" class="sort">
 						<option value="best">인기순</option> <!-- 좋아요갯수 많은 순으로 정렬-->
 						<option value="deadline">마감임박순</option>
 						<option value="newest">최신순</option>
 					</select>
+	            </div>
+	
+                <div class="input-group search">
+                    <input type="text" name="keyword" value="${ keyword }" class="form-control" placeholder="검색어를 입력하세요">
+                    <div class="input-group-append">
+                        <button class="btn searchBtn" type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
 				</form>
-			</div>
+	        </div>
+		
+			 <c:if test="${ !empty condition or !empty sort }">
+	        	<script>
+	        	$(function(){
+	        		$(".condition option[value=${condition}]").attr("selected", true);
+	        		$(".sort option[value=${sort}]").attr("selected", true);
+	        		
+	        		
+	        	});
+	        	</script>
+	        </c:if>
+                
+			
 		
 		    <table class="table table-bordered" id="fdTable">
 		    <c:choose>
@@ -73,14 +123,14 @@
 				<thead>
 				  <tr align="center" style="height: 10px; background-color: rgb(224, 224, 224); font-size:smaller ;">
 					<th width="70">글번호</th>
-		            <th width="150">카테고리</th>
-		            <th width="400">제목</th>
+		            <th width="130">카테고리</th>
+		            <th width="350">제목</th>
 		            <th width="100">파트너명</th>
 		            <th width="80">달성률</th>
 		            <th width="120">마감일</th>
 		            <th width="80">좋아요</th>
-		            <th width="60">펀딩상태</th>
-		            <th width="60">승인상태</th>
+		            <th width="90">펀딩상태</th>
+		            <th width="90">승인상태</th>
 				  </tr>
 				</thead>
 				<tbody>
@@ -88,11 +138,11 @@
 						<tr align="center">
 							<td class="pno">${ fd.projectNo }</td>
 							<td>${ fd.catName }</td>
-							<td><a herf="">${ fd.projectTitle }</a></td>
+							<td>${ fd.projectTitle }</td>
 							<td>${ fd.partnerName }</td>
-							<td>아직 못함</td>
+							<td>${ fd.percentage } %</td>
 							<td>${ fd.projectEndDT }</td>
-							<td>못했으</td>
+							<td>-</td>
 							<td>
 								<c:choose>
 			                    	<c:when test="${ fd.dday >= 0}">
@@ -127,6 +177,7 @@
 	            </tbody>
         	</c:otherwise>
         </c:choose>
+        </table>
 	    </div>
 	    
 	    <!-- 주문상세 정보 -->
@@ -195,9 +246,8 @@
 		    </div>
 		</c:if>
 
-
 	</div>
-	
+	</div>
 
 </body>
 </html>

@@ -42,5 +42,8 @@ public class FundingDetail {
 	private String rewardContent;
 	private String optionYn;
 	private String rewardShip;
+	
+	// 현정 추가
+	private String projectStatus;
 
 }	

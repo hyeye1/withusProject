@@ -188,5 +188,15 @@ public class FundingServiceImpl implements FundingService {
 		return funDao.updateProjectStatus(sqlSession, map);
 	}
 
+	@Override
+	public int countSearch(HashMap<String, String> map) {
+		return funDao.countSearch(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<Project> searchFundingMana(HashMap<String, String> map, PageInfo pi) {
+		return funDao.searchFundingMana(sqlSession, map, pi);
+	}
+
 
 }

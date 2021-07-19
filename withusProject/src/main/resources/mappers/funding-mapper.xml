@@ -55,6 +55,8 @@
 		<result column="reward_ship" property="rewardShip" />
 		<result column="reward_content" property="rewardContent" />
 		<result column="option_yn" property="optionYn" />
+		
+		<result column="project_status" property="projectStatus" />
 	</resultMap>
 	
 	<resultMap id="Category" type="Category">
@@ -726,26 +728,43 @@
  	</select>
  	
  	<!-- 펀딩 리스트 -->
- 	<select id="selectFundingList" resultMap="fundingListResultSet">
+ 	<select id="selectFundingList" resultMap="fundingListResultSet"
+ 			 parameterType="Project">
  		select
-		        p.project_no
-		      , c.cat_name
-		      , p.project_title
-		      , m.partner_name
-		      <!-- , 달성률 -->
-		      , to_char(p.project_end_dt,'YYYY-MM-DD') project_end_dt
-		      <!-- ,좋아요 -->
-		      , ceil(p.project_end_dt - sysdate) dday 
-		      , p.project_status
-		  from project p 
-		  join category c on(c.cat_no = p.cat_no)
-		  join member m on(m.member_no = p.member_no)
-		  full join likey l on(l.project_no = p.project_no)
-		  order
-		     by p.project_no desc
+               p.project_no
+             , p.project_title
+             , c.cat_no
+             , c.cat_name
+             , m.partner_name
+             , sum(o.total_price) total_price
+             , floor(sum(o.total_price) / p.project_gprice * 100) percentage
+             , p.project_gprice
+             , to_char(p.project_end_dt,'YYYY-MM-DD') project_end_dt
+             , ceil(project_end_dt - sysdate) dday
+             , p.project_status
+          from 
+          	   tb_order o
+             , project p
+             , category c
+             , member m
+         where p.project_no = o.project_no(+)
+           and p.cat_no = c.cat_no 
+           and p.member_no = m.member_no 
+           and p.project_status = 3
+         group
+            by p.project_no
+             , p.project_title
+             , c.cat_no
+             , c.cat_name
+             , m.partner_name
+             , p.project_gprice
+             , p.project_end_dt 
+             , p.project_status
+         order 
+            by p.project_no desc
  	</select>
  	
- 	<!-- 프로젝트 조회 -->
+ 	<!-- 펀딩 미리보기 조회 -->
  	<select id="fundingConsiderPre" resultMap="fundingDetail" 
 			parameterType="FundingDetail">
 	    select
@@ -780,6 +799,7 @@
 		     , partner_phone
 		     , partner_email
 		     , phone_yn
+		     , project_status
 		  from project
 		  join member using(member_no)
 		  join category using(cat_no)
@@ -825,6 +845,58 @@
 		 where project_no = #{pno}  
 	</update>
  	
- 
+ 	<!-- 펀딩 검색 -->
+<!--  	<select id="searchFundingMana" resultMap="fundingListResultSet"
+			parameterType="hashmap">
+			
+		select
+               p.project_no
+             , p.project_title
+             , c.cat_no
+             , c.cat_name
+             , m.partner_name
+             , sum(o.total_price) total_price
+             , floor(sum(o.total_price) / p.project_gprice * 100) percentage
+             , p.project_gprice
+             , p.project_end_dt
+             , ceil(project_end_dt - sysdate) dday
+             , p.project_status
+          from 
+          	   tb_order o
+             , project p
+             , category c
+             , member m
+        	where p.project_title like '%' || #{keyword} || '%' 
+           
+            <if test='sort != null'>
+   			   <choose>
+	   			   	<when test='sort == "ing"'> and dday >= 0 </when>
+	   			   	<when test='sort == "end"'> and  0 > dday </when>
+   			   </choose>
+		   </if>
+		   <if test='sort != null'>
+   			   <choose>
+	   			   	<when test='sort == "best"'> and member_status = 'Y' </when>
+	   			   	<when test='sort == "deadline"'> and ceil(project_end_dt - sysdate) > 0</when>
+	   			   	<when test='sort == "newest"'> and member_status = 'A' </when>
+   			   </choose>
+		   </if>
+           and p.project_no = o.project_no(+)
+           and p.cat_no = c.cat_no 
+           and p.member_no = m.member_no 
+           and p.project_status = 3
+         group
+            by p.project_no
+             , p.project_title
+             , c.cat_no
+             , c.cat_name
+             , m.partner_name
+             , p.project_gprice
+             , p.project_end_dt 
+             , p.project_status
+         order 
+            by p.project_no desc
+			
+	</select> -->
     
  </mapper>
