@@ -31,9 +31,11 @@ public class OtoDao {
 		return sqlSession.insert("otoMapper.insertOto", o);
 	}
 	
+	/*
 	public int increaseCount(SqlSessionTemplate sqlSession, int otoNo) {
 		return sqlSession.update("otoMapper.increaseCount", otoNo);
 	}
+	*/
 	
 	public Oto selectOto(SqlSessionTemplate sqlSession, int otoNo) {
 		return sqlSession.selectOne("otoMapper.selectOto", otoNo);

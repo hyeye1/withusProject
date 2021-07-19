@@ -31,7 +31,7 @@ public class OtoController {
 	public ModelAndView selectOtoList(@RequestParam (value="currentPage", defaultValue="1")int currentPage, ModelAndView mv) {
 		
 		int listCount = oService.selectListCount();
-		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
 		ArrayList<Oto> list = oService.selectList(pi);
 		
@@ -87,13 +87,13 @@ public class OtoController {
 		return changeName;	
 		}
 
-	
 	@RequestMapping("detail.oto")
 	public String selectOto(int ono, Model model) {
-		int result = oService.increaseCount(ono);
 		
-		if(result > 0) {
-			Oto o = oService.selectOto(ono);
+		Oto o = oService.selectOto(ono);
+		
+		if( o != null) {
+			
 			model.addAttribute("o", o);
 			return "admin/csc/oto/otoDetailView";
 		}else {
