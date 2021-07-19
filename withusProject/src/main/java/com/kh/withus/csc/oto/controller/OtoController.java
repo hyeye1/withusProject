@@ -24,11 +24,10 @@ import com.kh.withus.csc.oto.model.vo.Oto;
 @Controller
 public class OtoController {
 
-	// 6/27 윤경 생성
 	@Autowired
 	private OtoService oService;
 	
-	@RequestMapping("list.oto")
+	@RequestMapping("otoList.mana")
 	public ModelAndView selectOtoList(@RequestParam (value="currentPage", defaultValue="1")int currentPage, ModelAndView mv) {
 		
 		int listCount = oService.selectListCount();
@@ -36,7 +35,9 @@ public class OtoController {
 		
 		ArrayList<Oto> list = oService.selectList(pi);
 		
-		mv.addObject("pi", pi).addObject("list", list).setViewName("csc/otoListView");
+		mv.addObject("pi", pi)
+		  .addObject("list", list)
+		  .setViewName("admin/csc/oto/otoManaListView");
 		
 		return mv;
 	}
@@ -48,7 +49,6 @@ public class OtoController {
 	
 	@RequestMapping("insert.oto")
 	public String insertOto(Oto o, MultipartFile cscUpfile, HttpSession session, Model model) {
-		
 		if(!cscUpfile.getOriginalFilename().equals("")) {
 			String changeName = saveFile(session, cscUpfile);
 			
@@ -58,13 +58,9 @@ public class OtoController {
 		
 		int result = oService.insertOto(o);
 		
-		//System.out.println(o);
-		//System.out.println(cscUpfile);
-		
-		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "1:1문의가 등록되었습니다.");
-			return "redirect:list.oto";
+			return "redirect:myPage.me";
 		}else {
 			model.addAttribute("errorMsg", "1:1문의가 등록되지않았습니다.");
 			return "common/errorPage";
@@ -91,7 +87,7 @@ public class OtoController {
 		return changeName;	
 		}
 
-
+	
 	@RequestMapping("detail.oto")
 	public String selectOto(int ono, Model model) {
 		int result = oService.increaseCount(ono);
@@ -99,7 +95,7 @@ public class OtoController {
 		if(result > 0) {
 			Oto o = oService.selectOto(ono);
 			model.addAttribute("o", o);
-			return "csc/otoDetailView";
+			return "admin/csc/oto/otoDetailView";
 		}else {
 			model.addAttribute("errorMsg", "문의하기 조회를 실패했습니다.");
 			return "common/errorPage";
@@ -116,7 +112,7 @@ public class OtoController {
 			}
 			
 			session.setAttribute("alertMsg", "성공적으로 삭제되었습니다.");
-			return "redirect:list.oto";
+			return "redirect:otoManaListView";
 		}else {
 			model.addAttribute("errorMsg", "삭제를 실패했습니다.");
 			return "common/errorPage";

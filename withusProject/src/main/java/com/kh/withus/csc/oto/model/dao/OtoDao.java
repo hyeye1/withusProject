@@ -28,22 +28,22 @@ public class OtoDao {
 	}
 	
 	public int insertOto(SqlSessionTemplate sqlSession, Oto o) {
-		return sqlSession.insert("otoMapper.insertOto");
+		return sqlSession.insert("otoMapper.insertOto", o);
 	}
 	
 	public int increaseCount(SqlSessionTemplate sqlSession, int otoNo) {
-		return sqlSession.update("otoMapper.increaseCount");
+		return sqlSession.update("otoMapper.increaseCount", otoNo);
 	}
 	
 	public Oto selectOto(SqlSessionTemplate sqlSession, int otoNo) {
-		return sqlSession.selectOne("otoMapper.selectOto");
+		return sqlSession.selectOne("otoMapper.selectOto", otoNo);
 	}
 	
 	public int updateOto(SqlSessionTemplate sqlSession, Oto o) {
-		return sqlSession.update("otoMapper.updateOto");
+		return sqlSession.update("otoMapper.updateOto", o);
 	}
 
 	public int deleteOto(SqlSessionTemplate sqlSession, int otoNo) {
-		return sqlSession.update("otoMapper.deleteOTo");
+		return sqlSession.update("otoMapper.deleteOTo", otoNo);
 	}
 }

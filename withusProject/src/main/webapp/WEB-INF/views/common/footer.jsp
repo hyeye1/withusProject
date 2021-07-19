@@ -60,7 +60,7 @@
         <img src="${ pageContext.request.contextPath }/resources/images/footerLogo.PNG" width="100%">
 
         <div class="footerHead">
-            <a href="enrollForm.oto" target="_blank">
+            <a href="enrollForm.oto">
             	<img src="${ pageContext.request.contextPath }/resources/images/qButton.PNG" width="262px" height="63px">
             </a>
 
