@@ -113,6 +113,7 @@
 		  , commu_title
 		  , commu_content
 		  , commu_create
+		  , commu_status
 		  , commu_origin
 		  , commu_change
 		  )
@@ -124,6 +125,7 @@
 		  , #{commuTitle}
 		  , #{commuContent}
 		  , sysdate
+		  , 'Y'
 		  , #{commuOrigin}
 		  , #{commuChange}
 		  )
@@ -145,6 +147,7 @@
 			 , commu_writer
 			 , commu_origin
 		     , commu_change
+		     , commu_content
 		     , to_char(commu_create, 'YYYY-MM-DD') commu_create
 		  from community
 		 where commu_no = #{commuNo}

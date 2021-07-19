@@ -123,9 +123,9 @@
                 <div id="menubar">
                     <ul id="menubar_member" class="menubar_admin">
                         <p>커뮤니티</p>
-                        <li><a href="">자유</a></li>
-                        <li><a href="">질문</a></li>
-                        <li><a href="">공구모집</a></li>
+                        <li><a href="commu.free">자유</a></li>
+                        <li><a href="commu.ask">질문</a></li>
+                        <li><a href="commu.tool">공구모집</a></li>
                     </ul>
                 </div>
             </article>
@@ -156,7 +156,7 @@
                             </tr>
                             <tr>
                                 <th><label for="commuWriter">작성자</label></th>
-                                <td><input type="text" id="commuWriter" class="form-control" value="${ loginUser.memberId }" name="commuWriter" readonly>
+                                <td><input type="text" id="commuWriter" class="form-control" value="${ loginUser.memberNo }" name="commuWriter" readonly>
                                 </td>
                             </tr>
                             <tr>

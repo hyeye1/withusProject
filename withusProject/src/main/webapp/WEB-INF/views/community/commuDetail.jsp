@@ -177,7 +177,7 @@
                             </table>
                             <br>
 
-							<c:if test="${ loginUser.memberId eq c.commuWriter }">
+							<c:if test="${ loginUser.memberNo eq c.commuWriter }">
 					            <div align="center">
 					                <!-- 수정하기, 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨 -->
 					                <a class="btn btn-primary" onclick="postFormSubmit(1);">수정하기</a>
@@ -185,7 +185,7 @@
 					            </div><br><br>
 					            
 					            <form id="postForm" action="" method="post">
-					          	    <input type="hidden" name="memberNo" value="${ loginUser.memberNo }">
+					          	    <input type="hidden" name="cno" value="${ c.commuNo }">
 					            	<input type="hidden" name="filePath" value="${ c.commuChange }"> 	
 					            </form>
 					            
