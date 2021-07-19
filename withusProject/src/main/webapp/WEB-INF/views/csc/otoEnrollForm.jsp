@@ -26,9 +26,23 @@
 	                <form id="enrollForm" method="post" action="insert.oto" enctype="multipart/form-data">
 	                    <table class="table table-bordered" align="center">
 	                		<input type="hidden" id="memberNo" class="form-control" name="memberNo" value="${ loginUser.memberNo }">    
+	                        
 	                        <tr>
 	                            <th><label for="title">제목</label></th>
 	                            <td><input type="text" id="title" class="form-control" name="otoTitle" required></td>
+	                        </tr>
+	                        <tr>
+	                        	<th><label for="cate">문의유형</label></th>
+	                        	<td>
+	                        		<select id="otoCat" name="otoCat">
+	                        			<option value="배송 문의">배송 문의</option>
+	                        			<option value="상품 문의">상품 문의</option>
+	                        			<option value="결제 수단 문의">결제 수단 문의</option>
+	                        			<option value="파트너 문의">파트너 문의</option>
+	                        			<option value="리워드 문의">리워드 문의</option>
+	                        			<option value="기타 문의">기타 문의</option>
+	                        		</select>
+	                        	</td>
 	                        </tr>
 	                        <tr>
 	                            <th><label for="upfile">첨부파일</label></th>

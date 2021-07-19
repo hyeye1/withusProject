@@ -35,7 +35,7 @@
 		     , oto_status
 		 from oto
 		order
-		   by oto_date desc
+		   by oto_no desc
 	</select>
 	 
 	<insert id="insertOto" parameterType="Oto">
@@ -44,8 +44,8 @@
 		  (
 		    oto_no
 		  , member_no
-		  , oto_title
 		  , oto_cat
+		  , oto_title
 		  , oto_content
 		  , oto_originname
 		  , oto_changename
