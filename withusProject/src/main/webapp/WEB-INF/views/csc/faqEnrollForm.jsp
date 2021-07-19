@@ -60,7 +60,6 @@
 
     
 
-
     <!-- 푸터바 -->
     <jsp:include page="../common/footer.jsp"/>
 

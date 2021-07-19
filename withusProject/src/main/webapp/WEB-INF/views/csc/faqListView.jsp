@@ -79,6 +79,7 @@
 			        <c:forEach var="f" items="${ list }">
 			            <div class="faqCon">
 			            	<table class="table table-bordered">
+			            	<input type="hidden" name="faqNo" value="${ f.faqNo }" >
 			            		<tr class="title">
 			            			<th width="5%">Q</th>
 			            			<th width="15%">${ f.faqCat }</th>
@@ -91,7 +92,7 @@
 			            				<br>
 			            				<c:if test="${ loginUser.memberStatus eq 'A' }">
 				                            <div align="right" style="padding-right: 30px;">
-												<a href="update.faq?faqNo=${ f.faqNo }" class="btn btn-warning btn-sm">수정</a>
+												<a href="updateForm.faq?faqNo=${ f.faqNo }" class="btn btn-warning btn-sm">수정</a>
 												<a href="delete.faq?fno=${ f.faqNo }" class="btn btn-danger btn-sm" style="color:white;">삭제</a>
 											</div>
 										</c:if>

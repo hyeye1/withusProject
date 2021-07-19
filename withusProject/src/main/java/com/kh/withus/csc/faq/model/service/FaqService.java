@@ -6,7 +6,7 @@ import com.kh.withus.csc.faq.model.vo.Faq;
 
 public interface FaqService {
 	
-	// 6/27 윤경 생성
+	// ----------- 사용자 -------------
 	
 	// faq 리스트 조회(페이징 처리x)
 	ArrayList<Faq> selectList();
@@ -28,6 +28,15 @@ public interface FaqService {
 	ArrayList<Faq> selectDelivery();
 	ArrayList<Faq> selectExchange();
 	ArrayList<Faq> selectEtc();
+
+	// ----------- 관리자 -------------
+	/*
+	ArrayList<Faq> selectManaList();
+
+	int insertManaFaq(Faq fM);
+
+	Faq selectManaFaq(int fnoM);
+	*/
 	
 
 }
