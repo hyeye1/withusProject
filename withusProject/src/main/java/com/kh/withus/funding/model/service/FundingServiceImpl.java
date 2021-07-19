@@ -189,8 +189,8 @@ public class FundingServiceImpl implements FundingService {
 	}
 
 	@Override
-	public int countSearch(HashMap<String, String> map) {
-		return funDao.countSearch(sqlSession, map);
+	public int countSearchFdMana(HashMap<String, String> map) {
+		return funDao.countSearchFdMana(sqlSession, map);
 	}
 
 	@Override

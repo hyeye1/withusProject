@@ -48,4 +48,7 @@ public class Project {
 	
 	private ArrayList<Reward> rewardList;
 	
+	// 현정 추가
+	private int likeCount;
+	
 }

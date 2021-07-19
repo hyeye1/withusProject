@@ -22,7 +22,8 @@
 		<!-- 관리자 -->
 		<result column="project_status" property="projectStatus" />
 		<result column="cat_name" property="catName" />
-		
+		<result column="project_cr_dt" property="projectCrDT" />
+		<result column="likeCount" property="likeCount" />
 	</resultMap>
 	
 	<resultMap id="fundingDetail" type="FundingDetail">
@@ -742,6 +743,7 @@
              , to_char(p.project_end_dt,'YYYY-MM-DD') project_end_dt
              , ceil(project_end_dt - sysdate) dday
              , p.project_status
+             , (select count(*) from likey l where l.project_no = p.project_no) as likeCount
           from 
           	   tb_order o
              , project p
@@ -750,7 +752,6 @@
          where p.project_no = o.project_no(+)
            and p.cat_no = c.cat_no 
            and p.member_no = m.member_no 
-           and p.project_status = 3
          group
             by p.project_no
              , p.project_title
@@ -845,8 +846,56 @@
 		 where project_no = #{pno}  
 	</update>
  	
+ 	<!-- 펀딩 검색 페이징 처리 -->
+ 	<select id="countSearchFdMana" resultType="_int" 
+			parameterType="hashmap">
+		select
+			   count(*)
+		from 
+          	   tb_order o
+             , project p
+             , category c
+             , member m
+        	where p.project_title like '%' || #{keyword} || '%' 
+			<if test='condition != null'>
+				<choose>
+					<when test='condition == "ing"'> and ceil(project_end_dt - sysdate) >= 0 </when>
+					<when test='condition == "end"'> and 0 > ceil(project_end_dt - sysdate) </when>
+				</choose>
+            </if>
+            <if test='sort == "deadline"'> 
+            	and ceil(project_end_dt - sysdate) >= 0
+			 </if>
+         
+           and p.project_no = o.project_no(+)
+           and p.cat_no = c.cat_no 
+           and p.member_no = m.member_no 
+         group
+            by p.project_no
+             , p.project_title
+             , c.cat_no
+             , c.cat_name
+             , m.partner_name
+             , p.project_gprice
+             , p.project_end_dt 
+             , p.project_status
+             , p.project_cr_dt
+         order 
+            by 
+            <if test='condition != null'> 
+            	p.project_cr_dt desc
+           	</if>
+			<if test='sort != null'>
+				<choose>
+	 			   	<when test='sort == "best"'>  p.project_cr_dt desc </when>
+	 			   	<when test='sort == "deadline"'>  dday asc</when>
+	 			   	<when test='sort == "newest"'>  likeCount desc </when>
+			   </choose>
+			</if>
+		</select>
+ 	
  	<!-- 펀딩 검색 -->
-<!--  	<select id="searchFundingMana" resultMap="fundingListResultSet"
+  	<select id="searchFundingMana" resultMap="fundingListResultSet"
 			parameterType="hashmap">
 			
 		select
@@ -861,30 +910,28 @@
              , p.project_end_dt
              , ceil(project_end_dt - sysdate) dday
              , p.project_status
+             , (select count(*) from likey l 
+             	where l.project_no = p.project_no
+             	) as likeCount
           from 
           	   tb_order o
              , project p
              , category c
              , member m
         	where p.project_title like '%' || #{keyword} || '%' 
-           
-            <if test='sort != null'>
-   			   <choose>
-	   			   	<when test='sort == "ing"'> and dday >= 0 </when>
-	   			   	<when test='sort == "end"'> and  0 > dday </when>
-   			   </choose>
-		   </if>
-		   <if test='sort != null'>
-   			   <choose>
-	   			   	<when test='sort == "best"'> and member_status = 'Y' </when>
-	   			   	<when test='sort == "deadline"'> and ceil(project_end_dt - sysdate) > 0</when>
-	   			   	<when test='sort == "newest"'> and member_status = 'A' </when>
-   			   </choose>
-		   </if>
+			<if test='condition != null'>
+				<choose>
+					<when test='condition == "ing"'> and ceil(project_end_dt - sysdate) >= 0 </when>
+					<when test='condition == "end"'> and 0 > ceil(project_end_dt - sysdate) </when>
+				</choose>
+            </if>
+            <if test='sort == "deadline"'> 
+            	and ceil(project_end_dt - sysdate) >= 0
+			 </if>
+         
            and p.project_no = o.project_no(+)
            and p.cat_no = c.cat_no 
            and p.member_no = m.member_no 
-           and p.project_status = 3
          group
             by p.project_no
              , p.project_title
@@ -894,9 +941,19 @@
              , p.project_gprice
              , p.project_end_dt 
              , p.project_status
+             , p.project_cr_dt
          order 
-            by p.project_no desc
-			
-	</select> -->
+            by 
+            <if test='condition != null'> 
+            	p.project_cr_dt desc
+           	</if>
+			<if test='sort != null'>
+				<choose>
+	 			   	<when test='sort == "best"'>  p.project_cr_dt desc </when>
+	 			   	<when test='sort == "deadline"'>  dday asc</when>
+	 			   	<when test='sort == "newest"'>  likeCount desc </when>
+			   </choose>
+			</if>
+	</select> 
     
  </mapper>
