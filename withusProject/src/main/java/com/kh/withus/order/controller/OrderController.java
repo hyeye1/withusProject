@@ -152,16 +152,12 @@ public class OrderController {
 			ArrayList<Order> polist = oService.selectPartnerOrderList(pi, mno);
 			//System.out.println(polist);
 			
-			if(polist.size() > 0) { // 프로젝트 o : 발송리스트 조회 
-				model.addAttribute("polist", polist);
-				model.addAttribute("pi",pi);
-				model.addAttribute("sc", sc);
-				
-				return "myPage/partner/pagePartOrderNDeliveryList";
-			}else { // 프로젝트 X : 프로젝트 먼저 등록 
-				session.setAttribute("alertMsg", "프로젝트 등록을 해주세요");
-				return "myPage/partner/pageMyFundingMain";
-			}
+			model.addAttribute("polist", polist);
+			model.addAttribute("pi",pi);
+			model.addAttribute("sc", sc);
+			
+			return "myPage/partner/pagePartOrderNDeliveryList";
+			
 		}else { //  서포터일 경우 --> 알람창 노출
 			session.setAttribute("alertMsg", "파트너만 접근 가능합니다.");
 			return "myPage/partner/pageMyFundingMain";
@@ -191,7 +187,7 @@ public class OrderController {
 		map.put("condition", condition);
 		map.put("keyword", keyword);
 		map.put("mno", loginUser.getMemberNo());
-		System.out.println(map);
+		//System.out.println(map);
 		
 		// statusBox에 출력될 건수
 		Order sc = oService.selectStatusCount(mno);
@@ -202,7 +198,7 @@ public class OrderController {
 		
 		ArrayList<Order> polist = oService.selectSearchPartOrder(map, pi);
 		
-		System.out.println(polist);
+		//System.out.println(polist);
 		
 		mv.addObject("polist", polist)
 		  .addObject("pi", pi)
@@ -225,7 +221,7 @@ public class OrderController {
 		//System.out.println(ono); // 펀딩번호 확인	
 		
 		Order o = oService.selectOrderInfo(ono);
-		System.out.println(o); // 펀딩내역 잘 담겼는지
+		//System.out.println(o); // 펀딩내역 잘 담겼는지
 		
 		return new Gson().toJson(o);
 	}	

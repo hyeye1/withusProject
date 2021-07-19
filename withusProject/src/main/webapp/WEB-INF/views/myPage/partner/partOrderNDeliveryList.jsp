@@ -59,6 +59,7 @@
   #orderList th{font-size: 12px;}
   #orderList td{font-size: 13px;}
   #orderList td, #orderList th{ padding: 0.7rem .20rem; vertical-align: middle;}
+  .rew {text-align:left;}
 
   
   button.btn.btn-sm {font-size: 10px; text-align: justify; padding: 5px; }
@@ -68,18 +69,23 @@
   /* modla css */
   /* 공통 */
   .modal-header.none, .modal-footer.none{border: none;}
+  .modal-body div{float: none;}
 
   /*sendInfoModal*/
-  .partnerOrder, .trackingInfo{ padding:0 20px;}
+  .partnerOrder, .trackingInfo{ padding:0 6px;}
   .partnerOrder table, .trackingInfo *{ font-size: 14px; width: 90%;}
   .partnerOrder table *{padding: 3px 0;}
   .partnerOrder>table>th {color: grey; font-weight: 500;}
   .trackingInfo select{margin-bottom: 15px; height: 30px;} 
   .trackingInfo label{font-size: 15px; font-weight: 550;}
+  .partnerOrder th {width: 95px}
+  .partnerOrder td {width: 235px}
+  
 
   /*refundInfo*/
   .partnerRefund {color: #3b3e41; padding: 10px 10px 30px; border-bottom: 1px solid gainsboro; }
-  .partnerRefund td, .partnerRefundInfo th, .refundTb th {width:140px;}
+  .partnerRefundInfo th, .refundTb th {width:145px; height:31px;}
+  .redetail{width: 235px}
   .partnerRefundInfo {padding: 5px 10px;}
   .refundTb {padding: 5px 10px; border-top: 1px dashed gainsboro; color: black;}
   .detailTb {width:447px; border-radius: 3px;}
@@ -213,16 +219,16 @@
 						<table class="table table-border" id="orderList">
 							<thead>
 								<tr height="50">
-									<th width="60">펀딩번호</th>
-									<th width="75">서포터 정보</th>
-									<th width="60">결제상태</th>
-									<th width="70">결제금액</th>
-									<th width="220">리워드</th>
+									<th width="40">펀딩<br>번호</th>
+									<th width="60">서포터<br>정보</th>
+									<th width="60">결제<br>상태</th>
+									<th width="70">결제<br>금액</th>
+									<th width="220" colspan="2">리워드</th>
 									<th width="85">발송정보</th>
-									<th width="80">발송 예정일</th>
-									<th width="80">발송·배송</th>
-									<th width="80">발송번호</th>
-									<th width="80">펀딩금 반환</th>
+									<th width="80">발송<br>예정일</th>
+									<th width="70">발송·배송</th>
+									<th width="65">발송<br>번호</th>
+									<th width="80">펀딩금<br>반환</th>
 								</tr>
 							</thead>
 							<c:choose>
@@ -245,12 +251,27 @@
 			                        		<c:when test="${ p.orderStatus eq 3 }">
 			                        			<td class="cancle">취소완료</td>
 			                        		</c:when>
+			                        		<c:when test="${ p.orderStatus eq 4 }">
+			                        			<td class="cancle">환불반려</td>
+			                        		</c:when>
 			                        	  </c:choose>
 					                      <td>${ p.totalPrice } 원</td>
-					                      <td><img src="${p.projectThum }" width="60" height="40">&nbsp;&nbsp; ${ p.rewardTitle } 
-					                      		<br>옵션: ${ p.orderOption } / 수량: ${ p.orderCount }개</td>
+					                      <td><img src="${ p.projectThum }" width="50" height="40"></td>
+					                      <td class="rew">
+												<c:choose>
+						                      		<c:when test="${ !empty p.rewardTitle}">
+							                      		${ p.rewardTitle } 
+						                      		</c:when>
+						                      		<c:otherwise>
+						                      			${ p.rewardContent }
+						                      		</c:otherwise>
+												</c:choose>					                      		
+					                      		<br><c:if test="${ !empty p.orderOption }">옵션: ${ p.orderOption } /</c:if> 
+				                      			<!-- 펀딩밀어주기도 수량인 있는거? -->
+					                      		 수량: ${ p.orderCount }개
+			                      		 </td>
 					                      <td><button type="button" class="btn btn-withus btn-sm" data-toggle="modal" data-target="#sendInfoModal" onclick="ajaxSendInfo();">
-					                      		발송정보 입력
+					                      		발송정보입력
 					                      	</button></td>
 					                      <td>${ p.deliveryDate }</td>
 					                      <!-- 운송장 번호가 비어 있을 경우 배송준비 중, 배송완료 조건은 뭘로 해야되나? -->
@@ -277,14 +298,9 @@
 							                        	확인하기
 						                        	</button>
 						                        </c:when>
-					                        	<c:when test="${ p.refundStatus eq 'Y'}">
+					                        	<c:when test="${ p.refundStatus eq 'Y' or p.refundStatus eq 'N'}">
 							                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#refundInfo_done" onclick="ajaxRefundInfo();">
-							                        	승인완료
-						                        	</button>
-					                        	</c:when>
-					                        	<c:when test="${ p.refundStatus eq 'N'}">
-							                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#refundInfo_done" onclick="ajaxRefundInfo();">
-							                        	거절
+							                        	처리완료
 						                        	</button>
 					                        	</c:when>
 					                        </c:choose>
@@ -310,31 +326,65 @@
 	              			
 	            			url:"send.info",
 	            			data:{ono:$orderNo},
+	            			dataType: "json",
 	              		   success:function(oi){
 	              			   //console.log(oi);
+	              			   
+	              			   /*처리할 조건 
+	              			   1. rewardTitle == null -> rewardContent 반환 / rewardTitle
+	              			   2. orderOption == null -> "펀딩밀어주기" 반환  / orderOption 반환
+	              			   */
+	              		
+	              				 var resultSend = "<table>"
+           			   				+ "<tr>" 
+           			   				+ "<th>펀딩번호</th>"
+           			   				+ "<td>" + oi.orderNo + "</td>" 
+           			   				+ "</tr>"
+	              			   			+ "<tr>" 
+           			   				+ "<th>서포터명</th>"
+           			   				+ "<td>" + oi.supporterName + "</td>" 
+           			   				+ "</tr>"
+	              			   		+ "<tr>" 
+           			   				+ "<th>펀딩내역</th>"
+           			 		
+           			   			if(oi.rewardTitle == null) {
+           			   		   		resultSend += "<td>" + oi.rewardContent +"</td>"
+	           			   						+ "</tr>"
+	        	              			   		+ "<tr>" 
+	                   			   				+ "<th>옵션</th>"
+                   			   				
+                   			   		if(oi.orderOption == null){
+                   			   			resultSend +=  "<td>"  + oi.orderCount + " 개</td>" 
+               			   							
+                   			   		}else{
+	                   			   		resultSend +=  "<td>" + oi.orderOption + " / " + oi.orderCount + " 개</td>" 
+				   							
+                   			   			
+                   			   		}		
+                   			   				
+           			   			}else{
+         			   				resultSend += "<td>" + oi.rewardTitle +"</td>"
+			   			   						+ "</tr>"
+				              			   		+ "<tr>" 
+			           			   				+ "<th>옵션</th>"
+		           			   				
+	           			   			if(oi.orderOption == null){
+	               			   			resultSend +=  "<td>"  + oi.orderCount + " 개</td>" 
+	           			   							
+	               			   		}else{
+	                   			   		resultSend +=  "<td>" + oi.orderOption + " / " + oi.orderCount + " 개</td>" 
+				   						
+	           			   			}
+           			   			}	
+           			   			+ "</tr>"	
+			   						+ "<th>총 결제 금액</th>"
+       			   				+ "<td>" + oi.totalPrice + " 원</td>" 
+       			   				+ "</tr>"
+       			   				+ "</table>"
+			                    	
+			             
  	              			   
-	              			   var resultSend = "<table>"
-		              			   				+ "<tr>" 
-		              			   				+ "<th>펀딩번호</th>"
-		              			   				+ "<td>" + oi.orderNo + "</td>" 
-		              			   				+ "</tr>"
-			              			   			+ "<tr>" 
-		              			   				+ "<th>서포터명</th>"
-		              			   				+ "<td>" + oi.supporterName + "</td>" 
-		              			   				+ "</tr>"
-			              			   			+ "<tr>" 
-		              			   				+ "<th>펀딩내역</th>"
-		              			   				+ "<td>" + oi.rewardTitle + "</td>" 
-		              			   				+ "</tr>"
-			              			   			+ "<tr>" 
-		              			   				+ "<th>옵션</th>"
-		              			   				+ "<td>" + oi.orderOption / oi.orderCount + " 개</td>" 
-		              			   				+ "</tr>"	
-			              			   			+ "<th>총 결제 금액</th>"
-		              			   				+ "<td>" + oi.totalPrice + " 원</td>" 
-		              			   				+ "</tr>"
-		              			   				+ "</table>"
-	              			   				
+	              			  
            			   			$(".partnerOrder").html(resultSend);		
    	              			
 		   				
@@ -373,7 +423,7 @@
 	              				
 	              				var resultOrder = "<table>"
 				          			   				+ "<tr>" 
-				          			   				+ "<td>펀딩번호</td>"
+				          			   				+ "<td width='140'>펀딩번호</td>"
 				          			   				+ "<td>" + ri.orderNo + "</td>" 
 				          			   				+ "</tr>"
 				              			   			+ "<tr>" 
@@ -382,11 +432,37 @@
 				          			   				+ "</tr>"
 				              			   			+ "<tr>" 
 				          			   				+ "<td>펀딩내역</td>"
-				          			   				+ "<td>" + ri.rewardTitle + "</td>" 
-				          			   				+ "</tr>"
-				              			   			+ "<tr>" 
-				          			   				+ "<td>옵션</td>"
-				          			   				+ "<td>" + ri.orderOption / ri.orderCount + "</td>" 
+				          			   				
+					          			   			if(ri.rewardTitle != null) {
+					          			   				resultOrder += "<td width='300'>" + ri.rewardTitle + "</td>" 
+								          			   				+ "</tr>"
+								          			   				+ "<tr>" 
+								          			   				+ "<td>옵션</td>"
+						           			   						
+					                   			   		if(ri.orderOption != null){
+					                   			   			resultOrder += "<td>" + ri.orderOption + " / " + ri.orderCount + " 개</td>" 
+					               			   							
+					                   			   		}else{
+					                   			   			resultOrder += "<td>" + ri.orderCount + " 개</td>" 
+					                   			   			
+					                   			   		}		
+					                   			   				
+					           			   			}else{
+					           			   				resultOrder += "<td>" + ri.rewardContent +"</td>"
+								   			   						+ "</tr>"
+									              			   		+ "<tr>" 
+								           			   				+ "<td>옵션</td>"
+								           			   				
+						           			   			if(ri.orderOption != null){
+					                   			   			resultOrder += "<td>" + ri.orderOption + " / " + ri.orderCount + " 개</td>" 
+					               			   							
+					                   			   		}else{
+					                   			   			resultOrder += "<td>" + ri.orderCount + " 개</td>" 
+					                   			   			
+					                   			   		}		
+						           			   				
+					           			   			}
+					          			   			
 				          			   				+ "</tr>"	
 				              			   			+ "<td>총 결제 금액</td>"
 				          			   				+ "<td>" + ri.totalPrice + " 원</td>" 
@@ -405,18 +481,19 @@
 				          			   				+ "</tr>"
 				              			   			+ "<tr>" 
 				          			   				+ "<th>증빙자료</th>"
-				          			   				//+ "<td>" +"<a href="+"${ ri.reChangeName }" +"download=" + "${ ri.reChangeName }" + ">"
-				          			   				//<img class="wh" src="${ ri.reChangeName }" >
-				          			   				if(ri.reChangeName == null){
-				          			   					+ "<td>자료없음</td>"
+				          			   				+ "<td>"
+				          			   				if(ri.reChangeName != null){
+				          			   					resultRefund += "<image class='wh'" + "src="+ "'${"+ ri.reChangeName + "}'" + ">"
 				          			   				}else{
-				          			   				+ "<td>"+ "<image class=" + "'wh'" + "src="+ "'${"+ ri.reChangeName + "}'" + "></td>"
+				          			   					resultRefund += "자료없음"
 				          			   				}
+				          			   				
+				          			   				+"</td>"
 				          			   				+ "</tr>"
 				          			   				+ "</table>"
 				          			   				
           			   			var resultTable = "<tr>"
-					            					+ "<th class=" + "st1" + ">반환 금액</th>"
+					            					+ "<th class=" + "'st1'" + ">반환 금액</th>"
 											        + "</tr>"
 											        + "<tr>"
 											        + "<th>반환 신청 금액</th>"
@@ -554,32 +631,32 @@
 		                                   </table>
 		                                   </td>
 		                               </tr>
-		                           </table>
-		                       </div>
+		                           	</table>
+		                       	</div>
 		
-							<c:if test="${ refundStatus eq 'S' }">
-							</c:if>		
+								<c:if test="${ refundStatus eq 'S' }">
+								</c:if>		
 		
-							<!-- Modal footer -->
-							<div class="modal-footer none">
-								<button type="button" name="rstatus" value="Y"
-										class="btn btn-withus approvalBtn" data-dismiss="modal">승인</button>
-								<button type="button" name="rstatus" value="N"
-										class="btn btn-danger oppositionBtn" data-dismiss="modal">거절</button>
-							</div>
-							<script>
-								$(function() {
-								    $("button[name=rstatus]").on('click', function() {
-								        var rstatus = $(event.target).val();    
-								        console.log(rstatus);
-								        $("form[name=refundResult]")
-						                .attr({ action:"refundable.part?rstatus="+rstatus, method:"post" })
-						                .submit();
-								    });
-								});
-							</script>
+								<!-- Modal footer -->
+								<div class="modal-footer none">
+									<button type="button" name="rstatus" value="Y"
+											class="btn btn-withus approvalBtn" data-dismiss="modal">승인</button>
+									<button type="button" name="rstatus" value="N"
+											class="btn btn-danger oppositionBtn" data-dismiss="modal">거절</button>
+								</div>
+								<script>
+									$(function() {
+									    $("button[name=rstatus]").on('click', function() {
+									        var rstatus = $(event.target).val();    
+									        console.log(rstatus);
+									        $("form[name=refundResult]")
+							                .attr({ action:"refundable.part?rstatus="+rstatus, method:"post" })
+							                .submit();
+									    });
+									});
+								</script>
+	                          	</form>
 							
-							</form>
 		
 							</div>
 						</div>

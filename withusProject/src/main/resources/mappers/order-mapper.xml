@@ -379,6 +379,7 @@
 		      , o.order_count
 		      , to_char(o.total_price,'999,999,999,999,999') total_price
 		      , r.reward_title
+		      , r.reward_content
 		      , to_char(r.reward_price,'999,999,999,999,999') reward_price
 		      , o.shipping_com
      		  , o.shipping_no
@@ -406,6 +407,7 @@
 			    o.order_no
 			  , m.member_name supporter_name
 			  , r.reward_title
+			  , r.reward_content
 			  , o.order_option
 			  , o.order_count
 			  , to_char(o.total_price,'999,999,999,999,999') total_price
