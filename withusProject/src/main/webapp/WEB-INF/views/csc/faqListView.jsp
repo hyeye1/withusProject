@@ -22,38 +22,37 @@
         height:50px;
         text-align:center;
         line-height:30px;
-        border:1px solid lightgray;
+        border:1px solid rgb(178, 185, 223);
+        background: rgb(178, 185, 223);
         border-radius:5px;
         cursor:pointer;
         font-weight:150%;
     }
     
-    .content{
+    .hide{
     	width:600px;
     	height:150px;
-    	border:1px solid rgb(178, 185, 223);
-    	background: rgb(178, 185, 223);
+    	border:1px solid lightgray;
     	border-radius:5px;
+    	display:none;
     }
     
-    .btn{
-    	height
-    }
     
 </style>
 </head>
 <body>
 	
-	<!-- 6/12 윤경 생성-->
     <!-- 해더바 포함 -->
     <jsp:include page="../common/header.jsp"/>
 
-    <h3><b>FAQ</b></h3>
-    <hr><br>
+    
 
-	<div class="container" align="center">
-        <div class="btn" align="center">
-            <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;">전체보기</a> &nbsp;&nbsp;
+	<div class="container">
+		<br>
+		<h3><b>FAQ</b></h3>
+    	<hr><br>
+        <div class="selectbtn" align="center">
+            <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;" href="list.faq">전체보기</a> &nbsp;&nbsp;
             <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;" href="funding.faq">펀딩상품관련</a> &nbsp;&nbsp;
             <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;" href="delivery.faq">배송관련</a> &nbsp;&nbsp;
             <a class="btn btn-outline-secondary" style="height: 50px; width: 150px;" href="exchange.faq">교환/반품관련</a> &nbsp;&nbsp;
@@ -79,26 +78,26 @@
 			    <div class="faqY" align="center">
 			        <c:forEach var="f" items="${ list }">
 			            <div class="faqCon">
-			                <ul class="accodrding_list">
-			                    <li>
-			                        <div class="title">
-			                        	<input type="hidden" value="${ f.faqCat }">
-			                            <span id="faqTitle" name="faqTitle">${ f.faqTitle } </span>
-			                        </div>
-			                        <div class="content">
-			                            <p id="faqContent" name="faqContent" align="left" style="padding-left: 5%;">
-			                                <br>${ f.faqContent }<br>
-			                                
-			                                <c:if test="${ loginUser.memberStatus eq 'A' }">
-				                                <div align="right" style="padding-right: 30px;">
-													<a href="update.faq?faqNo=${ f.faqNo }" class="btn btn-warning btn-sm">수정</a>
-													<a href="delete.faq?fno=${ f.faqNo }" class="btn btn-danger btn-sm" style="color:white;">삭제</a>
-												</div>
-											</c:if>
-			                            </p>
-			                        </div>
-			                    </li>
-			                </ul>
+			            	<table class="table table-bordered">
+			            		<tr class="title">
+			            			<th width="5%">Q</th>
+			            			<th width="15%">${ f.faqCat }</th>
+			            			<th>${ f.faqTitle }</th>
+			            		</tr>
+			            		<tr class="hide">
+			            			<td colspan="3">
+			            				<br>
+			            				${ f.faqContent }
+			            				<br>
+			            				<c:if test="${ loginUser.memberStatus eq 'A' }">
+				                            <div align="right" style="padding-right: 30px;">
+												<a href="update.faq?faqNo=${ f.faqNo }" class="btn btn-warning btn-sm">수정</a>
+												<a href="delete.faq?fno=${ f.faqNo }" class="btn btn-danger btn-sm" style="color:white;">삭제</a>
+											</div>
+										</c:if>
+			            			</td>
+			            		</tr>
+			            	</table>
 			            </div>
 		            </c:forEach>
 		        </div>
@@ -110,13 +109,12 @@
 		$(function(){
 			$(".title").click(function(){
 				// slideDown or slideUp
-				var $box = $(this).next();
+				var table = $(this).next("tr");
 				
-				if($box.css("display") == "none"){
-					$(this).siblings("box").slideUp();
-					$box.slideDown();
+				if(table.is(":visible")){
+					table.slideUp();
 				} else{
-					$box.slideUp();
+					table.slideDown();
 				}
 			})
 		})

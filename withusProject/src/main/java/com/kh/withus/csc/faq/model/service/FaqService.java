@@ -12,7 +12,7 @@ public interface FaqService {
 	ArrayList<Faq> selectList();
 	
 	// faq 한 행 조회
-	Faq selectFaq(int fno);
+	Faq selectFaq(int fatNo);
 	
 	// faq 작성
 	int insertFaq(Faq f);

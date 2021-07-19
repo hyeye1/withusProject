@@ -39,8 +39,8 @@ public class FaqServiceImpl implements FaqService {
 	}
 
 	@Override
-	public Faq selectFaq(int fno) {
-		return fDao.selectFaq(sqlSession, fno);
+	public Faq selectFaq(int faqNo) {
+		return fDao.selectFaq(sqlSession, faqNo);
 	}
 
 	

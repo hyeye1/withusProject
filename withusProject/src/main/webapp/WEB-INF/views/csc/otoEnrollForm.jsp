@@ -69,9 +69,6 @@
     </div>
     <br><br>
     
-    <!-- Modal -->
-    
-    
 
     <!-- 푸터바 포함 -->
     <jsp:include page="../common/footer.jsp"/>

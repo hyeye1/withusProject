@@ -16,7 +16,6 @@ import com.kh.withus.csc.faq.model.vo.Faq;
 @Controller
 public class FaqController {
 	
-	// 6/27 윤경생성
 	@Autowired
 	private FaqService fService;
 	
@@ -38,7 +37,7 @@ public class FaqController {
 	
 	@RequestMapping("insert.faq")
 	public String insertFaq(Faq f, HttpSession session, Model model) {
-		
+		System.out.println(f);
 		int result = fService.insertFaq(f);
 		if(result > 0) {
 			session.setAttribute("alertMsg", "faq가 등록되었습니다.");
@@ -63,7 +62,7 @@ public class FaqController {
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "faq가 수정되었습니다.");
-			return "redirect:list.faq";
+			return "redirect:list.faq?fno=" + f.getFaqNo();
 		}else {
 			model.addAttribute("errorMsg", "faq가 수정되지않았습니다.");
 			return "common/errorPage";

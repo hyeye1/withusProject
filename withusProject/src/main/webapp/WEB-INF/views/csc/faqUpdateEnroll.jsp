@@ -20,31 +20,36 @@
     <div class="container">
     
     	<br>
-	    <h3><b>FAQ 등록</b></h3>
+	    <h3><b>FAQ 수정</b></h3>
 		<hr><br>
 
-        <form id="faqEnrollForm" action="insert.faq" method="get" enctype="multipart/form-data">
+        <form id="faqUpdateEnroll" action="update.faq" method="get" enctype="multipart/form-data">
 	        <table class="table table-bordered">
+	         
+	        <input type="hidden" class="form-control" name="faqNo" id="faqNo" value="${ f.faqNo }">
+	        <input type="hidden" class="form-control" name="faqCat" id="faqCat" value="${ f.faqCat }">
 	        
 	        	<tr>
 	            	<th style="width:200px;">카테고리 선택</th>
 	                <td>
-	                    <select class="form-control" id="faqCat" name="faqCat">
+	                    <select class="form-control" id="faqCat" name="faqCat" readonly>
+	                       
 	                        <option value="펀딩상품 관련">펀딩상품 관련</option>
 	                        <option value="배송 관련">배송 관련</option>
 	                        <option value="교환/반품 관련">교환/반품 관련</option>
 	                        <option value="기타 관련">기타 관련</option>
+	                        
 	                    </select>
 	                </td>
 	            </tr>
 	            <tr>
 	                <th><label for="title">제목</label></th>
-	                <td><input type="text" class="form-control" id="faqTitle" name="faqTitle" required></td>
+	                <td><input type="text" class="form-control" id="faqTitle" name="faqTitle" value="${ f.faqTitle }"></td>
 	            </tr>
 	            <tr>
 	                <th><label for="content">내용</label></th>
 	                <td>
-	                	<input type="text" class="form-control" id="faqContent" name="faqContent" style="height:300px" required>
+	                	<input type="text" class="form-control" id="faqContent" name="faqContent" style="height:300px" value="${ f.faqContent }">
 	                </td>
 	            </tr>
 	         </table>
