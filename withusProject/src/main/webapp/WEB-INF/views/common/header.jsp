@@ -180,6 +180,7 @@
 				.modal-body div {float:left;}
 				.btn-primary{background-color: rgb(52, 152, 219); border-color:rgb(52, 152, 219);}
 				.fa-search {color:white;}
+				.lfSkuP{background:linear-gradient(rgb(91 172 255 / 62%) 0%, rgb(79 133 255 / 62%) 50%, rgb(90 79 255 / 50%) 100%) !important}
 			</style>
 		</head>
 
