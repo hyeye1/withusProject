@@ -26,17 +26,16 @@
 		 where oto_status = 'Y'
 	</select>
 	
-	<!-- 로그인 유저글만 보이도록 -->
 	<select id="selectList" resultMap="oto">
 		select
 		       oto_no
+		     , oto_cat
 		     , oto_title
 		     , to_char(oto_date, 'YYYY-MM-DD') oto_date
+		     , oto_status
 		 from oto
-		where oto_status = 'Y'
-		  and member_no = #{memberNo}
 		order
-		   by oto_date desc
+		   by oto_no desc
 	</select>
 	 
 	<insert id="insertOto" parameterType="Oto">
@@ -45,6 +44,7 @@
 		  (
 		    oto_no
 		  , member_no
+		  , oto_cat
 		  , oto_title
 		  , oto_content
 		  , oto_originname
@@ -54,6 +54,7 @@
 		  (
 		    seq_otono.nextval
 		  , #{memberNo}
+		  , #{otoCat}
 		  , #{otoTitle}
 		  , #{otoContent}
 		  , #{otoOriginname}
@@ -61,6 +62,7 @@
 		  )
 	</insert>
 	
+	<!-- 불필요 
 	<insert id="increaseCount" parameterType="_int">
 		update
 		       oto
@@ -68,16 +70,19 @@
 		 where oto_no = #{otoNo}
 		   and oto_status = 'Y'
 	</insert>
+	 -->
+	
 	
 	<select id="selectOto" resultMap="oto" parameterType="_int">
 		select
 		       oto_no
 		     , member_no
+		     , oto_cat
 		     , oto_title
 		     , oto_content
 		     , oto_originname
 		     , oto_changename
-		     , to_char(create_date, 'YYYY-MM-DD') oto_date
+		     , to_char(oto_date, 'YYYY-MM-DD') oto_date
 		  from oto
 		 where oto_no = #{otoNo}
 	

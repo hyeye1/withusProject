@@ -28,8 +28,8 @@ public class FaqDao {
 		return sqlSession.update("faqMapper.deleteFaq", fno);
 	}
 
-	public Faq selectFaq(SqlSessionTemplate sqlSession, int fno) {
-		return sqlSession.selectOne("faqMapper.selectFaq", fno);
+	public Faq selectFaq(SqlSessionTemplate sqlSession, int faqNo) {
+		return sqlSession.selectOne("faqMapper.selectFaq", faqNo);
 	}
 
 	

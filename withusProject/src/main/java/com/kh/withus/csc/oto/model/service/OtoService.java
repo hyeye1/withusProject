@@ -17,7 +17,6 @@ public interface OtoService {
 	int insertOto(Oto o);
 	
 	// oto 상세조회
-	int increaseCount(int otoNo);
 	Oto selectOto(int otoNo);
 	
 	// oto 수정

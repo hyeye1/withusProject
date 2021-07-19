@@ -200,7 +200,7 @@ public class NoticeController {
 			return "redirect:noticeList.mana";
 		}else {
 			modelM.addAttribute("errorMsg", "공지사항이 등록되지않았습니다.");
-			return "common/errorPage";
+			return "common/manaErrorPage";
 		}
 	
 	}
@@ -211,13 +211,15 @@ public class NoticeController {
 	public String selectManaNotice(int nnoM, Model modelM) {
 		int result = nService.increaseCount(nnoM);
 		
+		System.out.println(nnoM);
+		
 		if(result > 0) {
 			Notice nM = nService.selectNotice(nnoM);
 			modelM.addAttribute("nM", nM);
 			return "admin/csc/notice/noticeManaDetailView";
 		}else {
 			modelM.addAttribute("errorMsg", "공지사항 상세조회를 실패했습니다.");
-			return "common/errorPage";
+			return "common/manaErrorPage";
 		}
 	}
 	
@@ -225,7 +227,7 @@ public class NoticeController {
 	// 공지사항 등록
 	@RequestMapping("manaUpdateForm.no")
 	public String updateManaForm(int nnoM, Model modelM) {
-		modelM.addAttribute("n", nService.selectNotice(nnoM));
+		modelM.addAttribute("nM", nService.selectNotice(nnoM));
 		return "admin/csc/notice/noticeManaUpdateEnroll";
 	}
 	
@@ -241,30 +243,30 @@ public class NoticeController {
 		
 		if(result > 0) {
 			sessionM.setAttribute("alertMsg", "공지사항이 수정되었습니다.");
-			return "redirect:detail.no?nno=" + nM.getNoticeNo();
+			return "redirect:detail.no?nnoM=" + nM.getNoticeNo();
 		}else {
 			modelM.addAttribute("errorMsg", "공지사항이 수정되지않았습니다.");
-			return "common/errorPage";
+			return "common/manaErrorPage";
 		}
 		
 	}
 	
 	@RequestMapping("manaDelete.no")
-	public String deleteManaNotice(int nnoM, String filePathM, HttpSession sessionM, Model modelM) {
+	public String deleteManaNotice(int nnoM, String filePath, HttpSession sessionM, Model modelM) {
 		
 		int result = nService.deleteNotice(nnoM);
 		
 		if(result > 0) {
-			if(!filePathM.equals("")) {
-				new File(sessionM.getServletContext().getRealPath(filePathM)).delete();
+			if(!filePath.equals("")) {
+				new File(sessionM.getServletContext().getRealPath(filePath)).delete();
 			}
 			
 			sessionM.setAttribute("alertMsg", "공지사항이 성공적으로 삭제되었습니다.");
-			return "redirect:list.no";
+			return "redirect:noticeList.mana";
 			
 		} else {
 			modelM.addAttribute("errorMsg", "공지사항 삭제를 실패했습니다.");
-			return "common/errorPage";
+			return "common/manaErrorPage";
 		}
 	}
 	

@@ -34,44 +34,26 @@
 	            <th width="400px">공지사항 제목</th>
 	            <th width="150px">날짜</th>
 	            <th width="50px">글상태<br>(Y/N)</th>
-	            <th width="150px">수정/삭제</th>
 			  </tr>
 			</thead>
 			<tbody>
 				<c:forEach var="nM" items="${ mlist }">
 					<tr align="center">
 						<td>${ nM.noticeNo }</td>
-						<td><a href="manaDetail.no">${ nM.noticeTitle }</a></td>
+						<td><a href="manaDetail.no?nnoM=${ nM.noticeNo }">${ nM.noticeTitle }</a></td>
 						<td>${ nM.createDate }</td>
 						<td>${ nM.noticeStatus }</td>
-						<td>
-							<a class="btn btn-success" onclick="postFormSubmit(1)">수정</a> &nbsp;
-							<a class="btn btn-warning" onclick="postFormSubmit(2)">삭제</a>
-						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
-		</table>
-		
-		<form id="postForm" action="" method="post">
-			<input type="hidden" name="nnoM" value="nM.noticeNo">
-		</form>
-		
+		</table>		
 		
 		<script>
             $(function(){
-            	$("#noticeMList tbody tr").click(function(){
+            	$("#noticeManaList tbody tr").click(function(){
             		location.href="manaDetail.no?nnoM=" + $(this).children(".nnoM").text()
             	})
             })
-            
-            function postFormSubmit(num){
-				if(num == 1){// 수정 클릭
-					$("#postForm").attr("action", "manaUpdateForm.no").submit();
-				} else { // 삭제 클릭
-					$("#postForm").attr("action", "manaDelete.no").submit();
-				}
-			}
         </script>
 		
 		

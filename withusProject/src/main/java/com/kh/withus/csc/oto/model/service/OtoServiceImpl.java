@@ -35,10 +35,12 @@ public class OtoServiceImpl implements OtoService {
 		return oDao.insertOto(sqlSession, o);
 	}
 
+	/*
 	@Override
 	public int increaseCount(int otoNo) {
 		return oDao.increaseCount(sqlSession, otoNo);
 	}
+	*/
 
 	@Override
 	public Oto selectOto(int otoNo) {

@@ -104,18 +104,25 @@
         <div id="mypage">
             <div id="content">
                 
-               <!--좋아요-->
+               <!--내프로젝트-->
                 <div id="main_1">
                   <p><a href="partnerFunding.me">오픈프로젝트<img src="resources/images/myPage/right_arrow.png" id="rightIcon"></a></p>
                   <div id="underLine"></div>
-
-                  <div style="margin-top: 10px; font-size: 20px; font-weight: bold;">나의펀딩 ${ fundingCount }</div>
+                  
+                  <c:choose>
+                  	<c:when test="${ loginUser.partnerJoin eq 'N' }">
+                  		<div style="margin-top: 10px; font-size: 20px; font-weight: bold;">나의펀딩 0</div>
+                  	</c:when>
+                  	<c:otherwise>
+                  		<div style="margin-top: 10px; font-size: 20px; font-weight: bold;">나의펀딩 ${ fundingCount }</div>
+                  	</c:otherwise>
+                  
+                  </c:choose>
                   
 
-
                   <c:choose>
-                  		<c:when test="${ empty fundingList && loginUser.partnerJoin eq 'N' }"> 
-                    		<div class="empty">
+                  		<c:when test="${ loginUser.partnerJoin eq 'N' }"> 
+                  			<div class="empty">
                     			<img src="resources/images/myPage/closed.png" id="empty">
 			                    <div id="joinus">가치가자의 파트너가 되어 펀딩 프로젝트를 오픈해보세요! </div>
 							</div>
@@ -193,7 +200,7 @@
                 			<button id="openBtn" class="btn btn-sm"><a href="partnerJoinForm.me">펀딩오픈하기</a></button>
                 		</c:when>
                 		<c:otherwise>
-                			<button id="openBtn" class="btn btn-sm"><a href="">펀딩오픈하기</a></button>
+                			<button id="openBtn" class="btn btn-sm"><a href="register.fd">펀딩오픈하기</a></button>
                 		</c:otherwise>
                 	
                 	</c:choose>

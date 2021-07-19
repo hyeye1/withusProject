@@ -13,12 +13,6 @@
 </head>
 <body>
 	
-	<!-- 6/9 윤경 생성, 수정 예정 (틀만 잡아놈) -->
-	<!-- 6/10 윤경 라디오버튼 수정 -->
-	<!-- 6/22 윤경 전체적 div 수정-->
-	<!-- 6/28 윤경 전체적 ui 변경 -->
-	<!-- 7/6 윤경 ui 변경 -->
-
 	<!-- 메뉴바 포함 -->
     <jsp:include page="../common/manaHeader.jsp"/>
 
@@ -31,50 +25,6 @@
 			</h2>
 	        <hr>
 	
-			<!-- 테이블로 묶어서 섹션 만든 후 라디오 그룹 만들기 -->
-			<div class="cateList" style="display:inline-flex">
-				<table cellspacing="0" class="table1">
-					<colgroup>
-					<col class="coll">
-					<col>
-					</colgroup>
-					<tbody>
-						<tr>
-							<th scope="row">카테고리 정렬</th>
-							<td>
-								<input type="radio" name="cateRadio" class="inputRadioCate3" onclick="$('frmPageSize').value=this.value;" value="3"> <label for="cate_01" class="mgr2">3개</label>
-								<input type="radio" name="cateRadio" class="inputRadioCate5" onclick="$('frmPageSize').value=this.value;" checked="checked" value="5"> <label for="cate_02" class="mgr2">5개</label>
-								<input type="radio" name="cateRadio" class="inputRadioCate7" onclick="$('frmPageSize').value=this.value;" value="7"> <label for="cate_03" class="mgr2">7개</label>
-								<input type="radio" name="cateRadio" class="inputRadioCate10" onclick="$('frmPageSize').value=this.value;" value="10"> <label for="cate_04" class="mgr2">10개</label>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				<br>				
-			</div>
-			<br><br>
-			<div class="tagList" style="display: inline-flex;">
-				<table cellspacing="0" class="table2">
-					<colgroup>
-					<col class="coll">
-					<col>
-					</colgroup>
-					<tbody>
-						<tr>
-							<th scope="row">태그 정렬</th>
-							<td>
-								<input type="radio" name="tagRadio" class="inputRadioTag1" onclick="$('frmPageSize').value=this.value;" value="1"> <label for="tag_01" class="mgr3">3개</label>
-								<input type="radio" name="tagRadio" class="inputRadioTag3" onclick="$('frmPageSize').value=this.value;" checked="checked" value="3"> <label for="tag_02" class="mgr3">5개</label>
-								<input type="radio" name="tagRadio" class="inputRadioTag5" onclick="$('frmPageSize').value=this.value;" value="5"> <label for="tag_03" class="mgr3">7개</label>
-								<input type="radio" name="tagRadio" class="inputRadioTag10" onclick="$('frmPageSize').value=this.value;" value="10"> <label for="tag_04" class="mgr3">10개</label>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				<br>
-			</div>
-
-			<hr>
 			<br>
 			<div class="btn" align="right">
 				<a class="btn btn-primary" href="enrollForm.cate">추가</a>

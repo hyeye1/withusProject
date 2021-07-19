@@ -38,6 +38,7 @@
 	<select id="selectFunding" resultMap="faq" parameterType="_int">
 		select
 		       faq_no
+		     , faq_cat  
 		     , faq_title
 		     , faq_content
 		  from faq
@@ -48,6 +49,7 @@
 	<select id="selectDelivery" resultMap="faq" parameterType="_int">
 		select
 		       faq_no
+		     , faq_cat
 		     , faq_title
 		     , faq_content
 		  from faq
@@ -58,6 +60,7 @@
 	<select id="selectExchange" resultMap="faq" parameterType="_int">
 		select
 		       faq_no
+		     , faq_cat
 		     , faq_title
 		     , faq_content
 		  from faq
@@ -68,6 +71,7 @@
 	<select id="selectEtc" resultMap="faq" parameterType="_int">
 		select
 		       faq_no
+		     , faq_cat
 		     , faq_title
 		     , faq_content
 		  from faq
@@ -76,7 +80,7 @@
 	</select>
 	 
 	 
-	<insert id="insertFaq" parameterType="_int">
+	<insert id="insertFaq" parameterType="Faq">
 		insert
 		  into faq
 		  (

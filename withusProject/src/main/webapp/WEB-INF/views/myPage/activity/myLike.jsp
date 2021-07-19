@@ -88,14 +88,7 @@
 			                        <table>
 			                            <tr>
 			                                <td colspan="3">
-			                                	<c:choose>
-			                                		<c:when test="${ empty list.projectThum }">
-			                                			<img src="resources/project_thumbnail/no_image.jpg"  width="250" height="200">
-			                                		</c:when>
-			                                		<c:otherwise>
-			                                			<img src="${ list.projectThum }"  width="250" height="200">
-			                                		</c:otherwise>
-			                                	</c:choose>
+			                                	<img src="${ list.projectThum }"  width="250" height="200">
 			                                </td>
 			                            </tr>
 			                            <tr>
@@ -127,7 +120,7 @@
                 
                 <script>
                 $(function(){
-            		$("#content_1 #fundingList").click(function(){
+            		$("#content_1 #likeList").click(function(){
             			location.href="detail.fd?pno=" + $(this).children(".pno").val();
             		})
             	})
