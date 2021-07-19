@@ -25,6 +25,19 @@
 		    by faq_no desc
 	</select>
 	
+	<select id="selectManaList" resultMap="faq" parameterType="_int">
+		select
+		       faq_no
+		     , faq_cat
+		     , faq_title
+		     , faq_content
+		     , faq_status
+		  from faq
+		 order
+		    by faq_no desc
+	</select>
+	
+	
 	<select id="selectFaq" resultMap="faq" parameterType="_int">
 		select
 		        faq_no

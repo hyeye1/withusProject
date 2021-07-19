@@ -58,7 +58,7 @@ public class FaqController {
 	
 	@RequestMapping("update.faq")
 	public String updateFaq(Faq f, HttpSession session, Model model) {
-		System.out.println(f);
+		//System.out.println(f);
 		
 		int result = fService.updateFaq(f);
 		
@@ -121,7 +121,7 @@ public class FaqController {
 	// ------------------------------------------------------------
 	
 	
-	/* 관리자페이지 
+	/* 관리자페이지 */
 		// faq 조회
 		@RequestMapping("faqList.mana")
 		public String selectManaList(Model modelM) {
@@ -150,17 +150,17 @@ public class FaqController {
 			}
 		}
 		
-		
+		/*
 		// faq 수정
 		@RequestMapping("manaUpdateForm.faq")
-		public String updateManaForm(int fnoM, Model modelM) {
-			modelM.addAttribute("fM", fService.selectManaFaq(fnoM));
+		public String updateManaForm(int faqNoM, Model modelM) {
+			modelM.addAttribute("fM", fService.selectManaFaq(faqNoM));
 			return "csc/faqUpdateEnroll";
 		}
 		
 		@RequestMapping("manaUpdate.faq")
 		public String updateManaFaq(Faq fM, HttpSession sessionM, Model modelM) {
-			int result = fService.updateFaq(fM);
+			int result = fService.updateManaFaq(fM);
 			
 			if(result > 0) {
 				sessionM.setAttribute("alertMsg", "faq가 수정되었습니다.");
@@ -173,10 +173,10 @@ public class FaqController {
 		
 		
 		// faq 삭제
-		@RequestMapping("delete.faq")
+		@RequestMapping("manaDelete.faq")
 		public String deleteManaFaq(int fnoM, HttpSession sessionM, Model modelM) {
 			
-			int resultM = fService.deleteFaq(fnoM);
+			int resultM = fService.deleteManaFaq(fnoM);
 			
 			if(resultM > 0) {
 				sessionM.setAttribute("alertMsg", "성공적으로 삭제되었습니다.");
@@ -186,6 +186,7 @@ public class FaqController {
 				return "common/manaErrorPage";
 			}
 		}
+		*/
 		
 		
 		// faq 카테고리별 버튼
@@ -217,7 +218,7 @@ public class FaqController {
 			return "admin/csc/faq/faqManaListView";
 		}
 		
-		*/
+		
 	
 	
 }

@@ -17,6 +17,7 @@ public class FaqServiceImpl implements FaqService {
 	@Autowired
 	private FaqDao fDao;
 	
+	// ------------------ 사용자 --------------------
 	
 	@Override
 	public ArrayList<Faq> selectList() {
@@ -65,5 +66,57 @@ public class FaqServiceImpl implements FaqService {
 		return fDao.selectEtc(sqlSession);
 	}
 
+	
+	// ------------------ 관리자 --------------------
+	
+	
+	@Override
+	public ArrayList<Faq> selectManaList() {
+		return fDao.selectManaList(sqlSession);
+	}
+
+	@Override
+	public int insertManaFaq(Faq fM) {
+		return fDao.insertManaFaq(sqlSession, fM);
+	}
+
+	@Override
+	public Faq selectManaFaq(int fnoM) {
+		return fDao.selectManaFaq(sqlSession, fnoM);
+	}
+	
+	@Override
+	public int updateManaFaq(Faq fM) {
+		return fDao.updateManaFaq(sqlSession, fM);
+	}
+
+	@Override
+	public int deleteManaFaq(int fnoM) {
+		return fDao.deleteManaFaq(sqlSession, fnoM);
+	}
+
+	
+
+	@Override
+	public ArrayList<Faq> selectManaFunding() {
+		return fDao.selectManaFunding(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Faq> selectManaDelivery() {
+		return fDao.selectManaDelivery(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Faq> selectManaExchange() {
+		return fDao.selectManaExchange(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Faq> selectManaEtc() {
+		return fDao.selectManaEtc(sqlSession);
+	}
+
+	
 
 }

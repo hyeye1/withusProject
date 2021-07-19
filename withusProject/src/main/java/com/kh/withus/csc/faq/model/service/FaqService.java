@@ -30,13 +30,24 @@ public interface FaqService {
 	ArrayList<Faq> selectEtc();
 
 	// ----------- 관리자 -------------
-	/*
+	
 	ArrayList<Faq> selectManaList();
 
 	int insertManaFaq(Faq fM);
 
 	Faq selectManaFaq(int fnoM);
-	*/
+
+	int updateManaFaq(Faq fM);
+
+	int deleteManaFaq(int fnoM);
+	
+	ArrayList<Faq> selectManaFunding();
+	ArrayList<Faq> selectManaDelivery();
+	ArrayList<Faq> selectManaExchange();
+	ArrayList<Faq> selectManaEtc();
+
+	
+	
 	
 
 }
