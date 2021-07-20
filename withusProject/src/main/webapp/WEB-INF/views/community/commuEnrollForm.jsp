@@ -122,7 +122,7 @@
             <article>
                 <div id="menubar">
                     <ul id="menubar_member" class="menubar_admin">
-                        <p>커뮤니티</p>
+                        <a href="commu.main">커뮤니티</a>
                         <li><a href="commu.free">자유</a></li>
                         <li><a href="commu.ask">질문</a></li>
                         <li><a href="commu.tool">공구모집</a></li>
