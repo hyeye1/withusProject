@@ -501,6 +501,11 @@
 	}
 	
 	a{text-decoration: none; color: black;}
+	
+	.chooseReward:hover{
+        cursor:pointer;
+        opacity:0.3;
+    	}
 		
 		</style>
         </head>
