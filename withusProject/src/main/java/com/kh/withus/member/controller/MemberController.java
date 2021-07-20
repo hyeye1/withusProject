@@ -165,11 +165,12 @@ public class MemberController {
 			mv.setViewName("redirect:memberListView.mana");
 			
 			
-		}else {
+		}else { 
 			// 로그인 실패
 			session.setAttribute("alertMsg", "로그인실패");
-			mv.setViewName("common/manaErrorPage");
-		}
+			mv.setViewName("common/manaErrorPage"); 
+		  }
+		 
 		return mv;
 	}
 	
@@ -201,8 +202,8 @@ public class MemberController {
 		if(loginUser!= null && loginUser.getMemberStatus().equals("A") ) {
 			return "redirect:memberListView.mana";
 		}else {
-			session.setAttribute("alertMsg", "로그인을 해주세요");
-			return "redirect:login.mana";
+			//session.setAttribute("alertMsg", "로그인을 해주세요");
+			return "admin/adminMain";
 		}
 		
 		

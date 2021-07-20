@@ -13,7 +13,8 @@ public interface ReportService {
 	ArrayList<Report> selectReportList(int reportNo);
 	
 	// 처리중 버튼(update)
-	String reportSubmit(int reportNo);
+	int reportSubmit(int rno);
+	int reportReset(int rno);
 	
 	
 	

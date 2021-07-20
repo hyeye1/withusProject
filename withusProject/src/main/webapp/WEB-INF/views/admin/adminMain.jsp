@@ -1,15 +1,36 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin main</title>
+<meta charset="UTF-8">
+<title>Admin With Us</title>
 </head>
 <body>
-    <jsp:inclue page="../common/manaHeader.jsp"/>
-
-    여기는 관리자 메인
+    <jsp:include page="../common/manaErrorPage.jsp"/>
+    
+	<c:choose>
+        	<c:when test="${ loginUser.memberStatus eq 'A' }">
+        		<script>
+			     // 로그인이 null일때 모달창 자동으로 노출
+				    $(document).ready(function(){
+				    	//alert("작동되니?");
+			    		location.href = "memberListView.mana";
+				    });
+		    	</script> 
+        	
+        	</c:when>
+        	<c:otherwise>
+        		<script>
+			     	// 로그인이 null일때 모달창 자동으로 노출
+				    $(document).ready(function(){
+			    		$("#manaLogin").modal();
+				    });
+			    </script> 
+        	</c:otherwise>
+        </c:choose>
+        
 
 </body>
 </html>
