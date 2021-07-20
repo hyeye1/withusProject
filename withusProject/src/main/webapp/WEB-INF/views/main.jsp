@@ -57,7 +57,7 @@
         .section .slidelist > li > a {display:block;position:relative;}
         
         /* 자동슬라이드 */
-        .visualSlide .slidelist > li {animation: translate 10s infinite; animation-delay: 10s;}
+        .visualSlide .slidelist > li {animation: translate 10s infinite 10s; }
         /* .visualSlide .slidelist > li:hover{animation-play-state: paused;} */
         @keyframes translate {
             0%{
