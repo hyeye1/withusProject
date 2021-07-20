@@ -68,6 +68,9 @@
                     color: rgb(71, 189, 250);
                     font-weight: 500;
                 }
+                .menubar_admin #com{
+					color: black;
+				}
 
                 /* 시작 */
                 #page_main {
@@ -124,7 +127,7 @@
                     <article>
                         <div id="menubar">
                             <ul id="menubar_member" class="menubar_admin">
-                                <a href="commu.main">커뮤니티</a>
+                                <a href="commu.main" id="com">커뮤니티</a>
                                 <li><a href="commu.free">자유</a></li>
                                 <li><a href="commu.ask">질문</a></li>
                                 <li><a href="commu.tool">공구모집</a></li>
