@@ -203,7 +203,7 @@
 			            <c:otherwise>
 			            	 <c:choose>
 			            		<c:when test="${ empty condition and empty sort }">
-					            	<li class="page-item"><a class="page-link" href="${ pi.currentPage - 1 }">이전</a></li>
+					            	<li class="page-item"><a class="page-link" href="fundingListView.mana?currentPage=${ pi.currentPage - 1 }">이전</a></li>
 					            </c:when>
 					            <c:otherwise>
 					            	<li class="page-item"><a class="page-link" href="searchFunding.mana?currentPage=${pi.currentPage - 1}&condition=${condition}&sort=${sort}&keyword=${keyword}">이전</a></li>
@@ -232,7 +232,7 @@
 			           	<c:otherwise>
 			           		 <c:choose>
 			            		<c:when test="${ empty condition and empty sort }">
-					           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
+					           		<li class="page-item"><a class="page-link" href="fundingListView.mana?currentPage=${ pi.currentPage + 1 }">다음</a></li>
 					            </c:when>
 					            <c:otherwise>
 					            	<li class="page-item"><a class="page-link" href="searchFunding.mana?currentPage=${pi.currentPage + 1}&condition=${condition}&sort=${sort}&keyword=${keyword}">다음</a></li>

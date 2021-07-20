@@ -22,10 +22,9 @@
     height: 1.5px;
     width: 80%;
   }
-  #mypage{height: 100%; position: absolute; top: 3%; left: 7%;}
+  #mypage{height: 100%; position: relative; top: 7%; left: 6%;}
   
   /* mypage안의 세부영역 */
-  #mypage>div{height: 100%;}
   #content{width: 100%;}
 
   /*큰제목*/
@@ -35,7 +34,7 @@
   .list #content_1{height: 80%; margin-top: 50px; width: 80%;}
 
   /* 페이징*/
-  #pagingArea{width:fit-content; margin:auto; margin-top: 50px;} 
+  #pagingArea{width:fit-content; margin:auto; margin-top: 70px; margin-top: 100px; margin-bottom: 180px;} 
 
 
 
@@ -164,9 +163,9 @@
 
 					<div class="oList">
 						<label>목록</label>
+						<input type="hidden" name="currentPage" value="1">
 
 						<form action="orderNDeliverySearch.part" name=searchPart>
-						<input type="hidden" name="currentPage" value="1">
 							<div class="searchForm">
 								<div class="keyword_1">
 									<select name="shStatus" class="shStatus">
@@ -255,18 +254,19 @@
 			                        			<td class="cancle">환불반려</td>
 			                        		</c:when>
 			                        	  </c:choose>
-					                      <td>${ p.totalPrice } 원</td>
+					                      <td>${ p.totalPrice } 원 </td>
 					                      <td><img src="${ p.projectThum }" width="50" height="40"></td>
 					                      <td class="rew">
 												<c:choose>
-						                      		<c:when test="${ !empty p.rewardTitle}">
+						                      		<c:when test="${p.rewardTitle ne  ' ' }">
 							                      		${ p.rewardTitle } 
 						                      		</c:when>
 						                      		<c:otherwise>
 						                      			${ p.rewardContent }
 						                      		</c:otherwise>
 												</c:choose>					                      		
-					                      		<br><c:if test="${ !empty p.orderOption }">옵션: ${ p.orderOption } /</c:if> 
+					                      		<br>
+					                      		<c:if test="${ !empty p.orderOption }">옵션: ${ p.orderOption } /</c:if> 
 				                      			<!-- 펀딩밀어주기도 수량인 있는거? -->
 					                      		 수량: ${ p.orderCount }개
 			                      		 </td>
@@ -347,7 +347,7 @@
 	              			   		+ "<tr>" 
            			   				+ "<th>펀딩내역</th>"
            			 		
-           			   			if(oi.rewardTitle == null) {
+           			   			if(oi.rewardTitle == ' ') {
            			   		   		resultSend += "<td>" + oi.rewardContent +"</td>"
 	           			   						+ "</tr>"
 	        	              			   		+ "<tr>" 
@@ -433,7 +433,7 @@
 				              			   			+ "<tr>" 
 				          			   				+ "<td>펀딩내역</td>"
 				          			   				
-					          			   			if(ri.rewardTitle != null) {
+					          			   			if(ri.rewardTitle != ' ') {
 					          			   				resultOrder += "<td width='300'>" + ri.rewardTitle + "</td>" 
 								          			   				+ "</tr>"
 								          			   				+ "<tr>" 
@@ -504,7 +504,7 @@
 											        + "<table class=" + "'detailTb'" + ">" 
 											        + "<tr>"
 											        + "<td>리워드 금액</td>"
-											        + "<td>"+ ri.rewardPrice + " 원 </td>"
+											        + "<td>"+ ri.totalPrice + " 원 </td>"
 											        + "</tr>" 
 											        + "<tr>"
 											        + "<td>추가 후원금</td>"
@@ -731,7 +731,7 @@
 					            <c:otherwise>
 					            	<c:choose>
 					            		<c:when test="${ empty shStatus and empty orStatus and empty condition and empty keyword }">
-							            	<li class="page-item"><a class="page-link" href="${ pi.currentPage - 1 }">이전</a></li>
+							            	<li class="page-item"><a class="page-link" href="orderNDeliveryList.part?currentPage=${ pi.currentPage - 1 }">이전</a></li>
 							            </c:when>
 							            <c:otherwise>
 							            	<li class="page-item"><a class="page-link" href="orderNDeliverySearch.part?currentPage=${pi.currentPage - 1}&shStatus=${shStatus}&orStatus=${orStatus}&condition=${condition}&keyword=${keyword}">이전</a></li>
@@ -744,7 +744,7 @@
 							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 								<c:choose>
 									<c:when test="${ empty shStatus and empty orStatus and empty condition and empty keyword }">
-						            	<li class="page-item"><a class="page-link" href="${p}">${ p }</a></li>
+						            	<li class="page-item"><a class="page-link" href="orderNDeliveryList.part?currentPage=${p}">${ p }</a></li>
 									</c:when>
 									<c:otherwise>
 										<li class="page-item"><a class="page-link" href="orderNDeliverySearch.part?currentPage=${p}&shStatus=${shStatus}&orStatus=${orStatus}&condition=${condition}&keyword=${keyword}">${ p }</a></li>
@@ -760,7 +760,7 @@
 					           	<c:otherwise>
 					           		<c:choose>
 					            		<c:when test="${ empty shStatus and empty orStatus and empty condition and empty keyword }">
-							           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
+							           		<li class="page-item"><a class="page-link" href="orderNDeliveryList.part?currentPage=${ pi.currentPage + 1 }">다음</a></li>
 							            </c:when>
 							            <c:otherwise>
 							            	<li class="page-item"><a class="page-link" href="orderNDeliverySearch.part?currentPage=${pi.currentPage + 1}&shStatus=${shStatus}&orStatus=${orStatus}&condition=${condition}&keyword=${keyword}">다음</a></li>

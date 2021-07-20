@@ -144,6 +144,7 @@ public class OrderController {
 			
 			// statusBox에 출력 될 건수
 			Order sc = oService.selectStatusCount(mno);
+			//System.out.println(sc);
 			
 			// 페이징 처리
 			PageInfo pi = pagination.getPageInfo(totalList, currentPage, 10, 10);
