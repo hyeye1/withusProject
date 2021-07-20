@@ -28,6 +28,14 @@
         cursor:pointer;
         opacity:0.5;
     }
+    .pTitle{
+		height:80px;
+		font-weight: 600;
+		font-size: 18px;
+		margin-top: 5px;
+	}
+	.leftp{color: grey;}
+	#dday{float:right;}
 	 
 	/* .outer div {outline:1px solid purple;} */
 	.outer {margin:auto; margin-bottom:50px; width:1050px;}
@@ -38,6 +46,7 @@
 	.cateImage:hover {}
    	.cateFile {width:100%; height:100%;}
 	.cateText:hover {}
+	
 	
 </style>
 </head>
@@ -113,12 +122,15 @@
 					<input type="hidden" value="">
 		            	
 		            <img src="${ p.projectThum }" width="270" height="230">
-		            <p align="left">
-		                ${ p.projectTitle } <br>
+
+					<div class="pTitle" align="left">
+						${ p.projectTitle } <br>
+					</div>
+		            <p class="leftp" align="left">
 		                ${ p.catName } | ${ p.partnerName }<br>
 		                <c:choose>
 		                	<c:when test="${ p.dday >= 0 }">
-								<span id="percent">${ p.percentage }%</span>&nbsp;&nbsp;&nbsp;<span id="totalPrice">${ p.totalPrice }</span>원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>D-${ p.dday }</span>
+								<span id="percent">${ p.percentage }%</span>&nbsp;&nbsp;&nbsp;<span id="totalPrice">${ p.totalPrice }</span>원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="dday">D-${ p.dday }</span>
 		            		</c:when>
 		            		<c:otherwise>
 		            			<span id="percent">${ p.percentage }%</span>&nbsp;&nbsp;&nbsp;<span id="totalPrice">${ p.totalPrice }</span>원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>펀딩종료</span>

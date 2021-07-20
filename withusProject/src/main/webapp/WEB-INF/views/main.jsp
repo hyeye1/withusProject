@@ -107,7 +107,7 @@
             cursor: pointer;
         }
         .right{margin-left: 5px;}
-
+		.slidelist a {text-decoration: none; color: black;}
     </style>
 </head>
 <body>
@@ -126,13 +126,13 @@
                 <ul class="slidelist">
                     <!-- 슬라이드 영역 -->
                     <li class="slideitem">
-                        <a><img src="resources/project_thumbnail/20210720022542370073.PNG" class="slideImg" width="830px" height="503px"></a>
+                        <a href="detail.fd?pno=73"><img src="resources/project_thumbnail/20210720022542370073.PNG" class="slideImg" width="830px" height="503px"></a>
                     </li>
                     <li class="slideitem">
-                        <a><img src="resources/project_thumbnail/20210720023359253651.PNG" class="slideImg" width="830px" height="503px"></a>
+                        <a href="detail.fd?pno=74"><img src="resources/project_thumbnail/20210720023359253651.PNG" class="slideImg" width="830px" height="503px"></a>
                     </li>
                     <li class="slideitem">
-                        <a><img src="resources/project_thumbnail/20210720023914376777.PNG" class="slideImg" width="830px" height="503px"></a>
+                        <a href="detail.fd?pno=75"><img src="resources/project_thumbnail/20210720023914376777.PNG" class="slideImg" width="830px" height="503px"></a>
                     </li class="slideitem">
                 </ul>
                 
@@ -140,29 +140,35 @@
                     <div id="slideLetter">
                         <ul class="slidelist">
                             <li class="slideitem">
-                                <p align="left" style="font-size: 30px; font-weight: 900;">
-                                    한복을 가방으로 <br> 피워내다,
-                                </p>
-                                <p align="left" style="font-size: 16px; font-weight: 500;">
-                                    업사이클링 모던 '저고리백'
-                                </p>
+                           	 	<a href="detail.fd?pno=73">
+	                                <p align="left" style="font-size: 30px; font-weight: 900;">
+	                                    한복을 가방으로 <br> 피워내다,
+	                                </p>
+	                                <p align="left" style="font-size: 16px; font-weight: 500;">
+	                                    업사이클링 모던 '저고리백'
+	                                </p>
+                                </a>
                             </li>
                             <li class="slideitem">
-                                <p align="left" style="font-size: 30px; font-weight: 900;">
-                                    조각 조각 리스본 꾸러미
-                                </p>
-                                <p align="left" style="font-size: 16px; font-weight: 500;">
-                                    뜨거운 햇빛 아래 빛나던 여행 속 꾸러미
-                                </p>
+                            	<a href="detail.fd?pno=74">
+	                                <p align="left" style="font-size: 30px; font-weight: 900;">
+	                                    조각 조각 리스본 꾸러미
+	                                </p>
+	                                <p align="left" style="font-size: 16px; font-weight: 500;">
+	                                    뜨거운 햇빛 아래 빛나던 여행 속 꾸러미
+	                                </p>
+                            	</a>
                             </li>
                             <li class="slideitem">
-                                <p align="left" style="font-size: 30px; font-weight: 900;">
-                                    가방과 뱃지 시리즈로 <br>
-                                    재미를 행복을!
-                                </p>
-                                <p align="left" style="font-size: 16px; font-weight: 500;">
-                                    재미를, 행복을 찾아서 '이상한 나라의 앨리스'
-                                </p>
+                            	<a href="detail.fd?pno=75">
+	                                <p align="left" style="font-size: 30px; font-weight: 900;">
+	                                    가방과 뱃지 시리즈로 <br>
+	                                    재미를 행복을!
+	                                </p>
+	                                <p align="left" style="font-size: 16px; font-weight: 500;">
+	                                    재미를, 행복을 찾아서 '이상한 나라의 앨리스'
+	                                </p>
+                            	</a>
                             </li>
                         </ul>
                     </div>
