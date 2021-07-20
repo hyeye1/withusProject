@@ -577,7 +577,7 @@
           		</div>
           	</c:when>
           	<c:otherwise>
-               <img src="${ p.projectThum }" height="480px">
+               <img src="${ p.projectThum }" width="640px" height="480px">
           	</c:otherwise>
          	</c:choose>
          </div>
