@@ -74,7 +74,7 @@
 				
 				
 			<hr>
-			<c:forEach var="p" items="${ list }">
+			<c:forEach var="p" items="${ pList }">
 		        <div class="thumbnail" id="thumbnail" align="center">
 		            <input type="hidden" class="pno" value="${ p.projectNo }">
 					<input type="hidden" value="${ p.projectGprice }">

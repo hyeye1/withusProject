@@ -42,10 +42,42 @@ public class FundingController {
 	@Autowired
 	private MyPageService mpService;
 	
+	@ResponseBody
+	@RequestMapping(value="famousList.main", produces="application/json; charset=utf-8")
+	public String ajaxSelectFamousList() {
+		
+		return new Gson().toJson(funService.selectFamousList());
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="eveList.main", produces="application/json; charset=utf-8")
+	public String ajaxSelectEveList() {
+		
+		return new Gson().toJson(funService.selectEveList());
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="newList.main", produces="application/json; charset=utf-8")
+	public String ajaxSelectNewList() {
+		
+		return new Gson().toJson(funService.selectNewList());
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="readyList.main", produces="application/json; charset=utf-8")
+	public String ajaxSelectReadyList() {
+		
+		return new Gson().toJson(funService.selectReadyList());
+		
+	}
+	
 	@RequestMapping("menuList.fun")
     public ModelAndView selectMenuList(String menu, ModelAndView mv) {
 		
-		//System.out.println(menu);
+		System.out.println(menu);
 		ArrayList<Project> pList = null;
 		
 		switch(menu){
@@ -68,7 +100,7 @@ public class FundingController {
 			
 		}
 		
-		//System.out.println(pList);
+		System.out.println(pList);
 		
 		mv.addObject("menu", menu)
 		.addObject("pList", pList) 

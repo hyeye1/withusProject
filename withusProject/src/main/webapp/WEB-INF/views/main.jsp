@@ -444,7 +444,39 @@
             </table>
         </div>
         
-	<jsp:include page="common/footer.jsp"/>
+        <script>
+	    	$(function(){
+	    		selectFamousList();
+	    		
+	    		setInterval(selectReplyList, 1000);
+	    	})
+	    	
+	    	function selectFamousList(){
+	    		$.ajax({
+	    			url:"famousList.main",
+	    			success:function(list){
+	    				console.log(list);
+	    				/*
+	    				var value="";
+	    				$.each(list, function(i,obj){
+	    					value += "<tr>"
+	    						   +	"<td>" + obj.replyWriter + "</td>"
+	    						   +	"<td>" + obj.replyContent + "</td>"
+	    						   +	"<td>" + obj.createDate + "</td>"
+	    						   + "</tr>"
+	    				})		
+	    				
+						$("#replyArea tbody").html(value);
+	    				$("#rcount").text(list.length);
+	    				*/
+	    			}, error:function(){
+	    				console.log("댓글 리스트 조회용 ajax 통신 실패");
+	    			}
+	    		})
+	    	}	    	
+    	</script>
+        
+		<jsp:include page="common/footer.jsp"/>
 	
     </div>
     
