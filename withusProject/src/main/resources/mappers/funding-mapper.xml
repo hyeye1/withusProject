@@ -304,8 +304,8 @@
 	             , p.project_end_dt 
 	             , p.project_count
 	         order 
-	            by p.project_count desc)
-             <!-- where rownum <![CDATA[ < ]]> 10 -->
+	            by floor(sum(o.total_price) / p.project_gprice * 100) desc)
+             where percentage is not null  
     </select>
     
     <select id="selectEveList" resultMap="fundingListResultSet">
