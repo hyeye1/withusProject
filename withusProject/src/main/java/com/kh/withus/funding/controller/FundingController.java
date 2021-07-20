@@ -55,7 +55,6 @@ public class FundingController {
 	@RequestMapping("menuList.fun")
     public ModelAndView selectMenuList(String menu, ModelAndView mv) {
 		
-		System.out.println(menu);
 		ArrayList<Project> pList = null;
 		
 		switch(menu){
@@ -78,8 +77,6 @@ public class FundingController {
 			
 		}
 		
-		System.out.println(pList);
-		
 		mv.addObject("menu", menu)
 		.addObject("pList", pList) 
 		.setViewName("funding/menuListView");
@@ -90,17 +87,11 @@ public class FundingController {
 	@RequestMapping("search.fun")
     public ModelAndView selectSearchList(Search s, ModelAndView mv) {
 		
-		//System.out.println(s);
-		
 		HashMap<String, String> map = new HashMap<>();
 		map.put("condition", s.getCondition());
 		map.put("keyword", s.getKeyword());
 		
-		//System.out.println(map);
-		
 		ArrayList<Project> list = funService.selectSearchList(map);
-		
-		//System.out.println(list);
 		
 		mv.addObject("list", list)
 		.setViewName("funding/fundingListView");
@@ -110,8 +101,6 @@ public class FundingController {
 	
 	@RequestMapping("list.fun")
     public ModelAndView selectFundingList(int catNo, String menu, ModelAndView mv) {
-		
-		//System.out.println(menu);
 		
 		// 전체 카테고리 사진, 명 조회
 		ArrayList<Category> cList = funService.selectCate();
@@ -170,9 +159,6 @@ public class FundingController {
 		
 		FundingDetail fd = funService.selectOneReward(rewardNo);
 		
-		//System.out.println(o);
-		//System.out.println(fd);
-		
 		model.addAttribute("fd", fd);
 		model.addAttribute("o", o);
 		return "funding/payCheckForm";
@@ -218,8 +204,6 @@ public class FundingController {
 			
 		}
 
-		//System.out.println(p);
-		
 		// servieImpl, dao, sql 작성
 		int result = funService.insertProject(p);
 
@@ -254,8 +238,6 @@ public class FundingController {
 	
 	@RequestMapping("pay.fun")
 	public String payForm(Order o, Model model) {
-		
-		//System.out.println(o);
 		
 		FundingDetail fd = funService.selectOneReward(o.getRewardNo());
 		
@@ -319,7 +301,6 @@ public class FundingController {
 	@ResponseBody
 	@RequestMapping(value="proReply.fd", produces="application/json; charset=utf-8")
 	public String ajaxSelectReplyList(int pno) {
-		//System.out.println(pno);
 		
 		return new Gson().toJson(funService.selectReplyList(pno));
 		
@@ -342,16 +323,12 @@ public class FundingController {
 		
 	}
 	
-	
-	
-	
 	// 프로젝트 대댓글부분
 	@ResponseBody
 	@RequestMapping(value="proReReply.fd", produces="application/json; charset=utf-8")
 	public String ajaxSelectReReplyList(String replyNo) {
-		//System.out.println(replyNo);
+
 		return null;
-		
 		
 		//return new Gson().toJson(funService.selectReplyList(pno));
 		
@@ -398,7 +375,6 @@ public class FundingController {
 		}else { // 안좋아요중
 			return "dislike";
 		}
-					
 			
 	}
 	
@@ -442,7 +418,6 @@ public class FundingController {
 			
 	}	
 	
-	
 	// +현정 : 관리자
 	// 펀딩 리스트 조회
 	@RequestMapping("fundingListView.mana")
@@ -453,7 +428,6 @@ public class FundingController {
 		PageInfo pi = pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
 		ArrayList<Project> fdList = funService.selectFundingList(pi);
-		//System.out.println(fdList);
 		
 		mv.addObject("fdList",fdList)
 		.addObject("pi", pi)
@@ -488,7 +462,6 @@ public class FundingController {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("pno", pno);
 			map.put("considerBtn", considerBtn);
-			//System.out.println(map);
 			
 			int result = funService.updateProjectStatus(map);
 			
@@ -518,7 +491,6 @@ public class FundingController {
 			map.put("condition", condition);
 			map.put("sort", sort);
 			map.put("keyword", keyword);
-			//System.out.println(map);
 			
 			// 검색결과 리스트 총 갯수
 			int count = funService.countSearchFdMana(map);
@@ -528,7 +500,6 @@ public class FundingController {
 			
 			// 검색결과 담아내기
 			ArrayList<Project> fdList = funService.searchFundingMana(map, pi);
-			//System.out.println(mList);
 			
 			mv.addObject("pi", pi)
 			  .addObject("fdList",fdList)
