@@ -24,9 +24,14 @@ public class ReportDao {
 		return (ArrayList)sqlSession.selectList("reportMapper.selectList", reportNo);
 	}
 
-	public String reportSubmit(SqlSessionTemplate sqlSession, int reportNo) {
-		return null;
+	public int reportSubmit(SqlSessionTemplate sqlSession, int rno) {
+		return sqlSession.update("reportMapper.submitReport", rno);
 	}
+	
+	public int reportReset(SqlSessionTemplate sqlSession, int rno) {
+		return sqlSession.update("reportMapper.resetReport", rno);
+	}
+
 
 
 	/*
