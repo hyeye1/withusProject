@@ -48,7 +48,7 @@
         #qCat{width: 10%;}
         #qTitle{width: 60%;}
         #qDate{width: 20%; text-align: right;}
-        #qContent, #qReply{height: 350px;}
+        #qContent, #qReply{height: 280px;}
         #backBtn{text-align: center;}
         
         .btn{background-color: rgb(178, 185, 223); color: white;}

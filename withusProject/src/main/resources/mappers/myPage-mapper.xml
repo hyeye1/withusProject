@@ -387,6 +387,7 @@
 		  from tb_order o
 		  join project using(project_no)
 		 where o.member_no = #{memberNo}
+		 order by order_no desc
 	</select>
   
   

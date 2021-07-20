@@ -38,7 +38,7 @@
         #content_1_1{width: 10%;  margin-left: 100px; margin-top: 30px;}
         #content_1_2{width: 30%; margin-top: 40px; margin-left: 50px;}
 
-        #content_1_2>div{float: left; margin-top: 20px; text-align: center; font-size: 12px;}
+        #content_1_2>div{float: left; margin-top: 20px; text-align: center; font-size: 13px;}
 
 		/* 버튼 */
 		#editBtn{width: 100px; }
@@ -87,18 +87,18 @@
 		            </c:choose>
                     
                     <div id="content_1_2">
-                        <li style="font-size: 20px;">
+                        <li style="font-size: 20px; font-weight:bold;">
                             	${ loginUser.memberName }(${loginUser.partnerName })
                         </li>
-                        <li style="font-size: 12px;">파트너</li>
+                        <li style="font-size: 15px; margin-top:5px;">파트너</li>
 
                         <div>
-                            <li style="color: rgb(52, 152, 219);">${ fundingCount }</li>
+                            <li style="color: rgb(52, 152, 219); font-weight:bold;">${ fundingCount }</li>
                             <li >만든펀딩</li>
                         </div>
 
                         <div style="margin-left: 25px;">
-                            <li style="color: rgb(52, 152, 219);" id="followerCount"></li>
+                            <li style="color: rgb(52, 152, 219); font-weight:bold;" id="followerCount"></li>
                             <li>팔로워</li>
                         </div>
                         
@@ -215,8 +215,7 @@
 							            	</c:choose>
 						            	</tr>
 			                            <tr>
-			                                <td>오픈 여부</td>
-			                                <td>
+			                                <td colspan="2">
 			                                	<c:choose>
 			                                		<c:when test="${ list.projectStatus eq '1' }">
 			                                			수락요청

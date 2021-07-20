@@ -197,9 +197,11 @@
                     	<tr>
                     		
  							<td>
-                     			<div style="margin-top: 20px;">${orderList.projectTitle }</div>
-                                <div>${orderList.rewardTitle }</div>
-                                <div>${orderList.rewardContent }</div>               
+                     			<div style="margin-top: 10px; font-weight: 600;">${orderList.projectTitle }</div>
+                     			<c:if test="${ !empty orderList.rewardTitle  }">
+                                	<div><label style="font-weight: bold; margin-top: 20px;">* ${orderList.rewardTitle }</label></div>
+                                </c:if>
+                                <div style="font-size:14px">${orderList.rewardContent }</div>               
                             </td>
                             <td><img src="${ orderList.projectThum }" width="100" height="90" ></td>
                             <td style="text-align: center;">${ orderList.rewardPrice }</td>

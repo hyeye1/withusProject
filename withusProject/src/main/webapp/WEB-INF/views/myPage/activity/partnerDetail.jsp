@@ -32,7 +32,7 @@
 
         
         /* userDetail content */
-        .userDetail #content_1{height: 15%;}
+        .userDetail #content_1{height: 20%;}
         .userDetail #content_2{height: 60%;}
         .userDetail #content_3{height: 20%;}
 
@@ -42,7 +42,7 @@
         .userDetail #content_1_1{width: 10%;  margin-left: 100px; margin-top: 30px;}
         .userDetail #content_1_2{width: 30%; margin-top: 40px; margin-left: 50px;}
 
-        .userDetail #content_1_2>div{float: left; margin-top: 20px; text-align: center; font-size: 12px;}
+        .userDetail #content_1_2>div{float: left; margin-top: 20px; text-align: center; font-size: 13px;}
         
         .followBtn{color:black;}
         .followingBtn{color:white;}
@@ -95,7 +95,7 @@
                     
                     <div id="content_1_2">
                         <!-- 파트너명 -->
-                        <li style="font-size: 20px;">
+                        <li style="font-size: 20px; font-weight:bold;">
                             	${ m.partnerName }
                         </li>
                         
@@ -103,22 +103,22 @@
                         <!-- 서포터/파트너 (파트너페이지 이지만..) -->
 		                <c:choose>
 		                	<c:when test="${ m.partnerJoin eq 'Y' }">
-		                		<li style="font-size: 12px;">파트너</li>
+		                		<li style="font-size: 15px; margin-top:5px;">파트너</li>
 		                	</c:when>
 		                	<c:otherwise>
-		                		<li style="font-size: 12px;">서포터</li>
+		                		<li style="font-size: 15px; margin-top:5px;">서포터</li>
 		                	</c:otherwise>
 		               	</c:choose>
                         
                         <!-- 펀딩수 -->
                         <div>
-                            <li style="color: rgb(52, 152, 219);">${ fundingCount }</li>
+                            <li style="color: rgb(52, 152, 219); font-weight:bold;">${ fundingCount }</li>
                             <li >오픈펀딩</li>
                         </div>
 					
 						<!-- 팔로워수 -->
                         <div style="margin-left: 25px;">
-                            <li style="color: rgb(52, 152, 219);" id="followerCount"></li>
+                            <li style="color: rgb(52, 152, 219); font-weight:bold;" id="followerCount"></li>
                             <li>팔로워</li>
                         </div>
                         

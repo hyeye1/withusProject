@@ -31,7 +31,7 @@
     #menu_1_2{width: 50%; margin-top: 60px;}
 
     /*프로필 부분*/
-    #user_name{font-size: 19px; margin-top: 40px; margin-bottom: 0; margin-left: 10px;}
+    #user_name{font-size: 19px; margin-top: 40px; margin-bottom: 0; margin-left: 10px; font-weight:bold;}
     #member_grade{margin-top: 0px; margin-left: 10px;}    
 
     a{text-decoration: none !important; color: black; } 
