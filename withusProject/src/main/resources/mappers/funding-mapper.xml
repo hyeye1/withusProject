@@ -313,7 +313,7 @@
              , p.project_start_dt
              , p.project_end_dt  
          order 
-            by p.project_no asc
+            by p.project_no desc
 	</select>
 	
 	<select id="selectCate" resultMap="Category">
@@ -358,7 +358,7 @@
              , p.project_start_dt
              , p.project_end_dt  
          order 
-            by p.project_no asc
+            by p.project_no desc
    </select>
    
     <select id="selectList" resultMap="fundingListResultSet" parameterType="_int">
@@ -396,7 +396,7 @@
              , p.project_start_dt
              , p.project_end_dt  
          order 
-            by p.project_no asc
+            by p.project_no desc
    </select>
 	
 	<update id="increaseCount" parameterType="_int">
@@ -404,7 +404,6 @@
 		       project
 		   set project_count = project_count+1
 		 where project_no = #{projectNo}
-		   and project_status = 3
 	</update>
     
     <select id="selectFunding" resultMap="fundingDetail" parameterType="FundingDetail">
@@ -443,8 +442,7 @@
 	  from project
 	  join member using(member_no)
 	  join category using(cat_no)
-	 where project_status = 3
-	   and project_no = #{projectNo}
+	 where project_no = #{projectNo}
     </select>
     
     <select id="selectReward" resultMap="fundingDetail" parameterType="Order">
