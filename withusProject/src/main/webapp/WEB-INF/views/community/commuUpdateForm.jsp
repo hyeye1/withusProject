@@ -126,9 +126,9 @@
                 <div id="menubar">
                     <ul id="menubar_member" class="menubar_admin">
                         <a href="commu.main" id="com">커뮤니티</a>
-                        <li><a href="">자유</a></li>
-                        <li><a href="">질문</a></li>
-                        <li><a href="">공구모집</a></li>
+                        <li><a href="commu.free">자유</a></li>
+                        <li><a href="commu.ask">질문</a></li>
+                        <li><a href="commu.tool">공구모집</a></li>
                     </ul>
                 </div>
             </article>
@@ -187,7 +187,7 @@
                             <button type="submit" class="btn btn-primary">수정하기</button>
                             <button type="button" class="btn btn-danger" onclick="javascript:history.go(-1);">이전으로</button>
                         </div>
-                    </form>
+                    </form>               
                 </div>
                 <br><br>
             </div>
