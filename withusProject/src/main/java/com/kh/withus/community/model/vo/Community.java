@@ -13,7 +13,7 @@ import lombok.ToString;
 public class Community {
 	
 	private int commuNo;
-	private String commuWriter;
+	private int commuWriter;
 	private String commuCate;
 	private String commuTitle;
 	private String commuContent;

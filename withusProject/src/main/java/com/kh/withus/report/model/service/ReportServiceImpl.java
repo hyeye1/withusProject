@@ -26,8 +26,13 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public String reportSubmit(int reportNo) {
+	public int reportSubmit(int reportNo) {
 		return rDao.reportSubmit(sqlSession, reportNo);
+	}
+
+	@Override
+	public int reportReset(int rno) {
+		return rDao.reportReset(sqlSession, rno);
 	}
 	
 	/*

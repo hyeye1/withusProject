@@ -89,6 +89,14 @@
 				
 		</table>
 		
+		<form id="postForm" value="${ r.reportNo }">
+			<input type="hidden" name="rno" value="${ r.reportNo }">
+			<input type="hidden" name="memberNo" value="${ r.memberNo }">
+			<input type="hidden" name="memberStatus" value="${ r.memberStatus }">
+		</form>
+		
+		
+		
 		<!-- The Modal -->
 		  <div class="modal fade" id="reportModal">
 		    <div class="modal-dialog">
@@ -107,8 +115,8 @@
 		        
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
-		          <button type="button" class="btn btn-danger" data-dismiss="modal">승인</button>
-		          <button type="button" class="btn btn-secondary" data-dismiss="modal">반려</button>
+		          <button id="submitBtn" type="button" class="btn btn-danger" data-dismiss="modal">승인</button>
+		          <button id="resetBtn" type="button" class="btn btn-secondary" data-dismiss="modal">반려</button>
 		        </div>
 		        
 		      </div>
@@ -124,7 +132,7 @@
 				
 			
 			function selectReportList(){
-				$(document).on("click", "#submit", function(){
+				//$(document).on("click", "#submit", function(){
 					$.ajax({
 						url : "reportList.mana",
 						data : {rno:${r.reportNo}},
@@ -138,7 +146,7 @@
 								       +    "<td>" + list[i].reportContent + "</td>"
 								       +    "<td>" + list[i].memberStatus + "</td>"
 								       +    "<td>" + list[i].reportDate + "</td>"
-								       +    "<td><button id='submit' on='postForm(1)'>" + list[i].reportStatus + "</button></td>"
+								       +    "<td><button id='submit' onclick='postForm(1)'>" + list[i].reportStatus + "</button></td>"
 								       + "</tr>";
 							})
 							
@@ -151,6 +159,10 @@
 				
 				})		
 			}
+			
+			$(document).on("click", "#submit", function(){
+				
+			})
 				
 			
 		</script>        

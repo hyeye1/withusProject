@@ -143,7 +143,6 @@
                             <tr>
                                 <div class="select">
                                     <select class="custom-select" name="commuCate" id="commuCate">
-                                        <option selected>카테고리 선택</option>
                                         <option value="자유" id="free">자유</option>
                                         <option value="질문" id="ask">질문</option>
                                         <option value="공구모집" id="tool">공구모집</option>

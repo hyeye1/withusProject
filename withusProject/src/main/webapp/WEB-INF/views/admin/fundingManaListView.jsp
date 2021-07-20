@@ -201,27 +201,27 @@
 			           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
 			            </c:when>
 			            <c:otherwise>
+			            	 <c:choose>
+			            		<c:when test="${ empty condition and empty sort }">
 					            	<li class="page-item"><a class="page-link" href="${ pi.currentPage - 1 }">이전</a></li>
-			            	<%-- <c:choose>
-			            		<c:when test="${ empty partnerJoin and empty memberStatus }">
 					            </c:when>
 					            <c:otherwise>
-					            	<li class="page-item"><a class="page-link" href="searchMember.mana?currentPage=${pi.currentPage - 1}&partnerJoin=">이전</a></li>
+					            	<li class="page-item"><a class="page-link" href="searchFunding.mana?currentPage=${pi.currentPage - 1}&condition=${condition}&sort=${sort}&keyword=${keyword}">이전</a></li>
 			            		</c:otherwise>
-			            	</c:choose> --%>
+			            	</c:choose> 
 			            </c:otherwise>
 			    	</c:choose>     
 			    	   
 			    	   
 					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+						 <c:choose>
+							<c:when test="${ empty condition and empty sort }">
 				            	<li class="page-item"><a class="page-link" href="fundingListView.mana?currentPage=${p}">${ p }</a></li>
-						<%-- <c:choose>
-							<c:when test="${ empty partnerJoin and empty memberStatus }">
 							</c:when>
 							<c:otherwise>
-								<li class="page-item"><a class="page-link" href="searchMember.mana?currentPage=${p}&partnerJoin=${partnerJoin}&memberStatus=${memberStatus}&memKey=${memKey}&keyword=${keyword}">${ p }</a></li>
+								<li class="page-item"><a class="page-link" href="searchFunding.mana?currentPage=${p}&condition=${condition}&sort=${sort}&keyword=${keyword}">${ p }</a></li>
 							</c:otherwise>
-						</c:choose> --%>
+						</c:choose> 
 					</c:forEach>		            
 			            
 			            
@@ -230,14 +230,14 @@
 			           	 	<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
 			           	</c:when>
 			           	<c:otherwise>
+			           		 <c:choose>
+			            		<c:when test="${ empty condition and empty sort }">
 					           		<li class="page-item"><a class="page-link" href="${ pi.currentPage + 1 }">다음</a></li>
-			           		<%-- <c:choose>
-			            		<c:when test="${ empty partnerJoin and empty memberStatus }">
 					            </c:when>
 					            <c:otherwise>
-					            	<li class="page-item"><a class="page-link" href="searchMember.mana?currentPage=${pi.currentPage + 1}&partnerJoin=${partnerJoin}&memberStatus=${memberStatus}&memKey=${memKey}&keyword=${keyword}">다음</a></li>
+					            	<li class="page-item"><a class="page-link" href="searchFunding.mana?currentPage=${pi.currentPage + 1}&condition=${condition}&sort=${sort}&keyword=${keyword}">다음</a></li>
 			            		</c:otherwise>
-			            	</c:choose> --%>
+			            	</c:choose> 
 			           	</c:otherwise> 	
 		        	</c:choose>
 		        	

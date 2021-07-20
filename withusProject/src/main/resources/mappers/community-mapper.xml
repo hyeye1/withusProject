@@ -163,8 +163,11 @@
 	<update id="updateCommunity" parameterType="Community">
 		update
 		       community
-		   set commu_title = #{commuTitle}
+		   set commu_cate = #{commuCate}
+		     , commu_title = #{commuTitle}
 		     , commu_content = #{commuContent}
+		     , commu_create = #{commuCreate}
+		     , commu_status = 'Y'
 		     , commu_origin = #{commuOrigin}
 		     , commu_change = #{commuChange}
 		 where commu_no = #{commuNo}

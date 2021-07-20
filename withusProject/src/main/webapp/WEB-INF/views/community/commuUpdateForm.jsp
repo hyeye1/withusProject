@@ -139,24 +139,23 @@
 
                     <form id="enrollForm" method="post" action="update.co" enctype="multipart/form-data">
                         <table align="center">
-                            
                             <tr>
                                 <div class="select">
-                                    <select class="custom-select" name="condition">
-                                        <option selected>카테고리 선택</option>
-                                        <option value="title">자유</option>
-                                        <option value="content">질문</option>
-                                        <option value="content">공구모집</option>
+                                    <select class="custom-select" name="commuCate" id="commuCate">
+                                        <option value="자유" id="free">자유</option>
+                                        <option value="질문" id="ask">질문</option>
+                                        <option value="공구모집" id="tool">공구모집</option>
                                     </select>
                                 </div>
                             </tr>
+                         
                             <tr>
-                                <th><label for="title">제목</label></th>
-                                <td><input type="text" id="title" class="form-control" name="commuTitle" value="${ c.commuTitle }" required></td>
+                                <th><label for="commuTitle">제목</label></th>
+                                <td><input type="text" id="commuTitle" class="form-control" name="commuTitle" value="${ c.commuTitle }" required></td>
                             </tr>
                             <tr>
-                                <th><label for="writer">작성자</label></th>
-                                <td><input type="text" id="writer" class="form-control" value="${ c.commuWriter }" name="commuWriter" readonly>
+                                <th><label for="commuWriter">작성자</label></th>
+                                <td><input type="text" id="commuWriter" class="form-control" value="${ c.commuWriter }" name="commuWriter" readonly>
                                 </td>
                             </tr>
                             <tr>
@@ -172,10 +171,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th colspan="2"><label for="content">내용</label></th>
+                                <th colspan="2"><label for="commuContent">내용</label></th>
                             </tr>
                             <tr>
-                                <th colspan="2"><textarea class="form-control" required name="commuContent" id="content" rows="10"
+                                <th colspan="2"><textarea class="form-control" required name="commuContent" id="commuContent" rows="10"
                                         style="resize:none;">${ c.commuContent }</textarea></th>
                             </tr>
                         </table>
