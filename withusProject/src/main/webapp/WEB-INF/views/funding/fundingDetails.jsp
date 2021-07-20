@@ -522,7 +522,7 @@
 
                     <div class="detailThumb">
                         <img src="${ p.projectThum }"
-                             height="480px">
+                             width="640px" height="480px">
                     </div>
 
                     <div class="detailAside" align="left">
