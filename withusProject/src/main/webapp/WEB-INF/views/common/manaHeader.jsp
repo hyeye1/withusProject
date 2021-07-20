@@ -48,7 +48,7 @@
 	.logo_img>img{margin: 0 20px;}
 	.login_area{text-align: center; line-height:68px; font-size: 16px;}
 	.login_area>a{margin: 5px;}
-	.login_area>a:hover{cursor: pointer;}
+	.login_area a:hover{cursor: pointer;}
 	
 	/* navigator */
 	.gnb_wrap {width: 100%;float: left;}
@@ -132,26 +132,7 @@
             </div>
         </div>
         
-<%--        
-	    <script>
-	     // 로그인이 null일때 모달창 자동으로 노출
-		    $(document).ready(function(){
-		    	//alert("작동되니?");
-		    	
-		    	// javaScript에서 session에 담긴 값 가져오기 
-		      var loginUser = '<%=(String)session.getAttribute("loginUser")%>'; 
-		    	alert(loginUser);
-		    	
-		    	if(loginUser == "null"){
-			    	//alert("작동되니?");
-			    	$("#manaLogin").modal();
-		    		
-		    	}else{
-		    		location.href = "memberListView.mana"
-		    	}
-		    });
-	    </script> 
-      --%>
+     
         <div class="gnb_wrap">
             <ul class="navi">
                 <li><a href="memberListView.mana">회원관리</a></li>

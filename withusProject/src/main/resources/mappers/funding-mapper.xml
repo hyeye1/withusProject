@@ -851,47 +851,9 @@
 			parameterType="hashmap">
 		select
 			   count(*)
-		from 
-          	   tb_order o
-             , project p
-             , category c
-             , member m
-        	where p.project_title like '%' || #{keyword} || '%' 
-			<if test='condition != null'>
-				<choose>
-					<when test='condition == "ing"'> and ceil(project_end_dt - sysdate) >= 0 </when>
-					<when test='condition == "end"'> and 0 > ceil(project_end_dt - sysdate) </when>
-				</choose>
-            </if>
-            <if test='sort == "deadline"'> 
-            	and ceil(project_end_dt - sysdate) >= 0
-			 </if>
-         
-           and p.project_no = o.project_no(+)
-           and p.cat_no = c.cat_no 
-           and p.member_no = m.member_no 
-         group
-            by p.project_no
-             , p.project_title
-             , c.cat_no
-             , c.cat_name
-             , m.partner_name
-             , p.project_gprice
-             , p.project_end_dt 
-             , p.project_status
-             , p.project_cr_dt
-         order 
-            by 
-            <if test='condition != null'> 
-            	p.project_cr_dt desc
-           	</if>
-			<if test='sort != null'>
-				<choose>
-	 			   	<when test='sort == "best"'>  p.project_cr_dt desc </when>
-	 			   	<when test='sort == "deadline"'>  dday asc</when>
-	 			   	<when test='sort == "newest"'>  likeCount desc </when>
-			   </choose>
-			</if>
+		from  project 
+        	where project_title like '%' || #{keyword} || '%' 
+			
 		</select>
  	
  	<!-- 펀딩 검색 -->
@@ -907,7 +869,7 @@
              , sum(o.total_price) total_price
              , floor(sum(o.total_price) / p.project_gprice * 100) percentage
              , p.project_gprice
-             , p.project_end_dt
+             , to_char(p.project_end_dt,'YYYY-MM-DD') project_end_dt
              , ceil(project_end_dt - sysdate) dday
              , p.project_status
              , (select count(*) from likey l 
@@ -949,9 +911,9 @@
            	</if>
 			<if test='sort != null'>
 				<choose>
-	 			   	<when test='sort == "best"'>  p.project_cr_dt desc </when>
-	 			   	<when test='sort == "deadline"'>  dday asc</when>
-	 			   	<when test='sort == "newest"'>  likeCount desc </when>
+	 			   	<when test='sort == "best"'>  , p.project_cr_dt desc </when>
+	 			   	<when test='sort == "deadline"'> , dday asc</when>
+	 			   	<when test='sort == "newest"'> , likeCount desc </when>
 			   </choose>
 			</if>
 	</select> 

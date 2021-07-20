@@ -528,7 +528,7 @@ public class FundingController {
 			map.put("condition", condition);
 			map.put("sort", sort);
 			map.put("keyword", keyword);
-			System.out.println(map);
+			//System.out.println(map);
 			
 			// 검색결과 리스트 총 갯수
 			int count = funService.countSearchFdMana(map);
