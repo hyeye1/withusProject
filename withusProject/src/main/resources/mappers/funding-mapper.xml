@@ -134,7 +134,7 @@
 	             , p.project_count
 	         order 
 	            by p.project_count desc)
-             where rownum <![CDATA[ < ]]> 10
+             <!-- where rownum <![CDATA[ < ]]> 10 -->
     </select>
     
     <select id="selectEveList" resultMap="fundingListResultSet">
@@ -178,7 +178,7 @@
             having floor(sum(o.total_price) / p.project_gprice * 100) > 90 and floor(sum(o.total_price) / p.project_gprice * 100) <![CDATA[ < ]]> 100
 	         order 
 	            by floor(sum(o.total_price) / p.project_gprice * 100) desc)
-             where rownum <![CDATA[ < ]]> 10
+             <!-- where rownum <![CDATA[ < ]]> 10 -->
     </select>
     
     <select id="selectNewList" resultMap="fundingListResultSet">
@@ -220,7 +220,7 @@
 	             , p.project_end_dt
             
 	         )
-             where rownum <![CDATA[ < ]]> 10
+             <!-- where rownum <![CDATA[ < ]]> 10 -->
     </select>
     
     <select id="selectReadyList" resultMap="fundingListResultSet">
@@ -261,7 +261,7 @@
 	             , p.project_end_dt 
 	             , p.project_count
 	         )
-             where rownum <![CDATA[ < ]]> 10
+             <!-- where rownum <![CDATA[ < ]]> 10 -->
     </select>
 	
 	<select id="selectSearchList" resultMap="fundingListResultSet" parameterType="hashmap">
