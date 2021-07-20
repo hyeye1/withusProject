@@ -957,8 +957,7 @@
                         -->
                         
                         <div class="comReply">
-							<table class="replyTable">
-							</table>
+							
 						</div>
                         
                         
@@ -1022,6 +1021,8 @@
                 				console.log(list);
                 				var reply = "";
                 				
+                				var button ="<button type='button' name='delete' value='obj.memberNo'>삭제</button>";
+                				
                 				list  = list.filter(function(item) {
                 					  return item !== null && item !== undefined && item !== '';
                 					});
@@ -1029,27 +1030,46 @@
                 				
                 				
                 				$.each(list, function(i, obj){
-                					reply += "<thead id='reply'>"
-	                					  		+"<tr class='replyWriter'>"
-		                					  		+"<th rowspan='2'>" + "<img src=" + obj.memberProfile + ">" + "</th>"
-		                					  		+"<td id='memberName'>" + obj.memberName +"</td>"
-		                					  	+"</tr>"	
-		                					  	+"<tr>"
-		                					  	    +"<td id='replyDate'>" + obj.replyDate +"</td>"
-		                					  	+"</tr>"
-		                					  	+"<tr>"
-		                					  	    +"<td colspan='2'><div class='replyContent'>" + obj.replyContent +"</div><hr></td>"
-		                					  	+"</tr>"
-		                					  	
-		                					  	+"</thead>";
+                					reply += "<table class='replyTable'>"
+        										+"<thead id='reply'>"
+		                					  		+"<tr class='replyWriter'>"
+			                					  		+"<th rowspan='2'>" + "<img src=" + obj.memberProfile + ">" + "</th>"
+			                					  		+"<td id='memberName'>" + obj.memberName +"</td>"
+			                					  	+"</tr>"	
+			                					  	+"<tr>"
+			                					  	    +"<td id='replyDate'>" + obj.replyDate +"</td>"
+			                					  	+"</tr>"
+			                					  	+"<tr>"
+			                					  	    +"<td colspan='2'><div class='replyContent'>" + obj.replyContent +"</div></td>"
+			                					  	+"</tr>"
+			                					 +"</thead>"
+			                					 
+			                					 +"<c:if test='${ loginUser.memberStatus eq "A"}'><tbody id='delete'>"
+		                					  		+"<tr>"
+			                					  	    +"<td colspan='2'><div class='btnArea'><button type='button' name='delete' value=" +obj.replyNo +">삭제</button></div></td>"
+			                					  	    
+			                					  	+"</tr>"
+			                					 +"</tbody></c:if>"
+			                					 
+			                					 +"<tfoot>"
+		                					  		+"<tr>"
+			                					  	    +"<td colspan='2'><hr></td>"
+			                					  	+"</tr>"
+			                					 +"</tfooy>"
+			                					 
+			                					 
+		                					  +"</table>";
 		                		})
                 				
-                				$(".comReply .replyTable").html(reply);
+                				$(".comReply").html(reply);
+                				
+                				
+                				
                 				
                 				
                 				
                 			}, error:function(){
-                				console.log("댓글 리스트 조회용 ajax")
+                				console.log("댓글 리스트 조회용 ajax");
                 			}
                 			
                 		});
@@ -1057,7 +1077,36 @@
                     
                     </script>
                     
+                    <script>
                     
+                    $('body').on('click', '[name=delete]', function(event) {
+                    	
+                    	var replyNo = $(this).val();
+                    	
+                    	
+                    	$.ajax({
+                			url:"deleteReply.fd",
+                			data:{replyNo:replyNo},
+                			
+                			success:function(result){
+                				
+                				console.log(result);
+                				alert("댓글이 삭제되었습니다");
+	    						selectReplyList();
+                				
+                				
+                				
+                				
+                				
+                			}, error:function(){
+                				console.log("댓글 삭제용 ajax 실패")
+                			}
+                			
+                		});
+                    	
+                    })
+                    
+                    </script>
                     
                     
                     

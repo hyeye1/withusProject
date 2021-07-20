@@ -315,6 +315,26 @@ public class FundingController {
 		
 	}
 	
+	// 프로젝트 댓글 삭제(관리자)
+	@ResponseBody
+	@RequestMapping("deleteReply.fd")
+	public String deleteReply(int replyNo) {
+		 
+		 int result = funService.deleteReply(replyNo);
+		 
+		 if(result>0) {
+			 return "success";
+		 }else {
+			 return "fail";
+		 }	
+		 
+		
+		
+	}
+	
+	
+	
+	
 	// 프로젝트 대댓글부분
 	@ResponseBody
 	@RequestMapping(value="proReReply.fd", produces="application/json; charset=utf-8")

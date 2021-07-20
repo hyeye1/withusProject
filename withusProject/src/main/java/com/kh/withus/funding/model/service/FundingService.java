@@ -62,6 +62,9 @@ public interface FundingService {
        
     // 펀딩 댓글 목록조회
     ArrayList<ProjectReply> selectReplyList (int pno);
+    
+    // 펀딩댓글 삭제
+ 	int deleteReply(int replyNo);
 
     //펀딩 좋아요 상태확인
 	int likeyCheck(MyPage m);
@@ -95,6 +98,8 @@ public interface FundingService {
 
 	// 검색
 	ArrayList<Project> searchFundingMana(HashMap<String, String> map, PageInfo pi);
+
+	
 
 	
 	
