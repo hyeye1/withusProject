@@ -45,7 +45,7 @@ public class FundingController {
 	@RequestMapping("menuList.fun")
     public ModelAndView selectMenuList(String menu, ModelAndView mv) {
 		
-		System.out.println(menu);
+		//System.out.println(menu);
 		ArrayList<Project> pList = null;
 		
 		switch(menu){
@@ -68,7 +68,7 @@ public class FundingController {
 			
 		}
 		
-		System.out.println(pList);
+		//System.out.println(pList);
 		
 		mv.addObject("menu", menu)
 		.addObject("pList", pList) 
@@ -80,17 +80,17 @@ public class FundingController {
 	@RequestMapping("search.fun")
     public ModelAndView selectSearchList(Search s, ModelAndView mv) {
 		
-		System.out.println(s);
+		//System.out.println(s);
 		
 		HashMap<String, String> map = new HashMap<>();
 		map.put("condition", s.getCondition());
 		map.put("keyword", s.getKeyword());
 		
-		System.out.println(map);
+		//System.out.println(map);
 		
 		ArrayList<Project> list = funService.selectSearchList(map);
 		
-		System.out.println(list);
+		//System.out.println(list);
 		
 		mv.addObject("list", list)
 		.setViewName("funding/fundingListView");
@@ -101,7 +101,7 @@ public class FundingController {
 	@RequestMapping("list.fun")
     public ModelAndView selectFundingList(int catNo, String menu, ModelAndView mv) {
 		
-		System.out.println(menu);
+		//System.out.println(menu);
 		
 		// 전체 카테고리 사진, 명 조회
 		ArrayList<Category> cList = funService.selectCate();
@@ -245,7 +245,7 @@ public class FundingController {
 	@RequestMapping("pay.fun")
 	public String payForm(Order o, Model model) {
 		
-		System.out.println(o);
+		//System.out.println(o);
 		
 		FundingDetail fd = funService.selectOneReward(o.getRewardNo());
 		
@@ -294,8 +294,6 @@ public class FundingController {
 		 
 		r.setMemberNo(Integer.parseInt(memberNo));
 		
-		
-		
 		 int result = funService.insertReply(r);
 		 if(result>0) {
 			 return "success";
@@ -315,23 +313,17 @@ public class FundingController {
 		
 		return new Gson().toJson(funService.selectReplyList(pno));
 		
-		
-		
-		
 	}
 	
 	// 프로젝트 대댓글부분
 	@ResponseBody
 	@RequestMapping(value="proReReply.fd", produces="application/json; charset=utf-8")
 	public String ajaxSelectReReplyList(String replyNo) {
-		System.out.println(replyNo);
+		//System.out.println(replyNo);
 		return null;
 		
 		
 		//return new Gson().toJson(funService.selectReplyList(pno));
-		
-		
-		
 		
 	}
 	
@@ -385,7 +377,6 @@ public class FundingController {
 	@RequestMapping("dislike.fd")
 	public String dislike(String memberNo, String projectNo, HttpSession session) {
 		
-		
 		MyPage m = new MyPage();
 		m.setMemberNo(Integer.parseInt(memberNo));
 		m.setProjectNo(Integer.parseInt(projectNo));
@@ -398,7 +389,6 @@ public class FundingController {
 		}else { // 안좋아요중
 			return "N";
 		}
-					
 			
 	}
 	
@@ -406,7 +396,6 @@ public class FundingController {
 	@ResponseBody
 	@RequestMapping("like.fd")
 	public String like(String memberNo, String projectNo, HttpSession session) {
-		
 		
 		MyPage m = new MyPage();
 		m.setMemberNo(Integer.parseInt(memberNo));
@@ -424,36 +413,7 @@ public class FundingController {
 	}	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	// +현정 : 관리자
-	
 	// 펀딩 리스트 조회
 	@RequestMapping("fundingListView.mana")
 	public ModelAndView selectFundingList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
@@ -504,7 +464,7 @@ public class FundingController {
 			
 			// 이전 url 가져오기
 			String referer = (String)request.getHeader("REFERER");
-			System.out.println(referer);
+			//System.out.println(referer);
 			
 			if(result > 0 ) {
 				session.setAttribute("alertMsg", "프로젝트 승인 처리 완료");
@@ -550,8 +510,5 @@ public class FundingController {
 			return mv;
 			
 		}
-	
-	
-   
-	
+	   
 }
