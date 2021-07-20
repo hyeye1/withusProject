@@ -31,7 +31,7 @@
     #menu_1_2{width: 50%; margin-top: 60px;}
 
     /*프로필 부분*/
-    #user_name{font-size: 19px; margin-top: 40px; margin-bottom: 0; margin-left: 10px;}
+    #user_name{font-size: 19px; margin-top: 40px; margin-bottom: 0; margin-left: 10px; font-weight:bold;}
     #member_grade{margin-top: 0px; margin-left: 10px;}    
 
     a{text-decoration: none !important; color: black; } 
@@ -177,7 +177,6 @@
 		            <li><a href="like.me">좋아요</a></li>
 		            <li><a href="followlist.me">팔로잉 목록</a></li>
 		            <li><a href="myQuery.me">나의 문의</a></li>
-		             <li><a href="">내가 쓴 글</a></li>
 		        </ul>
 		
 		      </div>
@@ -190,8 +189,7 @@
 		          <ul>
 		            <li><a href="fundingMain.me">펀딩스튜디오</a>  
 		            <li><a href="partnerFunding.me">나의펀딩</a></li>
-		            <li><a href="">펀딩관리</a></li>
-		            <li><a href="">프로젝트안내</a></li>
+		            <li><a href="orderNDeliveryList.part">펀딩관리</a></li>
 		          </ul>
 		      </div>
 		</div>

@@ -49,7 +49,8 @@
         /* 입력요소 */
         .info table{margin-left: 20px;}
         .info th{width: 200px; height: 40px;}
-        .info input{width: 300px}
+        .info input{width: 300px; font-size:14px;}
+        .info #partnerIntro{width: 300px; font-size:14px;}
         .info label{cursor: pointer; font-size: 12px;}
 
         /* 버튼 부분 */
@@ -117,7 +118,7 @@
                             
                             <tr>
                                 <th>파트너소개</th>
-                                <td><textarea name="partnerIntro" id="partnerIntro" cols="35" rows="5" style="resize: none;">${loginUser.partnerIntro }</textarea></td>
+                                <td><textarea name="partnerIntro" id="partnerIntro" rows="5" style="resize: none;">${loginUser.partnerIntro }</textarea></td>
                             </tr>
                             <tr>
                             	<td></td>

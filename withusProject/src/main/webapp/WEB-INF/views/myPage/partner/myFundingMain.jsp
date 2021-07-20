@@ -84,6 +84,7 @@
         /* 버튼 */
         #openBtnArea{margin-left: 250px; margin-bottom: 50px; margin-top: 170px; }
         #openBtn{width: 300px; margin-top: 30px; background-color: rgb(52, 152, 219); color: honeydew;}
+        #openBtn>a{text-decoration: none; color: honeydew;}
         
         
         

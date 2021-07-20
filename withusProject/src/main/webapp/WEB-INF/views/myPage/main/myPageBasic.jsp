@@ -42,8 +42,8 @@
 
         
         /* main content */
-        #main_1{height: 10%; }
-        #main_2{height: 30%; margin-top: 20px;}
+        #main_1{height: 15%; }
+        #main_2{height: 40%; margin-top: 20px;}
         #main_3{height: 30%; margin-top: 150px;}
         
 
@@ -86,7 +86,7 @@
         
         
         /* 팔로잉 테이블 */
-        #main_3_2>table{width: 100%; font-weight: 500;}
+        #main_3_2>table{width: 100%; font-weight: 500; margin-top:10px}
         #profile{width: 10%; height: 60px;}
         #user{width: 60%}
         #status{width: 20%}
@@ -116,7 +116,7 @@
                 
                 <!-- 나의 펀딩 목록-->
                 <div id="main_1">
-                  <p id="mainTitle"><a href="myFunding.me"><img src="resources/images/myPage/shopping.png" id="menuIcon">밀어준 펀딩 ${fundingCount} 회
+                  <p id="mainTitle"><a href="myFunding.me"><img src="resources/images/myPage/shopping.png" id="menuIcon">밀어준 펀딩 <label style="color: rgb(52, 152, 219); font-size:25px;">${fundingCount}</label> 회
                   <img src="resources/images/myPage/right_arrow.png" id="rightIcon"></a></p>
                   
                   <div id="underLine"></div>
@@ -243,7 +243,7 @@
 	                    	   <table id="followTable">
 		                      	<tr>
 			                        <td id="profile">
-			                        	<a href="partnerDetail.me?memberNo=${ m.memberNo }"><img src="${ m.memberProfile }" width="70" height="70" class="rounded-circle" value="${ m.memberNo }" ></a>
+			                        	<a href="partnerDetail.me?memberNo=${ m.memberNo }"><img src="${ m.memberProfile }" width="60" height="60" class="rounded-circle" value="${ m.memberNo }" ></a>
 			                        </td>
 			                        <th id="user">
 			                          <div id="id">${ m.partnerName }</div>

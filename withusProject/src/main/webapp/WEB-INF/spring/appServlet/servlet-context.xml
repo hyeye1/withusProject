@@ -39,7 +39,7 @@
 			
 			<mapping path="/querylist.me"/>
 			<mapping path="/myQuery.me"/>
-			<mapping path="/myQueryDetail"/>
+			<mapping path="/myQueryDetail.me"/>
 			<mapping path="/deleteQuery.me"/>
 			
 			<mapping path="/like.me"/>

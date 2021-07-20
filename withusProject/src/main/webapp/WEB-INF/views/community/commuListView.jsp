@@ -87,7 +87,7 @@
 
         .innerOuter {
           border: 1px solid lightgray;
-          width: 80%;
+          width: 90%;
           margin: auto;
           padding: 5% 15%;
           background: white;
@@ -155,6 +155,9 @@
           position: relative;
 
         }
+        #enroll{
+          margin-left: 530px;
+        }
       </style>
     </head>
 
@@ -204,7 +207,7 @@
                 <ul class="filter-btn-list">       
                   <!-- 로그인후 상태일 경우만 보여지는 글쓰기 버튼-->
                   <c:if test="${ !empty loginUser }">
-                    <li>
+                    <li id="enroll">
                       <a class="btn btn-secondary"
                         style="float:right; background-color: rgb(60, 145, 224); border: none;"
                         href="commu.enroll">새글쓰기</a>

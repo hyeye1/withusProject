@@ -15,7 +15,7 @@
     <style>
         
         /*div{border: 1px solid red; box-sizing: border-box;}*/
-        .wrap{width: 1000px; height: 800px; margin: auto;}
+        .wrap{width: 1000px; height: 900px; margin: auto;}
 
         .wrap>div{width: 100%;}
 
@@ -39,12 +39,12 @@
 
 
         /* content */
-        .like #content_1{height: 80%;}
-        .like #content_2{height: 10%; width: 80%;}
+        .like #content_1{height: 90%;}
+        .like #content_2{height: 5%; width: 80%;}
         
         
         /* 좋아요 목록 */
-        .like #content_1{margin-top: 50px;}
+        .like #content_1{margin-top: 20px;}
         .like #content_1>div{float: left; padding: 10px;}
         #content_1>#likeList:hover {cursor:pointer; opacity:0.5;}
         

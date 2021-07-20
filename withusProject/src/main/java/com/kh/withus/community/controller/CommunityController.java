@@ -214,7 +214,7 @@ public class CommunityController {
 		
 		if(result > 0) { 
 			session.setAttribute("alertMsg", "게시글이 성공적으로 수정되었습니다");
-			return "redirect:commu.detail?cno=" + c.getCommuNo();
+			return "redirect:commu.detail?cno=" + c.getCommuNo();		
 		}else { // 실패 => 에러문구 담아서 => 에러페이지 포워딩
 			model.addAttribute("errorMsg", "게시글 수정 실패");
 			return "common/errorPage";
