@@ -290,9 +290,9 @@ public class FundingController {
 	// 프로젝트 댓글입력
 	@ResponseBody
 	@RequestMapping("rinsert.fd")
-	public String ajaxInsertReply(ProjectReply r, String memberNo) {
+	public String ajaxInsertReply(ProjectReply r, int memberNo) {
 		 
-		r.setMemberNo(Integer.parseInt(memberNo));
+		 r.setMemberNo(memberNo);
 		
 		 int result = funService.insertReply(r);
 		 if(result>0) {

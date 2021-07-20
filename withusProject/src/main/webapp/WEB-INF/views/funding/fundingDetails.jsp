@@ -444,7 +444,19 @@
 	}
 
 	.comReply .replyTable{width: 100%;}
-	.comReply button{margin-top: 40px;}
+	.comReply button{
+		margin-top: 30px; 
+		float:right;
+		font-size: 12px;
+	    width: 50px;
+	    height: 30px;
+	    border-radius: 3px;
+	    border: 1px solid rgb(94, 94, 94);
+	    background-color: white;
+	    color: rgb(94, 94, 94);
+		
+		
+		}
 	
 	.detailGuide {
 	    background-color: white;
@@ -918,53 +930,9 @@
                             <hr>
                         </div>
 					
-						<!-- 일반댓글
-                        <div class="comReply">
-                        	<div class="Reply">
-	                            <div class="adminShown">
-	                                <button style="float: right;">삭제하기</button>
-	                            </div>
-	                            <div class="replyWriter"></div>
-                            </div>
+						
                         
-
-                        
-                           
-                           <div class="reReply">
-                                <div class="partnerShownEdit">
-                                    <button style="float: right; display: none;">수정/삭제</button>
-                                </div>
-                                <div class="adminShown">
-                                    <button style="float: right;">삭제하기</button>
-                                </div>
-                                <hr>
-                                
-                                <div class="replyWriter">
-                                    <img src="${ pageContext.request.contextPath }/resources/images/partnerDefault.PNG">
-                                    <div class="partnerMarks" align="center">
-                                        	파트너
-                                    </div>
-                                    <p>
-                                        <b>나브 Nav</b><br>
-                                        2021-04-05
-                                    </p>
-                                </div>
-                                <p class="replyContent">펀딩, 응원 감사드립니다 :)</p>
-                            </div>
-                            
-                        
-                        </div> 
-                        -->
-                        
-                        <div class="comReply">
-							
-						</div>
-                        
-                        
-                        
-                        
-                        
-                        
+                        <div class="comReply"></div>
                         
                     </div>
                     
@@ -972,9 +940,6 @@
                     $(function(){
                 		selectReplyList();
                 		
-                		//selectReReplyList();
-                		
-                		//setInterval(selectReplyList, 1000); // 1초 간격으로 주기적으로 실시간으로 갱신된 댓글리스트 조회요청
                 	})
                     
                     function insertReply(){
@@ -1021,14 +986,6 @@
                 				console.log(list);
                 				var reply = "";
                 				
-                				var button ="<button type='button' name='delete' value='obj.memberNo'>삭제</button>";
-                				
-                				list  = list.filter(function(item) {
-                					  return item !== null && item !== undefined && item !== '';
-                					});
-                				
-                				
-                				
                 				$.each(list, function(i, obj){
                 					reply += "<table class='replyTable'>"
         										+"<thead id='reply'>"
@@ -1044,18 +1001,27 @@
 			                					  	+"</tr>"
 			                					 +"</thead>"
 			                					 
-			                					 +"<c:if test='${ loginUser.memberStatus eq "A"}'><tbody id='delete'>"
-		                					  		+"<tr>"
-			                					  	    +"<td colspan='2'><div class='btnArea'><button type='button' name='delete' value=" +obj.replyNo +">삭제</button></div></td>"
-			                					  	    
-			                					  	+"</tr>"
-			                					 +"</tbody></c:if>"
+			                					 +"<c:if test='${ loginUser.memberStatus eq "A"}'>"
+			                					 	+"<tbody id='delete'>"
+			                					  		+"<tr>"
+				                					  	    +"<td colspan='2'><div class='btnArea'><button type='button' name='delete' value=" +obj.replyNo +">삭제</button></div></td>"
+				                					  	+"</tr>"
+			                					 	+"</tbody>"
+			                					 +"</c:if>"
+			                					 
 			                					 
 			                					 +"<tfoot>"
+				                					 +"<c:if test='${ loginUser.memberId eq "obj.memberId"}'>"
+				                					 	
+				                					  		+"<tr>"
+					                					  	    +"<td colspan='2'><div class='btnArea'><button type='button' name='delete' value=" +obj.replyNo +">삭제dddddd</button></div></td>"
+					                					  	+"</tr>"
+				                					 	
+				                					 +"</c:if>"
 		                					  		+"<tr>"
 			                					  	    +"<td colspan='2'><hr></td>"
 			                					  	+"</tr>"
-			                					 +"</tfooy>"
+			                					 +"</tfoot>"
 			                					 
 			                					 
 		                					  +"</table>";
@@ -1063,13 +1029,8 @@
                 				
                 				$(".comReply").html(reply);
                 				
+            					}, error:function(){
                 				
-                				
-                				
-                				
-                				
-                			}, error:function(){
-                				console.log("댓글 리스트 조회용 ajax");
                 			}
                 			
                 		});
@@ -1077,88 +1038,41 @@
                     
                     </script>
                     
+                    <!-- 관리자일때 댓글 삭제 가능 -->
                     <script>
-                    
                     $('body').on('click', '[name=delete]', function(event) {
                     	
                     	var replyNo = $(this).val();
+                    	var result = confirm("해당 댓글을 삭제하시겠습니까?");
+                    	
+                    	if(result){
+                    		
+                    		$.ajax({
+                    			url:"deleteReply.fd",
+                    			data:{replyNo:replyNo},
+                    			
+                    			success:function(result){
+                    				
+                    				console.log(result);
+                    				alert("댓글이 삭제되었습니다");
+    	    						selectReplyList();
+                    				
+                    			}, error:function(){
+                    				console.log("댓글 삭제용 ajax 실패")
+                    			}
+                    			
+                    		});
+                    	
+                    	} else {
+                    		
+                    		return false;
+                    	}
                     	
                     	
-                    	$.ajax({
-                			url:"deleteReply.fd",
-                			data:{replyNo:replyNo},
-                			
-                			success:function(result){
-                				
-                				console.log(result);
-                				alert("댓글이 삭제되었습니다");
-	    						selectReplyList();
-                				
-                				
-                				
-                				
-                				
-                			}, error:function(){
-                				console.log("댓글 삭제용 ajax 실패")
-                			}
-                			
-                		});
                     	
                     })
                     
                     </script>
-                    
-                    
-                    
-                    
-                    <!--  
-                    function selectReplyList(){
-                		$.ajax({
-                			url:"proReply.fd",
-                			data:{pno:${p.projectNo}},
-                			
-                			success:function(list){
-                				
-                				console.log(list);
-                				var reply = "";
-                				
-                				$.each(list, function(i, obj){
-                					reply += "<img src=" + obj.memberProfile + ">"
-                								+ "<p><b>" + obj.memberName + "</b><br>"
-                								+ obj.replyDate + "</p>"
-                								
-                								+ "<div>" 
-                								+ obj.replyContent
-                								+ "</div>"
-                								+ "<hr>"
-                								+ "<label>" + obj.replyNo + "</label>";
-                								
-                					
-                				
-                				})
-                				
-                				$(".Reply .replyWriter").html(reply);
-                				$(".Reply .replyWriter div").attr("class", "replyContent");
-                				$(".Reply .replyWriter label").attr("style", "display:none").attr("name","replyNo");
-                				
-                				
-                			}, error:function(){
-                				console.log("댓글 리스트 조회용 ajax")
-                			}
-                			
-                		});
-                	}
-                    
-                    
-                 -->
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
                     
                     
                     
