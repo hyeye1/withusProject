@@ -44,8 +44,8 @@
 
         .userDetail #content_1_2>div{float: left; margin-top: 20px; text-align: center; font-size: 13px;}
         
-        .followBtn{color:black;}
-        .followingBtn{color:white;}
+        .followBtn{color:black; width:80px;}
+        .followingBtn{color:white; width:80px;}
 
         
         /* 펀딩 목록 */
@@ -131,7 +131,7 @@
                             			<button type="button" class="btn btn-dark btn-sm followingBtn" id="followBtn">팔로잉</button>
                             		</c:when>
                             		<c:otherwise>
-                            			<button type="button" class="btn btn-outline-dark btn-sm followBtn" id="followBtn">팔로우</button>
+                            			<button type="button" class="btn btn-outline-dark btn-sm followBtn" id="followBtn">+팔로우</button>
                             		</c:otherwise>
                             	</c:choose>
                             </div>	
@@ -209,7 +209,7 @@
 		      						
 		      						if(result == "Y"){ // 언팔하기
 		      							
-		      							$("#clicked").html('팔로우').removeAttr("class").attr("class", "btn btn-outline-dark btn-sm");
+		      							$("#clicked").html('+팔로우').removeAttr("class").attr("class", "btn btn-outline-dark btn-sm followBtn");
 		      							alert("팔로우를 해제하였습니다");
 		      							
 		      							
@@ -234,7 +234,7 @@
 		      						
 		      						if(result == "Y"){ // 팔로우 중
 		      							
-		      							$("#clicked").html('팔로잉').removeAttr("class").attr("class", "btn btn-dark btn-sm");
+		      							$("#clicked").html('팔로잉').removeAttr("class").attr("class", "btn btn-dark btn-sm followingBtn");
 		      							alert("해당 파트너를 팔로우했습니다");
 		      							
 		      						}else{ // 오류

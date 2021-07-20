@@ -57,7 +57,7 @@
         .follow #id{font-size: 18px; font-weight: bold;}
         .follow #idDetail{font-size: 12px;}
        
-        .follow .btn{background-color: rgb(178, 185, 223); color: white;}
+        .follow .btn{background-color: rgb(178, 185, 223); color: white; font-weight:550; width:80px;}
         
 		
 		#profile>img{cursor: pointer;}
@@ -158,7 +158,7 @@
 		      						
 		      						if(result == "Y"){ // 언팔로우
 		      							
-		      							$("#clicked").html('팔로우').css('background', 'rgb(228, 230, 238)').css('color', ' rgb(111, 100, 122)');
+		      							$("#clicked").html('+팔로우').css('background', 'rgb(228, 230, 238)').css('color', 'black');
 		      							$("#clicked").removeAttr("id");
 		      							alert("팔로우를 해제하였습니다");
 		      							
