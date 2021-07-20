@@ -22,6 +22,7 @@ public class ProjectReply {
 	private String memberName;
 	private String memberProfile;
 	private String partnerName;
+	private String memberId;
 	
 	
 	private int subreNo;

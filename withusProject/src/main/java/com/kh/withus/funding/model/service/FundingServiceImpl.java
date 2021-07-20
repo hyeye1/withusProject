@@ -133,6 +133,11 @@ public class FundingServiceImpl implements FundingService {
 		return funDao.selectReplyList(sqlSession, pno);
 		
 	}
+	
+	@Override
+	public int deleteReply(int replyNo) {
+		return funDao.deleteReply(sqlSession, replyNo);
+	}
 
 	@Override
 	public int likeyCheck(MyPage m) {
@@ -197,6 +202,8 @@ public class FundingServiceImpl implements FundingService {
 	public ArrayList<Project> searchFundingMana(HashMap<String, String> map, PageInfo pi) {
 		return funDao.searchFundingMana(sqlSession, map, pi);
 	}
+
+	
 
 
 }

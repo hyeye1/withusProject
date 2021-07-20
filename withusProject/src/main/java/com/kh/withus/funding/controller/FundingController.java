@@ -290,9 +290,9 @@ public class FundingController {
 	// 프로젝트 댓글입력
 	@ResponseBody
 	@RequestMapping("rinsert.fd")
-	public String ajaxInsertReply(ProjectReply r, String memberNo) {
+	public String ajaxInsertReply(ProjectReply r, int memberNo) {
 		 
-		r.setMemberNo(Integer.parseInt(memberNo));
+		 r.setMemberNo(memberNo);
 		
 		 int result = funService.insertReply(r);
 		 if(result>0) {
@@ -314,6 +314,26 @@ public class FundingController {
 		return new Gson().toJson(funService.selectReplyList(pno));
 		
 	}
+	
+	// 프로젝트 댓글 삭제(관리자)
+	@ResponseBody
+	@RequestMapping("deleteReply.fd")
+	public String deleteReply(int replyNo) {
+		 
+		 int result = funService.deleteReply(replyNo);
+		 
+		 if(result>0) {
+			 return "success";
+		 }else {
+			 return "fail";
+		 }	
+		 
+		
+		
+	}
+	
+	
+	
 	
 	// 프로젝트 대댓글부분
 	@ResponseBody

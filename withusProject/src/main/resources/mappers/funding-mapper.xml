@@ -77,6 +77,7 @@
 		<result column="member_name" property="memberName" />
 		<result column="member_profile" property="memberProfile" />
 		<result column="partner_name" property="partnerName" />
+		<result column="member_Id" property="memberId" />
 		
 		<result column="subre_no" property="subreNo" />
 		<result column="subre_content" property="subreContent" />
@@ -634,6 +635,7 @@
                , m.member_no
                , m.member_name
                , m.member_profile
+               , m.member_id
                , s.subre_content
                , to_char(s.subre_date, 'YYYY-MM-DD') subre_date
             from pro_reply r
@@ -645,6 +647,13 @@
 		   	  by reply_no desc 
 	
 	</select>
+	
+	<update id="deleteReply" parameterType="_int">
+		update
+		       pro_reply
+		   set reply_status = '2'
+		 where reply_no = #{replyNo}
+	</update>
  	
  	<!-- 댓글등록 -->
  	<insert id="insertReply"  parameterType="ProjectReply">

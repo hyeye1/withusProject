@@ -95,6 +95,10 @@ public class FundingDao {
 	public ArrayList<ProjectReply> selectReplyList(SqlSessionTemplate sqlSession, int pno) {
 		return (ArrayList)sqlSession.selectList("fundingMapper.selectReplyList", pno);
 	}
+	
+	public int deleteReply(SqlSessionTemplate sqlSession, int replyNo) {
+		return sqlSession.update("fundingMapper.deleteReply", replyNo);
+	}
 
 	public int likeyCheck(SqlSessionTemplate sqlSession, MyPage m) {
 		return sqlSession.selectOne("fundingMapper.likeyCheck", m);
@@ -153,6 +157,8 @@ public class FundingDao {
 		
 		return (ArrayList)sqlSession.selectList("fundingMapper.searchFundingMana", map, rowBounds);
 	}
+
+	
 
 	
 	
