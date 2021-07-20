@@ -20,6 +20,22 @@ import com.kh.withus.order.model.vo.Order;
 @Repository
 public class FundingDao {
 	
+	public ArrayList<Project> selectFamousList3(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectFamousList3");
+	}
+
+	public ArrayList<Project> selectEveList3(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectEveList3");
+	}
+
+	public ArrayList<Project> selectNewList3(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectNewList3");
+	}
+
+	public ArrayList<Project> selectReadyList3(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectReadyList3");
+	}
+	
 	public ArrayList<Project> selectFamousList(SqlSessionTemplate sqlSession) {
 	    return (ArrayList)sqlSession.selectList("fundingMapper.selectFamousList");
 	    }
@@ -158,8 +174,4 @@ public class FundingDao {
 		return (ArrayList)sqlSession.selectList("fundingMapper.searchFundingMana", map, rowBounds);
 	}
 
-	
-
-	
-	
 }

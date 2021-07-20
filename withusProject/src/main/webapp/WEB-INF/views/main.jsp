@@ -30,11 +30,10 @@
         .mainBody{ width:1200px; height: 550px;}
         
         .mainTitle{
-            font-size: 27px; 
+            font-size: 40px; 
             font-weight: 900; 
             float: left; 
-            margin-top: 70px; 
-            margin-left: 65px;
+            margin: 50px 0 20px 40px; 
         } 
         .mainItems{
             text-align: left;
@@ -48,6 +47,18 @@
             float: right; 
             margin-right: 10px;
         }
+        .thumbnail:hover{
+        cursor:pointer;
+        opacity:0.5;
+    	}
+        .pTitle{
+		height:80px;
+		font-weight: 600;
+		font-size: 18px;
+		margin-top: 5px;
+		}
+		.leftp{color: grey;}
+		#dday{float:right;}
 
         .visualSlide * {margin:0;padding:0;}
         .section input[id*="slide"] {display:none;}
@@ -205,192 +216,35 @@
                 </div>
             </div>
         </div>
-
+        
         <!-- 이 프로젝트 어때요? -->
-        <div id="mainRecom" class="mainBody" style="width: 100%; height: 90%;">
+        <div id="mainRecom" class="mainBody">
             <p class="mainTitle"> 이 프로젝트 어때요?</p> 
             <br><br><br><br><br><br>
-            <table>
-                <tr>
-                    <th>
-                        <div class="mainItems">
-                            <img src="resources/images/project1.JPG">
-                            <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
-                            <span>
-                                <p>401,240원 펀딩</p>
-                            </span>
-                            <span class="mainInfos">
-                                <p>D-4</p>
-                                <p>401%</p> 
-                            </span>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="mainItems">
-                            <img src="resources/images/project1.JPG">
-                            <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
-                            <span>
-                                <p>401,240원 펀딩</p>
-                            </span>
-                            <span class="mainInfos">
-                                <p>D-4</p>
-                                <p>401%</p> 
-                            </span>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="mainItems">
-                            <img src="resources/images/project1.JPG">
-                            <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
-                            <span>
-                                <p>401,240원 펀딩</p>
-                            </span>
-                            <span class="mainInfos">
-                                <p>D-4</p>
-                                <p>401%</p> 
-                            </span>
-                        </div>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <div class="mainItems">
-                            <img src="resources/images/project1.JPG">
-                            <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
-                            <span>
-                                <p>401,240원 펀딩</p>
-                            </span>
-                            <span class="mainInfos">
-                                <p>D-4</p>
-                                <p>401%</p> 
-                            </span>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="mainItems">
-                            <img src="resources/images/project1.JPG">
-                            <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
-                            <span>
-                                <p>401,240원 펀딩</p>
-                            </span>
-                            <span class="mainInfos">
-                                <p>D-4</p>
-                                <p>401%</p> 
-                            </span>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="mainItems">
-                            <img src="resources/images/project1.JPG">
-                            <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
-                            <span>
-                                <p>401,240원 펀딩</p>
-                            </span>
-                            <span class="mainInfos">
-                                <p>D-4</p>
-                                <p>401%</p> 
-                            </span>
-                        </div>
-                    </th>
+            <table id="newList">
+                <tr style="margin-right:20px">
                 </tr>
             </table>
 
         </div>
-            
+        <br><br>
         <!-- 실시간 top3 -->
         <div id="mainTop3" class="mainBody" style="background-color:rgba(224, 224, 224, 0.52);">
             <p class="mainTitle"> 실시간 TOP 3</p> 
             <br><br><br><br><br><br>
-            <table>
-                <tr>
-                    <th>
-                        <div class="mainItems">
-                            <img src="resources/images/project1.JPG">
-                            <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
-                            <span>
-                                <p>401,240원 펀딩</p>
-                            </span>
-                            <span class="mainInfos">
-                                <p>D-4</p>
-                                <p>401%</p> 
-                            </span>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="mainItems">
-                            <img src="resources/images/project1.JPG">
-                            <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
-                            <span>
-                                <p>401,240원 펀딩</p>
-                            </span>
-                            <span class="mainInfos">
-                                <p>D-4</p>
-                                <p>401%</p> 
-                            </span>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="mainItems">
-                            <img src="resources/images/project1.JPG">
-                            <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
-                            <span>
-                                <p>401,240원 펀딩</p>
-                            </span>
-                            <span class="mainInfos">
-                                <p>D-4</p>
-                                <p>401%</p> 
-                            </span>
-                        </div>
-                    </th>
+            <table id="famousList">
+                <tr style="margin-right:20px">
                 </tr>
             </table>
         </div>
-
+		
+		
         <!-- 오픈 예정 프로젝트 -->
         <div id="mainComing" class="mainBody">
             <p class="mainTitle"> 오픈 예정 프로젝트</p>
             <br><br><br><br><br><br>
-            <table>
-                <tr>
-                    <th>
-                        <div class="mainItems">
-                            <img src="resources/images/project1.JPG">
-                            <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
-                            <span>
-                                <p>401,240원 펀딩</p>
-                            </span>
-                            <span class="mainInfos">
-                                <p>D-4</p>
-                                <p>401%</p> 
-                            </span>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="mainItems">
-                            <img src="resources/images/project1.JPG">
-                            <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
-                            <span>
-                                <p>401,240원 펀딩</p>
-                            </span>
-                            <span class="mainInfos">
-                                <p>D-4</p>
-                                <p>401%</p> 
-                            </span>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="mainItems">
-                            <img src="resources/images/project1.JPG">
-                            <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
-                            <span>
-                                <p>401,240원 펀딩</p>
-                            </span>
-                            <span class="mainInfos">
-                                <p>D-4</p>
-                                <p>401%</p> 
-                            </span>
-                        </div>
-                    </th>
+            <table id="readyList">
+                <tr style="margin-right:20px">
                 </tr>
             </table> 
         </div>
@@ -399,81 +253,110 @@
         <div id="mainSuccess" class="mainBody">
             <p class="mainTitle"> 성공 임박 프로젝트</p> 
             <br><br><br><br><br><br>
-            <table>
-                <tr>
-                    <th>
-                        <div class="mainItems">
-                            <img src="resources/images/project1.JPG">
-                            <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
-                            <span>
-                                <p>401,240원 펀딩</p>
-                            </span>
-                            <span class="mainInfos">
-                                <p>D-4</p>
-                                <p>401%</p> 
-                            </span>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="mainItems">
-                            <img src="resources/images/project1.JPG">
-                            <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
-                            <span>
-                                <p>401,240원 펀딩</p>
-                            </span>
-                            <span class="mainInfos">
-                                <p>D-4</p>
-                                <p>401%</p> 
-                            </span>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="mainItems">
-                            <img src="resources/images/project1.JPG">
-                            <p>봄날에 어울리는 포근한 샴푸향 향수</p><br>
-                            <span>
-                                <p>401,240원 펀딩</p>
-                            </span>
-                            <span class="mainInfos">
-                                <p>D-4</p>
-                                <p>401%</p> 
-                            </span>
-                        </div>
-                    </th>
+            <table id="eveList">
+                <tr style="margin-right:20px">
                 </tr>
             </table>
         </div>
         
         <script>
 	    	$(function(){
-	    		selectFamousList();
-	    		
-	    		setInterval(selectReplyList, 1000);
-	    	})
-	    	
-	    	function selectFamousList(){
 	    		$.ajax({
-	    			url:"famousList.main",
+	    			url:"menuList3.main",
 	    			success:function(list){
-	    				console.log(list);
-	    				/*
-	    				var value="";
-	    				$.each(list, function(i,obj){
-	    					value += "<tr>"
-	    						   +	"<td>" + obj.replyWriter + "</td>"
-	    						   +	"<td>" + obj.replyContent + "</td>"
-	    						   +	"<td>" + obj.createDate + "</td>"
-	    						   + "</tr>"
-	    				})		
 	    				
-						$("#replyArea tbody").html(value);
-	    				$("#rcount").text(list.length);
-	    				*/
+	    				var value1="";
+	    				var value2="";
+	    				var value3="";
+	    				var value4="";
+	    				$.each(list.fList, function(i, p){
+	    					value1 += '<th>' 
+	    						   +	'<div class="thumbnail" id="thumbnail" style="margin: 0 20px 0 20px;">'
+	    						   +		'<input type="hidden" class="pno" value=' + p.projectNo + '>'
+	    						   +		'<input type="hidden" value=' + p.projectGprice + '>'
+	    						   +		'<img width="350" src=' + p.projectThum + '>'
+	    						   +		'<div class="pTitle" align="left">'
+	    						   +			p.projectTitle + '<br>'
+	    						   +		'</div>'
+	    						   +		'<p class="leftp" align="left">'
+	    						   +			p.catName + '|' + p.partnerName + '<br>'
+	    						   +			'<span id="percent">' + p.percentage + '%</span>&nbsp;&nbsp;&nbsp;<span id="totalPrice">' + p.totalPrice + '</span>원<span id="dday" align="right">D-' + p.dday + '</span>'
+	    						   +		'</p>'
+	    						   +	'</div>'
+	    						   + '<th>'
+	    				})	
+	    				
+	    				$.each(list.eList, function(i, p){
+	    					value2 += '<th>' 
+	    						   +	'<div class="thumbnail" id="thumbnail" style="margin: 0 20px 0 20px;">'
+	    						   +		'<input type="hidden" class="pno" value=' + p.projectNo + '>'
+	    						   +		'<input type="hidden" value=' + p.projectGprice + '>'
+	    						   +		'<img width="350" src=' + p.projectThum + '>'
+	    						   +		'<div class="pTitle" align="left">'
+	    						   +			p.projectTitle + '<br>'
+	    						   +		'</div>'
+	    						   +		'<p class="leftp" align="left">'
+	    						   +			p.catName + '|' + p.partnerName + '<br>'
+	    						   +			'<span id="percent">' + p.percentage + '%</span>&nbsp;&nbsp;&nbsp;<span id="totalPrice">' + p.totalPrice + '</span>원<span id="dday">D-' + p.dday + '</span>'
+	    						   +		'</p>'
+	    						   +	'</div>'
+	    						   + '<th>'
+	    				})
+	    					    				
+	    				$.each(list.rList, function(i, p){
+	    					value3 += '<th>' 
+	    						   +	'<div class="thumbnail" id="thumbnail" style="margin: 0 20px 0 20px;">'
+	    						   +		'<input type="hidden" class="pno" value=' + p.projectNo + '>'
+	    						   +		'<input type="hidden" value=' + p.projectGprice + '>'
+	    						   +		'<img width="350" src=' + p.projectThum + '>'
+	    						   +		'<div class="pTitle" align="left">'
+	    						   +			p.projectTitle + '<br>'
+	    						   +		'</div>'
+	    						   +		'<p class="leftp" align="left">'
+	    						   +			p.catName + '|' + p.partnerName + '<br>'
+	    						   +			'<span id="percent">' + p.percentage + '%</span>&nbsp;&nbsp;&nbsp;<span id="totalPrice">' + p.totalPrice + '</span>원<span id="dday">D-' + p.dday + '</span>'
+	    						   +		'</p>'
+	    						   +	'</div>'
+	    						   + '<th>'
+	    				})
+	    				
+	    				$.each(list.nList, function(i, p){
+	    					value4 += '<th>' 
+	    						   +	'<div class="thumbnail" id="thumbnail" style="margin: 0 20px 0 20px;">'
+	    						   +		'<input type="hidden" class="pno" value=' + p.projectNo + '>'
+	    						   +		'<input type="hidden" value=' + p.projectGprice + '>'
+	    						   +		'<img width="350" src=' + p.projectThum + '>'
+	    						   +		'<div class="pTitle" align="left">'
+	    						   +			p.projectTitle + '<br>'
+	    						   +		'</div>'
+	    						   +		'<p class="leftp" align="left">'
+	    						   +			p.catName + '|' + p.partnerName + '<br>'
+	    						   +			'<span id="percent">' + p.percentage + '%</span>&nbsp;&nbsp;&nbsp;<span id="totalPrice">' + p.totalPrice + '</span>원<span id="dday">D-' + p.dday + '</span>'
+	    						   +		'</p>'
+	    						   +	'</div>'
+	    						   + '<th>'
+	    				})
+	    				
+						$("#famousList tr").html(value1);
+	    				$("#eveList tr").html(value2);
+	    				$("#readyList tr").html(value3);
+	    				$("#newList tr").html(value4);
+	    				
+	    	    		$(".thumbnail").click(function(){
+	    					location.href="detail.fd?pno=" + $(this).children(".pno").val();
+	    				})
+	    				
+	    				
 	    			}, error:function(){
-	    				console.log("댓글 리스트 조회용 ajax 통신 실패");
+	    				console.log("리스트 조회용 ajax 통신 실패");
 	    			}
 	    		})
-	    	}	    	
+	    		
+	    	})
+    	</script>
+    	
+    	<script>
+    		
     	</script>
         
 		<jsp:include page="common/footer.jsp"/>

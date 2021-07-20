@@ -43,34 +43,12 @@ public class FundingController {
 	private MyPageService mpService;
 	
 	@ResponseBody
-	@RequestMapping(value="famousList.main", produces="application/json; charset=utf-8")
-	public String ajaxSelectFamousList() {
+	@RequestMapping(value="menuList3.main", produces="application/json; charset=utf-8")
+	public String ajaxSelectMenuList3() {
 		
-		return new Gson().toJson(funService.selectFamousList());
+		HashMap<String, Object> map = funService.ajaxSelectMenuList3();
 		
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="eveList.main", produces="application/json; charset=utf-8")
-	public String ajaxSelectEveList() {
-		
-		return new Gson().toJson(funService.selectEveList());
-		
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="newList.main", produces="application/json; charset=utf-8")
-	public String ajaxSelectNewList() {
-		
-		return new Gson().toJson(funService.selectNewList());
-		
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="readyList.main", produces="application/json; charset=utf-8")
-	public String ajaxSelectReadyList() {
-		
-		return new Gson().toJson(funService.selectReadyList());
+		return new Gson().toJson(map);
 		
 	}
 	

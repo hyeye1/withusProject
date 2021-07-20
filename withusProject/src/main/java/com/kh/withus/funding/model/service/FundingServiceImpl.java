@@ -28,6 +28,23 @@ public class FundingServiceImpl implements FundingService {
 	private FundingDao funDao;
 	
 	@Override
+	public HashMap<String, Object> ajaxSelectMenuList3() {
+		
+		ArrayList<Project> fList =  funDao.selectFamousList3(sqlSession);
+		ArrayList<Project> eList =  funDao.selectEveList3(sqlSession);
+		ArrayList<Project> nList =  funDao.selectNewList3(sqlSession);
+		ArrayList<Project> rList =  funDao.selectReadyList3(sqlSession);
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("fList", fList);
+		map.put("eList", eList);
+		map.put("nList", nList);
+		map.put("rList", rList);
+		
+		return map;
+	}
+	
+	@Override
 	public ArrayList<Project> selectFamousList() {
 		return funDao.selectFamousList(sqlSession);
 	}
@@ -202,6 +219,8 @@ public class FundingServiceImpl implements FundingService {
 	public ArrayList<Project> searchFundingMana(HashMap<String, String> map, PageInfo pi) {
 		return funDao.searchFundingMana(sqlSession, map, pi);
 	}
+
+	
 
 	
 

@@ -15,6 +15,9 @@ import com.kh.withus.order.model.vo.Order;
 
 public interface FundingService {
 
+	// 메인 뿌려주는 3개 펀딩 조회
+	HashMap<String, Object> ajaxSelectMenuList3();
+	
 	// 인기상품 리스트 조회
 	ArrayList<Project> selectFamousList();
 	
