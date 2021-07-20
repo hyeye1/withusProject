@@ -195,21 +195,22 @@ public class CommunityController {
 	}
 	
 	@RequestMapping("update.co")
-	public String updateCommunity(Community c, MultipartFile reupfile, HttpSession session, Model model) {
+	public String updateCommunity(Community c, HttpSession session, Model model) {
 		
-		if(!reupfile.getOriginalFilename().equals("")) { // 새로 넘어온 첨부파일이 있을 경우
-			// 새로 넘어온 첨부파일있는데 기존의 첨부파일이 있었을 경우 => 서버에 업로드 되어있는 기존의 파일 찾아서 지울꺼임
-			if(c.getCommuChange() != null) {
-				new File(session.getServletContext().getRealPath(c.getCommuChange())).delete();
-			}
-			
-			// 그리고 새로 넘어온 첨부파일 서버에 업로드 시킴
-			String commuChange = saveFile(session, reupfile);
-			c.setCommuOrigin(reupfile.getOriginalFilename());
-			c.setCommuChange("resources/uploadFiles/" + commuChange);
-		}
-		
+//		if(!reupfile.getOriginalFilename().equals("")) { // 새로 넘어온 첨부파일이 있을 경우
+//			// 새로 넘어온 첨부파일있는데 기존의 첨부파일이 있었을 경우 => 서버에 업로드 되어있는 기존의 파일 찾아서 지울꺼임
+//			if(c.getCommuChange() != null) {
+//				new File(session.getServletContext().getRealPath(c.getCommuChange())).delete();
+//			}
+//			
+//			// 그리고 새로 넘어온 첨부파일 서버에 업로드 시킴
+//			String commuChange = saveFile(session, reupfile);
+//			c.setCommuOrigin(reupfile.getOriginalFilename());
+//			c.setCommuChange("resources/uploadFiles/" + commuChange);
+//		}
+//		
 		int result = cService.updateCommunity(c);
+//		System.out.println(result);
 		
 		if(result > 0) { 
 			session.setAttribute("alertMsg", "게시글이 성공적으로 수정되었습니다");
