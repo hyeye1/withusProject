@@ -53,7 +53,7 @@ public class OtoController {
 			String changeName = saveFile(session, cscUpfile);
 			
 			o.setOtoOriginname(cscUpfile.getOriginalFilename());
-			o.setOtoChangename("resources/cscUploadFile/" + changeName);
+			o.setOtoChangename("resources/cscUpFiles/" + changeName);
 		}
 		
 		int result = oService.insertOto(o);
