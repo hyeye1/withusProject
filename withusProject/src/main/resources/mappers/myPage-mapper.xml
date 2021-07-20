@@ -607,7 +607,6 @@
          where p.project_no = o.project_no(+)
            and p.cat_no = c.cat_no 
            and p.member_no = m.member_no 
-           and p.project_status = 3
            and p.member_no = #{memberNo}
          group
             by p.project_no
