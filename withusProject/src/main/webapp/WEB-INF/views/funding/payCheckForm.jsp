@@ -233,7 +233,7 @@
 	        </div> 
 	
 	        <div class="buttonArea">
-	            <button type="button" id="pay" class="btn btn-primary" align="center" disabled="disabled">다음 단계로></button>
+	            <button type="button" id="pay" class="btn btn-primary" align="center" disabled="disabled">결제하기></button>
 	        </div>
 	        
 	    </form>   

@@ -680,7 +680,7 @@
     	     )
     	values
     	     (
-    	       seq_odrno.nextval
+    	       seq_odrno.nextval+1
     	     , #{projectNo}
     	     , #{memberNo}
     	     , #{rewardNo}
