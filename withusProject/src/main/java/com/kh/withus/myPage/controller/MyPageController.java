@@ -185,7 +185,7 @@ public class MyPageController {
 		String encPwd = bcryptPasswordEncoder.encode(newPwd);
 		//System.out.println("암호화 후 : " + encPwd); // 같은 평문을 입력해도 매번 다른 암호문이 나옴
 		
-		m.setMemberPwd(encPwd); // 암호문 변경
+		mp.setMemberPwd(encPwd); // 암호문 변경
 		
 		int result = mpService.updatePwd(mp);
 		
