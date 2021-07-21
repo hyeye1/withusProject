@@ -16,14 +16,11 @@
                 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
                 .back {
-                    border: 1px solid #7f7fd5;
+                    
                     width: 100vw;
                     height: 100vh;
-                    background: -webkit-linear-gradient(to right,
-                            #91eae4,
-                            #86a8e7,
-                            hsl(240, 51%, 67%));
-                    background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
+                    background: url(https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=813&q=80);
+  			 	    background-size: cover;		
                     outline: 0;
                     border: 0;
 
@@ -109,17 +106,6 @@
                     font-size: 13px;
                 }
 
-                /* .kakao {
-        display: table;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 10px;
-        }
-        .naver {
-        display: table;
-        margin-left: auto;
-        margin-right: auto;
-        } */
                 #naver_id_login img {
                     border-radius: 50%;
                 }
@@ -146,7 +132,7 @@
             <form action="login.me" method="post">
                 <div class="back">
                     <div class="login">
-                        <p class="header">login</p>
+                        <p class="header">Login</p>
                         <div class="textbtn">
                             <input type="text" name="memberId" placeholder="  아이디" id="memberId">
                         </div>

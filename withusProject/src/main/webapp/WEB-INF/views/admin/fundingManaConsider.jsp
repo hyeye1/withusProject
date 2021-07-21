@@ -528,7 +528,7 @@
      <div class="detailOuter">
      
 	 <button type="button" class="btn btn-secondary" id="backBtn"	
-	 		 onclick="history.back();">목록으로</button>
+	 		 onclick="location.href='fundingListView.mana';">목록으로</button>
 	 		 
      <!-- 맨위 -->
      <div class="detailHeader" align="center">

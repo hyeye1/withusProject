@@ -157,7 +157,7 @@
                                 <td><input type="text" id="commuTitle" class="form-control" name="commuTitle" required></td>
                             </tr>
                             <tr>
-                                <th><label for="commuWriter">작성자</label></th>
+                                <th><label for="commuWriter">작성자번호</label></th>
                                 <td><input type="text" id="commuWriter" class="form-control" value="${ loginUser.memberNo }" name="commuWriter" readonly>
                                 </td>
                             </tr>

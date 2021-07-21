@@ -34,8 +34,8 @@
 		font-size: 18px;
 		margin-top: 5px;
 	}
-	.leftp{color: grey;}
-	#dday{float:right;}
+	.leftp{color: grey; font-weight: 500;}
+
 	 
 	/* .outer div {outline:1px solid purple;} */
 	.outer {margin:auto; margin-bottom:50px; width:1050px;}

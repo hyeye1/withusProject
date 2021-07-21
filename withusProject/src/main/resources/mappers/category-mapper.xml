@@ -56,7 +56,7 @@
 	</select>
 	
 	
-	<update id="updateCate" parameterType="_int">
+	<update id="updateCate" parameterType="Category">
 		update
 		       category
 		   set cat_name = #{catName}

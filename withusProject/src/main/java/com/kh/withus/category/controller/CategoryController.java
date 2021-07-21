@@ -62,6 +62,9 @@ public class CategoryController {
 	
 	@RequestMapping("update.cate")
 	public String updateCate(Category ct, HttpSession session, Model model) {
+		
+		//System.out.println(ct);
+		
 		int result = cService.updateCate(ct);
 		if(result > 0) {
 			session.setAttribute("alertMsg", "카테고리가 수정되었습니다.");

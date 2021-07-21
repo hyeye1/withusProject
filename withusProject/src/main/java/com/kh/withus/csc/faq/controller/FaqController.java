@@ -192,29 +192,29 @@ public class FaqController {
 		// faq 카테고리별 버튼
 		@RequestMapping("manaFunding.faq")
 		public String selectManaFunding(Model model) {
-			ArrayList<Faq> list = fService.selectManaFunding();
-			model.addAttribute("list", list);
+			ArrayList<Faq> listM = fService.selectManaFunding();
+			model.addAttribute("listM", listM);
 			return "admin/csc/faq/faqManaListView";
 		}
 		
 		@RequestMapping("manaDelivery.faq")
 		public String selectManaDelivery(Model model) {
-			ArrayList<Faq> list = fService.selectManaDelivery();
-			model.addAttribute("list", list);
+			ArrayList<Faq> listM = fService.selectManaDelivery();
+			model.addAttribute("listM", listM);
 			return "admin/csc/faq/faqManaListView";
 		}
 		
 		@RequestMapping("manaExchange.faq")
 		public String selectManaExchange(Model model) {
-			ArrayList<Faq> list = fService.selectManaExchange();
-			model.addAttribute("list", list);
+			ArrayList<Faq> listM = fService.selectManaExchange();
+			model.addAttribute("listM", listM);
 			return "admin/csc/faq/faqManaListView";
 		}
 		
 		@RequestMapping("manaEtc.faq")
 		public String selectManaEtc(Model model) {
-			ArrayList<Faq> list = fService.selectManaEtc();
-			model.addAttribute("list", list);
+			ArrayList<Faq> listM = fService.selectManaEtc();
+			model.addAttribute("listM", listM);
 			return "admin/csc/faq/faqManaListView";
 		}
 		

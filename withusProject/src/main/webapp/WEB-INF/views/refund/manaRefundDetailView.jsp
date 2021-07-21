@@ -108,7 +108,16 @@
                     </tr>
                     <tr>
                         <th>증빙자료</th>
-                        <td>${ r.reChangeName }</td>
+                        <td>
+                        	<c:choose>
+	                    		<c:when test="${ r.reChangeName eq 'null' }">
+		                    		첨부파일이 없음
+		                    	</c:when>
+		                    	<c:otherwise>
+			                        <a href="${ r.reChangeName }"  download="${ r.reChangeName }">환불 신청 증빙 자료</a>
+	                        	</c:otherwise>
+                        	</c:choose>
+                        </td>
                     </tr>
                     <tr>
                         <th>취소/환불 금액</th>

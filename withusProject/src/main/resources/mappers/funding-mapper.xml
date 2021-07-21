@@ -1030,6 +1030,15 @@
 			   count(*)
 		from  project 
         	where project_title like '%' || #{keyword} || '%' 
+        	<if test='condition != null'>
+				<choose>
+					<when test='condition == "ing"'> and ceil(project_end_dt - sysdate) >= 0 </when>
+					<when test='condition == "end"'> and 0 > ceil(project_end_dt - sysdate) </when>
+				</choose>
+            </if>
+            <if test='sort == "deadline"'> 
+            	and ceil(project_end_dt - sysdate) >= 0
+			 </if>
 			
 		</select>
  	

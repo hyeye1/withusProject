@@ -77,7 +77,7 @@
                     <br>
                     <div class="orderAllStatus">
                         <div class="oStatus">
-                        	<label for="" style="float: left;"><b>결제상태</b></label> &nbsp;&nbsp;
+                        	<label for="" style="float: left;"><b>결제 상태</b></label> &nbsp;&nbsp;
                             <input type="radio" name="odStatus" value="1"> 결제완료
                             <input type="radio" name="odStatus" value="2"> 취소요청
                             <input type="radio" name="odStatus" value="3"> 취소완료
@@ -169,7 +169,7 @@
 	                        			<td>배송준비중</td>
 	                        		</c:when>
 	                        		<c:when test="${ o.shippingStatus == 2 }">
-	                        			<td>배송시작</td>
+	                        			<td>배송 중</td>
 	                        		</c:when>
 	                        		<c:when test="${ o.shippingStatus == 3 }">
 	                        			<td>배송완료</td>

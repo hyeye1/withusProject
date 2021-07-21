@@ -27,10 +27,17 @@
         .mainBody p{
             display: table-cell;
         }
-        .mainBody{ width:1200px; height: 550px;}
-        
+        .mainBody{ 
+        	width:1200px; 
+        	height: 600px;
+  	 		padding-top: 20px;
+  	 		margin-top: 20px;
+    	}
+        #mainSuccess{
+        	margin-bottom: 100px;
+        }
         .mainTitle{
-            font-size: 40px; 
+            font-size: 30px; 
             font-weight: 900; 
             float: left; 
             margin: 50px 0 20px 40px; 
@@ -57,8 +64,8 @@
 		font-size: 18px;
 		margin-top: 5px;
 		}
-		.leftp{color: grey;}
 		#dday{float:right;}
+        
 
         .visualSlide * {margin:0;padding:0;}
         .section input[id*="slide"] {display:none;}
@@ -274,14 +281,11 @@
 	    						   +	'<div class="thumbnail" id="thumbnail" style="margin: 0 20px 0 20px;">'
 	    						   +		'<input type="hidden" class="pno" value=' + p.projectNo + '>'
 	    						   +		'<input type="hidden" value=' + p.projectGprice + '>'
-	    						   +		'<img width="350" src=' + p.projectThum + '>'
+	    						   +		'<img width="350" height="260" src=' + p.projectThum + '>'
 	    						   +		'<div class="pTitle" align="left">'
 	    						   +			p.projectTitle + '<br>'
 	    						   +		'</div>'
-	    						   +		'<p class="leftp" align="left">'
-	    						   +			p.catName + '|' + p.partnerName + '<br>'
 	    						   +			'<span id="percent">' + p.percentage + '%</span>&nbsp;&nbsp;&nbsp;<span id="totalPrice">' + p.totalPrice + '</span>원<span id="dday" align="right">D-' + p.dday + '</span>'
-	    						   +		'</p>'
 	    						   +	'</div>'
 	    						   + '<th>'
 	    				})	
@@ -295,10 +299,7 @@
 	    						   +		'<div class="pTitle" align="left">'
 	    						   +			p.projectTitle + '<br>'
 	    						   +		'</div>'
-	    						   +		'<p class="leftp" align="left">'
-	    						   +			p.catName + '|' + p.partnerName + '<br>'
 	    						   +			'<span id="percent">' + p.percentage + '%</span>&nbsp;&nbsp;&nbsp;<span id="totalPrice">' + p.totalPrice + '</span>원<span id="dday">D-' + p.dday + '</span>'
-	    						   +		'</p>'
 	    						   +	'</div>'
 	    						   + '<th>'
 	    				})
@@ -312,10 +313,6 @@
 	    						   +		'<div class="pTitle" align="left">'
 	    						   +			p.projectTitle + '<br>'
 	    						   +		'</div>'
-	    						   +		'<p class="leftp" align="left">'
-	    						   +			p.catName + '|' + p.partnerName + '<br>'
-	    						   +			'<span id="percent">' + p.percentage + '%</span>&nbsp;&nbsp;&nbsp;<span id="totalPrice">' + p.totalPrice + '</span>원<span id="dday">D-' + p.dday + '</span>'
-	    						   +		'</p>'
 	    						   +	'</div>'
 	    						   + '<th>'
 	    				})
@@ -329,10 +326,7 @@
 	    						   +		'<div class="pTitle" align="left">'
 	    						   +			p.projectTitle + '<br>'
 	    						   +		'</div>'
-	    						   +		'<p class="leftp" align="left">'
-	    						   +			p.catName + '|' + p.partnerName + '<br>'
 	    						   +			'<span id="percent">' + p.percentage + '%</span>&nbsp;&nbsp;&nbsp;<span id="totalPrice">' + p.totalPrice + '</span>원<span id="dday">D-' + p.dday + '</span>'
-	    						   +		'</p>'
 	    						   +	'</div>'
 	    						   + '<th>'
 	    				})

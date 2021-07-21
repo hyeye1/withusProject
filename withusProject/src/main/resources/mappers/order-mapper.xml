@@ -229,7 +229,7 @@
 			  , count(case when r.refund_status = 'Y' then 1 end) as comRefund
 			  , count(case when r.refund_status = 'N' then 1 end) as refRefund
 		   from tb_order o
-		   join refund r on(r.order_no = o.order_no)
+		   full join refund r on(r.order_no = o.order_no)
 		   join project p on(p.project_no = o.project_no)
 		   join member m  on(m.member_no = p.member_no)
 		  where m.member_no = p.member_no

@@ -83,9 +83,23 @@
 			<!-- <mapping path="/main.mana"/>
 			<mapping path="/login.mana"/> -->
 			<mapping path="/memberListView.mana"/>
-			<mapping path="/orderListView.mana"/>
-			<mapping path="/refundListView.mana"/>
+			<mapping path="/memStatus.mana"/>
+			<mapping path="/deleteMem.mana"/>
+			<mapping path="/searchMember.mana"/>
 			
+			<mapping path="/fundingListView.mana"/>
+			<mapping path="/fundingConsiderPre.mana"/>
+			<mapping path="/fundingConsider.mana"/>
+			<mapping path="/searchFunding.mana"/>
+			
+			<mapping path="/orderListView.mana"/>
+			<mapping path="/orderDetail.mana"/>
+			<mapping path="/orderUpdate.mana"/>
+			<mapping path="/orderSearch.mana"/>
+			
+			<mapping path="/refundListView.mana"/>
+			<mapping path="/refundDetail.mana"/>
+			<mapping path="/searchRefund.mana"/>
 			<beans:bean id="" class="com.kh.withus.common.interceptor.AdminLoginInterceptor"/>
 		</interceptor>
 		
