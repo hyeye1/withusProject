@@ -59,33 +59,36 @@
 		
 	    <br><br>
 		
+		<div align="center">
 	    <!-- 페이징 바 추가 -->
 	    <div id="pagingArea">
 	    	<ul class="pagination">
 	    		
 	    		<c:choose>
-	    			<c:when test="${ pi.currentPage eq 1 }">
+	    			<c:when test="${ mpi.currentPage eq 1 }">
 		    			<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
 		    		</c:when>
 		    		<c:otherwise>
-		    			<li class="page-item"><a class="page-link" href="list.no?currentPage=${ pi.currentPage -1 }">이전</a></li>
+		    			<li class="page-item"><a class="page-link" href="noticeList.mana?currentPage=${ mpi.currentPage -1 }">이전</a></li>
 	    			</c:otherwise>
 	    		</c:choose>
 	    		
-	    		<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-	    			<li class="page-item"><a class="page-link" href="list.no?currentPage=${ p }">${ p }</a></li>
+	    		<c:forEach var="p" begin="${ mpi.startPage }" end="${ mpi.endPage }">
+	    			<li class="page-item"><a class="page-link" href="noticeList.mana?currentPage=${ p }">${ p }</a></li>
 	    		</c:forEach>
 	    	
 	    		<c:choose>
-	    			<c:when test="${ pi.currentPage eq pi.maxPage }">
+	    			<c:when test="${ mpi.currentPage eq mpi.maxPage }">
 	    				<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
 	    			</c:when>
 	    			<c:otherwise>
-	    				<li class="page-item"><a class="page-link" href="list.no?currentPage=${ pi.currentPage+1 }">다음</a></li>
+	    				<li class="page-item"><a class="page-link" href="noticeList.mana?currentPage=${ mpi.currentPage+1 }">다음</a></li>
 	    			</c:otherwise>
 	    		</c:choose>
 	    	</ul>
 	    
+	    </div>
+	    <br>
 	    </div>
 	    
 		

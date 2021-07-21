@@ -44,7 +44,7 @@
 	                    </tr>
 	                    <tr>
 	                        <td colspan="2">
-	                            <textarea class="form-control" required name="noticeContent" id="noticeContent" value="${ nM.noticeContent }" style="height:500px; resize:none;"></textarea>
+	                            <textarea class="form-control" required name="noticeContent" id="noticeContent" value="${ nM.noticeContent }" style="height:500px; resize:none;">${ nM.noticeContent }</textarea>
 	                        </td>
 	                    </tr>
 	                </table>

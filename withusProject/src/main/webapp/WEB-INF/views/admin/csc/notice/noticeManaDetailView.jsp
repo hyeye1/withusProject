@@ -52,6 +52,21 @@
 				<tr>
 					<td colspan="2" style="height: 500px;">${ nM.noticeContent }</td>
 				</tr>
+				<tr>
+            	<th>첨부파일</th>
+                    <td colspan="2">
+                    	
+                    	<c:choose>
+	                    	<c:when test="${ empty nM.noticeOriginname }">
+	                    		첨부파일이 없습니다.
+	                    	</c:when>
+	                    	<c:otherwise>
+	                        	<a href="${ nM.noticeChangename }" download="${ nM.noticeOriginname }">${ nM.noticeOriginname }</a>
+							</c:otherwise>                        
+                        </c:choose>
+                    </td>
+                </tr>
+	        <tr>
 			</tbody>
 		</table>
 
@@ -80,6 +95,7 @@
 			<a class="btn btn-secondary" href="noticeList.mana">목록</a>
 		</div>
     </div>
+    <br><br>
 	
 
 </body>

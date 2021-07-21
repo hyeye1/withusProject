@@ -17,11 +17,12 @@
 	<!-- 해더바 -->
 	<jsp:include page="../common/manaHeader.jsp"/>
 	
+	
+	<div class="container">
+	
 	<br>
 	<h3><b>카테고리 수정</b></h3>
 	<hr><br>
-	
-	<div class="container">
 	
 		<form id="menuUpdateForm" method="post" action="update.cate" enctype="multipart/form-data">
 			<input type="hidden" id="catNo" name="catNo" value="${ ct.catNo }">
