@@ -483,7 +483,9 @@
 				          			   				+ "<th>증빙자료</th>"
 				          			   				+ "<td>"
 				          			   				if(ri.reChangeName != null){
-				          			   					resultRefund += "<image class='wh'" + "src="+ "'${"+ ri.reChangeName + "}'" + ">"
+				          			   					resultRefund += /* "<image class='wh'" + "src="+ "'${"+ ri.reChangeName + "}'" + ">" */
+			          			   				 						"<a href=" +"'${" + r.reChangeName "}'" +" download=" 
+			          			   				 						+ "' ${" + r.reChangeName "}'" + ">환불 신청 증빙 자료</a>"
 				          			   				}else{
 				          			   					resultRefund += "자료없음"
 				          			   				}
