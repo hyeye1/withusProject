@@ -150,7 +150,7 @@
                                 </tr>
                                 <br>
                                 <tr>
-                                    <th>작성자</th>
+                                    <th>작성자번호</th>
                                     <td>${ c.commuWriter }</td>
                                     <th>작성일</th>
                                     <td>${ c.commuCreate }</td>

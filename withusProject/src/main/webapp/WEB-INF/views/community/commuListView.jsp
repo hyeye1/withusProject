@@ -193,7 +193,7 @@
                   <select class="custom-select" name="condition">
                     <option value="commuTitle">제목</option>
                     <option value="commuContent">내용</option>
-                    <option value="commuWriter">작성자</option>
+                    <option value="commuWriter">작성자번호</option>
                   </select>
                 </div>
                 <div class="text">
@@ -221,7 +221,7 @@
                     <th>글번호</th>
                     <th>카테고리</th>
                     <th>제목</th>
-                    <th>작성자</th>
+                    <th>작성자번호</th>
                     <th>조회수</th>
                     <th>작성일</th>
                   </tr>
