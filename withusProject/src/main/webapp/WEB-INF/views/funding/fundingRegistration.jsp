@@ -395,7 +395,7 @@
                             <b class="regi regiFive" style="display: none;">제작자/부가 정보</b>
                         </p>
                         <button type="submit" class="registerBtn"  onclick="submitForm();">승인요청하기</button>
-                        <button type="button">임시저장</button>
+                        <!-- <button type="button">임시저장</button> -->
                         <button type="button" id="previewBtn" onclick="preview();">미리보기</button>
                     </div>
     
