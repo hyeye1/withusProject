@@ -23,7 +23,7 @@
 
 ## 💻 개발자
 
-| <img src="https://avatars.githubusercontent.com/u/73784921?v=4" width="55" height="55"><br>[정혜](https://github.com/hyeye1) | <img src="https://avatars.githubusercontent.com/u/82502787?v=4" width="55" height="55"><br>[김지환](https://github.com/jihwanew) | <img src="https://avatars.githubusercontent.com/u/82308444?v=4" width="55" height="55"><br>[윤현정](https://github.com/hyeonjxxx) | <img src="https://avatars.githubusercontent.com/u/86589216?v=4" width="55" height="55"><br>[김윤경](https://github.com/YunGyeongee) | <img src="https://avatars.githubusercontent.com/u/77923941?v=4" width="55" height="55"><br>[이윤정](https://github.com/yjung9108) | <img src="https://avatars.githubusercontent.com/u/55617281?s=400&u=45166515684d080b5782457babcc6920191823ee&v=4" width="55" height="55"><br>[김가은]() |
+| <img src="https://avatars.githubusercontent.com/u/73784921?v=4" width="55" height="55"><br>[정혜](https://github.com/hyeye1) | <img src="https://avatars.githubusercontent.com/u/82502787?v=4" width="55" height="55"><br>[김지환](https://github.com/jihwanew) | <img src="https://avatars.githubusercontent.com/u/82308444?v=4" width="55" height="55"><br>[윤현정](https://github.com/hyeonjxxx) | <img src="https://avatars.githubusercontent.com/u/86589216?v=4" width="55" height="55"><br>[김윤경](https://github.com/YunGyeongee) | <img src="https://avatars.githubusercontent.com/u/77923941?v=4" width="55" height="55"><br>[이윤정](https://github.com/yjung9108) | <img src="https://avatars.githubusercontent.com/u/82454400?v=4" width="55" height="55"><br>[김가은](https://github.com/KimGaEun2) |
 | --- | --- | --- | --- | --- | --- |
 
 ## Contribution
