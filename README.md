@@ -54,5 +54,5 @@
   - [x] 
 
 ## 💼Download
-  - git clone https://github.com/hyeye1/https://github.com/hyeye1/withusProject.git
+  - git clone https://github.com/hyeye1/withusProject.git
   
