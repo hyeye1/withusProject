@@ -46,14 +46,6 @@
     - 관리자 페이지
       - 회원관리, 파트너관리 ,프로젝트 관리
 
-## 개발에 어려웠던 점
-  - [x] 
-  - [x] 
-
-## 느낀점
-  - [x] 
-  - [x] 
-
 ## 💼Download
   - git clone https://github.com/hyeye1/withusProject.git
   
